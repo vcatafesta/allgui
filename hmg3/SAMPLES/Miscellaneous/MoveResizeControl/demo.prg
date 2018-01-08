@@ -35,7 +35,7 @@ FUNCTION MAIN
             VALUE "Label no. "+ str(i,1)
             WIDTH 110
             HEIGHT 40
-            Fontsize 10
+            FONTSIZE 10
             TOOLTIP "this is label no.  "+str(i,1)
             ALIGNMENT Center
             BACKCOLOR {255,255,0}

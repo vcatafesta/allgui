@@ -23,9 +23,9 @@ FUNCTION Main
          HEIGHT 200
          HEADERS { '', 'Column1', 'Column2'  }
          WIDTHS { 0, 200, 200 }
-         justify { 2, 0, 0 }
+         JUSTIFY { 2, 0, 0 }
          image { 'redbullet.bmp', 'whitebullet.bmp', 'greenbullet.bmp' }
-         items aItems
+         ITEMS aItems
       END GRID
 
       DEFINE GRID grid_2
@@ -35,9 +35,9 @@ FUNCTION Main
          HEIGHT 200
          HEADERS { '', 'Column1', 'Column2'  }
          WIDTHS { 0, 200, 200 }
-         justify { 2, 0, 0 }
+         JUSTIFY { 2, 0, 0 }
          image { 'redbullet1.bmp', 'whitebullet1.bmp', 'greenbullet1.bmp' }
-         items aItems
+         ITEMS aItems
       END GRID
 
       ON KEY ESCAPE ACTION thiswindow.release

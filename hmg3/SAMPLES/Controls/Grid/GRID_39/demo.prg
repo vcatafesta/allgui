@@ -21,7 +21,7 @@ FUNCTION Main
          COLUMNWHEN { {|| .t. }, {|| .t. } }
          COLUMNCONTROLS { { 'TEXTBOX', 'NUMERIC', '999' }, { 'TEXTBOX', 'CHARACTER' } }
          allowedit .t.
-         items { { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' } }
+         ITEMS { { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' } }
       END GRID
    END WINDOW
    sample.center

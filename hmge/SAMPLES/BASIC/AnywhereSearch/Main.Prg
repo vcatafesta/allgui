@@ -26,13 +26,13 @@ FUNCTION Main
          ROW 10
          COL 10
          VALUE 'Enter a search string'
-         autosize .t.
-         vcenteralign .t.
+         AUTOSIZE .t.
+         VCENTERALIGN .t.
       END LABEL
       DEFINE TEXTBOX textbox
          ROW 10
          COL 160
-         onchange ( _cAnywhereSearchStr := getproperty( ThisWindow.Name, 'textbox', 'VALUE' ), ;
+         ONCHANGE ( _cAnywhereSearchStr := getproperty( ThisWindow.Name, 'textbox', 'VALUE' ), ;
             setproperty( ThisWindow.Name, '_anywherelabel', 'VALUE', _cAnywhereSearchStr ), ;
             iif( empty(_HMGAnywhereSearch( cActiveControl, ThisWindow.Name, .t. )),;
             ( setproperty( ThisWindow.Name, 'textbox', 'VALUE', _cAnywhereSearchStr ), ;
@@ -73,8 +73,8 @@ FUNCTION Main
          HEIGHT 200
          multiselect .t.
          FONTNAME 'Arial'
-         fontsize 14
-         items aCountries
+         FONTSIZE 14
+         ITEMS aCountries
          VALUE { 1 }
          ON GOTFOCUS ( cActiveControl := this.name, main.Radio.Value := 2 )
       END listbox
@@ -82,9 +82,9 @@ FUNCTION Main
          ROW 250
          COL 10
          WIDTH 200
-         items aNationalities
+         ITEMS aNationalities
          FONTNAME 'FixedSys'
-         fontsize 12
+         FONTSIZE 12
          VALUE 1
          ON GOTFOCUS ( cActiveControl := this.name, main.Radio.Value := 3 )
       END COMBOBOX
@@ -93,7 +93,7 @@ FUNCTION Main
          COL 10
          WIDTH 350
          HEIGHT 200
-         items aGrid
+         ITEMS aGrid
          HEADERS { 'Head1', 'Head2', 'Head3' }
          WIDTHS { 100, 100, 120 }
          VALUE { 1 }
@@ -117,12 +117,12 @@ FUNCTION Main
          ROW GetProperty( ThisWindow.Name, 'HEIGHT' ) - 85
          COL 10
          WIDTH 200
-         transparent .t.
+         TRANSPARENT .t.
          FONTCOLOR { 255, 0, 0 }
          FONTNAME 'Arial'
-         fontsize 14
+         FONTSIZE 14
          FONTBOLD .t.
-         autosize .t.
+         AUTOSIZE .t.
       END LABEL
 
       DEFINE STATUSBAR

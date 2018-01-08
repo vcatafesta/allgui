@@ -5092,7 +5092,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 275
          HEIGHT 147
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          CAPTION _HMG_SYSDATA [ 371 ] [15]
       END FRAME
 
@@ -5100,10 +5100,10 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          ROW 25
          COL 20
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE 1
          Options { _HMG_SYSDATA [ 371 ] [16] , _HMG_SYSDATA [ 371 ] [17] }
-         OnChange if ( This.value == 1 , ( _HMG_PRINTER_PRINTPAGES.Label_1.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Label_2.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Spinner_1.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Spinner_2.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Combo_1.Enabled := .F.  , _HMG_PRINTER_PRINTPAGES.Label_4.Enabled := .F. ) , ( _HMG_PRINTER_PRINTPAGES.Label_1.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Label_2.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_1.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_2.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Combo_1.Enabled := .T.  , _HMG_PRINTER_PRINTPAGES.Label_4.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_1.SetFocus ) )
+         ONCHANGE if ( This.value == 1 , ( _HMG_PRINTER_PRINTPAGES.Label_1.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Label_2.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Spinner_1.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Spinner_2.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Combo_1.Enabled := .F.  , _HMG_PRINTER_PRINTPAGES.Label_4.Enabled := .F. ) , ( _HMG_PRINTER_PRINTPAGES.Label_1.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Label_2.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_1.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_2.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Combo_1.Enabled := .T.  , _HMG_PRINTER_PRINTPAGES.Label_4.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_1.SetFocus ) )
       END RadioGroup
 
       DEFINE LABEL Label_1
@@ -5112,7 +5112,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 50
          HEIGHT 25
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE _HMG_SYSDATA [ 371 ] [18] + ':'
       END LABEL
 
@@ -5121,7 +5121,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          COL 110
          WIDTH 50
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE 1
          RANGEMIN 1
          RANGEMAX _HMG_SYSDATA [ 380 ]
@@ -5133,7 +5133,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 35
          HEIGHT 25
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE _HMG_SYSDATA [ 371 ] [19] + ':'
       END LABEL
 
@@ -5142,7 +5142,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          COL 205
          WIDTH 50
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE _HMG_SYSDATA [ 380 ]
          RANGEMIN 1
          RANGEMAX _HMG_SYSDATA [ 380 ]
@@ -5154,7 +5154,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 50
          HEIGHT 25
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE _HMG_SYSDATA [ 371 ] [09] + ':'
       END LABEL
 
@@ -5163,9 +5163,9 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          COL 110
          WIDTH 145
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE 1
-         Items {_HMG_SYSDATA [ 371 ] [21] , _HMG_SYSDATA [ 371 ] [22] , _HMG_SYSDATA [ 371 ] [23] }
+         ITEMS {_HMG_SYSDATA [ 371 ] [21] , _HMG_SYSDATA [ 371 ] [22] , _HMG_SYSDATA [ 371 ] [23] }
       END COMBOBOX
 
       DEFINE BUTTON Ok
@@ -5174,7 +5174,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 105
          HEIGHT 25
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          CAPTION _HMG_SYSDATA [ 371 ] [11]
          ACTION _HMG_PRINTER_PrintPagesDo()
       END BUTTON
@@ -5185,7 +5185,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 105
          HEIGHT 25
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          CAPTION _HMG_SYSDATA [ 371 ] [12]
          ACTION ( EnableWindow(GetformHandle("_HMG_PRINTER_SHOWPREVIEW")), EnableWindow(GetformHandle("SPLITCHILD_1")), EnableWindow(GetformHandle("_HMG_PRINTER_SHOWTHUMBNAILS")), HideWindow(GetFormHandle("_HMG_PRINTER_PRINTPAGES")), DoMethod("SPLITCHILD_1","SetFocus") )
       END BUTTON
@@ -5196,7 +5196,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 45
          HEIGHT 25
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE _HMG_SYSDATA [ 371 ] [20] + ':'
       END LABEL
 
@@ -5205,11 +5205,11 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          COL 355
          WIDTH 50
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE _HMG_SYSDATA [ 376 ]
          RANGEMIN 1
          RANGEMAX 999
-         OnChange ( if ( IsControlDefined (CheckBox_1,_HMG_PRINTER_PRINTPAGES) , If ( This.Value > 1 , SetProperty( '_HMG_PRINTER_PRINTPAGES' , 'CheckBox_1','Enabled',.T.) , SetProperty( '_HMG_PRINTER_PRINTPAGES','CheckBox_1','Enabled', .F. ) ) , Nil ) )
+         ONCHANGE ( if ( IsControlDefined (CheckBox_1,_HMG_PRINTER_PRINTPAGES) , If ( This.Value > 1 , SetProperty( '_HMG_PRINTER_PRINTPAGES' , 'CheckBox_1','Enabled',.T.) , SetProperty( '_HMG_PRINTER_PRINTPAGES','CheckBox_1','Enabled', .F. ) ) , Nil ) )
       END Spinner
 
       DEFINE CHECKBOX CheckBox_1
@@ -5217,7 +5217,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          COL 300
          WIDTH 110
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE if ( _HMG_SYSDATA [ 377 ] == 1 , .T. , .F. )
          CAPTION _HMG_SYSDATA [ 371 ] [14]
       END CHECKBOX
@@ -5248,7 +5248,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 94
          HEIGHT 25
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE _HMG_SYSDATA [ 371 ] [10] + ':'
       END LABEL
 
@@ -5257,7 +5257,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          COL 105
          WIDTH 75
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          VALUE _HMG_SYSDATA [ 361 ]
          RANGEMIN 1
          RANGEMAX _HMG_SYSDATA [ 380 ]
@@ -5269,7 +5269,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 80
          HEIGHT 25
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          CAPTION _HMG_SYSDATA [ 371 ] [11]
          ACTION ( _HMG_SYSDATA [ 361 ] := _HMG_PRINTER_GO_TO_PAGE.Spinner_1.Value ,;
             HideWindow( GetFormHandle ( "_HMG_PRINTER_GO_TO_PAGE" ) ),;
@@ -5286,7 +5286,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          WIDTH 80
          HEIGHT 25
          FONTNAME 'Arial'
-         FontSize 9
+         FONTSIZE 9
          CAPTION _HMG_SYSDATA [ 371 ] [12]
          ACTION ( EnableWindow(GetformHandle("_HMG_PRINTER_SHOWPREVIEW")), EnableWindow(GetformHandle("SPLITCHILD_1")), EnableWindow(GetformHandle("_HMG_PRINTER_SHOWTHUMBNAILS")), HideWindow(GetFormHandle("_HMG_PRINTER_GO_TO_PAGE")), DoMethod("SPLITCHILD_1","SetFocus") )
       END BUTTON

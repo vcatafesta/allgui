@@ -36,7 +36,7 @@ FUNCTION grupo_fornecedores()
          CAPTION 'F5 Incluir'
          ACTION dados(1)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -53,7 +53,7 @@ FUNCTION grupo_fornecedores()
          CAPTION 'F6 Alterar'
          ACTION dados(2)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -70,7 +70,7 @@ FUNCTION grupo_fornecedores()
          CAPTION 'F7 Excluir'
          ACTION excluir()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -87,7 +87,7 @@ FUNCTION grupo_fornecedores()
          CAPTION 'F8 Imprimir'
          ACTION relacao()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -104,7 +104,7 @@ FUNCTION grupo_fornecedores()
          CAPTION 'Atualizar'
          ACTION atualizar()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -121,7 +121,7 @@ FUNCTION grupo_fornecedores()
          CAPTION 'ESC Voltar'
          ACTION form_grupo_fornecedores.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -140,7 +140,7 @@ FUNCTION grupo_fornecedores()
             HEADERS {'Código','Nome'}
             WIDTHS {100,650}
             FONTNAME 'verdana'
-            fontsize 010
+            FONTSIZE 010
             FONTBOLD .T.
             BACKCOLOR _amarelo_001
             FONTCOLOR _preto_001
@@ -153,12 +153,12 @@ FUNCTION grupo_fornecedores()
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_grupo_fornecedores;
@@ -176,12 +176,12 @@ FUNCTION grupo_fornecedores()
          COL form_grupo_fornecedores.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _verde_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       ON KEY F5 ACTION dados(1)
@@ -240,7 +240,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
@@ -260,7 +260,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões

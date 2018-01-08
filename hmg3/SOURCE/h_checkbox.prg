@@ -97,7 +97,7 @@ FUNCTION _DefineCheckBox ( ControlName, ParentForm, x, y, Caption, Value, ;
          FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
-         FontSize := _HMG_SYSDATA [ 182 ]
+         FONTSIZE := _HMG_SYSDATA [ 182 ]
       ENDIF
    ENDIF
    IF _HMG_SYSDATA [ 183 ] > 0
@@ -223,7 +223,7 @@ FUNCTION _DefineCheckButton ( ControlName, ParentForm, x, y, Caption, Value, ;
          FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
-         FontSize := _HMG_SYSDATA [ 182 ]
+         FONTSIZE := _HMG_SYSDATA [ 182 ]
       ENDIF
    ENDIF
    IF _HMG_SYSDATA [ 183 ] > 0

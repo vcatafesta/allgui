@@ -93,7 +93,7 @@ FUNCTION _DefineDatePick ( ControlName, ParentForm, x, y, w, h, value, ;
          FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
-         FontSize := _HMG_SYSDATA [ 182 ]
+         FONTSIZE := _HMG_SYSDATA [ 182 ]
       ENDIF
    ENDIF
    IF _HMG_SYSDATA [ 183 ] > 0

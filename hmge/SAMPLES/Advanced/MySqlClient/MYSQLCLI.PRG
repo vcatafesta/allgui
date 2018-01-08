@@ -212,7 +212,7 @@ PROCEDURE Main()
                HEIGHT       380                        ;
                HEADERS      { "" }                     ;
                WIDTHS       { 100 }                    ;
-               items        { { "" } }                 ;
+               ITEMS        { { "" } }                 ;
                VALUE        1                          ;
                ON GOTFOCUS  {|| setControl( .T. ) }    ;
                ON CHANGE {|| AddData(F_Main.GRD_Data.Value), setmessage("Record: "+ntrim(F_Main.GRD_Data.value), 2 ) }    ;

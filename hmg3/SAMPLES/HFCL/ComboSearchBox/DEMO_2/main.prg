@@ -41,13 +41,13 @@ PROC Main()
          FONTBOLD .t.
          FONTCOLOR {255,255,255}
          BACKCOLOR {0,0,255}
-         items acountries
+         ITEMS acountries
          ON ENTER msginfo(frmcsbtest.s1.value)
          anywheresearch .f.
          // dropheight 50
          ADDITIVE .t.
-         rowoffset 50
-         coloffset 0
+         ROWOFFSET 50
+         COLOFFSET 0
       END COMBOSEARCHBOX
 
    END WINDOW // frmCSBTest

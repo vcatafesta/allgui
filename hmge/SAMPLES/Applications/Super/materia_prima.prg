@@ -36,7 +36,7 @@ FUNCTION materia_prima()
          CAPTION 'F5 Incluir'
          ACTION dados(1)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -53,7 +53,7 @@ FUNCTION materia_prima()
          CAPTION 'F6 Alterar'
          ACTION dados(2)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -70,7 +70,7 @@ FUNCTION materia_prima()
          CAPTION 'F7 Excluir'
          ACTION excluir()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -87,7 +87,7 @@ FUNCTION materia_prima()
          CAPTION 'F8 Imprimir'
          ACTION relacao()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -104,7 +104,7 @@ FUNCTION materia_prima()
          CAPTION 'Atualizar'
          ACTION atualizar()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -121,7 +121,7 @@ FUNCTION materia_prima()
          CAPTION 'Fornecedores'
          ACTION fornecedores_mprima()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -138,7 +138,7 @@ FUNCTION materia_prima()
          CAPTION 'ESC Voltar'
          ACTION form_materia_prima.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -157,7 +157,7 @@ FUNCTION materia_prima()
             HEADERS {'Código','Nome','Unidade','Preço R$','Qtd.'}
             WIDTHS {080,320,120,120,120}
             FONTNAME 'verdana'
-            fontsize 010
+            FONTSIZE 010
             FONTBOLD .T.
             BACKCOLOR _amarelo_001
             FONTCOLOR _preto_001
@@ -170,12 +170,12 @@ FUNCTION materia_prima()
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_materia_prima;
@@ -193,12 +193,12 @@ FUNCTION materia_prima()
          COL form_materia_prima.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _verde_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       ON KEY F5 ACTION dados(1)
@@ -263,7 +263,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
@@ -281,7 +281,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,005 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
@@ -299,7 +299,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
-         transparent
+         TRANSPARENT
       @ 110,005 label lbl_003;
          of form_dados;
          VALUE 'Preço R$';
@@ -307,7 +307,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,005 getbox tbox_003;
          of form_dados;
          HEIGHT 027;
@@ -324,7 +324,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,135 getbox tbox_004;
          of form_dados;
          HEIGHT 027;
@@ -343,7 +343,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões
@@ -656,19 +656,19 @@ STATIC FUNCTION getcode_unidade(value)
          COL 005
          ROW 440
          VALUE 'Buscar'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
          MAXLENGTH 040
-         onchange find_unidade()
+         ONCHANGE find_unidade()
          uppercase .T.
       END TEXTBOX
 
@@ -683,13 +683,13 @@ STATIC FUNCTION getcode_unidade(value)
          FIELDS {'unidade_medida->codigo','unidade_medida->nome'}
          VALUE nreg
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
-         justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=unidade_medida->codigo,thiswindow.release)
       END browse
 
@@ -749,7 +749,7 @@ STATIC FUNCTION fornecedores_mprima()
          CAPTION 'ESC Voltar'
          ACTION form_fornecedor_mprima.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -767,7 +767,7 @@ STATIC FUNCTION fornecedores_mprima()
          HEADERS {'Nome do fornecedor'}
          WIDTHS {570}
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .F.
          nolines .T.
          BACKCOLOR _branco_001

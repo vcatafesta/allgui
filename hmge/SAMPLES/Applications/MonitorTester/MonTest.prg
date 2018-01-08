@@ -787,7 +787,7 @@ FUNCTION drawtextout(window,row,col,string,fontcolor,backcolor,fontname,fontsize
          FONTNAME := _HMG_DefaultFontName
       ENDIF
       IF valtype(fontsize) == "U"
-         fontsize := _HMG_DefaultFontSize
+         FONTSIZE := _HMG_DefaultFontSize
       ENDIF
       IF valtype(backcolor) == "U"
          BACKCOLOR := {255,255,255}

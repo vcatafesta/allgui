@@ -427,7 +427,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                WIDTH 270
                HEIGHT 300
                WIDTHS {130,60,60}
-               justify {0,1,0}
+               JUSTIFY {0,1,0}
                HEADERS {msgarr[6],msgarr[7],msgarr[57]}
                allowedit .t.
                COLUMNCONTROLS {{"TEXTBOX","CHARACTER"},{"TEXTBOX","NUMERIC","9999.99"},{"COMBOBOX",{msgarr[59],msgarr[60]}}}
@@ -507,7 +507,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                ROW 160
                COL 110
                WIDTH 50
-               items fontsizesstr
+               ITEMS fontsizesstr
                ON CHANGE pdffontsizechanged()
             END COMBOBOX
             DEFINE LABEL multilinelabel
@@ -520,7 +520,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                ROW 190
                COL 110
                WIDTH 90
-               items {msgarr[19],msgarr[20]}
+               ITEMS {msgarr[19],msgarr[20]}
                ON CHANGE pdfgridpreview()
             END COMBOBOX
             DEFINE LABEL pagination
@@ -533,7 +533,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                ROW 220
                COL 110
                WIDTH 90
-               items {msgarr[22],msgarr[23],msgarr[24]}
+               ITEMS {msgarr[22],msgarr[23],msgarr[24]}
                ON CHANGE pdfgridpreview()
             END COMBOBOX
             DEFINE LABEL separatorlab
@@ -594,7 +594,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                ROW 30
                COL 110
                WIDTH 90
-               items {msgarr[32],msgarr[33]}
+               ITEMS {msgarr[32],msgarr[33]}
                ON CHANGE pdfpapersizechanged()
             END COMBOBOX
             DEFINE LABEL printerslabel
@@ -607,7 +607,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                ROW 60
                COL 110
                WIDTH 165
-               items aprinternames
+               ITEMS aprinternames
                VALUE printerno
             END COMBOBOX
             DEFINE LABEL sizelabel
@@ -620,7 +620,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                ROW 90
                COL 110
                WIDTH 165
-               items papernames
+               ITEMS papernames
                ON CHANGE pdfpapersizechanged()
             END COMBOBOX
             DEFINE LABEL widthlabel
@@ -753,7 +753,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                HEIGHT 20
                CAPTION "+"
                FONTBOLD .t.
-               fontsize 16
+               FONTSIZE 16
                //               picture "additem"
                ACTION pdfaddmergeheadrow()
             END BUTTON
@@ -764,7 +764,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                HEIGHT 20
                CAPTION "-"
                FONTBOLD .t.
-               fontsize 16
+               FONTSIZE 16
                //               picture "delitem"
                ACTION pdfdelmergeheadrow()
             END BUTTON

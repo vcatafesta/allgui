@@ -28,7 +28,7 @@ FUNCTION relatorio_estoque_minimo()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,010 label lbl_002;
          of form_est_minimo;
          VALUE 'estejam com o estoque atual igual ou abaixo do mínimo';
@@ -36,7 +36,7 @@ FUNCTION relatorio_estoque_minimo()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 050,010 label lbl_003;
          of form_est_minimo;
          VALUE 'cadastrado. Somente produtos que não sejam - pizza -';
@@ -44,7 +44,7 @@ FUNCTION relatorio_estoque_minimo()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 070,010 label lbl_004;
          of form_est_minimo;
          VALUE 'aparecerão no relatório.';
@@ -52,7 +52,7 @@ FUNCTION relatorio_estoque_minimo()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
 
       * linha separadora
       DEFINE LABEL linha_rodape
@@ -62,7 +62,7 @@ FUNCTION relatorio_estoque_minimo()
          WIDTH form_est_minimo.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões

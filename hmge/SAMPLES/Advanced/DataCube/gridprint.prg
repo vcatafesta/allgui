@@ -221,12 +221,12 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
                WIDTH 250
                HEIGHT 240
                WIDTHS {0,130,70}
-               justify {0,0,1}
+               JUSTIFY {0,0,1}
                HEADERS {"",msgarr[6],msgarr[7]}
                image {'wrong','right'}
                TOOLTIP msgarr[8]
                ondblclick printgridtoggle()
-               onchange editcoldetails()
+               ONCHANGE editcoldetails()
             END GRID
             DEFINE LABEL sizelabel1
                ROW 280
@@ -313,7 +313,7 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
                ROW 160
                COL 110
                WIDTH 50
-               items fontsizesstr
+               ITEMS fontsizesstr
                ON CHANGE fontsizechanged()
                VALUE fontnumber
             END COMBOBOX
@@ -327,7 +327,7 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
                ROW 190
                COL 110
                WIDTH 90
-               items {msgarr[19],msgarr[20]}
+               ITEMS {msgarr[19],msgarr[20]}
                ON CHANGE printgridpreview()
                VALUE 2
             END COMBOBOX
@@ -341,7 +341,7 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
                ROW 220
                COL 110
                WIDTH 90
-               items {msgarr[22],msgarr[23],msgarr[24]}
+               ITEMS {msgarr[22],msgarr[23],msgarr[24]}
                ON CHANGE printgridpreview()
                VALUE 2
             END COMBOBOX
@@ -409,7 +409,7 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
                ROW 30
                COL 110
                WIDTH 90
-               items {msgarr[32],msgarr[33]}
+               ITEMS {msgarr[32],msgarr[33]}
                ON CHANGE papersizechanged()
                VALUE IIf(orientation == "P",2,1)
             END COMBOBOX
@@ -423,7 +423,7 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
                ROW 60
                COL 110
                WIDTH 165
-               items aprinternames
+               ITEMS aprinternames
                VALUE printerno
             END COMBOBOX
             DEFINE LABEL sizelabel
@@ -436,8 +436,8 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
                ROW 90
                COL 110
                WIDTH 165
-               items papernames
-               onchange papersizechanged()
+               ITEMS papernames
+               ONCHANGE papersizechanged()
             END COMBOBOX
             DEFINE LABEL widthlabel
                ROW 120

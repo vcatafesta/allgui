@@ -84,7 +84,7 @@ FUNCTION _DefineListbox ( ControlName, ParentForm, x, y, w, h, rows, value, ;
          FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
-         FontSize := _HMG_SYSDATA [ 182 ]
+         FONTSIZE := _HMG_SYSDATA [ 182 ]
       ENDIF
    ENDIF
 

@@ -28,7 +28,7 @@ FUNCTION relatorio_crec_001()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
 
       @ 040,010 datepicker dp_inicio;
          parent form_mov_crec;
@@ -51,7 +51,7 @@ FUNCTION relatorio_crec_001()
          WIDTH form_mov_crec.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões

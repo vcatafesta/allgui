@@ -37,7 +37,7 @@ FUNCTION fechamento_dia()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,010 label lbl_002;
          of form_fechamento;
          VALUE 'Este relatório totaliza todas as operações realizadas no';
@@ -45,7 +45,7 @@ FUNCTION fechamento_dia()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 100,010 label lbl_003;
          of form_fechamento;
          VALUE 'dia escolhido pelo usuário, oferecendo um mapa de';
@@ -53,7 +53,7 @@ FUNCTION fechamento_dia()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 120,010 label lbl_004;
          of form_fechamento;
          VALUE 'informações muito útil.';
@@ -61,7 +61,7 @@ FUNCTION fechamento_dia()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
 
       @ 040,010 datepicker dp_data;
          parent form_fechamento;
@@ -78,7 +78,7 @@ FUNCTION fechamento_dia()
          WIDTH form_fechamento.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões

@@ -181,7 +181,7 @@ FUNCTION DBUcloseindex()
          COL 10
          WIDTH 280
          HEIGHT 250
-         items _DBUindexfields
+         ITEMS _DBUindexfields
          multiselect .t.
       END listbox
       DEFINE BUTTON _DBUcloseindexbutton
@@ -263,7 +263,7 @@ FUNCTION DBUchangeactiveindex()
          COL 10
          WIDTH 280
          HEIGHT 250
-         items _DBUindexfields
+         ITEMS _DBUindexfields
          VALUE _DBUactiveindex
       END listbox
       DEFINE BUTTON _DBUchangeactivedone

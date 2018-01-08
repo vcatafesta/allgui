@@ -40,7 +40,7 @@ FUNCTION movimento_bancario()
          CAPTION 'F5 Incluir'
          ACTION dados(1)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -57,7 +57,7 @@ FUNCTION movimento_bancario()
          CAPTION 'F6 Alterar'
          ACTION dados(2)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -74,7 +74,7 @@ FUNCTION movimento_bancario()
          CAPTION 'F7 Excluir'
          ACTION excluir()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -91,7 +91,7 @@ FUNCTION movimento_bancario()
          CAPTION 'Atualizar'
          ACTION atualizar()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -108,7 +108,7 @@ FUNCTION movimento_bancario()
          CAPTION 'ESC Voltar'
          ACTION form_movban.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -127,7 +127,7 @@ FUNCTION movimento_bancario()
             HEADERS {'id','Data','Histórico','Entradas','Saídas'}
             WIDTHS {001,120,400,120,120}
             FONTNAME 'verdana'
-            fontsize 010
+            FONTSIZE 010
             FONTBOLD .T.
             BACKCOLOR _amarelo_001
             FONTCOLOR _preto_001
@@ -140,19 +140,19 @@ FUNCTION movimento_bancario()
          COL 005
          ROW 500
          VALUE 'Escolha o banco'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       define comboboxex cbo_001
       ROW   500
       COL   140
       WIDTH 300
       HEIGHT 200
-      items a_001
+      ITEMS a_001
       VALUE 1
    END comboboxex
 
@@ -161,24 +161,24 @@ FUNCTION movimento_bancario()
       COL 005
       ROW 545
       VALUE 'Escolha o período'
-      autosize .T.
+      AUTOSIZE .T.
       FONTNAME 'verdana'
-      fontsize 010
+      FONTSIZE 010
       FONTBOLD .T.
       FONTCOLOR _cinza_001
-      transparent .T.
+      TRANSPARENT .T.
    END LABEL
    DEFINE LABEL rodape_002
       parent form_movban
       COL 250
       ROW 545
       VALUE 'até'
-      autosize .T.
+      AUTOSIZE .T.
       FONTNAME 'verdana'
-      fontsize 010
+      FONTSIZE 010
       FONTBOLD .T.
       FONTCOLOR _cinza_001
-      transparent .T.
+      TRANSPARENT .T.
    END LABEL
    @ 540,140 datepicker dp_inicio;
       parent form_movban;
@@ -203,12 +203,12 @@ FUNCTION movimento_bancario()
       COL form_movban.width - 270
       ROW 545
       VALUE 'DUPLO CLIQUE : Alterar informação'
-      autosize .T.
+      AUTOSIZE .T.
       FONTNAME 'verdana'
-      fontsize 010
+      FONTSIZE 010
       FONTBOLD .T.
       FONTCOLOR _verde_002
-      transparent .T.
+      TRANSPARENT .T.
    END LABEL
 
    ON KEY F5 ACTION dados(1)
@@ -274,7 +274,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,005 textbox tbox_000;
          of form_dados;
          HEIGHT 027;
@@ -292,7 +292,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
-         transparent
+         TRANSPARENT
       @ 060,005 label lbl_001;
          of form_dados;
          VALUE 'Data';
@@ -300,7 +300,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
@@ -317,7 +317,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,005 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
@@ -335,7 +335,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 180,005 getbox tbox_003;
          of form_dados;
          HEIGHT 027;
@@ -352,7 +352,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _vermelho_002;
-         transparent
+         TRANSPARENT
       @ 180,140 getbox tbox_004;
          of form_dados;
          HEIGHT 027;
@@ -371,7 +371,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões
@@ -582,19 +582,19 @@ STATIC FUNCTION getcode_banco_2(value)
          COL 005
          ROW 440
          VALUE 'Buscar'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
          MAXLENGTH 040
-         onchange find_banco_2()
+         ONCHANGE find_banco_2()
          uppercase .T.
       END TEXTBOX
 
@@ -609,13 +609,13 @@ STATIC FUNCTION getcode_banco_2(value)
          FIELDS {'bancos->codigo','bancos->nome'}
          VALUE nreg
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
-         justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=bancos->codigo,thiswindow.release)
       END browse
 

@@ -100,7 +100,7 @@ FUNCTION _DefineLabel ( ControlName, ParentForm, x, y, Caption, w, h, ;
          FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
-         FontSize := _HMG_SYSDATA [ 182 ]
+         FONTSIZE := _HMG_SYSDATA [ 182 ]
       ENDIF
    ENDIF
    IF _HMG_SYSDATA [ 183 ] > 0
@@ -127,7 +127,7 @@ FUNCTION _DefineLabel ( ControlName, ParentForm, x, y, Caption, w, h, ;
    ParentForm = GetFormHandle (ParentForm)
 
    IF ( IsAppThemed() ) .and. aRGB_bk == NIL .and. _HMG_SYSDATA [ 183 ] > 0
-      Transparent := .t.
+      TRANSPARENT := .t.
    ENDIF
 
    Controlhandle := InitLabel ( ParentForm, Caption, 0, x, y, w, h, '', 0, Nil , border , clientedge , HSCROLL , VSCROLL , TRANSPARENT , invisible , rightalign , centeralign, EndEllipses, NoPrefix )
@@ -137,7 +137,7 @@ FUNCTION _DefineLabel ( ControlName, ParentForm, x, y, Caption, w, h, ;
    ELSE
       FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
       FONTNAME := _HMG_SYSDATA [ 342 ]
-      fontsize := _HMG_SYSDATA [ 343 ]
+      FONTSIZE := _HMG_SYSDATA [ 343 ]
    ENDIF
 
    IF _HMG_SYSDATA [ 265 ] = .T.

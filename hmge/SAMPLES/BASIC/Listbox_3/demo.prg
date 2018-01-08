@@ -19,14 +19,14 @@ FUNCTION Main
          ROW 10
          COL 10
          VALUE 'This is for status!'
-         AutoSize .t.
+         AUTOSIZE .t.
       END LABEL
 
       DEFINE BUTTON Button1
          ROW 240
          COL 10
          CAPTION "Add Item"
-         OnClick {|| Win1.List1.Additem("Added Item "+hb_ntos(Win1.List1.Itemcount + 1)), ;
+         ONCLICK {|| Win1.List1.Additem("Added Item "+hb_ntos(Win1.List1.Itemcount + 1)), ;
             Win1.List1.Value := iif(islistmultiselect('List1','Win1'), {Win1.List1.Itemcount}, Win1.List1.Itemcount)}
       END BUTTON
 
@@ -34,7 +34,7 @@ FUNCTION Main
          ROW 240
          COL 110
          CAPTION "Delete Item"
-         OnClick {|| Win1.List1.Deleteitem(1)}
+         ONCLICK {|| Win1.List1.Deleteitem(1)}
       END BUTTON
 
       DEFINE BUTTON Button3
@@ -42,21 +42,21 @@ FUNCTION Main
          COL 210
          CAPTION "Set Value"
          WIDTH 120
-         OnClick Win1.List1.Value := iif(islistmultiselect('List1','Win1'), {1,3,5}, 2)
+         ONCLICK Win1.List1.Value := iif(islistmultiselect('List1','Win1'), {1,3,5}, 2)
       END BUTTON
 
       DEFINE BUTTON Button4
          ROW 270
          COL 10
          CAPTION "Get Value"
-         OnClick ShowValues()
+         ONCLICK ShowValues()
       END BUTTON
 
       DEFINE BUTTON Button5
          ROW 270
          COL 110
          CAPTION "Get ItemCount"
-         OnClick {|| MsgInfo(str(Win1.List1.ItemCount))}
+         ONCLICK {|| MsgInfo(str(Win1.List1.ItemCount))}
       END BUTTON
 
       DEFINE BUTTON Button6
@@ -64,21 +64,21 @@ FUNCTION Main
          COL 210
          WIDTH 120
          CAPTION "Delete All Items"
-         OnClick {|| Win1.List1.DeleteAllItems()}
+         ONCLICK {|| Win1.List1.DeleteAllItems()}
       END BUTTON
 
       DEFINE BUTTON Button7
          ROW 300
          COL 10
          CAPTION "Set Items"
-         OnClick {|| SetItems({"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"})}
+         ONCLICK {|| SetItems({"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"})}
       END BUTTON
 
       DEFINE BUTTON Button8
          ROW 300
          COL 110
          CAPTION "Sort Items"
-         OnClick {|| loadlist( win1.list1.value, islistmultiselect('List1','Win1'), .t.)}
+         ONCLICK {|| loadlist( win1.list1.value, islistmultiselect('List1','Win1'), .t.)}
       END BUTTON
 
       DEFINE BUTTON Button9
@@ -86,7 +86,7 @@ FUNCTION Main
          COL 210
          WIDTH 120
          CAPTION "Toggle Multiselect"
-         OnClick {|| loadlist( if(isarray(win1.list1.value),1,{1}), !islistmultiselect('List1','Win1'), .f.)}
+         ONCLICK {|| loadlist( if(isarray(win1.list1.value),1,{1}), !islistmultiselect('List1','Win1'), .f.)}
       END BUTTON
 
    END WINDOW
@@ -116,8 +116,8 @@ FUNCTION loadlist(value,lmultiselect,lsort)
       ROW 40
       COL 10
       Parent Win1
-      Items {}
-      onChange {|| Win1.Label1.Value := iif(isarray(win1.list1.value),"MultiSelect List","Current Value is "+hb_ntos(win1.list1.value))}
+      ITEMS {}
+      ONCHANGE {|| Win1.Label1.Value := iif(isarray(win1.list1.value),"MultiSelect List","Current Value is "+hb_ntos(win1.list1.value))}
       onDblClick {|| MsgInfo("Double Click Action!")}
       multiselect lmultiselect
       SORT lsort

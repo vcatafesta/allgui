@@ -33,7 +33,7 @@ FUNCTION Main
          VALUE      .F.
          CAPTION      'Simple CheckBox'
          WIDTH      120
-         OnChange MsgInfo( "CheckBox 1 Value is Changed!" )
+         ONCHANGE MsgInfo( "CheckBox 1 Value is Changed!" )
       END CHECKBOX
 
       DEFINE CHECKBOX Check2
@@ -42,13 +42,13 @@ FUNCTION Main
          WIDTH      280
          VALUE      .F.
          FONTNAME   "Arial"
-         FontSize   12
+         FONTSIZE   12
          FONTBOLD   .t.
          FONTITALIC   .t.
-         FontUnderline   .t.
+         FONTUNDERLINE   .t.
          FontStrikeOut   .t.
          CAPTION      'CheckBox with Font Properties'
-         OnChange MsgInfo( "CheckBox 2 Value is Changed!" )
+         ONCHANGE MsgInfo( "CheckBox 2 Value is Changed!" )
       END CHECKBOX
 
       DEFINE CHECKBOX Check3
@@ -67,7 +67,7 @@ FUNCTION Main
          WIDTH   140
          HEIGHT   28
          CAPTION 'Change Event Block!'
-         OnClick Win1.Check1.OnChange := { || MsgInfo( "Event Block of 'On Change' event of Checkbox 1 is Changed dynamically!" ) }
+         ONCLICK Win1.Check1.OnChange := { || MsgInfo( "Event Block of 'On Change' event of Checkbox 1 is Changed dynamically!" ) }
       END BUTTON
 
       DEFINE BUTTON Button2
@@ -76,7 +76,7 @@ FUNCTION Main
          WIDTH   140
          HEIGHT   28
          CAPTION 'Win1.Check1.Value'
-         OnClick MsgInfo( Win1.Check1.value )
+         ONCLICK MsgInfo( Win1.Check1.value )
       END BUTTON
 
    END WINDOW

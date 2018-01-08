@@ -112,7 +112,7 @@ FUNCTION GetCode(nValue)
          FIELDS { 'Prod->Item_num' , 'Prod->Item_Desc' } ;
          VALUE nReg ;
          READONLY {.t.,.t.} ;
-         Justify {BROWSE_JTFY_LEFT , BROWSE_JTFY_CENTER} ;
+         JUSTIFY {BROWSE_JTFY_LEFT , BROWSE_JTFY_CENTER} ;
          ON DBLCLICK ( cReg:=Prod->Item_num, ThisWindow.Release ) ;
          TOOLTIP "DobleClick o Enter para Seleccionar "
 

@@ -1156,7 +1156,7 @@ FUNCTION ABMListado()
       of wndABMListado ;
       WIDTH 140 ;
       HEIGHT 100 ;
-      items aCamposListado ;
+      ITEMS aCamposListado ;
       VALUE 1 ;
       font "Arial" ;
       size 9
@@ -1164,7 +1164,7 @@ FUNCTION ABMListado()
       of wndABMListado ;
       WIDTH 140 ;
       HEIGHT 100 ;
-      items aCamposTotales ;
+      ITEMS aCamposTotales ;
       VALUE 1 ;
       font "Arial" ;
       size 9 ;

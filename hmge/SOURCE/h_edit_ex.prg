@@ -663,11 +663,11 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
    @ 60, 20 label lblIndice               ;
       of wndABM2Edit                  ;
       VALUE _HMG_aLangUser[26 ]       ;
-      autosize                        ;
+      AUTOSIZE                        ;
       font _GetSysFont() size 9
    @ 75, 20 combobox cbIndices             ;
       of wndABM2Edit                  ;
-      items _aIndice                  ;
+      ITEMS _aIndice                  ;
       VALUE _nIndiceActivo            ;
       WIDTH 150                       ;
       font _GetSysFont() size 9     ;
@@ -680,11 +680,11 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
    @ 60, nColumna label lblOpciones        ;
       of wndABM2Edit                  ;
       VALUE _HMG_aLangLabel[5 ]       ;
-      autosize                        ;
+      AUTOSIZE                        ;
       font _GetSysFont() size 9
    @ 75, nColumna combobox cbOpciones      ;
       of wndABM2Edit                  ;
-      items aTextoOp                  ;
+      ITEMS aTextoOp                  ;
       VALUE 1                         ;
       WIDTH 150                       ;
       font _GetSysFont() size 9     ;
@@ -716,7 +716,7 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
       ON CHANGE {|| ( _cArea )->( dbGoto( wndABM2Edit .brwABM2Edit. Value ) ),    ;
       ABM2Redibuja( .f. ) }                                     ;
       on dblclick {|| iif( wndABM2Edit .tbbEditar. Enabled, ABM2Editar( .f. ), ) }  ;
-      justify _aAlineadoTabla paintdoublebuffer
+      JUSTIFY _aAlineadoTabla paintdoublebuffer
 
    // Comprueba el estado de las opciones de usuario.
    IF Len( _aOpciones ) == 0
@@ -978,7 +978,7 @@ STATIC FUNCTION ABM2Editar( lNuevo )
          VALUE _aNombreCampo[ i ]                        ;
          WIDTH _aEtiqueta[ i, ABM_LBL_WIDTH ]            ;
          HEIGHT _aEtiqueta[ i, ABM_LBL_HEIGHT ]          ;
-         vcenteralign                                    ;
+         VCENTERALIGN                                    ;
          font _GetSysFont() size 9
    NEXT
 
@@ -1323,7 +1323,7 @@ STATIC FUNCTION ABM2Seleccionar()
          on dblclick {|| lSalida := .t.,                                 ;
          nReg := wndSeleccionar .brwSeleccionar. Value,    ;
          wndSeleccionar.Release }                        ;
-         justify _aAlineadoTabla paintdoublebuffer
+         JUSTIFY _aAlineadoTabla paintdoublebuffer
 
    END WINDOW
 
@@ -1690,7 +1690,7 @@ STATIC FUNCTION ABM2ActivarFiltro()
       of wndABM2Filtro                        ;
       WIDTH 140                               ;
       HEIGHT 100                              ;
-      items aCampos                           ;
+      ITEMS aCampos                           ;
       VALUE 1                                 ;
       font "Arial" size 9                     ;
       ON CHANGE {|| ABM2ControlFiltro() }     ;
@@ -1700,7 +1700,7 @@ STATIC FUNCTION ABM2ActivarFiltro()
       of wndABM2Filtro                        ;
       WIDTH 140                               ;
       HEIGHT 100                              ;
-      items aCompara                          ;
+      ITEMS aCompara                          ;
       VALUE 1                                 ;
       font "Arial" size 9                     ;
       ON GOTFOCUS wndABM2Filtro .StatusBar. Item( 1 ) := _HMG_aLangLabel[ 26 ] ;
@@ -2077,7 +2077,7 @@ STATIC FUNCTION ABM2Imprimir()
       of wndABM2Listado                                               ;
       WIDTH 140                                                       ;
       HEIGHT 100                                                      ;
-      items aCampoBase                                                ;
+      ITEMS aCampoBase                                                ;
       VALUE 1                                                         ;
       font "Arial" size 9                                             ;
       ON GOTFOCUS wndABM2Listado .StatusBar. Item( 1 ) := _HMG_aLangUser[ 12 ] ;
@@ -2086,7 +2086,7 @@ STATIC FUNCTION ABM2Imprimir()
       of wndABM2Listado                                               ;
       WIDTH 140                                                       ;
       HEIGHT 100                                                      ;
-      items aCampoListado                                             ;
+      ITEMS aCampoListado                                             ;
       VALUE 1                                                         ;
       font "Arial" size 9                                             ;
       ON GOTFOCUS wndABM2Listado .StatusBar. Item( 1 ) := _HMG_aLangUser[ 13 ] ;
@@ -2095,7 +2095,7 @@ STATIC FUNCTION ABM2Imprimir()
    // ComboBox.
    @ 220, 20 combobox cbxImpresoras                                        ;
       of wndABM2Listado                                               ;
-      items aImpresoras                                               ;
+      ITEMS aImpresoras                                               ;
       VALUE 1                                                         ;
       WIDTH 140                                                       ;
       font "Arial" size 9                                             ;

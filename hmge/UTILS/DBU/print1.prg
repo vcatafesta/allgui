@@ -113,7 +113,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       COL 30
       WIDTH 200
       HEIGHT 400
-      items _DBUfieldnamearr
+      ITEMS _DBUfieldnamearr
       multiselect .t.
    END listbox
    DEFINE BUTTON _DBUfieldadd
@@ -186,7 +186,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       COL 600
       WIDTH 150
       HEIGHT 100
-      items _DBUavailableprinters
+      ITEMS _DBUavailableprinters
       VALUE ascan(_DBUavailableprinters,_DBUcurrentprinter)
    END listbox
    DEFINE LABEL _DBUselectfontsizelabel
@@ -201,7 +201,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       COL 600
       WIDTH 150
       HEIGHT 100
-      items _DBUfontsizesstr
+      ITEMS _DBUfontsizesstr
       ON CHANGE DBUfontsizechanged()
       VALUE 5
    END listbox

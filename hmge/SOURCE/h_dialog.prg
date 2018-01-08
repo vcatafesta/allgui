@@ -309,7 +309,7 @@ FUNCTION _BeginDialog( name, parent, Id_resource, x, y, w, h, caption, fontname,
          FONTNAME := _HMG_ActiveFontName
       ENDIF
       IF .NOT. Empty ( _HMG_ActiveFontSize ) .AND. ValType( fontsize ) == "U"
-         fontsize := _HMG_ActiveFontSize
+         FONTSIZE := _HMG_ActiveFontSize
       ENDIF
    ENDIF
 

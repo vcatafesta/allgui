@@ -65,7 +65,7 @@ FUNCTION DBUmodistruct
       DEFINE COMBOBOX _DBUfieldtype
          ROW 70
          COL 195
-         items {"Character","Numeric","Date","Logical","Memo"}
+         ITEMS {"Character","Numeric","Date","Logical","Memo"}
          WIDTH 100
          VALUE 1
          ON LOSTFOCUS DBUtypelostfocus()
@@ -124,11 +124,11 @@ FUNCTION DBUmodistruct
          ROW 220
          COL 40
          HEADERS {"Name","Type","Size","Decimals"}
-         justify {0,0,1,1}
+         JUSTIFY {0,0,1,1}
          WIDTHS {150,100,100,75}
          WIDTH 450
          BACKCOLOR _DBUyellowish
-         items _DBUstructarr
+         ITEMS _DBUstructarr
          on dblclick DBUlineselected()
          HEIGHT 120
       END GRID

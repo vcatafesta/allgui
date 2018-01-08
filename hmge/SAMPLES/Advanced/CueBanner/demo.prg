@@ -22,7 +22,7 @@ FUNCTION Main
          ROW 10
          COL 10
          VALUE "Name:"
-         autosize .t.
+         AUTOSIZE .t.
       END LABEL
       DEFINE TEXTBOX name
          ROW 26
@@ -42,7 +42,7 @@ FUNCTION Main
          ROW 70
          COL 22
          VALUE "Cue text:"
-         autosize .t.
+         AUTOSIZE .t.
       END LABEL
       DEFINE TEXTBOX text
          ROW 86

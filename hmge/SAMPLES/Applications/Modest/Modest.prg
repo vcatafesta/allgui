@@ -430,7 +430,7 @@ PROCEDURE Main( cFile )
          @ 40, 100 ComboBox cmbType    ;
             WIDTH 40            ;
             HEIGHT 110          ;
-            Items CORRECT_TYPES ;
+            ITEMS CORRECT_TYPES ;
             VALUE 1             ;
             ListWidth 40        ;
             ON CHANGE ChangeMaxLimit()
@@ -556,7 +556,7 @@ PROCEDURE Main( cFile )
       HEIGHT 20       ;
       Bold            ;
       FONTCOLOR NAVY_COLOR  ;
-      Autosize
+      AUTOSIZE
    @ 220, 55 Label lblNew    ;
       VALUE 'New'     ;
       HEIGHT 18       ;

@@ -42,13 +42,13 @@ FUNCTION Main
          WIDTH 80;
          HEIGHT 20;
          VALUE "";
-         autosize
+         AUTOSIZE
 
       @  30, 10 Label Label_2 ;
          WIDTH 80;
          HEIGHT 20;
          VALUE "";
-         autosize
+         AUTOSIZE
 
       @ 80,10 GRID Grid_1 ;
          WIDTH 540 ;

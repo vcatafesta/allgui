@@ -57,7 +57,7 @@ FUNCTION Main
          VALUE 'mask !N9.9' ;
          WIDTH 100;
          FONT 'Arial' SIZE 09 BOLD;
-         Autosize
+         AUTOSIZE
 
       @ 50,10 LABEL label_2 ;
          VALUE 'Character mask';
@@ -87,7 +87,7 @@ FUNCTION Main
          VALUE 'mask !AAAAAAAAAAAA' ;
          WIDTH 100;
          FONT 'Arial' SIZE 09 BOLD;
-         Autosize
+         AUTOSIZE
 
       @ 110,10 LABEL label_4 ;
          VALUE 'Last name:' ;
@@ -103,7 +103,7 @@ FUNCTION Main
          VALUE 'mask !AAAAAAAAAAAA' ;
          WIDTH 100;
          FONT 'Arial' SIZE 09 BOLD;
-         Autosize
+         AUTOSIZE
 
    END WINDOW
 

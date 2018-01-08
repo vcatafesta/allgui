@@ -86,7 +86,7 @@ FUNCTION main
          COL 510
          CAPTION "Slideshow ("+alltrim(str(showinterval/1000,5,0))+" Sec)"
          WIDTH 130
-         onchange show1changed()
+         ONCHANGE show1changed()
       END CHECKBOX
       DEFINE BUTTON but1
          ROW 310

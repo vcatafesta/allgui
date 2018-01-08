@@ -59,7 +59,7 @@ FUNCTION Main()
          WIDTHS {50, 220, 120, 1100}
          ITEMS aMetrics
          VALUE 1
-         OnChange {|| Rebox_Update() }
+         ONCHANGE {|| Rebox_Update() }
          ONDBLCLICK {|| GridMetricsDblClick(), Rebox_Update() }
          ONHEADCLICK { ;
             {|| GridMetricsHeadClick(1, aMetrics), Rebox_Update() }, ;

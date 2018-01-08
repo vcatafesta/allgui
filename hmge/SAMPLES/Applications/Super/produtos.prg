@@ -35,7 +35,7 @@ FUNCTION produtos()
          CAPTION 'F5 Incluir'
          ACTION dados(1)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -52,7 +52,7 @@ FUNCTION produtos()
          CAPTION 'F6 Alterar'
          ACTION dados(2)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -69,7 +69,7 @@ FUNCTION produtos()
          CAPTION 'F7 Excluir'
          ACTION excluir()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -86,7 +86,7 @@ FUNCTION produtos()
          CAPTION 'F8 Imprimir'
          ACTION relacao()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -103,7 +103,7 @@ FUNCTION produtos()
          CAPTION 'Atualizar'
          ACTION atualizar()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -120,7 +120,7 @@ FUNCTION produtos()
          CAPTION 'Fornecedores'
          ACTION fornecedores_produto()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -137,7 +137,7 @@ FUNCTION produtos()
          CAPTION 'Compor Prod.'
          ACTION compor_produto()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -154,7 +154,7 @@ FUNCTION produtos()
          CAPTION 'ESC Voltar'
          ACTION form_produtos.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -173,7 +173,7 @@ FUNCTION produtos()
             HEADERS {'Pizza','Promoção','Baixa','Código','Código Barra','Nome (longo)','Qtd.Estoque'}
             WIDTHS {060,100,060,100,150,400,120}
             FONTNAME 'verdana'
-            fontsize 010
+            FONTSIZE 010
             FONTBOLD .T.
             BACKCOLOR _amarelo_001
             FONTCOLOR _preto_001
@@ -186,12 +186,12 @@ FUNCTION produtos()
          COL 005
          ROW getdesktopheight()-090
          VALUE 'Digite sua pesquisa'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ getdesktopheight()-095,160 textbox tbox_pesquisa;
          of form_produtos;
@@ -209,12 +209,12 @@ FUNCTION produtos()
          COL form_produtos.width - 270
          ROW getdesktopheight()-085
          VALUE 'DUPLO CLIQUE : Alterar informação'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _verde_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       ON KEY F5 ACTION dados(1)
@@ -323,7 +323,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 045,015 getbox tbox_001;
          of form_dados;
          HEIGHT 027;
@@ -339,7 +339,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 045,145 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
@@ -357,7 +357,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 095,015 textbox tbox_003;
          of form_dados;
          HEIGHT 027;
@@ -375,7 +375,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 095,275 textbox tbox_004;
          of form_dados;
          HEIGHT 027;
@@ -393,7 +393,7 @@ STATIC FUNCTION dados(parametro)
          CAPTION 'Produto é PIZZA ?'
          VALUE x_pizza
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
       END CHECKBOX
       DEFINE CHECKBOX tbox_006
@@ -403,7 +403,7 @@ STATIC FUNCTION dados(parametro)
          CAPTION 'Em Promoção ?'
          VALUE x_promocao
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
       END CHECKBOX
       DEFINE CHECKBOX tbox_007
@@ -413,7 +413,7 @@ STATIC FUNCTION dados(parametro)
          CAPTION 'Baixa o estoque ?'
          VALUE x_baixa
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
       END CHECKBOX
       @ 180,015 label lbl_008;
@@ -423,7 +423,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 200,015 textbox tbox_008;
          of form_dados;
          HEIGHT 027;
@@ -441,7 +441,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
-         transparent
+         TRANSPARENT
       @ 230,015 label lbl_009;
          of form_dados;
          VALUE 'Sub Categoria';
@@ -449,7 +449,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 250,015 textbox tbox_009;
          of form_dados;
          HEIGHT 027;
@@ -467,7 +467,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
-         transparent
+         TRANSPARENT
       @ 290,015 label lbl_010;
          of form_dados;
          VALUE 'Qtd. em estoque';
@@ -475,7 +475,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 310,015 textbox tbox_010;
          of form_dados;
          HEIGHT 027;
@@ -492,7 +492,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 310,130 textbox tbox_011;
          of form_dados;
          HEIGHT 027;
@@ -509,7 +509,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 310,240 textbox tbox_012;
          of form_dados;
          HEIGHT 027;
@@ -526,7 +526,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 360,015 textbox tbox_013;
          of form_dados;
          HEIGHT 027;
@@ -544,7 +544,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
-         transparent
+         TRANSPARENT
       @ 390,015 label lbl_014;
          of form_dados;
          VALUE 'Valor CUSTO R$';
@@ -552,7 +552,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _verde_001;
-         transparent
+         TRANSPARENT
       @ 410,015 getbox tbox_014;
          of form_dados;
          HEIGHT 027;
@@ -569,7 +569,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 410,175 getbox tbox_015;
          of form_dados;
          HEIGHT 027;
@@ -597,7 +597,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 025,670 label lbl_t002;
          of form_dados;
          VALUE 'Preços R$';
@@ -605,7 +605,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
 
       * mostrar os tamanhos pré-definidos
       @ 050,535 label lbl_t003;
@@ -615,7 +615,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 090,535 label lbl_t004;
          of form_dados;
          VALUE _tamanho_002;
@@ -623,7 +623,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 130,535 label lbl_t005;
          of form_dados;
          VALUE _tamanho_003;
@@ -631,7 +631,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 170,535 label lbl_t006;
          of form_dados;
          VALUE _tamanho_004;
@@ -639,7 +639,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 210,535 label lbl_t007;
          of form_dados;
          VALUE _tamanho_005;
@@ -647,7 +647,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 250,535 label lbl_t008;
          of form_dados;
          VALUE _tamanho_006;
@@ -655,7 +655,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
 
       * preços das pizzas
       @ 050,670 getbox tbox_preco_001;
@@ -721,7 +721,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões
@@ -798,7 +798,7 @@ STATIC FUNCTION compor_produto()
          CAPTION 'F5 Incluir'
          ACTION incluir_composicao(x_codigo_produto)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -815,7 +815,7 @@ STATIC FUNCTION compor_produto()
          CAPTION 'F7 Excluir'
          ACTION excluir_composicao()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -832,7 +832,7 @@ STATIC FUNCTION compor_produto()
          CAPTION 'ESC Voltar'
          ACTION form_compor.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -850,7 +850,7 @@ STATIC FUNCTION compor_produto()
          HEADERS {'id produto','id matéria prima','Nome','Quantidade','Unidade Medida'}
          WIDTHS {001,001,300,120,150}
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .F.
          nolines .T.
          BACKCOLOR _grid_002
@@ -886,7 +886,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 025,005 textbox tbox_001;
          of form_inccpo;
          HEIGHT 027;
@@ -904,7 +904,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
-         transparent
+         TRANSPARENT
       @ 065,005 label lbl_002;
          of form_inccpo;
          VALUE 'Quantidade utilizada';
@@ -912,7 +912,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 065,150 getbox tbox_002;
          of form_inccpo;
          HEIGHT 027;
@@ -931,7 +931,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          WIDTH form_inccpo.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões
@@ -1332,19 +1332,19 @@ STATIC FUNCTION getcode_categoria_produtos(value)
          COL 005
          ROW 440
          VALUE 'Buscar'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
          MAXLENGTH 040
-         onchange find_categoria_produtos()
+         ONCHANGE find_categoria_produtos()
          uppercase .T.
       END TEXTBOX
 
@@ -1359,13 +1359,13 @@ STATIC FUNCTION getcode_categoria_produtos(value)
          FIELDS {'categoria_produtos->codigo','categoria_produtos->nome'}
          VALUE nreg
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
-         justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=categoria_produtos->codigo,thiswindow.release)
       END browse
 
@@ -1451,19 +1451,19 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
          COL 005
          ROW 440
          VALUE 'Buscar'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
          MAXLENGTH 040
-         onchange find_subcategoria_produtos()
+         ONCHANGE find_subcategoria_produtos()
          uppercase .T.
       END TEXTBOX
 
@@ -1478,13 +1478,13 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
          FIELDS {'subcategoria_produtos->codigo','subcategoria_produtos->nome'}
          VALUE nreg
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
-         justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=subcategoria_produtos->codigo,thiswindow.release)
       END browse
 
@@ -1570,19 +1570,19 @@ STATIC FUNCTION getcode_impostos(value)
          COL 005
          ROW 440
          VALUE 'Buscar'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
          MAXLENGTH 040
-         onchange find_impostos()
+         ONCHANGE find_impostos()
          uppercase .T.
       END TEXTBOX
 
@@ -1597,13 +1597,13 @@ STATIC FUNCTION getcode_impostos(value)
          FIELDS {'impostos->codigo','impostos->nome'}
          VALUE nreg
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
-         justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=impostos->codigo,thiswindow.release)
       END browse
 
@@ -1689,19 +1689,19 @@ STATIC FUNCTION getcode_materia_prima(value)
          COL 005
          ROW 440
          VALUE 'Buscar'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
          MAXLENGTH 040
-         onchange find_materia_prima()
+         ONCHANGE find_materia_prima()
          uppercase .T.
       END TEXTBOX
 
@@ -1716,13 +1716,13 @@ STATIC FUNCTION getcode_materia_prima(value)
          FIELDS {'materia_prima->codigo','materia_prima->nome'}
          VALUE nreg
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
-         justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=materia_prima->codigo,thiswindow.release)
       END browse
 
@@ -1782,7 +1782,7 @@ STATIC FUNCTION fornecedores_produto()
          CAPTION 'ESC Voltar'
          ACTION form_fornecedor_produto.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -1800,7 +1800,7 @@ STATIC FUNCTION fornecedores_produto()
          HEADERS {'Nome do fornecedor'}
          WIDTHS {570}
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .F.
          nolines .T.
          BACKCOLOR _branco_001

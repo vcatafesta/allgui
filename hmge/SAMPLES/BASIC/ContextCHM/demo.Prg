@@ -38,7 +38,7 @@ PROCEDURE Main
          ROW 20
          COL 20
          CAPTION 'Press me'
-         onclick DisplayHelpTopic( "helpindex.htm" )
+         ONCLICK DisplayHelpTopic( "helpindex.htm" )
       END BUTTON
 
       DEFINE STATUSBAR

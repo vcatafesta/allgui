@@ -277,10 +277,10 @@ FUNCTION MAIN()
          VALUE "srgiri@dataone.in"
          address "srgiri@dataone.in"
          TOOLTIP "Contact me at the above address"
-         autosize .t.
+         AUTOSIZE .t.
          handcursor .t.
          FONTNAME "Arial"
-         fontsize 9
+         FONTSIZE 9
       END hyperlink
 
       DEFINE CONTEXT menu of _DBU
@@ -754,7 +754,7 @@ FUNCTION DBUsetfilter
          BACKCOLOR _DBUyellowish
          HEADERS {"Field Name"}
          WIDTHS {176}
-         items _DBUfieldsarr
+         ITEMS _DBUfieldsarr
          on dblclick _DBUfilterbox._DBUfiltercondition.value := alltrim(alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUfieldsarr[_DBUfilterbox._DBUfieldnames.value,1]))
          WIDTH 200
          HEIGHT 152
@@ -815,7 +815,7 @@ FUNCTION DBUsetfilter
          HEADERS {"Functions"}
          WIDTHS {176}
          BACKCOLOR _DBUgreenish
-         items _DBUdbffunctions
+         ITEMS _DBUdbffunctions
          on dblclick _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUdbffunctions[_DBUfilterbox._DBUfunctions.value,1])
          WIDTH 200
          HEIGHT 152

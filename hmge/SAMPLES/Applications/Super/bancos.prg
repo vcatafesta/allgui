@@ -36,7 +36,7 @@ FUNCTION contas_bancarias()
          CAPTION 'F5 Incluir'
          ACTION dados(1)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -53,7 +53,7 @@ FUNCTION contas_bancarias()
          CAPTION 'F6 Alterar'
          ACTION dados(2)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -70,7 +70,7 @@ FUNCTION contas_bancarias()
          CAPTION 'F7 Excluir'
          ACTION excluir()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -87,7 +87,7 @@ FUNCTION contas_bancarias()
          CAPTION 'F8 Imprimir'
          ACTION relacao()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -104,7 +104,7 @@ FUNCTION contas_bancarias()
          CAPTION 'Atualizar'
          ACTION atualizar()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -121,7 +121,7 @@ FUNCTION contas_bancarias()
          CAPTION 'ESC Voltar'
          ACTION form_bancos.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -140,7 +140,7 @@ FUNCTION contas_bancarias()
             HEADERS {'Código','Nome','Banco','Agência','Conta'}
             WIDTHS {100,250,150,150,100}
             FONTNAME 'verdana'
-            fontsize 010
+            FONTSIZE 010
             FONTBOLD .T.
             BACKCOLOR _amarelo_001
             FONTCOLOR _preto_001
@@ -153,12 +153,12 @@ FUNCTION contas_bancarias()
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_bancos;
@@ -176,12 +176,12 @@ FUNCTION contas_bancarias()
          COL form_bancos.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _verde_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       ON KEY F5 ACTION dados(1)
@@ -254,7 +254,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
@@ -272,7 +272,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,005 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
@@ -290,7 +290,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,155 textbox tbox_003;
          of form_dados;
          HEIGHT 027;
@@ -308,7 +308,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,005 textbox tbox_004;
          of form_dados;
          HEIGHT 027;
@@ -326,7 +326,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,155 getbox tbox_005;
          of form_dados;
          HEIGHT 027;
@@ -343,7 +343,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 180,005 textbox tbox_006;
          of form_dados;
          HEIGHT 027;
@@ -361,7 +361,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 230,005 textbox tbox_007;
          of form_dados;
          HEIGHT 027;
@@ -379,7 +379,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 280,005 textbox tbox_008;
          of form_dados;
          HEIGHT 027;
@@ -399,7 +399,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões

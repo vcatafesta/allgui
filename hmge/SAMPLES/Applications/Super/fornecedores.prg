@@ -36,7 +36,7 @@ FUNCTION fornecedores()
          CAPTION 'F5 Incluir'
          ACTION dados(1)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -53,7 +53,7 @@ FUNCTION fornecedores()
          CAPTION 'F6 Alterar'
          ACTION dados(2)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -70,7 +70,7 @@ FUNCTION fornecedores()
          CAPTION 'F7 Excluir'
          ACTION excluir()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -87,7 +87,7 @@ FUNCTION fornecedores()
          CAPTION 'F8 Imprimir'
          ACTION relacao()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -104,7 +104,7 @@ FUNCTION fornecedores()
          CAPTION 'Atualizar'
          ACTION atualizar()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -121,7 +121,7 @@ FUNCTION fornecedores()
          CAPTION 'ESC Voltar'
          ACTION form_fornecedores.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -140,7 +140,7 @@ FUNCTION fornecedores()
             HEADERS {'Código','Nome','Telefone fixo','Telefone celular'}
             WIDTHS {080,400,140,140}
             FONTNAME 'verdana'
-            fontsize 010
+            FONTSIZE 010
             FONTBOLD .T.
             BACKCOLOR _amarelo_001
             FONTCOLOR _preto_001
@@ -153,12 +153,12 @@ FUNCTION fornecedores()
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_fornecedores;
@@ -176,12 +176,12 @@ FUNCTION fornecedores()
          COL form_fornecedores.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _verde_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       ON KEY F5 ACTION dados(1)
@@ -262,7 +262,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
@@ -280,7 +280,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,325 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
@@ -298,7 +298,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,455 textbox tbox_003;
          of form_dados;
          HEIGHT 027;
@@ -316,7 +316,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,005 textbox tbox_004;
          of form_dados;
          HEIGHT 027;
@@ -334,7 +334,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,325 textbox tbox_005;
          of form_dados;
          HEIGHT 027;
@@ -352,7 +352,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,395 textbox tbox_006;
          of form_dados;
          HEIGHT 027;
@@ -370,7 +370,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,005 textbox tbox_007;
          of form_dados;
          HEIGHT 027;
@@ -388,7 +388,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,195 textbox tbox_008;
          of form_dados;
          HEIGHT 027;
@@ -406,7 +406,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,385 textbox tbox_009;
          of form_dados;
          HEIGHT 027;
@@ -424,7 +424,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,435 textbox tbox_010;
          of form_dados;
          HEIGHT 027;
@@ -442,7 +442,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 180,005 textbox tbox_011;
          of form_dados;
          HEIGHT 027;
@@ -460,7 +460,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 230,005 textbox tbox_012;
          of form_dados;
          HEIGHT 027;
@@ -478,7 +478,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
-         transparent
+         TRANSPARENT
 
       * linha separadora
       DEFINE LABEL linha_rodape
@@ -488,7 +488,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões
@@ -814,19 +814,19 @@ STATIC FUNCTION getcode_grupo_fornecedores(value)
          COL 005
          ROW 440
          VALUE 'Buscar'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
          MAXLENGTH 040
-         onchange find_grupo_fornecedores()
+         ONCHANGE find_grupo_fornecedores()
          uppercase .T.
       END TEXTBOX
 
@@ -841,13 +841,13 @@ STATIC FUNCTION getcode_grupo_fornecedores(value)
          FIELDS {'grupo_fornecedores->codigo','grupo_fornecedores->nome'}
          VALUE nreg
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
-         justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=grupo_fornecedores->codigo,thiswindow.release)
       END browse
 

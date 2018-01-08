@@ -76,7 +76,7 @@ FUNCTION Main()
          HEIGHT RowCharToPix( 1.65 )
          CAPTION "&Ok"
          FONTNAME "MS Sans Serif"
-         fontsize 8
+         FONTSIZE 8
          ACTION ( lOk := !Empty( cName ) .AND. !Empty( cStreet1 ) .AND. !Empty( cCity ) .AND. !Empty( cState ) .AND. !Empty( cZipcode ), ;
             ShowMsg(), f1.release() )
       END BUTTON
@@ -88,7 +88,7 @@ FUNCTION Main()
          HEIGHT RowCharToPix( 1.65 )
          CAPTION "&Cancel"
          FONTNAME "MS Sans Serif"
-         fontsize 8
+         FONTSIZE 8
          ACTION f1.release()
       END BUTTON
 

@@ -22,14 +22,14 @@ FUNCTION Main
          ROW 10
          COL 10
          VALUE "Name:"
-         autosize .t.
+         AUTOSIZE .t.
       END LABEL
       DEFINE COMBOBOX name
          ROW 26
          COL 10
          WIDTH 318
          HEIGHT 120
-         items {"Item 1","Item 2","Item 3"}
+         ITEMS {"Item 1","Item 2","Item 3"}
          cuebanner "ComboBox CueBanner Test"
       END COMBOBOX
       DEFINE FRAME frm_1
@@ -43,7 +43,7 @@ FUNCTION Main
          ROW 70
          COL 22
          VALUE "Cue text:"
-         autosize .t.
+         AUTOSIZE .t.
       END LABEL
       DEFINE TEXTBOX text
          ROW 86

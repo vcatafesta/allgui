@@ -108,7 +108,7 @@ FUNCTION _DefineCheckBox ( ControlName, ParentFormName, x, y, Caption, Value, ;
    ENDIF
 
    IF transparent .AND. _HMG_FrameLevel == 0 .AND. IsXPThemeActive() // Fixed for transparent problem at themed WinXP and later
-      transparent := FALSE
+      TRANSPARENT := FALSE
       mVar := _HMG_aFormBkColor[ GetFormIndex ( ParentFormName ) ]
       IF backcolor == NIL .AND. mVar[1] < 0 .AND. mVar[2] < 0 .AND. mVar[3] < 0
          mVar := GetSysColor( COLOR_BTNFACE )

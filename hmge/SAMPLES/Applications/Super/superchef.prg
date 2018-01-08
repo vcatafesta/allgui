@@ -171,11 +171,11 @@ FUNCTION main()
             HEIGHT 045
             VALUE 'CÓPIA DE AVALIAÇÃO - CÓPIA DE AVALIAÇÃO - CÓPIA DE AVALIAÇÃO - CÓPIA DE AVALIAÇÃO'
             FONTNAME 'tahoma'
-            fontsize 026
+            FONTSIZE 026
             FONTBOLD .T.
             FONTCOLOR _amarelo_002
             BACKCOLOR _vermelho_003
-            transparent .F.
+            TRANSPARENT .F.
          END LABEL
          _numero_serie_ := 'SCP---------------'
       ENDIF
@@ -259,7 +259,7 @@ FUNCTION main()
          CAPTION 'F5'+CRLF+'Venda'+CRLF+'Delivery'
          ACTION iif(libera(_a_001),venda_delivery(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .F.
@@ -278,7 +278,7 @@ FUNCTION main()
          CAPTION 'F6'+CRLF+'Venda'+CRLF+'Mesas'
          ACTION iif(libera(_a_002),venda_mesas(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .F.
@@ -297,7 +297,7 @@ FUNCTION main()
          CAPTION 'F7'+CRLF+'Venda'+CRLF+'Balcão'
          ACTION iif(libera(_a_003),venda_balcao(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .F.
@@ -316,7 +316,7 @@ FUNCTION main()
          CAPTION 'F8'+CRLF+'Cadastro'+CRLF+'Clientes'
          ACTION iif(libera(_a_004),clientes(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .F.
@@ -335,7 +335,7 @@ FUNCTION main()
          CAPTION 'F9'+CRLF+'Cadastro'+CRLF+'Produtos'
          ACTION iif(libera(_a_005),produtos(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .F.
@@ -354,7 +354,7 @@ FUNCTION main()
          CAPTION 'ESC'+CRLF+'Sair do'+CRLF+'Programa'
          ACTION form_main.release
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _vermelho_002
          vertical .F.
@@ -373,10 +373,10 @@ FUNCTION main()
          WIDTH 175
          HEIGHT 300
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          opaque .T.
-         transparent .F.
+         TRANSPARENT .F.
       END FRAME
 
       * acompanhamento dos pedidos e entregas
@@ -386,12 +386,12 @@ FUNCTION main()
          ROW 095
          VALUE 'tecla F10'
          ACTION mostra_entregas()
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR YELLOW
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL acompanhamento_002
          parent form_main
@@ -399,12 +399,12 @@ FUNCTION main()
          ROW 110
          VALUE 'Acompanhamento dos'
          ACTION mostra_entregas()
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_004
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL acompanhamento_003
          parent form_main
@@ -412,12 +412,12 @@ FUNCTION main()
          ROW 125
          VALUE 'pedidos feitos'
          ACTION mostra_entregas()
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_004
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL acompanhamento_004
          parent form_main
@@ -425,12 +425,12 @@ FUNCTION main()
          ROW 140
          VALUE 'em : venda delivery'
          ACTION mostra_entregas()
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_004
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL acompanhamento_005
          parent form_main
@@ -438,12 +438,12 @@ FUNCTION main()
          ROW 155
          VALUE 'em : venda balcão'
          ACTION mostra_entregas()
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_004
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       * operador
@@ -452,36 +452,36 @@ FUNCTION main()
          COL getdesktopwidth()-175
          ROW 185
          VALUE 'Operador atual'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR YELLOW
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL operador_002
          parent form_main
          COL getdesktopwidth()-175
          ROW 200
          VALUE ''
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_004
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL operador_003
          parent form_main
          COL getdesktopwidth()-175
          ROW 215
          VALUE dtoc(date())+' as '+substr(time(),1,5)+'h'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_004
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       * número de série do produto
@@ -490,24 +490,24 @@ FUNCTION main()
          COL getdesktopwidth()-170
          ROW 330
          VALUE 'Número de Série'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _branco_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL numero_serie_002
          parent form_main
          COL getdesktopwidth()-170
          ROW 350
          VALUE _numero_serie_
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _ciano_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       * nome do cliente e do programa
@@ -519,10 +519,10 @@ FUNCTION main()
          WIDTH 600
          HEIGHT 080
          FONTNAME 'courier new'
-         fontsize 030
+         FONTSIZE 030
          FONTBOLD .T.
          FONTCOLOR _ciano_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL nome_programa_001
          parent form_main
@@ -532,10 +532,10 @@ FUNCTION main()
          WIDTH 200
          HEIGHT 050
          FONTNAME 'tahoma'
-         fontsize 022
+         FONTSIZE 022
          FONTBOLD .T.
          FONTCOLOR _super
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL nome_programa_002
          parent form_main
@@ -545,10 +545,10 @@ FUNCTION main()
          WIDTH 200
          HEIGHT 050
          FONTNAME 'tahoma'
-         fontsize 022
+         FONTSIZE 022
          FONTBOLD .T.
          FONTCOLOR _laranja_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       * nome da softhouse
@@ -557,24 +557,24 @@ FUNCTION main()
          COL getdesktopwidth()-310
          ROW getdesktopheight()-190
          VALUE 'Este software foi desenvolvido por'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _branco_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL softhouse_002
          parent form_main
          COL getdesktopwidth()-310
          ROW getdesktopheight()-175
          VALUE 'xxxxxxxxxxxx'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 014
+         FONTSIZE 014
          FONTBOLD .T.
          FONTCOLOR _amarelo_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE IMAGE brasil
          ROW getdesktopheight()-175
@@ -599,36 +599,36 @@ FUNCTION main()
          COL getdesktopwidth()-310
          ROW getdesktopheight()-135
          VALUE 'Para obter suporte técnico deste produto'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _branco_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL suporte_002
          parent form_main
          COL getdesktopwidth()-310
          ROW getdesktopheight()-120
          VALUE 'Telefone: (99) 9999-9999'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_004
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL suporte_003
          parent form_main
          COL getdesktopwidth()-310
          ROW getdesktopheight()-105
          VALUE 'E-mail:xxxxxx@xxxxxxxx.com.br'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_004
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       ON KEY F5 ACTION venda_delivery()
@@ -1894,24 +1894,24 @@ STATIC FUNCTION tamanhos_pizza()
          COL 010
          ROW 005
          VALUE 'Duplo clique ou ENTER altera'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL info_002
          parent form_tamanhos
          COL 010
          ROW 025
          VALUE 'ESC fecha esta janela'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _vermelho_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 005,290 button btn_sair;
          parent form_tamanhos;
@@ -1968,7 +1968,7 @@ STATIC FUNCTION altera_tamanho()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 025,005 textbox tbox_001;
          of form_altera_tamanho;
          HEIGHT 027;
@@ -1986,7 +1986,7 @@ STATIC FUNCTION altera_tamanho()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 075,005 textbox tbox_002;
          of form_altera_tamanho;
          HEIGHT 027;
@@ -2071,11 +2071,11 @@ STATIC FUNCTION login()
          WIDTH 600
          HEIGHT 045
          FONTNAME 'tahoma'
-         fontsize 022
+         FONTSIZE 022
          FONTBOLD .T.
          BACKCOLOR _azul_006
          FONTCOLOR _super
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
       DEFINE LABEL lbl_top1
          parent form_login
@@ -2085,11 +2085,11 @@ STATIC FUNCTION login()
          WIDTH 350
          HEIGHT 045
          FONTNAME 'tahoma'
-         fontsize 022
+         FONTSIZE 022
          FONTBOLD .T.
          BACKCOLOR _azul_006
          FONTCOLOR _laranja_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL lbl_top2
          parent form_login
@@ -2099,11 +2099,11 @@ STATIC FUNCTION login()
          WIDTH 350
          HEIGHT 020
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _azul_006
          FONTCOLOR _branco_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       * senha
@@ -2111,12 +2111,12 @@ STATIC FUNCTION login()
          COL 050
          ROW 070
          VALUE 'Digite sua senha'
-         autosize .T.
+         AUTOSIZE .T.
          FONTCOLOR _cinza_001
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 070,190 textbox tbox_senha;
          of form_login;
@@ -2134,12 +2134,12 @@ STATIC FUNCTION login()
             COL 100
             ROW 100
             VALUE 'digite a senha 9999'
-            autosize .T.
+            AUTOSIZE .T.
             FONTCOLOR RED
             FONTNAME 'verdana'
-            fontsize 012
+            FONTSIZE 012
             FONTBOLD .T.
-            transparent .T.
+            TRANSPARENT .T.
          END LABEL
       ENDIF
 
@@ -2151,7 +2151,7 @@ STATIC FUNCTION login()
          WIDTH form_login.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       @ 170,220 buttonex btn_ok;
@@ -2348,58 +2348,58 @@ STATIC FUNCTION configurar_venda()
          COL 010
          ROW 005
          VALUE 'ESC fecha esta janela'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _vermelho_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL info_002
          parent form_configurar
          COL 010
          ROW 050
          VALUE 'Defina de que forma o programa deverá cobrar o valor'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _azul_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL info_003
          parent form_configurar
          COL 010
          ROW 070
          VALUE 'das pizzas vendidas, quando for selecionado mais  de'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _azul_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL info_004
          parent form_configurar
          COL 010
          ROW 090
          VALUE 'um sabor.'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _azul_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       define comboboxex cbo_tipo
       ROW 120
       COL 010
       WIDTH 380
       HEIGHT 400
-      items a_tipos
+      ITEMS a_tipos
       VALUE x_tipo
       FONTNAME 'courier new'
-      fontsize 12
+      FONTSIZE 12
       FONTCOLOR BLACK
    END comboboxex
 
@@ -2459,24 +2459,24 @@ STATIC FUNCTION bordas_pizza()
          COL 010
          ROW 005
          VALUE 'Duplo clique ou ENTER altera'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL info_002
          parent form_bordas
          COL 010
          ROW 025
          VALUE 'ESC fecha esta janela'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _vermelho_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 005,290 button btn_sair;
          parent form_bordas;
@@ -2533,7 +2533,7 @@ STATIC FUNCTION altera_borda()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 025,005 textbox tbox_001;
          of form_altera_borda;
          HEIGHT 027;
@@ -2551,7 +2551,7 @@ STATIC FUNCTION altera_borda()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 075,005 textbox tbox_002;
          of form_altera_borda;
          HEIGHT 027;

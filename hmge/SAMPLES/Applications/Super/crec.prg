@@ -30,7 +30,7 @@ FUNCTION crec()
          CAPTION 'F5 Incluir'
          ACTION dados_crec(1)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -47,7 +47,7 @@ FUNCTION crec()
          CAPTION 'F6 Alterar'
          ACTION dados_crec(2)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -64,7 +64,7 @@ FUNCTION crec()
          CAPTION 'F7 Excluir'
          ACTION excluir_crec()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -81,7 +81,7 @@ FUNCTION crec()
          CAPTION 'Atualizar'
          ACTION atualizar_crec()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -98,7 +98,7 @@ FUNCTION crec()
          CAPTION 'ESC Voltar'
          ACTION form_crec.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -116,7 +116,7 @@ FUNCTION crec()
          HEADERS {'id','Vencimento','Cliente','Forma Recebimento','Valor R$','Nº Documento','Observação'}
          WIDTHS {001,120,300,200,120,120,200}
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _amarelo_001
          FONTCOLOR _preto_001
@@ -128,24 +128,24 @@ FUNCTION crec()
          COL 005
          ROW 615
          VALUE 'Escolha o período'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL rodape_002_2
          parent form_crec
          COL 250
          ROW 615
          VALUE 'até'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 610,140 datepicker dp_inicio_2;
          parent form_crec;
@@ -170,12 +170,12 @@ FUNCTION crec()
          COL form_crec.width - 270
          ROW 615
          VALUE 'DUPLO CLIQUE : Alterar informação'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _verde_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       ON KEY ESCAPE ACTION thiswindow.release
@@ -240,7 +240,7 @@ STATIC FUNCTION dados_crec(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
@@ -258,7 +258,7 @@ STATIC FUNCTION dados_crec(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
-         transparent
+         TRANSPARENT
       @ 060,005 label lbl_002;
          of form_dados;
          VALUE 'Forma Recebimento';
@@ -266,7 +266,7 @@ STATIC FUNCTION dados_crec(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,005 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
@@ -284,7 +284,7 @@ STATIC FUNCTION dados_crec(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
-         transparent
+         TRANSPARENT
 
       @ 110,005 label lbl_003;
          of form_dados;
@@ -293,7 +293,7 @@ STATIC FUNCTION dados_crec(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
-         transparent
+         TRANSPARENT
       @ 130,005 textbox tbox_003;
          of form_dados;
          HEIGHT 027;
@@ -311,7 +311,7 @@ STATIC FUNCTION dados_crec(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _vermelho_002;
-         transparent
+         TRANSPARENT
       @ 130,140 getbox tbox_004;
          of form_dados;
          HEIGHT 027;
@@ -329,7 +329,7 @@ STATIC FUNCTION dados_crec(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,270 textbox tbox_005;
          of form_dados;
          HEIGHT 027;
@@ -348,7 +348,7 @@ STATIC FUNCTION dados_crec(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 180,005 textbox tbox_006;
          of form_dados;
          HEIGHT 027;
@@ -368,7 +368,7 @@ STATIC FUNCTION dados_crec(parametro)
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões
@@ -567,19 +567,19 @@ STATIC FUNCTION getcode_clientes(value)
          COL 005
          ROW 440
          VALUE 'Buscar'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
          MAXLENGTH 040
-         onchange find_clientes()
+         ONCHANGE find_clientes()
          uppercase .T.
       END TEXTBOX
 
@@ -594,13 +594,13 @@ STATIC FUNCTION getcode_clientes(value)
          FIELDS {'clientes->codigo','clientes->nome'}
          VALUE nreg
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
-         justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=clientes->codigo,thiswindow.release)
       END browse
 
@@ -686,19 +686,19 @@ STATIC FUNCTION getcode_formas_recebimento(value)
          COL 005
          ROW 440
          VALUE 'Buscar'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 012
+         FONTSIZE 012
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
          MAXLENGTH 040
-         onchange find_formas_recebimento()
+         ONCHANGE find_formas_recebimento()
          uppercase .T.
       END TEXTBOX
 
@@ -713,13 +713,13 @@ STATIC FUNCTION getcode_formas_recebimento(value)
          FIELDS {'formas_recebimento->codigo','formas_recebimento->nome'}
          VALUE nreg
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
-         justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=formas_recebimento->codigo,thiswindow.release)
       END browse
 

@@ -159,15 +159,15 @@ PROCEDURE editor()
       HEIGHT      rowchartopix( nHeight - 7 )
       parent      frm1
       FONTNAME   cFontName
-      fontsize   nFontSize
+      FONTSIZE   nFontSize
       FONTBOLD   lBold
       FONTITALIC   lItalic
-      fontUnderline   lUnderline
+      FONTUNDERLINE   lUnderline
       fontStrikeout   lStrikeOut
       FONTCOLOR   aColour
       BACKCOLOR   { 240, 240, 241 }
       HScrollBar   !lWordWrap
-      onchange   (lSaveNeeded := .T., Frm1.Button_3.Enabled := lSaveNeeded)
+      ONCHANGE   (lSaveNeeded := .T., Frm1.Button_3.Enabled := lSaveNeeded)
    END editbox
 
    setfocus edit of frm1

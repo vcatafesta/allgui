@@ -81,7 +81,7 @@ FUNCTION Main
          HEIGHT 445*gkoefv - iif(isthemed(),0,GetTitleHeight()+GetBorderHeight())
          showheaders .f.
          WIDTHS  {gw, gw, gw, gw, gw, gw, gw, gw, gw}
-         justify {2, 2, 2, 2, 2, 2, 2, 2, 2}
+         JUSTIFY {2, 2, 2, 2, 2, 2, 2, 2, 2}
          CELLNAVIGATION .T.
          allowedit .T.
          COLUMNCONTROLS { {"TEXTBOX", "CHARACTER", "9"}, ;
@@ -94,7 +94,7 @@ FUNCTION Main
             {"TEXTBOX", "CHARACTER", "9"}, ;
             {"TEXTBOX", "CHARACTER", "9"} }
          FONTNAME "Arial"
-         fontsize 30*gkoefh
+         FONTSIZE 30*gkoefh
          dynamicbackcolor { bColor, bColor, bColor, ;
             bColor, bColor, bColor, ;
             bColor, bColor, bColor }
@@ -108,7 +108,7 @@ FUNCTION Main
             { || checkgrid() }, { || checkgrid() }, ;
             { || checkgrid() }, { || checkgrid() }, ;
             { || checkgrid() } }
-         onchange CheckPossibleValues()
+         ONCHANGE CheckPossibleValues()
       END GRID
 
       DEFINE LABEL valid
@@ -117,7 +117,7 @@ FUNCTION Main
          WIDTH 370*gkoefh
          HEIGHT 30*gkoefv
          FONTNAME "Arial"
-         fontsize 18*gkoefv
+         FONTSIZE 18*gkoefv
       END LABEL
 
       // GAL

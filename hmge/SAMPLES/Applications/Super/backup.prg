@@ -33,7 +33,7 @@ FUNCTION backup()
          CAPTION 'Iniciar o Backup'
          ACTION CreateZip()
          FONTNAME 'verdana'
-         fontsize 9
+         FONTSIZE 9
          FONTCOLOR _preto_001
       END BUTTONEX
       DEFINE BUTTONEX button_destino
@@ -45,7 +45,7 @@ FUNCTION backup()
          CAPTION 'Pasta ?'
          ACTION Escolhe_Pasta()
          FONTNAME 'verdana'
-         fontsize 9
+         FONTSIZE 9
          FONTCOLOR _preto_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
@@ -72,11 +72,11 @@ FUNCTION backup()
       DEFINE LABEL label_local
          ROW 010
          COL 010
-         autosize .t.
+         AUTOSIZE .t.
          HEIGHT 20
          VALUE 'Escolha o local para ser gerado o backup'
          FONTBOLD .t.
-         transparent .t.
+         TRANSPARENT .t.
       END LABEL
       DEFINE LABEL label_destino
          ROW 030
@@ -85,7 +85,7 @@ FUNCTION backup()
          HEIGHT 40
          VALUE ''
          FONTBOLD .t.
-         transparent .t.
+         TRANSPARENT .t.
          FONTCOLOR BLUE
       END LABEL
       DEFINE LABEL label_zip
@@ -95,10 +95,10 @@ FUNCTION backup()
          HEIGHT 20
          VALUE ''
          FONTNAME 'arial'
-         fontsize 10
+         FONTSIZE 10
          TOOLTIP ''
          FONTBOLD .t.
-         transparent .t.
+         TRANSPARENT .t.
          centeralign .t.
       END LABEL
    END WINDOW

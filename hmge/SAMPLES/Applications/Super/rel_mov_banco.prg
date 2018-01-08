@@ -38,7 +38,7 @@ FUNCTION movimentacao_bancaria()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,010 label lbl_002;
          of form_mov_banco;
          VALUE 'Escolha o banco';
@@ -46,7 +46,7 @@ FUNCTION movimentacao_bancaria()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
 
       @ 040,010 datepicker dp_inicio;
          parent form_mov_banco;
@@ -65,7 +65,7 @@ FUNCTION movimentacao_bancaria()
       COL   010
       WIDTH 310
       HEIGHT 200
-      items a_001
+      ITEMS a_001
       VALUE 1
    END comboboxex
 
@@ -77,7 +77,7 @@ FUNCTION movimentacao_bancaria()
       WIDTH form_mov_banco.width
       HEIGHT 001
       BACKCOLOR _preto_001
-      transparent .F.
+      TRANSPARENT .F.
    END LABEL
 
    * botões

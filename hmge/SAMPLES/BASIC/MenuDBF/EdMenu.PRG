@@ -144,7 +144,7 @@ FUNCTION main()
       ONCHANGE  (IIF(ATIVADO = .T.,(E_D_Frame3(.f.),ChecaList() ),NIL))
       NOLINES .t.
       FONTNAME "courier new"
-      fontsize 10
+      FONTSIZE 10
    END GRID
 END WINDOW
 ACTIVATE WINDOW Form1

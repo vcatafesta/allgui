@@ -29,10 +29,10 @@ FUNCTION Main
          COL 10
          WIDTH 1000
          HEIGHT 600
-         items aData
+         ITEMS aData
          HEADERS {"REGION","PRODUCT","SALESMAN","QUANTITY","DISCOUNT"}
          WIDTHS {150,150,150,150,150}
-         justify {0,0,0,1,1}
+         JUSTIFY {0,0,0,1,1}
          COLUMNCONTROLS { {'TEXTBOX','CHARACTER'} , {'TEXTBOX','CHARACTER'} ,{'TEXTBOX','CHARACTER'},{'TEXTBOX','NUMERIC','999999'}  , {'TEXTBOX','NUMERIC','99'}}
       END GRID
       DEFINE BUTTON xtract
@@ -145,7 +145,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          ROW 45
          COL 10
          WIDTH 200
-         fontsize 14
+         FONTSIZE 14
          FONTBOLD .t.
          VALUE "Xtract Cube Construction"
       END LABEL
@@ -185,7 +185,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          ROW 45
          COL 350
          WIDTH 200
-         fontsize 14
+         FONTSIZE 14
          FONTBOLD .t.
          VALUE "Data Cube Skeleton"
       END LABEL
@@ -204,7 +204,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          COL 10
          WIDTH 150
          FONTBOLD .t.
-         fontsize 14
+         FONTSIZE 14
          VALUE "Filters"
       END LABEL
       DEFINE GRID filters
@@ -225,7 +225,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          COL 10
          WIDTH 150
          FONTBOLD .t.
-         fontsize 14
+         FONTSIZE 14
          VALUE "Data Cube"
       END LABEL
 
@@ -998,9 +998,9 @@ FUNCTION createreport(lAutoCalc)
          HEIGHT 250
          WIDTHS aWidths
          HEADERS aHeaders
-         justify aJustify
+         JUSTIFY aJustify
          showheaders .f.
-         items aReportGrid
+         ITEMS aReportGrid
          dynamicbackcolor aBackColors
          //      cellnavigation .t.
       END GRID
@@ -1107,10 +1107,10 @@ FUNCTION importfromdbf
          COL 10
          WIDTH 1000
          HEIGHT 600
-         items aData
+         ITEMS aData
          HEADERS aFieldNames
          WIDTHS aWidths
-         justify aJustify
+         JUSTIFY aJustify
       END GRID
    ENDIF
 

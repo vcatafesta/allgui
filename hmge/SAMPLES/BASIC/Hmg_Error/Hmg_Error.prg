@@ -430,7 +430,7 @@ FUNCTION ExpErrorPDF( logfile )
       HEIGHT := HPDF_Page_GetHeight( page )
       WIDTH  := HPDF_Page_GetWidth( page )
       font := HPDF_GetFont( oPdfError, "Courier", NIL )
-      fontsize := 12
+      FONTSIZE := 12
 
       txtfile := MemoRead( logfile )
       HPDF_Page_BeginText( page )

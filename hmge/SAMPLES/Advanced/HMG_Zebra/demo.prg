@@ -33,7 +33,7 @@ FUNCTION Main
          ROW 10
          COL 110
          WIDTH 100
-         items aTypeItems
+         ITEMS aTypeItems
          ON CHANGE barcode.code.value := aValues [ barcode.Type.value ]
       END COMBOBOX
 
@@ -99,14 +99,14 @@ FUNCTION Main
          COL 10
          WIDTH 120
          CAPTION 'Wide 2.5'
-         onchange iif( this.value, barcode.wide3.value := .f., )
+         ONCHANGE iif( this.value, barcode.wide3.value := .f., )
       END CHECKBOX
       DEFINE CHECKBOX wide3
          ROW 160
          COL 150
          WIDTH 120
          CAPTION 'Wide 3'
-         onchange iif( this.value, barcode.wide2_5.value := .f., )
+         ONCHANGE iif( this.value, barcode.wide2_5.value := .f., )
       END CHECKBOX
       DEFINE LABEL barcolor
          ROW 190
@@ -114,7 +114,7 @@ FUNCTION Main
          WIDTH 110
          FONTCOLOR { 0, 0, 0 }
          VALUE 'Barcode Color'
-         fontsize 11
+         FONTSIZE 11
          TOOLTIP 'Click to change color!'
          ACTION changebarcolor()
          ALIGNMENT center
@@ -126,7 +126,7 @@ FUNCTION Main
          WIDTH 100
          BACKCOLOR { 255, 255, 255 }
          VALUE 'Back Color'
-         fontsize 11
+         FONTSIZE 11
          TOOLTIP 'Click to change color!'
          ACTION changebackcolor()
          ALIGNMENT center

@@ -188,7 +188,7 @@ FUNCTION ShowUserList()
          HEIGHT  262
          HEADERS { 'User', 'Password', 'Max attempt', 'Rank' }
          WIDTHS  { 110, 110, 90, 50 }
-         items   list
+         ITEMS   list
          VALUE   1
          inplaceedit { ;
             { 'TEXTBOX', 'CHARACTER' }, ;
@@ -196,7 +196,7 @@ FUNCTION ShowUserList()
             { 'TEXTBOX', 'NUMERIC', '99' }, ;
             { 'TEXTBOX', 'NUMERIC', '999' }, ;
             }
-         justify { GRID_JTFY_LEFT, ;
+         JUSTIFY { GRID_JTFY_LEFT, ;
             GRID_JTFY_LEFT, ;
             GRID_JTFY_RIGHT, ;
             GRID_JTFY_RIGHT }

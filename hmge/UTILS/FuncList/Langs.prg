@@ -179,7 +179,7 @@ PROCEDURE SelectLanguage
       @ 15, 10 ComboBox cmbLangs ;
          WIDTH 215         ;
          HEIGHT 165        ;
-         Items {}          ;
+         ITEMS {}          ;
          ON CHANGE SetProperty( 'wLangs', 'btnOK', 'Enabled', !Empty( This.Value ) )
 
       @ ( wLangs.cmbLangs.Row + 40 ), wLangs.cmbLangs.Col ;

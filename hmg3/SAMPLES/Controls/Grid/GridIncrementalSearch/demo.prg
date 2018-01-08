@@ -46,7 +46,7 @@ FUNCTION Main
          WIDTH 600;
          HEIGHT 20;
          VALUE "???";
-         autosize
+         AUTOSIZE
 
       @  40, 10 Label L2 ;
          WIDTH 120;

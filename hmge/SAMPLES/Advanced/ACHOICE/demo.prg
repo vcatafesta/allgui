@@ -138,7 +138,7 @@ FUNCTION HMG_Achoice(nTop,nLeft,nBottom,nRight,aList,nDefault,lAnyWhere)
          COL 5
          WIDTH nWidth - 2*GetBorderWidth()
          HEIGHT nHeight - 50
-         items aList
+         ITEMS aList
          ON CHANGE _achoicelistchanged()
          on dblclick _aChoiceSelected()
       END listbox

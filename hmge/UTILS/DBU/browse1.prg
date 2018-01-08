@@ -104,7 +104,7 @@ FUNCTION DBUbrowse1()
          FIELDS _DBUanames
          VALUE recno()
          FONTNAME "Arial"
-         fontsize 9
+         FONTSIZE 9
          TOOLTIP 'Double click to edit field contents'
          allowappend .t.
          allowedit .t.

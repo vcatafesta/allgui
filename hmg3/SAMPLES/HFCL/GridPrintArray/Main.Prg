@@ -185,7 +185,7 @@ FUNCTION Main
          WIDTH 300
          HEIGHT 150
          VIRTUAL .t.
-         on querydata this.querydata := aArray[this.queryrowindex,this.querycolindex]
+         ON QUERYDATA this.querydata := aArray[this.queryrowindex,this.querycolindex]
          ITEMCOUNT HMG_LEN(aArray)
          HEADERS {"Head1","Head2","Head3"}
          WIDTHS {100,100,70}

@@ -236,7 +236,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                WIDTH 270
                HEIGHT 300
                WIDTHS {110,80,60}
-               justify {0,1,0}
+               JUSTIFY {0,1,0}
                HEADERS {msgarr[6],msgarr[7],msgarr[57]}
                allowedit .t.
                COLUMNCONTROLS {{"TEXTBOX","CHARACTER"},{"TEXTBOX","NUMERIC","9999.99"},{"COMBOBOX",{msgarr[59],msgarr[60]}}}
@@ -304,7 +304,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                ROW 160
                COL 110
                WIDTH 50
-               items fontsizesstr
+               ITEMS fontsizesstr
                ON CHANGE fontsizechanged()
             END COMBOBOX
             DEFINE LABEL multilinelabel
@@ -317,7 +317,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                ROW 190
                COL 110
                WIDTH 90
-               items {msgarr[19],msgarr[20]}
+               ITEMS {msgarr[19],msgarr[20]}
                ON CHANGE printgridpreview()
             END COMBOBOX
             DEFINE LABEL pagination
@@ -330,7 +330,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                ROW 220
                COL 110
                WIDTH 90
-               items {msgarr[22],msgarr[23],msgarr[24]}
+               ITEMS {msgarr[22],msgarr[23],msgarr[24]}
                ON CHANGE printgridpreview()
             END COMBOBOX
             DEFINE LABEL separatorlab
@@ -393,7 +393,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                ROW 30
                COL 110
                WIDTH 90
-               items {msgarr[32],msgarr[33]}
+               ITEMS {msgarr[32],msgarr[33]}
                ON CHANGE papersizechanged()
             END COMBOBOX
             DEFINE LABEL printerslabel
@@ -406,7 +406,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                ROW 60
                COL 110
                WIDTH 165
-               items aprinternames
+               ITEMS aprinternames
                VALUE printerno
             END COMBOBOX
             DEFINE LABEL sizelabel
@@ -419,7 +419,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                ROW 90
                COL 110
                WIDTH 165
-               items papernames
+               ITEMS papernames
                ON CHANGE papersizechanged()
             END COMBOBOX
             DEFINE LABEL widthlabel
@@ -552,7 +552,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                HEIGHT 20
                CAPTION "+"
                FONTBOLD .t.
-               fontsize 16
+               FONTSIZE 16
                ACTION addmergeheadrow()
             END BUTTON
             DEFINE BUTTON del
@@ -562,7 +562,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                HEIGHT 20
                CAPTION "-"
                FONTBOLD .t.
-               fontsize 16
+               FONTSIZE 16
                ACTION delmergeheadrow()
             END BUTTON
 

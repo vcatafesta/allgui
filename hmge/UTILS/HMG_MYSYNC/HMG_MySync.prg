@@ -158,7 +158,7 @@ FUNCTION Main
             DEFINE LISTBOX List_3
                ROW 95
                COL 140
-               Items aOptions
+               ITEMS aOptions
                VALUE 1
                WIDTH 200
                ON CHANGE Change_Cfg(2)

@@ -9,21 +9,21 @@ FUNCTION Main
          COL 45
          WIDTH 115
          VALUE 'Select Graph Type'
-         vcenteralign .T.
+         VCENTERALIGN .T.
       END LABEL
       DEFINE COMBOBOX graphtype
          ROW 10
          COL 160
          WIDTH 100
-         items { 'Bar', 'Lines', 'Points', 'Pie' }
-         onchange drawgraph()
+         ITEMS { 'Bar', 'Lines', 'Points', 'Pie' }
+         ONCHANGE drawgraph()
       END COMBOBOX
       DEFINE CHECKBOX enable3d
          ROW 10
          COL 280
          WIDTH 100
          CAPTION 'Enable 3D'
-         onchange drawgraph()
+         ONCHANGE drawgraph()
          VALUE .T.
       END CHECKBOX
       DEFINE BUTTON Button_1

@@ -131,12 +131,12 @@ FUNCTION LoadGrid(aRows,lmultiselect,lcelled,leditable)
       Parent      oWindow
       WIDTHS      {150,60,70,40,90,40,100}
       HEADERS      {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6','Column 7'}
-      Items      aRows
+      ITEMS      aRows
       VALUE      if (lmultiselect, { 1 }, if (lcelled, { 1 , 1 }, 1))
       AllowEdit   leditable
       CELLNAVIGATION   lcelled
       MultiSelect   lmultiselect
-      Justify      {0,1,0,0,0,1,0}
+      JUSTIFY      {0,1,0,0,0,1,0}
       COLUMNCONTROLS   {{'TEXTBOX','CHARACTER'},;
          {'TEXTBOX','NUMERIC','9,999.99'},;
          {'TEXTBOX','DATE'},;

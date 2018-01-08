@@ -11,16 +11,16 @@ FUNCTION Main
          COL 10
          WIDTH 60
          VALUE 'Name'
-         vcenteralign .t.
+         VCENTERALIGN .t.
       END LABEL
       DEFINE COMBOSEARCHGRID name
          ROW 10
          COL 80
          WIDTH 480
-         items aItems
+         ITEMS aItems
          HEADERS { 'First Name', 'Last Name', 'Code' }
          WIDTHS { 200, 150, 100 }
-         justify { 0, 0, 1 }
+         JUSTIFY { 0, 0, 1 }
          anywheresearch .t.
          showheaders .t.
       END COMBOSEARCHGRID
@@ -29,7 +29,7 @@ FUNCTION Main
          COL 10
          WIDTH 60
          VALUE 'Label 2'
-         vcenteralign .t.
+         VCENTERALIGN .t.
       END LABEL
       DEFINE TEXTBOX textbox2
          ROW 40

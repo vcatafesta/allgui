@@ -691,9 +691,9 @@ FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname
          HEIGHT 16 + _HMG_DefaultFontSize
          FONTBOLD .T.
          FONTNAME _HMG_DefaultFontName
-         fontsize _HMG_DefaultFontSize + 3
+         FONTSIZE _HMG_DefaultFontSize + 3
          centeralign ( Len( ctitle ) * 8 < ( tocol - fromcol ) )
-         vcenteralign .T.
+         VCENTERALIGN .T.
          VALUE ctitle
          FONTCOLOR { 0, 0, 0 }
          BACKCOLOR iif( lPrint, WHITE, backcolor )
@@ -854,15 +854,15 @@ FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname
             ROW fromrow
             COL fromcol + 20
             FONTNAME _HMG_DefaultFontName
-            fontsize _HMG_DefaultFontSize - 1
-            autosize .T.
+            FONTSIZE _HMG_DefaultFontSize - 1
+            AUTOSIZE .T.
             IF !lPrint .AND. !lNoborder
                HEIGHT 16
             ENDIF
             VALUE aname[i] + iif( lxval, " - " + LTrim( Transform( series[i], cPicture ) ) + " (" + LTrim( Str( series[i] / ser_sum * 100, 6, 2 ) ) + " %)", "" )
             FONTCOLOR iif( RGB( colors[i][1], colors[i][2], colors[i][3] ) == RGB( 255, 255, 255 ), BLACK, colors[i] )
             BACKCOLOR iif( lPrint, WHITE, NIL )
-            transparent .T.
+            TRANSPARENT .T.
          END LABEL
          fromrow += 20
       NEXT i

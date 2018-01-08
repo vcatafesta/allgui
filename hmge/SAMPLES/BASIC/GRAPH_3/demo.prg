@@ -58,7 +58,7 @@ FUNCTION Main
          COL   460
          WIDTH   120
          CAPTION   'Show Data Values'
-         OnChange ( lShowData := !lShowData, ;
+         ONCHANGE ( lShowData := !lShowData, ;
             if(nGraph = 1, DrawBarGraph ( aSer ), ;
             if(nGraph = 2, DrawLinesGraph ( aSer ), ;
             DrawPointsGraph ( aSer ))) )

@@ -766,7 +766,7 @@ PROCEDURE AddControl( cType )
          ROW      nCurrentRow
          COL      nCurrentCol
          CAPTION      cVar
-         OnClick      NIL
+         ONCLICK      NIL
       END BUTTON
 
    ELSEIF cType == 'CHECKBOX'
@@ -779,7 +779,7 @@ PROCEDURE AddControl( cType )
          ROW      nCurrentRow
          COL      nCurrentCol
          CAPTION      cVar
-         OnClick      NIL
+         ONCLICK      NIL
       END CHECKBOX
 
    ELSEIF cType == 'LISTBOX'
@@ -795,7 +795,7 @@ PROCEDURE AddControl( cType )
          COL      nCurrentCol
          WIDTH      100
          HEIGHT      100
-         Items      {cVar}
+         ITEMS      {cVar}
       END LISTBOX
 
    ELSEIF cType == 'COMBOBOX'
@@ -809,7 +809,7 @@ PROCEDURE AddControl( cType )
          COL      nCurrentCol
          WIDTH      100
          HEIGHT      100
-         Items      {cVar}
+         ITEMS      {cVar}
          VALUE      1
       END COMBOBOX
 

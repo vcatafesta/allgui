@@ -98,24 +98,24 @@ STATIC FUNCTION escolher_motoboy()
          COL 010
          ROW 005
          VALUE 'Duplo clique ou ENTER escolhe motoboy'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL info_002
          parent form_escolhe
          COL 010
          ROW 025
          VALUE 'ESC fecha esta janela'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _vermelho_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 005,290 button btn_sair;
          parent form_escolhe;
@@ -182,24 +182,24 @@ STATIC FUNCTION mudar_situacao()
          COL 010
          ROW 005
          VALUE 'Duplo clique ou ENTER escolhe situação'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _preto_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       DEFINE LABEL info_002
          parent form_situacao
          COL 010
          ROW 025
          VALUE 'ESC fecha esta janela'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'tahoma'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _vermelho_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 005,290 button btn_sair;
          parent form_situacao;

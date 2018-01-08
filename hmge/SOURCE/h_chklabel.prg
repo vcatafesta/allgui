@@ -81,7 +81,7 @@ FUNCTION _DefineChkLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
       y    := y + _HMG_ActiveFrameRow [_HMG_FrameLevel]
       ParentFormName := _HMG_ActiveFrameParentFormName [_HMG_FrameLevel]
       IF IsXpThemeActive() .AND. aRGB_bk == NIL
-         Transparent := .T.
+         TRANSPARENT := .T.
       ENDIF
    ENDIF
    lDialogInMemory := _HMG_DialogInMemory

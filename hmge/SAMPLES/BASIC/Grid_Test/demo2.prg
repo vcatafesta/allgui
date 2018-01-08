@@ -20,9 +20,9 @@ FUNCTION Main
          HEIGHT 250
          WIDTHS { 80, 200, 200 }
          HEADERS { 'No.', 'Name', 'Description' }
-         items aItems
+         ITEMS aItems
          COLUMNCONTROLS { { 'TEXTBOX', 'NUMERIC', '999' }, { 'TEXTBOX', 'CHARACTER' }, { 'TEXTBOX', 'CHARACTER' } }
-         justify { GRID_JTFY_RIGHT, GRID_JTFY_LEFT, GRID_JTFY_LEFT }
+         JUSTIFY { GRID_JTFY_RIGHT, GRID_JTFY_LEFT, GRID_JTFY_LEFT }
          COLUMNWHEN { {|| .t. }, {|| win_1.grid_1.cell( GetProperty("Win_1","Grid_1","Value")[1], 1 ) > 0 }, {|| .t. } }
          allowedit .t.
          CELLNAVIGATION .t.

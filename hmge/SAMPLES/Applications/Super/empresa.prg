@@ -56,7 +56,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,005 getbox tbox_001;
          of form_empresa;
          HEIGHT 027;
@@ -73,7 +73,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,325 getbox tbox_002;
          of form_empresa;
          HEIGHT 027;
@@ -91,7 +91,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,455 getbox tbox_003;
          of form_empresa;
          HEIGHT 027;
@@ -109,7 +109,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,005 getbox tbox_004;
          of form_empresa;
          HEIGHT 027;
@@ -126,7 +126,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,325 getbox tbox_005;
          of form_empresa;
          HEIGHT 027;
@@ -143,7 +143,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,395 getbox tbox_006;
          of form_empresa;
          HEIGHT 027;
@@ -160,7 +160,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,005 getbox tbox_007;
          of form_empresa;
          HEIGHT 027;
@@ -177,7 +177,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,195 getbox tbox_008;
          of form_empresa;
          HEIGHT 027;
@@ -194,7 +194,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,385 getbox tbox_009;
          of form_empresa;
          HEIGHT 027;
@@ -211,7 +211,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 130,435 getbox tbox_010;
          of form_empresa;
          HEIGHT 027;
@@ -228,7 +228,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 180,005 getbox tbox_011;
          of form_empresa;
          HEIGHT 027;
@@ -244,7 +244,7 @@ FUNCTION empresa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 230,005 getbox tbox_012;
          of form_empresa;
          HEIGHT 027;
@@ -262,7 +262,7 @@ FUNCTION empresa()
          WIDTH form_empresa.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões

@@ -36,7 +36,7 @@ FUNCTION operadores()
          CAPTION 'F5 Incluir'
          ACTION dados(1)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -53,7 +53,7 @@ FUNCTION operadores()
          CAPTION 'F6 Alterar'
          ACTION dados(2)
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -70,7 +70,7 @@ FUNCTION operadores()
          CAPTION 'F7 Excluir'
          ACTION excluir()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -87,7 +87,7 @@ FUNCTION operadores()
          CAPTION 'F8 Imprimir'
          ACTION relacao()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -104,7 +104,7 @@ FUNCTION operadores()
          CAPTION 'Atualizar'
          ACTION atualizar()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -121,7 +121,7 @@ FUNCTION operadores()
          CAPTION 'Acessos'
          ACTION acesso()
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -138,7 +138,7 @@ FUNCTION operadores()
          CAPTION 'ESC Voltar'
          ACTION form_operadores.release
          FONTNAME 'verdana'
-         fontsize 009
+         FONTSIZE 009
          FONTBOLD .T.
          FONTCOLOR _preto_001
          vertical .T.
@@ -157,7 +157,7 @@ FUNCTION operadores()
             HEADERS {'Código','Nome'}
             WIDTHS {100,650}
             FONTNAME 'verdana'
-            fontsize 010
+            FONTSIZE 010
             FONTBOLD .T.
             BACKCOLOR _amarelo_001
             FONTCOLOR _preto_001
@@ -170,12 +170,12 @@ FUNCTION operadores()
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _cinza_001
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_operadores;
@@ -193,12 +193,12 @@ FUNCTION operadores()
          COL form_operadores.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
-         autosize .T.
+         AUTOSIZE .T.
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          FONTCOLOR _verde_002
-         transparent .T.
+         TRANSPARENT .T.
       END LABEL
 
       ON KEY F5 ACTION dados(1)
@@ -259,7 +259,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
@@ -277,7 +277,7 @@ STATIC FUNCTION dados(parametro)
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 080,005 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
@@ -298,7 +298,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões
@@ -649,9 +649,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_001
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_002
                CAPTION 'Venda Mesas'
@@ -660,9 +660,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_002
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_003
                CAPTION 'Venda Balcão'
@@ -671,9 +671,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_003
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_004
                CAPTION 'Cadastro Clientes'
@@ -682,9 +682,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_004
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_005
                CAPTION 'Cadastro Produtos'
@@ -693,9 +693,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_005
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
          END PAGE
          page 'Tabelas' image path_imagens+'img_dois.bmp'
@@ -706,9 +706,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_006
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_007
                CAPTION 'Grupo de Fornecedores'
@@ -717,9 +717,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_007
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_008
                CAPTION 'Matéria Prima'
@@ -728,9 +728,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_008
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_009
                CAPTION 'Categorias de Produtos'
@@ -739,9 +739,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_009
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_010
                CAPTION 'Sub-Categorias de Produtos'
@@ -750,9 +750,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_010
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_011
                CAPTION 'Formas de Recebimento'
@@ -761,9 +761,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_011
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_012
                CAPTION 'Formas de Pagamento'
@@ -772,9 +772,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_012
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_013
                CAPTION 'Unidades de Medida'
@@ -783,9 +783,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_013
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_014
                CAPTION 'Contas Bancárias'
@@ -794,9 +794,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_014
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_015
                CAPTION 'Impostos e Alíquotas'
@@ -805,9 +805,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_015
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_016
                CAPTION 'Mesas da Pizzaria'
@@ -816,9 +816,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_016
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_017
                CAPTION 'Atendentes ou Garçons'
@@ -827,9 +827,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_017
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_018
                CAPTION 'Motoboys ou Entregadores'
@@ -838,9 +838,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_018
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_019
                CAPTION 'Operadores do Programa'
@@ -849,9 +849,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_019
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
          END PAGE
          page 'Relatórios' image path_imagens+'img_tres.bmp'
@@ -862,9 +862,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_020
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_021
                CAPTION 'Movimentação do Caixa'
@@ -873,9 +873,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_021
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_022
                CAPTION 'Movimentação Bancária'
@@ -884,9 +884,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_022
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_023
                CAPTION 'Contas a Pagar por período'
@@ -895,9 +895,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_023
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_024
                CAPTION 'Contas a Pagar por fornecedor'
@@ -906,9 +906,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_024
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_025
                CAPTION 'Contas a Receber por período'
@@ -917,9 +917,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_025
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_026
                CAPTION 'Contas a Receber por cliente'
@@ -928,9 +928,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_026
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_027
                CAPTION 'Pizzas mais vendidas'
@@ -939,9 +939,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_027
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_028
                CAPTION 'Produtos mais vendidos'
@@ -950,9 +950,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_028
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_029
                CAPTION 'Relação estoque mínimo'
@@ -961,9 +961,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_029
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_030
                CAPTION 'Posição do estoque (produtos)'
@@ -972,9 +972,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_030
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_031
                CAPTION 'Posição do estoque (matéria prima)'
@@ -983,9 +983,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_031
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_032
                CAPTION 'Comissão Motoboys/Entregadores'
@@ -994,9 +994,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_032
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_033
                CAPTION 'Comissão Atendentes/Garçons'
@@ -1005,9 +1005,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_033
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
          END PAGE
          page 'Financeiro' image path_imagens+'img_quatro.bmp'
@@ -1018,9 +1018,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_034
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_035
                CAPTION 'Movimentação Bancária'
@@ -1029,9 +1029,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_035
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_036
                CAPTION 'Compras / Entrada Estoque'
@@ -1040,9 +1040,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_036
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_037
                CAPTION 'Contas a Pagar'
@@ -1051,9 +1051,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_037
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_038
                CAPTION 'Contas a Receber'
@@ -1062,9 +1062,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_038
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
          END PAGE
          page 'Ferramentas' image path_imagens+'img_cinco.bmp'
@@ -1075,9 +1075,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_039
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_040
                CAPTION 'Cadastro da Pizzaria'
@@ -1086,9 +1086,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_040
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_041
                CAPTION 'Incluir ou Excluir Promoção'
@@ -1097,9 +1097,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_041
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_042
                CAPTION 'Reajustar Preços de Produtos'
@@ -1108,9 +1108,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_042
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_043
                CAPTION 'Backup do Banco de Dados'
@@ -1119,9 +1119,9 @@ STATIC FUNCTION acesso()
                WIDTH 350
                VALUE x_opcao_043
                FONTNAME 'verdana'
-               fontsize 10
+               FONTSIZE 10
                FONTBOLD .T.
-               transparent .F.
+               TRANSPARENT .F.
             END CHECKBOX
          END PAGE
 

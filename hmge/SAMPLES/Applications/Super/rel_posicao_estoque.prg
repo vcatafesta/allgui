@@ -28,7 +28,7 @@ FUNCTION posicao_estoque()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 030,010 label lbl_002;
          of form_estoque_produtos;
          VALUE 'mostrando a quantidade atual disponível de cada um.';
@@ -36,7 +36,7 @@ FUNCTION posicao_estoque()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 050,010 label lbl_003;
          of form_estoque_produtos;
          VALUE 'Somente produtos que não sejam - pizza -';
@@ -44,7 +44,7 @@ FUNCTION posicao_estoque()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       @ 070,010 label lbl_004;
          of form_estoque_produtos;
          VALUE 'aparecerão no relatório.';
@@ -52,7 +52,7 @@ FUNCTION posicao_estoque()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
 
       * linha separadora
       DEFINE LABEL linha_rodape
@@ -62,7 +62,7 @@ FUNCTION posicao_estoque()
          WIDTH form_estoque_produtos.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões

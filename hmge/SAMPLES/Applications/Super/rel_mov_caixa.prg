@@ -28,7 +28,7 @@ FUNCTION movimentacao_caixa()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
 
       @ 040,010 datepicker dp_inicio;
          parent form_mov_caixa;
@@ -51,7 +51,7 @@ FUNCTION movimentacao_caixa()
          WIDTH form_mov_caixa.width
          HEIGHT 001
          BACKCOLOR _preto_001
-         transparent .F.
+         TRANSPARENT .F.
       END LABEL
 
       * botões

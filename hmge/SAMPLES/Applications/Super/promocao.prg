@@ -55,13 +55,13 @@ FUNCTION promocao()
          font 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
-         transparent
+         TRANSPARENT
       define comboboxex cbo_001
       ROW   030
       COL   005
       WIDTH 200
       HEIGHT 200
-      items a_001
+      ITEMS a_001
       VALUE 1
    END comboboxex
 
@@ -73,13 +73,13 @@ FUNCTION promocao()
       font 'tahoma' size 010;
       bold;
       FONTCOLOR _preto_001;
-      transparent
+      TRANSPARENT
    define comboboxex cbo_002
    ROW   090
    COL   005
    WIDTH 200
    HEIGHT 400
-   items a_002
+   ITEMS a_002
    VALUE 1
    listwidth 300
 END comboboxex
@@ -92,13 +92,13 @@ END comboboxex
    font 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
-   transparent
+   TRANSPARENT
 define comboboxex cbo_003
 ROW   150
 COL   005
 WIDTH 200
 HEIGHT 400
-items a_003
+ITEMS a_003
 VALUE 1
 listwidth 300
 END comboboxex
@@ -111,7 +111,7 @@ END comboboxex
    font 'tahoma' size 010;
    bold;
    FONTCOLOR _vermelho_002;
-   transparent
+   TRANSPARENT
 @ 200,070 getbox tbox_004;
    of form_promocao;
    HEIGHT 027;
@@ -128,7 +128,7 @@ END comboboxex
    font 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
-   transparent
+   TRANSPARENT
 @ 230,005 label lbl_00444;
    of form_promocao;
    VALUE 'de venda já existente';
@@ -136,7 +136,7 @@ END comboboxex
    font 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
-   transparent
+   TRANSPARENT
 
 @ 250,040 label lbl_ou;
    of form_promocao;
@@ -145,7 +145,7 @@ END comboboxex
    font 'tahoma' size 018;
    bold;
    FONTCOLOR _preto_001;
-   transparent
+   TRANSPARENT
 
 * fase 5
 @ 290,005 label lbl_005;
@@ -155,7 +155,7 @@ END comboboxex
    font 'tahoma' size 010;
    bold;
    FONTCOLOR _vermelho_002;
-   transparent
+   TRANSPARENT
 @ 290,070 getbox tbox_005;
    of form_promocao;
    HEIGHT 027;
@@ -172,7 +172,7 @@ END comboboxex
    font 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
-   transparent
+   TRANSPARENT
 @ 320,005 label lbl_00555;
    of form_promocao;
    VALUE 'a menos sobre preço de venda';
@@ -180,7 +180,7 @@ END comboboxex
    font 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
-   transparent
+   TRANSPARENT
 
 * botão filtrar
 @ 360,005 buttonex botao_filtrar;
@@ -198,7 +198,7 @@ DEFINE LABEL label_separador
    VALUE ''
    WIDTH 002
    HEIGHT 600
-   transparent .F.
+   TRANSPARENT .F.
    BACKCOLOR _cinza_002
 END LABEL
 
@@ -210,7 +210,7 @@ END LABEL
    font 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
-   transparent
+   TRANSPARENT
 
 * botões
 @ 520,250 buttonex botao_excluir_promocao;
@@ -283,7 +283,7 @@ STATIC FUNCTION filtrar_informacoes_2()
          HEADERS {'.','Produto',_tamanho_001,_tamanho_002,_tamanho_003,_tamanho_004,_tamanho_005,_tamanho_006}
          WIDTHS {001,300,120,120,120,120,120,120}
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _branco_001
          FONTCOLOR _vermelho_002
@@ -299,7 +299,7 @@ STATIC FUNCTION filtrar_informacoes_2()
          HEADERS {'.','Produto','Preço reajustado R$'}
          WIDTHS {001,400,220}
          FONTNAME 'verdana'
-         fontsize 010
+         FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _branco_001
          FONTCOLOR _vermelho_002

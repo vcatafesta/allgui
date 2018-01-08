@@ -286,7 +286,7 @@ FUNCTION InitDialogChkListBox( ParentName, ControlHandle, k )
 
    Rows        := _HMG_aControlRangeMin [k]
    VALUE       := _HMG_aControlValue [k]
-   FontSize    := _HMG_aControlFontSize  [k]
+   FONTSIZE    := _HMG_aControlFontSize  [k]
    FontHandle  := _HMG_aControlFontHandle  [k]
 
    IF Len ( Rows ) > 0
