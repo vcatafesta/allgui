@@ -29,23 +29,23 @@ FUNCTION Main1()
    ENDIF
 
    SET NAVIGATION STANDARD
-   DEFINE WINDOW frmEasterCalc;
-         AT 0,0;
-         WIDTH 378 HEIGHT 135;
-         TITLE "Easter Sunday Calculator";
-         MAIN ICON NIL;
-         NOMAXIMIZE;
+   DEFINE WINDOW frmEasterCalc ;
+         AT 0,0 ;
+         WIDTH 378 HEIGHT 135 ;
+         TITLE "Easter Sunday Calculator" ;
+         MAIN ICON NIL ;
+         NOMAXIMIZE ;
          FONT "Arial" SIZE 9
 
       ON KEY RETURN ACTION BtnOk()
 
-      @  32, 30 LABEL lblYear OF frmEasterCalc VALUE "Enter Gregorian Year after 1582 AD";
+      @  32, 30 LABEL lblYear OF frmEasterCalc VALUE "Enter Gregorian Year after 1582 AD" ;
          ACTION Nil WIDTH  200 HEIGHT 20 FONT "Arial" SIZE 9
 
-      @  29,230 TEXTBOX txbYear OF frmEasterCalc HEIGHT 24 VALUE "0";
+      @  29,230 TEXTBOX txbYear OF frmEasterCalc HEIGHT 24 VALUE "0" ;
          WIDTH 100 NUMERIC INPUTMASK "9999"
 
-      @  10, 20 FRAME Frame_1 OF frmEasterCalc CAPTION "Please enter the year in 4 digit Century format";
+      @  10, 20 FRAME Frame_1 OF frmEasterCalc CAPTION "Please enter the year in 4 digit Century format" ;
          WIDTH  340 HEIGHT 55 FONT "Arial" SIZE 9 BACKCOLOR NIL FONTCOLOR NIL OPAQUE
 
       @  70, 90 BUTTON btnOk OF frmEasterCalc CAPTION "&Ok" ACTION BtnOk() FONT "Arial" SIZE 9
@@ -130,9 +130,9 @@ FUNCTION Easter(nYear,lDispResult)
    nSunMoon     := nCentury - INT( nCentury / 4 ) - INT( ( nCentury - nCorrection ) / 3 ) + 19 * nLeapDrop + 15
    nSunMoon     := nSunMoon - 30 * INT( ( nSunMoon / 30 ) )
 
-   nSunMoon     := nSunMoon - INT( ( nSunMoon / 28 ) ) *;
-      ( 1 - INT( ( nSunMoon / 28 ) ) *;
-      ( INT( 29 / ( nSunMoon + 1 ) ) ) *;
+   nSunMoon     := nSunMoon - INT( ( nSunMoon / 28 ) ) * ;
+      ( 1 - INT( ( nSunMoon / 28 ) ) * ;
+      ( INT( 29 / ( nSunMoon + 1 ) ) ) * ;
       ( INT( ( 21 - nLeapDrop ) / 11 ) ) )
 
    nLunarCycle  := nYear + INT( nYear / 4 ) + nSunMoon + 2 - nCentury + INT( nCentury / 4 )
@@ -159,9 +159,9 @@ FUNCTION Easter(nYear,lDispResult)
    Ascension       := dEasterSunday + 39  // Ascencion of Christ into heaven, observed on the
    // 40th day after Easter.
    Pentecost       := dEasterSunday + 49  // 7th Sunday after Easter; commemorates the
-   // emanation of the Holy Spirit to the Apostles;
+   // emanation of the Holy Spirit to the Apostles ;
    // Jewish: 6th of Sivan to celebrate Moses receiving
-   // the Ten Commandments;
+   // the Ten Commandments ;
    // Scotland: Quarter day
    TrinitySunday   := dEasterSunday + 56  // 8th Sunday after Easter
    CorpusChristi   := dEasterSunday + 60  // Thursday after Trinity Sunday; first celebrated
@@ -193,63 +193,63 @@ FUNCTION Easter(nYear,lDispResult)
 
    IF lDispResult
 
-      MultiMessage( { "Septuagesima: "    + CDOW( Septuagesima )   + ", " + DTOC( Septuagesima )   ,;
-         " ",;
-         "Quinquagesima: "   + CDOW( Quinquagesima )  + ", " + DTOC( Quinquagesima )  ,;
-         " ",;
-         "Ash Wednesday: "   + CDOW( AshWednesday )   + ", " + DTOC( AshWednesday )   ,;
-         " ",;
-         "Palm Sunday: "     + CDOW( PalmSunday )     + ", " + DTOC( PalmSunday )     ,;
-         " ",;
-         "Good Friday: "     + CDOW( GoodFriday )     + ", " + DTOC( GoodFriday )     ,;
-         " ",;
-         "Easter Sunday: "   + CDOW( dEasterSunday )  + ", " + DTOC( dEasterSunday )  ,;
-         " ",;
-         "Rogation Sunday: " + CDOW( RogationSunday ) + ", " + DTOC( RogationSunday ) ,;
-         " ",;
-         "Ascension: "       + CDOW( Ascension )      + ", " + DTOC( Ascension )      ,;
-         " ",;
-         "Pentecost: "       + CDOW( Pentecost )      + ", " + DTOC( Pentecost )      ,;
-         " ",;
-         "Trinity Sunday: "  + CDOW( TrinitySunday )  + ", " + DTOC( TrinitySunday )  ,;
-         " ",;
-         "Corpus Christi: "  + CDOW( CorpusChristi )  + ", " + DTOC( CorpusChristi )  ,;
-         " ",;
-         "Solemnity of Mary : " + CDOW( SolemnityofMary ) + ", " + DTOC( SolemnityofMary ),;
-         " ",;
-         "Presentation of the Lord : " + CDOW( PresentationoftheLord ) + ", " + DTOC( PresentationoftheLord ) ,;
-         " ",;
-         "The Annunciation : " + CDOW( TheAnnunciation ) + ", " + DTOC( TheAnnunciation ),;
-         " ",;
-         "Transfiguration of Jesus : " + CDOW( TransfigurationofJesus ) + ", " + DTOC( TransfigurationofJesus ),;
-         " ",;
-         "The Assumption of Mary : " + CDOW( TheAssumptionofMary ) + ", " + DTOC( TheAssumptionofMary ),;
-         " ",;
-         "Birth of Virgin Mary : " + CDOW( BirthofVirginMary ) + ", " + DTOC( BirthofVirginMary ),;
-         " ",;
-         "Celebration of Holy Cross : " + CDOW( CelebrationofHolyCross ) + ", " + DTOC( CelebrationofHolyCross ) ,;
-         " ",;
-         "The Mass of the Archangels : " + CDOW( TheMassoftheArchangels ) + ", " + DTOC( TheMassoftheArchangels ),;
-         " ",;
-         "All Saints Day : " + CDOW( AllSaintsDay ) + ", " + DTOC( AllSaintsDay ),;
-         " ",;
-         "All Souls Day : " + CDOW( AllSoulsDay ) + ", " + DTOC( AllSoulsDay ),;
-         " ",;
-         "Christ The King : " + CDOW( ChristtheKing ) + ", " + DTOC( ChristtheKing ),;
-         " ",;
-         "First Sunday of Advent : " + CDOW( FirstAdvent ) + ", " + DTOC( FirstAdvent ),;
-         " ",;
-         "Second Sunday of Advent : " + CDOW( SecondAdvent ) + ", " + DTOC( SecondAdvent ),;
-         " ",;
-         "Third Sunday of Advent : " + CDOW( ThirdAdvent ) + ", " + DTOC( ThirdAdvent ),;
-         " ",;
-         "Fourth Sunday of Advent : " + CDOW( FourthAdvent ) + ", " + DTOC( FourthAdvent ),;
-         " ",;
-         "Christmas Day : " + CDOW( ChristmasDay ) + ", " + DTOC( ChristmasDay ),;
-         " ",;
-         "Epiphany (Traditional - Three Kings) : " + CDOW( Epiphany1 ) + ", " + DTOC( Epiphany1 ),;
-         " ",;
-         "Epiphany - 2nd Sunday after Christmas : " + CDOW( Epiphany2 ) + ", " + DTOC( Epiphany2 ) },;
+      MultiMessage( { "Septuagesima: "    + CDOW( Septuagesima )   + ", " + DTOC( Septuagesima )   , ;
+         " ", ;
+         "Quinquagesima: "   + CDOW( Quinquagesima )  + ", " + DTOC( Quinquagesima )  , ;
+         " ", ;
+         "Ash Wednesday: "   + CDOW( AshWednesday )   + ", " + DTOC( AshWednesday )   , ;
+         " ", ;
+         "Palm Sunday: "     + CDOW( PalmSunday )     + ", " + DTOC( PalmSunday )     , ;
+         " ", ;
+         "Good Friday: "     + CDOW( GoodFriday )     + ", " + DTOC( GoodFriday )     , ;
+         " ", ;
+         "Easter Sunday: "   + CDOW( dEasterSunday )  + ", " + DTOC( dEasterSunday )  , ;
+         " ", ;
+         "Rogation Sunday: " + CDOW( RogationSunday ) + ", " + DTOC( RogationSunday ) , ;
+         " ", ;
+         "Ascension: "       + CDOW( Ascension )      + ", " + DTOC( Ascension )      , ;
+         " ", ;
+         "Pentecost: "       + CDOW( Pentecost )      + ", " + DTOC( Pentecost )      , ;
+         " ", ;
+         "Trinity Sunday: "  + CDOW( TrinitySunday )  + ", " + DTOC( TrinitySunday )  , ;
+         " ", ;
+         "Corpus Christi: "  + CDOW( CorpusChristi )  + ", " + DTOC( CorpusChristi )  , ;
+         " ", ;
+         "Solemnity of Mary : " + CDOW( SolemnityofMary ) + ", " + DTOC( SolemnityofMary ), ;
+         " ", ;
+         "Presentation of the Lord : " + CDOW( PresentationoftheLord ) + ", " + DTOC( PresentationoftheLord ) , ;
+         " ", ;
+         "The Annunciation : " + CDOW( TheAnnunciation ) + ", " + DTOC( TheAnnunciation ), ;
+         " ", ;
+         "Transfiguration of Jesus : " + CDOW( TransfigurationofJesus ) + ", " + DTOC( TransfigurationofJesus ), ;
+         " ", ;
+         "The Assumption of Mary : " + CDOW( TheAssumptionofMary ) + ", " + DTOC( TheAssumptionofMary ), ;
+         " ", ;
+         "Birth of Virgin Mary : " + CDOW( BirthofVirginMary ) + ", " + DTOC( BirthofVirginMary ), ;
+         " ", ;
+         "Celebration of Holy Cross : " + CDOW( CelebrationofHolyCross ) + ", " + DTOC( CelebrationofHolyCross ) , ;
+         " ", ;
+         "The Mass of the Archangels : " + CDOW( TheMassoftheArchangels ) + ", " + DTOC( TheMassoftheArchangels ), ;
+         " ", ;
+         "All Saints Day : " + CDOW( AllSaintsDay ) + ", " + DTOC( AllSaintsDay ), ;
+         " ", ;
+         "All Souls Day : " + CDOW( AllSoulsDay ) + ", " + DTOC( AllSoulsDay ), ;
+         " ", ;
+         "Christ The King : " + CDOW( ChristtheKing ) + ", " + DTOC( ChristtheKing ), ;
+         " ", ;
+         "First Sunday of Advent : " + CDOW( FirstAdvent ) + ", " + DTOC( FirstAdvent ), ;
+         " ", ;
+         "Second Sunday of Advent : " + CDOW( SecondAdvent ) + ", " + DTOC( SecondAdvent ), ;
+         " ", ;
+         "Third Sunday of Advent : " + CDOW( ThirdAdvent ) + ", " + DTOC( ThirdAdvent ), ;
+         " ", ;
+         "Fourth Sunday of Advent : " + CDOW( FourthAdvent ) + ", " + DTOC( FourthAdvent ), ;
+         " ", ;
+         "Christmas Day : " + CDOW( ChristmasDay ) + ", " + DTOC( ChristmasDay ), ;
+         " ", ;
+         "Epiphany (Traditional - Three Kings) : " + CDOW( Epiphany1 ) + ", " + DTOC( Epiphany1 ), ;
+         " ", ;
+         "Epiphany - 2nd Sunday after Christmas : " + CDOW( Epiphany2 ) + ", " + DTOC( Epiphany2 ) }, ;
          "Church Holiday for the Year " + ALLTRIM( STR( nYear ) ) )
    ENDIF
 
@@ -299,14 +299,14 @@ FUNCTION Convert2String( xParam )
 
    LOCAL cRetVal := ""
    LOCAL nType  :=  0
-   LOCAL aCases_ := { { "A", { | x | "{...}" } },;
-      { "B", { | x | "{||}" } },;
-      { "C", { | x | x }},;
-      { "M", { | x | x   } },;
-      { "D", { | x | DTOC( x ) } },;
-      { "L", { | x | IF( x,"On","Off") } },;
-      { "N", { | x | NTrim( x )  } },;
-      { "O", { | x | ":Object:" } },;
+   LOCAL aCases_ := { { "A", { | x | "{...}" } }, ;
+      { "B", { | x | "{||}" } }, ;
+      { "C", { | x | x }}, ;
+      { "M", { | x | x   } }, ;
+      { "D", { | x | DTOC( x ) } }, ;
+      { "L", { | x | IF( x,"On","Off") } }, ;
+      { "N", { | x | NTrim( x )  } }, ;
+      { "O", { | x | ":Object:" } }, ;
       { "U", { | x | "<NIL>" } } }
 
    IF (nType := ASCAN( aCases_, { | a1 | VALTYPE( xParam ) == a1[ 1 ] } ) ) > 0

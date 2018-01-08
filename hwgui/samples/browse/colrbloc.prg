@@ -5,7 +5,7 @@
 * 07/07/2005
 * Demo for Browse using bColorBlock
 *       oBrowse:aColumns[1]:bColorBlock := {|| IF (nNumber < 0, ;
-*       {textColor, backColor, textColorSel, backColorSel} ,;
+*       {textColor, backColor, textColorSel, backColorSel} , ;
 *       {textColor, backColor, textColorSel, backColorSel} ) }
 *       bColorBlock must return an array containing four colors values
 */
@@ -42,7 +42,7 @@ FUNCTION Main()
    END
 
    INIT WINDOW oWinMain MAIN  ;
-      TITLE "Teste" AT 0, 0 SIZE 600,400;
+      TITLE "Teste" AT 0, 0 SIZE 600,400 ;
       FONT HFont():Add( 'Arial',0,-13,400,,,) ;
       STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER
 
@@ -109,7 +109,7 @@ STATIC FUNCTION BrwDbs( lEdit, lZebra )
 
    @ 85,5 OWNERBUTTON o_Obtn1 OF oTbar1 SIZE 20,20     ;
       BITMAP "Home.bmp";// TRANSPARENT COORDINATES 0,2,0,0 ;
-      ON CLICK {|| BrowseMove(oBrwDb, "Home", oEdGoto, "Dbs" ) };
+      ON CLICK {|| BrowseMove(oBrwDb, "Home", oEdGoto, "Dbs" ) } ;
       TOOLTIP "First Record"
 
    @ 105,5 OWNERBUTTON o_Obtn2 OF oTbar1 SIZE 20,20    ;
@@ -157,7 +157,7 @@ STATIC FUNCTION BrwDbs( lEdit, lZebra )
    END
 
    //      {|| IF (nNumber < 0, ;
-   //       {tColor, bColor, tColorSel, bColorSel} ,;
+   //       {tColor, bColor, tColorSel, bColorSel} , ;
    //       {tColor, bColor, tColorSel, bColorSel}) }
 
    IF lEdit
@@ -170,7 +170,7 @@ STATIC FUNCTION BrwDbs( lEdit, lZebra )
          {x_BLACK, x_WHITE , x_WHITE, x_DARKBLUE })}
       IF lZebra
          FOR nI := 2 TO 5
-            oBrwDB:aColumns[nI]:bColorBlock := {|| IF(MOD(oBrwDB:nPaintRow, 2) = 0,;
+            oBrwDB:aColumns[nI]:bColorBlock := {|| IF(MOD(oBrwDB:nPaintRow, 2) = 0, ;
                {x_BLACK, x_GRAY, x_CYAN, x_DARKBLUE} , ;
                {x_BLACK, x_WHITE , x_WHITE, x_DARKBLUE })}
          NEXT
@@ -313,7 +313,7 @@ STATIC FUNCTION BrwArr(lEdit, lZebra)
 
    @ 85,5 OWNERBUTTON o_Obtn1 OF oTbar1 SIZE 20,20     ;
       BITMAP "Home.bmp";// TRANSPARENT COORDINATES 0,2,0,0 ;
-      ON CLICK {|| BrowseMove(oBrwArr, "Home", oEdGoto, "Array" ) };
+      ON CLICK {|| BrowseMove(oBrwArr, "Home", oEdGoto, "Array" ) } ;
       TOOLTIP "First Record"
 
    @ 105,5 OWNERBUTTON o_Obtn2 OF oTbar1 SIZE 20,20    ;
@@ -369,7 +369,7 @@ STATIC FUNCTION BrwArr(lEdit, lZebra)
    END
 
    //      {|| IF (nNumber < 0, ;
-   //       {tColor, bColor, tColorSel, bColorSel} ,;
+   //       {tColor, bColor, tColorSel, bColorSel} , ;
    //       {tColor, bColor, tColorSel, bColorSel}) }
    IF lEdit
       oBrwArr:aColumns[1]:bColorBlock := {|n| IF(aArrayTst[oBrwArr:nCurrent][1] < 0 , ;
@@ -381,7 +381,7 @@ STATIC FUNCTION BrwArr(lEdit, lZebra)
          {x_BLUE, x_WHITE , x_WHITE, x_BLUE })}
       IF lZebra
          FOR nI := 2 TO 5
-            oBrwArr:aColumns[nI]:bColorBlock := {|| IF(MOD(oBrwArr:nCurrent, 2) = 0,;
+            oBrwArr:aColumns[nI]:bColorBlock := {|| IF(MOD(oBrwArr:nCurrent, 2) = 0, ;
                {x_BLACK, x_GRAY, x_CYAN, x_DARKBLUE} , ;
                {x_BLACK, x_WHITE , x_WHITE, x_DARKBLUE })}
          NEXT

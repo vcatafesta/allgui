@@ -144,7 +144,7 @@ FUNCTION WriteIni( cSection, cEntry, cValue, cFileIni )
    LOCAL cArq
    LOCAL nLinhas
    LOCAL nContador  := 0
-   LOCAL vargrav     :=  upper( AllTrim( cEntry ) ) + "=" +;
+   LOCAL vargrav     :=  upper( AllTrim( cEntry ) ) + "=" + ;
       AllTrim( cValue ) + Chr( 13 ) + Chr( 10 )
    LOCAL Puntatore
    LOCAL pontvar
@@ -176,10 +176,10 @@ FUNCTION WriteIni( cSection, cEntry, cValue, cFileIni )
    Puntatore := At( procura, Upper( contenuto ) )
 
    IF Puntatore == 0
-      contenuto := contenuto + Chr( 13 ) + Chr( 10 ) + procura + Chr( 13 ) +;
+      contenuto := contenuto + Chr( 13 ) + Chr( 10 ) + procura + Chr( 13 ) + ;
          Chr( 10 ) + vargrav
    ELSEIF ( pontvar := At(Upper(AllTrim(cEntry)), Upper(contenuto)) ) == 0
-      contenuto := Left( contenuto, Puntatore + Len( lcSection ) + 1 ) + vargrav +;
+      contenuto := Left( contenuto, Puntatore + Len( lcSection ) + 1 ) + vargrav + ;
          Right( contenuto, Len(contenuto) - (1+Puntatore+Len(lcSection)))
    ELSE
       FOR i := pontvar To Len( contenuto )
@@ -195,7 +195,7 @@ FUNCTION WriteIni( cSection, cEntry, cValue, cFileIni )
          ENDIF
       NEXT
       pontfim  := Iif( ! disparou, Len( contenuto ), pontfim )
-      letra    := SubStr( contenuto, pontvar,;
+      letra    := SubStr( contenuto, pontvar, ;
          ( pontfim - pontvar ) + 1 )
       contenuto := SubStr( contenuto, 1, pontvar - 1 ) + ;
          vargrav + SubStr( contenuto, pontfim + 1, Len( contenuto ) )
@@ -280,9 +280,9 @@ FUNCTION CommDataRx(clear)
    proc BarSset()
 
       m->f_com:="COM"+zaps(Setbarcode.radiogroup_1.value)
-      m->scanset :=setbarcode.combo_1.item(setbarcode.combo_1.value)+","+;
-         setbarcode.combo_2.item(setbarcode.combo_2.value)+","+;
-         setbarcode.combo_3.item(setbarcode.combo_3.value)+","+;
+      m->scanset :=setbarcode.combo_1.item(setbarcode.combo_1.value)+","+ ;
+         setbarcode.combo_2.item(setbarcode.combo_2.value)+","+ ;
+         setbarcode.combo_3.item(setbarcode.combo_3.value)+","+ ;
          setbarcode.combo_4.item(setbarcode.combo_4.value)
 
       //m->delay:=setbarcode.Spinner_1.value

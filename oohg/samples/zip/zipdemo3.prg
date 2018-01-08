@@ -76,7 +76,7 @@ FUNCTION UnPackZip()
 
    /* Notas sobre las funciones:
 
-   FUNCTION hb_ZipFile( cFileName, acFiles, nLevel, bUpdate,lOverwrite, cPassword,;
+   FUNCTION hb_ZipFile( cFileName, acFiles, nLevel, bUpdate,lOverwrite, cPassword, ;
    lWithPath, lWithDrive, bProgress, lFullPath, acExclude )
 
    EXAMPLES

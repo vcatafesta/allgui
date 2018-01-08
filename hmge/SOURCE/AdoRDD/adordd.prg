@@ -50,10 +50,10 @@
 
 #ifndef __XHARBOUR__
 #include "hbusrrdd.ch"
-#xcommand TRY              => bError := errorBlock( {|oErr| break( oErr ) } ) ;;
+#xcommand TRY              => bError := errorBlock( {|oErr| break( oErr ) } ) ; ;
    BEGIN SEQUENCE
-#xcommand CATCH [<!oErr!>] => errorBlock( bError ) ;;
-      RECOVER[USING < oErr > ] <- oErr->;;
+#xcommand CATCH [<!oErr!>] => errorBlock( bError ) ; ;
+      RECOVER[USING < oErr > ] <- oErr->; ;
       ErrorBlock( bError )
 #else
 #include "usrrdd.ch"

@@ -100,20 +100,20 @@ FUNCTION Main
    BUTTON Button_1c ;
       TOOLTIP '&New' ;
       PICTURE 'Btn01.bmp' ;
-      ACTION _dummy();
+      ACTION _dummy() ;
       CHECK GROUP
 
    BUTTON Button_2c ;
       TOOLTIP '&Open' ;
       PICTURE 'Btn02.bmp' ;
-      ACTION _dummy();
+      ACTION _dummy() ;
       CHECK GROUP
 
    BUTTON Button_3c ;
       TOOLTIP '&Close' ;
       PICTURE 'Btn03.bmp' ;
       ACTION _dummy() ;
-      SEPARATOR;
+      SEPARATOR ;
       CHECK GROUP
 
    BUTTON Button_4c ;
@@ -150,12 +150,12 @@ DEFINE TOOLBAREX ToolBar_e BUTTONSIZE 25,25 SIZE 7  CAPTION 'Two Rows Button' RO
 BUTTON Button_1e ;
    TOOLTIP '&New' ;
    PICTURE 'Btn01.bmp' ;
-   ACTION _dummy();
+   ACTION _dummy() ;
 
 BUTTON Button_2e ;
    TOOLTIP '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   ACTION _dummy();
+   ACTION _dummy() ;
 
 BUTTON Button_3e ;
    TOOLTIP '&Close' ;
@@ -189,12 +189,12 @@ DEFINE TOOLBAREX ToolBar_f BUTTONSIZE 50,50 CAPTION 'Centered Bitmap'
 BUTTON Button_1f ;
    TOOLTIP '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   ACTION _dummy();
+   ACTION _dummy() ;
 
 BUTTON Button_2f ;
    TOOLTIP '&Save' ;
    PICTURE 'Btn04.bmp' ;
-   ACTION _dummy();
+   ACTION _dummy() ;
 
 END TOOLBAR
 
@@ -203,13 +203,13 @@ DEFINE TOOLBAREX ToolBar_g BUTTONSIZE 50,50 CAPTION 'Adjust Bitmap'
 BUTTON Button_1g ;
    TOOLTIP '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   ACTION _dummy();
+   ACTION _dummy() ;
    ADJUST
 
 BUTTON Button_2g ;
    TOOLTIP '&Save' ;
    PICTURE 'Btn04.bmp' ;
-   ACTION _dummy();
+   ACTION _dummy() ;
    ADJUST
 
 END TOOLBAR
@@ -224,7 +224,7 @@ BUTTON Button_1m ;
 BUTTON Button_2m ;
    CAPTION '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   TOOLTIP 'Open file';
+   TOOLTIP 'Open file' ;
    ACTION MsgInfo('Click! 2')
 
 BUTTON Button_3m ;
@@ -260,7 +260,7 @@ BUTTON Button_1n ;
 BUTTON Button_2n ;
    CAPTION '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   TOOLTIP 'Open file';
+   TOOLTIP 'Open file' ;
    ACTION MsgInfo('Click! 2')
 
 BUTTON Button_3n ;

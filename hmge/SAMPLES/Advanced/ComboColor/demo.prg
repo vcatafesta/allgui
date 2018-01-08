@@ -39,51 +39,51 @@ FUNCTION Main()
 
    LOCAL n, aColorName := {}, aSysColorName := {}
    LOCAL aColor := ;
-      {{YELLOW,    "YELLOW"},;
-      {PINK,      "PINK"},;
-      {RED,       "RED"},;
-      {FUCHSIA,   "FUCHSIA"},;
-      {BROWN,     "BROWN"},;
-      {ORANGE,    "ORANGE"},;
-      {GREEN,     "GREEN"},;
-      {PURPLE,    "PURPLE"},;
-      {BLACK,     "BLACK"},;
-      {WHITE,     "WHITE"},;
-      {GRAY,      "GRAY"},;
-      {BLUE,      "BLUE"},;
-      {SILVER,    "SILVER"},;
-      {MAROON,    "MAROON"},;
-      {OLIVE,     "OLIVE"},;
-      {LGREEN,    "LGREEN"},;
-      {AQUA,      "AQUA"},;
-      {NAVY,      "NAVY"},;
+      {{YELLOW,    "YELLOW"}, ;
+      {PINK,      "PINK"}, ;
+      {RED,       "RED"}, ;
+      {FUCHSIA,   "FUCHSIA"}, ;
+      {BROWN,     "BROWN"}, ;
+      {ORANGE,    "ORANGE"}, ;
+      {GREEN,     "GREEN"}, ;
+      {PURPLE,    "PURPLE"}, ;
+      {BLACK,     "BLACK"}, ;
+      {WHITE,     "WHITE"}, ;
+      {GRAY,      "GRAY"}, ;
+      {BLUE,      "BLUE"}, ;
+      {SILVER,    "SILVER"}, ;
+      {MAROON,    "MAROON"}, ;
+      {OLIVE,     "OLIVE"}, ;
+      {LGREEN,    "LGREEN"}, ;
+      {AQUA,      "AQUA"}, ;
+      {NAVY,      "NAVY"}, ;
       {TEAL,      "TEAL"}}
 
    LOCAL aSysColor := ;
-      {{COLOR_3DDKSHADOW,         "Dark shadow for 3D display elements"},;
-      {COLOR_BTNFACE,            "Face color for 3D display elements"},;
-      {COLOR_BTNHIGHLIGHT,       "Highlight color for 3D display elements"},;
-      {COLOR_3DLIGHT,            "Light color for 3D display elements"},;
-      {COLOR_BTNSHADOW,          "Shadow color for 3D display elements"},;
-      {COLOR_ACTIVEBORDER,       "Active window border"},;
-      {COLOR_ACTIVECAPTION,      "Active window caption"},;
-      {COLOR_APPWORKSPACE,       "Background color of MDI applications"},;
-      {COLOR_BACKGROUND,         "Desktop"},;
-      {COLOR_BTNTEXT,            "Text on push buttons"},;
-      {COLOR_CAPTIONTEXT,        "Text in caption, size, and scroll arrow box"},;
-      {COLOR_GRAYTEXT,           "Grayed (disabled) text"},;
-      {COLOR_HIGHLIGHT,          "Item(s) selected in a control"},;
-      {COLOR_HIGHLIGHTTEXT,      "Text of item(s) selected in a control"},;
-      {COLOR_INACTIVEBORDER,     "Inactive window border"},;
-      {COLOR_INACTIVECAPTION,    "Inactive window caption"},;
-      {COLOR_INACTIVECAPTIONTEXT,"Color of text in an inactive caption"},;
-      {COLOR_INFOBK,             "Background color for tooltip controls"},;
-      {COLOR_INFOTEXT,           "Text color for tooltip controls"},;
-      {COLOR_MENU,               "Menu background"},;
-      {COLOR_MENUTEXT,           "Text in menus"},;
-      {COLOR_SCROLLBAR,          "Scroll bar gray area"},;
-      {COLOR_WINDOW,             "Window background"},;
-      {COLOR_WINDOWFRAME,        "Window frame"},;
+      {{COLOR_3DDKSHADOW,         "Dark shadow for 3D display elements"}, ;
+      {COLOR_BTNFACE,            "Face color for 3D display elements"}, ;
+      {COLOR_BTNHIGHLIGHT,       "Highlight color for 3D display elements"}, ;
+      {COLOR_3DLIGHT,            "Light color for 3D display elements"}, ;
+      {COLOR_BTNSHADOW,          "Shadow color for 3D display elements"}, ;
+      {COLOR_ACTIVEBORDER,       "Active window border"}, ;
+      {COLOR_ACTIVECAPTION,      "Active window caption"}, ;
+      {COLOR_APPWORKSPACE,       "Background color of MDI applications"}, ;
+      {COLOR_BACKGROUND,         "Desktop"}, ;
+      {COLOR_BTNTEXT,            "Text on push buttons"}, ;
+      {COLOR_CAPTIONTEXT,        "Text in caption, size, and scroll arrow box"}, ;
+      {COLOR_GRAYTEXT,           "Grayed (disabled) text"}, ;
+      {COLOR_HIGHLIGHT,          "Item(s) selected in a control"}, ;
+      {COLOR_HIGHLIGHTTEXT,      "Text of item(s) selected in a control"}, ;
+      {COLOR_INACTIVEBORDER,     "Inactive window border"}, ;
+      {COLOR_INACTIVECAPTION,    "Inactive window caption"}, ;
+      {COLOR_INACTIVECAPTIONTEXT,"Color of text in an inactive caption"}, ;
+      {COLOR_INFOBK,             "Background color for tooltip controls"}, ;
+      {COLOR_INFOTEXT,           "Text color for tooltip controls"}, ;
+      {COLOR_MENU,               "Menu background"}, ;
+      {COLOR_MENUTEXT,           "Text in menus"}, ;
+      {COLOR_SCROLLBAR,          "Scroll bar gray area"}, ;
+      {COLOR_WINDOW,             "Window background"}, ;
+      {COLOR_WINDOWFRAME,        "Window frame"}, ;
       {COLOR_WINDOWTEXT,         "Text in windows"}}
 
    LOCAL BmpW := 16
@@ -134,7 +134,7 @@ FUNCTION Main()
       @ 10,20 Label Label_1 Value "HMG Colors ComboColor" AUTOSIZE
 
       @ 33,20 COMBOBOXEX ComboEx_1 ;
-         WIDTH 150 HEIGHT 200;
+         WIDTH 150 HEIGHT 200 ;
          ITEMS aColorName ;
          VALUE 1 ;
          ON ENTER GetHMGColor(aColor) ;
@@ -145,7 +145,7 @@ FUNCTION Main()
       @ 10,190 Label Label_2 Value "System Colors ComboColor" AUTOSIZE
 
       @ 33,190 COMBOBOXEX ComboEx_2 ;
-         WIDTH 250  HEIGHT 200;
+         WIDTH 250  HEIGHT 200 ;
          ITEMS aSysColorName ;
          VALUE 1 ;
          ON ENTER GetSystemColor(aSysColor) ;

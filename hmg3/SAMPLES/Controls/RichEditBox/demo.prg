@@ -34,8 +34,8 @@ FUNCTION MAIN
          AT 0,0 ;
          WIDTH 800 HEIGHT 600 ;
          TITLE 'RichEditBox Demo' ;
-         NOSIZE;
-         NOMAXIMIZE;
+         NOSIZE ;
+         NOMAXIMIZE ;
          MAIN
 
       DEFINE STATUSBAR
@@ -50,15 +50,15 @@ FUNCTION MAIN
             BUTTON Button_New ;
                TOOLTIP 'New File' ;
                PICTURE 'NEW' ;
-               ACTION ( IF ( MsgYesNo ( "Clear the current file ?" , "New" ) , (cFileName := "", Form_1.RichEditBox_1.VALUE := ""), NIL ) ,;
+               ACTION ( IF ( MsgYesNo ( "Clear the current file ?" , "New" ) , (cFileName := "", Form_1.RichEditBox_1.VALUE := ""), NIL ) , ;
                Form_1.StatusBar.Item(1) := "File: "+cFileName )
 
             BUTTON Button_Open ;
                TOOLTIP 'Open File' ;
                PICTURE 'OPEN' ;
-               ACTION ( cAuxFileName := GetFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder() ),;
-               IF ( EMPTY(cAuxFileName),;
-                  NIL,;
+               ACTION ( cAuxFileName := GetFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder() ), ;
+               IF ( EMPTY(cAuxFileName), ;
+                  NIL, ;
                   ( cFileName := cAuxFileName, Form_1.RichEditBox_1.RTFLoadFile ( cFileName, 4, .F.), Form_1.StatusBar.Item(1) := "File: "+cFileName ) ) )
 
                BUTTON Button_Close ;
@@ -69,10 +69,10 @@ FUNCTION MAIN
                BUTTON Button_Save ;
                   TOOLTIP 'Save' ;
                   PICTURE 'SAVE' ;
-                  ACTION ( cAuxFileName := PutFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder(), NIL, cFileName, ".rtf" ),;
-                  IF ( EMPTY(cAuxFileName),;
-                     NIL,;
-                     ( cFileName := cAuxFileName , Form_1.RichEditBox_1.RTFSaveFile ( cFileName, 4, .F.), Form_1.StatusBar.Item(1) := "File: "+cFileName ) ) );
+                  ACTION ( cAuxFileName := PutFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder(), NIL, cFileName, ".rtf" ), ;
+                  IF ( EMPTY(cAuxFileName), ;
+                     NIL, ;
+                     ( cFileName := cAuxFileName , Form_1.RichEditBox_1.RTFSaveFile ( cFileName, 4, .F.), Form_1.StatusBar.Item(1) := "File: "+cFileName ) ) ) ;
                      SEPARATOR
 
                   BUTTON Button_Print ;
@@ -89,13 +89,13 @@ FUNCTION MAIN
                END TOOLBAR
 
                COMBOBOX Combo_3 ;
-                  ITEMS aZoomValue;
+                  ITEMS aZoomValue ;
                   VALUE 5 ;
-                  HEIGHT 200;
+                  HEIGHT 200 ;
                   FONT 'Tahoma' SIZE 9 ;
-                  WIDTH 80;
-                  TOOLTIP 'Zoom Ratio';
-                  ON CHANGE ( Form_1.RichEditBox_1.Zoom := aZoomPercentage [ Form_1.Combo_3.VALUE ] ,;
+                  WIDTH 80 ;
+                  TOOLTIP 'Zoom Ratio' ;
+                  ON CHANGE ( Form_1.RichEditBox_1.Zoom := aZoomPercentage [ Form_1.Combo_3.VALUE ] , ;
                   Form_1.RichEditBox_1.SetFocus )
 
                DEFINE TOOLBAR ToolBar_2 BUTTONSIZE 23,23 FONT 'ARIAL' SIZE 8  FLAT
@@ -103,8 +103,8 @@ FUNCTION MAIN
                   BUTTON Button_BackgroundColor ;
                      TOOLTIP 'Background Color' ;
                      PICTURE 'BackgroundColor' ;
-                     ACTION ( aBackgroundColor := GetColor (NIL, NIL, .F.), IF (ValType (aBackgroundColor [1]) == "N",( Form_1.RichEditBox_1.BackgroundColor := aBackgroundColor ) , NIL) );
-                     DROPDOWN;
+                     ACTION ( aBackgroundColor := GetColor (NIL, NIL, .F.), IF (ValType (aBackgroundColor [1]) == "N",( Form_1.RichEditBox_1.BackgroundColor := aBackgroundColor ) , NIL) ) ;
+                     DROPDOWN ;
                      SEPARATOR
                   DEFINE DROPDOWN MENU BUTTON Button_BackgroundColor
                      ITEM "Set Default Windows Background Color" ACTION Form_1.RichEditBox_1.BackgroundColor := RTF_AUTOBACKGROUNDCOLOR
@@ -123,23 +123,23 @@ FUNCTION MAIN
                   BUTTON Button_Cut ;
                      TOOLTIP 'Cut' ;
                      PICTURE 'cut' ;
-                     ACTION Form_1.RichEditBox_1.SelCut ();
+                     ACTION Form_1.RichEditBox_1.SelCut () ;
 
                   BUTTON Button_Clear ;
                      TOOLTIP 'Clear' ;
                      PICTURE 'Clear' ;
-                     ACTION Form_1.RichEditBox_1.SelClear ();
+                     ACTION Form_1.RichEditBox_1.SelClear () ;
                      SEPARATOR
 
                   BUTTON Button_Undo ;
                      TOOLTIP 'Undo' ;
                      PICTURE 'undo' ;
-                     ACTION Form_1.RichEditBox_1.Undo ();
+                     ACTION Form_1.RichEditBox_1.Undo () ;
                      DROPDOWN
 
                   DEFINE DROPDOWN MENU BUTTON Button_Undo
-                     ITEM 'Clear Undo Buffer' ACTION ( Form_1.RichEditBox_1.ClearUndoBuffer () ,;
-                        Form_1.Button_Undo.Enabled := .F. ,;
+                     ITEM 'Clear Undo Buffer' ACTION ( Form_1.RichEditBox_1.ClearUndoBuffer () , ;
+                        Form_1.Button_Undo.Enabled := .F. , ;
                         Form_1.Button_Redo.Enabled := .F. )
                   END MENU
 
@@ -152,13 +152,13 @@ FUNCTION MAIN
                   BUTTON Button_Find ;
                      TOOLTIP 'Find' ;
                      PICTURE 'find2' ;
-                     ACTION ( cFind := Form_1.RichEditBox_1.GetSelectText,;
+                     ACTION ( cFind := Form_1.RichEditBox_1.GetSelectText, ;
                      FINDTEXTDIALOG ON ACTION FindReplaceOnClickProc() FIND cFind CHECKDOWN lDown CHECKMATCHCASE lMatchCase CHECKWHOLEWORD lWholeWord )
 
                   BUTTON Button_Repl ;
                      TOOLTIP 'Replace' ;
                      PICTURE 'repeat' ;
-                     ACTION ( cFind := Form_1.RichEditBox_1.GetSelectText,;
+                     ACTION ( cFind := Form_1.RichEditBox_1.GetSelectText, ;
                      REPLACETEXTDIALOG ON ACTION FindReplaceOnClickProc() FIND cFind REPLACE cReplace CHECKMATCHCASE lMatchCase CHECKWHOLEWORD lWholeWord )
 
                END TOOLBAR
@@ -166,24 +166,24 @@ FUNCTION MAIN
                GetFontList ( NIL, NIL, DEFAULT_CHARSET, NIL, NIL, NIL, @aFontList )
 
                COMBOBOX Combo_1 ;
-                  ITEMS aFontList;
+                  ITEMS aFontList ;
                   VALUE 2 ;
-                  WIDTH 170;
-                  HEIGHT 200;
+                  WIDTH 170 ;
+                  HEIGHT 200 ;
                   FONT 'Tahoma' SIZE 9 ;
-                  TOOLTIP 'Font Name';
+                  TOOLTIP 'Font Name' ;
                   ON GOTFOCUS  ( nFontNameValue := Form_1.Combo_1.VALUE ) ;
-                  ON CHANGE    ( Form_1.RichEditBox_1.FontName := Form_1.Combo_1.ITEM (Form_1.Combo_1.VALUE) );
+                  ON CHANGE    ( Form_1.RichEditBox_1.FontName := Form_1.Combo_1.ITEM (Form_1.Combo_1.VALUE) ) ;
                   ON CANCEL IF ( HMG_GetLastVirtualKeyDown() == VK_ESCAPE, ( HMG_CleanLastVirtualKeyDown(), Form_1.Combo_1.VALUE := nFontNameValue ), NIL ) ;
                   BREAK
 
                COMBOBOX Combo_2 ;
                   ITEMS aFontSize ;
                   VALUE 3 ;
-                  WIDTH 40;
+                  WIDTH 40 ;
                   TOOLTIP 'Font Size' ;
                   ON GOTFOCUS  ( nFontSizeValue := Form_1.Combo_2.VALUE ) ;
-                  ON CHANGE    ( Form_1.RichEditBox_1.FontSize := VAL (Form_1.Combo_2.ITEM (Form_1.Combo_2.VALUE)) );
+                  ON CHANGE    ( Form_1.RichEditBox_1.FontSize := VAL (Form_1.Combo_2.ITEM (Form_1.Combo_2.VALUE)) ) ;
                   ON CANCEL IF ( HMG_GetLastVirtualKeyDown() == VK_ESCAPE, ( HMG_CleanLastVirtualKeyDown(), Form_1.Combo_2.VALUE := nFontSizeValue ), NIL ) ;
 
                DEFINE TOOLBAR ToolBar_3 BUTTONSIZE 23,23 SIZE 8  FLAT
@@ -210,35 +210,35 @@ FUNCTION MAIN
                      TOOLTIP 'StrikeOut' ;
                      PICTURE 'strike' ;
                      ACTION Form_1.RichEditBox_1.FontStrikeOut := Form_1.Button_StrikeOut.VALUE ;
-                     CHECK;
+                     CHECK ;
                      SEPARATOR
 
                   BUTTON Button_SubScript ;
                      TOOLTIP 'SubScript' ;
                      PICTURE 'SubScript' ;
-                     ACTION  (Form_1.RichEditBox_1.FontScript := IF ( Form_1.Button_SubScript.VALUE, RTF_SUBSCRIPT, RTF_NORMALSCRIPT ),;
-                     Form_1.Button_SuperScript.VALUE := .F.);
+                     ACTION  (Form_1.RichEditBox_1.FontScript := IF ( Form_1.Button_SubScript.VALUE, RTF_SUBSCRIPT, RTF_NORMALSCRIPT ), ;
+                     Form_1.Button_SuperScript.VALUE := .F.) ;
                      CHECK
 
                   BUTTON Button_SuperScript ;
                      TOOLTIP 'SuperScript' ;
                      PICTURE 'SuperScript' ;
-                     ACTION  (Form_1.RichEditBox_1.FontScript := IF ( Form_1.Button_SuperScript.VALUE, RTF_SUPERSCRIPT, RTF_NORMALSCRIPT ),;
-                     Form_1.Button_SubScript.VALUE := .F.);
-                     CHECK;
+                     ACTION  (Form_1.RichEditBox_1.FontScript := IF ( Form_1.Button_SuperScript.VALUE, RTF_SUPERSCRIPT, RTF_NORMALSCRIPT ), ;
+                     Form_1.Button_SubScript.VALUE := .F.) ;
+                     CHECK ;
                      SEPARATOR
 
                   BUTTON Button_Link ;
                      TOOLTIP 'Set Link on Selected Text' ;
                      PICTURE 'Link' ;
                      ACTION  Form_1.RichEditBox_1.Link := Form_1.Button_Link.VALUE ;
-                     CHECK;
+                     CHECK ;
                      SEPARATOR
 
                   BUTTON Button_FontColor ;
                      TOOLTIP 'Font Color' ;
-                     PICTURE 'FontColor';
-                     ACTION  ( aFontColor := GetColor(Form_1.RichEditBox_1.FontColor, NIL, .F.), IF (ValType (aFontColor [1]) == "N",( Form_1.RichEditBox_1.FontColor := aFontColor ) , NIL) );
+                     PICTURE 'FontColor' ;
+                     ACTION  ( aFontColor := GetColor(Form_1.RichEditBox_1.FontColor, NIL, .F.), IF (ValType (aFontColor [1]) == "N",( Form_1.RichEditBox_1.FontColor := aFontColor ) , NIL) ) ;
                      DROPDOWN
                   DEFINE DROPDOWN MENU BUTTON Button_FontColor
                      ITEM "Set Default Windows Font Color" ACTION Form_1.RichEditBox_1.FontColor := -1
@@ -247,8 +247,8 @@ FUNCTION MAIN
                   BUTTON Button_FontBackColor ;
                      TOOLTIP 'Font Back Color' ;
                      PICTURE 'FontBackColor' ;
-                     ACTION  ( aFontBackColor := GetColor ( Form_1.RichEditBox_1.FontBackColor, NIL, .F.), IF (ValType (aFontBackColor [1]) == "N",( Form_1.RichEditBox_1.FontBackColor := aFontBackColor ) , NIL) );
-                     DROPDOWN;
+                     ACTION  ( aFontBackColor := GetColor ( Form_1.RichEditBox_1.FontBackColor, NIL, .F.), IF (ValType (aFontBackColor [1]) == "N",( Form_1.RichEditBox_1.FontBackColor := aFontBackColor ) , NIL) ) ;
+                     DROPDOWN ;
                      SEPARATOR
                   DEFINE DROPDOWN MENU BUTTON Button_FontBackColor
                      ITEM "Set Default Font Back Color" ACTION Form_1.RichEditBox_1.FontBackColor := -1
@@ -257,32 +257,32 @@ FUNCTION MAIN
                   BUTTON Button_Left ;
                      TOOLTIP 'Left Text' ;
                      PICTURE 'left' ;
-                     ACTION ( Form_1.RichEditBox_1.ParaAlignment := RTF_LEFT , OnSelectProc() );
+                     ACTION ( Form_1.RichEditBox_1.ParaAlignment := RTF_LEFT , OnSelectProc() ) ;
                      CHECK GROUP
 
                   BUTTON Button_Center ;
                      TOOLTIP 'Center Text' ;
                      PICTURE 'center' ;
-                     ACTION ( Form_1.RichEditBox_1.ParaAlignment := RTF_CENTER , OnSelectProc() );
+                     ACTION ( Form_1.RichEditBox_1.ParaAlignment := RTF_CENTER , OnSelectProc() ) ;
                      CHECK GROUP
 
                   BUTTON Button_Right ;
                      TOOLTIP 'Right Text' ;
                      PICTURE 'Right' ;
-                     ACTION ( Form_1.RichEditBox_1.ParaAlignment := RTF_RIGHT , OnSelectProc() );
+                     ACTION ( Form_1.RichEditBox_1.ParaAlignment := RTF_RIGHT , OnSelectProc() ) ;
                      CHECK GROUP
 
                   BUTTON Button_Justify ;
                      TOOLTIP 'Justify Text' ;
                      PICTURE 'Justify' ;
-                     ACTION ( Form_1.RichEditBox_1.ParaAlignment := RTF_JUSTIFY , OnSelectProc() );
-                     CHECK GROUP;
+                     ACTION ( Form_1.RichEditBox_1.ParaAlignment := RTF_JUSTIFY , OnSelectProc() ) ;
+                     CHECK GROUP ;
                      SEPARATOR
 
                   BUTTON Button_Bulleted ;
                      TOOLTIP 'Bulleted Paragraphs' ;
                      PICTURE 'Number' ;
-                     ACTION ( Form_1.RichEditBox_1.ParaNumbering := IF ( Form_1.Button_Bulleted.VALUE, RTF_BULLET, RTF_NOBULLETNUMBER ) , OnSelectProc() );
+                     ACTION ( Form_1.RichEditBox_1.ParaNumbering := IF ( Form_1.Button_Bulleted.VALUE, RTF_BULLET, RTF_NOBULLETNUMBER ) , OnSelectProc() ) ;
                      CHECK
 
 #define MIN_PARAINDENT   0 // in mm
@@ -299,9 +299,9 @@ FUNCTION MAIN
 
                   BUTTON Button_LineSpacing ;
                      TOOLTIP 'Line Spacing' ;
-                     PICTURE 'ParaLineSpacing';
-                     ACTION {|| Nil };
-                     WHOLEDROPDOWN;
+                     PICTURE 'ParaLineSpacing' ;
+                     ACTION {|| Nil } ;
+                     WHOLEDROPDOWN ;
                      SEPARATOR
 
                   DEFINE DROPDOWN MENU BUTTON Button_LineSpacing
@@ -326,14 +326,14 @@ FUNCTION MAIN
             @ 80,10 RICHEDITBOX RichEditBox_1 ;
                WIDTH 775 ;
                HEIGHT 450 ;
-               VALUE '';
-               FONT "Consolas" SIZE 12;
-               MAXLENGTH -1;
-               NOHSCROLL;
-               ON CHANGE ( IF (Form_1.RichEditBox_1.CanUndo,  (Form_1.Button_Undo.Enabled := .T.) ,  (Form_1.Button_Undo.Enabled := .F.)) ,;
+               VALUE '' ;
+               FONT "Consolas" SIZE 12 ;
+               MAXLENGTH -1 ;
+               NOHSCROLL ;
+               ON CHANGE ( IF (Form_1.RichEditBox_1.CanUndo,  (Form_1.Button_Undo.Enabled := .T.) ,  (Form_1.Button_Undo.Enabled := .F.)) , ;
                IF (Form_1.RichEditBox_1.CanRedo,  (Form_1.Button_Redo.Enabled := .T.) ,  (Form_1.Button_Redo.Enabled := .F.)) ) ;
-                  ON SELECT OnSelectProc ();
-                  ON LINK   OnLinkProc ();
+                  ON SELECT OnSelectProc () ;
+                  ON LINK   OnLinkProc () ;
                   ON VSCROLL ( Form_1.RichEditBox_1.Refresh )
 
                aViewRect := Form_1.RichEditBox_1.ViewRect
@@ -357,15 +357,15 @@ FUNCTION MAIN
                Form_1.Button_Undo.Enabled := .F.
                Form_1.Button_Redo.Enabled := .F.
 
-               Form_1.RichEditBox_1.VALUE := "Microsoft said:" + HB_OSNEWLINE() +;
-                  "Unicode is a worldwide character encoding standard that provides a unique number to represent " +;
-                  "each character used in modern computing, including technical symbols and special characters used in publishing. " +;
-                  "Unicode is required by modern standards, such as XML and ECMAScript (JavaScript), and is the official mechanism " +;
-                  "for implementing ISO/IEC 10646 (UCS: Universal Character Set). " +;
-                  "It is supported by many operating systems, all modern browsers, and many other products. " +;
-                  "New Windows applications should use Unicode to avoid the inconsistencies of varied code pages and " +;
-                  "to aid in simplifying localization." + HB_OSNEWLINE() + HB_OSNEWLINE() +;
-                  "Thereby HMG-Unicode is the future in the xBase programming for Windows ..." + HB_OSNEWLINE() +;
+               Form_1.RichEditBox_1.VALUE := "Microsoft said:" + HB_OSNEWLINE() + ;
+                  "Unicode is a worldwide character encoding standard that provides a unique number to represent " + ;
+                  "each character used in modern computing, including technical symbols and special characters used in publishing. " + ;
+                  "Unicode is required by modern standards, such as XML and ECMAScript (JavaScript), and is the official mechanism " + ;
+                  "for implementing ISO/IEC 10646 (UCS: Universal Character Set). " + ;
+                  "It is supported by many operating systems, all modern browsers, and many other products. " + ;
+                  "New Windows applications should use Unicode to avoid the inconsistencies of varied code pages and " + ;
+                  "to aid in simplifying localization." + HB_OSNEWLINE() + HB_OSNEWLINE() + ;
+                  "Thereby HMG-Unicode is the future in the xBase programming for Windows ..." + HB_OSNEWLINE() + ;
                   "www.hmgforum.com" + HB_OSNEWLINE()
 
             END WINDOW
@@ -531,17 +531,17 @@ PROCEDURE HelpProc
          AT 0,0 ;
          WIDTH 635 HEIGHT 450 ;
          TITLE 'Help: Rich Edit Shortcut Keys' ;
-         NOSIZE;
-         NOMAXIMIZE;
-         ON INIT     ( Form_2.RichEditBox_2.RTFLoadFile ("HelpRTF", .F., 4) );
-         ON RELEASE  ( Form_1.Button_Help.ENABLED := .T. );
+         NOSIZE ;
+         NOMAXIMIZE ;
+         ON INIT     ( Form_2.RichEditBox_2.RTFLoadFile ("HelpRTF", .F., 4) ) ;
+         ON RELEASE  ( Form_1.Button_Help.ENABLED := .T. ) ;
 
       @ 10,10 RICHEDITBOX RichEditBox_2 ;
          WIDTH 610 ;
          HEIGHT 400 ;
-         MAXLENGTH -1;
-         NOHSCROLL;
-         READONLY;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
+         READONLY ;
          BACKCOLOR YELLOW
 
    END WINDOW
@@ -556,17 +556,17 @@ PROCEDURE InfoProc
    DEFINE WINDOW Form_3 ;
          AT 0,0 ;
          WIDTH 400 HEIGHT 300 ;
-         MODAL;
-         NOCAPTION;
+         MODAL ;
+         NOCAPTION ;
          NOSIZE
 
       @ 10,10 RICHEDITBOX RichEditBox_3 ;
          WIDTH  Form_3.ClientAreaWidth  - 20 ;
          HEIGHT Form_3.ClientAreaHeight - 20 ;
-         MAXLENGTH -1;
-         NOHSCROLL;
-         READONLY;
-         BACKCOLOR NAVY;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
+         READONLY ;
+         BACKCOLOR NAVY ;
          ON LINK IF ( HMG_UPPER( ALLTRIM (ThisRichEditBox.GetClickLinkText) ) == HMG_UPPER ("Click Here"), Form_3.Release, OnLinkProc ( ThisRichEditBox.GetClickLinkText ) )
 
       ON KEY  ESCAPE  ACTION Form_3.Release

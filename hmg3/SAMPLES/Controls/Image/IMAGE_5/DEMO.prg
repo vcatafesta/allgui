@@ -13,7 +13,7 @@ FUNCTION Main
          AT 0,0 ;
          WIDTH 550 HEIGHT 670 ;
          TITLE 'Resize Image' ;
-         BACKCOLOR GREEN;
+         BACKCOLOR GREEN ;
          MAIN
 
       @  10, 10 IMAGE Image1 PICTURE "Giovanni.GIF" WIDTH 500 HEIGHT 300 ADJUSTIMAGE

@@ -73,8 +73,8 @@ PROCEDURE OpenTables()
 
 PROCEDURE PrntToPdf()
 
-   LOCAL cPFName  := "HPdfDemo.pdf",;
-      nLMargin := 20,;
+   LOCAL cPFName  := "HPdfDemo.pdf", ;
+      nLMargin := 20, ;
       nUMargin := 20
 
    LOCAL lSuccess
@@ -144,7 +144,7 @@ PROCEDURE PrntToPdf()
    RETURN // PrntToPdf()
 
 PROCEDURE WriteCompany( ;                  // Print company Info to PDF
-      nRow,;
+      nRow, ;
       nCol )
 
    @ nRow,       nCol  HPDFPRINT RECTANGLE ;
@@ -181,7 +181,7 @@ PROCEDURE WriteCompany( ;                  // Print company Info to PDF
    RETURN // WriteCompany()
 
 PROCEDURE WritePayer( ;
-      nRow,;
+      nRow, ;
       nCol )
 
    @ nRow,       nCol  HPDFPRINT RECTANGLE ;
@@ -215,10 +215,10 @@ PROCEDURE WritePayer( ;
 
    RETURN // WritePayer()
 
-PROCEDURE WriteDetail(;
-      nRow,;
+PROCEDURE WriteDetail( ;
+      nRow, ;
       nCol )
-   LOCAL nRow1    := nRow,;
+   LOCAL nRow1    := nRow, ;
       nPLinNo := 0
 
    @ nRow,       nCol  HPDFPRINT RECTANGLE ;

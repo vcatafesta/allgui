@@ -88,101 +88,101 @@ FUNCTION toolWin()
    DEFINE WINDOW Form_Fl ;
          AT 0,0 ;
          WIDTH 200 HEIGHT 80 ;
-         TITLE 'ToolBar Float Custom Buttons';
+         TITLE 'ToolBar Float Custom Buttons' ;
          PALETTE ;
-         ON SIZE flResizeTb();
+         ON SIZE flResizeTb() ;
          ON INIT AdjustFloatToolbar( GetFormHandle('Form_1'), GetFormHandle('Form_fl'), GetControlHandle ('ToolBar_i' , 'Form_fl' ) )
 
       DEFINE TOOLBAREX ToolBar_i OF Form_fl BUTTONSIZE 25,25  FLAT TOOLBARSIZE 100
 
       BUTTON Button_1 ;
          PICTURE "NEW.bmp" ;
-         TOOLTIP 'New file';
+         TOOLTIP 'New file' ;
          ACTION MsgInfo('Click 1! ')
 
       BUTTON Button_2 ;
          PICTURE "OPEN.bmp" ;
-         TOOLTIP 'File open';
+         TOOLTIP 'File open' ;
          ACTION MsgInfo('Click 2! ')
 
       BUTTON Button_3 ;
          PICTURE "SAVE.bmp" ;
-         TOOLTIP 'Save file';
-         ACTION MsgInfo('Click 3! ');
+         TOOLTIP 'Save file' ;
+         ACTION MsgInfo('Click 3! ') ;
 
       BUTTON Button_4 ;
          PICTURE "PREVIEW.bmp" ;
-         TOOLTIP 'Print Preview';
+         TOOLTIP 'Print Preview' ;
          ACTION MsgInfo('Click 4! ')
 
       BUTTON Button_5 ;
          PICTURE "PRINTER.bmp" ;
-         TOOLTIP 'Print';
-         ACTION MsgInfo('Click 5! ');
+         TOOLTIP 'Print' ;
+         ACTION MsgInfo('Click 5! ') ;
 
       BUTTON Button_6 ;
          PICTURE "Find2.bmp" ;
-         TOOLTIP 'Find';
+         TOOLTIP 'Find' ;
          ACTION MsgInfo('Click 6! ') ;
 
       BUTTON Button_7 ;
-         PICTURE "COPY.bmp";
-         TOOLTIP 'Copy';
+         PICTURE "COPY.bmp" ;
+         TOOLTIP 'Copy' ;
          ACTION MsgInfo('Click 7! ')
 
       BUTTON Button_8 ;
          PICTURE "CUT.bmp" ;
-         TOOLTIP 'Cut';
+         TOOLTIP 'Cut' ;
          ACTION MsgInfo('Click 8! ')
 
       BUTTON Button_9 ;
          PICTURE "PASTE.bmp" ;
-         TOOLTIP 'Paste';
+         TOOLTIP 'Paste' ;
          ACTION MsgInfo('Click 9! ')
 
       BUTTON Button_1b ;
          PICTURE "NEW.bmp" ;
-         TOOLTIP 'New file';
+         TOOLTIP 'New file' ;
          ACTION MsgInfo('Click 1! ')
 
       BUTTON Button_2b ;
          PICTURE "OPEN.bmp" ;
-         TOOLTIP 'File open';
+         TOOLTIP 'File open' ;
          ACTION MsgInfo('Click 2! ')
 
       BUTTON Button_3b ;
          PICTURE "SAVE.bmp" ;
-         TOOLTIP 'Save file';
-         ACTION MsgInfo('Click 3! ');
+         TOOLTIP 'Save file' ;
+         ACTION MsgInfo('Click 3! ') ;
 
       BUTTON Button_4b ;
          PICTURE "PREVIEW.bmp" ;
-         TOOLTIP 'Print Preview';
+         TOOLTIP 'Print Preview' ;
          ACTION MsgInfo('Click 4! ')
 
       BUTTON Button_5b ;
          PICTURE "PRINTER.bmp" ;
-         TOOLTIP 'Print';
-         ACTION MsgInfo('Click 5! ');
+         TOOLTIP 'Print' ;
+         ACTION MsgInfo('Click 5! ') ;
 
       BUTTON Button_6b ;
          PICTURE "Find2.bmp" ;
-         TOOLTIP 'Find';
+         TOOLTIP 'Find' ;
          ACTION MsgInfo('Click 6! ') ;
 
       BUTTON Button_7b ;
-         PICTURE "COPY.bmp";
-         TOOLTIP 'Copy';
+         PICTURE "COPY.bmp" ;
+         TOOLTIP 'Copy' ;
          ACTION MsgInfo('Click 7! ')
 
       BUTTON Button_8b ;
          PICTURE "CUT.bmp" ;
-         TOOLTIP 'Cut';
+         TOOLTIP 'Cut' ;
          ACTION MsgInfo('Click 8! ')
 
       BUTTON Button_9b ;
          PICTURE "PASTE.bmp" ;
-         TOOLTIP 'Paste';
+         TOOLTIP 'Paste' ;
          ACTION MsgInfo('Click 9! ')
 
    END TOOLBAR
@@ -205,82 +205,82 @@ FUNCTION toolWin1()
    DEFINE WINDOW Form_Fl ;
          AT 0,0 ;
          WIDTH 200 HEIGHT 80 ;
-         TITLE 'ToolBar Float Small Buttons';
+         TITLE 'ToolBar Float Small Buttons' ;
          PALETTE ;
-         ON SIZE flResizeTb();
+         ON SIZE flResizeTb() ;
          ON INIT AdjustFloatToolbar( GetFormHandle('Form_1'), GetFormHandle('Form_fl'), GetControlHandle ('ToolBar_i' , 'Form_fl' ) )
 
       DEFINE TOOLBAREX ToolBar_i BUTTONSIZE 25,25 IMAGELIST IDB_STD_SMALL_COLOR  CAPTION 'Small Buttons from DLL' FLAT
 
       BUTTON Button_1 ;
          PICTUREINDEX STD_FILENEW ;
-         TOOLTIP 'New file';
+         TOOLTIP 'New file' ;
          ACTION MsgInfo('Click! ')
 
       BUTTON Button_2 ;
          PICTUREINDEX STD_FILEOPEN ;
-         TOOLTIP 'File open';
+         TOOLTIP 'File open' ;
          ACTION MsgInfo('Click! ')
 
       BUTTON Button_3 ;
          PICTUREINDEX STD_FILESAVE ;
-         TOOLTIP 'Save file';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Save file' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_4 ;
          PICTUREINDEX STD_PRINTPRE ;
-         TOOLTIP 'Print Preview';
+         TOOLTIP 'Print Preview' ;
          ACTION MsgInfo('Click! ')
 
       BUTTON Button_5 ;
          PICTUREINDEX STD_PRINT ;
-         TOOLTIP 'Print ';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Print ' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_6 ;
          PICTUREINDEX STD_PROPERTIES ;
-         TOOLTIP 'Properties';
+         TOOLTIP 'Properties' ;
          ACTION MsgInfo('Click! ')
 
       BUTTON Button_7 ;
          PICTUREINDEX STD_REPLACE ;
-         TOOLTIP 'Replace';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Replace' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_8 ;
          PICTUREINDEX STD_FIND ;
-         TOOLTIP 'Find';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Find' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_9 ;
          PICTUREINDEX STD_CUT ;
-         TOOLTIP 'Cut';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Cut' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_10 ;
          PICTUREINDEX STD_DELETE ;
-         TOOLTIP 'Delete';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Delete' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_11 ;
          PICTUREINDEX STD_PASTE ;
-         TOOLTIP 'Paste';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Paste' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_12 ;
          PICTUREINDEX STD_UNDO ;
-         TOOLTIP 'Undo';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Undo' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_13 ;
          PICTUREINDEX STD_REDOW ;
-         TOOLTIP 'Redo';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Redo' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_14 ;
          PICTUREINDEX STD_HELP ;
-         TOOLTIP 'Help';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Help' ;
+         ACTION MsgInfo('Click! ') ;
 
    END TOOLBAR
 
@@ -302,82 +302,82 @@ FUNCTION toolWin2()
    DEFINE WINDOW Form_Fl ;
          AT 0,0 ;
          WIDTH 200 HEIGHT 80 ;
-         TITLE 'ToolBar Float Large Buttons';
+         TITLE 'ToolBar Float Large Buttons' ;
          PALETTE ;
-         ON SIZE flResizeTb();
+         ON SIZE flResizeTb() ;
          ON INIT AdjustFloatToolbar( GetFormHandle('Form_1'), GetFormHandle('Form_fl'), GetControlHandle ('ToolBar_i' , 'Form_fl' ) )
 
       DEFINE TOOLBAREX ToolBar_i BUTTONSIZE 25,25 IMAGELIST IDB_STD_LARGE_COLOR  CAPTION 'Large Buttons from DLL' FLAT BREAK
 
       BUTTON Button_1 ;
          PICTUREINDEX STD_FILENEW ;
-         TOOLTIP 'New file';
+         TOOLTIP 'New file' ;
          ACTION MsgInfo('Click! ')
 
       BUTTON Button_2 ;
          PICTUREINDEX STD_FILEOPEN ;
-         TOOLTIP 'File open';
+         TOOLTIP 'File open' ;
          ACTION MsgInfo('Click! ')
 
       BUTTON Button_3 ;
          PICTUREINDEX STD_FILESAVE ;
-         TOOLTIP 'Save file';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Save file' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_4 ;
          PICTUREINDEX STD_PRINTPRE ;
-         TOOLTIP 'Print Preview';
+         TOOLTIP 'Print Preview' ;
          ACTION MsgInfo('Click! ')
 
       BUTTON Button_5 ;
          PICTUREINDEX STD_PRINT ;
-         TOOLTIP 'Print ';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Print ' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_6 ;
          PICTUREINDEX STD_PROPERTIES ;
-         TOOLTIP 'Properties';
+         TOOLTIP 'Properties' ;
          ACTION MsgInfo('Click! ')
 
       BUTTON Button_7 ;
          PICTUREINDEX STD_REPLACE ;
-         TOOLTIP 'Replace';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Replace' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_8 ;
          PICTUREINDEX STD_FIND ;
-         TOOLTIP 'Find';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Find' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_9 ;
          PICTUREINDEX STD_CUT ;
-         TOOLTIP 'Cut';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Cut' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_10 ;
          PICTUREINDEX STD_DELETE ;
-         TOOLTIP 'Delete';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Delete' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_11 ;
          PICTUREINDEX STD_PASTE ;
-         TOOLTIP 'Paste';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Paste' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_12 ;
          PICTUREINDEX STD_UNDO ;
-         TOOLTIP 'Undo';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Undo' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_13 ;
          PICTUREINDEX STD_REDOW ;
-         TOOLTIP 'Redo';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Redo' ;
+         ACTION MsgInfo('Click! ') ;
 
       BUTTON Button_14 ;
          PICTUREINDEX STD_HELP ;
-         TOOLTIP 'Help';
-         ACTION MsgInfo('Click! ');
+         TOOLTIP 'Help' ;
+         ACTION MsgInfo('Click! ') ;
 
    END TOOLBAR
 

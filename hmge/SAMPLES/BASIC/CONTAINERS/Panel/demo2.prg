@@ -86,7 +86,7 @@ FUNCTION Main
                WIDTH 300 ;
                HEIGHT 330 ;
                HEADERS {'Last Name','First Name','Phone'} ;
-               WIDTHS {140,140,140};
+               WIDTHS {140,140,140} ;
                ITEMS aRows ;
                VALUE 1
 

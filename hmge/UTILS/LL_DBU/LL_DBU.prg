@@ -36,29 +36,29 @@ Bicahi Esgici
 #include "minigui.ch"
 #include "fileio.ch"
 
-STATIC aTblInfo,;
-   aTableStru,;
-   aTInfGrdItems,;
-   nFileHandle,;
-   nFileLength,;
-   nFilePointr,;
-   nTblHdrLeng,;
-   nTblRecLeng,;
-   aFInfNams,;
+STATIC aTblInfo, ;
+   aTableStru, ;
+   aTInfGrdItems, ;
+   nFileHandle, ;
+   nFileLength, ;
+   nFilePointr, ;
+   nTblHdrLeng, ;
+   nTblRecLeng, ;
+   aFInfNams, ;
    aRecoData
 
 PROCEDURE Main( cTableNam )
 
-   LOCAL aButtons := { { " « ", "Go to first record",    430,  96  },;
-      { " < ", "Go to previous record", 430, 212  },;
-      { " > ", "Go to next record",     430, 328  },;
+   LOCAL aButtons := { { " « ", "Go to first record",    430,  96  }, ;
+      { " < ", "Go to previous record", 430, 212  }, ;
+      { " > ", "Go to next record",     430, 328  }, ;
       { " » ", "Go to last record",     430, 444  } }
 
-   LOCAL nButton,;
-      cBtnName,;
-      cBtnCapt,;
-      cBtnTTip,;
-      nBttnRow,;
+   LOCAL nButton, ;
+      cBtnName, ;
+      cBtnCapt, ;
+      cBtnTTip, ;
+      nBttnRow, ;
       nBttnCol
 
    SET CENT ON
@@ -77,12 +77,12 @@ PROCEDURE Main( cTableNam )
    nTblHdrLeng := 0
    nTblRecLeng := 0
 
-   aFInfNams  := { { 'Type', 'Table Type'           },;
-      { 'UDat', 'Last Update Date'     },;
-      { 'HLen', 'Header Length'        },;
-      { 'RLen', 'Record Length'        },;
-      { 'RCou', 'Record Count'         },;
-      { 'FCou', 'Field Count'          },;
+   aFInfNams  := { { 'Type', 'Table Type'           }, ;
+      { 'UDat', 'Last Update Date'     }, ;
+      { 'HLen', 'Header Length'        }, ;
+      { 'RLen', 'Record Length'        }, ;
+      { 'RCou', 'Record Count'         }, ;
+      { 'FCou', 'Field Count'          }, ;
       { 'FSzC', 'File Size (Computed)' } }
 
    AEVAL( aFInfNams, { | a1 | AADD( aTInfGrdItems, { a1[ 2 ], '' } ) } )
@@ -92,7 +92,7 @@ PROCEDURE Main( cTableNam )
    DEFINE WINDOW frmLLDBUMain ;
          AT 0,0 ;
          WIDTH 630 ;
-         HEIGHT 550;
+         HEIGHT 550 ;
          TITLE 'LL DBU ( Low-level DBU )' ;
          ON INIT LL_UseTable( cTableNam ) ;
          MAIN ;
@@ -134,10 +134,10 @@ PROCEDURE Main( cTableNam )
                HEADERS  { 'No', 'Field Name', 'Type', 'Width', 'Dec' }
                WIDTHS   { 30, 100, 109, 60, 60 }
 
-               COLUMNCONTROLS { {'TEXTBOX','CHARACTER'}          ,;
-                  {'TEXTBOX','CHARACTER'}          ,;
-                  {'TEXTBOX','CHARACTER'}          ,;
-                  {'TEXTBOX','NUMERIC','99,9999'}  ,;
+               COLUMNCONTROLS { {'TEXTBOX','CHARACTER'}          , ;
+                  {'TEXTBOX','CHARACTER'}          , ;
+                  {'TEXTBOX','CHARACTER'}          , ;
+                  {'TEXTBOX','NUMERIC','99,9999'}  , ;
                   {'TEXTBOX','NUMERIC','99'}       }
 
                ON QUERYDATA VGridAddItem( aTableStru )
@@ -229,7 +229,7 @@ PROCEDURE Main( cTableNam )
 PROCEDURE LL_UseTable(;                        // Low-level USE (open) table
       cTableNam )
 
-   LOCAL aTGHas   := {},;
+   LOCAL aTGHas   := {}, ;
       nFVSnFT              // file's validity status and file type
 
    WHILE .T.
@@ -306,11 +306,11 @@ PROCEDURE LL_UseTable(;                        // Low-level USE (open) table
 
    *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-PROCEDURE VGridRefresh(;
-      cWindName,;
+PROCEDURE VGridRefresh( ;
+      cWindName, ;
       cGridName )
 
-   LOCAL nGrdValue,;
+   LOCAL nGrdValue, ;
       nGrdItmCo := GetProperty( cWindName, cGridName, "ItemCount" )
 
    FOR nGrdValue := 1 TO nGrdItmCo
@@ -323,7 +323,7 @@ PROCEDURE VGridRefresh(;
 
    *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-PROCEDURE VGridAddItem(;
+PROCEDURE VGridAddItem( ;
       aGridItems )
 
    IF This.QueryRowIndex <= LEN( aGridItems )
@@ -380,15 +380,15 @@ PROCEDURE LL_SKIP( nSkip )           // Low-level skip
 
 PROCEDURE LL_DispReco()
 
-   LOCAL cRecStr := SPACE( nTblRecLeng ),;
+   LOCAL cRecStr := SPACE( nTblRecLeng ), ;
       nRBytes
 
    LOCAL aClTblStru := { { '', '<Deleted>', '', 1, 0 } }
 
-   LOCAL nFldNum,;
-      nFldPos :=  1,;
-      nFldLen,;
-      cFldDat,;
+   LOCAL nFldNum, ;
+      nFldPos :=  1, ;
+      nFldLen, ;
+      cFldDat, ;
       aRecDat := {}
 
    AEVAL( aTableStru, { | a1 | AADD( aClTblStru, a1 ) } )
@@ -420,14 +420,14 @@ PROCEDURE LL_DispReco()
 
 FUNCTION MsgAbout()
 
-   RETURN MsgInfo(;
-      "Not a real DBU, only an experimental work with very limited DB operations." + CRLF + CRLF +;
-      "Primary goal of this project is access, detect, inspect and dig a damaged table." + CRLF + CRLF +;
-      "Reasons of damage may be various, so recovery method too depend on a damage type." + CRLF + CRLF +;
-      "This program open a table by Low Level file access and read methods." + CRLF + CRLF +;
-      "A second usage may be inspecting how data recorded into a table; always in the visible form or not." + CRLF + CRLF +;
-      "I hope that my friends find useful this humble work." + CRLF + CRLF +;
-      "Happy HMG'ing :D" + CRLF + CRLF +;
+   RETURN MsgInfo( ;
+      "Not a real DBU, only an experimental work with very limited DB operations." + CRLF + CRLF + ;
+      "Primary goal of this project is access, detect, inspect and dig a damaged table." + CRLF + CRLF + ;
+      "Reasons of damage may be various, so recovery method too depend on a damage type." + CRLF + CRLF + ;
+      "This program open a table by Low Level file access and read methods." + CRLF + CRLF + ;
+      "A second usage may be inspecting how data recorded into a table; always in the visible form or not." + CRLF + CRLF + ;
+      "I hope that my friends find useful this humble work." + CRLF + CRLF + ;
+      "Happy HMG'ing :D" + CRLF + CRLF + ;
       "Bicahi Esgici", "About Low Level DBU" )
 
    *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
@@ -480,7 +480,7 @@ FUNCTION HL_IsIncCtrl( cByte )
 FUNCTION HL_FldTypC2V( field_type )
 
    LOCAL cType := "Unknown"
-   LOCAL data_type [5],;
+   LOCAL data_type [5], ;
       n
 
    // data types as character strings

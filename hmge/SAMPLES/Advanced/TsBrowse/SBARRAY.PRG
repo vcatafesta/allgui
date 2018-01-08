@@ -51,7 +51,7 @@ FUNCTION SBArray()
             CHILD
 
          DEFINE TBROWSE oLbx AT 10,15  ;
-            OF Form_3 WIDTH 470 HEIGHT 290 CELLED;
+            OF Form_3 WIDTH 470 HEIGHT 290 CELLED ;
             COLORS  {CLR_BLACK, CLR_NBLUE}
 
          oLbx:SetArray( Arr1 ) // this is necessary to work with arrays
@@ -59,7 +59,7 @@ FUNCTION SBArray()
          // let's define the block for background color
          bColor := { || If( oLbx:nAt % 2 == 0, CLR_PINK, CLR_NBLUE ) }
 
-         ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 1;
+         ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 1 ;
             TITLE "Col 1" ;
             SIZE 120 EDITABLE;          // this column is editable
             COLORS CLR_BLACK, bColor;   // background color from a Code Block
@@ -69,7 +69,7 @@ FUNCTION SBArray()
             ALIGN DT_LEFT, DT_CENTER, DT_RIGHT; // cells, title, footer
             FOOTER "Totals->"
 
-         ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 2;
+         ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 2 ;
             TITLE "Col 2"  ;
             ALIGN DT_RIGHT, DT_CENTER;  // let's align cells to right and center title
             SIZE 80 EDITABLE;           // this column is editable
@@ -84,7 +84,7 @@ FUNCTION SBArray()
             If( oLbx:lChanged, ( ++nBad, --nGood ), Nil ) ), ;
             oLbx:DrawFooters() }
 
-         ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 3;
+         ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 3 ;
             TITLE "Col 3"  ;
             ALIGN DT_RIGHT, DT_CENTER;  // let's align cells to right and center title
             SIZE 80  EDITABLE;          // this column is editable
@@ -107,7 +107,7 @@ FUNCTION SBArray()
          // dynamic setting of background color for next column depending on cell's value
          bColor := { || If( Eval( oLbx:aColumns[ 4 ]:bData ) < 325, CLR_RED, CLR_CYAN ) }
 
-         ADD COLUMN TO TBROWSE oLbx DATA bData;
+         ADD COLUMN TO TBROWSE oLbx DATA bData ;
             TITLE "Col 4"  ;
             ALIGN DT_RIGHT, DT_CENTER;  // let's align cells to right and center title
             SIZE 80;                    // this column is NOT editable
@@ -213,15 +213,15 @@ FUNCTION TsGrid
          END POPUP
       END MENU
       //    +Chr(13)+'Handy'
-      //      DEFINE TBROWSE Grid1 AT 10,10  ARRAY aTab;
-      @ 10,10 TBROWSE Grid1 ARRAY aTab;
+      //      DEFINE TBROWSE Grid1 AT 10,10  ARRAY aTab ;
+      @ 10,10 TBROWSE Grid1 ARRAY aTab ;
          WIDTH 620 ;
          HEIGHT 326 ;
          HEADERS ' ','Last~Name','First~Name','Phone','Value~Data Types','Date~Data Types','Num.~Data Types','Logic~Data Types' ;
          WIDTHS 18,100,100,100,100,80,40,35 ;
          PICTURE '','@K !xxxxxxxxxxxxxxxxx','@K !xxxxxxxxxxxxxxxxx','@K 999-9999','@K 999,999.99' ;
-         IMAGE "br_em","br_ok","br_no";
-         EDIT CELLED;
+         IMAGE "br_em","br_ok","br_no" ;
+         EDIT CELLED ;
          JUSTIFY { DT_CENTER, DT_LEFT, DT_LEFT, DT_CENTER, DT_RIGHT, DT_CENTER, DT_RIGHT, DT_CENTER}
 
       Grid1:nLineStyle :=  LINES_VERT
@@ -234,7 +234,7 @@ FUNCTION TsGrid
       Grid1:SetColor( { 1, 3, 5, 6, 13, 15 ,17}, ;
          { CLR_BLACK,  CLR_YELLOW, CLR_WHITE, ;
          { CLR_HBLUE, CLR_BLUE }, ; // degraded cursor background color
-         CLR_HGREEN, CLR_BLACK ,;
+         CLR_HGREEN, CLR_BLACK , ;
          CLR_HRED } )  // text superheader
       Grid1:SetColor( { 2, 4, 14,16 }, ;
          { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
@@ -251,24 +251,24 @@ FUNCTION TsGrid
 
       @ 360,50 BUTTON Btn_1 ;
          CAPTION "Load Array" ;
-         ACTION LoadTabDan(Grid1,aRows);
+         ACTION LoadTabDan(Grid1,aRows) ;
          WIDTH 80 ;
          HEIGHT 28
 
       @ 360,150 BUTTON Btn_2 ;
          CAPTION "Delete Array" ;
-         ACTION DeleteTabDan(Grid1);
+         ACTION DeleteTabDan(Grid1) ;
          WIDTH 80 ;
          HEIGHT 28
       @ 360,250 BUTTON Btn_3 ;
          CAPTION "Delete Row" ;
-         ACTION DeleteRow(Grid1);
+         ACTION DeleteRow(Grid1) ;
          WIDTH 80 ;
          HEIGHT 28
 
       @ 360,350 BUTTON Btn_4 ;
          CAPTION "Add Row" ;
-         ACTION AddNextRow(Grid1,aRows);
+         ACTION AddNextRow(Grid1,aRows) ;
          WIDTH 80 ;
          HEIGHT 28
 

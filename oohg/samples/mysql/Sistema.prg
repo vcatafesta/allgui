@@ -188,17 +188,17 @@ FUNCTION CreoTabla
    IF oQuery:NetErr()
       MsgExclamation('Error'+chr(13)+oQuery:Error(),'Creando Tabla...') ; Return .f.
    ENDIF
-   cQuery:="Create Table CLIENTES ("+;
-      "CODIGO     Mediumint(5) default 0,"+;
-      "TIPO       Char(1)      default 'S',"+;
-      "NOMBRE     Char(30)     default '',"+;
-      "TELEFONO   Char(15)     default '',"+;
-      "DIRECCION  Char(30)     default '',"+;
-      "DOCUMENTO  Char(10)     default '',"+;
-      "LOCALIDAD  Char(20)     default '',"+;
-      "NROCUIT    Char(13)     default '',"+;
-      "FECHAINGRE Date         null,"+;
-      "FECHAEGRE  Date         null,"+;
+   cQuery:="Create Table CLIENTES ("+ ;
+      "CODIGO     Mediumint(5) default 0,"+ ;
+      "TIPO       Char(1)      default 'S',"+ ;
+      "NOMBRE     Char(30)     default '',"+ ;
+      "TELEFONO   Char(15)     default '',"+ ;
+      "DIRECCION  Char(30)     default '',"+ ;
+      "DOCUMENTO  Char(10)     default '',"+ ;
+      "LOCALIDAD  Char(20)     default '',"+ ;
+      "NROCUIT    Char(13)     default '',"+ ;
+      "FECHAINGRE Date         null,"+ ;
+      "FECHAEGRE  Date         null,"+ ;
       "CLIEID Int(10) unsigned Not Null auto_increment, Primary Key (CLIEID)) ENGINE=InnoDB Default Charset=latin1"
    oQuery1:=oServer:Query(cQuery)
    IF oQuery1:NetErr()

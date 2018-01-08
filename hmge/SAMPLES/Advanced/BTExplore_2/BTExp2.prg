@@ -31,11 +31,11 @@ PROCEDURE Main()
    hImageDisplay := 0
    cImgFilName   := ''
 
-   DEFINE WINDOW frmBTExp_IC;
-         AT 0,0;
-         WIDTH  700;
-         HEIGHT 600;
-         TITLE "Exploring Bos Taurus for HMG  -- Image Converter";
+   DEFINE WINDOW frmBTExp_IC ;
+         AT 0,0 ;
+         WIDTH  700 ;
+         HEIGHT 600 ;
+         TITLE "Exploring Bos Taurus for HMG  -- Image Converter" ;
          ICON "BT_Icon" ;
          ON INIT BTExp_OpenImgFile() ;
          ON RELEASE BT_BitmapRelease ( hImage ) ;
@@ -148,11 +148,11 @@ PROCEDURE BTExp_SetImageAdjust()
 PROCEDURE BTExp_OpenImgFile()                 // Open an Image file
 
    cImgFilName := Getfile( { {'All images','*.png; *.jpg; *.bmp; *.tif; *.gif'},;    // acFilter
-      {'PNG Files', '*.png'},;
-      {'JPG Files', '*.jpg'},;
-      {'BMP Files', '*.bmp'},;
-      {'TIF Files', '*.tif'},;
-      {'GIF Files', '*.gif'} },;
+      {'PNG Files', '*.png'}, ;
+      {'JPG Files', '*.jpg'}, ;
+      {'BMP Files', '*.bmp'}, ;
+      {'TIF Files', '*.tif'}, ;
+      {'GIF Files', '*.gif'} }, ;
       'Open Image' )
 
    IF ! EMPTY( cImgFilName ) .OR. FILE( cImgFilName )
@@ -169,7 +169,7 @@ PROCEDURE BTExp_OpenImgFile()                 // Open an Image file
          frmBTExp_IC.mit_Print.Enabled := .T.
          frmBTExp_IC.mit_Close.Enabled := .T.
       ELSE
-         MsgStop( "Couldn't open " + cImgFilName + " file as a image !"+CRLF+CRLF+;
+         MsgStop( "Couldn't open " + cImgFilName + " file as a image !"+CRLF+CRLF+ ;
             "Not Image File OR unsupported file format ! ", "OPEN ERROR !" )
       ENDIF
 
@@ -181,8 +181,8 @@ PROCEDURE BTExp_OpenImgFile()                 // Open an Image file
 
 PROCEDURE SaveAs ( nNewImageType )
 
-   LOCAL cNewImageType,;
-      cTargetFileNam,;
+   LOCAL cNewImageType, ;
+      cTargetFileNam, ;
       lContinue := .T.
 
    IF ! EMPTY( cImgFilName ) .AND. hImage # 0
@@ -192,7 +192,7 @@ PROCEDURE SaveAs ( nNewImageType )
 
       IF FILE( cTargetFileNam )
 
-         lContinue := MsgYesNo( cTargetFileNam + " file exist;" + CRLF + CRLF +;
+         lContinue := MsgYesNo( cTargetFileNam + " file exist;" + CRLF + CRLF + ;
             "OVERWRITE ?", "Confirm Overwrite" )
       ENDIF
 
@@ -225,10 +225,10 @@ PROCEDURE Pict2PDF( ;
 
    LOCAL cTmpFName := TEMPFILE(, "png")
 
-   LOCAL nImgOrjWidth,;
-      nImgOrjHeight,;
-      nImgPDFWidth,;
-      nImgPDFHeight,;
+   LOCAL nImgOrjWidth, ;
+      nImgOrjHeight, ;
+      nImgPDFWidth, ;
+      nImgPDFHeight, ;
       lSelPDF
 
    nImgOrjWidth  := BT_BitmapWidth( hImage )
@@ -282,7 +282,7 @@ PROCEDURE Pict2Prn()                      // ( previously loaded ) Picture -> Pr
    IF lSelPrntr
       START PRINTDOC
          START PRINTPAGE
-            @ 20, 20 PRINT IMAGE cImgFilName;
+            @ 20, 20 PRINT IMAGE cImgFilName ;
                WIDTH  170 ;
                HEIGHT 170
          END PRINTPAGE

@@ -34,40 +34,40 @@ FUNCTION main()
    PUBLIC  _HMG_aPropSheetPages           := {}
    PUBLIC  _HMG_aPropSheetActivePages     := {}
 
-   PUBLIC aWinVersions := {{"win20", "Windows 2.0"},;
-      {"win30", "Windows 3.0"},;
-      {"win31", "Windows 3.1"},;
-      {"nt351", "Windows NT 3.5"},;
-      {"nt40",  "Windows NT 4.0"},;
-      {"win95", "Windows 95"},;
-      {"win98", "Windows 98"},;
-      {"winme", "Windows ME"},;
-      {"win2k", "Windows 2000"},;
-      {"winxp", "Windows XP"},;
+   PUBLIC aWinVersions := {{"win20", "Windows 2.0"}, ;
+      {"win30", "Windows 3.0"}, ;
+      {"win31", "Windows 3.1"}, ;
+      {"nt351", "Windows NT 3.5"}, ;
+      {"nt40",  "Windows NT 4.0"}, ;
+      {"win95", "Windows 95"}, ;
+      {"win98", "Windows 98"}, ;
+      {"winme", "Windows ME"}, ;
+      {"win2k", "Windows 2000"}, ;
+      {"winxp", "Windows XP"}, ;
       {"", ""}}
-   PUBLIC aDOSVersions := {{"6.22", "MS-DOS 6.22"},;
+   PUBLIC aDOSVersions := {{"6.22", "MS-DOS 6.22"}, ;
       {"", ""}}
-   PUBLIC aWineLook    := {{"win31", "Windows 3.1"},;
-      {"win95", "Windows 95"},;
-      {"win98", "Windows 98"},;
+   PUBLIC aWineLook    := {{"win31", "Windows 3.1"}, ;
+      {"win95", "Windows 95"}, ;
+      {"win98", "Windows 98"}, ;
       {"", ""}}
-   PUBLIC aWineDrivers := {{"x11drv", "X11 Interface"},;
-      {"ttydrv", "TTY Interface"},;
+   PUBLIC aWineDrivers := {{"x11drv", "X11 Interface"}, ;
+      {"ttydrv", "TTY Interface"}, ;
       {"", ""}}
-   PUBLIC aDLLType     := {{"oleaut32", DLL_BUILTIN},;
-      {"ole32", DLL_BUILTIN},;
-      {"commdlg", DLL_BUILTIN},;
-      {"comdlg32", DLL_BUILTIN},;
-      {"shell", DLL_BUILTIN},;
-      {"shell32", DLL_BUILTIN},;
-      {"shfolder", DLL_BUILTIN},;
-      {"shlwapi", DLL_BUILTIN},;
-      {"shdocvw", DLL_BUILTIN},;
-      {"advapi32", DLL_BUILTIN},;
-      {"msvcrt", DLL_NATIVE},;
-      {"mciavi.drv", DLL_NATIVE},;
-      {"mcianim.drv", DLL_NATIVE},;
-      {"*", DLL_NATIVE},;
+   PUBLIC aDLLType     := {{"oleaut32", DLL_BUILTIN}, ;
+      {"ole32", DLL_BUILTIN}, ;
+      {"commdlg", DLL_BUILTIN}, ;
+      {"comdlg32", DLL_BUILTIN}, ;
+      {"shell", DLL_BUILTIN}, ;
+      {"shell32", DLL_BUILTIN}, ;
+      {"shfolder", DLL_BUILTIN}, ;
+      {"shlwapi", DLL_BUILTIN}, ;
+      {"shdocvw", DLL_BUILTIN}, ;
+      {"advapi32", DLL_BUILTIN}, ;
+      {"msvcrt", DLL_NATIVE}, ;
+      {"mciavi.drv", DLL_NATIVE}, ;
+      {"mcianim.drv", DLL_NATIVE}, ;
+      {"*", DLL_NATIVE}, ;
       {"", -1}}
    PUBLIC nWinVer := 1 , nDosVer := 1, nWineLook := 1,nSelOpt := 0
 
@@ -375,7 +375,7 @@ FUNCTION WizardLitePropSheet()
       AT 150,150 ;
       WIDTH 300 ;
       HEIGHT 200 ;
-      WIZARD LITE;
+      WIZARD LITE ;
       CAPTION "Wizard Lite Property Sheet Demo" ;
       ICON IDI_STARICON ;
       FONT "Arial" SIZE 10 ;
@@ -397,9 +397,9 @@ FUNCTION InitWizardSheetFun(hWndDlg, idDlg )
    DO CASE
    CASE idDlg == IDD_INIT
 
-      REDEFINE LABEL Lbl_1;
+      REDEFINE LABEL Lbl_1 ;
          ID IDC_STC1 ;
-         OF Form_1;
+         OF Form_1 ;
          VALUE "Welcome to the Sample Wizard"  ;
          FONT "Tahoma" SIZE 12  BOLD
 
@@ -443,7 +443,7 @@ FUNCTION ModalPropSheetInDirect()
       HEIGHT 450 ;
       MODAL ;
       CAPTION "MODAL Property Sheet Demo - Wine Configuration" ;
-      FONT "MS Sans Serif" SIZE 8;
+      FONT "MS Sans Serif" SIZE 8 ;
       ICON "STAR.ICO" ;
       DIALOGPROC {|x,y,z,v| ModalPropSheetFun(x,y,z,v) } ;
       ON INIT { |hWndDlg, idDlg| InitModalFun(hWndDlg, idDlg) } ;
@@ -457,10 +457,10 @@ FUNCTION ModalPropSheetInDirect()
    @ 34, 338 LABEL Lbl_1 VALUE "CVS"  WIDTH 112 HEIGHT 16
    @ 30,34 IMAGE Img_1  ID IDC_BMP PICTURE "WINE.bmp" WIDTH 200 HEIGHT 180
    @ 62, 238 LABEL Lbl_1 VALUE  "http://www.winehq.com/" WIDTH 212 HEIGHT 16
-   @ 88, 238 LABEL Lbl_1 VALUE  "This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.";
+   @ 88, 238 LABEL Lbl_1 VALUE  "This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version." ;
       WIDTH 248 HEIGHT 118
    @ 230,16 FRAME Frame_2 CAPTION  "Information" WIDTH 488 HEIGHT 194
-   @ 256, 30 LABEL Lbl_1 VALUE "Wine provides the ability for Windows applications to mimic various Windows versions and styles";
+   @ 256, 30 LABEL Lbl_1 VALUE "Wine provides the ability for Windows applications to mimic various Windows versions and styles" ;
       WIDTH 454 HEIGHT 40
    @ 310, 34 LABEL Lbl_1 VALUE  "Windows Version:" WIDTH 116 HEIGHT 16
    @ 346, 34 LABEL Lbl_1 VALUE "DOS Version:" WIDTH 114 HEIGHT 16
@@ -480,11 +480,11 @@ END SHEETPAGE
 DEFINE SHEETPAGE demo52 RESOURCE IDD_DLLCFG TITLE "Libraries"
 
 @ 8,16 FRAME Frame_2 CAPTION  "Static" WIDTH 488 HEIGHT 314
-@ 34,30 LABEL Lbl_1 VALUE 'Libraries can be specified individually to be either builtin or native. A DLL entry specified"; as "*" pertains to all DLLs not specified explicitly.';
+@ 34,30 LABEL Lbl_1 VALUE 'Libraries can be specified individually to be either builtin or native. A DLL entry specified"; as "*" pertains to all DLLs not specified explicitly.' ;
    WIDTH 456 HEIGHT 54
 @ 94, 30 LISTBOX Lbox_1 ID IDC_LIST_DLLS WIDTH 454 HEIGHT 180 ITEMS {}
 @ 290, 32 LABEL Lbl_1 VALUE "Load order:" WIDTH 74 HEIGHT 16
-@ 288 ,118 RADIOGROUP Radio_1 ID {IDC_RAD_BUILTIN,IDC_RAD_NATIVE};
+@ 288 ,118 RADIOGROUP Radio_1 ID {IDC_RAD_BUILTIN,IDC_RAD_NATIVE} ;
    OPTIONS {"Builtin (Wine)","Native (Windows)"} VALUE 1 WIDTH 144 HORIZONTAL ;
 
 END SHEETPAGE
@@ -492,7 +492,7 @@ END SHEETPAGE
 DEFINE SHEETPAGE demo53 RESOURCE IDD_APPCFG TITLE "Applications"
 
 @ 8,16 FRAME Frame_2 CAPTION  "Application Specific Setting" WIDTH 488 HEIGHT 302
-@ 34,30 LABEL Lbl_1 VALUE "These settings allow you to overwrite Wine default settings (as specified in other configuration tabs) on a per-application basis.";
+@ 34,30 LABEL Lbl_1 VALUE "These settings allow you to overwrite Wine default settings (as specified in other configuration tabs) on a per-application basis." ;
    WIDTH 456 HEIGHT 40
 @ 78, 32 LISTBOX Lbox_1 ID IDC_LIST_APPS WIDTH 452 HEIGHT 216 ITEMS {}
 
@@ -509,11 +509,11 @@ DEFINE SHEETPAGE demo54 RESOURCE IDD_X11DRVCFG TITLE "X11 Driver"
 @ 318 ,128 TEXTBOX tbox1 ID IDC_DESKTOP_WIDTH WIDTH 80 HEIGHT 28 NUMERIC  //DISABLED
 @ 318 ,234 TEXTBOX tbox1 ID IDC_DESKTOP_HEIGHT WIDTH 80 HEIGHT 28 VALUE "" NUMERIC  //DISABLED
 @ 8,16 FRAME Frame_2 CAPTION "Render Settings" WIDTH 488 HEIGHT 180
-@ 34,30 LABEL Lbl_1 VALUE "The driver color and render settings are used to optimise the way in which colors and applications are displayed.";
+@ 34,30 LABEL Lbl_1 VALUE "The driver color and render settings are used to optimise the way in which colors and applications are displayed." ;
    WIDTH 456 HEIGHT 44
 @ 86,34 LABEL Lbl_1 VALUE "Allocated system colors:" WIDTH 152 HEIGHT 16
 @ 198,16 FRAME Frame_2 CAPTION "Wine Desktop" WIDTH 488 HEIGHT 166
-@ 224,30 LABEL Lbl_1 VALUE 'Wine can be setup to emulate a windows desktop, or can be run in "Managed" mode (default) where the default X11 windows manager/environment is resposible for placing the windows.';
+@ 224,30 LABEL Lbl_1 VALUE 'Wine can be setup to emulate a windows desktop, or can be run in "Managed" mode (default) where the default X11 windows manager/environment is resposible for placing the windows.' ;
    WIDTH 456 HEIGHT 56
 @ 322,34 LABEL Lbl_1 VALUE "Desktop size:"  ID IDC_DESKTOP_SIZE WIDTH 88 HEIGHT 16  //WS_DISABLED
 @ 322,216 LABEL Lbl_1 VALUE "X" ID IDC_DESKTOP_BY WIDTH 16 HEIGHT 16  //WS_DISABLED
@@ -532,9 +532,9 @@ FUNCTION WizardPropSheetInDirect()
       AT 150,150 ;
       WIDTH 300 ;
       HEIGHT 300 ;
-      WIZARD;
-      CAPTION "Wizard Property Sheet Demo";
-      FONT "Arial" SIZE 9;
+      WIZARD ;
+      CAPTION "Wizard Property Sheet Demo" ;
+      FONT "Arial" SIZE 9 ;
       WATERMARK IDI_WIZARD ;
       HEADERBMP IDI_HEADER ;
       DIALOGPROC {|x,y,z,v| WizardDialogFun(x,y,z,v)} ;
@@ -556,7 +556,7 @@ END SHEETPAGE
 
 DEFINE SHEETPAGE demo63 RESOURCE IDD_WIZ2 HEADER "Header Title" SUBHEADER "Subtitle for 2nd page"
 @ 15, 10 LABEL Lbl_2 ID IDC_STATIC ;
-   VALUE  "These settings allow you to overwrite Wine default settings (as specified in other configuration tabs) on a per-application basis.";
+   VALUE  "These settings allow you to overwrite Wine default settings (as specified in other configuration tabs) on a per-application basis." ;
    WIDTH 450 HEIGHT 48
 @ 60,60  FRAME Frame1 ID IDC_STATIC CAPTION "Application Specific Setting" WIDTH 300 HEIGHT 150
 @ 80,70  TEXTBOX Edit_1 ID IDC_EDIT1 VALUE "" WIDTH 280 HEIGHT 120
@@ -573,7 +573,7 @@ FUNCTION ModelessPropSheetInDirect()
       WIDTH 530 ;
       HEIGHT 450 ;
       CAPTION "MODELESS Property Sheet Demo - Wine Configuration" ;
-      FONT "MS Sans Serif" SIZE 8;
+      FONT "MS Sans Serif" SIZE 8 ;
       ICON "STAR.ICO" ;
       DIALOGPROC {|x,y,z,v| ModalPropSheetFun(x,y,z,v) } ;
       ON INIT { |hWndDlg, idDlg| InitModalFun(hWndDlg, idDlg) } ;
@@ -587,10 +587,10 @@ FUNCTION ModelessPropSheetInDirect()
    @ 34, 338 LABEL Lbl_1 VALUE "CVS"  WIDTH 112 HEIGHT 16
    @ 30,34 IMAGE Img_1  ID IDC_BMP PICTURE "WINE.bmp" WIDTH 150 HEIGHT 140  STRETCH
    @ 62, 238 LABEL Lbl_1 VALUE  "http://www.winehq.com/" WIDTH 212 HEIGHT 16
-   @ 88, 238 LABEL Lbl_1 VALUE  "This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.";
+   @ 88, 238 LABEL Lbl_1 VALUE  "This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version." ;
       WIDTH 248 HEIGHT 118
    @ 230,16 FRAME Frame_2 CAPTION  "Information" WIDTH 488 HEIGHT 194
-   @ 256, 30 LABEL Lbl_1 VALUE "Wine provides the ability for Windows applications to mimic various Windows versions and styles";
+   @ 256, 30 LABEL Lbl_1 VALUE "Wine provides the ability for Windows applications to mimic various Windows versions and styles" ;
       WIDTH 454 HEIGHT 40
    @ 310, 34 LABEL Lbl_1 VALUE  "Windows Version:" WIDTH 116 HEIGHT 16
    @ 346, 34 LABEL Lbl_1 VALUE "DOS Version:" WIDTH 114 HEIGHT 16
@@ -610,11 +610,11 @@ END SHEETPAGE
 DEFINE SHEETPAGE demo72 RESOURCE IDD_DLLCFG TITLE "Libraries"
 
 @ 8,16 FRAME Frame_2 CAPTION  "Static" WIDTH 488 HEIGHT 314
-@ 34,30 LABEL Lbl_1 VALUE 'Libraries can be specified individually to be either builtin or native. A DLL entry specified"; as "*" pertains to all DLLs not specified explicitly.';
+@ 34,30 LABEL Lbl_1 VALUE 'Libraries can be specified individually to be either builtin or native. A DLL entry specified"; as "*" pertains to all DLLs not specified explicitly.' ;
    WIDTH 456 HEIGHT 54
 @ 94, 30 LISTBOX Lbox_1 ID IDC_LIST_DLLS WIDTH 454 HEIGHT 180 ITEMS {}
 @ 290, 32 LABEL Lbl_1 VALUE "Load order:" WIDTH 74 HEIGHT 16
-@ 288 ,118 RADIOGROUP Radio_1 ID {IDC_RAD_BUILTIN,IDC_RAD_NATIVE};
+@ 288 ,118 RADIOGROUP Radio_1 ID {IDC_RAD_BUILTIN,IDC_RAD_NATIVE} ;
    OPTIONS {"Builtin (Wine)","Native (Windows)"} VALUE 1 WIDTH 144 HORIZONTAL ;
 
 END SHEETPAGE
@@ -622,7 +622,7 @@ END SHEETPAGE
 DEFINE SHEETPAGE demo73 RESOURCE IDD_APPCFG TITLE "Applications"
 
 @ 8,16 FRAME Frame_2 CAPTION  "Application Specific Setting" WIDTH 488 HEIGHT 302
-@ 34,30 LABEL Lbl_1 VALUE "These settings allow you to overwrite Wine default settings (as specified in other configuration tabs) on a per-application basis.";
+@ 34,30 LABEL Lbl_1 VALUE "These settings allow you to overwrite Wine default settings (as specified in other configuration tabs) on a per-application basis." ;
    WIDTH 456 HEIGHT 40
 @ 78, 32 LISTBOX Lbox_1 ID IDC_LIST_APPS WIDTH 452 HEIGHT 216 ITEMS {}
 
@@ -639,11 +639,11 @@ DEFINE SHEETPAGE demo74 RESOURCE IDD_X11DRVCFG TITLE "X11 Driver"
 @ 318 ,128 TEXTBOX tbox1 ID IDC_DESKTOP_WIDTH WIDTH 80 HEIGHT 28 NUMERIC  //DISABLED
 @ 318 ,234 TEXTBOX tbox1 ID IDC_DESKTOP_HEIGHT WIDTH 80 HEIGHT 28 VALUE "" NUMERIC  //DISABLED
 @ 8,16 FRAME Frame_2 CAPTION "Render Settings" WIDTH 488 HEIGHT 180
-@ 34,30 LABEL Lbl_1 VALUE "The driver color and render settings are used to optimise the way in which colors and applications are displayed.";
+@ 34,30 LABEL Lbl_1 VALUE "The driver color and render settings are used to optimise the way in which colors and applications are displayed." ;
    WIDTH 456 HEIGHT 44
 @ 86,34 LABEL Lbl_1 VALUE "Allocated system colors:" WIDTH 152 HEIGHT 16
 @ 198,16 FRAME Frame_2 CAPTION "Wine Desktop" WIDTH 488 HEIGHT 166
-@ 224,30 LABEL Lbl_1 VALUE 'Wine can be setup to emulate a windows desktop, or can be run in "Managed" mode (default) where the default X11 windows manager/environment is resposible for placing the windows.';
+@ 224,30 LABEL Lbl_1 VALUE 'Wine can be setup to emulate a windows desktop, or can be run in "Managed" mode (default) where the default X11 windows manager/environment is resposible for placing the windows.' ;
    WIDTH 456 HEIGHT 56
 @ 322,34 LABEL Lbl_1 VALUE "Desktop size:"  ID IDC_DESKTOP_SIZE WIDTH 88 HEIGHT 16  //WS_DISABLED
 @ 322,216 LABEL Lbl_1 VALUE "X" ID IDC_DESKTOP_BY WIDTH 16 HEIGHT 16  //WS_DISABLED
@@ -661,7 +661,7 @@ FUNCTION ModelessPropSheetInDirectEnv()
       WIDTH 530 ;
       HEIGHT 450 ;
       CAPTION "MODELESS Property Sheet Demo - Wine Configuration" ;
-      FONT "MS Sans Serif" SIZE 8;
+      FONT "MS Sans Serif" SIZE 8 ;
       ICON "STAR.ICO" ;
       ON INIT { |hWndDlg, idDlg| InitModalFun(hWndDlg, idDlg) } ;
       ON CANCEL { |hWndDlg, idDlg| MsgInfo("Cancel for ID Page: "+Str(idDlg,4)), CancelModalFun( hWndDlg, IdDlg ),FALSE } ;
@@ -675,10 +675,10 @@ FUNCTION ModelessPropSheetInDirectEnv()
    @ 34, 338 LABEL Lbl_2 VALUE "CVS"  WIDTH 112 HEIGHT 16
    @ 30,34 IMAGE Img_1  ID IDC_BMP PICTURE "WINE.bmp" WIDTH 150 HEIGHT 150  STRETCH
    @ 62, 238 LABEL Lbl_3 VALUE  "http://www.winehq.com/" WIDTH 212 HEIGHT 16
-   @ 88, 238 LABEL Lbl_4 VALUE  "This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.";
+   @ 88, 238 LABEL Lbl_4 VALUE  "This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version." ;
       WIDTH 248 HEIGHT 118
    @ 230,16 FRAME Frame_2 CAPTION  "Information" WIDTH 488 HEIGHT 194
-   @ 256, 30 LABEL Lbl_4 VALUE "Wine provides the ability for Windows applications to mimic various Windows versions and styles";
+   @ 256, 30 LABEL Lbl_4 VALUE "Wine provides the ability for Windows applications to mimic various Windows versions and styles" ;
       WIDTH 454 HEIGHT 40
    @ 310, 34 LABEL Lbl_5 VALUE  "Windows Version:" WIDTH 116 HEIGHT 16
    @ 346, 34 LABEL Lbl_6 VALUE "DOS Version:" WIDTH 114 HEIGHT 16
@@ -698,11 +698,11 @@ END SHEETPAGE
 DEFINE SHEETPAGE demo82 RESOURCE IDD_DLLCFG TITLE "Libraries"
 
 @ 8,16 FRAME Frame_2 CAPTION  "Static" WIDTH 488 HEIGHT 314
-@ 34,30 LABEL Lbl_1 VALUE 'Libraries can be specified individually to be either builtin or native. A DLL entry specified"; as "*" pertains to all DLLs not specified explicitly.';
+@ 34,30 LABEL Lbl_1 VALUE 'Libraries can be specified individually to be either builtin or native. A DLL entry specified"; as "*" pertains to all DLLs not specified explicitly.' ;
    WIDTH 456 HEIGHT 54
 @ 94, 30 LISTBOX Lbox_1 ID IDC_LIST_DLLS WIDTH 454 HEIGHT 180 ITEMS {}
 @ 290, 32 LABEL Lbl_1 VALUE "Load order:" WIDTH 74 HEIGHT 16
-@ 288 ,118 RADIOGROUP Radio_1 ID {IDC_RAD_BUILTIN,IDC_RAD_NATIVE};
+@ 288 ,118 RADIOGROUP Radio_1 ID {IDC_RAD_BUILTIN,IDC_RAD_NATIVE} ;
    OPTIONS {"Builtin (Wine)","Native (Windows)"} VALUE 1 WIDTH 144 HORIZONTAL ;
    ON CHANGE OnChangeRadio()
 
@@ -711,7 +711,7 @@ END SHEETPAGE
 DEFINE SHEETPAGE demo83 RESOURCE IDD_APPCFG TITLE "Applications"
 
 @ 8,16 FRAME Frame_2 CAPTION  "Application Specific Setting" WIDTH 488 HEIGHT 302
-@ 34,30 LABEL Lbl_1 VALUE "These settings allow you to overwrite Wine default settings (as specified in other configuration tabs) on a per-application basis.";
+@ 34,30 LABEL Lbl_1 VALUE "These settings allow you to overwrite Wine default settings (as specified in other configuration tabs) on a per-application basis." ;
    WIDTH 456 HEIGHT 40
 @ 78, 32 LISTBOX Lbox_1 ID IDC_LIST_APPS WIDTH 452 HEIGHT 216 ITEMS {}
 
@@ -720,9 +720,9 @@ END SHEETPAGE
 DEFINE SHEETPAGE demo84 RESOURCE IDD_X11DRVCFG TITLE "X11 Driver"
 
 @ 82 ,200  TEXTBOX  tbox1    ID IDC_SYSCOLORS WIDTH 80 HEIGHT 28 VALUE "" NUMERIC
-@ 124 ,34  CHECKBOX chkbox_1 ID IDC_PRIVATEMAP CAPTION "Use a private color map" WIDTH 182 HEIGHT 20;
+@ 124 ,34  CHECKBOX chkbox_1 ID IDC_PRIVATEMAP CAPTION "Use a private color map" WIDTH 182 HEIGHT 20 ;
    ON CHANGE  OnChangeCheck(0)
-@ 152 ,34  CHECKBOX chkbox_2 ID IDC_PERFECTGRAPH CAPTION "Favor correctness over speed" WIDTH 234 HEIGHT 20;
+@ 152 ,34  CHECKBOX chkbox_2 ID IDC_PERFECTGRAPH CAPTION "Favor correctness over speed" WIDTH 234 HEIGHT 20 ;
    ON CHANGE  OnChangeCheck(0)
 @ 124 ,282 CHECKBOX chkbox_3 ID IDC_XDGA CAPTION "Use XFree DGA extention" WIDTH 194 HEIGHT 20 ;
    ON CHANGE  OnChangeCheck(0)
@@ -734,11 +734,11 @@ DEFINE SHEETPAGE demo84 RESOURCE IDD_X11DRVCFG TITLE "X11 Driver"
 @ 318 ,128 TEXTBOX tbox2 ID IDC_DESKTOP_WIDTH WIDTH 80 HEIGHT 28 NUMERIC  //DISABLED
 @ 318 ,234 TEXTBOX tbox3 ID IDC_DESKTOP_HEIGHT WIDTH 80 HEIGHT 28 VALUE "" NUMERIC  //DISABLED
 @ 8   ,16  FRAME Frame_1 CAPTION "Render Settings" WIDTH 488 HEIGHT 180
-@ 34,30    LABEL Lbl_1 VALUE "The driver color and render settings are used to optimise the way in which colors and applications are displayed.";
+@ 34,30    LABEL Lbl_1 VALUE "The driver color and render settings are used to optimise the way in which colors and applications are displayed." ;
    WIDTH 456 HEIGHT 44
 @ 86,34    LABEL Lbl_2 VALUE "Allocated system colors:" WIDTH 152 HEIGHT 16
 @ 198,16   FRAME Frame_2 CAPTION "Wine Desktop" WIDTH 488 HEIGHT 166
-@ 224,30   LABEL Lbl_3 VALUE 'Wine can be setup to emulate a windows desktop, or can be run in "Managed" mode (default) where the default X11 windows manager/environment is resposible for placing the windows.';
+@ 224,30   LABEL Lbl_3 VALUE 'Wine can be setup to emulate a windows desktop, or can be run in "Managed" mode (default) where the default X11 windows manager/environment is resposible for placing the windows.' ;
    WIDTH 456 HEIGHT 56
 @ 322,34   LABEL Lbl_4 VALUE "Desktop size:"  ID IDC_DESKTOP_SIZE WIDTH 88 HEIGHT 16  //WS_DISABLED
 @ 322,216  LABEL Lbl_5 VALUE "X" ID IDC_DESKTOP_BY WIDTH 16 HEIGHT 16  //WS_DISABLED

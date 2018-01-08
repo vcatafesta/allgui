@@ -314,7 +314,7 @@ FUNCTION _BeginDialog( name, parent, Id_resource, x, y, w, h, caption, fontname,
    ENDIF
 
    IF ValType ( parent ) == 'U'
-      parent := _HMG_ActiveFormName
+      PARENT := _HMG_ActiveFormName
    ENDIF
    IF ValType ( Id_resource ) == 'U'
       Id_resource := 0

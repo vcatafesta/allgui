@@ -14,23 +14,23 @@ FUNCTION Main()
 
    OpenDB()
 
-   DEFINE WINDOW MainWA;
-         MAIN;
-         WIDTH  380;
-         HEIGHT 290;
-         TITLE  'Browse - Sort Columns With Header Click';
-         NOMAXIMIZE;
+   DEFINE WINDOW MainWA ;
+         MAIN ;
+         WIDTH  380 ;
+         HEIGHT 290 ;
+         TITLE  'Browse - Sort Columns With Header Click' ;
+         NOMAXIMIZE ;
          NOSIZE
 
-      @ 10, 10 BROWSE CompGR;
-         WIDTH          350;
-         HEIGHT         180;
-         HEADERS        {'Name', 'Code', 'Price'};
-         WIDTHS         {75, 110, 70, 70};
-         WORKAREA       COMP;
-         FIELDS         {'Name', 'Code', 'Price'};
-         ON GOTFOCUS    iif(lInit, , (HMG_SetOrder( 1, .F. ), lInit := .T.));
-         JUSTIFY        {BROWSE_JTFY_LEFT, BROWSE_JTFY_CENTER, BROWSE_JTFY_RIGHT};
+      @ 10, 10 BROWSE CompGR ;
+         WIDTH          350 ;
+         HEIGHT         180 ;
+         HEADERS        {'Name', 'Code', 'Price'} ;
+         WIDTHS         {75, 110, 70, 70} ;
+         WORKAREA       COMP ;
+         FIELDS         {'Name', 'Code', 'Price'} ;
+         ON GOTFOCUS    iif(lInit, , (HMG_SetOrder( 1, .F. ), lInit := .T.)) ;
+         JUSTIFY        {BROWSE_JTFY_LEFT, BROWSE_JTFY_CENTER, BROWSE_JTFY_RIGHT} ;
          COLUMNSORT     {/*.T., .F., .T.*/}
 
       DEFINE BUTTON ExitBU

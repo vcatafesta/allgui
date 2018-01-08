@@ -39,14 +39,14 @@ FUNCTION Test()
 
    PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 
-   INIT DIALOG oForm CLIPPER NOEXIT TITLE "Postgres Sample";
+   INIT DIALOG oForm CLIPPER NOEXIT TITLE "Postgres Sample" ;
       FONT oFont ;
       AT 0, 0 SIZE 700, 425 ;
       STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
 
-   @ 10,10 GRID oGrid OF oForm SIZE 680,375;
+   @ 10,10 GRID oGrid OF oForm SIZE 680,375 ;
       ITEMCOUNT oQuery:Lastrec() ;
-      COLOR hwg_VColor('D3D3D3');
+      COLOR hwg_VColor('D3D3D3') ;
       BACKCOLOR hwg_Rgb(220,220,220) ;
       ON DISPINFO {|oCtrl, nRow, nCol| valtoprg(oQuery:FieldGet( nRow, nCol )) }
 
@@ -79,8 +79,8 @@ FUNCTION ConnectGrid()
       oServer:DeleteTable('Test')
    ENDIF
 
-   oServer:CreateTable('Test', {{'col1', 'N', 6, 0},;
-      {'col2', 'C', 40,0},;
+   oServer:CreateTable('Test', {{'col1', 'N', 6, 0}, ;
+      {'col2', 'C', 40,0}, ;
       {'col3', 'D', 8, 0}})
 
    oQuery := oServer:Query('SELECT * FROM test')

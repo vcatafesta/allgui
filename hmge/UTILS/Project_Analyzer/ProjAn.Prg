@@ -257,7 +257,7 @@ FUNCTION List_1_Change()
       wMain.Grid_1.DisableUpdate
       wMain.Grid_1.DeleteAllItems
       FOR i:=1 to len(aPrg[n,2])
-         wMain.Grid_1.AddItem ( {aPrg[n,2,i,1]+')',;
+         wMain.Grid_1.AddItem ( {aPrg[n,2,i,1]+')', ;
             if(len(aPrg[n,2,i,2])>0,left(aPrg[n,2,i,2],1),' '), ;
             alltrim(str(aPrg[n,2,i,3])),aPrg[n,2,i,4]} )
       NEXT

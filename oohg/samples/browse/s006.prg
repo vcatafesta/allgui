@@ -33,7 +33,7 @@ FUNCTION Main
          WIDTH 500 HEIGHT 380 ;
          MINWIDTH 500 MINHEIGHT 380 ;
          TITLE 'Browse: Record Positioning and Anchor Property' ;
-         MAIN;
+         MAIN ;
          ON INIT OpenTables( Browse_1 ) ;
          ON RELEASE CleanUp()
 

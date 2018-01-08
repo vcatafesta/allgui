@@ -218,7 +218,7 @@ FUNCTION BublSort( nElements, aArray1, aArray2, aArray3, aArray4, aArray5 )
 
 FUNCTION CharOnly( cOKChars, cString2Check )
 
-   * Processes cString2Check and removes all but the characters in cOKChars;
+   * Processes cString2Check and removes all but the characters in cOKChars ;
    * from Clipper Tools 9/17/94
 
    LOCAL cSingleChar
@@ -476,7 +476,7 @@ STATIC FUNCTION ContactMediTrax
             FONT 'Arial' SIZE 09  ;
             AUTOSIZE ;
             ADDRESS 'support@meditrax.com';            // e-mail address
-            TOOLTIP 'Click to open your email client';
+            TOOLTIP 'Click to open your email client' ;
             BACKCOLOR WHITE ;
             HANDCURSOR
 

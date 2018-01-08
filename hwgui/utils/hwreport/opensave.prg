@@ -420,7 +420,7 @@ STATIC FUNCTION WriteRep( han, repName )
          oFont := aItem[ITEM_FONT]
          Fwrite( han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
             Ltrim(Str(aItem[ITEM_X1],4)) + ";" + Ltrim(Str(aItem[ITEM_Y1],4)) + ";" + ;
-            Ltrim(Str(aItem[ITEM_WIDTH],4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT],4)) +;
+            Ltrim(Str(aItem[ITEM_WIDTH],4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT],4)) + ;
             ";" + Str(aItem[ITEM_ALIGN],1) + ";" + oFont:name ;
             + "," + Ltrim(Str(oFont:width)) + "," + Ltrim(Str(oFont:height)) ;
             + "," + Ltrim(Str(oFont:weight)) + "," + Ltrim(Str(oFont:charset)) ;
@@ -535,7 +535,7 @@ STATIC FUNCTION WriteScript( han,cScript,lPrg )
             IF lPrg
                cQuote := Iif(!( '"' $ stroka),'"', ;
                   Iif(!( "'" $ stroka),"'","["))
-               Fwrite( han,Iif(lFirst,"",";"+Chr(10))+Space(5)+;
+               Fwrite( han,Iif(lFirst,"",";"+Chr(10))+Space(5)+ ;
                   Iif(lFirst,"","+ ")+cQuote+stroka+cQuote+"+cEnd" )
                lFirst := .F.
             ELSE

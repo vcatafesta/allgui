@@ -48,7 +48,7 @@
 
          LOCA cMessage := ""
 
-         DEFAULT cTitle TO PROCNAME(1) + "\" + NTrim( PROCLINE(1) ),;
+         DEFAULT cTitle TO PROCNAME(1) + "\" + NTrim( PROCLINE(1) ), ;
             lEnum  TO .F.
 
          IF VALTYPE( xMesaj  ) # "A"
@@ -80,16 +80,16 @@
 
          FUNC Any2Strg( xAny )
 
-            LOCA cRVal  := '???',;
-               nType,;
-               aCases := { { "A", { | | "{...}" } },;
-               { "B", { | | "{||}" } },;
-               { "C", { | x | x }},;
-               { "M", { | x | x   } },;
-               { "D", { | x | DTOC( x ) } },;
-               { "L", { | x | IF( x,"On","Off") } },;
-               { "N", { | x | NTrim( x )  } },;
-               { "O", { | | ":Object:" } },;
+            LOCA cRVal  := '???', ;
+               nType, ;
+               aCases := { { "A", { | | "{...}" } }, ;
+               { "B", { | | "{||}" } }, ;
+               { "C", { | x | x }}, ;
+               { "M", { | x | x   } }, ;
+               { "D", { | x | DTOC( x ) } }, ;
+               { "L", { | x | IF( x,"On","Off") } }, ;
+               { "N", { | x | NTrim( x )  } }, ;
+               { "O", { | | ":Object:" } }, ;
                { "U", { | | "<NIL>" } } }
 
             IF (nType := ASCAN( aCases, { | a1 | VALTYPE( xAny ) == a1[ 1 ] } ) ) > 0

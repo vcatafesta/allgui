@@ -20,26 +20,26 @@ add page header.
 
 PROCEDURE PrintTest9()
 
-   LOCAL lSuccess := .F.,;
+   LOCAL lSuccess := .F., ;
       nVMargin := 20,;    // Vertical margin
       nHMargin := 20,;      // Horizontal margin
-      cFontName := "Verdana",;
+      cFontName := "Verdana", ;
       nFontSize := 10,;   // In pixel
       nLine_Num :=  0
 
-   LOCAL nPageLength := 210 - nHMargin * 2,;
+   LOCAL nPageLength := 210 - nHMargin * 2, ;
       nPageHeigth := 297 - nVMargin * 5,;  // 1 Top Margin + 2 Header + 1 Bottom margin
       nChrsPerLin :=  80
 
    LOCAL cItem2Prnt
 
-   PRIVATE nCharLength := 2.25,;
+   PRIVATE nCharLength := 2.25, ;
       nLineHeigth := 5
 
-   PRIVATE nPageNumb   := 0,;
+   PRIVATE nPageNumb   := 0, ;
       nPTLineCo   := 0,;    // Total line count
       nPTPageCo   := 0,;    // Total page count
-      nLinsPerPag := nPageHeigth / nLineHeigth,;
+      nLinsPerPag := nPageHeigth / nLineHeigth, ;
       nLineNo1Pag := 0
 
    PRIVATE nPrintRow :=  0,;   // Row ( line ) number in printed page
@@ -126,9 +126,9 @@ STATIC PROCEDURE PrintPageHeader()
 
    LOCAL cHeadLine := "Employee Salary List"
 
-   LOCAL cItem2Prnt := '',;
-      nColumnLen :=  0,;
-      nPrCol1st  := nPrintCol,;
+   LOCAL cItem2Prnt := '', ;
+      nColumnLen :=  0, ;
+      nPrCol1st  := nPrintCol, ;
       nPrRow1st  := nPrintRow
 
    ++nPageNumb

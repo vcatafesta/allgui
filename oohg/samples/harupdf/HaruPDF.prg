@@ -259,7 +259,7 @@ STATIC FUNCTION Page_Lines( pdf )
 
       /* print the lines of the page. */
       HPDF_Page_SetLineWidth(page, 1)
-      HPDF_Page_Rectangle(page, 50, 50, HPDF_Page_GetWidth(page) - 100,;
+      HPDF_Page_Rectangle(page, 50, 50, HPDF_Page_GetWidth(page) - 100, ;
          HPDF_Page_GetHeight(page) - 110)
       HPDF_Page_Stroke(page)
 
@@ -571,7 +571,7 @@ STATIC FUNCTION Page_Text( pdf, grid )
       HPDF_Page_TextOut(page, rect[ rLEFT ], rect[ rTOP ] + 3, "HPDF_TALIGN_LEFT")
 
       HPDF_Page_SetFontAndSize(page, font, 13)
-      HPDF_Page_TextRect(page, rect[ rLEFT ], rect[ rTOP ], rect[ rRIGHT ], rect[ rBOTTOM ],;
+      HPDF_Page_TextRect(page, rect[ rLEFT ], rect[ rTOP ], rect[ rRIGHT ], rect[ rBOTTOM ], ;
          SAMP_TXT, HPDF_TALIGN_LEFT, NIL)
 
       HPDF_Page_EndText(page)
@@ -611,7 +611,7 @@ STATIC FUNCTION Page_Text( pdf, grid )
       HPDF_Page_TextOut(page, rect[ rLEFT ], rect[ rTOP ] + 3, "HPDF_TALIGN_CENTER")
 
       HPDF_Page_SetFontAndSize(page, font, 13)
-      HPDF_Page_TextRect(page, rect[ rLEFT ], rect[ rTOP ], rect[ rRIGHT ], rect[ rBOTTOM ],;
+      HPDF_Page_TextRect(page, rect[ rLEFT ], rect[ rTOP ], rect[ rRIGHT ], rect[ rBOTTOM ], ;
          SAMP_TXT, HPDF_TALIGN_CENTER, NIL)
 
       HPDF_Page_EndText(page)
@@ -620,7 +620,7 @@ STATIC FUNCTION Page_Text( pdf, grid )
       rect[ rLEFT  ] := 220
       rect[ rRIGHT ] := 395
 
-      HPDF_Page_Rectangle(page, rect[ rLEFT ], rect[ rBOTTOM ], rect[ rRIGHT ] - rect[ rLEFT ],;
+      HPDF_Page_Rectangle(page, rect[ rLEFT ], rect[ rBOTTOM ], rect[ rRIGHT ] - rect[ rLEFT ], ;
          rect[ rTOP ] - rect[ rBOTTOM ])
       HPDF_Page_Stroke(page)
 
@@ -649,7 +649,7 @@ STATIC FUNCTION Page_Text( pdf, grid )
       rect[ rRIGHT  ] := 175
       rect[ rBOTTOM ] := 0
 
-      HPDF_Page_Rectangle(page, rect[ rLEFT ], rect[ rBOTTOM ], rect[ rRIGHT ] - rect[ rLEFT ],;
+      HPDF_Page_Rectangle(page, rect[ rLEFT ], rect[ rBOTTOM ], rect[ rRIGHT ] - rect[ rLEFT ], ;
          rect[ rTOP ] - rect[ rBOTTOM ])
       HPDF_Page_Stroke(page)
 
@@ -773,7 +773,7 @@ STATIC FUNCTION Page_TextScaling( pdf, grid )
       HPDF_Page_SetFontAndSize(page, font, 24)
       tw = HPDF_Page_TextWidth(page, page_title)
       HPDF_Page_BeginText(page)
-      HPDF_Page_TextOut(page,(HPDF_Page_GetWidth(page) - tw) / 2,;
+      HPDF_Page_TextOut(page,(HPDF_Page_GetWidth(page) - tw) / 2, ;
          HPDF_Page_GetHeight(page) - 50, page_title)
       HPDF_Page_EndText(page)
 
@@ -1040,8 +1040,8 @@ STATIC FUNCTION Page_CodePages( pdf )
    LOCAL cAfm := cResPath+"a010013l.afm"
    LOCAL cPfb := cResPath+"a010013l.pfb"
    LOCAL encodings := { ;
-      "StandardEncoding",;
-      "MacRomanEncoding",;
+      "StandardEncoding", ;
+      "MacRomanEncoding", ;
       "WinAnsiEncoding", ;
       "ISO8859-2",       ;
       "ISO8859-3",       ;
@@ -1123,7 +1123,7 @@ STATIC FUNCTION draw_graph( page )
    HPDF_Page_SetLineWidth(page, 0.5)
 
    FOR i := 0 to 17
-      x = i * CELL_WIDTH + 40;
+      x = i * CELL_WIDTH + 40 ;
 
       HPDF_Page_MoveTo(page, x, PAGE_HEIGHT - 60)
       HPDF_Page_LineTo(page, x, 40)
@@ -1278,8 +1278,8 @@ STATIC FUNCTION Page_Annotation( pdf )
       HPDF_Page_EndText(page)
 
       annot = HPDF_Page_CreateTextAnnot(page, rect1, ;
-         "Annotation with Comment Icons"+chr(13)+chr(10)+;
-         "This annotation set to be opened initially.",;
+         "Annotation with Comment Icons"+chr(13)+chr(10)+ ;
+         "This annotation set to be opened initially.", ;
          NIL)
 
       HPDF_TextAnnot_SetIcon(annot, HPDF_ANNOT_ICON_COMMENT)
@@ -1518,7 +1518,7 @@ STATIC FUNCTION Print_jpg( pdf )
    LOCAL cImagePath := "files" + hb_OSPathSeparator(), font, dst, page
    LOCAL image1, image2, x, y, iw, ih
 
-   FONT = HPDF_GetFont (pdf, "Helvetica", Nil);
+   FONT = HPDF_GetFont (pdf, "Helvetica", Nil) ;
       /* add a new page object. */
    page = HPDF_AddPage (pdf)
       aadd( cpos, page )
@@ -1673,7 +1673,7 @@ STATIC FUNCTION print_grid( pdf, page )
 
 STATIC FUNCTION Page_Link_Annotation( pdf )
 
-   LOCAL index_page, Font, /*i,*/ Tp, Dst, annot, rect := array(4), page:={},;
+   LOCAL index_page, Font, /*i,*/ Tp, Dst, annot, rect := array(4), page:={}, ;
       Uri:= "http://www.hmgextended.com" //,pagex
    /*
    #define rLEFT   1
@@ -1953,7 +1953,7 @@ STATIC FUNCTION Print_TTFont ( pdf , TTName , emb )
 
 STATIC FUNCTION Page_slide (pdf)
 
-   LOCAL page0,page1,page2,page3,page4,page5,page6,page7,page8,page9,page10,;
+   LOCAL page0,page1,page2,page3,page4,page5,page6,page7,page8,page9,page10, ;
       page11,page12,page13,page14,page15,page16,font
 
    /* create default-font */
@@ -1978,37 +1978,37 @@ STATIC FUNCTION Page_slide (pdf)
    page15 := HPDF_AddPage (pdf)
    page16 := HPDF_AddPage (pdf)
 
-   Slide_page(page0, "HPDF_TS_WIPE_RIGHT", font,;
+   Slide_page(page0, "HPDF_TS_WIPE_RIGHT", font, ;
       HPDF_TS_WIPE_RIGHT, NIL, page1)
-   Slide_page(page1, "HPDF_TS_WIPE_UP", font,;
+   Slide_page(page1, "HPDF_TS_WIPE_UP", font, ;
       HPDF_TS_WIPE_UP, page0, page2)
-   Slide_page(page2, "HPDF_TS_WIPE_LEFT", font,;
+   Slide_page(page2, "HPDF_TS_WIPE_LEFT", font, ;
       HPDF_TS_WIPE_LEFT, page1, page3)
-   Slide_page(page3, "HPDF_TS_WIPE_DOWN", font,;
+   Slide_page(page3, "HPDF_TS_WIPE_DOWN", font, ;
       HPDF_TS_WIPE_DOWN, page2, page4)
-   Slide_page(page4, "HPDF_TS_BARN_DOORS_HORIZONTAL_OUT", font,;
+   Slide_page(page4, "HPDF_TS_BARN_DOORS_HORIZONTAL_OUT", font, ;
       HPDF_TS_BARN_DOORS_HORIZONTAL_OUT, page3, page5)
-   Slide_page(page5, "HPDF_TS_BARN_DOORS_HORIZONTAL_IN", font,;
+   Slide_page(page5, "HPDF_TS_BARN_DOORS_HORIZONTAL_IN", font, ;
       HPDF_TS_BARN_DOORS_HORIZONTAL_IN, page4, page6)
-   Slide_page(page6, "HPDF_TS_BARN_DOORS_VERTICAL_OUT", font,;
+   Slide_page(page6, "HPDF_TS_BARN_DOORS_VERTICAL_OUT", font, ;
       HPDF_TS_BARN_DOORS_VERTICAL_OUT, page5, page7)
-   Slide_page(page7, "HPDF_TS_BARN_DOORS_VERTICAL_IN", font,;
+   Slide_page(page7, "HPDF_TS_BARN_DOORS_VERTICAL_IN", font, ;
       HPDF_TS_BARN_DOORS_VERTICAL_IN, page6, page8)
-   Slide_page(page8, "HPDF_TS_BOX_OUT", font,;
+   Slide_page(page8, "HPDF_TS_BOX_OUT", font, ;
       HPDF_TS_BOX_OUT, page7, page9)
-   Slide_page(page9, "HPDF_TS_BOX_IN", font,;
+   Slide_page(page9, "HPDF_TS_BOX_IN", font, ;
       HPDF_TS_BOX_IN, page8, page10)
-   Slide_page(page10, "HPDF_TS_BLINDS_HORIZONTAL", font,;
+   Slide_page(page10, "HPDF_TS_BLINDS_HORIZONTAL", font, ;
       HPDF_TS_BLINDS_HORIZONTAL, page9, page11)
-   Slide_page(page11, "HPDF_TS_BLINDS_VERTICAL", font,;
+   Slide_page(page11, "HPDF_TS_BLINDS_VERTICAL", font, ;
       HPDF_TS_BLINDS_VERTICAL, page10, page12)
-   Slide_page(page12, "HPDF_TS_DISSOLVE", font,;
+   Slide_page(page12, "HPDF_TS_DISSOLVE", font, ;
       HPDF_TS_DISSOLVE, page11, page13)
-   Slide_page(page13, "HPDF_TS_GLITTER_RIGHT", font,;
+   Slide_page(page13, "HPDF_TS_GLITTER_RIGHT", font, ;
       HPDF_TS_GLITTER_RIGHT, page12, page14)
-   Slide_page(page14, "HPDF_TS_GLITTER_DOWN", font,;
+   Slide_page(page14, "HPDF_TS_GLITTER_DOWN", font, ;
       HPDF_TS_GLITTER_DOWN, page13, page15)
-   Slide_page(page15, "HPDF_TS_GLITTER_TOP_LEFT_TO_BOTTOM_RIGHT", font,;
+   Slide_page(page15, "HPDF_TS_GLITTER_TOP_LEFT_TO_BOTTOM_RIGHT", font, ;
       HPDF_TS_GLITTER_TOP_LEFT_TO_BOTTOM_RIGHT, page14, page16)
    Slide_page(page16, "HPDF_TS_REPLACE", font,HPDF_TS_REPLACE, page15, NIL)
 
@@ -2033,7 +2033,7 @@ STATIC FUNCTION Slide_page (page, caption, font, style, prev, next)
    HPDF_Page_SetWidth (page, 800)
    HPDF_Page_SetHeight (page, 600)
 
-   HPDF_Page_SetRGBFill (page, r, g, b);
+   HPDF_Page_SetRGBFill (page, r, g, b) ;
 
    HPDF_Page_Rectangle (page, 0, 0, 800, 600)
    HPDF_Page_Fill (page)
@@ -2096,7 +2096,7 @@ STATIC PROCEDURE Page_Zebra( pdf )
    LOCAL page := HPDF_AddPage( pdf ), tw
 
    HPDF_Page_SetLineWidth(page, 1)
-   HPDF_Page_Rectangle(page, 50, 50, HPDF_Page_GetWidth(page) - 100,;
+   HPDF_Page_Rectangle(page, 50, 50, HPDF_Page_GetWidth(page) - 100, ;
       HPDF_Page_GetHeight(page) - 110)
    HPDF_Page_Stroke(page)
    HPDF_Page_SetSize( page, HPDF_PAGE_SIZE_A4, HPDF_PAGE_PORTRAIT )

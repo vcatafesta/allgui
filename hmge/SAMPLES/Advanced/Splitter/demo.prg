@@ -37,14 +37,14 @@ PROCEDURE main()
          HEIGHT   nYPos ;
          VALUE    LOREMIPSUM_L ;
          TOOLTIP  'EditBox_1' ;
-         nohscroll
+         NOHSCROLL
 
       @ nYPos + nBorder, 0 editbox EditBox_2 ;
          WIDTH    w ;
          HEIGHT   h - ( nYPos + nBorder ) ;
          VALUE    LOREMIPSUM_R ;
          TOOLTIP  'EditBox_2' ;
-         nohscroll
+         NOHSCROLL
    END WINDOW
 
    // Add Horizontal Splitter to Form_1

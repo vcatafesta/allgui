@@ -401,7 +401,7 @@ PROCEDURE SaveNewSec( cSectionName, cNewEntries )
 
    RETURN
 
-#xcommand DEL SECTION <cSection> TO <result>;
+#xcommand DEL SECTION <cSection> TO <result> ;
       => ;
       <result> := _DelIniSection( <cSection> )
 

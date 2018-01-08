@@ -6,14 +6,14 @@ FUNCTION AutoAdjust( cForm )
 
    LOCAL i,;                    // From no
       k,;                    // Control no
-      ParentForm,;
-      ControlCount,;
-      ControlName,;
-      ControlType,;
-      nWidth,;
-      nHeight,;
-      lvisible := .T.,;
-      nDivw,;
+      ParentForm, ;
+      ControlCount, ;
+      ControlName, ;
+      ControlType, ;
+      nWidth, ;
+      nHeight, ;
+      lvisible := .T., ;
+      nDivw, ;
       nDivh
 
    IF GetDesktopWidth() < GetWindowWidth ( hWnd )
@@ -58,23 +58,23 @@ FUNCTION AutoAdjust( cForm )
 
             DO CASE
             CASE ControlType $ "RADIOGROUP,TEXT,BUTTON"
-               _SetControlSizePos( ControlName, ParentForm,;
+               _SetControlSizePos( ControlName, ParentForm, ;
                   _GetControlRow( ControlName, ParentForm ) * nDivh, ;   // row
                   _GetControlCol ( ControlName, ParentForm ) * nDivw ,;  // column
                   _GetControlWidth( ControlName, ParentForm ) * nDivw,;  // with
                   _GetControlHeight ( ControlName, ParentForm ) )        // height
 
             CASE ControlType == "SLIDER"
-               _SetControlSizePos ( ControlName, ParentForm,;
-                  _GetControlRow ( ControlName, ParentForm ) * nDivh, _GetControlCol ( ControlName, ParentForm ) * nDivw,;
+               _SetControlSizePos ( ControlName, ParentForm, ;
+                  _GetControlRow ( ControlName, ParentForm ) * nDivh, _GetControlCol ( ControlName, ParentForm ) * nDivw, ;
                   _GetControlWidth ( ControlName, ParentForm ) * nDivw, _GetControlHeight ( ControlName, ParentForm ) * nDivh )
 
             CASE ControlType == "STATUSBAR"
                // do nothing
 
             CASE !ControlType $ "TOOLBUTTON"
-               _SetControlSizePos ( ControlName, ParentForm,;
-                  _GetControlRow ( ControlName, ParentForm ) * nDivh, _GetControlCol ( ControlName, ParentForm ) * nDivw,;
+               _SetControlSizePos ( ControlName, ParentForm, ;
+                  _GetControlRow ( ControlName, ParentForm ) * nDivh, _GetControlCol ( ControlName, ParentForm ) * nDivw, ;
                   _GetControlWidth ( ControlName, ParentForm ) * nDivw, _GetControlHeight ( ControlName, ParentForm ) * nDivh )
             OTHERWISE
                IF EMPTY( _HMG_SYSDATA[ 28, k ] )

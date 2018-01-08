@@ -3,22 +3,22 @@
 PROCEDURE DrawBorder(;                             // Draw a border around any control
       cPWinName,;      // Name of parent window
       cControlName,;   // Name of control to be bordered
-      nPenWidth,;
-      aUpColor,;
-      aDnColor,;
+      nPenWidth, ;
+      aUpColor, ;
+      aDnColor, ;
       nSpace )
 
-   LOCAL nControlRow := GetProperty( cPWinName, cControlName, "ROW" ),;
-      nControlCol := GetProperty( cPWinName, cControlName, "COL" ),;
-      nControlWid := GetProperty( cPWinName, cControlName, "WIDTH" ),;
+   LOCAL nControlRow := GetProperty( cPWinName, cControlName, "ROW" ), ;
+      nControlCol := GetProperty( cPWinName, cControlName, "COL" ), ;
+      nControlWid := GetProperty( cPWinName, cControlName, "WIDTH" ), ;
       nControlHig := GetProperty( cPWinName, cControlName, "HEIGHT" )
 
-   LOCAL nBordrRow,;
-      nBordrCol,;
-      nBordrWid,;
+   LOCAL nBordrRow, ;
+      nBordrCol, ;
+      nBordrWid, ;
       nBordrHig
 
-   LOCAL aCoords,;
+   LOCAL aCoords, ;
       nLineNo
 
    HB_DEFAULT( @nPenWidth, 1 )
@@ -66,8 +66,8 @@ PROCEDURE DrawBorder(;                             // Draw a border around any c
    FOR nLineNo := 1 TO 4
 
       DRAW LINE IN WINDOW &cPWinName ;
-         AT aCoords[ nLineNo, 1 ],   aCoords[ nLineNo, 2 ];
-         TO aCoords[ nLineNo+1, 1 ], aCoords[ nLineNo+1, 2 ];
+         AT aCoords[ nLineNo, 1 ],   aCoords[ nLineNo, 2 ] ;
+         TO aCoords[ nLineNo+1, 1 ], aCoords[ nLineNo+1, 2 ] ;
          PENWIDTH nPenWidth ;
          PENCOLOR IF( nLineNo < 3, aUpColor, aDnColor )
 

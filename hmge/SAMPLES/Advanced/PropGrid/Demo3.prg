@@ -68,13 +68,13 @@ FUNCTION main()
 
       DEFINE PROPGRID PropertyGrid_1   ;
          AT 15,10   WIDTH 430 HEIGHT 390 ;
-         HEADER "Property Name","Value";
-         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 280;
-         BACKCOLOR {240,240,240};
-         ON CHANGEVALUE  RejChd();
-         OKBTN  APPLYBTN;
-         CANCELBTN;
-         HELPBTN  MsgInfo( "Help Button User");
+         HEADER "Property Name","Value" ;
+         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 280 ;
+         BACKCOLOR {240,240,240} ;
+         ON CHANGEVALUE  RejChd() ;
+         OKBTN  APPLYBTN ;
+         CANCELBTN ;
+         HELPBTN  MsgInfo( "Help Button User") ;
          ITEMINFO
 
       DEFINE CATEGORY 'Appearance'
@@ -113,50 +113,50 @@ END PROPGRID
 DISABLE PROPERTYITEM PropertyGrid_1 ID 107
 
 @ 10,480 FRAME Frame_1 WIDTH 140 HEIGHT 120 CAPTION "Property from:"
-@ 30,500 BUTTON btn_1;
-   CAPTION "File Txt";
-   ACTION  LoadDemoFile("PropGrid.txt");
+@ 30,500 BUTTON btn_1 ;
+   CAPTION "File Txt" ;
+   ACTION  LoadDemoFile("PropGrid.txt") ;
    WIDTH 100 HEIGHT 24
 
-@ 60,500 BUTTON btn_2;
-   CAPTION "File Xml";
+@ 60,500 BUTTON btn_2 ;
+   CAPTION "File Xml" ;
    ACTION   LoadDemoFile("PropGrid.xml",.t.) ;
    WIDTH 100 HEIGHT 24
 
-@ 90,500 BUTTON btn_3;
-   CAPTION "File Ini";
-   ACTION  LoadDemoFile("PropGrid.ini");
+@ 90,500 BUTTON btn_3 ;
+   CAPTION "File Ini" ;
+   ACTION  LoadDemoFile("PropGrid.ini") ;
    WIDTH 100 HEIGHT 24
 
 @ 160,480 FRAME Frame_2 WIDTH 140 HEIGHT 110 CAPTION "Saving a copy to:"
 
-@ 180,500 BUTTON btn_5;
-   CAPTION "File Txt";
+@ 180,500 BUTTON btn_5 ;
+   CAPTION "File Txt" ;
    ACTION PgSaveFile("Form_1","PropertyGrid_1","PropGrid1.txt") ;
    WIDTH 100 HEIGHT 24
 
-@ 210,500 BUTTON btn_6;
-   CAPTION "File Xml";
+@ 210,500 BUTTON btn_6 ;
+   CAPTION "File Xml" ;
    ACTION PgSaveFile("Form_1","PropertyGrid_1","PropGrid1.xml") ;
    WIDTH 100 HEIGHT 24
 
-@ 240,500 BUTTON btn_7;
-   CAPTION "File Ini";
+@ 240,500 BUTTON btn_7 ;
+   CAPTION "File Ini" ;
    ACTION PgSaveFile("Form_1","PropertyGrid_1","PropGrid1.ini") ;
    WIDTH 100 HEIGHT 24
 
-@ 290,490 BUTTON btn_10;
-   CAPTION "Collapse/Expand";
+@ 290,490 BUTTON btn_10 ;
+   CAPTION "Collapse/Expand" ;
    ACTION ToggleExpandPG("Form_1","PropertyGrid_1") ;
    WIDTH 120 HEIGHT 24
 
-@ 330,490 BUTTON btn_11;
-   CAPTION "Save Variables";
+@ 330,490 BUTTON btn_11 ;
+   CAPTION "Save Variables" ;
    ACTION SaveChdPar("PropertyGrid_1","Form_1") ;
    WIDTH 120 HEIGHT 24
 
-@ 370,490 BUTTON btn_12;
-   CAPTION "Info Hide/Show";
+@ 370,490 BUTTON btn_12 ;
+   CAPTION "Info Hide/Show" ;
    ACTION _ShowInfoItem  ("Form_1","PropertyGrid_1") ;
    WIDTH 120 HEIGHT 24
 
@@ -264,15 +264,15 @@ FUNCTION DisplPGInfo(PGname,cForm,nId)
 
    LOCAL xValue,aValue,n
    LOCAL cStr
-   LOCAL aType := {"Name        - ",;
-      "Value       - ",;
-      "Data        - ",;
-      "Disabled    - ",;
-      "Changed     - ",;
-      "DisableEdit - ",;
-      "Item Type   - ",;
-      "Item ID     - ",;
-      "Info        - ",;
+   LOCAL aType := {"Name        - ", ;
+      "Value       - ", ;
+      "Data        - ", ;
+      "Disabled    - ", ;
+      "Changed     - ", ;
+      "DisableEdit - ", ;
+      "Item Type   - ", ;
+      "Item ID     - ", ;
+      "Info        - ", ;
       "Variable    - "}
 
    IF nId==0

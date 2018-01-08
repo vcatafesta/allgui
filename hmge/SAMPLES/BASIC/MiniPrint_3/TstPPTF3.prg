@@ -4,25 +4,25 @@
 
 PROCEDURE MAIN()
 
-   PRIVATE aPrinterList,;
-      cDefaPrinter,;
-      nSelPrintrNo,;
+   PRIVATE aPrinterList, ;
+      cDefaPrinter, ;
+      nSelPrintrNo, ;
       lSelPrnDialog
    * Paper names and size nums :
-   PRIVATE aPapers := MakPaprArr(),;
+   PRIVATE aPapers := MakPaprArr(), ;
       nPaprLstNo := 7  // A4
 
    * Print parameters :
-   PRIVATE cPTFilName := '',;
-      nPaprTypeNo,;
-      lWordWrap,;
-      cFontName,;
-      nFontSize,;
+   PRIVATE cPTFilName := '', ;
+      nPaprTypeNo, ;
+      lWordWrap, ;
+      cFontName, ;
+      nFontSize, ;
       nVMargin,;     // Vertical margin
       nHMargin,;     // Horizontal margin
-      nChrsPerLin,;
-      nLineHeigth,;
-      bUpdaSBar,;
+      nChrsPerLin, ;
+      nLineHeigth, ;
+      bUpdaSBar, ;
       bUpdaPBar
 
    PRIVATE aSBarVals := ARRAY( 4 ),;    // Status Bar values
@@ -32,7 +32,7 @@ PROCEDURE MAIN()
 
    DEFINE WINDOW frmPPTFile ;
          AT 0,0 ;
-         WIDTH 600;
+         WIDTH 600 ;
          HEIGHT 200 ;
          TITLE 'Test Print a Plain Text File ( Comfortable way )' ;
          ON INIT InitMainForm() ;
@@ -82,13 +82,13 @@ PROCEDURE SeleFile(;                    // Select Plain Text File
       nCaller )
 
    LOCAL cSelFName := Getfile( { ;                                            // acFilter
-      { 'Text Files',      '*.txt' } ,;
-      { 'Program Files',    '*.prg' } ,;
-      { 'Format Files',     '*.fmg' } ,;
-      { 'Header Files',     '*.ch'  } ,;
-      { 'C Source Files',   '*.c'   } ,;
+      { 'Text Files',      '*.txt' } , ;
+      { 'Program Files',    '*.prg' } , ;
+      { 'Format Files',     '*.fmg' } , ;
+      { 'Header Files',     '*.ch'  } , ;
+      { 'C Source Files',   '*.c'   } , ;
       { 'CPP Source Files', '*.cpp'  } ;
-      },;
+      }, ;
       'Select Plain Text File' ,;   // Title
       GetStartUpFolder(),;          // cDefaultPath
       .F.,;                         // lMultiSelect
@@ -125,18 +125,18 @@ PROCEDURE PrntFile()
       ENDIF aShPrgsOp[ 1 ]
 
       nPPageCou := PPTFComf( cPTFilName,;  // Source file name
-         cDefaPrinter,;
-         lSelPrnDialog,;
-         nPaprTypeNo,;
-         lWordWrap,;
-         cFontName,;
-         nFontSize,;
+         cDefaPrinter, ;
+         lSelPrnDialog, ;
+         nPaprTypeNo, ;
+         lWordWrap, ;
+         cFontName, ;
+         nFontSize, ;
          nVMargin,;        // Vertical margin
          nHMargin,;        // Horizontal margin
-         nChrsPerLin,;
-         nLineHeigth,;
-         aShPrgsOp,;
-         bUpdaSBar,;
+         nChrsPerLin, ;
+         nLineHeigth, ;
+         aShPrgsOp, ;
+         bUpdaSBar, ;
          bUpdaPBar )
 
       UpdaSBar( cPTFilName,,,nPPageCou )
@@ -168,7 +168,7 @@ PROCEDURE GFUPrnOpts()                    // Get From User Print Options
 
 PROCEDURE Fill_PrOps()                    // Variables => Controls
 
-   * frmPrntOpts.txbSrcFile is RO;
+   * frmPrntOpts.txbSrcFile is RO ;
    * for change source file name use File\Select
    frmPrntOpts.txbSrcFile.Value    := cPTFilName
    frmPrntOpts.cmbPrinters.Value   := nSelPrintrNo
@@ -205,9 +205,9 @@ PROCEDURE SetPrntOps()                    // Controls  => Variables ( set & exit
    nHMargin      := frmPrntOpts.spnHorzMarg.Value
    nChrsPerLin   := frmPrntOpts.spnChrsLine.Value
    nLineHeigth   := frmPrntOpts.spnLineHeight.Value
-   aShPrgsOp     := { frmPrntOpts.chbPBar.Value,;
-      frmPrntOpts.chbSBI1.Value,;
-      frmPrntOpts.chbSBI3.Value,;
+   aShPrgsOp     := { frmPrntOpts.chbPBar.Value, ;
+      frmPrntOpts.chbSBI1.Value, ;
+      frmPrntOpts.chbSBI3.Value, ;
       frmPrntOpts.chbSBI4.Value }
 
    frmPrntOpts.Release

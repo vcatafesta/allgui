@@ -35,23 +35,23 @@ FUNCTION Main()
       brwMesas:bColorSel := 16711680 //Cor da linha do browse
 
       ADD COLUMN {|| OrdKeyNo()} TO brwMesas ;
-         HEADER "OrdKeyNo()";
+         HEADER "OrdKeyNo()" ;
          TYPE "N" LENGTH 6 DEC 0 ;
-         PICTURE "@E 999999";
+         PICTURE "@E 999999" ;
          JUSTIFY HEAD DT_LEFT ;
          JUSTIFY LINE DT_RIGHT
 
       ADD COLUMN {|| RECNO()} TO brwMesas ;
-         HEADER "Recno()";
+         HEADER "Recno()" ;
          TYPE "N" LENGTH 6 DEC 0 ;
-         PICTURE "@E 999999";
+         PICTURE "@E 999999" ;
          JUSTIFY HEAD DT_LEFT ;
          JUSTIFY LINE DT_RIGHT
 
       ADD COLUMN FIELDBLOCK("mesa") TO brwMesas ;
-         HEADER "Mesa";
+         HEADER "Mesa" ;
          TYPE "C" LENGTH 6 DEC 0 ;
-         PICTURE "@E 999999";
+         PICTURE "@E 999999" ;
          JUSTIFY HEAD DT_LEFT ;
          JUSTIFY LINE DT_LEFT
 
@@ -81,27 +81,27 @@ FUNCTION Main()
             brwItens:bColorSel := 16711680
 
             ADD COLUMN {|| OrdKeyNo()} TO brwItens ;
-               HEADER "OrdKeyNo()";
+               HEADER "OrdKeyNo()" ;
                TYPE "N" LENGTH 6 DEC 0 ;
-               PICTURE "@E 999999";
+               PICTURE "@E 999999" ;
                JUSTIFY HEAD DT_LEFT ;
                JUSTIFY LINE DT_RIGHT
 
             ADD COLUMN {|| RECNO()} TO brwItens ;
-               HEADER "Recno()";
+               HEADER "Recno()" ;
                TYPE "N" LENGTH 6 DEC 0 ;
-               PICTURE "@E 999999";
+               PICTURE "@E 999999" ;
                JUSTIFY HEAD DT_LEFT ;
                JUSTIFY LINE DT_RIGHT
 
             ADD COLUMN FIELDBLOCK("mesa") TO brwItens ;
-               HEADER "Mesa";
+               HEADER "Mesa" ;
                TYPE "C" LENGTH 6 DEC 0 ;
                JUSTIFY HEAD DT_LEFT ;
                JUSTIFY LINE DT_LEFT
 
             ADD COLUMN FIELDBLOCK("estornado") TO brwItens ;
-               HEADER "Estornado";
+               HEADER "Estornado" ;
                TYPE "C" LENGTH 1 DEC 0 ;
                JUSTIFY HEAD DT_LEFT ;
                JUSTIFY LINE DT_LEFT
@@ -115,7 +115,7 @@ FUNCTION Main()
                JUSTIFY LINE DT_LEFT
 
             ADD COLUMN FIELDBLOCK("qtd") TO brwItens ;
-               HEADER "Quantidade";
+               HEADER "Quantidade" ;
                JUSTIFY HEAD DT_RIGHT ;
                JUSTIFY LINE DT_RIGHT
 

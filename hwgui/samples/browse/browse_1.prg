@@ -36,7 +36,7 @@ FUNCTION BrowseTest()
 
    PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 
-   INIT DIALOG oForm CLIPPER NOEXIT TITLE "Browse Database";
+   INIT DIALOG oForm CLIPPER NOEXIT TITLE "Browse Database" ;
       FONT oFont ;
       AT 0, 0 SIZE 700, 425 ;
       STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
@@ -50,12 +50,12 @@ FUNCTION BrowseTest()
    PUBLIC TENTA:=1
 
    ADD COLUMN FieldBlock(Fieldname(1) ) TO oBrowse ;
-      HEADER 'Code';
-      TYPE 'N';
+      HEADER 'Code' ;
+      TYPE 'N' ;
       LENGTH 6 ;
       DEC 0 ;
       EDITABLE ;
-      PICTURE "@E 999,999";
+      PICTURE "@E 999,999" ;
       JUSTIFY HEAD DT_CENTER ;
       JUSTIFY LINE DT_RIGHT ;
       VALID BrowseValid() ;
@@ -138,11 +138,11 @@ STATIC FUNCTION CreateDB()
       FErase('browse_1.dbf')
    END
 
-   DBCreate('browse_1', {{'code', 'N', 6, 0},;
-      {'desc', 'C', 40, 0},;
-      {'list', 'N', 1, 0},;
-      {'creation', 'D', 8, 0},;
-      {'status', 'L', 1, 0},;
+   DBCreate('browse_1', {{'code', 'N', 6, 0}, ;
+      {'desc', 'C', 40, 0}, ;
+      {'list', 'N', 1, 0}, ;
+      {'creation', 'D', 8, 0}, ;
+      {'status', 'L', 1, 0}, ;
       {'price', 'N', 10, 2}})
 
    USE browse_1 EXCLUSIVE

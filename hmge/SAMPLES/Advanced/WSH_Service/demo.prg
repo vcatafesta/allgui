@@ -17,7 +17,7 @@ PROCEDURE Main()
 
          DEFINE POPUP "Test"
             MENUITEM 'Create Desktop Shortcuts' ACTION CreateShortcuts()
-            MENUITEM 'Remove Desktop Shortcuts' ACTION DeleteShortcuts(;
+            MENUITEM 'Remove Desktop Shortcuts' ACTION DeleteShortcuts( ;
                {"Shutdown", "Log Off", "Restart"})
             SEPARATOR
             ITEM 'Exit' ACTION Form_1.Release()

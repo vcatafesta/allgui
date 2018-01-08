@@ -62,7 +62,7 @@ FUNCTION WaitWinCreate( cTitle, lCenter, nWRow, nWCol)
 
    LOCAL cFormName := "WaitWin_" + HB_NtoS( _GetId() )
    LOCAL nTime := SECONDS()
-   LOCAL aPict := {"FR01","FR02","FR03","FR04","FR05","FR06","FR07","FR08",;
+   LOCAL aPict := {"FR01","FR02","FR03","FR04","FR05","FR06","FR07","FR08", ;
       "FR09","FR10","FR11","FR12"}
 
    DEFAULT cTitle := "Wait", lCenter := .T., nWRow := 0, nWCol := 0

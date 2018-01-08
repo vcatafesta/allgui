@@ -56,7 +56,7 @@ FUNCTION Captura()
 
 PROCEDURE VerItem()
 
-   MsgInfo( 'Col 1: ' + GetColValue( "Grid_1", "Win_1", 1 )+'  ';
+   MsgInfo( 'Col 1: ' + GetColValue( "Grid_1", "Win_1", 1 )+'  ' ;
       + 'Col 2: ' + GetColValue( "Grid_1", "Win_1", 2 ) )
 
    RETURN

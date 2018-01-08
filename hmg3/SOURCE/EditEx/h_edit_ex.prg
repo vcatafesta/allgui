@@ -540,8 +540,8 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
    nColumna       := 10
    nAnchoEtiqueta := 0
    FOR i := 1 to HMG_LEN( _aNombreCampo )
-      nAnchoEtiqueta := iif( nAnchoEtiqueta > ( HMG_LEN( _aNombreCampo[i] ) * 9 ),;
-         nAnchoEtiqueta,;
+      nAnchoEtiqueta := iif( nAnchoEtiqueta > ( HMG_LEN( _aNombreCampo[i] ) * 9 ), ;
+         nAnchoEtiqueta, ;
          HMG_LEN( _aNombreCampo[i] ) * 9 )
    NEXT
    FOR i := 1 to HMG_LEN( _aEstructura )
@@ -768,8 +768,8 @@ STATIC FUNCTION ABM2salir( nRegistro, cIndiceActivo, cFiltroAnt, nArea )
    LOCAL bFiltroAnt as codeblock           // Bloque de código del filtro.
 
    ////////// Inicialización de variables.----------------------------------------
-   bFiltroAnt := iif( Empty( cFiltroAnt ),;
-      &("{||NIL}"),;
+   bFiltroAnt := iif( Empty( cFiltroAnt ), ;
+      &("{||NIL}"), ;
       &("{||" + cFiltroAnt + "}") )
 
    ////////// Restaura el area de la bdd inicial.---------------------------------
@@ -919,11 +919,11 @@ STATIC FUNCTION ABM2Editar( lNuevo )
    nAnchoControl  := 0
    nAltoControl   := 0
    FOR i := 1 to HMG_LEN( _aEtiqueta )
-      nAnchoEtiqueta := iif( nAnchoEtiqueta > _aEtiqueta[i,ABM_LBL_WIDTH],;
-         nAnchoEtiqueta,;
+      nAnchoEtiqueta := iif( nAnchoEtiqueta > _aEtiqueta[i,ABM_LBL_WIDTH], ;
+         nAnchoEtiqueta, ;
          _aEtiqueta[i,ABM_LBL_WIDTH] )
-      nAnchoControl  := iif( nAnchoControl > _aControl[i,ABM_CON_WIDTH],;
-         nAnchoControl,;
+      nAnchoControl  := iif( nAnchoControl > _aControl[i,ABM_CON_WIDTH], ;
+         nAnchoControl, ;
          _aControl[i,ABM_CON_WIDTH] )
       nAltoControl   += _aControl[i,ABM_CON_HEIGHT] + 10
    NEXT
@@ -1619,11 +1619,11 @@ STATIC FUNCTION ABM2ActivarFiltro()
 
    ////////// Inicialización de variables.----------------------------------------
    aCampos    := _aNombreCampo
-   aCompara   := { _HMG_SYSDATA [ 129 ][27],;
-      _HMG_SYSDATA [ 129 ][28],;
-      _HMG_SYSDATA [ 129 ][29],;
-      _HMG_SYSDATA [ 129 ][30],;
-      _HMG_SYSDATA [ 129 ][31],;
+   aCompara   := { _HMG_SYSDATA [ 129 ][27], ;
+      _HMG_SYSDATA [ 129 ][28], ;
+      _HMG_SYSDATA [ 129 ][29], ;
+      _HMG_SYSDATA [ 129 ][30], ;
+      _HMG_SYSDATA [ 129 ][31], ;
       _HMG_SYSDATA [ 129 ][32] }
 
    ////////// Crea la ventana de filtrado.----------------------------------------
@@ -1642,7 +1642,7 @@ STATIC FUNCTION ABM2ActivarFiltro()
       DEFINE TOOLBAR tbBuscar buttonsize 90, 32 flat righttext border
          button tbbCancelarFil caption _HMG_SYSDATA [ 128 ][7]           ;
             PICTURE "HMG_EDIT_CANCEL"     ;
-            ACTION  {|| wndABM2Filtro.Release,;
+            ACTION  {|| wndABM2Filtro.Release, ;
             ABM2Redibuja( .f. ) }
          button tbbAceptarFil  caption _HMG_SYSDATA [ 128 ][8]           ;
             PICTURE "HMG_EDIT_OK"         ;
@@ -2088,7 +2088,7 @@ STATIC FUNCTION ABM2Imprimir()
       ITEMS aCampoListado                                             ;
       VALUE 1                                                         ;
       FONT "Arial" size 9                                             ;
-      ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _HMG_SYSDATA [ 130 ][13];
+      ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _HMG_SYSDATA [ 130 ][13] ;
       ON LOSTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := ""
 
    // ComboBox.

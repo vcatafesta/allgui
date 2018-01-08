@@ -42,7 +42,7 @@ FUNCTION AST_ProgressBar(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -95,8 +95,8 @@ FUNCTION AST_ProgressBar(cReadString,cTerminator)
    aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " PROGRESSBAR " +;
-      aProperties_[1] + " OF ~LDCS_Form RANGE " + aProperties_[6] + "," + aProperties_[7] + " " +;
+   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " PROGRESSBAR " + ;
+      aProperties_[1] + " OF ~LDCS_Form RANGE " + aProperties_[6] + "," + aProperties_[7] + " " + ;
       aProperties_[4] + " " + aProperties_[5] + " SMOOTH" + CRLF
 
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF

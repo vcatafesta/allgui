@@ -543,7 +543,7 @@ METHOD StatusHeight( nHeight  ) CLASS HStatus
             ::oParent:aOffset[ 4 ] -= ( aCoors[ 4 ] - aCoors[ 2 ] )
          ENDIF
          hwg_Sendmessage( ::handle, ;           // (HWND) handle to destination control
-            SB_SETMINHEIGHT, nHeight, 0 )      // (UINT) message ID  // = (WPARAM)(int) minHeight;
+            SB_SETMINHEIGHT, nHeight, 0 )      // (UINT) message ID  // = (WPARAM)(int) minHeight ;
          hwg_Sendmessage( ::handle, WM_SIZE, 0, 0 )
          aCoors := hwg_Getwindowrect( ::handle )
       ENDIF

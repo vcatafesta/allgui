@@ -97,7 +97,7 @@ FUNCTION Main(DbArc,r,g,b)
       g     := "200"
       b     := "200"
    ELSEIF narg >=2 .AND.  narg <=3
-      Msgstop("Parametri RGB inseriti dal batch errati !"+CRLF;
+      Msgstop("Parametri RGB inseriti dal batch errati !"+CRLF ;
          +"Uso: GraphPrint  archivio colore(r) Colore (g) Colore (b)")
       QUIT
    ENDIF
@@ -997,7 +997,7 @@ PROCEDURE torta
 
    DEFINE WINDOW m at 0,0 ;
          WIDTH m->a_colo+40 ;
-         HEIGHT  m->a_riga +80 main;
+         HEIGHT  m->a_riga +80 main ;
          TITLE titolo_mask ;
          BACKCOLOR m->colore_sfondo
       showpie_3d()
@@ -1034,16 +1034,16 @@ PROCEDURE showpie_3D
    ERASE WINDOW m
    op_pie := 1
 
-   DRAW GRAPH IN WINDOW m AT m->da_riga, m->da_colo;
+   DRAW GRAPH IN WINDOW m AT m->da_riga, m->da_colo ;
       TO m->a_riga, m->a_colo ;
       TITLE m->titolo_graph ;
-      TYPE PIE;
+      TYPE PIE ;
       SERIES m->aser ;
       DEPTH m->profondita ;
       SERIENAMES m->didascalie ;
       COLORS m->colore_graph ;
-      3DVIEW;
-      SHOWXVALUES;
+      3DVIEW ;
+      SHOWXVALUES ;
       SHOWLEGENDS DATAMASK m->data_mask
 
    RETURN
@@ -1053,15 +1053,15 @@ PROCEDURE showpie_flat
    ERASE WINDOW m
    op_pie := 2
 
-   DRAW GRAPH IN WINDOW m AT m->da_riga, m->da_colo;
+   DRAW GRAPH IN WINDOW m AT m->da_riga, m->da_colo ;
       TO m->a_riga, m->a_colo ;
       TITLE m->titolo_graph ;
-      TYPE PIE;
+      TYPE PIE ;
       SERIES m->aser ;
       DEPTH m->profondita ;
       SERIENAMES m->didascalie ;
       COLORS m->colore_graph ;
-      SHOWXVALUES;
+      SHOWXVALUES ;
       SHOWLEGENDS DATAMASK m->data_mask
 
    RETURN
@@ -1075,28 +1075,28 @@ PROCEDURE Printpie
    sa_colo := m->sda_colo + m->saltezza
 
    IF op_pie = 1
-      PRINT GRAPH IN WINDOW m AT m->sda_riga, m->sda_colo;
+      PRINT GRAPH IN WINDOW m AT m->sda_riga, m->sda_colo ;
          TO sa_riga, sa_colo  ;
          TITLE m->titolo_graph ;
-         TYPE PIE;
-         SERIES m->aser;
+         TYPE PIE ;
+         SERIES m->aser ;
          DEPTH m->profondita ;
          SERIENAMES m->didascalie ;
          COLORS m->colore_graph  ;
-         3DVIEW;
-         SHOWXVALUES;
+         3DVIEW ;
+         SHOWXVALUES ;
          SHOWLEGENDS DATAMASK m->data_mask
 
    ELSEIF op_pie = 2
-      PRINT GRAPH IN WINDOW m AT m->sda_riga, m->sda_colo;
+      PRINT GRAPH IN WINDOW m AT m->sda_riga, m->sda_colo ;
          TO sa_riga, sa_colo ;
          TITLE m->titolo_graph ;
-         TYPE PIE;
-         SERIES m->aser;
+         TYPE PIE ;
+         SERIES m->aser ;
          DEPTH m->profondita ;
          SERIENAMES m->didascalie ;
          COLORS m->colore_graph  ;
-         SHOWXVALUES;
+         SHOWXVALUES ;
          SHOWLEGENDS DATAMASK m->data_mask
    ENDIF
 

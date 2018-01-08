@@ -10,7 +10,7 @@ M   Memo     4 or 8             Memo
 =   ModTime  8                  Last modified date & time of this record
 ^   RowVers  8                  Row version number; modification count of this record
 @   DayTime  8                  Date & Time
-I   Integer  1, 2, 3, 4 or 8    Signed Integer ( Width :  )" },;
+I   Integer  1, 2, 3, 4 or 8    Signed Integer ( Width :  )" }, ;
 T   Time     4 or 8             Only time (if width is 4 ) or Date & Time (if width is 8 ) (?)
 V   Variant  3, 4, 6 or more    Variable type Field
 Y   Currency 8                  64 bit integer with implied 4 decimal
@@ -38,7 +38,7 @@ PROCEDURE Main()
       a1Oper := {}, ;
       n1Oper := 1
 
-   LOCAL aFldTypes := { { "D", "Date",     "Date ( Width : 3, 4 or 8 )" },;
+   LOCAL aFldTypes := { { "D", "Date",     "Date ( Width : 3, 4 or 8 )" }, ;
       { "M", "Memo",     "Memo ( Width : 4 or 8 )" }, ;
       { "+", "AutoInc",  "Auto increment ( Width : 4 )" }, ;
       { "=", "ModTime",  "Last modified date & time of this record ( Width : 8 )" }, ;
@@ -257,19 +257,19 @@ PROCEDURE IntLimits()                             // Determining Integer Limits
    USE IntLimits
 
    dbAppend()
-   REPLACE MNMX WITH "Minimum",;
-      INT1 WITH  -2 ^ 7,;
-      INT2 WITH  -2 ^ 15,;
-      INT3 WITH  -2 ^ 23,;
-      INT4 WITH  -2 ^ 31,;
+   REPLACE MNMX WITH "Minimum", ;
+      INT1 WITH  -2 ^ 7, ;
+      INT2 WITH  -2 ^ 15, ;
+      INT3 WITH  -2 ^ 23, ;
+      INT4 WITH  -2 ^ 31, ;
       INT8 WITH  -2 ^ 63
 
    dbAppend()
-   REPLACE MNMX WITH "Maximum",;
-      INT1 WITH   2 ^ 7  - 1,;
-      INT2 WITH   2 ^ 15 - 1,;
-      INT3 WITH   2 ^ 23 - 1,;
-      INT4 WITH   2 ^ 31 - 1,;
+   REPLACE MNMX WITH "Maximum", ;
+      INT1 WITH   2 ^ 7  - 1, ;
+      INT2 WITH   2 ^ 15 - 1, ;
+      INT3 WITH   2 ^ 23 - 1, ;
+      INT4 WITH   2 ^ 31 - 1, ;
       INT8 WITH   2 ^ 63 - 513    // < 513 ---> "Error DBFNTX/1021 Data width error"
 
    dbGoTop()
@@ -392,12 +392,12 @@ PROCEDURE V_SetGet( aType )               // Set & read back field values
 
 PROCEDURE SG_Date()                           // Date : Compare set / get
 
-   LOCAL aStru6 := { { "Initial",  "D",  8, 0 },;
-      { "Internal3",  "D",  3, 0 },;
-      { "Internal4",  "D",  4, 0 },;
-      { "Internal8",  "D",  8, 0 },;
-      { "ReadBack3",  "C", 12, 0 },;
-      { "ReadBack4",  "C", 12, 0 },;
+   LOCAL aStru6 := { { "Initial",  "D",  8, 0 }, ;
+      { "Internal3",  "D",  3, 0 }, ;
+      { "Internal4",  "D",  4, 0 }, ;
+      { "Internal8",  "D",  8, 0 }, ;
+      { "ReadBack3",  "C", 12, 0 }, ;
+      { "ReadBack4",  "C", 12, 0 }, ;
       { "ReadBack8",  "C", 12, 0 } }
 
    dbCreate( "SG_Date", aStru6 )
@@ -406,11 +406,11 @@ PROCEDURE SG_Date()                           // Date : Compare set / get
 
    dbAppend()
    REPLACE Initial  WITH Date() - ( 66 * 365 + 66 / 4 ), ;
-      Internal3  WITH Initial,;
-      Internal4  WITH Initial,;
-      Internal8  WITH Initial,;
-      ReadBack3  WITH hb_ValToStr( Internal3 ),;
-      ReadBack4  WITH hb_ValToStr( Internal4 ),;
+      Internal3  WITH Initial, ;
+      Internal4  WITH Initial, ;
+      Internal8  WITH Initial, ;
+      ReadBack3  WITH hb_ValToStr( Internal3 ), ;
+      ReadBack4  WITH hb_ValToStr( Internal4 ), ;
       ReadBack8  WITH hb_ValToStr( Internal8 )
    dbGoTop()
 
@@ -423,7 +423,7 @@ PROCEDURE SG_Date()                           // Date : Compare set / get
 
 PROCEDURE SG_Memo()                       // Set / Get test for MEMO fields
 
-   LOCAL aStru7 := { { "MEMO_4",   "M",  4, 0 },;
+   LOCAL aStru7 := { { "MEMO_4",   "M",  4, 0 }, ;
       { "MEMO_10",  "M", 10, 0 } }
 
    dbCreate( "SG_Memo", aStru7 )
@@ -445,10 +445,10 @@ PROCEDURE SG_Memo()                       // Set / Get test for MEMO fields
 
 PROCEDURE SG_DayTime()                       // Set / Get test for DayTime fields
 
-   LOCAL aStru8 := { { "ModTim",   "=",  8, 0 },;
-      { "DaTime",   "@",  8, 0 },;
-      { "Time_8",   "T",  8, 0 },;
-      { "Time_4",   "T",  4, 0 },;
+   LOCAL aStru8 := { { "ModTim",   "=",  8, 0 }, ;
+      { "DaTime",   "@",  8, 0 }, ;
+      { "Time_8",   "T",  8, 0 }, ;
+      { "Time_4",   "T",  4, 0 }, ;
       { "Time_C",   "C", 12, 0 } }
 
    dbCreate( "SG_Datime", aStru8 )
@@ -522,26 +522,26 @@ PROCEDURE SG_Integers()                       // Set / Get test for INTEGER fiel
       dbAppend()
    NEXT nRecno
 
-   REPL ALL INT1  WITH Int( hb_Random( -2 ^ 7, 2 ^ 7  - 1   ) ),;
-      INT11 WITH Int( hb_Random( -2 ^ 7, 2 ^ 7  - 1   ) ) / 10,;
-      INT2  WITH Int( hb_Random( -2 ^ 15, 2 ^ 15 - 1   ) ),;
-      INT22 WITH Int( hb_Random( -2 ^ 15, 2 ^ 15 - 1   ) ),;
-      INT3  WITH Int( hb_Random( -2 ^ 23, 2 ^ 23 - 1   ) ),;
-      INT32 WITH Int( hb_Random( -2 ^ 23, 2 ^ 23 - 1   ) ) / 100,;
-      INT4  WITH Int( hb_Random( -2 ^ 31, 2 ^ 31 - 1   ) ),;
-      INT42 WITH Int( hb_Random( -2 ^ 31, 2 ^ 31 - 1   ) ) / 100,;
-      INT8  WITH Int( hb_Random( -2 ^ 63, 2 ^ 63 - 513 ) ),;
+   REPL ALL INT1  WITH Int( hb_Random( -2 ^ 7, 2 ^ 7  - 1   ) ), ;
+      INT11 WITH Int( hb_Random( -2 ^ 7, 2 ^ 7  - 1   ) ) / 10, ;
+      INT2  WITH Int( hb_Random( -2 ^ 15, 2 ^ 15 - 1   ) ), ;
+      INT22 WITH Int( hb_Random( -2 ^ 15, 2 ^ 15 - 1   ) ), ;
+      INT3  WITH Int( hb_Random( -2 ^ 23, 2 ^ 23 - 1   ) ), ;
+      INT32 WITH Int( hb_Random( -2 ^ 23, 2 ^ 23 - 1   ) ) / 100, ;
+      INT4  WITH Int( hb_Random( -2 ^ 31, 2 ^ 31 - 1   ) ), ;
+      INT42 WITH Int( hb_Random( -2 ^ 31, 2 ^ 31 - 1   ) ) / 100, ;
+      INT8  WITH Int( hb_Random( -2 ^ 63, 2 ^ 63 - 513 ) ), ;
       INT84 WITH Int( hb_Random( -2 ^ 63, 2 ^ 63 - 513 ) ) / 10000
 
-   REPL ALL NUM1  WITH INT1,  EQL1  WITH NUM1  = INT1,;
-      NUM11 WITH INT11, EQL11 WITH NUM11 = INT11,;
-      NUM2  WITH INT2,  EQL2  WITH NUM2  = INT2,;
-      NUM22 WITH INT22, EQL22 WITH NUM22 = INT22,;
-      NUM3  WITH INT3,  EQL3  WITH NUM3  = INT3,;
-      NUM32 WITH INT32, EQL32 WITH NUM32 = INT32,;
-      NUM4  WITH INT4,  EQL4  WITH NUM4  = INT4,;
-      NUM42 WITH INT42, EQL42 WITH NUM42 = INT42,;
-      NUM8  WITH INT8,  EQL8  WITH NUM8  = INT8,;
+   REPL ALL NUM1  WITH INT1,  EQL1  WITH NUM1  = INT1, ;
+      NUM11 WITH INT11, EQL11 WITH NUM11 = INT11, ;
+      NUM2  WITH INT2,  EQL2  WITH NUM2  = INT2, ;
+      NUM22 WITH INT22, EQL22 WITH NUM22 = INT22, ;
+      NUM3  WITH INT3,  EQL3  WITH NUM3  = INT3, ;
+      NUM32 WITH INT32, EQL32 WITH NUM32 = INT32, ;
+      NUM4  WITH INT4,  EQL4  WITH NUM4  = INT4, ;
+      NUM42 WITH INT42, EQL42 WITH NUM42 = INT42, ;
+      NUM8  WITH INT8,  EQL8  WITH NUM8  = INT8, ;
       NUM84 WITH INT84, EQL84 WITH NUM84 = INT84
 
    dbGoTop()
@@ -555,10 +555,10 @@ PROCEDURE SG_Integers()                       // Set / Get test for INTEGER fiel
 
 PROCEDURE SG_Currency()                       // Set / Get test for CURRENCY fields
 
-   LOCAL aStru10 := { { "Currenc",  "Y",  8, 4 },;
-      { "NUM2D",    "N", 21, 2 },;
-      { "NUM4D",    "N", 21, 4 },;
-      { "NUM6D",    "N", 23, 6 },;
+   LOCAL aStru10 := { { "Currenc",  "Y",  8, 4 }, ;
+      { "NUM2D",    "N", 21, 2 }, ;
+      { "NUM4D",    "N", 21, 4 }, ;
+      { "NUM6D",    "N", 23, 6 }, ;
       { "NUM8D",    "N", 25, 8 } }
 
    dbCreate( "SG_Curncy", aStru10 )
@@ -567,10 +567,10 @@ PROCEDURE SG_Currency()                       // Set / Get test for CURRENCY fie
 
    FOR nRecno := 1 TO 100
       dbAppend()
-      REPLACE Currenc WITH hb_Random( -2 ^ 53, 2 ^ 53 ) / 10000,;
-         NUM2D   WITH Currenc,;
-         NUM4D   WITH Currenc,;
-         NUM6D   WITH Currenc,;
+      REPLACE Currenc WITH hb_Random( -2 ^ 53, 2 ^ 53 ) / 10000, ;
+         NUM2D   WITH Currenc, ;
+         NUM4D   WITH Currenc, ;
+         NUM6D   WITH Currenc, ;
          NUM8D   WITH Currenc
 
    NEXT nRecno
@@ -587,10 +587,10 @@ PROCEDURE SG_Double()                       // Set / Get test for DOUBLE ( BINAR
 
    LOCAL nRecno  := 0
 
-   LOCAL aStru11 := { { "Double",  "B",  8, 4 },;
-      { "NUM2D",   "N", 21, 2 },;
-      { "NUM4D",   "N", 21, 4 },;
-      { "NUM6D",   "N", 23, 6 },;
+   LOCAL aStru11 := { { "Double",  "B",  8, 4 }, ;
+      { "NUM2D",   "N", 21, 2 }, ;
+      { "NUM4D",   "N", 21, 4 }, ;
+      { "NUM6D",   "N", 23, 6 }, ;
       { "NUM8D",   "N", 25, 8 } }
 
    dbCreate( "SG_Double", aStru11 )
@@ -599,10 +599,10 @@ PROCEDURE SG_Double()                       // Set / Get test for DOUBLE ( BINAR
 
    FOR nRecno := 1 TO 100
       dbAppend()
-      REPLACE Double WITH hb_Random( -2 ^ 53, 2 ^ 53 ) / 10000,;
-         NUM2D  WITH Double,;
-         NUM4D  WITH Double,;
-         NUM6D  WITH Double,;
+      REPLACE Double WITH hb_Random( -2 ^ 53, 2 ^ 53 ) / 10000, ;
+         NUM2D  WITH Double, ;
+         NUM4D  WITH Double, ;
+         NUM6D  WITH Double, ;
          NUM8D  WITH Double
 
    NEXT nRecno
@@ -647,10 +647,10 @@ PROCEDURE SignChng()                           // Convert and test signed to int
 
       dbAppend()
 
-      REPLACE NUM1 WITH hb_Random( 0, 2 ^ 8  - 1 ), INT1 WITH NUM1 - 2 ^ 7, RET1 WITH INT1 + 2 ^ 7,  EQL1 WITH NUM1 = RET1,;
-         NUM2 WITH hb_Random( 0, 2 ^ 16 - 1 ), INT2 WITH NUM2 - 2 ^ 15, RET2 WITH INT2 + 2 ^ 15, EQL2 WITH NUM2 = RET2,;
-         NUM3 WITH hb_Random( 0, 2 ^ 24 - 1 ), INT3 WITH NUM3 - 2 ^ 23, RET3 WITH INT3 + 2 ^ 23, EQL3 WITH NUM3 = RET3,;
-         NUM4 WITH hb_Random( 0, 2 ^ 32 - 1 ), INT4 WITH NUM4 - 2 ^ 31, RET4 WITH INT4 + 2 ^ 31, EQL4 WITH NUM4 = RET4,;
+      REPLACE NUM1 WITH hb_Random( 0, 2 ^ 8  - 1 ), INT1 WITH NUM1 - 2 ^ 7, RET1 WITH INT1 + 2 ^ 7,  EQL1 WITH NUM1 = RET1, ;
+         NUM2 WITH hb_Random( 0, 2 ^ 16 - 1 ), INT2 WITH NUM2 - 2 ^ 15, RET2 WITH INT2 + 2 ^ 15, EQL2 WITH NUM2 = RET2, ;
+         NUM3 WITH hb_Random( 0, 2 ^ 24 - 1 ), INT3 WITH NUM3 - 2 ^ 23, RET3 WITH INT3 + 2 ^ 23, EQL3 WITH NUM3 = RET3, ;
+         NUM4 WITH hb_Random( 0, 2 ^ 32 - 1 ), INT4 WITH NUM4 - 2 ^ 31, RET4 WITH INT4 + 2 ^ 31, EQL4 WITH NUM4 = RET4, ;
          NUM8 WITH hb_Random( 0, 2 ^ 64 - 1 ), INT8 WITH NUM8 - 2 ^ 63, RET8 WITH INT8 + 2 ^ 63, EQL8 WITH NUM8 = RET8
 
    NEXT nRecno

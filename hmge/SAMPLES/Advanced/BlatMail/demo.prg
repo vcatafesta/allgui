@@ -66,12 +66,12 @@ PROCEDURE Main()
          HEIGHT 27                      ;
          FONT "Courier New" Size 10
 
-      @010,130 TEXTBOX T_smtp;
+      @010,130 TEXTBOX T_smtp ;
          WIDTH 390           ;
          VALUE _smtp         ;
-         TOOLTIP "Informe o Servidor de saídas de E-mails(SMTP).";
+         TOOLTIP "Informe o Servidor de saídas de E-mails(SMTP)." ;
          FONT "Courier New" Size 10     ;
-         ON ENTER DoMethod("Form_Email","T_usuario","SetFocus");
+         ON ENTER DoMethod("Form_Email","T_usuario","SetFocus") ;
          MAXLENGTH 60 LOWERCASE
 
       @044,020 LABEL  Label_T_usuario   ;
@@ -86,7 +86,7 @@ PROCEDURE Main()
          VALUE _usuario                 ;
          TOOLTIP "Informe o usuario."   ;
          FONT "Courier New" Size 10     ;
-         ON ENTER DoMethod("Form_Email","T_id","SetFocus");
+         ON ENTER DoMethod("Form_Email","T_id","SetFocus") ;
          MAXLENGTH 60
 
       @074,020 LABEL  Label_T_id        ;
@@ -98,9 +98,9 @@ PROCEDURE Main()
       @070,130 TEXTBOX T_id ;
          WIDTH 390          ;
          VALUE _ident       ;
-         TOOLTIP "Informe o nome pelo qual você será identificado pelo desetinatário.";
+         TOOLTIP "Informe o nome pelo qual você será identificado pelo desetinatário." ;
          FONT "Courier New" Size 10     ;
-         ON ENTER DoMethod("Form_Email","T_De","SetFocus");
+         ON ENTER DoMethod("Form_Email","T_De","SetFocus") ;
          MAXLENGTH 60 LOWERCASE
 
       @104,020 LABEL  Label_T_De        ;
@@ -113,9 +113,9 @@ PROCEDURE Main()
       @100,110 TEXTBOX T_De ;
          WIDTH 410          ;
          VALUE _de          ;
-         TOOLTIP "Informe o endereço de E-Mail do pessoa que está enviando.";
+         TOOLTIP "Informe o endereço de E-Mail do pessoa que está enviando." ;
          FONT "Courier New" Size 10     ;
-         ON ENTER DoMethod("Form_Email","T_Para","SetFocus");
+         ON ENTER DoMethod("Form_Email","T_Para","SetFocus") ;
          MAXLENGTH 60 LOWERCASE
 
       @134,020 LABEL  Label_T_Para      ;
@@ -127,9 +127,9 @@ PROCEDURE Main()
 
       @130,110 TEXTBOX T_Para ;
          WIDTH 410           ;
-         TOOLTIP "Informe o endereço de E-Mail do pessoa para quem está enviando.";
+         TOOLTIP "Informe o endereço de E-Mail do pessoa para quem está enviando." ;
          FONT "Courier New" Size 10     ;
-         ON ENTER DoMethod("Form_Email","T_Assunto","SetFocus");
+         ON ENTER DoMethod("Form_Email","T_Assunto","SetFocus") ;
          MAXLENGTH 60 LOWERCASE
 
       @164,020 LABEL  Label_T_Assunto   ;
@@ -141,9 +141,9 @@ PROCEDURE Main()
 
       @160,110 TEXTBOX T_Assunto        ;
          WIDTH 410                      ;
-         TOOLTIP "Informe/Confirme o Assunto do E-Mail a ser enviado.";
+         TOOLTIP "Informe/Confirme o Assunto do E-Mail a ser enviado." ;
          FONT "Courier New" Size 10     ;
-         ON ENTER DoMethod("Form_Email","ECorpo","SetFocus");
+         ON ENTER DoMethod("Form_Email","ECorpo","SetFocus") ;
          MAXLENGTH 60
 
       @194,020 LABEL  Label_T_Axeno     ;
@@ -191,7 +191,7 @@ PROCEDURE Main()
          TOOLTIP "Informe/Confirme a Senha." ;
          FONT "Courier New" Size 10 ;
          PASSWORD ;
-         ON ENTER DoMethod("Form_Email","BEnviar","SetFocus");
+         ON ENTER DoMethod("Form_Email","BEnviar","SetFocus") ;
          MAXLENGTH 12
 
       @484,020 BUTTONEX BEnviar ;

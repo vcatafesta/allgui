@@ -33,15 +33,15 @@
 
 FUNCTION Main()
 
-   DEFINE WINDOW TestMain;
-         AT 0,0;
-         WIDTH 699 HEIGHT 543;
-         TITLE "DALE-AID";
-         ICON "DaleAid.ico";
-         MAIN NOMAXIMIZE;
+   DEFINE WINDOW TestMain ;
+         AT 0,0 ;
+         WIDTH 699 HEIGHT 543 ;
+         TITLE "DALE-AID" ;
+         ICON "DaleAid.ico" ;
+         MAIN NOMAXIMIZE ;
          FONT "Arial" SIZE 9
 
-      @  10, 10 FRAME Frame_1 OF TestMain CAPTION "&Please fill-in the informations required correctly:";
+      @  10, 10 FRAME Frame_1 OF TestMain CAPTION "&Please fill-in the informations required correctly:" ;
          WIDTH  670 HEIGHT 450 FONT "Arial" SIZE 9 BACKCOLOR NIL FONTCOLOR NIL
 
       @ 470,460 BUTTON Button_1 OF TestMain CAPTION "&Save" ACTION Nil FONT "Arial" SIZE 9
@@ -52,264 +52,264 @@ FUNCTION Main()
 
          PAGE "&Personal"
 
-            @  40, 10 LABEL Label_1 OF TestMain VALUE "&Master Account No.:";
+            @  40, 10 LABEL Label_1 OF TestMain VALUE "&Master Account No.:" ;
                ACTION Nil WIDTH  120 HEIGHT 12 FONT "Arial" SIZE 9
 
-            @  60, 10 TEXTBOX txbMasterCode OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @  60, 10 TEXTBOX txbMasterCode OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 13 ON LOSTFOCUS Nil
 
-            @  40,267 LABEL lblLastName OF TestMain VALUE "&Last Name";
+            @  40,267 LABEL lblLastName OF TestMain VALUE "&Last Name" ;
                ACTION Nil WIDTH  100 HEIGHT 12 FONT "Arial" SIZE 9
 
-            @  60,266 TEXTBOX txbLastName OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @  60,266 TEXTBOX txbLastName OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 20 ON LOSTFOCUS Nil
 
-            @  40,394 LABEL lblFirstName OF TestMain VALUE "&First Name";
+            @  40,394 LABEL lblFirstName OF TestMain VALUE "&First Name" ;
                ACTION Nil WIDTH  100 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @  60,393 TEXTBOX txbFirstName OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @  60,393 TEXTBOX txbFirstName OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 20 ON LOSTFOCUS Nil
 
-            @  40,520 LABEL lblSecondName OF TestMain VALUE "&Second Name";
+            @  40,520 LABEL lblSecondName OF TestMain VALUE "&Second Name" ;
                ACTION Nil WIDTH  100 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @  60,520 TEXTBOX txbSecondName OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @  60,520 TEXTBOX txbSecondName OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 20 ON LOSTFOCUS Nil
 
-            @  90, 10 LABEL lblMidName OF TestMain VALUE "&Middle Name";
+            @  90, 10 LABEL lblMidName OF TestMain VALUE "&Middle Name" ;
                ACTION Nil WIDTH  100 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 110, 10 TEXTBOX txbMidName OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @ 110, 10 TEXTBOX txbMidName OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 20 ON LOSTFOCUS Nil
 
-            @  60,138 DATEPICKER dpkDate OF TestMain VALUE CTOD(" / / ");
+            @  60,138 DATEPICKER dpkDate OF TestMain VALUE CTOD(" / / ") ;
                WIDTH  120 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @  40,140 LABEL lblDate OF TestMain VALUE "&Date";
+            @  40,140 LABEL lblDate OF TestMain VALUE "&Date" ;
                ACTION Nil WIDTH  100 HEIGHT 18 FONT "Arial" SIZE 9
 
-            @  90,140 LABEL lblTitle OF TestMain VALUE "Title";
+            @  90,140 LABEL lblTitle OF TestMain VALUE "Title" ;
                ACTION Nil WIDTH  80 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 110,138 COMBOBOX cboTitle OF TestMain ITEMS {""} VALUE 0;
+            @ 110,138 COMBOBOX cboTitle OF TestMain ITEMS {""} VALUE 0 ;
                WIDTH  120 HEIGHT 100 FONT "Arial" SIZE 9 ON LOSTFOCUS Nil
 
-            @  90,271 LABEL lblFullName OF TestMain VALUE "&Full Name";
+            @  90,271 LABEL lblFullName OF TestMain VALUE "&Full Name" ;
                ACTION Nil WIDTH  100 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 110,271 TEXTBOX txbFullName OF TestMain HEIGHT 24 VALUE "" WIDTH  370;
+            @ 110,271 TEXTBOX txbFullName OF TestMain HEIGHT 24 VALUE "" WIDTH  370 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 50 ON LOSTFOCUS Nil
 
-            @ 140, 11 LABEL lblDOB OF TestMain VALUE "Date of Birt&h";
+            @ 140, 11 LABEL lblDOB OF TestMain VALUE "Date of Birt&h" ;
                ACTION Nil WIDTH  120 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 160, 11 DATEPICKER dpkDOB OF TestMain VALUE CTOD(" / / ");
+            @ 160, 11 DATEPICKER dpkDOB OF TestMain VALUE CTOD(" / / ") ;
                WIDTH  120 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @ 140,141 LABEL Label_3 OF TestMain VALUE "&Place of Birth";
+            @ 140,141 LABEL Label_3 OF TestMain VALUE "&Place of Birth" ;
                ACTION Nil WIDTH  120 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 160,141 TEXTBOX txbPlaceOfBirth OF TestMain HEIGHT 24 VALUE "" WIDTH  490;
+            @ 160,141 TEXTBOX txbPlaceOfBirth OF TestMain HEIGHT 24 VALUE "" WIDTH  490 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 40 ON LOSTFOCUS Nil
 
-            @ 213, 21 LABEL lblAdrLine1 OF TestMain VALUE "Line 1:";
+            @ 213, 21 LABEL lblAdrLine1 OF TestMain VALUE "Line 1:" ;
                ACTION Nil WIDTH  40 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 243, 21 LABEL lblAdrLine2 OF TestMain VALUE "Line 2:";
+            @ 243, 21 LABEL lblAdrLine2 OF TestMain VALUE "Line 2:" ;
                ACTION Nil WIDTH  40 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 273, 21 LABEL lblAdrLine3 OF TestMain VALUE "Line 3:";
+            @ 273, 21 LABEL lblAdrLine3 OF TestMain VALUE "Line 3:" ;
                ACTION Nil WIDTH  40 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 210, 71 TEXTBOX txbLine1 OF TestMain HEIGHT 24 VALUE "" WIDTH  214;
+            @ 210, 71 TEXTBOX txbLine1 OF TestMain HEIGHT 24 VALUE "" WIDTH  214 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 40 ON LOSTFOCUS Nil
 
-            @ 240, 71 TEXTBOX txbLine2 OF TestMain HEIGHT 24 VALUE "" WIDTH  214;
+            @ 240, 71 TEXTBOX txbLine2 OF TestMain HEIGHT 24 VALUE "" WIDTH  214 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 40 ON LOSTFOCUS Nil
 
-            @ 270, 71 TEXTBOX txbLine3 OF TestMain HEIGHT 24 VALUE "" WIDTH  214;
+            @ 270, 71 TEXTBOX txbLine3 OF TestMain HEIGHT 24 VALUE "" WIDTH  214 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 40 ON LOSTFOCUS Nil
 
-            @ 190, 11 FRAME Frame_2 OF TestMain CAPTION "&Address Details";
+            @ 190, 11 FRAME Frame_2 OF TestMain CAPTION "&Address Details" ;
                WIDTH  283 HEIGHT 120 FONT "Arial" SIZE 9 BACKCOLOR NIL FONTCOLOR NIL OPAQUE
 
-            @ 213,321 LABEL lblMobile OF TestMain VALUE "&Mobile No.:";
+            @ 213,321 LABEL lblMobile OF TestMain VALUE "&Mobile No.:" ;
                ACTION Nil WIDTH  120 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 243,321 LABEL lblHomePhone OF TestMain VALUE "&Home Tel. No.:";
+            @ 243,321 LABEL lblHomePhone OF TestMain VALUE "&Home Tel. No.:" ;
                ACTION Nil WIDTH  120 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 273,321 LABEL lblHomeFax OF TestMain VALUE "Home Fax No.:";
+            @ 273,321 LABEL lblHomeFax OF TestMain VALUE "Home Fax No.:" ;
                ACTION Nil WIDTH  120 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 303,321 LABEL lblBusPhone OF TestMain VALUE "Business Tel No.:";
+            @ 303,321 LABEL lblBusPhone OF TestMain VALUE "Business Tel No.:" ;
                ACTION Nil WIDTH  120 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 363,321 LABEL lblBusFax OF TestMain VALUE "Business Fax No.:";
+            @ 363,321 LABEL lblBusFax OF TestMain VALUE "Business Fax No.:" ;
                ACTION Nil WIDTH  120 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 333,321 LABEL lblExtn OF TestMain VALUE "Local/Extensions No.:";
+            @ 333,321 LABEL lblExtn OF TestMain VALUE "Local/Extensions No.:" ;
                ACTION Nil WIDTH  120 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @ 210,451 TEXTBOX txbMobile OF TestMain HEIGHT 24 VALUE "" WIDTH  170;
+            @ 210,451 TEXTBOX txbMobile OF TestMain HEIGHT 24 VALUE "" WIDTH  170 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 14 ON LOSTFOCUS Nil
 
-            @ 240,451 TEXTBOX txbHomePhone OF TestMain HEIGHT 24 VALUE "" WIDTH  170;
+            @ 240,451 TEXTBOX txbHomePhone OF TestMain HEIGHT 24 VALUE "" WIDTH  170 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 13 ON LOSTFOCUS Nil
 
-            @ 270,451 TEXTBOX txbHomeFax OF TestMain HEIGHT 24 VALUE "" WIDTH  170;
+            @ 270,451 TEXTBOX txbHomeFax OF TestMain HEIGHT 24 VALUE "" WIDTH  170 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 13 ON LOSTFOCUS Nil
 
-            @ 300,451 TEXTBOX txbBusPhone OF TestMain HEIGHT 26 VALUE "" WIDTH  170;
+            @ 300,451 TEXTBOX txbBusPhone OF TestMain HEIGHT 26 VALUE "" WIDTH  170 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 26 ON LOSTFOCUS Nil
 
-            @ 330,451 TEXTBOX txbExtension OF TestMain HEIGHT 24 VALUE "" WIDTH  170;
+            @ 330,451 TEXTBOX txbExtension OF TestMain HEIGHT 24 VALUE "" WIDTH  170 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 16 ON LOSTFOCUS Nil
 
-            @ 360,451 TEXTBOX txbBusFax OF TestMain HEIGHT 24 VALUE "" WIDTH  170;
+            @ 360,451 TEXTBOX txbBusFax OF TestMain HEIGHT 24 VALUE "" WIDTH  170 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 13 ON LOSTFOCUS Nil
 
-            @ 190,301 FRAME Frame_3 OF TestMain CAPTION "P&hone Notes:";
+            @ 190,301 FRAME Frame_3 OF TestMain CAPTION "P&hone Notes:" ;
                WIDTH  330 HEIGHT 210 FONT "Arial" SIZE 9 BACKCOLOR NIL FONTCOLOR NIL OPAQUE
 
-            @ 310, 11 FRAME Frame_4 OF TestMain CAPTION "Web";
+            @ 310, 11 FRAME Frame_4 OF TestMain CAPTION "Web" ;
                WIDTH  280 HEIGHT 100 FONT "Arial" SIZE 9 BACKCOLOR NIL FONTCOLOR NIL OPAQUE
 
-            @ 333, 21 LABEL lblEmail OF TestMain VALUE "E-Mail:";
+            @ 333, 21 LABEL lblEmail OF TestMain VALUE "E-Mail:" ;
                ACTION Nil WIDTH  40 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 330, 71 TEXTBOX txbEmail OF TestMain HEIGHT 24 VALUE "" WIDTH  213;
+            @ 330, 71 TEXTBOX txbEmail OF TestMain HEIGHT 24 VALUE "" WIDTH  213 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 50 ON LOSTFOCUS Nil
 
-            @ 357, 21 LABEL lblHomePage OF TestMain VALUE "Home Page:";
+            @ 357, 21 LABEL lblHomePage OF TestMain VALUE "Home Page:" ;
                ACTION Nil WIDTH  70 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 377, 21 TEXTBOX txbHomePage OF TestMain HEIGHT 24 VALUE "" WIDTH  264;
+            @ 377, 21 TEXTBOX txbHomePage OF TestMain HEIGHT 24 VALUE "" WIDTH  264 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 50 ON LOSTFOCUS Nil
 
          END PAGE
 
          PAGE "&Beneficiary"
 
-            @  30, 11 FRAME Frame_5 OF TestMain CAPTION "Beneficiary &Lists:";
+            @  30, 11 FRAME Frame_5 OF TestMain CAPTION "Beneficiary &Lists:" ;
                WIDTH  630 HEIGHT 340 FONT "Arial" SIZE 9 BACKCOLOR NIL FONTCOLOR NIL OPAQUE
 
-            @ 380,231 BUTTON btnAdd OF TestMain CAPTION "&Add Item";
+            @ 380,231 BUTTON btnAdd OF TestMain CAPTION "&Add Item" ;
                PICTURE "add.bmp" LEFT ;
                WIDTH  100 HEIGHT 28
 
-            @ 380,331 BUTTON btnEdit OF TestMain CAPTION "&Edit Item";
+            @ 380,331 BUTTON btnEdit OF TestMain CAPTION "&Edit Item" ;
                PICTURE "edit.bmp" LEFT ;
                WIDTH  100 HEIGHT 28
 
-            @ 380,431 BUTTON btnDel OF TestMain CAPTION "&Delete Item";
+            @ 380,431 BUTTON btnDel OF TestMain CAPTION "&Delete Item" ;
                PICTURE "del.bmp" LEFT ;
                WIDTH  100 HEIGHT 28
 
-            @ 380,531 BUTTON btnPrint OF TestMain CAPTION "P&rint List";
+            @ 380,531 BUTTON btnPrint OF TestMain CAPTION "P&rint List" ;
                PICTURE "print.bmp" LEFT ;
                WIDTH  100 HEIGHT 28
 
-            @  50, 21 BROWSE Browse_1 OF ~LDSC_Form WIDTH  610 HEIGHT 310;
-               HEADERS {''} WIDTHS {0} WORKAREA Nil FIELDS {''};
-               FONT "Arial" SIZE 9 ON DBLCLICK Nil;
+            @  50, 21 BROWSE Browse_1 OF ~LDSC_Form WIDTH  610 HEIGHT 310 ;
+               HEADERS {''} WIDTHS {0} WORKAREA Nil FIELDS {''} ;
+               FONT "Arial" SIZE 9 ON DBLCLICK Nil ;
                ON HEADCLICK Nil
 
          END PAGE
 
          PAGE "&Abroad Details"
 
-            @  30, 11 FRAME Frame_6 OF TestMain CAPTION "Overseas Contact Information ( if Applicable )";
+            @  30, 11 FRAME Frame_6 OF TestMain CAPTION "Overseas Contact Information ( if Applicable )" ;
                WIDTH  630 HEIGHT 380 FONT "Arial" SIZE 9 BACKCOLOR NIL FONTCOLOR NIL OPAQUE
 
-            @  70, 31 LABEL lblCountry OF TestMain VALUE "&Country Code:";
+            @  70, 31 LABEL lblCountry OF TestMain VALUE "&Country Code:" ;
                ACTION Nil WIDTH  80 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @  70,121 TEXTBOX txbCountryCode OF TestMain HEIGHT 24 VALUE "" WIDTH  30;
+            @  70,121 TEXTBOX txbCountryCode OF TestMain HEIGHT 24 VALUE "" WIDTH  30 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 2 ON LOSTFOCUS Nil
 
-            @  70,161 COMBOBOX cboCountry OF TestMain ITEMS {""} VALUE 0;
+            @  70,161 COMBOBOX cboCountry OF TestMain ITEMS {""} VALUE 0 ;
                WIDTH  163 HEIGHT 100 FONT "Arial" SIZE 9 ON LOSTFOCUS Nil
 
-            @  50, 21 FRAME Frame_7 OF TestMain CAPTION "&Host Country:";
+            @  50, 21 FRAME Frame_7 OF TestMain CAPTION "&Host Country:" ;
                WIDTH  310 HEIGHT 80 FONT "Arial" SIZE 9 BACKCOLOR Nil FONTCOLOR Nil OPAQUE
 
-            @ 103, 31 LABEL lblCountryDetails OF TestMain VALUE "GMT +8  Phone Dialing Codes: 966  DST = Yes";
+            @ 103, 31 LABEL lblCountryDetails OF TestMain VALUE "GMT +8  Phone Dialing Codes: 966  DST = Yes" ;
                ACTION Nil WIDTH  290 HEIGHT 20 FONT "Arial" SIZE 9
 
-            @ 150, 31 LABEL lblFAdrLine1 OF TestMain VALUE "Line &1";
+            @ 150, 31 LABEL lblFAdrLine1 OF TestMain VALUE "Line &1" ;
                ACTION Nil WIDTH  40 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 180, 31 LABEL lblFAdrLine2 OF TestMain VALUE "Line &2";
+            @ 180, 31 LABEL lblFAdrLine2 OF TestMain VALUE "Line &2" ;
                ACTION Nil WIDTH  40 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 210, 31 LABEL lblFAdrLine3 OF TestMain VALUE "Line &3";
+            @ 210, 31 LABEL lblFAdrLine3 OF TestMain VALUE "Line &3" ;
                ACTION Nil WIDTH  40 HEIGHT 14 FONT "Arial" SIZE 9
 
-            @ 150, 81 TEXTBOX txbFAdrLine1 OF TestMain HEIGHT 24 VALUE "" WIDTH  240;
+            @ 150, 81 TEXTBOX txbFAdrLine1 OF TestMain HEIGHT 24 VALUE "" WIDTH  240 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 40 ON LOSTFOCUS Nil
 
-            @ 180, 81 TEXTBOX txbFAdrLine2 OF TestMain HEIGHT 24 VALUE "" WIDTH  240;
+            @ 180, 81 TEXTBOX txbFAdrLine2 OF TestMain HEIGHT 24 VALUE "" WIDTH  240 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 40 ON LOSTFOCUS Nil
 
-            @ 210, 81 TEXTBOX txbFAdrLine3 OF TestMain HEIGHT 24 VALUE "" WIDTH  240;
+            @ 210, 81 TEXTBOX txbFAdrLine3 OF TestMain HEIGHT 24 VALUE "" WIDTH  240 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 40 ON LOSTFOCUS Nil
 
-            @ 130, 21 FRAME Frame_8 OF TestMain CAPTION "Address Details in Host Country";
+            @ 130, 21 FRAME Frame_8 OF TestMain CAPTION "Address Details in Host Country" ;
                WIDTH  310 HEIGHT 120 FONT "Arial" SIZE 9 BACKCOLOR Nil FONTCOLOR Nil OPAQUE
 
-            @  70,371 LABEL lblFMobile OF TestMain VALUE "Mobile &No.:";
+            @  70,371 LABEL lblFMobile OF TestMain VALUE "Mobile &No.:" ;
                ACTION Nil WIDTH  105 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @ 100,371 LABEL lblFHomePhone OF TestMain VALUE "&Home Phone:";
+            @ 100,371 LABEL lblFHomePhone OF TestMain VALUE "&Home Phone:" ;
                ACTION Nil WIDTH  105 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @ 130,371 LABEL lblFHomeFax OF TestMain VALUE "Ho&me Fa&x";
+            @ 130,371 LABEL lblFHomeFax OF TestMain VALUE "Ho&me Fa&x" ;
                ACTION Nil WIDTH  105 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @ 160,371 LABEL Label_12 OF TestMain VALUE "B&usiness Tel. No.:";
+            @ 160,371 LABEL Label_12 OF TestMain VALUE "B&usiness Tel. No.:" ;
                ACTION Nil WIDTH  105 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @ 190,371 LABEL Label_13 OF TestMain VALUE "Ex&tension No(s).:";
+            @ 190,371 LABEL Label_13 OF TestMain VALUE "Ex&tension No(s).:" ;
                ACTION Nil WIDTH  105 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @ 220,371 LABEL Label_14 OF TestMain VALUE "Business &Fax:";
+            @ 220,371 LABEL Label_14 OF TestMain VALUE "Business &Fax:" ;
                ACTION Nil WIDTH  105 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @  70,481 TEXTBOX txbFMobile OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @  70,481 TEXTBOX txbFMobile OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 14 ON LOSTFOCUS Nil
 
-            @ 100,481 TEXTBOX txbFHomePhone OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @ 100,481 TEXTBOX txbFHomePhone OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 13 ON LOSTFOCUS Nil
 
-            @ 130,481 TEXTBOX txbFHomeFax OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @ 130,481 TEXTBOX txbFHomeFax OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 13 ON LOSTFOCUS Nil
 
-            @ 160,481 TEXTBOX txbFBusPhone OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @ 160,481 TEXTBOX txbFBusPhone OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 26 ON LOSTFOCUS Nil
 
-            @ 190,481 TEXTBOX txbFBusExtn OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @ 190,481 TEXTBOX txbFBusExtn OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 16 ON LOSTFOCUS Nil
 
-            @ 220,481 TEXTBOX txbFBusFax OF TestMain HEIGHT 24 VALUE "" WIDTH  120;
+            @ 220,481 TEXTBOX txbFBusFax OF TestMain HEIGHT 24 VALUE "" WIDTH  120 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 13 ON LOSTFOCUS Nil
 
-            @  50,341 FRAME Frame_9 OF TestMain CAPTION "Phone Notes:";
+            @  50,341 FRAME Frame_9 OF TestMain CAPTION "Phone Notes:" ;
                WIDTH  290 HEIGHT 210 FONT "Arial" SIZE 9 BACKCOLOR Nil FONTCOLOR Nil OPAQUE
 
-            @ 270, 21 FRAME Frame_10 OF TestMain CAPTION "Alternate &Web Details:";
+            @ 270, 21 FRAME Frame_10 OF TestMain CAPTION "Alternate &Web Details:" ;
                WIDTH  610 HEIGHT 90 FONT "Arial" SIZE 9 BACKCOLOR Nil FONTCOLOR Nil OPAQUE
 
-            @ 290, 31 LABEL lblAltEmail OF TestMain VALUE "&Alternate E-mail:";
+            @ 290, 31 LABEL lblAltEmail OF TestMain VALUE "&Alternate E-mail:" ;
                ACTION Nil WIDTH  120 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @ 330, 31 LABEL lblAltHomePage OF TestMain VALUE "Alternate Home Page:";
+            @ 330, 31 LABEL lblAltHomePage OF TestMain VALUE "Alternate Home Page:" ;
                ACTION Nil WIDTH  120 HEIGHT 24 FONT "Arial" SIZE 9
 
-            @ 290,161 TEXTBOX txbAltEmail OF TestMain HEIGHT 24 VALUE "" WIDTH  460;
+            @ 290,161 TEXTBOX txbAltEmail OF TestMain HEIGHT 24 VALUE "" WIDTH  460 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 50 ON LOSTFOCUS Nil
 
-            @ 320,161 TEXTBOX txbAltHomePage OF TestMain HEIGHT 24 VALUE "" WIDTH  460;
+            @ 320,161 TEXTBOX txbAltHomePage OF TestMain HEIGHT 24 VALUE "" WIDTH  460 ;
                FONT "Arial" SIZE 9 TOOLTIP "" MAXLENGTH 50 ON LOSTFOCUS Nil
 
          END PAGE

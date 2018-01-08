@@ -31,10 +31,10 @@ FUNCTION Main()
       @ 070,005 GRID GRID_PECAS     ;
          WIDTH  780          ;
          HEIGHT 400          ;
-         HEADERS {"Código", "Original", "Cód Fornecedor 1", "Descrição", "Embalagem","Marca", "Preço Venda", "Estoque" , "Aplicação", "Obervação", "Record"};
+         HEADERS {"Código", "Original", "Cód Fornecedor 1", "Descrição", "Embalagem","Marca", "Preço Venda", "Estoque" , "Aplicação", "Obervação", "Record"} ;
          WIDTHS  { 100, 100, 100, 240, 60, 80, 90, 60, 300, 300, 70 }  ;
          VALUE 1                        ;
-         FONT "Arial" Size 8 Bold;
+         FONT "Arial" Size 8 Bold ;
          BACKCOLOR _YELLOW FONTCOLOR BLACK  ;
          JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT}
 
@@ -43,17 +43,17 @@ FUNCTION Main()
          WIDTH 70              ;
          HEIGHT 20             ;
          FONTCOLOR _BLUE ;
-         FONT "MS SANS SERIF" SIZE 09 BOLD;
+         FONT "MS SANS SERIF" SIZE 09 BOLD ;
          TRANSPARENT
 
       @ 480,075 TEXTBOX TXTPESQUISA                   ;
          WIDTH 280                             ;
          TOOLTIP "Digite o Nome para PESQUISA" ;
-         FONT "MS SANS SERIF" SIZE 9 BOLD;
+         FONT "MS SANS SERIF" SIZE 9 BOLD ;
          BACKCOLOR _YELLOW2 FONTCOLOR _VERDE  ;
          MAXLENGTH 40 UPPERCASE                ;
          ON GOTFOCUS This.BackColor:= _BLUE3  ;
-         ON LOSTFOCUS This.BackColor:=_YELLOW2;
+         ON LOSTFOCUS This.BackColor:=_YELLOW2 ;
          ON CHANGE { || PESQUISA_PECAS() }
 
       @ 485,365 LABEL  Label_QUAL          ;
@@ -61,7 +61,7 @@ FUNCTION Main()
          WIDTH 250             ;
          HEIGHT 20             ;
          FONTCOLOR _BLUE5 ;
-         FONT "MS SANS SERIF" SIZE 10 BOLD;
+         FONT "MS SANS SERIF" SIZE 10 BOLD ;
          TRANSPARENT
 
       @ 505,005 LABEL  Label_X ;
@@ -69,7 +69,7 @@ FUNCTION Main()
          WIDTH 700             ;
          HEIGHT 40             ;
          FONTCOLOR _BLUE ;
-         FONT "MS SANS SERIF" SIZE 09 BOLD;
+         FONT "MS SANS SERIF" SIZE 09 BOLD ;
          TRANSPARENT
 
       DEFINE MAIN MENU

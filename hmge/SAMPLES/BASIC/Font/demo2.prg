@@ -57,8 +57,8 @@ FUNCTION Main()
       @ 10,10 LABEL Label_2 ;
          WIDTH 350 HEIGHT 150 ;
          VALUE "" ;
-         ACTION MsgInfo('Click!');
-         BACKCOLOR YELLOW;
+         ACTION MsgInfo('Click!') ;
+         BACKCOLOR YELLOW ;
          FONT "font_2" CENTERALIGN
 
       @ 10,400 LABEL Label_3 ;

@@ -19,7 +19,7 @@ PROC Main()
    DEFINE WINDOW frmCSBTest ;
          AT 0,0 ;
          WIDTH 550 ;
-         HEIGHT 300;
+         HEIGHT 300 ;
          TITLE 'CSBox ( Combined Search Box ) Test' ;
          MAIN
 

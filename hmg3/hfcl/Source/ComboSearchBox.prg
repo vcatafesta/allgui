@@ -12,37 +12,37 @@ MEMVAR _HMG_SYSDATA
 
 #include "hmg.ch"
 
-PROC _DefineComboSearchBox( cCSBoxName,;
-      cCSBoxParent,;
-      cCSBoxCol,;
-      cCSBoxRow,;
-      cCSBoxWidth,;
-      cCSBoxHeight,;
-      cCSBoxValue,;
-      cFontName,;
-      nFontSize,;
-      cToolTip,;
-      nMaxLenght,;
-      lUpper,;
-      lLower,;
-      lNumeric,;
-      bLostFocus,;
-      bGotFocus,;
-      bEnter,;
-      lRightAlign,;
-      nHelpId,;
-      lBold,;
-      lItalic,;
-      lUnderline,;
-      aBackColor,;
-      aFontColor,;
-      lNoTabStop,;
-      aArray,;
-      lAnyWhere,;
-      nDropHeight,;
-      lAdditive,;
-      nRowOffset,;
-      nColOffset;
+PROC _DefineComboSearchBox( cCSBoxName, ;
+      cCSBoxParent, ;
+      cCSBoxCol, ;
+      cCSBoxRow, ;
+      cCSBoxWidth, ;
+      cCSBoxHeight, ;
+      cCSBoxValue, ;
+      cFontName, ;
+      nFontSize, ;
+      cToolTip, ;
+      nMaxLenght, ;
+      lUpper, ;
+      lLower, ;
+      lNumeric, ;
+      bLostFocus, ;
+      bGotFocus, ;
+      bEnter, ;
+      lRightAlign, ;
+      nHelpId, ;
+      lBold, ;
+      lItalic, ;
+      lUnderline, ;
+      aBackColor, ;
+      aFontColor, ;
+      lNoTabStop, ;
+      aArray, ;
+      lAnyWhere, ;
+      nDropHeight, ;
+      lAdditive, ;
+      nRowOffset, ;
+      nColOffset ;
       )
 
    LOCAL   cParentName := ''
@@ -69,37 +69,37 @@ PROC _DefineComboSearchBox( cCSBoxName,;
       cParentName := cCSBoxParent
    ENDIF
 
-   _DefineTextBox( cCSBoxName,;
-      cCSBoxParent,;
-      cCSBoxcol,;
-      cCSBoxRow,;
-      cCSBoxWidth,;
-      cCSBoxheight,;
-      cCSBoxValue,;
-      cFontName,;
-      nFontSize,;
-      cToolTip,;
-      nMaxLenght,;
-      lUpper,;
-      lLower,;
-      lNumeric,;
-      .f.,;
-      bLostFocus,;
-      bGotFocus,;
-      {||CreateCSBox( cParentName, cCSBoxName, aArray, lAnyWhere, nDropHeight, lAdditive, nRowOFfset, nColOFfset )},;
-      bEnter,;
-      lRightAlign,;
-      nHelpId,;
-      .f.,;
-      lBold,;
-      lItalic,;
-      lUnderline,;
-      .f.,;
-      ,;
-      aBackColor,;
-      aFontColor,;
-      .f.,;
-      iif(lNoTabStop,.f.,.t.);
+   _DefineTextBox( cCSBoxName, ;
+      cCSBoxParent, ;
+      cCSBoxcol, ;
+      cCSBoxRow, ;
+      cCSBoxWidth, ;
+      cCSBoxheight, ;
+      cCSBoxValue, ;
+      cFontName, ;
+      nFontSize, ;
+      cToolTip, ;
+      nMaxLenght, ;
+      lUpper, ;
+      lLower, ;
+      lNumeric, ;
+      .f., ;
+      bLostFocus, ;
+      bGotFocus, ;
+      {||CreateCSBox( cParentName, cCSBoxName, aArray, lAnyWhere, nDropHeight, lAdditive, nRowOFfset, nColOFfset )}, ;
+      bEnter, ;
+      lRightAlign, ;
+      nHelpId, ;
+      .f., ;
+      lBold, ;
+      lItalic, ;
+      lUnderline, ;
+      .f., ;
+      , ;
+      aBackColor, ;
+      aFontColor, ;
+      .f., ;
+      iif(lNoTabStop,.f.,.t.) ;
       )
 
    && DEFINE TEXTBOX &cCSBoxName
@@ -188,7 +188,7 @@ PROC _DefineComboSearchBox( cCSBoxName,;
                   TITLE '' ;
                   MODAL ;
                   NOCAPTION ;
-                  NOSIZE;
+                  NOSIZE ;
                   ON INIT SetProperty( cCSBxName, '_cstext', "CaretPos", caret )
 
                ON KEY UP     OF This.Window ACTION _CSDoUpKey()
@@ -295,14 +295,14 @@ PROC _DefineComboSearchBox( cCSBoxName,;
 
                SetProperty( cParentName, cTxBName, "VALUE", cListItem )
 
-               SetProperty(cParentName,cTxBName,"CARETPOS",;
-                  HMG_LEN( GetProperty( ThisWindow.Name, '_csList', "ITEM",;
+               SetProperty(cParentName,cTxBName,"CARETPOS", ;
+                  HMG_LEN( GetProperty( ThisWindow.Name, '_csList', "ITEM", ;
                   GetProperty( ThisWindow.Name, '_csList', "VALUE" ) ) ) )
             ELSE
                IF lRetainItem // lAdditive!
                   stopcontroleventprocedure( cTxBName, cParentName, .t. )
                   SetProperty( cParentName, cTxBName, "VALUE", GetProperty( ThisWindow.Name, '_cstext', "VALUE" ) )
-                  SetProperty(cParentName,cTxBName,"CARETPOS",;
+                  SetProperty(cParentName,cTxBName,"CARETPOS", ;
                      HMG_LEN( GetProperty( cParentName, cTxBName, "VALUE" ) ) )
                   stopcontroleventprocedure( cTxBName, cParentName, .f. )
                ENDIF
@@ -347,7 +347,7 @@ PROC _DefineComboSearchBox( cCSBoxName,;
                      ELSE
                         stopcontroleventprocedure( cCSBoxName, cParentName, .t. )
                         SetProperty( cParentName, cCSBoxName, "VALUE", GetProperty( ThisWindow.Name, '_cstext', "VALUE" ) )
-                        SetProperty(cParentName,cCSBoxName,"CARETPOS",;
+                        SetProperty(cParentName,cCSBoxName,"CARETPOS", ;
                            HMG_LEN( GetProperty( cParentName, cCSBoxName, "VALUE" ) ) )
                         DoMethod( cParentName,cCSBoxName,"SETFOCUS" )
                         stopcontroleventprocedure( cCSBoxName, cParentName, .f. )

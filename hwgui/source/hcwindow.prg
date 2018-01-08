@@ -366,7 +366,7 @@ METHOD Anchor( oCtrl, x, y, w, h ) CLASS HCustomWindow
 
    LOCAL nlen , i, x1, y1
 
-   IF oCtrl = Nil .OR.;
+   IF oCtrl = Nil .OR. ;
          ASCAN( oCtrl:aControls, {| o | __ObjHasMsg( o,"ANCHOR") .AND. o:Anchor > 0 } ) = 0
 
       RETURN .F.

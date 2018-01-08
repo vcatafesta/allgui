@@ -61,10 +61,10 @@ FUNCTION Main
          FIELDS { 'Test->Types' , 'Test->First' , 'Test->Last' , 'Test->Birth' ,  'Test->Bio' } ;
          VALUE 1 ;
          DYNAMICBACKCOLOR { , bColor, bColor, bColor, bColor } ;
-         FONT "MS Sans Serif" SIZE 9;
+         FONT "MS Sans Serif" SIZE 9 ;
          EDIT ;
          NOLINES ;
-         IMAGE {"br0","br1","br2","br3","br4","br5","br6","br7","br8","br9"};
+         IMAGE {"br0","br1","br2","br3","br4","br5","br6","br7","br8","br9"} ;
          JUSTIFY { ,, BROWSE_JTFY_CENTER, } // BROWSE_JTFY_LEFT por defecto, no es necesario escribirlo
 
    END WINDOW

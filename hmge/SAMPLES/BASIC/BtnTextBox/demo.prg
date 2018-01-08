@@ -23,7 +23,7 @@ FUNCTION Main
          MAIN
 
       @ 10,10 TEXTBOX Text_1 ;
-         WIDTH 200;
+         WIDTH 200 ;
          VALUE "123AB" ;
          FONT 'Arial' SIZE 10 ;
          TOOLTIP 'Standard TextBox' ;
@@ -45,29 +45,29 @@ FUNCTION Main
    @ 70,10 BTNTEXTBOX Text_3 ;
       WIDTH 200 ;
       VALUE 150 ;
-      ACTION f_Btn(2);
-      ON ENTER f_Btn(2);
-      NUMERIC;
-      RIGHTALIGN;
-      MAXLENGTH 3;
+      ACTION f_Btn(2) ;
+      ON ENTER f_Btn(2) ;
+      NUMERIC ;
+      RIGHTALIGN ;
+      MAXLENGTH 3 ;
       FONT 'Arial' SIZE 10 ;
       TOOLTIP {'Numeric TextBox Tooltip','Button Tooltip'}
 
-   @ 110, 10 BTNTEXTBOX Text_4;
-      WIDTH 200;
+   @ 110, 10 BTNTEXTBOX Text_4 ;
+      WIDTH 200 ;
       VALUE '' ;
-      ACTION Get_Fold_Click('Program Folder');
-      DEFAULT;
-      ACTION2 msginfo("Button Info pressed");
-      PICTURE {"folder.bmp","info.bmp"};
-      BUTTONWIDTH 24;
-      FONT 'Arial' SIZE 10;
-      DISABLEEDIT;
+      ACTION Get_Fold_Click('Program Folder') ;
+      DEFAULT ;
+      ACTION2 msginfo("Button Info pressed") ;
+      PICTURE {"folder.bmp","info.bmp"} ;
+      BUTTONWIDTH 24 ;
+      FONT 'Arial' SIZE 10 ;
+      DISABLEEDIT ;
       TOOLTIP {'Button TextBox','Button 1 Tooltip','Button 2 Tooltip'}
 
-   @ 140,10 BUTTON Btn_1;
-      CAPTION "Dialog Test";
-      ACTION fDialog();
+   @ 140,10 BUTTON Btn_1 ;
+      CAPTION "Dialog Test" ;
+      ACTION fDialog() ;
       WIDTH 200
 
 END WINDOW
@@ -118,7 +118,7 @@ FUNCTION Get_Fold_Click(NameWorkKat)
 FUNCTION fDialog()
 
    DEFINE DIALOG f_dialog ;
-      OF Form_1;
+      OF Form_1 ;
       RESOURCE IDD_DLG1 ;
 
    REDEFINE  TEXTBOX Text_1 ID IDC_EDT1 ;
@@ -128,25 +128,25 @@ FUNCTION fDialog()
 
    REDEFINE BTNTEXTBOX Text_2 ID IDC_EDT2 ;
       VALUE '' ;
-      ACTION {|| f_BtnDlg(1)};
+      ACTION {|| f_BtnDlg(1)} ;
       FONT 'Arial' SIZE 10 ;
       TOOLTIP 'Button Character TextBox'
 
-   REDEFINE  BTNTEXTBOX Text_3 ID IDC_EDT3;
+   REDEFINE  BTNTEXTBOX Text_3 ID IDC_EDT3 ;
       VALUE 150 ;
-      ACTION f_BtnDlg(2);
-      ACTION2 f_BtnDlg(4);
-      NUMERIC;
+      ACTION f_BtnDlg(2) ;
+      ACTION2 f_BtnDlg(4) ;
+      NUMERIC ;
       FONT 'Arial' SIZE 10 ;
       TOOLTIP 'Button Numeric TextBox'
 
    REDEFINE  BTNTEXTBOX Text_4 ID IDC_EDT4 ;
       VALUE '' ;
-      ACTION Get_Fold_dlg('Progrmm Folder ');
-      ACTION2 msginfo("Button Info pressed ");
-      PICTURE {"folder.bmp","info.bmp"};
-      BUTTONWIDTH 20;
-      FONT 'Arial' SIZE 10 BOLD;
+      ACTION Get_Fold_dlg('Progrmm Folder ') ;
+      ACTION2 msginfo("Button Info pressed ") ;
+      PICTURE {"folder.bmp","info.bmp"} ;
+      BUTTONWIDTH 20 ;
+      FONT 'Arial' SIZE 10 BOLD ;
       TOOLTIP {'Button TextBox','Button 1 Tooltip','Button 1 Tooltip'}
 
 END DIALOG

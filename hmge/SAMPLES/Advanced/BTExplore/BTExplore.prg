@@ -22,11 +22,11 @@ PROCEDURE Main()
    nFrmNo := 0
    aHandles := {}
 
-   DEFINE WINDOW frmBTExpMain;
-         AT 0,0;
-         WIDTH  700;
-         HEIGHT 600;
-         TITLE "Exploring Bos Taurus for HMG";
+   DEFINE WINDOW frmBTExpMain ;
+         AT 0,0 ;
+         WIDTH  700 ;
+         HEIGHT 600 ;
+         TITLE "Exploring Bos Taurus for HMG" ;
          ICON "BT_Icon" ;
          ON RELEASE ReleaseAll() ;
          MAIN
@@ -92,11 +92,11 @@ PROCEDURE BTEx_Release( hBitmap )
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
-PROCEDURE BTEx_Paint(;
-      cFrmName,;
+PROCEDURE BTEx_Paint( ;
+      cFrmName, ;
       hBitmap )
 
-   LOCAL nFrmWidth  := BT_ClientAreaWidth(  cFrmName ),;
+   LOCAL nFrmWidth  := BT_ClientAreaWidth(  cFrmName ), ;
       nFrmHeight := BT_ClientAreaHeight( cFrmName )
 
    LOCAL hDC, BTstruct
@@ -115,13 +115,13 @@ PROCEDURE BTEx_OpenImgFile()                 // Open an Image file
 
    LOCAL cImgFileName := GetFile(,, GetCurrentFolder() )  // Image File Name
 
-   LOCAL nParentHeight := frmBTExpMain.Height,;
-      nParentCol := frmBTExpMain.Col,;
-      nParentRow := frmBTExpMain.Row,;
-      nFrmWidth,;
+   LOCAL nParentHeight := frmBTExpMain.Height, ;
+      nParentCol := frmBTExpMain.Col, ;
+      nParentRow := frmBTExpMain.Row, ;
+      nFrmWidth, ;
       nFrmHeight
 
-   LOCAL cFrmName := "frmImg_",;
+   LOCAL cFrmName := "frmImg_", ;
       hBitmap
 
    LOCAL nImgWidth,;          // Width of bitmap
@@ -144,7 +144,7 @@ PROCEDURE BTEx_OpenImgFile()                 // Open an Image file
       nFrmWidth  := nFrmHeight * nAspRatio - 40
 
       DEFINE WINDOW &cFrmName ;
-            AT nParentRow + nFrmNo * 40, nParentCol + nFrmNo * 40;
+            AT nParentRow + nFrmNo * 40, nParentCol + nFrmNo * 40 ;
             WIDTH  nFrmWidth ;
             HEIGHT nFrmHeight ;
             ICON "BT_Icon" ;

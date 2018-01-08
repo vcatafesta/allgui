@@ -2610,7 +2610,7 @@ FUNCTION _SetPicture ( ControlName, ParentForm, FileName )
       IF  .Not. Empty (_HMG_SYSDATA [ 25 ] [i] ) ;
             .And. ;
             .Not. Empty (_HMG_SYSDATA [ 33 ] [i] ) ;
-            .Or.;
+            .Or. ;
             (_HMG_SYSDATA [ 22 ] [i] == 'I' .And. IsAppThemed())
 
          IF _HMG_SYSDATA [ 38 ] [i] == .T.
@@ -3516,7 +3516,7 @@ FUNCTION InputWindow ( cTitle, aLabels, aValues, aFormats, nRow, nCol, aBackColo
    IF nR + nH > GetDeskTopRealHeight()
       nDiff :=  nR + nH - GetDeskTopRealHeight()
       // nR := nR - nDiff
-      DEFINE WINDOW _InputWindow AT nR, nC WIDTH nW HEIGHT (nH - nDiff);
+      DEFINE WINDOW _InputWindow AT nR, nC WIDTH nW HEIGHT (nH - nDiff) ;
             VIRTUAL HEIGHT nH VIRTUAL WIDTH nW+20 ;
             TITLE cTitle MODAL NOSIZE BackColor aBackColor ON RELEASE _InputWindowOnRelease(OldScrollStep,aHotKeys)
 
@@ -5029,8 +5029,8 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
 
    DEFINE WINDOW _HMG_PRINTER_SHOWPREVIEW ;
          AT 0,0 ;
-         WIDTH  GetDesktopWidth() - 103 - IF ( ISVISTA() .And. IsAppThemed() , 25 , 0);
-         HEIGHT GetDesktopHeight() - 066  - IF ( ISVISTA() .And. IsAppThemed() , 25 , 0);
+         WIDTH  GetDesktopWidth() - 103 - IF ( ISVISTA() .And. IsAppThemed() , 25 , 0) ;
+         HEIGHT GetDesktopHeight() - 066  - IF ( ISVISTA() .And. IsAppThemed() , 25 , 0) ;
          CHILD NOSIZE NOMINIMIZE NOMAXIMIZE NOSYSMENU ;
          TITLE ppnavtitle ;
          BACKCOLOR GRAY ;
@@ -5067,7 +5067,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
                ON SCROLLLEFT   _HMG_PRINTER_ScrollLeft() ;
                ON SCROLLRIGHT  _HMG_PRINTER_ScrollRight() ;
                ON HSCROLLBOX   _HMG_PRINTER_hScrollBoxProcess() ;
-               ON VSCROLLBOX   _HMG_PRINTER_vScrollBoxProcess();
+               ON VSCROLLBOX   _HMG_PRINTER_vScrollBoxProcess() ;
                ON PAINT _HMG_PRINTER_PREVIEW_OnPaint()
 
             _HMG_PRINTER_SET_K_EVENTS("SPLITCHILD_1")
@@ -5234,11 +5234,11 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
 
       ON KEY ESCAPE ACTION ( EnableWindow(GetformHandle("_HMG_PRINTER_SHOWPREVIEW")), EnableWindow(GetformHandle("SPLITCHILD_1")), EnableWindow(GetformHandle("_HMG_PRINTER_SHOWTHUMBNAILS")), HideWindow(GetFormHandle("_HMG_PRINTER_GO_TO_PAGE")), DoMethod("SPLITCHILD_1","SetFocus") )
 
-      ON KEY RETURN  ACTION ( _HMG_SYSDATA [ 361 ] := _HMG_PRINTER_GO_TO_PAGE.Spinner_1.Value ,;
-         EnableWindow(GetformHandle("_HMG_PRINTER_SHOWPREVIEW")),;
-         EnableWindow(GetformHandle("SPLITCHILD_1")),;
-         EnableWindow(GetformHandle("_HMG_PRINTER_SHOWTHUMBNAILS")),;
-         HideWindow(GetFormHandle("_HMG_PRINTER_GO_TO_PAGE")),;
+      ON KEY RETURN  ACTION ( _HMG_SYSDATA [ 361 ] := _HMG_PRINTER_GO_TO_PAGE.Spinner_1.Value , ;
+         EnableWindow(GetformHandle("_HMG_PRINTER_SHOWPREVIEW")), ;
+         EnableWindow(GetformHandle("SPLITCHILD_1")), ;
+         EnableWindow(GetformHandle("_HMG_PRINTER_SHOWTHUMBNAILS")), ;
+         HideWindow(GetFormHandle("_HMG_PRINTER_GO_TO_PAGE")), ;
          _HMG_PRINTER_PREVIEWRefresh(),;   // ADD April 2014
          DoMethod("SPLITCHILD_1","SetFocus") )
 
@@ -5271,11 +5271,11 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          FONTNAME 'Arial'
          FONTSIZE 9
          CAPTION _HMG_SYSDATA [ 371 ] [11]
-         ACTION ( _HMG_SYSDATA [ 361 ] := _HMG_PRINTER_GO_TO_PAGE.Spinner_1.Value ,;
-            HideWindow( GetFormHandle ( "_HMG_PRINTER_GO_TO_PAGE" ) ),;
-            EnableWindow ( GetformHandle ( "_HMG_PRINTER_SHOWPREVIEW" ) ),;
-            EnableWindow ( GetformHandle ( "SPLITCHILD_1" ) ),;
-            EnableWindow ( GetformHandle ( "_HMG_PRINTER_SHOWTHUMBNAILS" ) ),;
+         ACTION ( _HMG_SYSDATA [ 361 ] := _HMG_PRINTER_GO_TO_PAGE.Spinner_1.Value , ;
+            HideWindow( GetFormHandle ( "_HMG_PRINTER_GO_TO_PAGE" ) ), ;
+            EnableWindow ( GetformHandle ( "_HMG_PRINTER_SHOWPREVIEW" ) ), ;
+            EnableWindow ( GetformHandle ( "SPLITCHILD_1" ) ), ;
+            EnableWindow ( GetformHandle ( "_HMG_PRINTER_SHOWTHUMBNAILS" ) ), ;
             _HMG_PRINTER_PREVIEWRefresh(),;   // ADD April 2014
             DoMethod("_HMG_PRINTER_SHOWPREVIEW","SetFocus") )
       END BUTTON
@@ -5494,17 +5494,17 @@ FUNCTION CreateThumbNails()
 
       cFileName := _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".EMF"
 
-      _DefineImage( cMacroTemp,;
-         '_HMG_PRINTER_SHOWTHUMBNAILS',;
-         10,;
-         ( i * (tHeight + 10) ) - tHeight,;
-         "" /*cFileName*/,;
-         tWidth,;
-         tHeight,;
-         { || &cAction },;
-         Nil,;
-         .F.,;
-         .F.,;
+      _DefineImage( cMacroTemp, ;
+         '_HMG_PRINTER_SHOWTHUMBNAILS', ;
+         10, ;
+         ( i * (tHeight + 10) ) - tHeight, ;
+         "" /*cFileName*/, ;
+         tWidth, ;
+         tHeight, ;
+         { || &cAction }, ;
+         Nil, ;
+         .F., ;
+         .F., ;
          .T. )
 
       //  by Dr. Claudio Soto, April 2014
@@ -5814,13 +5814,13 @@ FUNCTION _HMG_PRINTER_PREVIEW_OnPaint()   // July 2015
 
    hDC := BT_CreateDC ("SPLITCHILD_1", BT_HDC_INVALIDCLIENTAREA, @BTstruct)   // July 2015
 
-   aCoord := _HMG_PRINTER_SHOWPAGE ( _HMG_SYSDATA [ 360 ] + StrZero(_HMG_SYSDATA [ 361 ],4) + ".emf",;
-      GetFormhandle ('SPLITCHILD_1') ,;
-      _HMG_SYSDATA [ 372 ] ,;
-      _HMG_SYSDATA [ 362 ] * 10000 ,;
-      _HMG_SYSDATA [ 365 ] ,;
-      _HMG_SYSDATA [ 363 ] ,;
-      _HMG_SYSDATA [ 364 ] ,;
+   aCoord := _HMG_PRINTER_SHOWPAGE ( _HMG_SYSDATA [ 360 ] + StrZero(_HMG_SYSDATA [ 361 ],4) + ".emf", ;
+      GetFormhandle ('SPLITCHILD_1') , ;
+      _HMG_SYSDATA [ 372 ] , ;
+      _HMG_SYSDATA [ 362 ] * 10000 , ;
+      _HMG_SYSDATA [ 365 ] , ;
+      _HMG_SYSDATA [ 363 ] , ;
+      _HMG_SYSDATA [ 364 ] , ;
       hDC )   // July 2015
    BT_DeleteDC (BTstruct)   // July 2015
 
@@ -10945,11 +10945,11 @@ FUNCTION ToolTipCustomDrawEvent ( lParam )
                      HMG_ChangeWindowStyle ( GetHwndFrom (lParam), NIL, TTS_BALLOON, .F., .F. )
                   ENDIF
 
-                  xRet := TOOLTIP_CUSTOMDRAW ( lParam,;
-                     _HMG_SYSDATA [ 41 ] [ i ] [ 3 ] [ 1 ],;
-                     _HMG_SYSDATA [ 41 ] [ i ] [ 3 ] [ 2 ],;
-                  /*_HMG_SYSDATA [ 41 ] [ i ] [ 3 ] [ 3 ],;
-                  IsToolTipMenu,;
+                  xRet := TOOLTIP_CUSTOMDRAW ( lParam, ;
+                     _HMG_SYSDATA [ 41 ] [ i ] [ 3 ] [ 1 ], ;
+                     _HMG_SYSDATA [ 41 ] [ i ] [ 3 ] [ 2 ], ;
+                  /*_HMG_SYSDATA [ 41 ] [ i ] [ 3 ] [ 3 ], ;
+                  IsToolTipMenu, ;
                   hWnd */ )
 
                   ELSEIF GetNotifyCode ( lParam ) ==  TTN_SHOW  .AND.  .NOT.( IsToolTipMenu )
@@ -10971,11 +10971,11 @@ FUNCTION ToolTipCustomDrawEvent ( lParam )
                   HMG_ChangeWindowStyle ( GetHwndFrom (lParam), NIL, TTS_BALLOON, .F., .F. )
                   endif
 
-                  xRet := TOOLTIP_CUSTOMDRAW ( lParam,;
-                  _HMG_SYSDATA [ 512 ] [ k ] [ 1 ],;
-                  _HMG_SYSDATA [ 512 ] [ k ] [ 2 ],;
-                  /*_HMG_SYSDATA [ 512 ] [ k ] [ 3 ],;
-                  IsToolTipMenu,;
+                  xRet := TOOLTIP_CUSTOMDRAW ( lParam, ;
+                  _HMG_SYSDATA [ 512 ] [ k ] [ 1 ], ;
+                  _HMG_SYSDATA [ 512 ] [ k ] [ 2 ], ;
+                  /*_HMG_SYSDATA [ 512 ] [ k ] [ 3 ], ;
+                  IsToolTipMenu, ;
                   hWnd */ )
 
                   ELSEIF GetNotifyCode ( lParam ) ==  TTN_SHOW  .AND.  .NOT.( IsToolTipMenu )

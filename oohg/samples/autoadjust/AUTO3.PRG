@@ -88,13 +88,13 @@ FUNCTION Main()
       principal.list_1.fontcolor:={0,0,0}
       principal.list_1.backcolor:={255,255,255}
 
-      @ 244,313 COMBOBOX combo_1 WIDTH 100 VALUE 3;
+      @ 244,313 COMBOBOX combo_1 WIDTH 100 VALUE 3 ;
          FONT 'MS Sans Serif' SIZE 10 ITEMS {"HMG","MiniGUI","ooHG"} ;
 
       principal.combo_1.fontcolor:={0,0,0}
       principal.combo_1.backcolor:={255,255,255}
 
-      @ 243,488 BUTTON picbutt_3 PICTURE 'hbprint_close';
+      @ 243,488 BUTTON picbutt_3 PICTURE 'hbprint_close' ;
          ACTION msginfo('Pic button pressed') WIDTH 100 HEIGHT 44 ;
 
    END WINDOW

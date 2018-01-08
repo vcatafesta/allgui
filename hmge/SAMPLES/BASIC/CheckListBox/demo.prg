@@ -26,7 +26,7 @@ FUNCTION Main()
          WIDTH 150 HEIGHT 160 ;
          ITEMS aItems ;
          VALUE {2} ;
-         CHECKBOXITEM {4,5};
+         CHECKBOXITEM {4,5} ;
          ON DBLCLICK cmlb_Check() ;
          MULTISELECT ;
          ITEMHEIGHT 19 ;

@@ -164,14 +164,14 @@ PROCEDURE Main
 
          @ 36,nBorderWidth + 320 - aIni[9] QHTM Html_1 OF Form_1 ;
             VALUE MemoRead( aIni[2] ) ;
-            WIDTH Form_1.Width - nBorderWidth * 2 - 318 + aIni[9];
+            WIDTH Form_1.Width - nBorderWidth * 2 - 318 + aIni[9] ;
             HEIGHT 324
 
       ELSE
 
          @ 36,nBorderWidth + 320 - aIni[9] LABEL Label_2 OF Form_1 ;
             VALUE MemoRead( aIni[2] ) ;
-            WIDTH Form_1.Width - nBorderWidth * 2 - 318 + aIni[9];
+            WIDTH Form_1.Width - nBorderWidth * 2 - 318 + aIni[9] ;
             HEIGHT 324 ;
             BACKCOLOR CLR_BLUE ;
             FONTCOLOR aClr_Fore ;

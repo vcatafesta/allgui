@@ -121,11 +121,11 @@ FUNCTION Main
 
       proc cas_click
          LOCAL x := ;
-            'CellRowIndex  = ' + alltrim( str( This.CellRowIndex ) ) +chr(13)+;
-            'CellColIndex  = ' + alltrim( str( This.CellColIndex ) ) +chr(13)+;
-            'CellColRow    = ' + alltrim( str( This.CellRow ) )      +chr(13)+;
-            'CellColCol    = ' + alltrim( str( This.CellCol ) )      +chr(13)+;
-            'CellColWidth  = ' + alltrim( str( This.CellWidth ) )    +chr(13)+;
+            'CellRowIndex  = ' + alltrim( str( This.CellRowIndex ) ) +chr(13)+ ;
+            'CellColIndex  = ' + alltrim( str( This.CellColIndex ) ) +chr(13)+ ;
+            'CellColRow    = ' + alltrim( str( This.CellRow ) )      +chr(13)+ ;
+            'CellColCol    = ' + alltrim( str( This.CellCol ) )      +chr(13)+ ;
+            'CellColWidth  = ' + alltrim( str( This.CellWidth ) )    +chr(13)+ ;
             'CellColHeight = ' + alltrim( str( This.CellHeight ) )
 
          Form_1.Grid_1.Cell( This.CellRowIndex , This.CellColIndex ) := 'cas_webnet@yahoo.com.br'
@@ -139,7 +139,7 @@ FUNCTION Main
          func cas_change
             LOCAL spc := space(3)
             form_1.statusbar.item(1) := ;
-               'Selected: ' + alltrim( str( len(this.value) ) ) +'/'+;
+               'Selected: ' + alltrim( str( len(this.value) ) ) +'/'+ ;
                alltrim( str( form_1.grid_1.ItemCount ) )
 
             cas_limpa()
@@ -201,9 +201,9 @@ FUNCTION Main
                   FOR n_for=1 to len( a_result )
                      n_pos := a_result[ n_for ]
                      x += ;
-                        form_1.grid_1.header( 2 ) +'='+;
-                        form_1.grid_1.cell( n_pos , 2 ) +space(15)+;
-                        form_1.grid_1.header( 3 ) +'='+;
+                        form_1.grid_1.header( 2 ) +'='+ ;
+                        form_1.grid_1.cell( n_pos , 2 ) +space(15)+ ;
+                        form_1.grid_1.header( 3 ) +'='+ ;
                         form_1.grid_1.cell( n_pos , 3 ) + chr(13)
                   NEXT
 

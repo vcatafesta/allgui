@@ -7,7 +7,7 @@ PROCEDURE MAIN()
 
    DEFINE WINDOW frmGUIPrnt ;
          AT 0,0 ;
-         WIDTH 400;
+         WIDTH 400 ;
          HEIGHT 300 ;
          TITLE 'MiniPrint Tests' ;
          MAIN

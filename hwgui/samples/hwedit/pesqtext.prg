@@ -9,9 +9,9 @@ FUNCTION pesquisaglobal()
    LOCAL oDlgPesq,getpesq,ocomb,atu:=1
    LOCAL oIcon := HIcon():AddRESOURCE( "SEARCHICON" )
    LOCAL oDir:=directory(DiskName()+':\*.',"D",.t.) // pegando diretirio
-   PRIVATE rd_pesq:='',;
-      diretorio :={},;
-      resultado:='',;
+   PRIVATE rd_pesq:='', ;
+      diretorio :={}, ;
+      resultado:='', ;
       get01
 
    FOR f = 1 to len(oDir) // filtrando diretorios
@@ -26,7 +26,7 @@ FUNCTION pesquisaglobal()
       ENDIF
    NEXT g
    oComb:=atu
-   INIT DIALOG oDlgPesq TITLE "Pesquisa Gobal" ICON oIcon;
+   INIT DIALOG oDlgPesq TITLE "Pesquisa Gobal" ICON oIcon ;
       AT 26,136 SIZE 694,456
    @ 20,10 SAY "Texto a Procurar" SIZE 111,15
    @ 20,57 SAY "Pasta" SIZE 80,14
@@ -45,7 +45,7 @@ FUNCTION pesq(rd_dir,rd_text)
    LOCAL arquivos:=directory(rd_dir+'*.prg',"D",.t.) // pegando arquivos
    LOCAL nom_arq:={}
    LOCAL s_lEof:=.F.
-   PRIVATE arq_contem:={},;
+   PRIVATE arq_contem:={}, ;
       result:=''
 
    FOR f:= 1 to len(arquivos) // filtrando arquivos

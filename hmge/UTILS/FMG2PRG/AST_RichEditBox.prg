@@ -42,7 +42,7 @@ FUNCTION AST_RichEditBox(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
 
    LOCAL sReadLine := ""
@@ -95,7 +95,7 @@ FUNCTION AST_RichEditBox(cReadString,cTerminator)
    //    VALUE <cValue> FONT <cFontName> SIZE <nFontSize>
    // DBF FIELD Syntax:
    // -----------------
-   // @ <nRow> ,<nCol> RICHEDITBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight>;
+   // @ <nRow> ,<nCol> RICHEDITBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight> ;
    //    FIELD <Field> VALUE <cValue> FONT <cFontName> SIZE <nFontSize>
 
    DO CASE
@@ -129,8 +129,8 @@ FUNCTION AST_RichEditBox(cReadString,cTerminator)
 
       // @ <nRow> ,<nCol> RICHEDITBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight>
       //    VALUE <cValue> FONT <cFontName> SIZE <nFontSize>
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " RICHEDITBOX " +;
-         aProperties_[1] + " ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + " " +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " RICHEDITBOX " + ;
+         aProperties_[1] + " ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + " " + ;
          aProperties_[6] + " " + aProperties_[7] + " " + aProperties_[8] + CRLF
 
    CASE cSyntax == "DBF"
@@ -162,11 +162,11 @@ FUNCTION AST_RichEditBox(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      // @ <nRow> ,<nCol> RICHEDITBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight>;
+      // @ <nRow> ,<nCol> RICHEDITBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight> ;
       //    FIELD <Field> VALUE <cValue> FONT <cFontName> SIZE <nFontSize>
       cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " RICHEDITBOX " + ;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[22] + " " + aProperties_[6] + " " +;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[22] + " " + aProperties_[6] + " " + ;
          aProperties_[7] + " " + aProperties_[8] + CRLF
 
    ENDCASE

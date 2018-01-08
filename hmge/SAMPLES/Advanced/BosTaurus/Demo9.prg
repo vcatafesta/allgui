@@ -14,20 +14,20 @@ FUNCTION MAIN
 
    PRIVATE flag := .F.
 
-   DEFINE WINDOW Win1;
-         AT 200,600;
-         WIDTH  500;
-         HEIGHT 400;
-         TITLE  "Demo9: Draw DC to DC";
-         NOMINIMIZE;
-         ON SIZE      {|| flag := .F., BT_ClientAreaInvalidateAll ("Win2", .T.)};
-         ON MAXIMIZE  {|| flag := .F., BT_ClientAreaInvalidateAll ("Win2", .T.)};
-         MAIN;
+   DEFINE WINDOW Win1 ;
+         AT 200,600 ;
+         WIDTH  500 ;
+         HEIGHT 400 ;
+         TITLE  "Demo9: Draw DC to DC" ;
+         NOMINIMIZE ;
+         ON SIZE      {|| flag := .F., BT_ClientAreaInvalidateAll ("Win2", .T.)} ;
+         ON MAXIMIZE  {|| flag := .F., BT_ClientAreaInvalidateAll ("Win2", .T.)} ;
+         MAIN ;
          ON PAINT Proc_ON_PAINT ()
 
-      DEFINE TAB Tab_1;
-            AT 50,50;
-            WIDTH  400;
+      DEFINE TAB Tab_1 ;
+            AT 50,50 ;
+            WIDTH  400 ;
             HEIGHT 200
 
          DEFINE PAGE "EditBox"
@@ -46,12 +46,12 @@ FUNCTION MAIN
 
    END WINDOW
 
-   DEFINE WINDOW Win2;
-         AT 0,0;
-         WIDTH  500;
-         HEIGHT 400;
-         TITLE  "Mirror of the Client Area of the Win1";
-         NOSYSMENU;
+   DEFINE WINDOW Win2 ;
+         AT 0,0 ;
+         WIDTH  500 ;
+         HEIGHT 400 ;
+         TITLE  "Mirror of the Client Area of the Win1" ;
+         NOSYSMENU ;
          CHILD
    END WINDOW
 

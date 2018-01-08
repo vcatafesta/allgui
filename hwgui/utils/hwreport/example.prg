@@ -84,7 +84,7 @@ FUNCTION MyReport
    Aadd( aPaintRep[6], { 1,"Age",578,184,37,20,2,0,HFont():Add( "MS Sans Serif",0,-13,0,0,0,0,0 ),0,0,Nil,0 } )
    Aadd( aPaintRep[6], { 6,"SL",-16,218,16,10,0,0,0,0,0,Nil,0 } )
    aPaintRep[6,Len(aPaintRep[6]),12] := ;
-      "use test"+cEnd;
+      "use test"+cEnd ;
       + "go top"+cEnd
    Aadd( aPaintRep[6], { 4,,110,218,60,26,0,HPen():Add(0,1,0),0,0,0,Nil,0 } )
    Aadd( aPaintRep[6], { 4,,168,218,200,26,0,HPen():Add(0,1,0),0,0,0,Nil,0 } )
@@ -96,8 +96,8 @@ FUNCTION MyReport
    Aadd( aPaintRep[6], { 1,"Str(Age,2)",578,220,36,16,0,0,HFont():Add( "MS Sans Serif",0,-13,0,0,0,0,0 ),1,0,Nil,0 } )
    Aadd( aPaintRep[6], { 6,"EL",-16,243,16,10,0,0,0,0,0,Nil,0 } )
    aPaintRep[6,Len(aPaintRep[6]),12] := ;
-      "skip"+cEnd;
-      + "nStroka++"+cEnd;
+      "skip"+cEnd ;
+      + "nStroka++"+cEnd ;
       + "lLastCycle := (Recno()>=20)"+cEnd
    Aadd( aPaintRep[6], { 6,"PF",-16,861,16,10,0,0,0,0,0,Nil,0 } )
    Aadd( aPaintRep[6], { 2,,46,867,661,6,0,HPen():Add(0,1,0),0,0,0,Nil,0 } )

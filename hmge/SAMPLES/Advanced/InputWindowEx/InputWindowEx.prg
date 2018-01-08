@@ -12,7 +12,7 @@
 #define F_VALUE   5 // control value ( combobox, textbox numeric, editbox )
 #define MAX_F     5
 
-FUNCTION InputWindowEx( cTitle , aLabels , aValues , aFormats ,;
+FUNCTION InputWindowEx( cTitle , aLabels , aValues , aFormats , ;
       nRow , nCol, lCenterWindow, aButOKCancelCaptions, bCode )
    LOCAL i, imax, nControlRow, cLabel, cControl, xFormat
    LOCAL nWidth, nHeight, nWinWidth, nWinHeight, nRowHeight:=28  //30

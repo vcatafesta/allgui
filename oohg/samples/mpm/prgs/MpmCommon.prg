@@ -196,7 +196,7 @@ FUNCTION cFilePath( cPathMask )
 
    LOCAL n := RAt( "\", cPathMask ), cDisk
 
-   RETURN If( n > 0, Upper( Left( cPathMask, n ) ),;
+   RETURN If( n > 0, Upper( Left( cPathMask, n ) ), ;
       ( cDisk := cFileDisc( cPathMask ) ) + If( ! Empty( cDisk ), "\", "" ) )
 
 FUNCTION cFileDisc( cPathMask )

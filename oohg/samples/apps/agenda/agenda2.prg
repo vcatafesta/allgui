@@ -56,17 +56,17 @@ PROCEDURE Agenda2()
 
       @ 397,011 BUTTON Agenda_Novo     ;
          CAPTION '&Novo'             ;
-         ACTION { || Bt_Novo_Agenda(1)};
+         ACTION { || Bt_Novo_Agenda(1)} ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 397,111 BUTTON Agenda_Editar    ;
          CAPTION '&Editar'           ;
-         ACTION { || Bt_Novo_Agenda(2)};
+         ACTION { || Bt_Novo_Agenda(2)} ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 397,211 BUTTON Agenda_Excluir    ;
          CAPTION 'E&xcluir'          ;
-         ACTION { || Bt_Agenda_Excluir()};
+         ACTION { || Bt_Agenda_Excluir()} ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 397,311 BUTTON Agenda_Sair      ;
@@ -144,7 +144,7 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @010,100 TEXTBOX  Agenda_Codigo    ;
          WIDTH 50       ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o Codigo";
+         TOOLTIP "Digite o Codigo" ;
          MAXLENGTH 10 UPPERCASE
 
       *------------------------------------------------- Tipo
@@ -171,9 +171,9 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @040,100 TEXTBOX  Agenda_Nome     ;
          WIDTH 350       ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o Nome do Contato";
+         TOOLTIP "Digite o Nome do Contato" ;
          MAXLENGTH 40 UPPERCASE    ;
-         ON LOSTFOCUS { || Alu_Habilita_Tecla() };
+         ON LOSTFOCUS { || Alu_Habilita_Tecla() } ;
          ON ENTER Novo_Agenda.Agenda_Endereco.SetFocus
 
       *------------------------------------------------- Endereço
@@ -186,12 +186,12 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @070,100 TEXTBOX  Agenda_Endereco    ;
          WIDTH 350       ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o Endereço do Contato";
-         MAXLENGTH 40 UPPERCASE;
+         TOOLTIP "Digite o Endereço do Contato" ;
+         MAXLENGTH 40 UPPERCASE ;
          ON ENTER Novo_Agenda.Agenda_Bairro.SetFocus
 
       *------------------------------------------------- Bairro
-      @104,020 LABEL Label_Agenda_Bairro;
+      @104,020 LABEL Label_Agenda_Bairro ;
          VALUE "Bairro"      ;
          WIDTH 80      ;
          HEIGHT 27       ;
@@ -200,12 +200,12 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @100,100 TEXTBOX  Agenda_Bairro     ;
          WIDTH 220    ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o Bairro do Contato";
+         TOOLTIP "Digite o Bairro do Contato" ;
          MAXLENGTH 30 UPPERCASE   ;
          ON ENTER Novo_Agenda.Agenda_Cep.SetFocus
 
       *------------------------------------------------- Cep
-      @104,330 LABEL Label_Agenda_Cep;
+      @104,330 LABEL Label_Agenda_Cep ;
          VALUE "Cep"      ;
          WIDTH 50      ;
          HEIGHT 27       ;
@@ -214,12 +214,12 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @100,370 TEXTBOX  Agenda_Cep     ;
          WIDTH 80    ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o Cep do Contato";
-         MAXLENGTH 09 UPPERCASE;
+         TOOLTIP "Digite o Cep do Contato" ;
+         MAXLENGTH 09 UPPERCASE ;
          ON ENTER Novo_Agenda.Agenda_Cidade.SetFocus
 
       *------------------------------------------------- Cidade
-      @134,020 LABEL Label_Agenda_Cidade;
+      @134,020 LABEL Label_Agenda_Cidade ;
          VALUE "Cidade"      ;
          WIDTH 80      ;
          HEIGHT 27       ;
@@ -228,12 +228,12 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @130,100 TEXTBOX  Agenda_Cidade      ;
          WIDTH 220       ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite a Cidade do Contato";
-         MAXLENGTH 30 UPPERCASE;
+         TOOLTIP "Digite a Cidade do Contato" ;
+         MAXLENGTH 30 UPPERCASE ;
          ON ENTER Novo_Agenda.Agenda_Estado.SetFocus
 
       *------------------------------------------------- Estado
-      @134,330 LABEL Label_Agenda_Estado;
+      @134,330 LABEL Label_Agenda_Estado ;
          VALUE "UF"      ;
          WIDTH 50      ;
          HEIGHT 27       ;
@@ -242,15 +242,15 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @130,370 TEXTBOX  Agenda_Estado     ;
          WIDTH 40    ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o Estado do Contato";
-         MAXLENGTH 02 UPPERCASE;
+         TOOLTIP "Digite o Estado do Contato" ;
+         MAXLENGTH 02 UPPERCASE ;
          ON ENTER Novo_Agenda.Agenda_Fone1.SetFocus
 
       @165,005 FRAME Group_Agenda_2 WIDTH 460 HEIGHT 100
 
       *------------------------------------------ Fone #1
-      @174,020 LABEL  Label_Agenda_Fone1;
-         VALUE "Telefone #1";
+      @174,020 LABEL  Label_Agenda_Fone1 ;
+         VALUE "Telefone #1" ;
          WIDTH  70         ;
          HEIGHT 15         ;
          FONT "MS Sans Serif" SIZE 8 BOLD
@@ -258,13 +258,13 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @170,100 TEXTBOX  Agenda_Fone1 ;
          WIDTH 80       ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o Telefone #1 do Contato";
-         MAXLENGTH 10 UPPERCASE;
+         TOOLTIP "Digite o Telefone #1 do Contato" ;
+         MAXLENGTH 10 UPPERCASE ;
          ON ENTER Novo_Agenda.Agenda_Fone2.SetFocus
 
       *------------------------------------------ Fone #1
-      @174,290 LABEL  Label_Agenda_Fone2;
-         VALUE "Telefone #2";
+      @174,290 LABEL  Label_Agenda_Fone2 ;
+         VALUE "Telefone #2" ;
          WIDTH  70         ;
          HEIGHT 15         ;
          FONT "MS Sans Serif" SIZE 8 BOLD
@@ -272,8 +272,8 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @170,370 TEXTBOX  Agenda_Fone2 ;
          WIDTH 80       ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o Telefone #2 do Contato";
-         MAXLENGTH 10 UPPERCASE;
+         TOOLTIP "Digite o Telefone #2 do Contato" ;
+         MAXLENGTH 10 UPPERCASE ;
          ON ENTER Novo_Agenda.Agenda_Email.SetFocus
 
       @204,020 LABEL  Label_Agenda_Email ;
@@ -285,12 +285,12 @@ FUNCTION Bt_Novo_Agenda(nTipo)
       @200,100 TEXTBOX  Agenda_Email ;
          WIDTH 350 ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o E-Mail do Contato";
-         MAXLENGTH 40 LOWERCASE;
+         TOOLTIP "Digite o E-Mail do Contato" ;
+         MAXLENGTH 40 LOWERCASE ;
          ON ENTER Novo_Agenda.Agenda_Nascto.SetFocus
 
       *--------------------------------------------- Data de Nascto
-      @234,020 LABEL Label_Agenda_Nascto;
+      @234,020 LABEL Label_Agenda_Nascto ;
          VALUE "Nascto"   ;
          WIDTH 80       ;
          HEIGHT 27       ;
@@ -322,7 +322,7 @@ FUNCTION Bt_Novo_Agenda(nTipo)
 
       @335,130 BUTTON  Agenda_Anterior   ;
          CAPTION "&Anterior"               ;
-         ACTION { || Navegar_Agenda(2) };
+         ACTION { || Navegar_Agenda(2) } ;
          FONT "Arial" SIZE 8 FLAT
 
       @335,240 BUTTON  Agenda_Proximo    ;

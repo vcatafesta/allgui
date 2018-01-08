@@ -120,9 +120,9 @@ FUNCTION Customer()
             MDICHILD ;
             ON INIT ( ResizeEdit() ) ;
             ON RELEASE ( oCust:close(), ReleaseMdiChild() ) ;
-            ON SIZE ResizeEdit();
-            ON MAXIMIZE ResizeEdit();
-            ON MINIMIZE ResizeEdit();
+            ON SIZE ResizeEdit() ;
+            ON MAXIMIZE ResizeEdit() ;
+            ON MINIMIZE ResizeEdit() ;
             ON MOUSECLICK SetEditFocus()
 
          @ 0,0 GRID BrwMdi                        ;

@@ -127,8 +127,8 @@ FUNCTION _DefineGrid (   ControlName   , ;
       FONTCOLOR   , ;
       alloweditInplace   , ;
       editcontrols   , ;
-      DYNAMICBACKCOLOR ,;
-      DYNAMICforecolor ,;
+      DYNAMICBACKCOLOR , ;
+      DYNAMICforecolor , ;
       COLUMNVALID ,      ;
       COLUMNWHEN ,      ;
       columnheaders ,   ;
@@ -141,9 +141,9 @@ FUNCTION _DefineGrid (   ControlName   , ;
       ALLOWDELETE     , ;
       DYNAMICdisplay, ;
       onsave      , ;
-      lockcolumns,;
-      OnClick, OnKey, InplaceEditOption,;
-      Notrans, NotransHeader,;
+      lockcolumns, ;
+      OnClick, OnKey, InplaceEditOption, ;
+      Notrans, NotransHeader, ;
       aDynamicFont, OnCheckBoxClicked, OnInplaceEditEvent )
    LOCAL i , cParentForm , mVar, wBitmap , k := 0
    LOCAL ControlHandle
@@ -1005,8 +1005,8 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
 
          IF AEC = 'EDITBOX'
 
-            ON KEY CONTROL+W ACTION IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
-               ( _HMG_SYSDATA [ 256 ] := .F. ,;
+            ON KEY CONTROL+W ACTION IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ), ;
+               ( _HMG_SYSDATA [ 256 ] := .F. , ;
                _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ),;  // ADD V parameter, by Pablo on February, 2015
                NIL )
 
@@ -1015,7 +1015,7 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
                COL   278 - IF ( IsAppThemed() , 1 , 0 )
                WIDTH   28
                HEIGHT   28
-               ACTION   IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
+               ACTION   IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ), ;
                   ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ),;  // ADD V parameter, by Pablo on February, 2015
                   NIL )
                PICTURE   'GRID_MSAV'
@@ -1034,7 +1034,7 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
 
          ELSE
 
-            ON KEY RETURN ACTION IIF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
+            ON KEY RETURN ACTION IIF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ), ;
                ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ) ,;  // ADD V parameter, by Pablo on February, 2015
                NIL )
 
@@ -1042,7 +1042,7 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
 
          ENDIF
 
-         ON KEY F2 ACTION IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
+         ON KEY F2 ACTION IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ), ;
             ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ) ,;  // ADD V parameter, by Pablo on February, 2015
             NIL )
 
@@ -1303,8 +1303,8 @@ PROCEDURE _hmg_grid_disablekeys
 
 PROCEDURE _hmg_grid_enablekeys( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues )
 
-   ON KEY RETURN OF _HMG_GRID_InplaceEdit ACTION IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
-      ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK ( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues ) ),;
+   ON KEY RETURN OF _HMG_GRID_InplaceEdit ACTION IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ), ;
+      ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK ( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues ) ), ;
       NIL )
 
    ON KEY ESCAPE OF _HMG_GRID_InplaceEdit ACTION ( _HMG_SYSDATA [ 256 ] := .T. , _HMG_GRID_InplaceEdit.RELEASE )

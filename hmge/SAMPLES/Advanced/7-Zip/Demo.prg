@@ -27,19 +27,19 @@ pragma pack( 4 )
 #define FNAME_MAX32       512
 
 typedef struct { ;
-   DWORD dwOriginalSize;
-   DWORD dwCompressedSize;
-   DWORD dwCRC;
-   UINT uFlag;
-   UINT uOSType;
-   WORD wRatio;
-   WORD wDate;
-   WORD wTime;
-   char szFileName[ FNAME_MAX32 + 1 ];
-   char dummy1[ 3 ];
-   char szAttribute[ 8 ];
-   char szMode[ 8 ];
-   } INDIVIDUALINFO, * PINDIVIDUALINFO;
+   DWORD dwOriginalSize ;
+   DWORD dwCompressedSize ;
+   DWORD dwCRC ;
+   UINT uFlag ;
+   UINT uOSType ;
+   WORD wRatio ;
+   WORD wDate ;
+   WORD wTime ;
+   char szFileName[ FNAME_MAX32 + 1 ] ;
+   char dummy1[ 3 ] ;
+   char szAttribute[ 8 ] ;
+   char szMode[ 8 ] ;
+   } INDIVIDUALINFO, * PINDIVIDUALINFO ;
 
 /******
 *       ƒоступ к архивам 7z, zip с использованием динамической
@@ -87,7 +87,7 @@ PROCEDURE Main
    DEFINE WINDOW wMain                                         ;
          At 0, 0                                               ;
          WIDTH 553 + iif( IsSeven(), GetBorderWidth() -2, 0 )  ;
-         HEIGHT 432 + iif( IsSeven(), GetBorderHeight() -2, 0 );
+         HEIGHT 432 + iif( IsSeven(), GetBorderHeight() -2, 0 ) ;
          TITLE 'Demo 7-Zip interaction'                        ;
          ICON 'main.ico'                                       ;
          MAIN                                                  ;

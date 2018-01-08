@@ -48,14 +48,14 @@ FUNCTION MAIN()
    oGet:SetKeyEvent( , {|o| MsgBox( 'LDblClick : ' + cValToChar( o:VarGet() ), This.Name ) } )
 
    @ 40,10 GETBOX Text_2 OBJ oGet ;
-      HEIGHT 20;
+      HEIGHT 20 ;
       VALUE 57639 ;
-      ACTION MsgInfo( "Button Action");
-      TOOLTIP {"Numeric input. RANGE -100,200000 PICTURE @Z 99,999.99","Button ToolTip"};
-      PICTURE '@Z 99,999.99';
-      RANGE -100,200000;
-      BOLD;
-      MESSAGE "Numeric input";
+      ACTION MsgInfo( "Button Action") ;
+      TOOLTIP {"Numeric input. RANGE -100,200000 PICTURE @Z 99,999.99","Button ToolTip"} ;
+      PICTURE '@Z 99,999.99' ;
+      RANGE -100,200000 ;
+      BOLD ;
+      MESSAGE "Numeric input" ;
       VALIDMESSAGE "Value between -100 and 200000 " ;
       BACKCOLOR {{255,255,255},{255,255,200},{200,255,255}} ;
       FONTCOLOR {{0,0,0},{255,255,200},{0,0,255}}
@@ -64,40 +64,40 @@ FUNCTION MAIN()
    oGet:SetKeyEvent( , {|o| MsgBox( 'LDblClick : ' + cValToChar( o:VarGet() ), This.Name ) } )
 
    @ 78,10 GETBOX Text_3 ;
-      VALUE "Jacek";
-      ACTION MsgInfo( "Button Action");
-      ACTION2 MsgInfo( "Button2 Action");
-      IMAGE {"folder.bmp","info.bmp"};
-      BUTTONWIDTH 24;
-      PICTURE "@K !xxxxxxxxxxx";
-      TOOLTIP {"Character Input. VALID {|| ( len(alltrim(This.Value)) >= 2)} PICTURE @K !xxxxxxxxxxx ","Button ToolTip","Button 2 ToolTip"};
-      VALID {|| ( len(alltrim(This.Value)) >= 2)};
+      VALUE "Jacek" ;
+      ACTION MsgInfo( "Button Action") ;
+      ACTION2 MsgInfo( "Button2 Action") ;
+      IMAGE {"folder.bmp","info.bmp"} ;
+      BUTTONWIDTH 24 ;
+      PICTURE "@K !xxxxxxxxxxx" ;
+      TOOLTIP {"Character Input. VALID {|| ( len(alltrim(This.Value)) >= 2)} PICTURE @K !xxxxxxxxxxx ","Button ToolTip","Button 2 ToolTip"} ;
+      VALID {|| ( len(alltrim(This.Value)) >= 2)} ;
       VALIDMESSAGE "Minimum 2 characters" ;
-      MESSAGE "Character Input";
+      MESSAGE "Character Input" ;
       BACKCOLOR {{255,255,255},{255,255,200},{200,255,255}} ;
       FONTCOLOR {{0,0,0},{255,255,200},{0,0,255}}
 
-   @ 120,10 GETBOX Text_4 WIDTH 30 HEIGHT 20;
-      VALUE .t.;
-      TOOLTIP "Logical Input VALID {|| (This.Value == .t.)}";
-      PICTURE "Y";
-      VALID {|| (This.Value == .t.)};
-      VALIDMESSAGE "Only True is allowed here !!!";
-      MESSAGE "Logical Input";
+   @ 120,10 GETBOX Text_4 WIDTH 30 HEIGHT 20 ;
+      VALUE .t. ;
+      TOOLTIP "Logical Input VALID {|| (This.Value == .t.)}" ;
+      PICTURE "Y" ;
+      VALID {|| (This.Value == .t.)} ;
+      VALIDMESSAGE "Only True is allowed here !!!" ;
+      MESSAGE "Logical Input" ;
       BACKCOLOR {{255,255,255},{255,255,200},{200,255,255}} ;
       FONTCOLOR {{0,0,0},{255,255,200},{0,0,255}}
 
-   @ 160,10 GETBOX Text_2a HEIGHT 20;
+   @ 160,10 GETBOX Text_2a HEIGHT 20 ;
       VALUE 234123.10 ;
       TOOLTIP "Numeric input PICTURE @ECX) $**,***.**" ;
       PICTURE '@ECX) $**,***.**' ;
       BACKCOLOR {{255,255,255},{255,255,200},{200,255,255}} ;
       FONTCOLOR {{0,0,0},{255,255,200},{0,0,255}}
 
-   @ 200,10  GETBOX Text_2b HEIGHT 20;
-      VALUE "Kowalski";
-      PICTURE "@K !!!!!!!!!!";
-      ON CHANGE {|| TONE(300)};
+   @ 200,10  GETBOX Text_2b HEIGHT 20 ;
+      VALUE "Kowalski" ;
+      PICTURE "@K !!!!!!!!!!" ;
+      ON CHANGE {|| TONE(300)} ;
       BACKCOLOR {{255,255,255},{255,255,200},{200,255,255}} ;
       FONTCOLOR {{0,0,0},{255,255,200},{0,0,255}}
 
@@ -121,23 +121,23 @@ END GETBOX
 @ 10,160 BROWSE Browse_1 WIDTH 300 HEIGHT 180 ;
    WORKAREA TEST ;
    BACKCOLOR {255,255,200} ;
-   HEADERS {"Date","Numeric","Character","Logical"};
-   WIDTHS {70,60,99,50};
+   HEADERS {"Date","Numeric","Character","Logical"} ;
+   WIDTHS {70,60,99,50} ;
    FIELDS { 'Test->Datev' , 'Test->Numeric' , 'Test->Character' , 'Test->Logical'} ;
    JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT, BROWSE_JTFY_LEFT,BROWSE_JTFY_CENTER} ;
    FONT "MS Sans serif" SIZE 09 ;
-   VALUE 1;
-   LOCK;
-   TOOLTIP "Double Click to edit";
+   VALUE 1 ;
+   LOCK ;
+   TOOLTIP "Double Click to edit" ;
    ON DBLCLICK { || UnlockData( ) } ;
    ON CHANGE {|| (  SetProperty( "Form_1", "StatusBar", "Item", 2, alltrim(str(recno() ))),Form_1.Text_5.Refresh , Form_1.Text_6.Refresh , Form_1.Text_7.Refresh ,Form_1.Text_8.Refresh)}//
 
 @ 213,165 LABEL Label_1a VALUE "Date" BOLD AUTOSIZE
 @ 210,210 GETBOX Text_5 ;
-   WIDTH 75 HEIGHT 20;
+   WIDTH 75 HEIGHT 20 ;
    TOOLTIP "Text_5" ;
    BACKCOLOR {{255,255,255},{255,255,200},{200,255,255}} ;
-   PICTURE '@D';
+   PICTURE '@D' ;
    FIELD test->Datev ;
    READONLY
 
@@ -159,23 +159,23 @@ END GETBOX
 
 @ 273,165 LABEL Label_1c VALUE "Char." BOLD AUTOSIZE
 @ 270,210 GETBOX Text_7 ;
-   WIDTH 130 HEIGHT 20;
+   WIDTH 130 HEIGHT 20 ;
    BACKCOLOR {{255,255,255},{255,255,200},{200,255,255}} ;
    TOOLTIP "Characters field. " ;
-   VALIDMESSAGE "Can not be empty!. VALID {|| (!EMPTY(This.Value))} . PICTURE @K !XXXXXXXXXXXXXXXX ";
+   VALIDMESSAGE "Can not be empty!. VALID {|| (!EMPTY(This.Value))} . PICTURE @K !XXXXXXXXXXXXXXXX " ;
    VALID {|| (!EMPTY(This.Value))} ;
    FIELD test->Character  ;
-   PICTURE "@K !XXXXXXXXXXXXXXXX";
+   PICTURE "@K !XXXXXXXXXXXXXXXX" ;
    READONLY
 
 @ 303,165 LABEL Label_1d VALUE "Logical" BOLD AUTOSIZE
 @ 300,210 GETBOX Text_8 ;
-   WIDTH 30 HEIGHT 20;
+   WIDTH 30 HEIGHT 20 ;
    BACKCOLOR {{255,255,255},{255,255,200},{200,255,255}} ;
    FONTCOLOR RED ;
-   BOLD;
+   BOLD ;
    TOOLTIP "Logical field" ;
-   FIELD test->Logical;
+   FIELD test->Logical ;
    READONLY
 
 @ 210,360 BUTTONEX Button_1 WIDTH 60 HEIGHT 25 CAPTION "Save" FONTCOLOR {200,0,0}   BOLD ACTION saveDateNow()

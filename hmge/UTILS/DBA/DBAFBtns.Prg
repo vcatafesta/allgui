@@ -62,7 +62,7 @@ göre yapýlýr. Bu bilgi dahi FB'Nin ilgi alanýnýn dýþýndadýr.
 
 nOpenTablesCo <= LEN( aOpenTables ) dir.
 
-Table'lerin, Data'lar içinde hýfzý ve idaresi mümkün ve ekonomik gibi görünüyorsa da;
+Table'lerin, Data'lar içinde hýfzý ve idaresi mümkün ve ekonomik gibi görünüyorsa da ;
 yapý, özellik ve kullaným benzemezliði sebepleriyle bu iki kavramýn biribirinden ayrý
 tutulmasý müreccah görüldü.
 
@@ -98,7 +98,7 @@ Bu da aOpenTables'e bir yapý :
 
 PROC FB_InitBtns()                       // Initialize all FB Buttons
 
-   LOCA nButton  := 0,;
+   LOCA nButton  := 0, ;
       cButtNam := ''
 
    _HideControl ( "btnPrev", cMWinName )
@@ -126,11 +126,11 @@ PROC FB_InitBtns()                       // Initialize all FB Buttons
 
       PROC FB_RefrsAll()                        // Refresh All Elements of Floating Buttons
 
-         LOCA nButton   := 0,;
-            cButtNam  ,;
-            nPOPageCo ,;
-            cMark     ,;
-            nMainULen := GetProperty( cMWinName, "Width"  ),;
+         LOCA nButton   := 0, ;
+            cButtNam  , ;
+            nPOPageCo , ;
+            cMark     , ;
+            nMainULen := GetProperty( cMWinName, "Width"  ), ;
             nMainUHig := GetProperty( cMWinName, "Height" )
 
          SetProperty( cMWinName, "Width",  MAX( nMinMWWid, nMainULen ) )
@@ -210,8 +210,8 @@ PROC FB_InitBtns()                       // Initialize all FB Buttons
 
             PROC FB_RefrNavB()                        // Refresh Navigation ( prev-next page ) Buttons
 
-               LOCA nNxtBtnCol  := 0,;
-                  nClosBtnCol := 0,;
+               LOCA nNxtBtnCol  := 0, ;
+                  nClosBtnCol := 0, ;
                   nClosBtnLen := 0
 
                IF nPrvBtLen > 0
@@ -286,10 +286,10 @@ PROC FB_InitBtns()                       // Initialize all FB Buttons
 
                      PROC FB_ScalTabs()                        // escaleid (?!) tabs
 
-                        LOCA nButton   :=  0,;
-                           cButnNam  := '',;
-                           cButnCapt := '',;
-                           nDataNum  :=  0,;
+                        LOCA nButton   :=  0, ;
+                           cButnNam  := '', ;
+                           cButnCapt := '', ;
+                           nDataNum  :=  0, ;
                            nBegColm  := GetProperty( cMWinName, "btnPrev", "Col" ) + nPrvBtLen
 
                         FOR nButton := 1 TO nMaxPageCo

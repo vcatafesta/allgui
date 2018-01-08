@@ -48,7 +48,7 @@ FUNCTION Main()
 
       @ 260, 60 BUTTON Button_1 CAPTION "TransBlt" ;
          ACTION ( TBlt( GetControlHandle( "Image_2", "Form_1" ), ;
-         aSize1[1], aSize1[2],;
+         aSize1[1], aSize1[2], ;
          GetControlHandle( "Image_1", "Form_1" ), ;
          aSize2[1], aSize2[2], RGB(255, 255, 255) ) ) ;
          WIDTH 110 HEIGHT 26

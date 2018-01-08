@@ -90,7 +90,7 @@ FUNCTION Main
             WIDTH 300 ;
             HEIGHT 200 ;
             HEADERS {'Last Name','First Name'} ;
-            WIDTHS {180,180};
+            WIDTHS {180,180} ;
             ITEMS { {'Simpson','Homer'} , {'Mulder','Fox'} } VALUE 1 ;
             TOOLTIP 'Grid Control'
 

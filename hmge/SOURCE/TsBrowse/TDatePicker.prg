@@ -18,9 +18,9 @@ CLASS TDatePicker FROM TControl
    CLASSDATA lRegistered AS LOGICAL
    DATA Atx, lAppend
 
-   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
-      nClrFore, nClrBack, hFont, cControl, oCursor, cWnd, cMsg,;
-      lUpdate, bWhen, lCenter, lRight, bChanged,;
+   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid, ;
+      nClrFore, nClrBack, hFont, cControl, oCursor, cWnd, cMsg, ;
+      lUpdate, bWhen, lCenter, lRight, bChanged, ;
       lNoBorder, nHelpId, shownone )
 
    METHOD Default()
@@ -37,9 +37,9 @@ CLASS TDatePicker FROM TControl
    * METHOD TDatePicker:New() Version 7.0
    * ============================================================================
 
-METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
-      nClrFore, nClrBack, hFont, cControl, oCursor, cWnd, cMsg,;
-      lUpdate, bWhen, lCenter, lRight, bChanged,;
+METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid, ;
+      nClrFore, nClrBack, hFont, cControl, oCursor, cWnd, cMsg, ;
+      lUpdate, bWhen, lCenter, lRight, bChanged, ;
       lNoBorder, nHelpId, shownone ) CLASS TDatePicker
 
    LOCAL updown      := .T.
@@ -47,11 +47,11 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
    LOCAL rightalign  := .F.
    LOCAL notabstop   := .F.
 
-   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ),;
-      nClrBack  := GetSysColor( COLOR_WINDOW ),;
-      nHeight   := 12 ,;
-      lUpdate   := .F.,;
-      lNoBorder := .F.,;
+   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ), ;
+      nClrBack  := GetSysColor( COLOR_WINDOW ), ;
+      nHeight   := 12 , ;
+      lUpdate   := .F., ;
+      lNoBorder := .F., ;
       SHOWNONE  := .F.
 
    HB_SYMBOL_UNUSED( cPict )
@@ -72,7 +72,7 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
 
    ::cControlName := cControl
    ::cParentWnd   := cWnd
-   ::nStyle       := nOR( WS_CHILD, WS_VISIBLE, WS_TABSTOP,;
+   ::nStyle       := nOR( WS_CHILD, WS_VISIBLE, WS_TABSTOP, ;
       WS_VSCROLL, WS_BORDER, DTS_UPDOWN, DTS_SHOWNONE )
 
    ::bSetGet      := bSetGet

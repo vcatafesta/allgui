@@ -131,7 +131,7 @@ FUNCTION PrPdfEsegui(_MainArea,_psd,db_arc,_prw)
    oWr:Lmargin := 0
    IF lselect
       // msgstop(cFilePath(GetExeFileName())+"\")
-      oWr:astat[ 'JobPath' ] := c_BrowseForFolder(NIL,[Indicare il percorso dove esportare:];
+      oWr:astat[ 'JobPath' ] := c_BrowseForFolder(NIL,[Indicare il percorso dove esportare:] ;
          ,BIF_EDITBOX + BIF_VALIDATE + BIF_NEWDIALOGSTYLE,CSIDL_DRIVES,oWr:astat[ 'JobPath' ])
       IF right(oWr:astat[ 'JobPath' ],1)<> "\"
          oWr:astat[ 'JobPath' ] += "\"
@@ -303,10 +303,10 @@ STATIC FUNCTION pdfmemosay(arg1,arg2,argm1,argl1,argf1,argsize,abold,aita,aunder
          , argcolor1[2] ;
          , argcolor1[3] ;
          , arrymemo[1] ;
-         , abold;
-         , aita;
-         , aunder;
-         , astrike;
+         , abold ;
+         , aita ;
+         , aunder ;
+         , astrike ;
          , if(valtype(argcolor1)=="A", .t.,.f.) ;
          , if(valtype(argf1)=="C", .t.,.f.) ;
          , if(valtype(argsize)=="N", .t.,.f.) ;
@@ -324,7 +324,7 @@ STATIC FUNCTION pdfmemosay(arg1,arg2,argm1,argl1,argf1,argsize,abold,aita,aunder
 
          _HMG_HPDF_PRINT ( ;
             (nline*lstep)+oWr:aStat[ 'Hbcompatible' ] , arg2, argf1 , argsize , argcolor1[1], argcolor1[2], argcolor1[3] ;
-            , arrymemo[mcl], abold, aita, aunder, astrike;
+            , arrymemo[mcl], abold, aita, aunder, astrike ;
             , if(valtype(argcolor1)=="A", .t.,.f.) ;
             , if(valtype(argf1)=="C", .t.,.f.) ;
             , if(valtype(argsize)=="N", .t.,.f.) ;
@@ -341,7 +341,7 @@ STATIC FUNCTION pdfmemosay(arg1,arg2,argm1,argl1,argf1,argsize,abold,aita,aunder
 
 FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
 
-   LOCAL _arg1,_arg2, _arg3,_arg4, aX:={} , _varmem , Aclr , _varexec ,;
+   LOCAL _arg1,_arg2, _arg3,_arg4, aX:={} , _varmem , Aclr , _varexec , ;
       blse := {|x| if(val(x)> 0,.t.,if(x=".T.".or. x ="ON",.T.,.F.))}, al, _align
    LOCAL string1 := ''
 
@@ -420,7 +420,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             , arrypar[4] ;
             , val(eval(chblk,arrypar,[TO])) ;
             , _arg1 ;
-            , if(ascan(arryPar,[SIZE])#0,val(eval(chblk,arrypar,[SIZE])) ,_HMG_HPDFDATA[ 1 ][9]);
+            , if(ascan(arryPar,[SIZE])#0,val(eval(chblk,arrypar,[SIZE])) ,_HMG_HPDFDATA[ 1 ][9]) ;
             , Aclr[1] ;
             , Aclr[2] ;
             , Aclr[3] ;
@@ -428,8 +428,8 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
             , if(ascan(arryPar,[FONT])>0, .t.,.f.) ;
             , if(ascan(arryPar,[SIZE])>0, .t.,.f.) ;
-            , if(ascan(arryPar,[BORDER])#0,.t.,.f.);
-            , if(ascan(arryPar,[WIDTH])#0,.t.,.f.);
+            , if(ascan(arryPar,[BORDER])#0,.t.,.f.) ;
+            , if(ascan(arryPar,[WIDTH])#0,.t.,.f.) ;
             , if(ascan(arryPar,[WIDTH])# 0,VAL(eval(chblk,arrypar,[WIDTH])),NIL) )
 
       CASE ascan(arryPar,[URLLINK]) > 0
@@ -447,7 +447,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             , arrypar[4] ;
             , eval(chblk,arrypar,[TO]) ;
             , _arg1 ;
-            , if(ascan(arryPar,[SIZE])#0,val(eval(chblk,arrypar,[SIZE])) ,_HMG_HPDFDATA[ 1 ][9]);
+            , if(ascan(arryPar,[SIZE])#0,val(eval(chblk,arrypar,[SIZE])) ,_HMG_HPDFDATA[ 1 ][9]) ;
             , Aclr[1] ;
             , Aclr[2] ;
             , Aclr[3] ;
@@ -502,9 +502,9 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             CASE ascan(arryPar,[PAGENUMBERING]) > 0
 
                _HMG_HPDF_SetPageLabel( ;
-                  MAX(val(eval(chblk,arrypar,[FROM])),1) ; // <nPage>;
-                  ,eval(chblk,arrypar,[STYLE]) ;           // <"cStyle">;
-                  ,IF (ASCAN(ARRYPAR,[UPPER])>0,"UPPER","LOWER") ;// <"cCase">;
+                  MAX(val(eval(chblk,arrypar,[FROM])),1) ; // <nPage> ;
+                  ,eval(chblk,arrypar,[STYLE]) ;           // <"cStyle"> ;
+                  ,IF (ASCAN(ARRYPAR,[UPPER])>0,"UPPER","LOWER") ;// <"cCase"> ;
                   ,eval(chblk,arrypar,[PREFIX]) )          // ;<cPrefix> )
 
             CASE ascan(arryPar,[ENCODING]) > 0
@@ -794,14 +794,14 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
          //                         if val(eval(chblk,arrypar,[1]))+ val(eval(chblk2,arrypar,[TO]))> 0 ///require multiline
          /*
          aeval(arrypar,{|x,y|msginfo(x,zaps(y)) } )
-         #xcommand @ <row>,<col>,<row2>,<col2> DRAW TEXT <txt> [STYLE <style>] [FONT <cfont>];
+         #xcommand @ <row>,<col>,<row2>,<col2> DRAW TEXT <txt> [STYLE <style>] [FONT <cfont>] ;
          => hbprn:drawtext(<row>,<col>,<row2>,<col2>,<txt>,<style>,<cfont>)
 
          //msgbox(zaps(::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_STYLE")),"GGGGG")
          al := ::UsaFont(arrypar)
 
-         hbprn:drawtext(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]);
-         ,eval(epar,ArryPar[3]),eval(epar,Arrypar[4]),eval(chblk,arrypar,[TEXT]);
+         hbprn:drawtext(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]) ;
+         ,eval(epar,ArryPar[3]),eval(epar,Arrypar[4]),eval(chblk,arrypar,[TEXT]) ;
          ,::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_STYLE"), "Fx" )
 
          */
@@ -811,15 +811,15 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             , val(eval(chblk,arrypar,[TO])) ;
             , val(eval(chblk2,arrypar,[TO])) ;
             , _arg1 ;
-            , if(ascan(arryPar,[SIZE])#0,min(_arg4,300) ,_HMG_HPDFDATA[ 1 ][9]);
+            , if(ascan(arryPar,[SIZE])#0,min(_arg4,300) ,_HMG_HPDFDATA[ 1 ][9]) ;
             , Aclr[1] ;
             , Aclr[2] ;
             , Aclr[3] ;
             , arrypar[4] ;
-            , if(ascan(arryPar,[BOLD])#0,.T.,.f.);
+            , if(ascan(arryPar,[BOLD])#0,.T.,.f.) ;
             , if(ascan(arryPar,[ITALIC])#0,.t.,.f.) ;
-            , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.);
-            , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.);
+            , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.) ;
+            , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.) ;
             , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
             , if(ascan(arryPar,[FONT])>0, .t.,.f.) ;
             , if(ascan(arryPar,[SIZE])>0, .t.,.f.) ;
@@ -839,7 +839,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             , Aclr[1] ;
             , Aclr[2] ;
             , Aclr[3] ;
-            , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+            , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
             , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
             , if(ascan(arryPar,[FILLED])>0, .t.,.f.) )
 
@@ -877,16 +877,16 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             , Aclr[1] ;
             , Aclr[2] ;
             , Aclr[3] ;
-            , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+            , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
             , if(ascan(arryPar,[COLOR])>0, .t.,.f.) )
 
       CASE ascan(ArryPar,[PICTURE])=3
 
-         _WR_IMAGE_PDF ( eval(chblk,arrypar,[PICTURE]);
+         _WR_IMAGE_PDF ( eval(chblk,arrypar,[PICTURE]) ;
             , if([LINE]$ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])) ;
             , eval(epar,ArryPar[2]) ;
-            , val(eval(chblk,arrypar,[SIZE]));
-            , val(eval(chblk2,arrypar,[SIZE]));
+            , val(eval(chblk,arrypar,[SIZE])) ;
+            , val(eval(chblk2,arrypar,[SIZE])) ;
             , if(ascan(ArryPar,[STRETCH])> 0,.t.,.f.))
 
       CASE ascan(ArryPar,[ROUNDRECT])=5
@@ -902,7 +902,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             , Aclr[1] ;
             , Aclr[2] ;
             , Aclr[3] ;
-            , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+            , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
             , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
             , if(ascan(arryPar,[FILLED])>0, .t.,.f.) ;
             , MIN(VAL(eval(chblk2,arrypar,[ROUNDR])),_ARG1) )  // CURVE value is aprox 1/3 ROUNDR
@@ -933,11 +933,11 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
 
          CASE ASCAN(ArryPar,[IMAGE]) > 0
 
-            _WR_IMAGE_PDF ( eval(chblk,arrypar,[IMAGE]);
+            _WR_IMAGE_PDF ( eval(chblk,arrypar,[IMAGE]) ;
                , if([LINE]$ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])) ;
                , eval(epar,ArryPar[2]) ;
-               , val(eval(chblk,arrypar,[HEIGHT]));
-               , val(eval(chblk,arrypar,[WIDTH]));
+               , val(eval(chblk,arrypar,[HEIGHT])) ;
+               , val(eval(chblk,arrypar,[WIDTH])) ;
                , if(ascan(ArryPar,[STRETCH])> 0,.t.,.f.))
 
          CASE ASCAN(ArryPar,[LINE]) > 0
@@ -951,7 +951,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
                , Aclr[1] ;
                , Aclr[2] ;
                , Aclr[3] ;
-               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
                , if(ascan(arryPar,[COLOR])>0, .t.,.f.) )
 
          CASE ASCAN(ArryPar,[RECTANGLE]) > 0
@@ -966,7 +966,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
                   , Aclr[1] ;
                   , Aclr[2] ;
                   , Aclr[3] ;
-                  , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+                  , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
                   , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
                   , if(ascan(arryPar,[FILLED])>0, .t.,.f.) ;
                   , VAL(eval(chblk,arrypar,[CURVE])) )
@@ -980,7 +980,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
                   , Aclr[1] ;
                   , Aclr[2] ;
                   , Aclr[3] ;
-                  , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+                  , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
                   , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
                   , if(ascan(arryPar,[FILLED])>0, .t.,.f.) )
 
@@ -996,7 +996,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
                , Aclr[1] ;
                , Aclr[2] ;
                , Aclr[3] ;
-               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
                , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
                , if(ascan(arryPar,[FILLED])>0, .t.,.f.) )
 
@@ -1013,7 +1013,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
                , Aclr[1] ;
                , Aclr[2] ;
                , Aclr[3] ;
-               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
                , if(ascan(arryPar,[COLOR])>0, .t.,.f.) )
 
          CASE ASCAN(ArryPar,[ARC]) > 0
@@ -1028,7 +1028,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
                , Aclr[1] ;
                , Aclr[2] ;
                , Aclr[3] ;
-               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
                , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
                , if(ascan(arryPar,[FILLED])>0, .t.,.f.) )
 
@@ -1043,7 +1043,7 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
                , Aclr[1] ;
                , Aclr[2] ;
                , Aclr[3] ;
-               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+               , if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
                , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
                , if(ascan(arryPar,[FILLED])>0, .t.,.f.) )
 
@@ -1083,15 +1083,15 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
                   , val(eval(chblk,arrypar,[TO])) ;
                   , val(eval(chblk2,arrypar,[TO])) ;
                   , _arg1 ;
-                  , if(ascan(arryPar,[SIZE])#0,min(_arg4,300) ,_HMG_HPDFDATA[ 1 ][9]);
+                  , if(ascan(arryPar,[SIZE])#0,min(_arg4,300) ,_HMG_HPDFDATA[ 1 ][9]) ;
                   , Aclr[1] ;
                   , Aclr[2] ;
                   , Aclr[3] ;
                   , arrypar[4] ;
-                  , if(ascan(arryPar,[BOLD])#0,.T.,.f.);
+                  , if(ascan(arryPar,[BOLD])#0,.T.,.f.) ;
                   , if(ascan(arryPar,[ITALIC])#0,.t.,.f.) ;
-                  , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.);
-                  , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.);
+                  , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.) ;
+                  , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.) ;
                   , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
                   , if(ascan(arryPar,[FONT])>0, .t.,.f.) ;
                   , if(ascan(arryPar,[SIZE])>0, .t.,.f.) ;
@@ -1104,15 +1104,15 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
                   if([LINE]$ Arrypar[1],&(Arrypar[1])+oWr:aStat[ 'Hbcompatible' ],eval(epar,ArryPar[1])+oWr:aStat[ 'Hbcompatible' ]) ;  // row
                   , eval(epar,ArryPar[2])  ;                                                // col
                   , _arg1 ;
-                  , if(ascan(arryPar,[SIZE])#0,min(_arg4,300) ,_HMG_HPDFDATA[ 1 ][9]);
+                  , if(ascan(arryPar,[SIZE])#0,min(_arg4,300) ,_HMG_HPDFDATA[ 1 ][9]) ;
                   , Aclr[1] ;
                   , Aclr[2] ;
                   , Aclr[3] ;
                   , arrypar[4] ;
-                  , if(ascan(arryPar,[BOLD])#0,.T.,.f.);
+                  , if(ascan(arryPar,[BOLD])#0,.T.,.f.) ;
                   , if(ascan(arryPar,[ITALIC])#0,.t.,.f.) ;
-                  , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.);
-                  , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.);
+                  , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.) ;
+                  , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.) ;
                   , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
                   , if(ascan(arryPar,[FONT])>0, .t.,.f.) ;
                   , if(ascan(arryPar,[SIZE])>0, .t.,.f.) ;
@@ -1131,14 +1131,14 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             ,if(ascan(arryPar,[LEN])>0,if(valtype(oWr:argm[3])=="A", ;
             oWr:MACROCOMPILE(eval(chblk,arrypar,[LEN]),.t.,cmdline,section) , ;
             val(eval(chblk,arrypar,[LEN]))),NIL) ;
-            ,_arg1 ;//if(ascan(arryPar,[FONT])>0,eval(chblk,arrypar,[FONT]),NIL);
-            ,if(ascan(arryPar,[SIZE])>0,val( eval(chblk,arrypar,[SIZE] ) ),NIL );
-            ,if(ascan(arryPar,[BOLD])#0,.T.,.f.);
+            ,_arg1 ;//if(ascan(arryPar,[FONT])>0,eval(chblk,arrypar,[FONT]),NIL) ;
+            ,if(ascan(arryPar,[SIZE])>0,val( eval(chblk,arrypar,[SIZE] ) ),NIL ) ;
+            ,if(ascan(arryPar,[BOLD])#0,.T.,.f.) ;
             ,if(ascan(arryPar,[ITALIC])#0,.t.,.f.) ;
-            ,if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.);
-            ,if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.);
-            ,if(ascan(arryPar,[COLOR])>0,oWr:usacolor(eval(chblk,arrypar,[COLOR])),NIL);
-            ,_arg2 ;//,if(ascan(arryPar,[ALIGN])>0,oWr:what_ele(eval(chblk,arrypar,[ALIGN]),_aAlign,"_aAlign"),NIL);
+            ,if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.) ;
+            ,if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.) ;
+            ,if(ascan(arryPar,[COLOR])>0,oWr:usacolor(eval(chblk,arrypar,[COLOR])),NIL) ;
+            ,_arg2 ;//,if(ascan(arryPar,[ALIGN])>0,oWr:what_ele(eval(chblk,arrypar,[ALIGN]),_aAlign,"_aAlign"),NIL) ;
             ,if(ascan(arryPar,[.F.])>0,".F.",""))
 
       CASE ascan(ArryPar,[PUTARRAY])=3
@@ -1170,11 +1170,11 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
             ,nil )                                                                //userfun
 
       CASE ascan(ArryPar,[BARCODE])=3
-         oWr:DrawBarcode(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])),eval(epar,ArryPar[2]);
-            , VAL(eval(chblk,arrypar,[HEIGHT]));
+         oWr:DrawBarcode(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])),eval(epar,ArryPar[2]) ;
+            , VAL(eval(chblk,arrypar,[HEIGHT])) ;
             , VAL(eval(chblk,arrypar,[WIDTH])) ;
             , eval(chblk,arrypar,[TYPE])  ;
-            , if("->" $ ArryPar[4] .or. [(] $ ArryPar[4],oWr:MACROCOMPILE(ArryPar[4],.t.,cmdline,section),ArryPar[4]);
+            , if("->" $ ArryPar[4] .or. [(] $ ArryPar[4],oWr:MACROCOMPILE(ArryPar[4],.t.,cmdline,section),ArryPar[4]) ;
             , oWr:UseFlags( upper(eval(chblk,arrypar,[FLAG]))) ;
             ,(ascan(arryPar,[SUBTITLE])> 0)  ;
             ,(ascan(arryPar,[INTERNAL])< 1) ;
@@ -1194,19 +1194,19 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
 FUNCTION CheckFont( cFontName)  //returns the name and path
 
    LOCAL nPos := 0 , cFont := ''
-   LOCAL aHpdf_Font := {'Courier',;
-      'Courier-Bold',;
-      'Courier-Oblique',;
-      'Courier-BoldOblique',;
-      'Helvetica',;
-      'Helvetica-Bold',;
-      'Helvetica-Oblique',;
-      'Helvetica-BoldOblique',;
-      'Times-Roman',;
-      'Times-Bold',;
-      'Times-Italic',;
-      'Times-BoldItalic',;
-      'Symbol',;
+   LOCAL aHpdf_Font := {'Courier', ;
+      'Courier-Bold', ;
+      'Courier-Oblique', ;
+      'Courier-BoldOblique', ;
+      'Helvetica', ;
+      'Helvetica-Bold', ;
+      'Helvetica-Oblique', ;
+      'Helvetica-BoldOblique', ;
+      'Times-Roman', ;
+      'Times-Bold', ;
+      'Times-Italic', ;
+      'Times-BoldItalic', ;
+      'Symbol', ;
       'ZapfDingbats'}
 
    aeval( aHpdf_Font,{|x,y| if(upper(x)==cFontname,npos:= y,NIL )})
@@ -1241,19 +1241,19 @@ FUNCTION CheckFont( cFontName)  //returns the name and path
 FUNCTION _HMG_HPDF_SetFont( cFontName, lBold, lItalic )
 
    LOCAL nPos := 0 , cFont := '', jld :=''
-   LOCAL aHpdf_Font := {'Courier',;
-      'Courier-Bold',;
-      'Courier-Oblique',;
-      'Courier-BoldOblique',;
-      'Helvetica',;
-      'Helvetica-Bold',;
-      'Helvetica-Oblique',;
-      'Helvetica-BoldOblique',;
-      'Times-Roman',;
-      'Times-Bold',;
-      'Times-Italic',;
-      'Times-BoldItalic',;
-      'Symbol',;
+   LOCAL aHpdf_Font := {'Courier', ;
+      'Courier-Bold', ;
+      'Courier-Oblique', ;
+      'Courier-BoldOblique', ;
+      'Helvetica', ;
+      'Helvetica-Bold', ;
+      'Helvetica-Oblique', ;
+      'Helvetica-BoldOblique', ;
+      'Times-Roman', ;
+      'Times-Bold', ;
+      'Times-Italic', ;
+      'Times-BoldItalic', ;
+      'Symbol', ;
       'ZapfDingbats'}
 
    DEFAULT lBold := .f., lItalic := .f.

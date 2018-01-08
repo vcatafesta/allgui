@@ -42,7 +42,7 @@ FUNCTION AST_IPAddress(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -102,7 +102,7 @@ FUNCTION AST_IPAddress(cReadString,cTerminator)
    aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " IPADDRESS " +;
+   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " IPADDRESS " + ;
       aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + " " + aProperties_[12] + CRLF
 
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF

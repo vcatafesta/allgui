@@ -27,7 +27,7 @@ PROCEDURE Main()
          OF Form_1 ;
          BUTTONSIZE 32, 48  ;
          IMAGE {'Nums.bmp'} ;
-         COLORMASK CLR_DEFAULT;
+         COLORMASK CLR_DEFAULT ;
          IMAGECOUNT 12 ;
          MASK
 

@@ -41,7 +41,7 @@ FUNCTION Main
       aRows[ 09 ] := { 'Pedemonti', 'Flavio', '000-0000', '14/07/66', '125' }
       aRows[ 10 ] := { 'Gomez',     'Juan',   '583-4832', '14/09/63', '125' }
 
-      @ 10,10 GRID Grid_1 OBJ oGrid;
+      @ 10,10 GRID Grid_1 OBJ oGrid ;
          WIDTH oForm:ClientWidth - 20 ;
          HEIGHT 330 ;
          HEADERS { 'Last Name', 'First Name', 'Phone', 'Date', 'Data' } ;
@@ -49,7 +49,7 @@ FUNCTION Main
          ITEMS aRows ;
          VALUE 3 ;
          APPEND ;
-         EDIT INPLACE;
+         EDIT INPLACE ;
          FULLMOVE ;
          DELETE ;
          ENABLEALTA ;

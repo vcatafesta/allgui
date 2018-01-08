@@ -6,15 +6,15 @@
 
 FUNCTION Main()
 
-   DEFINE WINDOW Main_WA;
-         MAIN;
-         ROW    100;
-         COL    100;
-         WIDTH  225;
-         HEIGHT 150;
-         TITLE  'TextBox Password Test';
-         NOSIZE;
-         NOMAXIMIZE;
+   DEFINE WINDOW Main_WA ;
+         MAIN ;
+         ROW    100 ;
+         COL    100 ;
+         WIDTH  225 ;
+         HEIGHT 150 ;
+         TITLE  'TextBox Password Test' ;
+         NOSIZE ;
+         NOMAXIMIZE ;
          NOMINIMIZE
 
       DEFINE LABEL Pass_LA

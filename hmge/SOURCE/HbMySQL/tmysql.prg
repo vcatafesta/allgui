@@ -141,8 +141,8 @@ METHOD FieldPut( cnField, Value ) CLASS TMySQLRow
 
    IF nNum > 0 .AND. nNum <= Len( ::aRow )
 
-      IF ValType( Value ) == ValType( ::aRow[ nNum ] );
-            .OR. (ValType( Value ) + ValType( ::aRow[ nNum ] ))$"CMC";
+      IF ValType( Value ) == ValType( ::aRow[ nNum ] ) ;
+            .OR. (ValType( Value ) + ValType( ::aRow[ nNum ] ))$"CMC" ;
             .OR. ::aRow[ nNum ] == NIL
 
          // if it is a char field remove trailing spaces
@@ -1206,8 +1206,8 @@ METHOD FieldPut( cnField, Value ) CLASS TMySQLTable
 
    IF nNum > 0 .AND. nNum <= ::nNumFields
 
-      IF ValType( Value ) == ValType( ::aRow[ nNum ] );
-            .OR. (ValType( Value ) + ValType( ::aRow[ nNum ] ))$"CMC";
+      IF ValType( Value ) == ValType( ::aRow[ nNum ] ) ;
+            .OR. (ValType( Value ) + ValType( ::aRow[ nNum ] ))$"CMC" ;
             .OR. ::aRow[ nNum ] == NIL
 
          // if it is a char field remove trailing spaces

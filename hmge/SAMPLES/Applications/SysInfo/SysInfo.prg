@@ -160,13 +160,13 @@ PROCEDURE Main()
       @ 5, 316 HYPERLINK Label_2            ;
          VALUE "gfilatov@inbox.ru"         ;
          ADDRESS "gfilatov@inbox.ru?cc=&bcc=" +      ;
-         "&subject=System%20Info%20Feedback:";
+         "&subject=System%20Info%20Feedback:" ;
          BACKCOLOR WHITE               ;
          WIDTH 100 HEIGHT 14 HANDCURSOR         ;
          TOOLTIP "E-mail me if you have any comments or suggestions"
 
       @ 22,86 LABEL Label_3               ;
-         VALUE "Copyright "+ Chr(169) + COPYRIGHT +;
+         VALUE "Copyright "+ Chr(169) + COPYRIGHT + ;
          ". All rights reserved"         ;
          BACKCOLOR WHITE               ;
          WIDTH 300 HEIGHT 14

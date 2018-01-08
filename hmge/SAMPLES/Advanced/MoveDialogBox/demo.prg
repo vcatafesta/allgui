@@ -21,16 +21,16 @@ FUNCTION MAIN
          TITLE 'Move Dialog Box' ;
          MAIN
 
-      @  50,350 BUTTON Button_1 CAPTION "Dlg Move1"  ACTION ( ( SET DIALOGBOX CENTER OF This.Handle ),;
-         MsgInfo ("Hello", "Dlg Move 1"),;
+      @  50,350 BUTTON Button_1 CAPTION "Dlg Move1"  ACTION ( ( SET DIALOGBOX CENTER OF This.Handle ), ;
+         MsgInfo ("Hello", "Dlg Move 1"), ;
          SET DIALOGBOX )
 
-      @ 150,100 BUTTON Button_2 CAPTION "Dlg Move2"  ACTION ( ( SET DIALOGBOX CENTER ),;
-         MsgInfo ("Hello", "Dlg Move 2"),;
+      @ 150,100 BUTTON Button_2 CAPTION "Dlg Move2"  ACTION ( ( SET DIALOGBOX CENTER ), ;
+         MsgInfo ("Hello", "Dlg Move 2"), ;
          SET DIALOGBOX )
 
-      @ 250,100 BUTTON Button_3 CAPTION "Dlg Move3"  ACTION ( ( SET DIALOGBOX ROW 50 COL 30 ),;
-         MsgInfo ("Hello", "Dlg Move 3"),;
+      @ 250,100 BUTTON Button_3 CAPTION "Dlg Move3"  ACTION ( ( SET DIALOGBOX ROW 50 COL 30 ), ;
+         MsgInfo ("Hello", "Dlg Move 3"), ;
          SET DIALOGBOX )
 
       @ 350,100 BUTTON Button_4 CAPTION "Dlg NoMove" ACTION MsgInfo( GetClassName( Form_1.Handle ) )

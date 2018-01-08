@@ -17,7 +17,7 @@ FUNCTION AutoCols()
    DEFINE WINDOW Form_14 At 40,60 ;
          WIDTH 600 HEIGHT 600 ;
          TITLE "Array AutoColums" ;
-         ICON "Demo.ico";
+         ICON "Demo.ico" ;
          CHILD
 
       @  30, 50 TBROWSE oBrw ARRAY aArr WIDTH 500 HEIGHT 500 CELLED AUTOCOLS SELECTOR .T. EDITABLE ;
@@ -38,7 +38,7 @@ FUNCTION TestLbx()
    DEFINE WINDOW Form_15 At 140,160 ;
          WIDTH 300 HEIGHT 250 ;
          TITLE "TSBrowse Like a ListBox" ;
-         ICON "Demo.ico";
+         ICON "Demo.ico" ;
          CHILD
 
       @ 20, 50 TBROWSE oBrw ITEMS aItems  WIDTH 100 HEIGHT 100 COLOR CLR_BLACK, CLR_HGRAY EDITABLE

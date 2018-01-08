@@ -44,11 +44,11 @@ FUNCTION pdf_create
             Draw_HeaderBox()
             Print_Header( "HMG_HPDF Introduction" )
             cContent := "      HMG_HPDF is a small library to create PDF documents in a simple way using xBase syntax. " + ;
-               "Output from HMG programs can be exported to PDF with HMG PRINT like commands. Apart from HMG PRINT " +;
+               "Output from HMG programs can be exported to PDF with HMG PRINT like commands. Apart from HMG PRINT " + ;
                "features this library has some additional features also." + ;
                cLB + ;
                cLB + ;
-               "      It is based on HPDF in Harbour. HPDF is originally ported from LibHaru to Harbour." +;
+               "      It is based on HPDF in Harbour. HPDF is originally ported from LibHaru to Harbour." + ;
                cLB + ;
                cLB + ;
                "USAGE:" + ;
@@ -262,9 +262,9 @@ FUNCTION pdf_create
             cContent := "      This command is used to set the page numbering style of the PDF Document and the starting page number to be used for that purpose. " + ;
                "Lower/Upper case can be used for Roman/Letters number styles. A prefix can be used to attach before the page numbers in thumbnails."
             Print_Content( cContent )
-            cSyntax := 'SET HPDFDOC PAGENUMBERING [ FROM <nPage> ];' +;
+            cSyntax := 'SET HPDFDOC PAGENUMBERING [ FROM <nPage> ];' + ;
                cLB + ;
-               '   [ STYLE DECIMAL|ROMAN|LETTERS ];' +;
+               '   [ STYLE DECIMAL|ROMAN|LETTERS ];' + ;
                cLB + ;
                '   [ UPPER|LOWER ];' + ;
                cLB + ;
@@ -286,8 +286,8 @@ FUNCTION pdf_create
             Print_Header( "SET HPDFDOC ENCODING" )
             cContent := "      This command is used to set the character encoding of the PDF document to correctly show the characters of various languages other than the default language (English). " + ;
                'Available Character encoding options are StandardEncoding, MacRomanEncoding, WinAnsiEncoding, FontSpecific, ' + ;
-               'ISO8859-2, ISO8859-3, ISO8859-4, ISO8859-5, ISO8859-6, ISO8859-7, ISO8859-8, ISO8859-9, ISO8859-10, ' +;
-               'ISO8859-11, ISO8859-13, ISO8859-14, ISO8859-15, ISO8859-16, CP1250, CP1251, CP1252, CP1253, CP1254, ' +;
+               'ISO8859-2, ISO8859-3, ISO8859-4, ISO8859-5, ISO8859-6, ISO8859-7, ISO8859-8, ISO8859-9, ISO8859-10, ' + ;
+               'ISO8859-11, ISO8859-13, ISO8859-14, ISO8859-15, ISO8859-16, CP1250, CP1251, CP1252, CP1253, CP1254, ' + ;
                'CP1255, CP1256, CP1257, CP1258, KOI8-R.' + ;
                cLB + ;
                cLB + ;
@@ -355,7 +355,7 @@ FUNCTION pdf_create
             SET HPDFDOC PAGEOUTLINE TITLE "START HPDFPAGE" PARENT "PAGE"
             Draw_HeaderBox()
             Print_Header( "START HPDFPAGE" )
-            cContent := '      This command is used to add a new page to the HPDFDOC. The added page will be the current page until END HPDFPAGE is called. ' +;
+            cContent := '      This command is used to add a new page to the HPDFDOC. The added page will be the current page until END HPDFPAGE is called. ' + ;
                'Please note that, PAGE once added can not be deleted or removed or moved afterwards. This command can be called only after START HPDFDOC'
             Print_Content( cContent )
             cSyntax := 'START HPDFPAGE'

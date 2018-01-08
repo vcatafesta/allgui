@@ -22,8 +22,8 @@ DEFINE WINDOW TEMPLATE ;
 
    DEFINE TAB Tab_1 ;
          AT  10 ,5 ;
-         WIDTH  435;
-         HEIGHT 300;
+         WIDTH  435 ;
+         HEIGHT 300 ;
          BUTTONS
 
       PAGE ''

@@ -614,10 +614,10 @@ FUNCTION oWndData( nIndex, cName, nHandle, nParent, cType, cVar )
    LOCAL o
 
    DEFAULT nIndex  := 0, ;
-      cName   := '',;
+      cName   := '', ;
       nHandle := 0, ;
       nParent := 0, ;
-      cType   := '',;
+      cType   := '', ;
       cVar    := ''
 
    IF Empty( nIndex ) .OR. Empty( nHandle ) .OR. Empty( cName )
@@ -634,10 +634,10 @@ FUNCTION oCnlData( nIndex, cName, nHandle, nParent, cType, cVar, oWin )
    LOCAL o, ob
 
    DEFAULT nIndex  := 0, ;
-      cName   := '',;
+      cName   := '', ;
       nHandle := 0, ;
       nParent := 0, ;
-      cType   := '',;
+      cType   := '', ;
       cVar    := ''
 
    IF Empty( nIndex ) .OR. Empty( nHandle ) .OR. Empty( nParent ) .OR. Empty( cName ); RETURN o

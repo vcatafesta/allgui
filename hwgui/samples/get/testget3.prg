@@ -45,28 +45,28 @@ FUNCTION DlgGet
    @ 0,0 toolbar oTool of oModDlg size oModDlg:nWidth,40 ID 700
    TOOLBUTTON  otool ;
       ID 701 ;
-      BITMAP 2;
+      BITMAP 2 ;
       STYLE 0+BTNS_DROPDOWN ;
-      STATE 4;
+      STATE 4 ;
       TEXT "teste1"  ;
       TOOLTIP "ola" ;
-      MENU amenu;
+      MENU amenu ;
       ON CLICK {|x,y|DlgGet()}
 
    TOOLBUTTON  otool ;
       ID 702 ;
-      BITMAP 3;
+      BITMAP 3 ;
       STYLE 0 ;
-      STATE 4;
+      STATE 4 ;
       TEXT "teste2"  ;
       TOOLTIP "ola2" ;
       ON CLICK {|x,y|DlgGet()}
 
    TOOLBUTTON  otool ;
       ID 703 ;
-      BITMAP 2;
+      BITMAP 2 ;
       STYLE 0 ;
-      STATE 4;
+      STATE 4 ;
       TEXT ""  ;
       TOOLTIP "ola3" ;
       ON CLICK {|x,y|DlgGet()}
@@ -131,27 +131,27 @@ FUNCTION CreateBar(oModDlg,otool)
 
    TOOLBUTTON  otool ;
    ID 701 ;
-   BITMAP 2;
+   BITMAP 2 ;
    STYLE 0+BTNS_DROPDOWN ;
-   STATE 4;
+   STATE 4 ;
    TEXT "teste1"  ;
    TOOLTIP "ola" ;
    ON CLICK {|x,y|DlgGet()}
 
    TOOLBUTTON  otool ;
    ID 702 ;
-   BITMAP 3;
+   BITMAP 3 ;
    STYLE 0 ;
-   STATE 4;
+   STATE 4 ;
    TEXT "teste2"  ;
    TOOLTIP "ola2" ;
    ON CLICK {|x,y|DlgGet()}
 
    TOOLBUTTON  otool ;
    ID 703 ;
-   BITMAP 2;
+   BITMAP 2 ;
    STYLE 0 ;
-   STATE 4;
+   STATE 4 ;
    TEXT ""  ;
    TOOLTIP "ola3" ;
    ON CLICK {|x,y|DlgGet()}

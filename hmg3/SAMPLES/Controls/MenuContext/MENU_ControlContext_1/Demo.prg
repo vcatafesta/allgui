@@ -3,8 +3,8 @@
 
 FUNCTION Main()
 
-   DEFINE WINDOW Form_1;
-         AT 0, 0;
+   DEFINE WINDOW Form_1 ;
+         AT 0, 0 ;
          WIDTH 800 HEIGHT 500 ;
          TITLE "HMG Control Context Menu" ;
          MAIN

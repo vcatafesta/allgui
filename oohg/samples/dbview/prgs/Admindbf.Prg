@@ -26,7 +26,7 @@ PROCEDURE AdministraDBF( nReg )
             AT 0,0                                         ;
             WIDTH 685                                      ;
             HEIGHT 570                                     ;
-            TITLE PROGRAM+VERSION+' - Record View #'+Alltrim(Str(RecNo()));
+            TITLE PROGRAM+VERSION+' - Record View #'+Alltrim(Str(RecNo())) ;
             ICON "MAIN1"                                   ;
             MODAL                                          ;
             FONT 'ARIAL' SIZE 9                            ;

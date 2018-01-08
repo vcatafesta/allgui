@@ -87,9 +87,9 @@ PROCEDURE CloseTable
 
 PROCEDURE CreateTable
 
-   DbCreate( "test2.mdb;table1", { { "FIRST",   "C", 10, 0 },;
-      { "LAST",    "C", 10, 0 },;
-      { "BIRTH",   "D",  8, 0 },;
+   DbCreate( "test2.mdb;table1", { { "FIRST",   "C", 10, 0 }, ;
+      { "LAST",    "C", 10, 0 }, ;
+      { "BIRTH",   "D",  8, 0 }, ;
       { "AGE",     "N",  8, 0 } }, "ADORDD" )
 
    RETURN

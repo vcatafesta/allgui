@@ -12,7 +12,7 @@ FUNCTION Main()
          AT 0,0 ;
          WIDTH 345 ;
          HEIGHT 450 ;
-         MAIN;
+         MAIN ;
          TITLE 'Button Test' ;
          NOSIZE ;
          NOMAXIMIZE

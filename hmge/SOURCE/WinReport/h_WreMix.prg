@@ -462,7 +462,7 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
          _HMG_SYSDATA [ 358 ]:= eval(chblk,arrypar,[NAME])
 
       CASE ascan(arryPar,[MARGINS])=3
-         WRM_SETVIEWPORTORG(_hmg_printer_hdc;
+         WRM_SETVIEWPORTORG(_hmg_printer_hdc ;
             ,Mconvert({val(eval(chblk,arrypar,[TOP])),val(eval(chblk,arrypar,[LEFT]))}))
 
       CASE ascan(ArryPar,[CHARSET])=2
@@ -482,7 +482,7 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
          , Aclr[1] ;
          , Aclr[2] ;
          , Aclr[3] ;
-         , .T. ; //if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+         , .T. ; //if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
          , if(ascan(arryPar,[COLOR])>0, .t.,.f.) )
 
    CASE ascan(ArryPar,[RECTANGLE])=5
@@ -504,7 +504,7 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
       Aclr := oWr:UsaColor(eval(chblk,arrypar,[COLOR]))
       _arg2 := max(.1,val(eval(chblk,arrypar,[PENWIDTH])))
 
-      _HMG_PRINTER_H_LINE ( if(MGSYS,_HMG_SYSDATA [ 374 ],_hmg_printer_hdc),;
+      _HMG_PRINTER_H_LINE ( if(MGSYS,_HMG_SYSDATA [ 374 ],_hmg_printer_hdc), ;
          if([LINE]$ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])) ;
          , eval(epar,ArryPar[2]) ;
          , if([LINE]$ Arrypar[3],&(Arrypar[3]),eval(epar,ArryPar[3])) ;
@@ -513,7 +513,7 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
          , Aclr[1] ;
          , Aclr[2] ;
          , Aclr[3] ;
-         , .t. ; //if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.);
+         , .t. ; //if(ascan(arryPar,[PENWIDTH])>0, .t.,.f.) ;
          , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
          , if(ascan(arryPar,[DOTTED])>0, .T.,.f.))
 
@@ -522,11 +522,11 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
       DO CASE
       CASE ASCAN(ArryPar,[IMAGE]) > 0
          _HMG_PRINTER_H_IMAGE ( if(MGSYS,_HMG_SYSDATA [ 374 ],_hmg_printer_hdc) ;
-            , oWr:GestImage(eval(chblk,arrypar,[IMAGE]));
+            , oWr:GestImage(eval(chblk,arrypar,[IMAGE])) ;
             , if([LINE]$ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])) ;
             , eval(epar,ArryPar[2]) ;
-            , val(eval(chblk,arrypar,[HEIGHT]));
-            , val(eval(chblk,arrypar,[WIDTH]));
+            , val(eval(chblk,arrypar,[HEIGHT])) ;
+            , val(eval(chblk,arrypar,[WIDTH])) ;
             , if(ascan(ArryPar,[STRETCH])> 0,.t.,.T.)) // Put true for better compatibility with HBPRINTER
          // Unfortunately miniprint has a misbehaving without stretch clause
          // _HMG_PRINTER_IMAGE (if(MGSYS,_HMG_SYSDATA [ 374 ],_hmg_printer_hdc),"hmglogo.gif",25,25,20,16 )
@@ -643,10 +643,10 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
                , Aclr[2] ;
                , Aclr[3] ;
                , arrypar[4] ;
-               , if(ascan(arryPar,[BOLD])#0,.T.,.f.);
+               , if(ascan(arryPar,[BOLD])#0,.T.,.f.) ;
                , if(ascan(arryPar,[ITALIC])#0,.t.,.f.) ;
-               , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.);
-               , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.);
+               , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.) ;
+               , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.) ;
                , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
                , if(ascan(arryPar,[FONT])>0, .t.,.f.) ;
                , if(ascan(arryPar,[SIZE])>0, .t.,.f.) ;
@@ -661,11 +661,11 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
                , Aclr[1] ;
                , Aclr[2] ;
                , Aclr[3] ;
-               , arrypar[4];
-               , if(ascan(arryPar,[BOLD])#0,.T.,.f.);
+               , arrypar[4] ;
+               , if(ascan(arryPar,[BOLD])#0,.T.,.f.) ;
                , if(ascan(arryPar,[ITALIC])#0,.t.,.f.) ;
-               , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.);
-               , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.);
+               , if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.) ;
+               , if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.) ;
                , if(ascan(arryPar,[COLOR])>0, .t.,.f.) ;
                , if(ascan(arryPar,[FONT])>0, .t.,.f.) ;
                , if(ascan(arryPar,[SIZE])>0, .t.,.f.) ;
@@ -676,13 +676,13 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
       ENDCASE
 
    CASE ascan(ArryPar,[BARCODE])=3
-      oWr:DrawBarcode(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])),eval(epar,ArryPar[2]);
+      oWr:DrawBarcode(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])),eval(epar,ArryPar[2]) ;
          , VAL(eval(chblk,arrypar,[HEIGHT])) ;
          , VAL(eval(chblk,arrypar,[WIDTH])) ;
          , eval(chblk,arrypar,[TYPE])  ;
-         , if("->" $ ArryPar[4] .or. [(] $ ArryPar[4],oWr:MACROCOMPILE(ArryPar[4],.t.,cmdline,section),ArryPar[4]);
+         , if("->" $ ArryPar[4] .or. [(] $ ArryPar[4],oWr:MACROCOMPILE(ArryPar[4],.t.,cmdline,section),ArryPar[4]) ;
          , oWr:UseFlags( upper(eval(chblk,arrypar,[FLAG]))) ;
-         ,(ascan(arryPar,[SUBTITLE])>0);
+         ,(ascan(arryPar,[SUBTITLE])>0) ;
          ,(ascan(arryPar,[INTERNAL])< 1) ;
          , cmdline )
 
@@ -691,14 +691,14 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
          ,if(ascan(arryPar,[LEN])>0,if(valtype(oWr:argm[3])=="A", ;
          oWr:MACROCOMPILE(eval(chblk,arrypar,[LEN]),.t.,cmdline,section) , ;
          val(eval(chblk,arrypar,[LEN]))),NIL) ;
-         ,if(ascan(arryPar,[FONT])>0,eval(chblk,arrypar,[FONT]),NIL);
-         ,if(ascan(arryPar,[SIZE])>0,val( eval(chblk,arrypar,[SIZE] ) ),NIL );
-         ,if(ascan(arryPar,[BOLD])#0,.T.,.f.);
+         ,if(ascan(arryPar,[FONT])>0,eval(chblk,arrypar,[FONT]),NIL) ;
+         ,if(ascan(arryPar,[SIZE])>0,val( eval(chblk,arrypar,[SIZE] ) ),NIL ) ;
+         ,if(ascan(arryPar,[BOLD])#0,.T.,.f.) ;
          ,if(ascan(arryPar,[ITALIC])#0,.t.,.f.) ;
-         ,if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.);
-         ,if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.);
-         ,if(ascan(arryPar,[COLOR])>0,oWr:usacolor(eval(chblk,arrypar,[COLOR])),NIL);
-         ,if(ascan(arryPar,[ALIGN])>0,oWr:what_ele(eval(chblk,arrypar,[ALIGN]),_aAlign,"_aAlign"),NIL);
+         ,if(ascan(arryPar,[UNDERLINE])#0,.t.,.f.) ;
+         ,if(ascan(arryPar,[STRIKEOUT])#0,.t.,.f.) ;
+         ,if(ascan(arryPar,[COLOR])>0,oWr:usacolor(eval(chblk,arrypar,[COLOR])),NIL) ;
+         ,if(ascan(arryPar,[ALIGN])>0,oWr:what_ele(eval(chblk,arrypar,[ALIGN]),_aAlign,"_aAlign"),NIL) ;
          ,if(ascan(arryPar,[.F.])>0,".F.",""))
 
    CASE ascan(ArryPar,[PUTARRAY])=3
@@ -759,7 +759,7 @@ FUNCTION hb_zebra_draw_wapi( hZebra, arg2, ... )
 
    CASE oWr:prndrv = "MINI" // miniprint
       hb_zebra_draw( hZebra, {| nc, nr, w, h |(lru[1] := nc ,Lru[2]:= NR ;
-         ,_HMG_PRINTER_H_RECTANGLE ( arg2 , nr , nc , nr+h , nc+w , 1 , 0 , 0;
+         ,_HMG_PRINTER_H_RECTANGLE ( arg2 , nr , nc , nr+h , nc+w , 1 , 0 , 0 ;
          , 0 , .f. , .f. , .t., .t. ) ) }, ... )
 
    CASE oWr:PrnDrv = "PDF"  // PdfPrint

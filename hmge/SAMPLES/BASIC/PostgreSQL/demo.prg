@@ -72,7 +72,7 @@ FUNCTION main( cHost, cBase, cUser, cPass, cPort )
 
    FOR i:=1 to 10
 
-      cQuery := "INSERT INTO simple2 (id, name, age, weight, budget, birth) "+;
+      cQuery := "INSERT INTO simple2 (id, name, age, weight, budget, birth) "+ ;
          "VALUES ( " + ntrim(i) + ", 'Jon Doe', "+ntrim(i*2)+", "+ntrim(12.34*i, 2)+", "+ntrim(123.56*i, 2)+", '"+d2pg(date()+i)+"')"
 
       oQuery := oServer:Query( cQuery )
@@ -105,11 +105,11 @@ FUNCTION main( cHost, cBase, cUser, cPass, cPort )
 
          oRow := oQuery:getrow(i)
 
-         ? ntrim(oRow:Fieldget(1))   +","+;
-            alltrim(oRow:Fieldget(2)) +","+;
-            ntrim(oRow:Fieldget(3))   +","+;
-            ntrim(oRow:Fieldget(4),2) +","+;
-            ntrim(oRow:Fieldget(5),2) +","+;
+         ? ntrim(oRow:Fieldget(1))   +","+ ;
+            alltrim(oRow:Fieldget(2)) +","+ ;
+            ntrim(oRow:Fieldget(3))   +","+ ;
+            ntrim(oRow:Fieldget(4),2) +","+ ;
+            ntrim(oRow:Fieldget(5),2) +","+ ;
             dtoc(oRow:Fieldget(6))
 
       NEXT

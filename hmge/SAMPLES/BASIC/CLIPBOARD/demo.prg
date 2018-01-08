@@ -71,7 +71,7 @@ PROCEDURE Main
                WIDTH 340       ;
                HEIGHT 260      ;
                VALUE 'Highlight the text in a word or more, and then click button "{...}"'  ;
-               NoHScroll
+               NOHSCROLL
          END PAGE
 
          Page 'Desktop'   // Desktop sizes

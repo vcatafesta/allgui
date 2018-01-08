@@ -243,7 +243,7 @@ FUNCTION erasewindow(window)
 
    RETURN NIL
 
-PROCEDURE GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle,aYVals,nBarD,nWideB,nSep,nXRanges,;
+PROCEDURE GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle,aYVals,nBarD,nWideB,nSep,nXRanges, ;
       l3D,lGrid,lxGrid,lyGrid,lxVal,lyVal,lLegends,aSeries,aColors,nType,lViewVal,cPicture , nLegendWindth , lNoborder )
    LOCAL nI, nJ, nPos, nMax, nMin, nMaxBar, nDeep
    LOCAL nRange, nResH, nResV,  nWide, aPoint, cName
@@ -629,13 +629,13 @@ PROCEDURE GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
 
    IF l3D
       // Lateral
-      drawpolygon( parent,{{nX-1,nY+nWidth+1},{nX+nDeep-nHigh,nY+nWidth+1},;
-         {nX-nHigh+1,nY+nWidth+nDeep},{nX-nDeep,nY+nWidth+nDeep},;
+      drawpolygon( parent,{{nX-1,nY+nWidth+1},{nX+nDeep-nHigh,nY+nWidth+1}, ;
+         {nX-nHigh+1,nY+nWidth+nDeep},{nX-nDeep,nY+nWidth+nDeep}, ;
          {nX-1,nY+nWidth+1}},nShadow,,nShadow )
       // Superior
       nHigh   := Max( nHigh, nDeep )
-      drawpolygon( parent,{{nX-nHigh+nDeep,nY+1},{nX-nHigh+nDeep,nY+nWidth+1},;
-         {nX-nHigh+1,nY+nWidth+nDeep},{nX-nHigh+1,nY+nDeep},;
+      drawpolygon( parent,{{nX-nHigh+nDeep,nY+1},{nX-nHigh+nDeep,nY+nWidth+1}, ;
+         {nX-nHigh+1,nY+nWidth+nDeep},{nX-nHigh+1,nY+nDeep}, ;
          {nX-nHigh+nDeep,nY+1}},nColTop,,nColTop )
       // Border
       DrawBox( parent, nY, nX, nH, nWidth, l3D, nDeep )
@@ -894,7 +894,7 @@ FUNCTION drawpiegraph(windowname,fromrow,fromcol,torow,tocol,series,aname,colors
          _releasecontrol("title_of_pie",windowname)
       ENDIF
       DEFINE LABEL title_of_pie
-         parent &windowname
+         PARENT &windowname
          ROW fromrow + 10
          COL iif(HMG_LEN(ALLTRIM(ctitle)) * 12 > (tocol - fromcol),fromcol,int(((tocol - fromcol) - (HMG_LEN(ALLTRIM(ctitle)) * 12))/2) + fromcol)
          AUTOSIZE .t.
@@ -1067,7 +1067,7 @@ FUNCTION drawpiegraph(windowname,fromrow,fromcol,torow,tocol,series,aname,colors
          cname := "pielegend_"+ALLTRIM(STR(i,3,0))
          drawrect(windowname,fromrow,fromcol,fromrow + 15,fromcol + 15,{0,0,0},1,colors[i])
          DEFINE LABEL &cname
-            parent &windowname
+            PARENT &windowname
             ROW fromrow
             COL fromcol + 20
             FONTNAME "Arial"

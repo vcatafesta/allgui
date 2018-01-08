@@ -37,17 +37,17 @@ FUNCTION Main()
 
    SET FONT TO "MS Shell Dlg", 8
 
-   DEFINE WINDOW MainWnd;
-         WIDTH  480 + GetSystemMetrics(7 /*SM_CXFIXEDFRAME*/) * 2;
-         HEIGHT 320 + GetSystemMetrics(4 /*SM_CYCAPTION*/) + GetSystemMetrics(8 /*SM_CYFIXEDFRAME*/) * 2;
-         MINWIDTH  300;
-         MINHEIGHT 200;
-         TITLE  "Image from website";
-         ICON "download.ico";
-         MAIN;
-         ON PAINT    PaintFrame(MainWnd.HANDLE, 41, 170, GetProperty('MainWnd', "CLIENTWIDTH") - 180, GetProperty('MainWnd', "CLIENTHEIGHT") - 51 - GetWindowHeight(MainWnd.STATUSBAR.HANDLE));
-         ON SIZE     MainWndResize();
-         ON MAXIMIZE MainWndResize();
+   DEFINE WINDOW MainWnd ;
+         WIDTH  480 + GetSystemMetrics(7 /*SM_CXFIXEDFRAME*/) * 2 ;
+         HEIGHT 320 + GetSystemMetrics(4 /*SM_CYCAPTION*/) + GetSystemMetrics(8 /*SM_CYFIXEDFRAME*/) * 2 ;
+         MINWIDTH  300 ;
+         MINHEIGHT 200 ;
+         TITLE  "Image from website" ;
+         ICON "download.ico" ;
+         MAIN ;
+         ON PAINT    PaintFrame(MainWnd.HANDLE, 41, 170, GetProperty('MainWnd', "CLIENTWIDTH") - 180, GetProperty('MainWnd', "CLIENTHEIGHT") - 51 - GetWindowHeight(MainWnd.STATUSBAR.HANDLE)) ;
+         ON SIZE     MainWndResize() ;
+         ON MAXIMIZE MainWndResize() ;
          ON RELEASE  HB_DirRemoveAll(scTmpDir)
 
       DEFINE LABEL UrlLabel

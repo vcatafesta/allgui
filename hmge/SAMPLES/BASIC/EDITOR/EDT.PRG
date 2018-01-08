@@ -68,12 +68,12 @@ FUNCTION main()
             item 'E&xit'+_TAB+'Ctrl+X' action Salir()
          END POPUP
          POPUP 'Opt&ions'
-            item '&Default font'+_TAB+'Ctrl+D'   action (Frm1.edit.fontname := 'Arial',Frm1.edit.fontsize := 10,;
+            item '&Default font'+_TAB+'Ctrl+D'   action (Frm1.edit.fontname := 'Arial',Frm1.edit.fontsize := 10, ;
                Frm1.edit.fontbold := .f.,Frm1.edit.fontitalic := .f.,Frm1.edit.fontUnderline := .f.,Frm1.edit.fontStrikeout := .f.)
-            item 'O&EM font'+_TAB+'Ctrl+E'      action (Frm1.edit.fontname := 'Terminal',Frm1.edit.fontsize := 12,;
+            item 'O&EM font'+_TAB+'Ctrl+E'      action (Frm1.edit.fontname := 'Terminal',Frm1.edit.fontsize := 12, ;
                Frm1.edit.fontbold := .f.,Frm1.edit.fontitalic := .f.,Frm1.edit.fontUnderline := .f.,Frm1.edit.fontStrikeout := .f.)
             SEPARATOR
-            item 'Word Wrap'         action (lWordWrap:=!lWordWrap,Frm1.WordWrap.Checked := lWordWrap,;
+            item 'Word Wrap'         action (lWordWrap:=!lWordWrap,Frm1.WordWrap.Checked := lWordWrap, ;
                Frm1.edit.release,lCreated := .f.,nuevo(),frm1.tmr1.enabled := .t.) name WordWrap
             item 'Set fon&t...'+_TAB+'Ctrl+T'   action Selecfont()
          END POPUP
@@ -131,9 +131,9 @@ FUNCTION main()
 
       ON KEY CONTROL+X ACTION Salir()
 
-      ON KEY CONTROL+D ACTION (Frm1.edit.fontname := 'Arial',Frm1.edit.fontsize := 10,;
+      ON KEY CONTROL+D ACTION (Frm1.edit.fontname := 'Arial',Frm1.edit.fontsize := 10, ;
          Frm1.edit.fontbold := .f.,Frm1.edit.fontitalic := .f.,Frm1.edit.fontUnderline := .f.,Frm1.edit.fontStrikeout := .f.)
-      ON KEY CONTROL+E ACTION (Frm1.edit.fontname := 'Terminal',Frm1.edit.fontsize := 12,;
+      ON KEY CONTROL+E ACTION (Frm1.edit.fontname := 'Terminal',Frm1.edit.fontsize := 12, ;
          Frm1.edit.fontbold := .f.,Frm1.edit.fontitalic := .f.,Frm1.edit.fontUnderline := .f.,Frm1.edit.fontStrikeout := .f.)
       ON KEY CONTROL+T ACTION Selecfont()
       ON KEY CONTROL+A ACTION Acercade()
@@ -157,7 +157,7 @@ PROCEDURE editor()
       COL      colchartopix(0)
       WIDTH      colchartopix( nWidth - 1 )
       HEIGHT      rowchartopix( nHeight - 7 )
-      parent      frm1
+      PARENT      frm1
       FONTNAME   cFontName
       FONTSIZE   nFontSize
       FONTBOLD   lBold

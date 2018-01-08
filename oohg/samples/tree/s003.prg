@@ -161,8 +161,8 @@ FUNCTION Main()
 
       @ 310,310 BUTTON Button_11 ;
          CAPTION 'Item Height' ;
-         ACTION AutoMsgBox(;
-         oTree:ItemHeight(;
+         ACTION AutoMsgBox( ;
+         oTree:ItemHeight( ;
          VAL(InputBox('New Item Height')))) ;
          WIDTH 140
 

@@ -17,7 +17,7 @@ FUNCTION main()
          END POPUP
       END MENU
 
-      DEFINE TREE Tree_1 AT 10,10 WIDTH 200 HEIGHT 400 VALUE 3;
+      DEFINE TREE Tree_1 AT 10,10 WIDTH 200 HEIGHT 400 VALUE 3 ;
             NODEIMAGES {"wd.bmp"}
 
          NODE 'Root'

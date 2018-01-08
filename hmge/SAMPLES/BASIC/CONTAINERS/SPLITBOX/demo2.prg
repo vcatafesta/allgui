@@ -29,7 +29,7 @@ FUNCTION Main
 
          DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 100,30 FLAT RIGHTTEXT
 
-            BUTTON Button_1;
+            BUTTON Button_1 ;
                CAPTION '&Undo' ;
                PICTURE 'button4.bmp' ;
                ACTION MsgInfo('UnDo Click!')

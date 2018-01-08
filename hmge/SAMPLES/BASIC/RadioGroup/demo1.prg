@@ -27,18 +27,18 @@ FUNCTION Main
          END POPUP
       END MENU
 
-      @ 40,10 RadioGroup RadioGroup1;
-         Options {"New 1","New 2","New 3"};
-         WIDTH   60;
-         Spacing 20;
-         VALUE   2;
-         Horizontal;
-         TOOLTIP   'Horizontal Radiogroup';
+      @ 40,10 RadioGroup RadioGroup1 ;
+         Options {"New 1","New 2","New 3"} ;
+         WIDTH   60 ;
+         Spacing 20 ;
+         VALUE   2 ;
+         Horizontal ;
+         TOOLTIP   'Horizontal Radiogroup' ;
          ON CHANGE MsgInfo("OOP Radiogroup 1 Value Changed!")
 
-      @ 110, 10 RadioGroup Radiogroup2;
+      @ 110, 10 RadioGroup Radiogroup2 ;
          Options {"Option 1","Option 2","Option 3","Option 4"} ;
-         WIDTH 240;
+         WIDTH 240 ;
          TOOLTIP   'Vertical Radiogroup' ;
          ON CHANGE {||MsgInfo("OOP Radiogroup 2 Value Changed!")}
 
@@ -89,10 +89,10 @@ PROCEDURE sethorizontal(control,form)
 
    @ 110, 10 RadioGroup Radiogroup2 of &form ;
       Options aoptions ;
-      Horizontal;
-      WIDTH 80;
-      Spacing 12;
-      VALUE nvalue;
+      Horizontal ;
+      WIDTH 80 ;
+      Spacing 12 ;
+      VALUE nvalue ;
       TOOLTIP   'Horizontal Radiogroup' ;
       ON CHANGE {||MsgInfo("OOP Radiogroup 2 Value Changed!")}
 

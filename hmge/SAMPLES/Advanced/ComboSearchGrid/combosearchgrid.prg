@@ -6,38 +6,38 @@ MEMVAR _HMG_CSG_aTable
 MEMVAR _HMG_CSG_nCols
 MEMVAR _HMG_CSG_lShowHeaders
 
-PROC _DefineComboSearchGrid( cCSBoxName,;
-      cCSBoxParent,;
-      cCSBoxCol,;
-      cCSBoxRow,;
-      cCSBoxWidth,;
-      cCSBoxHeight,;
-      cCSBoxValue,;
-      cFontName,;
-      nFontSize,;
-      cToolTip,;
-      nMaxLenght,;
-      lUpper,;
-      lLower,;
-      lNumeric,;
-      bLostFocus,;
-      bGotFocus,;
-      bEnter,;
-      lRightAlign,;
-      nHelpId,;
-      lBold,;
-      lItalic,;
-      lUnderline,;
-      aBackColor,;
-      aFontColor,;
-      lNoTabStop,;
-      aArray,;
-      lAnyWhere,;
-      nDropHeight,;
-      aColumnHeaders,;
-      aColumnJustify,;
-      aColumnWidths,;
-      lShowHeaders;
+PROC _DefineComboSearchGrid( cCSBoxName, ;
+      cCSBoxParent, ;
+      cCSBoxCol, ;
+      cCSBoxRow, ;
+      cCSBoxWidth, ;
+      cCSBoxHeight, ;
+      cCSBoxValue, ;
+      cFontName, ;
+      nFontSize, ;
+      cToolTip, ;
+      nMaxLenght, ;
+      lUpper, ;
+      lLower, ;
+      lNumeric, ;
+      bLostFocus, ;
+      bGotFocus, ;
+      bEnter, ;
+      lRightAlign, ;
+      nHelpId, ;
+      lBold, ;
+      lItalic, ;
+      lUnderline, ;
+      aBackColor, ;
+      aFontColor, ;
+      lNoTabStop, ;
+      aArray, ;
+      lAnyWhere, ;
+      nDropHeight, ;
+      aColumnHeaders, ;
+      aColumnJustify, ;
+      aColumnWidths, ;
+      lShowHeaders ;
       )
 
    LOCAL   cParentName
@@ -271,7 +271,7 @@ PROC _DefineComboSearchGrid( cCSBoxName,;
             DEFINE WINDOW &cCSBxName ;
                   AT     nFormRow+nControlRow+20, nFormCol+nControlCol ;
                   WIDTH  nControlWidth+6 ;
-                  HEIGHT nListBoxHeight + nControlHeight + 10;
+                  HEIGHT nListBoxHeight + nControlHeight + 10 ;
                   TITLE '' ;
                   MODAL ;
                   NOCAPTION ;
@@ -424,7 +424,7 @@ FUNCTION _HMG_CSG_QueryItem
 
             SetProperty( cParentName, cTxBName, "VALUE", cListItem )
 
-            SetProperty(cParentName,cTxBName,"CARETPOS",;
+            SetProperty(cParentName,cTxBName,"CARETPOS", ;
                LEN( cListItem ) )
 
             DoMethod( ThisWindow.Name, "Release" )

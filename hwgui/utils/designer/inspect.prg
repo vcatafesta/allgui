@@ -33,9 +33,9 @@
    [ ON UPDATE <bUpdate> ]    ;
    [ ON KEYDOWN <bKeyDown> ]  ;
    => ;
-   [<oBrw> :=] PBrowse():New( Iif(<.lDb.>,BRW_DATABASE,Iif(<.lArr.>,BRW_ARRAY,0)),;
+   [<oBrw> :=] PBrowse():New( Iif(<.lDb.>,BRW_DATABASE,Iif(<.lArr.>,BRW_ARRAY,0)), ;
    <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>,<height>,<oFont>,<bInit>,<bSize>, ;
-   <bDraw>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>,;
+   <bDraw>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>, ;
    <.lAutoedit.>, <bUpdate>, <bKeyDown> )
 
 STATIC oCombo, oBrw1, oBrw2
@@ -138,14 +138,14 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                FONT ::oFont                   ;
                WHEN {||hwg_Postmessage( oBtn:handle,WM_CLOSE,0,0 ),OgET:REFRESH()   ,.T.}
 
-            @ x1,y1-2 BUTTON oBtn CAPTION '...' OF oBrw1;
+            @ x1,y1-2 BUTTON oBtn CAPTION '...' OF oBrw1 ;
                SIZE 13,::height+6  ;
-               ON CLICK {|| (varbuf := IIF (aDataDef[ j,1 ] == "filename",;
+               ON CLICK {|| (varbuf := IIF (aDataDef[ j,1 ] == "filename", ;
                hwg_SelectFile( "Animation Files( *.avi )", "*.avi"),IIF (aDataDef[ j,1 ] == "filedbf", ;
-               hwg_SelectFile( {"xBase Files( *.dbf)"," All Files( *.*)"},{ "*.dbf","*.*"}),;
-               hwg_SelectFile("Imagens Files( *.jpg;*.gif;*.bmp;*.ico )",;
+               hwg_SelectFile( {"xBase Files( *.dbf)"," All Files( *.*)"},{ "*.dbf","*.*"}), ;
+               hwg_SelectFile("Imagens Files( *.jpg;*.gif;*.bmp;*.ico )", ;
                "*.jpg;*.gif;*.bmp;*.ico")))), ;
-               IIF( !empty(varbuf), oGet:refresh(), NIL ) } //,;
+               IIF( !empty(varbuf), oGet:refresh(), NIL ) } //, ;
             *   VldBrwGet(oGet)} //,   hwg_Postmessage( oBtn:handle,WM_CLOSE,0,0 )}
             // : END LFB
             //varbuf := hwg_SelectFile( "All files ( *.* )","*.*" )
@@ -327,16 +327,16 @@ FUNCTION InspOpen(lShow)
    //PRIVATE oMenuDlg := 0
 
    *FONT oDesigner:oMainWnd:oFonti
-   *STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SIZEBOX+WS_SYSMENU;
+   *STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SIZEBOX+WS_SYSMENU ;
    lShow := IIF(VALTYPE(lShow) != "U",lShow, .T.)
    nStilo := WS_CAPTION+WS_SIZEBOX+MB_USERICON + WS_VISIBLE
    //  IIF(lShow,WS_VISIBLE,0) //DS_SYSMODAL
    INIT DIALOG oDesigner:oDlgInsp TITLE "Object Inspector" ;
       AT 0,280  SIZE 220,300       ;
       FONT HFont():Add( "MS Sans Serif",0,-12,400,,,)  ;
-      STYLE nStilo;
+      STYLE nStilo ;
       ON INIT {||IIF(!lshow,oDesigner:oDlgInsp:hide(),),hwg_Movewindow(oDesigner:oDlgInsp:handle,0,134,280,410)}   ;
-      ON GETFOCUS {|o| o:show(),.t.};
+      ON GETFOCUS {|o| o:show(),.t.} ;
       ON EXIT {|| oDesigner:oDlgInsp := NIL, hwg_Checkmenuitem( oDesigner:oMainWnd:handle, 1010, .F. ), .T. } ;
       ON OTHER MESSAGES {|o,m,wp,lp| MessagesOthers( o, m, wp, lp ) }
 
@@ -382,7 +382,7 @@ FUNCTION InspOpen(lShow)
 
    // : LFB POS
    @ 190,25 BUTTON "Close" SIZE 50, 23     ;
-      ON SIZE {|o,x|o:Move(x-52,,,)};
+      ON SIZE {|o,x|o:Move(x-52,,,)} ;
       ON CLICK {|| oDesigner:oDlgInsp:close()}
    // : LFB
 
@@ -570,7 +570,7 @@ FUNCTION InspUpdBrowse()
       IF lChg .AND. !oBrw1:lHide
          oBrw1:Refresh()
          // : LFB pos
-         statusbarmsg(,'x: '+ltrim(str(oCtrl:nLeft))+'  y: '+ltrim(str(oCtrl:nTop)),;
+         statusbarmsg(,'x: '+ltrim(str(oCtrl:nLeft))+'  y: '+ltrim(str(oCtrl:nTop)), ;
             'w: '+ltrim(str(oCtrl:nWidth))+' h: '+ltrim(str(oCtrl:nHeight)))
          // : LFB
       ENDIF
@@ -615,7 +615,7 @@ STATIC FUNCTION EditArray( arr )
    oBrw:AddColumn( HColumn():New( ,{|v,o| Iif( v!=NIL, o:aArray[o:nCurrent] := v, o:aArray[o:nCurrent] ) }, "C", 100, 0, .T. ) )
    // 30 - 35
    @ 21,265 BUTTON "Delete Item"  SIZE 110, 26 ;
-      ON SIZE {|o,x,y|HB_SYMBOL_UNUSED( x ),o:Move(,y-30,,)};
+      ON SIZE {|o,x,y|HB_SYMBOL_UNUSED( x ),o:Move(,y-30,,)} ;
       ON CLICK {|| onclick_deleteItem(oBrw)}
    @ 151,265 BUTTON "Ok" SIZE 110, 26     ;
       ON SIZE {|o,x,y|HB_SYMBOL_UNUSED( x ),o:Move(,y-30,,)}  ;

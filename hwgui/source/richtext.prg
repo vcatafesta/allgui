@@ -2317,9 +2317,9 @@ METHOD CurrDate( cFormat ) CLASS RichText
 
    // initialize the metafile
    SETWNDEX(hDCOut,0,0)
-   SetWindowExtEx(hDCOut,nWidth,nHeight);
+   SetWindowExtEx(hDCOut,nWidth,nHeight) ;
 
-   DibDraw( hDCOut, hDib, hPal, 0, 0,;
+   DibDraw( hDCOut, hDib, hPal, 0, 0, ;
    nWidth, nHeight, nRaster )
 
    GlobalFree( hDib )

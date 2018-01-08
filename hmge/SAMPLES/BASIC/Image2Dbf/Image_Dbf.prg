@@ -13,9 +13,9 @@ proc main
 
    IF !file ( x_arq )
       DBCREATE( x_arq , { ;
-         {"ROW"    , "N" , 9 , 3} ,;
-         {"COL"    , "N" , 9 , 3} ,;
-         {"WIDTH"  , "N" , 9 , 3} ,;
+         {"ROW"    , "N" , 9 , 3} , ;
+         {"COL"    , "N" , 9 , 3} , ;
+         {"WIDTH"  , "N" , 9 , 3} , ;
          {"HEIGHT" , "N" , 9 , 3} } )
    END
 
@@ -23,7 +23,7 @@ proc main
 
    IF !file ( x_arq )
       DBCREATE( x_arq , { ;
-         {"NOME"   , "C" , 254 , 0} ,;
+         {"NOME"   , "C" , 254 , 0} , ;
          {"IMAGEM" , "M" ,  10 , 0} } )
    END
 
@@ -73,7 +73,7 @@ proc main
 
       Define timer timer_1 ;
          interval 250 ;
-         ACTION ( setforegroundwindow( getformhandle('form_1') ),;
+         ACTION ( setforegroundwindow( getformhandle('form_1') ), ;
          form_1.browse_1.setfocus ) once
 
    END WINDOW
@@ -170,18 +170,18 @@ proc main
 
             func f_exportar
                LOCAL a_arqs := { ;
-                  { "Image Files" , "*.JPG;*.BMP;*.GIF;*.ICO" } ,;
-                  { "Arquivos JPG" , "*.JPG" } ,;
-                  { "Arquivos BMP" , "*.BMP" } ,;
-                  { "Arquivos GIF" , "*.GIF" } ,;
-                  { "Arquivos ICO" , "*.ICO" } } ,;
+                  { "Image Files" , "*.JPG;*.BMP;*.GIF;*.ICO" } , ;
+                  { "Arquivos JPG" , "*.JPG" } , ;
+                  { "Arquivos BMP" , "*.BMP" } , ;
+                  { "Arquivos GIF" , "*.GIF" } , ;
+                  { "Arquivos ICO" , "*.ICO" } } , ;
                   m_novo := alltrim( IMAGE->NOME ) , cFile
 
                IF empty( lastrec() )
                   retu nil
                END
 
-               cFile := Putfile( a_arqs ,;
+               cFile := Putfile( a_arqs , ;
                   'Salvar Arquivo como...' , GetCurrentFolder() , .f. , m_novo )
 
                IF empty( cFile )
@@ -259,9 +259,9 @@ FUNCTION f_importar
    p_GetFile := iif( empty( p_GetFile ) , GetMyDocumentsFolder() , p_GetFile )
 
    arq_cas := GetFile ( { ;
-      {'Image Files' , '*.JPG;*.BMP;*.GIF;*.ICO'} ,;
-      {'JPG Files' , '*.JPG'} ,;
-      {'BMP Files' , '*.BMP'}  } ,;
+      {'Image Files' , '*.JPG;*.BMP;*.GIF;*.ICO'} , ;
+      {'JPG Files' , '*.JPG'} , ;
+      {'BMP Files' , '*.BMP'}  } , ;
       'Open File(s)' , p_GetFile , varios , .t. )
 
    IF len( arq_cas ) = 0

@@ -107,10 +107,10 @@ STATIC FUNCTION Grabo
       cCampo4:=AbmClie.Text_4.Value ; cCampo5:=AbmClie.Text_5.Value ; cCampo6:=AbmClie.Text_6.Value ; cCampo7:=AbmClie.Text_7.Value
       cCampo8:=AbmClie.Text_8.Value ; cCampo9:=d2c(AbmClie.Text_9.Value)
       IF Ok   //Es un Alta
-         cQuery:="Insert Into CLIENTES (CODIGO,NOMBRE,TIPO,TELEFONO,DIRECCION,LOCALIDAD,DOCUMENTO,NROCUIT,FECHAINGRE) Value ('"+;
+         cQuery:="Insert Into CLIENTES (CODIGO,NOMBRE,TIPO,TELEFONO,DIRECCION,LOCALIDAD,DOCUMENTO,NROCUIT,FECHAINGRE) Value ('"+ ;
             cCampo1+"','"+cCampo2+"','"+cCampo3+"','"+cCampo4+"','"+cCampo5+"','"+cCampo6+"','"+cCampo7+"','"+cCampo8+"','"+cCampo9+"')"
       ELSE
-         cQuery:="Update CLIENTES Set CODIGO='"+cCampo1+"',NOMBRE='"+cCampo2+"',TIPO='"+cCampo3+"',TELEFONO='"+cCampo4+"',DIRECCION='"+cCampo5+;
+         cQuery:="Update CLIENTES Set CODIGO='"+cCampo1+"',NOMBRE='"+cCampo2+"',TIPO='"+cCampo3+"',TELEFONO='"+cCampo4+"',DIRECCION='"+cCampo5+ ;
             "',LOCALIDAD='"+cCampo6+"',DOCUMENTO='"+cCampo7+"',NROCUIT='"+cCampo8+"',FECHAINGRE='"+cCampo9+"' Where CODIGO='"+cCampo1+"'"
       ENDIF
       oQuery:=oServer:Query(cQuery)

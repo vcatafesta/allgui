@@ -3264,8 +3264,8 @@ FUNCTION inspector( oWind )
 
       @ 24,0 grid __oohg_obj_Inspector_Grid obj oGrd ;
          HEIGHT 240 width 394 ;
-         HEADERS {"DATA","Values"};
-         WIDTHS {150,180};
+         HEADERS {"DATA","Values"} ;
+         WIDTHS {150,180} ;
          ON DBLCLICK (selecciona(aControls[oCombo:value],aControlsNames[oCombo:value],oooBj_Data[this.cellrowindex]),carga(aControls[oCombo:value],oGrd,@ooobj_data))
 
       aData := {}
@@ -3284,8 +3284,8 @@ FUNCTION inspector( oWind )
          aControlsNames[ ENUMINDEX ]:=S
       NEXT
 
-      @ 0,0 combobox __OOHG_OBJ_INSPECTOR_combo obj oCombo;
-         ITEMS aData value 1 width 394;
+      @ 0,0 combobox __OOHG_OBJ_INSPECTOR_combo obj oCombo ;
+         ITEMS aData value 1 width 394 ;
          ON CHANGE carga(aControls[oCombo:value],oGrd,@ooobj_data)
       carga(aControls[1],oGrd,@ooobj_data)
 
@@ -3351,9 +3351,9 @@ STATIC FUNCTION selecciona(ooBj,name,Values)
 
    tipo=valtype(values[2])
    IF tipo$"CNDL"
-      DEFINE WINDOW _oohg_change_value obj oWnd;
-            at 50,50 width 400 height 150;
-            TITLE "Change value : "+name+'=>'+Values[1];
+      DEFINE WINDOW _oohg_change_value obj oWnd ;
+            at 50,50 width 400 height 150 ;
+            TITLE "Change value : "+name+'=>'+Values[1] ;
             modal NOSIZE nomaximize nominimize
 
          @ 10,10 label _oohg_change_value_lbl value "New value for "+name+'=>'+Values[1] autosize

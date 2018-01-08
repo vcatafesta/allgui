@@ -148,18 +148,18 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
 #define MIN_WIDTH  650
 #define MIN_HEIGHT 550
 
-      DEFINE WINDOW _HMG_FormDebugger;
-            AT 0,0;
-            WIDTH 0;
-            HEIGHT 0;
-            TITLE "HMG Debugger   ( Ctrl+H - Help )";
-            ; //TOPMOST;
-            ON RELEASE DeleteDbgForm( "_HMG_FormDebugger" );
-            ON INTERACTIVECLOSE .F.;
-            ON INIT AjustControlSize();
-            ON MAXIMIZE AjustControlSize();
-            ON SIZE ( Iif( ThisWindow.WIDTH < MIN_WIDTH,   ThisWindow.WIDTH  := MIN_WIDTH,  NIL ),;
-            Iif( ThisWindow.HEIGHT < MIN_HEIGHT, ThisWindow.HEIGHT := MIN_HEIGHT, NIL ),;
+      DEFINE WINDOW _HMG_FormDebugger ;
+            AT 0,0 ;
+            WIDTH 0 ;
+            HEIGHT 0 ;
+            TITLE "HMG Debugger   ( Ctrl+H - Help )" ;
+            ; //TOPMOST ;
+            ON RELEASE DeleteDbgForm( "_HMG_FormDebugger" ) ;
+            ON INTERACTIVECLOSE .F. ;
+            ON INIT AjustControlSize() ;
+            ON MAXIMIZE AjustControlSize() ;
+            ON SIZE ( Iif( ThisWindow.WIDTH < MIN_WIDTH,   ThisWindow.WIDTH  := MIN_WIDTH,  NIL ), ;
+            Iif( ThisWindow.HEIGHT < MIN_HEIGHT, ThisWindow.HEIGHT := MIN_HEIGHT, NIL ), ;
             AjustControlSize() )
 
          ON KEY RETURN ACTION OnKeyPress( VK_RETURN )
@@ -222,10 +222,10 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
             DEFINE TOOLBAR ToolBar_2 BUTTONSIZE 85,85 IMAGESIZE 64,64 STRICTWIDTH FLAT
                BUTTON Button_8  CAPTION "&BreakPoint"      PICTURE '_breakpoint'      ACTION MenuOption( ID_breakpoint )      TOOLTIP 'Toggle BreakPoint'
                BUTTON Button_9  CAPTION "&TracePoint"      PICTURE '_tracepoint'      ACTION MenuOption( ID_tracepoint )      TOOLTIP 'Add TracePoint'
-               BUTTON Button_10 CAPTION "&WatchPoint"      PICTURE '_watchpoint'      ACTION MenuOption( ID_watchpoint )      TOOLTIP 'Add WatchPoint';
+               BUTTON Button_10 CAPTION "&WatchPoint"      PICTURE '_watchpoint'      ACTION MenuOption( ID_watchpoint )      TOOLTIP 'Add WatchPoint' ;
                   SEPARATOR
-               BUTTON Button_11 CAPTION "S&etting"         PICTURE '_configuration'   ACTION MenuOption( ID_configuration )   TOOLTIP 'Enable/Disable Setting';
-                  CHECK;
+               BUTTON Button_11 CAPTION "S&etting"         PICTURE '_configuration'   ACTION MenuOption( ID_configuration )   TOOLTIP 'Enable/Disable Setting' ;
+                  CHECK ;
                   SEPARATOR
                BUTTON Button_12 CAPTION "&Quit"            PICTURE '_quit'            ACTION MenuOption( ID_quit )            TOOLTIP 'Exit the debugger and closing the application'
             END TOOLBAR
@@ -235,18 +235,18 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
          @ 0,nWIDTH() LABEL Label_1 VALUE "" AUTOSIZE
          @ 0,0 BUTTON Button_Refresh CAPTION "Refresh" PICTURE "_refresh" LEFT ACTION UpdateGrids() TOOLTIP "Refresh Grid Data" WIDTH 100 HEIGHT 30 FONT "Calibri" SIZE 10 BOLD ITALIC
 
-         DEFINE TAB Tab_1;
-               AT 0,0;
-               WIDTH 0;
-               HEIGHT 0;
-               BOLD ITALIC;
+         DEFINE TAB Tab_1 ;
+               AT 0,0 ;
+               WIDTH 0 ;
+               HEIGHT 0 ;
+               BOLD ITALIC ;
                ON CHANGE  UpdateGrids()
 
             DEFINE PAGE "Source"
 
                HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Source" )' )
-               @ 0,0 COMBOBOX ComboBox_SourceCode ITEMS HMG_Debugger():GetSourceFiles() FONT "Arial"  SIZE 10;
-                  VALUE 1;
+               @ 0,0 COMBOBOX ComboBox_SourceCode ITEMS HMG_Debugger():GetSourceFiles() FONT "Arial"  SIZE 10 ;
+                  VALUE 1 ;
                   ON CHANGE UpdateGrids() ;
                   ON GOTFOCUS  ( nComboBoxValue := _HMG_FormDebugger.ComboBox_SourceCode.VALUE )
 
@@ -259,16 +259,16 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
                   cGrid_SourceCode := "Grid_SourceCode_" + hb_ntos( i )
                   AAdd( aGrid_SourceCode, { cGrid_SourceCode, .F., aFiles[ i ] } )
 
-                  @ 0,0 GRID &cGrid_SourceCode;
-                     WIDTH 0;
-                     HEIGHT 0;
-                     HEADERS {'Line','Source Code'};
-                     WIDTHS  { 0, 0 };
-                     FONT "Arial"  SIZE 10  BOLD;
-                     BACKCOLOR COLOR_Gainsboro;
-                     FONTCOLOR COLOR_DarkGreen;
-                     DYNAMICBACKCOLOR { bBackColor, bBackColor };
-                     DYNAMICFORECOLOR { {|| GetForeColorSourceCode() }, {|| GetForeColorSourceCode() } };
+                  @ 0,0 GRID &cGrid_SourceCode ;
+                     WIDTH 0 ;
+                     HEIGHT 0 ;
+                     HEADERS {'Line','Source Code'} ;
+                     WIDTHS  { 0, 0 } ;
+                     FONT "Arial"  SIZE 10  BOLD ;
+                     BACKCOLOR COLOR_Gainsboro ;
+                     FONTCOLOR COLOR_DarkGreen ;
+                     DYNAMICBACKCOLOR { bBackColor, bBackColor } ;
+                     DYNAMICFORECOLOR { {|| GetForeColorSourceCode() }, {|| GetForeColorSourceCode() } } ;
                      NOLINES
 
                   SetProperty( "_HMG_FormDebugger", aGrid_SourceCode[i][1], "ColumnDYNAMICFONT", 1, {|| GetFontSourceCode() } )
@@ -287,16 +287,16 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
                HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Stack" )' )
                bForeColor := {|| IIF ( Empty(_HMG_FormDebugger.Grid_CallStack.CELL(This.CellRowIndex, 2)), COLOR_DarkGreen, NIL ) }
 
-               @ 0,0 GRID Grid_CallStack;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS { "Level", "File", "Function", "Line" };
-                  WIDTHS  { 80, 150, 300, 100 };
-                  FONT "Arial"  SIZE 10  BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_NavyBlue;
-                  DYNAMICFORECOLOR { bForeColor, bForeColor, bForeColor, bForeColor };
-                  NOLINES;
+               @ 0,0 GRID Grid_CallStack ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS { "Level", "File", "Function", "Line" } ;
+                  WIDTHS  { 80, 150, 300, 100 } ;
+                  FONT "Arial"  SIZE 10  BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_NavyBlue ;
+                  DYNAMICFORECOLOR { bForeColor, bForeColor, bForeColor, bForeColor } ;
+                  NOLINES ;
                   TOOLTIP "Press ENTER to see the source code"
 
                _HMG_FormDebugger.Grid_CallStack.PaintDoubleBuffer := .T.
@@ -305,30 +305,30 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
             DEFINE PAGE "Watch"
 
                HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Watch" )' )
-               @ 0,0 GRID Grid_Watch;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS { "Number", "Type", "Expression", "ValType", "Value", "ValidExpr" };
-                  WIDTHS  { 0, 0, 0, 100, 100, 100 };
-                  FONT "Arial"  SIZE 10  BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_NavyBlue;
-                  DYNAMICFORECOLOR { {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()} };
-                  NOLINES;
+               @ 0,0 GRID Grid_Watch ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS { "Number", "Type", "Expression", "ValType", "Value", "ValidExpr" } ;
+                  WIDTHS  { 0, 0, 0, 100, 100, 100 } ;
+                  FONT "Arial"  SIZE 10  BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_NavyBlue ;
+                  DYNAMICFORECOLOR { {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()} } ;
+                  NOLINES ;
                   TOOLTIP "Press ENTER to edit the expression and press DELETE to delete item"
 
                _HMG_FormDebugger.Grid_Watch.PaintDoubleBuffer := .T.
 
-               @ 0,0 LABEL Label_WatchNro  VALUE "" FONT "Arial"  SIZE 10 BACKCOLOR COLOR_Gainsboro FONTCOLOR COLOR_Chocolate4 BOLD ITALIC;
+               @ 0,0 LABEL Label_WatchNro  VALUE "" FONT "Arial"  SIZE 10 BACKCOLOR COLOR_Gainsboro FONTCOLOR COLOR_Chocolate4 BOLD ITALIC ;
                   TOOLTIP "Watch number"
                SET CONTROL Label_WatchNro  OF _HMG_FormDebugger CLIENTEDGE
                _HMG_FormDebugger.Label_WatchNro.WIDTH := _HMG_FormDebugger.Label_WatchNro.WIDTH / 2
 
-               @ 0,0 LABEL Label_WatchType VALUE "" FONT "Arial"  SIZE 10 BACKCOLOR COLOR_Gainsboro FONTCOLOR COLOR_Chocolate4 BOLD ITALIC;
+               @ 0,0 LABEL Label_WatchType VALUE "" FONT "Arial"  SIZE 10 BACKCOLOR COLOR_Gainsboro FONTCOLOR COLOR_Chocolate4 BOLD ITALIC ;
                   TOOLTIP "Watch type"
                SET CONTROL Label_WatchType OF _HMG_FormDebugger CLIENTEDGE
 
-               @ 0,0 TEXTBOX TextBox_Watch  VALUE "" BOLD BACKCOLOR COLOR_Wheat1 FONT "Arial"  SIZE 10 FONTCOLOR COLOR_Chocolate4;
+               @ 0,0 TEXTBOX TextBox_Watch  VALUE "" BOLD BACKCOLOR COLOR_Wheat1 FONT "Arial"  SIZE 10 FONTCOLOR COLOR_Chocolate4 ;
                   TOOLTIP "Watch expression"
                _HMG_FormDebugger.TextBox_Watch.Enabled := .F.
 
@@ -341,25 +341,25 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
             DEFINE PAGE "Evaluate"
 
                HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Evaluate" )' )
-               @ 0,0 GRID Grid_Calc;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS { "Expression", "Value" };
-                  WIDTHS  { MIN_WIDTH / 2, MIN_WIDTH / 3 };
-                  FONT "Arial"  SIZE 10  BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_NavyBlue;
-                  NOLINES;
+               @ 0,0 GRID Grid_Calc ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS { "Expression", "Value" } ;
+                  WIDTHS  { MIN_WIDTH / 2, MIN_WIDTH / 3 } ;
+                  FONT "Arial"  SIZE 10  BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_NavyBlue ;
+                  NOLINES ;
                   TOOLTIP "Press ENTER to copy expression for evaluate and press DELETE to delete item"
 
                _HMG_FormDebugger.Grid_Calc.PaintDoubleBuffer := .T.
 
 #define TOOLTIP_CALC   "e.g. VarName, FuncName( param1, ... ), VarName := Value, Arr[i,1] := Value, etc."
 
-               @ 0,0 LABEL Label_Calc VALUE "Enter the expression to evaluate:" AUTOSIZE FONT "Arial"  SIZE 10 FONTCOLOR COLOR_Chocolate4 BOLD ITALIC;
+               @ 0,0 LABEL Label_Calc VALUE "Enter the expression to evaluate:" AUTOSIZE FONT "Arial"  SIZE 10 FONTCOLOR COLOR_Chocolate4 BOLD ITALIC ;
                   TOOLTIP TOOLTIP_CALC
 
-               @ 0,0 TEXTBOX TextBox_Calc  VALUE "" BOLD BACKCOLOR COLOR_Wheat1 FONT "Arial"  SIZE 10 FONTCOLOR COLOR_Chocolate4;
+               @ 0,0 TEXTBOX TextBox_Calc  VALUE "" BOLD BACKCOLOR COLOR_Wheat1 FONT "Arial"  SIZE 10 FONTCOLOR COLOR_Chocolate4 ;
                   TOOLTIP TOOLTIP_CALC
 
             END PAGE
@@ -367,16 +367,16 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
             DEFINE PAGE "Variables"
 
                HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Variables" )' )
-               @ 0,0 GRID Grid_Vars;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS { "Level", "Scope", "Name", "Type", "Value" };
-                  WIDTHS  { 80, 100, 300, 100, 100 };
-                  FONT "Arial"  SIZE 10  BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_NavyBlue;
-                  DYNAMICFORECOLOR { {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()} };
-                  NOLINES;
+               @ 0,0 GRID Grid_Vars ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS { "Level", "Scope", "Name", "Type", "Value" } ;
+                  WIDTHS  { 80, 100, 300, 100, 100 } ;
+                  FONT "Arial"  SIZE 10  BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_NavyBlue ;
+                  DYNAMICFORECOLOR { {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()} } ;
+                  NOLINES ;
                   TOOLTIP "Press ENTER for inspect the value of variables"
 
                _HMG_FormDebugger.Grid_Vars.PaintDoubleBuffer := .T.
@@ -386,29 +386,29 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
             DEFINE PAGE "Areas"
 
                HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Areas" )' )
-               @ 0,0 GRID Grid_Areas;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS {'Alias','Area','RDD Name','Reccount','Recno','Bof','Eof','Found','Deleted','dbFilter', 'ordName', 'ordKey'};
-                  WIDTHS  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                  FONT "Arial"  SIZE 10  BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_NavyBlue;
-                  NOLINES;
-                  TOOLTIP "Available work areas";
+               @ 0,0 GRID Grid_Areas ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS {'Alias','Area','RDD Name','Reccount','Recno','Bof','Eof','Found','Deleted','dbFilter', 'ordName', 'ordKey'} ;
+                  WIDTHS  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ;
+                  FONT "Arial"  SIZE 10  BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_NavyBlue ;
+                  NOLINES ;
+                  TOOLTIP "Available work areas" ;
                   ON CHANGE ( UpdateGridRec() , _HMG_FormDebugger.Grid_Areas.SETFOCUS )
 
                _HMG_FormDebugger.Grid_Areas.PaintDoubleBuffer := .T.
 
-               @ 0,0 GRID Grid_Rec;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS {'Name', 'Type', 'Length', 'Value'};
-                  WIDTHS  { 0, 0, 0, 0 };
-                  FONT "Arial"  SIZE 10  BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_DarkGreen;
-                  NOLINES;
+               @ 0,0 GRID Grid_Rec ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS {'Name', 'Type', 'Length', 'Value'} ;
+                  WIDTHS  { 0, 0, 0, 0 } ;
+                  FONT "Arial"  SIZE 10  BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_DarkGreen ;
+                  NOLINES ;
                   TOOLTIP "Value of current RECORD in the selected work area"
 
                _HMG_FormDebugger.Grid_Rec.PaintDoubleBuffer := .T.
@@ -651,27 +651,27 @@ PROCEDURE DisplayVars ( cVarName, xVarValue, aColor )
 
    lOldMainFirst := HMG_ActivateMainWindowFirst( .F. )
 
-   DEFINE WINDOW &cFormName;
-         AT 0,0;
-         WIDTH  MIN_WIDTH;
-         HEIGHT MIN_HEIGHT;
-         TITLE cTitle;
-         ON INIT     Ajust( cFormName, cGridName );
-         ON MAXIMIZE Ajust( cFormName, cGridName );
-         ON SIZE     Ajust( cFormName, cGridName );
+   DEFINE WINDOW &cFormName ;
+         AT 0,0 ;
+         WIDTH  MIN_WIDTH ;
+         HEIGHT MIN_HEIGHT ;
+         TITLE cTitle ;
+         ON INIT     Ajust( cFormName, cGridName ) ;
+         ON MAXIMIZE Ajust( cFormName, cGridName ) ;
+         ON SIZE     Ajust( cFormName, cGridName ) ;
          ON RELEASE  DeleteDbgForm( cFormName )
 
-      @ nHEIGHT() , nWIDTH() GRID &cGridName;
-         WIDTH 0;
-         HEIGHT 0;
-         HEADERS { "Name", "Type", "Value" };
-         WIDTHS  { 300, 100, 100 };
-         ITEMS aItems;
-         FONT "Arial"  SIZE 10  BOLD;
-         BACKCOLOR COLOR_Gainsboro;
-         FONTCOLOR COLOR_NavyBlue;
-         DYNAMICFORECOLOR { {|| aColor }, {|| aColor }, {|| aColor } };
-         NOLINES;
+      @ nHEIGHT() , nWIDTH() GRID &cGridName ;
+         WIDTH 0 ;
+         HEIGHT 0 ;
+         HEADERS { "Name", "Type", "Value" } ;
+         WIDTHS  { 300, 100, 100 } ;
+         ITEMS aItems ;
+         FONT "Arial"  SIZE 10  BOLD ;
+         BACKCOLOR COLOR_Gainsboro ;
+         FONTCOLOR COLOR_NavyBlue ;
+         DYNAMICFORECOLOR { {|| aColor }, {|| aColor }, {|| aColor } } ;
+         NOLINES ;
          TOOLTIP "Press ENTER for inspect the value of variables"
 
       ON KEY RETURN ACTION OnKeyPress_DisplayVars( VK_RETURN, cFormName, cGridName, xVarValue, aObjRawValue, aColor )
@@ -1526,24 +1526,24 @@ PROCEDURE HMG_DebuggerWaitMessage( cMsg, cTitle )
 
    IF .NOT. IsWindowDefined( _HMG_FormDebuggerMessage ) .AND. ValType( cMsg ) == "C"
       lOldMainFirst := HMG_ActivateMainWindowFirst( .F. )
-      DEFINE WINDOW _HMG_FormDebuggerMessage;
-            AT 0,0;
-            WIDTH  500;
-            HEIGHT 120;
-            TITLE iif( ValType( cTitle ) <> "C", ( _HMG_DEBUGGER_NAME_ + " - " + GetProgramFileName() ), cTitle );
-            NOSYSMENU;
-            NOSIZE;
-            NOMINIMIZE;
-            NOMAXIMIZE;
-            TOPMOST;
+      DEFINE WINDOW _HMG_FormDebuggerMessage ;
+            AT 0,0 ;
+            WIDTH  500 ;
+            HEIGHT 120 ;
+            TITLE iif( ValType( cTitle ) <> "C", ( _HMG_DEBUGGER_NAME_ + " - " + GetProgramFileName() ), cTitle ) ;
+            NOSYSMENU ;
+            NOSIZE ;
+            NOMINIMIZE ;
+            NOMAXIMIZE ;
+            TOPMOST ;
             CHILD
 
 #define _CY    nHEIGHT()
 #define _CX    nWIDTH()*2
-         @ _CY, _CX LABEL Label_1;
-            VALUE  cMsg;
-            WIDTH  _HMG_FormDebuggerMessage.ClientAreaWidth - _CX*2;
-            HEIGHT 30;
+         @ _CY, _CX LABEL Label_1 ;
+            VALUE  cMsg ;
+            WIDTH  _HMG_FormDebuggerMessage.ClientAreaWidth - _CX*2 ;
+            HEIGHT 30 ;
             CENTERALIGN
 
          @ ( _HMG_FormDebuggerMessage.Label_1.ROW + _HMG_FormDebuggerMessage.Label_1.HEIGHT + 1) , _HMG_FormDebuggerMessage.Label_1.COL ;

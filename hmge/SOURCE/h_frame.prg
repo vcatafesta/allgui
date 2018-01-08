@@ -194,12 +194,12 @@ FUNCTION _BeginFrame( name , parent , row , col , w , h , caption , fontname , f
    IF _HMG_FrameLevel > 0 .AND. !_HMG_ParentWindowActive
       COL    := col + _HMG_ActiveFrameCol [_HMG_FrameLevel]
       ROW    := row + _HMG_ActiveFrameRow [_HMG_FrameLevel]
-      Parent := _HMG_ActiveFrameParentFormName [_HMG_FrameLevel]
+      PARENT := _HMG_ActiveFrameParentFormName [_HMG_FrameLevel]
    ENDIF
 
    IF ValType ( parent ) == 'U'
       IF _HMG_BeginWindowActive .OR. _HMG_BeginDialogActive
-         Parent := iif( _HMG_BeginDialogActive, _HMG_ActiveDialogName, _HMG_ActiveFormName )
+         PARENT := iif( _HMG_BeginDialogActive, _HMG_ActiveDialogName, _HMG_ActiveFormName )
       ENDIF
    ENDIF
 

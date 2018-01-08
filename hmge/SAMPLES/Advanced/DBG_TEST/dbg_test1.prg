@@ -11,9 +11,9 @@ FUNCTION MAIN
 
    LOCAL a := {{{1,2}},3 }, nLine, cFileName
 
-   LOCAL hCustomers := { "CC001" => "Pierce Firth",;
-      "CC002" => "Stellan Taylor",;
-      "CC003" => "Chris Cherry",;
+   LOCAL hCustomers := { "CC001" => "Pierce Firth", ;
+      "CC002" => "Stellan Taylor", ;
+      "CC003" => "Chris Cherry", ;
       "CC004" => "Amanda Baranski" }
 
    LOCAL hFruits := { "fruits" => { "apple", "chery", "apricot" } }
@@ -33,17 +33,17 @@ FUNCTION MAIN
       ON KEY ALT+D ACTION HMG_ShowEventMonitor()
 
 #xtranslate EDITBOX_INFO() => Form1.EditBox_1.Value := ;
-         "--- Vars  ---"   + hb_osNewLine() + VarInfo (HMG_Debugger():GetVars()) +;
-         "--- Stack ---"   + hb_osNewLine() + VarInfo (HMG_Debugger():GetProcStack()) +;
-         str (HMG_Debugger():nProcLevel) + hb_osNewLine() +;
-         str (__dbgProcLevel()) + hb_osNewLine() +;
+         "--- Vars  ---"   + hb_osNewLine() + VarInfo (HMG_Debugger():GetVars()) + ;
+         "--- Stack ---"   + hb_osNewLine() + VarInfo (HMG_Debugger():GetProcStack()) + ;
+         str (HMG_Debugger():nProcLevel) + hb_osNewLine() + ;
+         str (__dbgProcLevel()) + hb_osNewLine() + ;
          ListCalledFunctions ()
 
       Form1.TITLE := "Break Point 1"
 
       @ 10, 500 EDITBOX EditBox_1 ;
-         WIDTH 400;
-         HEIGHT 400;
+         WIDTH 400 ;
+         HEIGHT 400 ;
          VALUE ""
 
       @ 100,350 BUTTON Button_1 CAPTION 'DBF' ACTION Test_DBF()

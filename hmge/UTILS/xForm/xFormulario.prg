@@ -93,10 +93,10 @@ PROCEDURE PInterfaceFormMade_Formulario()
          CHILD ;
          NOMINIMIZE ;
          NOMAXIMIZE ;
-         ON INIT (PInterfaceFormMade_Move(), PInterfaceFormMade_Refresh());
-         ON MOUSECLICK PInterfaceFormMade_Click();
+         ON INIT (PInterfaceFormMade_Move(), PInterfaceFormMade_Refresh()) ;
+         ON MOUSECLICK PInterfaceFormMade_Click() ;
          ON MOVE PInterfaceFormMade_Move() ;
-         ON SIZE PInterfaceFormMade_Size();
+         ON SIZE PInterfaceFormMade_Size() ;
          ON MOUSEMOVE PInterfaceFormMade_Mouse() ;
          BACKCOLOR {206,192,168}
 
@@ -148,15 +148,15 @@ PROCEDURE PInterfaceListaDeObjetos_Formulario()
          CHILD ;
          NOSYSMENU
 
-      @ 10 ,10 COMBOBOX Cbx_Controles;
-         PARENT WControles;
-         WIDTH 270;
-         HEIGHT 150;
+      @ 10 ,10 COMBOBOX Cbx_Controles ;
+         PARENT WControles ;
+         WIDTH 270 ;
+         HEIGHT 150 ;
          ON CHANGE PInterfaceListaDeObjetos_Cambio()
 
-      @ 40,10 GRID Grd_Propiedades;
-         WIDTH 270;
-         HEIGHT 300;
+      @ 40,10 GRID Grd_Propiedades ;
+         WIDTH 270 ;
+         HEIGHT 300 ;
          HEADERS {PSayText({'Propiedad','Propietie'}),PSayText({'Valor','Value'})} ;
          WIDTHS {120,120} ;
          ON DBLCLICK PInterfaceListaDePropiedades_Edit()
@@ -232,10 +232,10 @@ FUNCTION Main(mSendNameFile)
          AT 0,0 ;
          WIDTH 895 ;
          HEIGHT 175 ;
-         MAIN;
+         MAIN ;
          NOTIFYICON 'xForma2' ;
-         TITLE FileName+' - '+MAIN_TITLE;
-         ON INTERACTIVECLOSE PFinalizarForma(cIniFile);
+         TITLE FileName+' - '+MAIN_TITLE ;
+         ON INTERACTIVECLOSE PFinalizarForma(cIniFile) ;
          ON DROPFILES {| aFiles | PArchivo_Tratamiento(aFiles[1]) }
 
       mLinea:= 5
@@ -424,17 +424,17 @@ PROCEDURE SetIniValue( cIni )
 
 PROCEDURE PMain_MasControles()
 
-   LOCAL mMouseRow,;
-      aMouseCol,;
+   LOCAL mMouseRow, ;
+      aMouseCol, ;
       mNumLine
    mMouseRow := GetCursorPos()[ 1 ]-15
    aMouseCol := GetCursorPos()[ 2 ]-15
 
-   DEFINE WINDOW W_Botones;
-         AT mMouseRow,aMouseCol;
-         WIDTH 137;
-         HEIGHT 168;
-         TITLE PSayText({'Botones','Buttons'});
+   DEFINE WINDOW W_Botones ;
+         AT mMouseRow,aMouseCol ;
+         WIDTH 137 ;
+         HEIGHT 168 ;
+         TITLE PSayText({'Botones','Buttons'}) ;
          MODAL
 
       ON KEY ESCAPE ACTION W_Botones.RELEASE
@@ -623,9 +623,9 @@ PROCEDURE PInterfaceFormMade_Mouse()
 PROCEDURE PInterfaceFormMade_Refresh()
 
    LOCAL cIniFile := GetStartupFolder() + '\setup.ini'
-   LOCAL mCont1:= 10,;
-      mCont2:= 10,;
-      mCont1Step,;
+   LOCAL mCont1:= 10, ;
+      mCont2:= 10, ;
+      mCont1Step, ;
       mCont2Step
    LOCAL mWinWidth
    LOCAL mWinHeight
@@ -720,7 +720,7 @@ PROCEDURE PInterfaceFormMade_Click()
                      nLocalCol:= aControles[I,3,J,2]
                   ENDIF
                NEXT
-               IF nLocalRow <= aMousePos[1] .AND. nLocalRow+20 >= aMousePos[1] .AND.;
+               IF nLocalRow <= aMousePos[1] .AND. nLocalRow+20 >= aMousePos[1] .AND. ;
                      nLocalCol <= aMousePos[2] .AND. nLocalCol+60 >= aMousePos[2]
                   // Seleccionar
                   mNumItem:= I
@@ -1272,11 +1272,11 @@ FUNCTION PInterfaceListaDePropiedades_ChangePropiedad(mcPropName,mxValor)
       mxValor:= VAL(mxValor)
    ENDIF
 
-   DEFINE WINDOW Frm_ChangProp;
-         AT 376,679;
-         WIDTH 397;
-         HEIGHT 151;
-         TITLE PSayText({'Cambio de Propiedad','Property Change'});
+   DEFINE WINDOW Frm_ChangProp ;
+         AT 376,679 ;
+         WIDTH 397 ;
+         HEIGHT 151 ;
+         TITLE PSayText({'Cambio de Propiedad','Property Change'}) ;
          MODAL
 
       ON KEY ESCAPE ACTION Frm_ChangProp.RELEASE
@@ -1333,11 +1333,11 @@ FUNCTION PInterfaceListaDePropiedades_TrueFalse(mValor,mPropiedad)
    LOCAL mNumLine
    PRIVATE mValRetur:= mValor
 
-   DEFINE WINDOW W_FalsoVerdadero;
-         AT 186,710;
-         WIDTH 136;
-         HEIGHT 188;
-         TITLE PSayText({'Valor','Value'});
+   DEFINE WINDOW W_FalsoVerdadero ;
+         AT 186,710 ;
+         WIDTH 136 ;
+         HEIGHT 188 ;
+         TITLE PSayText({'Valor','Value'}) ;
          MODAL
 
       ON KEY ESCAPE ACTION W_FalsoVerdadero.RELEASE
@@ -1383,11 +1383,11 @@ FUNCTION PInterfaceListaDePropiedades_Items(aItems)
       AADD(mItemGrid,mItemTemp)
    NEXT
 
-   DEFINE WINDOW W_ITEMS;
-         AT 186,710;
-         WIDTH 287;
-         HEIGHT 394;
-         TITLE 'Items';
+   DEFINE WINDOW W_ITEMS ;
+         AT 186,710 ;
+         WIDTH 287 ;
+         HEIGHT 394 ;
+         TITLE 'Items' ;
          MODAL
 
       ON KEY ESCAPE ACTION W_ITEMS.RELEASE
@@ -1411,11 +1411,11 @@ PROCEDURE PInterfaceListaDePropiedades_Undo()
 
    LOCAL mNumLine
 
-   DEFINE WINDOW W_ITEMS;
-         AT 186,710;
-         WIDTH 380;
-         HEIGHT 394;
-         TITLE 'UnDo ';
+   DEFINE WINDOW W_ITEMS ;
+         AT 186,710 ;
+         WIDTH 380 ;
+         HEIGHT 394 ;
+         TITLE 'UnDo ' ;
          CHILD ;
          ON INIT PInterfaceListaDePropiedades_UndoRefresh()
 
@@ -1509,114 +1509,114 @@ PROCEDURE PInterfaceListaDePropiedades_ItemsOk()
 
 FUNCTION PInterfaceListaDePropiedades_Imagen(mNomImg)
 
-   LOCAL  aImageList,;
-      aGrIdItems,;
+   LOCAL  aImageList, ;
+      aGrIdItems, ;
       mNumLine
    PRIVATE mRetNom:= mNomImg
 
-   aImageList:= {"ACEPTAR16"       ,;
-      "ANIO16"          ,;
-      "ANULAR16"        ,;
-      "BUSCAR16"        ,;
-      "CALC16"          ,;
-      "CANCELAR16"      ,;
-      "CARPETA16"       ,;
-      "CARPETABUSCAR16" ,;
-      "CONECTAR16"      ,;
-      "CONECTADO16"     ,;
-      "CONSULTA16"      ,;
-      "CONTA16"         ,;
-      "CONTA216"        ,;
-      "DESCONECTADO16"  ,;
-      "DESGLOSE16"      ,;
-      "DESGLOSE216"     ,;
-      "DESHACER16"      ,;
-      "EDITAR16"        ,;
-      "ELIMINAR16"      ,;
-      "GAS16"           ,;
-      "GENERAR16"       ,;
-      "GUARDAR16"       ,;
-      "GRP016"          ,;
-      "GRP116"          ,;
-      "LISTA16"         ,;
-      "LOCK16"          ,;
-      "MASCARA16"       ,;
-      "MES16"           ,;
-      "MESDOWN16"       ,;
-      "MESUP16"         ,;
-      "MONEDA16"        ,;
-      "MULTIPLE16"      ,;
-      "NUEVO16"         ,;
-      "NO16"            ,;
-      "OTROS16"         ,;
-      "PRINT16"         ,;
-      "RAIZ16"          ,;
-      "RESTA16"         ,;
-      "RETORNAR16"      ,;
-      "SI16"            ,;
-      "SUMA16"          ,;
-      "TITULO16"        ,;
-      "UNLOCK16"        ,;
-      "UP16"            ,;
-      "VACIO16"         ,;
-      "DOWN16"          ,;
-      "LEFT16"          ,;
+   aImageList:= {"ACEPTAR16"       , ;
+      "ANIO16"          , ;
+      "ANULAR16"        , ;
+      "BUSCAR16"        , ;
+      "CALC16"          , ;
+      "CANCELAR16"      , ;
+      "CARPETA16"       , ;
+      "CARPETABUSCAR16" , ;
+      "CONECTAR16"      , ;
+      "CONECTADO16"     , ;
+      "CONSULTA16"      , ;
+      "CONTA16"         , ;
+      "CONTA216"        , ;
+      "DESCONECTADO16"  , ;
+      "DESGLOSE16"      , ;
+      "DESGLOSE216"     , ;
+      "DESHACER16"      , ;
+      "EDITAR16"        , ;
+      "ELIMINAR16"      , ;
+      "GAS16"           , ;
+      "GENERAR16"       , ;
+      "GUARDAR16"       , ;
+      "GRP016"          , ;
+      "GRP116"          , ;
+      "LISTA16"         , ;
+      "LOCK16"          , ;
+      "MASCARA16"       , ;
+      "MES16"           , ;
+      "MESDOWN16"       , ;
+      "MESUP16"         , ;
+      "MONEDA16"        , ;
+      "MULTIPLE16"      , ;
+      "NUEVO16"         , ;
+      "NO16"            , ;
+      "OTROS16"         , ;
+      "PRINT16"         , ;
+      "RAIZ16"          , ;
+      "RESTA16"         , ;
+      "RETORNAR16"      , ;
+      "SI16"            , ;
+      "SUMA16"          , ;
+      "TITULO16"        , ;
+      "UNLOCK16"        , ;
+      "UP16"            , ;
+      "VACIO16"         , ;
+      "DOWN16"          , ;
+      "LEFT16"          , ;
       "RIGHT16"         }
 
-   aGrIdItems :={{00,"ACEPTAR16"       },;
-      {01,"ANIO16"          },;
-      {02,"ANULAR16"        },;
-      {03,"BUSCAR16"        },;
-      {04,"CALC16"          },;
-      {05,"CANCELAR16"      },;
-      {06,"CARPETA16"       },;
-      {07,"CARPETABUSCAR16" },;
-      {08,"CONECTAR16"      },;
-      {09,"CONECTADO16"     },;
-      {00,"CONSULTA16"      },;
-      {11,"CONTA16"         },;
-      {12,"CONTA216"        },;
-      {13,"DESCONECTADO16"  },;
-      {14,"DESGLOSE16"      },;
-      {15,"DESGLOSE216"     },;
-      {16,"DESHACER16"      },;
-      {17,"EDITAR16"        },;
-      {18,"ELIMINAR16"      },;
-      {19,"GAS16"           },;
-      {20,"GENERAR16"       },;
-      {21,"GUARDAR16"       },;
-      {22,"GRP016"          },;
-      {23,"GRP116"          },;
-      {24,"LISTA16"         },;
-      {25,"LOCK16"          },;
-      {26,"MASCARA16"       },;
-      {27,"MES16"           },;
-      {28,"MESDOWN16"       },;
-      {29,"MESUP16"         },;
-      {30,"MONEDA16"        },;
-      {31,"MULTIPLE16"      },;
-      {32,"NUEVO16"         },;
-      {33,"NO16"            },;
-      {34,"OTROS16"         },;
-      {35,"PRINT16"         },;
-      {36,"RAIZ16"          },;
-      {37,"RESTA16"         },;
-      {38,"RETORNAR16"      },;
-      {39,"SI16"            },;
-      {40,"SUMA16"          },;
-      {41,"TITULO16"        },;
-      {42,"UNLOCK16"        },;
-      {43,"UP16"            },;
-      {44,"VACIO16"         },;
-      {45,"DOWN16"          },;
-      {46,"LEFT16"          },;
+   aGrIdItems :={{00,"ACEPTAR16"       }, ;
+      {01,"ANIO16"          }, ;
+      {02,"ANULAR16"        }, ;
+      {03,"BUSCAR16"        }, ;
+      {04,"CALC16"          }, ;
+      {05,"CANCELAR16"      }, ;
+      {06,"CARPETA16"       }, ;
+      {07,"CARPETABUSCAR16" }, ;
+      {08,"CONECTAR16"      }, ;
+      {09,"CONECTADO16"     }, ;
+      {00,"CONSULTA16"      }, ;
+      {11,"CONTA16"         }, ;
+      {12,"CONTA216"        }, ;
+      {13,"DESCONECTADO16"  }, ;
+      {14,"DESGLOSE16"      }, ;
+      {15,"DESGLOSE216"     }, ;
+      {16,"DESHACER16"      }, ;
+      {17,"EDITAR16"        }, ;
+      {18,"ELIMINAR16"      }, ;
+      {19,"GAS16"           }, ;
+      {20,"GENERAR16"       }, ;
+      {21,"GUARDAR16"       }, ;
+      {22,"GRP016"          }, ;
+      {23,"GRP116"          }, ;
+      {24,"LISTA16"         }, ;
+      {25,"LOCK16"          }, ;
+      {26,"MASCARA16"       }, ;
+      {27,"MES16"           }, ;
+      {28,"MESDOWN16"       }, ;
+      {29,"MESUP16"         }, ;
+      {30,"MONEDA16"        }, ;
+      {31,"MULTIPLE16"      }, ;
+      {32,"NUEVO16"         }, ;
+      {33,"NO16"            }, ;
+      {34,"OTROS16"         }, ;
+      {35,"PRINT16"         }, ;
+      {36,"RAIZ16"          }, ;
+      {37,"RESTA16"         }, ;
+      {38,"RETORNAR16"      }, ;
+      {39,"SI16"            }, ;
+      {40,"SUMA16"          }, ;
+      {41,"TITULO16"        }, ;
+      {42,"UNLOCK16"        }, ;
+      {43,"UP16"            }, ;
+      {44,"VACIO16"         }, ;
+      {45,"DOWN16"          }, ;
+      {46,"LEFT16"          }, ;
       {47,"RIGHT16"         }}
 
-   DEFINE WINDOW W_iMAGENES;
-         AT 186,470;
-         WIDTH 298;
-         HEIGHT 428;
-         TITLE PSayText({'Imagenes','Image'});
+   DEFINE WINDOW W_iMAGENES ;
+         AT 186,470 ;
+         WIDTH 298 ;
+         HEIGHT 428 ;
+         TITLE PSayText({'Imagenes','Image'}) ;
          MODAL
 
       ON KEY ESCAPE ACTION W_iMAGENES.RELEASE
@@ -1678,190 +1678,190 @@ FUNCTION PObjeto_Properties(mTipoControl,mNameCtrl,aMousePos)
    aPropiedades:= {}
    DO CASE
    CASE mTipoControl= "TREE"
-      aPropiedades:={{"ROW"       ,aMousePos[1] ,1,"V"},;
-         {"COL"       ,aMousePos[2] ,2,"V"},;
-         {"NAME"      ,mNameCtrl    ,3,"V"},;
-         {"WIDTH"     ,200          ,4,"V"},;
-         {"HEIGHT"    ,300          ,5,"V"},;
+      aPropiedades:={{"ROW"       ,aMousePos[1] ,1,"V"}, ;
+         {"COL"       ,aMousePos[2] ,2,"V"}, ;
+         {"NAME"      ,mNameCtrl    ,3,"V"}, ;
+         {"WIDTH"     ,200          ,4,"V"}, ;
+         {"HEIGHT"    ,300          ,5,"V"}, ;
          {"ITEMHEIGHT",20           ,5,"V"}}
 
    CASE mTipoControl= "TIMER"
-      aPropiedades:={{"ROW"       ,aMousePos[1] ,1,"V"},;
-         {"COL"       ,aMousePos[2] ,2,"V"},;
-         {"NAME"      ,mNameCtrl    ,3,"V"},;
-         {"INTERVAL"  ,100          ,4,"V"},;
+      aPropiedades:={{"ROW"       ,aMousePos[1] ,1,"V"}, ;
+         {"COL"       ,aMousePos[2] ,2,"V"}, ;
+         {"NAME"      ,mNameCtrl    ,3,"V"}, ;
+         {"INTERVAL"  ,100          ,4,"V"}, ;
          {"ACTION"    ,"NIL"        ,5,"V"}}
 
    CASE mTipoControl = "FRAME"
-      aPropiedades:= {{"ROW"     ,aMousePos[1] ,1,"V"},;
-         {"COL"     ,aMousePos[2] ,2,"V"},;
-         {"NAME"    ,mNameCtrl,3,"V"},;
-         {"CAPTION" ,mNameCtrl,4,"T"},;
-         {"WIDTH"   ,150      ,5,"V"},;
+      aPropiedades:= {{"ROW"     ,aMousePos[1] ,1,"V"}, ;
+         {"COL"     ,aMousePos[2] ,2,"V"}, ;
+         {"NAME"    ,mNameCtrl,3,"V"}, ;
+         {"CAPTION" ,mNameCtrl,4,"T"}, ;
+         {"WIDTH"   ,150      ,5,"V"}, ;
          {"HEIGHT"  ,50       ,6,"V"}}
 
    CASE mTipoControl= "LABEL"
-      aPropiedades:= {{"ROW"       ,aMousePos[1]  ,1,"V"},;
-         {"COL"       ,aMousePos[2]  ,2,"V"},;
-         {"NAME"      ,mNameCtrl ,3,"V"},;
-         {"VALUE"     ,mNameCtrl ,4,"T"},;
-         {"WIDTH"     ,100       ,5,"V"},;
-         {"HEIGHT"    ,15        ,6,"V"},;
-         {"BORDER"    ,.F.       ,7,"C"},;
-         {"CLIENTEDGE",.F.       ,8,"C"},;
-         {"RIGHTALIGN",.F.       ,9,"C"},;
+      aPropiedades:= {{"ROW"       ,aMousePos[1]  ,1,"V"}, ;
+         {"COL"       ,aMousePos[2]  ,2,"V"}, ;
+         {"NAME"      ,mNameCtrl ,3,"V"}, ;
+         {"VALUE"     ,mNameCtrl ,4,"T"}, ;
+         {"WIDTH"     ,100       ,5,"V"}, ;
+         {"HEIGHT"    ,15        ,6,"V"}, ;
+         {"BORDER"    ,.F.       ,7,"C"}, ;
+         {"CLIENTEDGE",.F.       ,8,"C"}, ;
+         {"RIGHTALIGN",.F.       ,9,"C"}, ;
          {"CENTERALIGN",.F.     ,10,"C"}}
 
    CASE mTipoControl= "GETBOX"
-      aPropiedades:={{"ROW"      ,aMousePos[1]   ,1,"V"},;
-         {"COL"      ,aMousePos[2]   ,2,"V"},;
-         {"NAME"     ,mNameCtrl      ,3,"V"},;
-         {"VALUE"    ,mNameCtrl      ,4,"T"},;
-         {"WIDTH"    ,100            ,5,"V"},;
-         {"HEIGHT"   ,20             ,6,"V"},;
-         {"BACKCOLOR","Sys_BackColor",7,"V"},;
+      aPropiedades:={{"ROW"      ,aMousePos[1]   ,1,"V"}, ;
+         {"COL"      ,aMousePos[2]   ,2,"V"}, ;
+         {"NAME"     ,mNameCtrl      ,3,"V"}, ;
+         {"VALUE"    ,mNameCtrl      ,4,"T"}, ;
+         {"WIDTH"    ,100            ,5,"V"}, ;
+         {"HEIGHT"   ,20             ,6,"V"}, ;
+         {"BACKCOLOR","Sys_BackColor",7,"V"}, ;
          {"FONTCOLOR","Sys_FontColor",8,"V"}}
 
    CASE mTipoControl= "BUTTONEX"
 
       IF mMasButtos
-         aPropiedades:={{"ROW"    ,aMousePos[1] ,1,"V"},;
-            {"COL"    ,aMousePos[2] ,2,"V"},;
-            {"NAME"   ,mNameCtrl    ,3,"V"},;
-            {"CAPTION",mMasBCaption ,4,"T"},;
-            {"PICTURE",mMasBPicture ,5,"T"},;
-            {"WIDTH"  ,100          ,6,"V"},;
-            {"HEIGHT" ,25           ,7,"V"},;
-            {"ACTION" ,"NIL"        ,8,"V"},;
+         aPropiedades:={{"ROW"    ,aMousePos[1] ,1,"V"}, ;
+            {"COL"    ,aMousePos[2] ,2,"V"}, ;
+            {"NAME"   ,mNameCtrl    ,3,"V"}, ;
+            {"CAPTION",mMasBCaption ,4,"T"}, ;
+            {"PICTURE",mMasBPicture ,5,"T"}, ;
+            {"WIDTH"  ,100          ,6,"V"}, ;
+            {"HEIGHT" ,25           ,7,"V"}, ;
+            {"ACTION" ,"NIL"        ,8,"V"}, ;
             {"TOOLTIP" ,mMasBToolTip,9,"T"}}
       ELSE
-         aPropiedades:={{"ROW"    ,aMousePos[1] ,1,"V"},;
-            {"COL"    ,aMousePos[2] ,2,"V"},;
-            {"NAME"   ,mNameCtrl    ,3,"V"},;
-            {"CAPTION",mNameCtrl    ,4,"T"},;
-            {"PICTURE",""           ,5,"T"},;
-            {"WIDTH"  ,100          ,6,"V"},;
-            {"HEIGHT" ,25           ,7,"V"},;
-            {"ACTION" ,"NIL"        ,8,"V"},;
+         aPropiedades:={{"ROW"    ,aMousePos[1] ,1,"V"}, ;
+            {"COL"    ,aMousePos[2] ,2,"V"}, ;
+            {"NAME"   ,mNameCtrl    ,3,"V"}, ;
+            {"CAPTION",mNameCtrl    ,4,"T"}, ;
+            {"PICTURE",""           ,5,"T"}, ;
+            {"WIDTH"  ,100          ,6,"V"}, ;
+            {"HEIGHT" ,25           ,7,"V"}, ;
+            {"ACTION" ,"NIL"        ,8,"V"}, ;
             {"TOOLTIP" ,"ToolTip"   ,9,"T"}}
       ENDIF
 
    CASE mTipoControl= "CHECKBOX"
-      aPropiedades:={{"ROW"    ,aMousePos[1]  ,1,"V"},;
-         {"COL"    ,aMousePos[2]  ,2,"V"},;
-         {"NAME"   ,mNameCtrl     ,3,"V"},;
-         {"CAPTION",mNameCtrl     ,4,"T"},;
-         {"WIDTH"  ,150           ,5,"V"},;
+      aPropiedades:={{"ROW"    ,aMousePos[1]  ,1,"V"}, ;
+         {"COL"    ,aMousePos[2]  ,2,"V"}, ;
+         {"NAME"   ,mNameCtrl     ,3,"V"}, ;
+         {"CAPTION",mNameCtrl     ,4,"T"}, ;
+         {"WIDTH"  ,150           ,5,"V"}, ;
          {"HEIGHT" ,25            ,6,"V"}}
 
    CASE mTipoControl= "RADIOGROUP"
-      aPropiedades:={{"ROW"             ,aMousePos[1] ,1,"V"},;
-         {"COL"             ,aMousePos[2] ,2,"V"},;
-         {"NAME"            ,mNameCtrl,3,"V"},;
-         {"OPTIONS",'{"Option1","Option2"}',4,"V"},;
-         {"VALUE"           ,1        ,5,"V"},;
-         {"WIDTH"           ,150      ,6,"V"},;
-         {"SPACING"         ,35       ,7,"V"},;
+      aPropiedades:={{"ROW"             ,aMousePos[1] ,1,"V"}, ;
+         {"COL"             ,aMousePos[2] ,2,"V"}, ;
+         {"NAME"            ,mNameCtrl,3,"V"}, ;
+         {"OPTIONS",'{"Option1","Option2"}',4,"V"}, ;
+         {"VALUE"           ,1        ,5,"V"}, ;
+         {"WIDTH"           ,150      ,6,"V"}, ;
+         {"SPACING"         ,35       ,7,"V"}, ;
          {"HORIZONTAL"      ,.F.      ,8,"C"}}
 
    CASE mTipoControl= "COMBOBOX"
-      aPropiedades:= {{"ROW"      ,aMousePos[1]   ,1,"V"},;
-         {"COL"      ,aMousePos[2]   ,2,"V"},;
-         {"NAME"     ,mNameCtrl  ,3,"V"},;
-         {"ITEMS"    ,'{"'+mNameCtrl+'","Item2  "}',4,"V"},;
-         {"VALUE"    ,1          ,5,"V"},;
-         {"WIDTH"    ,150        ,6,"V"},;
-         {"HEIGHT"   ,100        ,7,"V"},;
+      aPropiedades:= {{"ROW"      ,aMousePos[1]   ,1,"V"}, ;
+         {"COL"      ,aMousePos[2]   ,2,"V"}, ;
+         {"NAME"     ,mNameCtrl  ,3,"V"}, ;
+         {"ITEMS"    ,'{"'+mNameCtrl+'","Item2  "}',4,"V"}, ;
+         {"VALUE"    ,1          ,5,"V"}, ;
+         {"WIDTH"    ,150        ,6,"V"}, ;
+         {"HEIGHT"   ,100        ,7,"V"}, ;
          {"LISTWIDTH",150        ,8,"V"}}
 
    CASE mTipoControl= "SPINNER"
-      aPropiedades:= {{"ROW"     ,aMousePos[1]  ,1,"V"},;
-         {"COL"     ,aMousePos[2]  ,2,"V"},;
-         {"NAME"    ,mNameCtrl ,3,"V"},;
-         {"RANGEMIN",1         ,4,"V"},;
-         {"RANGEMAX",100       ,5,"V"},;
-         {"VALUE"   ,1         ,6,"V"},;
-         {"WIDTH"   ,100       ,7,"V"},;
+      aPropiedades:= {{"ROW"     ,aMousePos[1]  ,1,"V"}, ;
+         {"COL"     ,aMousePos[2]  ,2,"V"}, ;
+         {"NAME"    ,mNameCtrl ,3,"V"}, ;
+         {"RANGEMIN",1         ,4,"V"}, ;
+         {"RANGEMAX",100       ,5,"V"}, ;
+         {"VALUE"   ,1         ,6,"V"}, ;
+         {"WIDTH"   ,100       ,7,"V"}, ;
          {"HEIGHT"  ,25        ,8,"V"}}
 
    CASE mTipoControl= "TBROWSE"
-      aPropiedades:={{"ROW"    ,aMousePos[1] ,1,"V"},;
-         {"COL"    ,aMousePos[2] ,2,"V"},;
-         {"NAME"   ,mNameCtrl    ,3,"V"},;
-         {"WIDTH"  ,200          ,4,"V"},;
+      aPropiedades:={{"ROW"    ,aMousePos[1] ,1,"V"}, ;
+         {"COL"    ,aMousePos[2] ,2,"V"}, ;
+         {"NAME"   ,mNameCtrl    ,3,"V"}, ;
+         {"WIDTH"  ,200          ,4,"V"}, ;
          {"HEIGHT" ,150          ,5,"V"}}
 
    CASE mTipoControl= "GRID"
-      aPropiedades:={{"ROW"    ,aMousePos[1]           ,1,"V"},;
-         {"COL"    ,aMousePos[2]           ,2,"V"},;
-         {"NAME"   ,mNameCtrl              ,3,"V"},;
-         {"WIDTH"  ,200                    ,4,"V"},;
-         {"HEIGHT" ,150                    ,5,"V"},;
-         {"HEADERS",'{"Heder1","Heder2"}'  ,6,"V"},;
-         {"WIDTHS" ,"{100,100}"            ,7,"V"},;
+      aPropiedades:={{"ROW"    ,aMousePos[1]           ,1,"V"}, ;
+         {"COL"    ,aMousePos[2]           ,2,"V"}, ;
+         {"NAME"   ,mNameCtrl              ,3,"V"}, ;
+         {"WIDTH"  ,200                    ,4,"V"}, ;
+         {"HEIGHT" ,150                    ,5,"V"}, ;
+         {"HEADERS",'{"Heder1","Heder2"}'  ,6,"V"}, ;
+         {"WIDTHS" ,"{100,100}"            ,7,"V"}, ;
          {"ITEMS"  ,'{{"Item11","Item12"},{"Item21","Item21"}}',8,"V"}}
 
    CASE mTipoControl= "PROGRESSBAR"
-      aPropiedades:= {{"ROW"     ,aMousePos[1]  ,1,"V"},;
-         {"COL"     ,aMousePos[2]  ,2,"V"},;
-         {"NAME"    ,mNameCtrl ,3,"V"},;
-         {"RANGEMIN",1         ,4,"V"},;
-         {"RANGEMAX",100       ,5,"V"},;
-         {"VALUE"   ,1         ,6,"V"},;
-         {"WIDTH"   ,150       ,7,"V"},;
-         {"HEIGHT"  ,20        ,8,"V"},;
+      aPropiedades:= {{"ROW"     ,aMousePos[1]  ,1,"V"}, ;
+         {"COL"     ,aMousePos[2]  ,2,"V"}, ;
+         {"NAME"    ,mNameCtrl ,3,"V"}, ;
+         {"RANGEMIN",1         ,4,"V"}, ;
+         {"RANGEMAX",100       ,5,"V"}, ;
+         {"VALUE"   ,1         ,6,"V"}, ;
+         {"WIDTH"   ,150       ,7,"V"}, ;
+         {"HEIGHT"  ,20        ,8,"V"}, ;
          {"VERTICAL",.F.       ,9,"C"}}
 
    CASE mTipoControl= "LISTBOX"
-      aPropiedades:= {{"ROW"      ,aMousePos[1]   ,1,"V"},;
-         {"COL"      ,aMousePos[2]   ,2,"V"},;
-         {"NAME"     ,mNameCtrl  ,3,"V"},;
-         {"ITEMS"    ,'{"'+mNameCtrl+'","Item2"}',4,"V"},;
-         {"VALUE"    ,1          ,5,"V"},;
-         {"WIDTH"    ,150        ,6,"V"},;
+      aPropiedades:= {{"ROW"      ,aMousePos[1]   ,1,"V"}, ;
+         {"COL"      ,aMousePos[2]   ,2,"V"}, ;
+         {"NAME"     ,mNameCtrl  ,3,"V"}, ;
+         {"ITEMS"    ,'{"'+mNameCtrl+'","Item2"}',4,"V"}, ;
+         {"VALUE"    ,1          ,5,"V"}, ;
+         {"WIDTH"    ,150        ,6,"V"}, ;
          {"HEIGHT"   ,100        ,7,"V"}}
 
    CASE mTipoControl= "EDITBOX"
-      aPropiedades:={{"ROW"      ,aMousePos[1]       ,1,"V"},;
-         {"COL"      ,aMousePos[2]       ,2,"V"},;
-         {"NAME"     ,mNameCtrl      ,3,"V"},;
-         {"VALUE"    ,PSayText({"Activar con boton Derecho","Rigth Click to active"}),4,"T"},;
-         {"WIDTH"    ,150            ,5,"V"},;
+      aPropiedades:={{"ROW"      ,aMousePos[1]       ,1,"V"}, ;
+         {"COL"      ,aMousePos[2]       ,2,"V"}, ;
+         {"NAME"     ,mNameCtrl      ,3,"V"}, ;
+         {"VALUE"    ,PSayText({"Activar con boton Derecho","Rigth Click to active"}),4,"T"}, ;
+         {"WIDTH"    ,150            ,5,"V"}, ;
          {"HEIGHT"   ,150            ,6,"V"}}
 
    CASE mTipoControl= "IMAGE"
-      aPropiedades:= {{"ROW"     ,aMousePos[1]    ,1,"V"},;
-         {"COL"     ,aMousePos[2]    ,2,"V"},;
-         {"NAME"    ,mNameCtrl   ,3,"V"},;
-         {"PICTURE" ,"demoimage",4,"T"},;
-         {"WIDTH"   ,100         ,5,"V"},;
+      aPropiedades:= {{"ROW"     ,aMousePos[1]    ,1,"V"}, ;
+         {"COL"     ,aMousePos[2]    ,2,"V"}, ;
+         {"NAME"    ,mNameCtrl   ,3,"V"}, ;
+         {"PICTURE" ,"demoimage",4,"T"}, ;
+         {"WIDTH"   ,100         ,5,"V"}, ;
          {"HEIGHT"  ,100         ,6,"V"}}
 
    CASE mTipoControl= "CHECKBUTTON"
-      aPropiedades:= {{"ROW"     ,aMousePos[1]    ,1,"V"},;
-         {"COL"     ,aMousePos[2]    ,2,"V"},;
-         {"NAME"    ,mNameCtrl       ,3,"V"},;
-         {"CAPTION" ,"Ckb"           ,4,"T"},;
-         {"PICTURE" ,""              ,5,"T"},;
-         {"WIDTH"   ,30              ,6,"V"},;
-         {"HEIGHT"  ,30              ,7,"V"},;
+      aPropiedades:= {{"ROW"     ,aMousePos[1]    ,1,"V"}, ;
+         {"COL"     ,aMousePos[2]    ,2,"V"}, ;
+         {"NAME"    ,mNameCtrl       ,3,"V"}, ;
+         {"CAPTION" ,"Ckb"           ,4,"T"}, ;
+         {"PICTURE" ,""              ,5,"T"}, ;
+         {"WIDTH"   ,30              ,6,"V"}, ;
+         {"HEIGHT"  ,30              ,7,"V"}, ;
          {"VALUE"   ,.F.             ,8,"V"}}
 
    CASE mTipoControl= "DATEPICKER"
-      aPropiedades:={{"ROW"      ,aMousePos[1]    ,1,"V"},;
-         {"COL"      ,aMousePos[2]    ,2,"V"},;
-         {"NAME"     ,mNameCtrl       ,3,"V"},;
-         {"VALUE"    ,DATE()          ,4,"V"},;
-         {"WIDTH"    ,100             ,5,"V"},;
+      aPropiedades:={{"ROW"      ,aMousePos[1]    ,1,"V"}, ;
+         {"COL"      ,aMousePos[2]    ,2,"V"}, ;
+         {"NAME"     ,mNameCtrl       ,3,"V"}, ;
+         {"VALUE"    ,DATE()          ,4,"V"}, ;
+         {"WIDTH"    ,100             ,5,"V"}, ;
          {"HEIGHT"   ,20              ,6,"V"}}
 
    CASE mTipoControl= "HYPERLINK"
-      aPropiedades:={{"ROW"      ,aMousePos[1]    ,1,"V"},;
-         {"COL"      ,aMousePos[2]    ,2,"V"},;
-         {"NAME"     ,mNameCtrl       ,3,"V"},;
-         {"VALUE"    ,"http//www.programer.com" ,4,"T"},;
-      {"ADDRESS"  ,"http//www.programer.com" ,4,"T"},;
-      {"WIDTH"    ,200             ,5,"V"},;
+      aPropiedades:={{"ROW"      ,aMousePos[1]    ,1,"V"}, ;
+         {"COL"      ,aMousePos[2]    ,2,"V"}, ;
+         {"NAME"     ,mNameCtrl       ,3,"V"}, ;
+         {"VALUE"    ,"http//www.programer.com" ,4,"T"}, ;
+      {"ADDRESS"  ,"http//www.programer.com" ,4,"T"}, ;
+      {"WIDTH"    ,200             ,5,"V"}, ;
          {"HEIGHT"   ,20              ,6,"V"}}
 
    ENDCASE
@@ -2371,9 +2371,9 @@ PROCEDURE PObjeto_Copiar()
    LOCAL mNumItem
    LOCAL mCont
    LOCAL aPropiedades:= {}
-   LOCAL mValTemp1,;
-      mValTemp2,;
-      mValTemp3,;
+   LOCAL mValTemp1, ;
+      mValTemp2, ;
+      mValTemp3, ;
       mValTemp4
 
    mNumItem:= WControles.Cbx_Controles.value
@@ -2412,9 +2412,9 @@ PROCEDURE PObjeto_Pegar()
    LOCAL mNameCtrl
    LOCAL maPropiedades
    LOCAL mCont
-   LOCAL mValTemp1,;
-      mValTemp2,;
-      mValTemp3,;
+   LOCAL mValTemp1, ;
+      mValTemp2, ;
+      mValTemp3, ;
       mValTemp4
 
    aMousePos:= FGetMousePos()
@@ -2610,9 +2610,9 @@ FUNCTION FObjeto_NexName(mControl)
 FUNCTION FGetMousePos(mConIman)
 
    // Retorna un Vector Con Las Posiciones del Raton
-   LOCAL aMPos,;
-      mMouseRow,;
-      mMouseCol,;
+   LOCAL aMPos, ;
+      mMouseRow, ;
+      mMouseCol, ;
       mReciduo
 
    DEFAULT mConIman:= .F.

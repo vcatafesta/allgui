@@ -16,13 +16,13 @@ FUNCTION produtos()
    ordsetfocus('nome_longo')
    produtos->(dbgotop())
 
-   DEFINE WINDOW form_produtos;
-         at 000,000;
-         WIDTH getdesktopwidth();
-         HEIGHT getdesktopheight();
-         TITLE 'Produtos';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_produtos ;
+         at 000,000 ;
+         WIDTH getdesktopwidth() ;
+         HEIGHT getdesktopheight() ;
+         TITLE 'Produtos' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          ON INIT pesquisar()
 
       * botões (toolbar)
@@ -165,7 +165,7 @@ FUNCTION produtos()
 
       DEFINE SPLITBOX
          DEFINE GRID grid_produtos
-            parent form_produtos
+            PARENT form_produtos
             COL 000
             ROW 105
             WIDTH getdesktopwidth()
@@ -182,7 +182,7 @@ FUNCTION produtos()
       END SPLITBOX
 
       DEFINE LABEL rodape_001
-         parent form_produtos
+         PARENT form_produtos
          COL 005
          ROW getdesktopheight()-090
          VALUE 'Digite sua pesquisa'
@@ -193,19 +193,19 @@ FUNCTION produtos()
          FONTCOLOR _cinza_001
          TRANSPARENT .T.
       END LABEL
-      @ getdesktopheight()-095,160 textbox tbox_pesquisa;
-         of form_produtos;
-         HEIGHT 027;
-         WIDTH 550;
-         VALUE '';
-         MAXLENGTH 040;
-         FONT 'verdana' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase;
+      @ getdesktopheight()-095,160 textbox tbox_pesquisa ;
+         of form_produtos ;
+         HEIGHT 027 ;
+         WIDTH 550 ;
+         VALUE '' ;
+         MAXLENGTH 040 ;
+         FONT 'verdana' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         uppercase ;
          ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
-         parent form_produtos
+         PARENT form_produtos
          COL form_produtos.width - 270
          ROW getdesktopheight()-085
          VALUE 'DUPLO CLIQUE : Alterar informação'
@@ -296,96 +296,96 @@ STATIC FUNCTION dados(parametro)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW form_dados;
-         at 000,000;
-         WIDTH 830;
-         HEIGHT 550;
-         TITLE (titulo);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_dados ;
+         at 000,000 ;
+         WIDTH 830 ;
+         HEIGHT 550 ;
+         TITLE (titulo) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 005,005 frame frame_geral;
-         parent form_dados;
-         CAPTION 'Informações do cadastro';
-         WIDTH 510;
-         HEIGHT 440;
-         FONT 'verdana';
-         size 010;
-         bold;
+      @ 005,005 frame frame_geral ;
+         PARENT form_dados ;
+         CAPTION 'Informações do cadastro' ;
+         WIDTH 510 ;
+         HEIGHT 440 ;
+         FONT 'verdana' ;
+         size 010 ;
+         bold ;
          opaque
 
-      @ 025,015 label lbl_001;
-         of form_dados;
-         VALUE 'Código';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 025,015 label lbl_001 ;
+         of form_dados ;
+         VALUE 'Código' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 045,015 getbox tbox_001;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_codigo;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
+      @ 045,015 getbox tbox_001 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_codigo ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
          FONTCOLOR _letra_get_1
-      @ 025,145 label lbl_002;
-         of form_dados;
-         VALUE 'Nome (longo)';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 025,145 label lbl_002 ;
+         of form_dados ;
+         VALUE 'Nome (longo)' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 045,145 textbox tbox_002;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 360;
-         VALUE x_nome_longo;
-         MAXLENGTH 040;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 075,015 label lbl_003;
-         of form_dados;
-         VALUE 'Nome (cupom)';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 045,145 textbox tbox_002 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 360 ;
+         VALUE x_nome_longo ;
+         MAXLENGTH 040 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 075,015 label lbl_003 ;
+         of form_dados ;
+         VALUE 'Nome (cupom)' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 095,015 textbox tbox_003;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 250;
-         VALUE x_nome_cupom;
-         MAXLENGTH 015;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 075,275 label lbl_004;
-         of form_dados;
-         VALUE 'Código Barra';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 095,015 textbox tbox_003 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 250 ;
+         VALUE x_nome_cupom ;
+         MAXLENGTH 015 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 075,275 label lbl_004 ;
+         of form_dados ;
+         VALUE 'Código Barra' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 095,275 textbox tbox_004;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 230;
-         VALUE x_cbarra;
-         MAXLENGTH 015;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
+      @ 095,275 textbox tbox_004 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 230 ;
+         VALUE x_cbarra ;
+         MAXLENGTH 015 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
       DEFINE CHECKBOX tbox_005
          ROW 130
          COL 015
@@ -416,301 +416,301 @@ STATIC FUNCTION dados(parametro)
          FONTSIZE 010
          FONTBOLD .T.
       END CHECKBOX
-      @ 180,015 label lbl_008;
-         of form_dados;
-         VALUE 'Categoria';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 180,015 label lbl_008 ;
+         of form_dados ;
+         VALUE 'Categoria' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 200,015 textbox tbox_008;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_categoria;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 200,015 textbox tbox_008 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_categoria ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_categoria('form_dados','tbox_008')
-      @ 200,085 label lbl_nome_categoria;
-         of form_dados;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 200,085 label lbl_nome_categoria ;
+         of form_dados ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
-      @ 230,015 label lbl_009;
-         of form_dados;
-         VALUE 'Sub Categoria';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 230,015 label lbl_009 ;
+         of form_dados ;
+         VALUE 'Sub Categoria' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 250,015 textbox tbox_009;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_subcategoria;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 250,015 textbox tbox_009 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_subcategoria ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_subcategoria('form_dados','tbox_009')
-      @ 250,085 label lbl_nome_subcategoria;
-         of form_dados;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 250,085 label lbl_nome_subcategoria ;
+         of form_dados ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
-      @ 290,015 label lbl_010;
-         of form_dados;
-         VALUE 'Qtd. em estoque';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 290,015 label lbl_010 ;
+         of form_dados ;
+         VALUE 'Qtd. em estoque' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 310,015 textbox tbox_010;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 100;
-         VALUE x_qtd_estoque;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 310,015 textbox tbox_010 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 100 ;
+         VALUE x_qtd_estoque ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          NUMERIC
-      @ 290,130 label lbl_011;
-         of form_dados;
-         VALUE 'Qtd. mínima';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 290,130 label lbl_011 ;
+         of form_dados ;
+         VALUE 'Qtd. mínima' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 310,130 textbox tbox_011;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 100;
-         VALUE x_qtd_minimo;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 310,130 textbox tbox_011 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 100 ;
+         VALUE x_qtd_minimo ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          NUMERIC
-      @ 290,240 label lbl_012;
-         of form_dados;
-         VALUE 'Qtd. máxima';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 290,240 label lbl_012 ;
+         of form_dados ;
+         VALUE 'Qtd. máxima' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 310,240 textbox tbox_012;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 100;
-         VALUE x_qtd_maximo;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 310,240 textbox tbox_012 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 100 ;
+         VALUE x_qtd_maximo ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          NUMERIC
-      @ 340,015 label lbl_013;
-         of form_dados;
-         VALUE 'Imposto';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 340,015 label lbl_013 ;
+         of form_dados ;
+         VALUE 'Imposto' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 360,015 textbox tbox_013;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_imposto;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 360,015 textbox tbox_013 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_imposto ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_imposto('form_dados','tbox_013')
-      @ 360,085 label lbl_nome_imposto;
-         of form_dados;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 360,085 label lbl_nome_imposto ;
+         of form_dados ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
-      @ 390,015 label lbl_014;
-         of form_dados;
-         VALUE 'Valor CUSTO R$';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _verde_001;
+      @ 390,015 label lbl_014 ;
+         of form_dados ;
+         VALUE 'Valor CUSTO R$' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _verde_001 ;
          TRANSPARENT
-      @ 410,015 getbox tbox_014;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 150;
-         VALUE x_valor_custo;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 410,015 getbox tbox_014 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 150 ;
+         VALUE x_valor_custo ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
-      @ 390,175 label lbl_015;
-         of form_dados;
-         VALUE 'Valor VENDA R$';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 390,175 label lbl_015 ;
+         of form_dados ;
+         VALUE 'Valor VENDA R$' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 410,175 getbox tbox_015;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 150;
-         VALUE x_valor_venda;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 410,175 getbox tbox_015 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 150 ;
+         VALUE x_valor_venda ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
 
       * valores referentes aos tamanhos
-      @ 005,525 frame frame_valores;
-         parent form_dados;
-         CAPTION 'Tamanhos e preços (pizza)';
-         WIDTH 290;
-         HEIGHT 440;
-         FONT 'verdana';
-         size 010;
-         bold;
+      @ 005,525 frame frame_valores ;
+         PARENT form_dados ;
+         CAPTION 'Tamanhos e preços (pizza)' ;
+         WIDTH 290 ;
+         HEIGHT 440 ;
+         FONT 'verdana' ;
+         size 010 ;
+         bold ;
          opaque
-      @ 025,535 label lbl_t001;
-         of form_dados;
-         VALUE 'Tamanhos';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 025,535 label lbl_t001 ;
+         of form_dados ;
+         VALUE 'Tamanhos' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 025,670 label lbl_t002;
-         of form_dados;
-         VALUE 'Preços R$';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 025,670 label lbl_t002 ;
+         of form_dados ;
+         VALUE 'Preços R$' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
 
       * mostrar os tamanhos pré-definidos
-      @ 050,535 label lbl_t003;
-         of form_dados;
-         VALUE _tamanho_001;
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 050,535 label lbl_t003 ;
+         of form_dados ;
+         VALUE _tamanho_001 ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 090,535 label lbl_t004;
-         of form_dados;
-         VALUE _tamanho_002;
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 090,535 label lbl_t004 ;
+         of form_dados ;
+         VALUE _tamanho_002 ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 130,535 label lbl_t005;
-         of form_dados;
-         VALUE _tamanho_003;
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 130,535 label lbl_t005 ;
+         of form_dados ;
+         VALUE _tamanho_003 ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 170,535 label lbl_t006;
-         of form_dados;
-         VALUE _tamanho_004;
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 170,535 label lbl_t006 ;
+         of form_dados ;
+         VALUE _tamanho_004 ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 210,535 label lbl_t007;
-         of form_dados;
-         VALUE _tamanho_005;
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 210,535 label lbl_t007 ;
+         of form_dados ;
+         VALUE _tamanho_005 ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 250,535 label lbl_t008;
-         of form_dados;
-         VALUE _tamanho_006;
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 250,535 label lbl_t008 ;
+         of form_dados ;
+         VALUE _tamanho_006 ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
 
       * preços das pizzas
-      @ 050,670 getbox tbox_preco_001;
-         of form_dados;
-         HEIGHT 030;
-         WIDTH 140;
-         VALUE x_valor_001;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 050,670 getbox tbox_preco_001 ;
+         of form_dados ;
+         HEIGHT 030 ;
+         WIDTH 140 ;
+         VALUE x_valor_001 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
-      @ 090,670 getbox tbox_preco_002;
-         of form_dados;
-         HEIGHT 030;
-         WIDTH 140;
-         VALUE x_valor_002;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 090,670 getbox tbox_preco_002 ;
+         of form_dados ;
+         HEIGHT 030 ;
+         WIDTH 140 ;
+         VALUE x_valor_002 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
-      @ 130,670 getbox tbox_preco_003;
-         of form_dados;
-         HEIGHT 030;
-         WIDTH 140;
-         VALUE x_valor_003;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 130,670 getbox tbox_preco_003 ;
+         of form_dados ;
+         HEIGHT 030 ;
+         WIDTH 140 ;
+         VALUE x_valor_003 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
-      @ 170,670 getbox tbox_preco_004;
-         of form_dados;
-         HEIGHT 030;
-         WIDTH 140;
-         VALUE x_valor_004;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 170,670 getbox tbox_preco_004 ;
+         of form_dados ;
+         HEIGHT 030 ;
+         WIDTH 140 ;
+         VALUE x_valor_004 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
-      @ 210,670 getbox tbox_preco_005;
-         of form_dados;
-         HEIGHT 030;
-         WIDTH 140;
-         VALUE x_valor_005;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 210,670 getbox tbox_preco_005 ;
+         of form_dados ;
+         HEIGHT 030 ;
+         WIDTH 140 ;
+         VALUE x_valor_005 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
-      @ 250,670 getbox tbox_preco_006;
-         of form_dados;
-         HEIGHT 030;
-         WIDTH 140;
-         VALUE x_valor_006;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 250,670 getbox tbox_preco_006 ;
+         of form_dados ;
+         HEIGHT 030 ;
+         WIDTH 140 ;
+         VALUE x_valor_006 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
 
       * linha separadora
@@ -779,13 +779,13 @@ STATIC FUNCTION compor_produto()
       RETURN NIL
    ENDIF
 
-   DEFINE WINDOW form_compor;
-         at 000,000;
-         WIDTH 600;
-         HEIGHT 500;
-         TITLE 'Compor produto : '+alltrim(x_nome_produto);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_compor ;
+         at 000,000 ;
+         WIDTH 600 ;
+         HEIGHT 500 ;
+         TITLE 'Compor produto : '+alltrim(x_nome_produto) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * botões (toolbar)
@@ -842,7 +842,7 @@ STATIC FUNCTION compor_produto()
       END BUTTONEX
 
       DEFINE GRID grid_mprima_composicao
-         parent form_compor
+         PARENT form_compor
          COL 005
          ROW 104
          WIDTH 585
@@ -870,57 +870,57 @@ STATIC FUNCTION compor_produto()
 
 STATIC FUNCTION incluir_composicao(parametro)
 
-   DEFINE WINDOW form_inccpo;
-         at 000,000;
-         WIDTH 400;
-         HEIGHT 200;
-         TITLE 'Incluir composição';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_inccpo ;
+         at 000,000 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'Incluir composição' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
-      @ 005,005 label lbl_001;
-         of form_inccpo;
-         VALUE 'Matéria Prima';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 005,005 label lbl_001 ;
+         of form_inccpo ;
+         VALUE 'Matéria Prima' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 025,005 textbox tbox_001;
-         of form_inccpo;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE 0;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 025,005 textbox tbox_001 ;
+         of form_inccpo ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE 0 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_mprima('form_inccpo','tbox_001')
-      @ 025,075 label lbl_nome_mprima;
-         of form_inccpo;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 025,075 label lbl_nome_mprima ;
+         of form_inccpo ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
-      @ 065,005 label lbl_002;
-         of form_inccpo;
-         VALUE 'Quantidade utilizada';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 065,005 label lbl_002 ;
+         of form_inccpo ;
+         VALUE 'Quantidade utilizada' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 065,150 getbox tbox_002;
-         of form_inccpo;
-         HEIGHT 027;
-         WIDTH 080;
-         VALUE 0;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 065,150 getbox tbox_002 ;
+         of form_inccpo ;
+         HEIGHT 027 ;
+         WIDTH 080 ;
+         VALUE 0 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@R 9999.999'
 
       * linha separadora
@@ -1319,13 +1319,13 @@ STATIC FUNCTION getcode_categoria_produtos(value)
    categoria_produtos->(ordsetfocus('nome'))
    categoria_produtos->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -1345,7 +1345,7 @@ STATIC FUNCTION getcode_categoria_produtos(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_categoria_produtos()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
@@ -1438,13 +1438,13 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
    subcategoria_produtos->(ordsetfocus('nome'))
    subcategoria_produtos->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -1464,7 +1464,7 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_subcategoria_produtos()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
@@ -1557,13 +1557,13 @@ STATIC FUNCTION getcode_impostos(value)
    impostos->(ordsetfocus('nome'))
    impostos->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -1583,7 +1583,7 @@ STATIC FUNCTION getcode_impostos(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_impostos()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
@@ -1676,13 +1676,13 @@ STATIC FUNCTION getcode_materia_prima(value)
    materia_prima->(ordsetfocus('nome'))
    materia_prima->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -1702,7 +1702,7 @@ STATIC FUNCTION getcode_materia_prima(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_materia_prima()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
@@ -1763,13 +1763,13 @@ STATIC FUNCTION fornecedores_produto()
       RETURN NIL
    ENDIF
 
-   DEFINE WINDOW form_fornecedor_produto;
-         at 000,000;
-         WIDTH 600;
-         HEIGHT 500;
-         TITLE 'Fornecedores de : '+alltrim(x_nome_produto);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_fornecedor_produto ;
+         at 000,000 ;
+         WIDTH 600 ;
+         HEIGHT 500 ;
+         TITLE 'Fornecedores de : '+alltrim(x_nome_produto) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * botões (toolbar)
@@ -1792,7 +1792,7 @@ STATIC FUNCTION fornecedores_produto()
       END BUTTONEX
 
       DEFINE GRID grid_fornecedor_produto
-         parent form_fornecedor_produto
+         PARENT form_fornecedor_produto
          COL 005
          ROW 104
          WIDTH 585

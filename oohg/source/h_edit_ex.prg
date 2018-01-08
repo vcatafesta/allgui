@@ -554,8 +554,8 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
    nColumna       := 10
    nAnchoEtiqueta := 0
    FOR i := 1 to Len( _aNombreCampo )
-      nAnchoEtiqueta := iif( nAnchoEtiqueta > ( Len( _aNombreCampo[i] ) * 9 ),;
-         nAnchoEtiqueta,;
+      nAnchoEtiqueta := iif( nAnchoEtiqueta > ( Len( _aNombreCampo[i] ) * 9 ), ;
+         nAnchoEtiqueta, ;
          Len( _aNombreCampo[i] ) * 9 )
    NEXT
    FOR i := 1 to Len( _aEstructura )
@@ -783,8 +783,8 @@ STATIC FUNCTION ABM2salir( nRegistro, cIndiceActivo, cFiltroAnt, nArea )
    LOCAL bFiltroAnt as codeblock           // Bloque de código del filtro.
 
    ////////// Inicialización de variables.----------------------------------------
-   bFiltroAnt := iif( Empty( cFiltroAnt ),;
-      &("{||NIL}"),;
+   bFiltroAnt := iif( Empty( cFiltroAnt ), ;
+      &("{||NIL}"), ;
       &("{||" + cFiltroAnt + "}") )
 
    ////////// Restaura el area de la bdd inicial.---------------------------------
@@ -941,11 +941,11 @@ STATIC FUNCTION ABM2Editar( lNuevo )
    nAnchoControl  := 0
    nAltoControl   := 0
    FOR i := 1 to Len( _aEtiqueta )
-      nAnchoEtiqueta := iif( nAnchoEtiqueta > _aEtiqueta[i,ABM_LBL_WIDTH],;
-         nAnchoEtiqueta,;
+      nAnchoEtiqueta := iif( nAnchoEtiqueta > _aEtiqueta[i,ABM_LBL_WIDTH], ;
+         nAnchoEtiqueta, ;
          _aEtiqueta[i,ABM_LBL_WIDTH] )
-      nAnchoControl  := iif( nAnchoControl > _aControl[i,ABM_CON_WIDTH],;
-         nAnchoControl,;
+      nAnchoControl  := iif( nAnchoControl > _aControl[i,ABM_CON_WIDTH], ;
+         nAnchoControl, ;
          _aControl[i,ABM_CON_WIDTH] )
       nAltoControl   += _aControl[i,ABM_CON_HEIGHT] + 10
    NEXT
@@ -1678,11 +1678,11 @@ STATIC FUNCTION ABM2ActivarFiltro()
 
    ////////// Inicialización de variables.----------------------------------------
    aCampos    := _aNombreCampo
-   aCompara   := { _OOHG_Messages( 10, 27 ),;
-      _OOHG_Messages( 10, 28 ),;
-      _OOHG_Messages( 10, 29 ),;
-      _OOHG_Messages( 10, 30 ),;
-      _OOHG_Messages( 10, 31 ),;
+   aCompara   := { _OOHG_Messages( 10, 27 ), ;
+      _OOHG_Messages( 10, 28 ), ;
+      _OOHG_Messages( 10, 29 ), ;
+      _OOHG_Messages( 10, 30 ), ;
+      _OOHG_Messages( 10, 31 ), ;
       _OOHG_Messages( 10, 32 ) }
 
    ////////// Crea la ventana de filtrado.----------------------------------------
@@ -1702,7 +1702,7 @@ STATIC FUNCTION ABM2ActivarFiltro()
       DEFINE TOOLBAR tbBuscar buttonsize 90, 32 flat righttext border
          button tbbCancelarFil caption _OOHG_Messages( 9, 7 ) ;
             PICTURE "MINIGUI_EDIT_CANCEL"     ;
-            ACTION  {|| wndABM2Filtro.Release,;
+            ACTION  {|| wndABM2Filtro.Release, ;
             ABM2Redibuja( .f. ) }
          button tbbAceptarFil  caption _OOHG_Messages( 9, 8 ) ;
             PICTURE "MINIGUI_EDIT_OK"         ;

@@ -20,10 +20,10 @@ FUNCTION Main
          HEIGHT 630 ;
          TITLE 'SET BACKGROUND WINDOW' ;
          MAIN;  //ON INIT Repaint_Window (); // Invalida toda el area del cliente para que se envie un Msg WM_PAINT para obligar a que se ejecute ON PAINT al iniciarse la ventana
-         ON PAINT Paint_Background_Window ();
-         ON RELEASE BMP_RELEASE_HANDLE (hBitmap);
-         VIRTUAL WIDTH  1100;
-         VIRTUAL HEIGHT 1100;
+         ON PAINT Paint_Background_Window () ;
+         ON RELEASE BMP_RELEASE_HANDLE (hBitmap) ;
+         VIRTUAL WIDTH  1100 ;
+         VIRTUAL HEIGHT 1100 ;
 
       DEFINE MAIN MENU
          DEFINE POPUP "Automatic"
@@ -52,7 +52,7 @@ FUNCTION Main
 
       @ 10,450 GRID Grid_1 WIDTH 300 HEIGHT 330 ;
          HEADERS {'Column 1','Column 2','Column 3'} ;
-         WIDTHS {140,140,140};
+         WIDTHS {140,140,140} ;
          VIRTUAL ;
          ITEMCOUNT 30 ;
          ON QUERYDATA {||This.QueryData := Str ( This.QueryRowIndex ) + ',' + Str ( This.QueryColIndex )}

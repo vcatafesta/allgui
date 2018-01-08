@@ -57,7 +57,7 @@ FUNCTION addnewcontrols(actrl)
    ENDIF
 
    DEFINE LABEL &c1
-      parent tabsample
+      PARENT tabsample
       ROW 50
       COL 10
       WIDTH 40
@@ -69,7 +69,7 @@ FUNCTION addnewcontrols(actrl)
    ENDIF
 
    DEFINE TEXTBOX &c2
-      parent tabsample
+      PARENT tabsample
       ROW 50
       COL 50
       WIDTH 100
@@ -87,7 +87,7 @@ FUNCTION addnewcontrol2(ctrl)
    ENDIF
 
    DEFINE BUTTONEX &ctrl
-      parent tabsample
+      PARENT tabsample
       ROW 10
       COL 10
       WIDTH 180

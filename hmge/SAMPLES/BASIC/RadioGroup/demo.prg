@@ -53,7 +53,7 @@ FUNCTION Main
          OPTIONS { 'One' , 'Two' , 'Three', 'Four' } ;
          VALUE 1 ;
          WIDTH 100 ;
-         TOOLTIP 'RadioGroup 1 leftjustify vertical(default)';
+         TOOLTIP 'RadioGroup 1 leftjustify vertical(default)' ;
          LEFTJUSTIFY
 
       @ 10,200 RADIOGROUP Radio_1a ;

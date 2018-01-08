@@ -305,12 +305,12 @@ FUNCTION _REINDEKS(cIdxNaz,cIdxWYR)
    LOCAL cNazIdx:=cIdxNaz
 
    DEFINE WINDOW Form_idx AT 274,282 ;
-         WIDTH 298 HEIGHT 100;
-         TITLE "Indexing in progress - don`t interrupt !!!!";
-         ICON "Tool";
+         WIDTH 298 HEIGHT 100 ;
+         TITLE "Indexing in progress - don`t interrupt !!!!" ;
+         ICON "Tool" ;
          MODAL  ;
          NOSIZE ;
-         ON INIT _INDEKSUJ(cIdxWYR,cNazIdx);
+         ON INIT _INDEKSUJ(cIdxWYR,cNazIdx) ;
          FONT 'Arial' SIZE 09
       @ 30,19 PROGRESSBAR ProgressBar_1 RANGE 0,100 WIDTH 252 HEIGHT 18
       @ 6,94 LABEL Label_001 VALUE "Completed " WIDTH 120 HEIGHT 24

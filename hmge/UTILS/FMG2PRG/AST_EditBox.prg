@@ -42,7 +42,7 @@ FUNCTION AST_EditBox(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
 
    LOCAL sReadLine := ""
@@ -92,12 +92,12 @@ FUNCTION AST_EditBox(cReadString,cTerminator)
    //    [ NOHSCROLL ]
    // Memvar Syntax:
    // --------------
-   // @ <nRow> ,<nCol> EDITBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight>;
+   // @ <nRow> ,<nCol> EDITBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight> ;
    //    VALUE <cValue> FONT <cFontName> SIZE <nFontSize> TOOLTIP <cToolTipText>
    // DBF Field Syntax:
    // -----------------
-   // @ <nRow> ,<nCol> EDITBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight>;
-   //    FIELD <FieldName> VALUE <cValue> FONT <cFontName> SIZE <nFontSize>;
+   // @ <nRow> ,<nCol> EDITBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight> ;
+   //    FIELD <FieldName> VALUE <cValue> FONT <cFontName> SIZE <nFontSize> ;
    //    TOOLTIP <cToolTipText>
 
    DO CASE
@@ -132,9 +132,9 @@ FUNCTION AST_EditBox(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " EDITBOX " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[6] + " " + aProperties_[7] + " " +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " EDITBOX " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[6] + " " + aProperties_[7] + " " + ;
          aProperties_[8] + " " + aProperties_[9] + CRLF
 
    CASE cSyntax == "DBF"
@@ -168,10 +168,10 @@ FUNCTION AST_EditBox(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " EDITBOX " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " EDITBOX " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF + ;
          LDCS_iLevel(3) + aProperties_[25] + " " + aProperties_[6] + " " + ;
-         aProperties_[7] + " " + aProperties_[8] + ";" + CRLF +;
+         aProperties_[7] + " " + aProperties_[8] + ";" + CRLF + ;
          LDCS_iLevel(3) + aProperties_[9] + CRLF
    ENDCASE
 

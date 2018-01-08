@@ -63,7 +63,7 @@ FUNCTION CreateBrowse()
       HEIGHT Form_0.HEIGHT - GetTitleHeight() - GetTitleHeight() - ;
       GetProperty( "Form_0", "StatusBar", "Height" ) - 2 * GetBorderHeight() ;
       GRID ;
-      SELECTOR TRUE;
+      SELECTOR TRUE ;
       FONT "Arial" SIZE 12
 
    oBrw:SetArray( aDatos, .T. )

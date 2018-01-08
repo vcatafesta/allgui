@@ -2206,7 +2206,7 @@ METHOD Preview() CLASS HBPrinter
 
          DEFINE WINDOW HBPREVIEW1  ;
                WIDTH ahs[ 2, 6 ] - 15  HEIGHT ahs[ 2, 5 ] - ahs[ 3, 5 ] - ahs[ 4, 5 ] - 10 ;
-               VIRTUAL WIDTH ahs[ 2, 6 ] - 5;
+               VIRTUAL WIDTH ahs[ 2, 6 ] - 5 ;
                VIRTUAL HEIGHT ahs[ 2, 5 ] - ahs[ 3, 5 ] - ahs[ 4, 5 ] ;
                TITLE aopisy[ 13 ] SPLITCHILD GRIPPERTEXT "P"
 

@@ -32,10 +32,10 @@ PROCEDURE Draw_All()
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE DrawWideBorder( ;
-      cWindowName,;
-      cControlName,;
-      aColor,;
-      nSpace,;
+      cWindowName, ;
+      cControlName, ;
+      aColor, ;
+      nSpace, ;
       nStep )
 
    LOCAL nWidness, aCurColor

@@ -957,10 +957,10 @@ STATIC FUNCTION AbeeGraphic()
    PSFrame(25, 30, 190, 245, 4, APS_BLACK, APS_WHITE, APS_SOLID)
    PSLine(40, 60, 160, 60, 1, APS_BLACK)
 
-   @30 ,140 TEXTOUT "Salesperson : Steve Von Denis" FONT APS_ARIAL;
+   @30 ,140 TEXTOUT "Salesperson : Steve Von Denis" FONT APS_ARIAL ;
       POINT 14  STYLE APS_BOLD  JUSTIFY APS_CENTER  COLOR APS_BLACK
 
-   @170,140 TEXTOUT "Months" FONT APS_ARIAL;
+   @170,140 TEXTOUT "Months" FONT APS_ARIAL ;
       POINT 14  STYLE APS_BOLD  JUSTIFY APS_CENTER  COLOR APS_BLACK
 
    FOR nLoop := 40 to 160 step 10
@@ -1335,7 +1335,7 @@ STATIC FUNCTION AbeePrnCaps()
 
    LOCAL nLoop
    LOCAL aCaps
-   LOCAL aText := {;
+   LOCAL aText := { ;
       "Paper width :", ;
       "Paper height :", ;
       "Printable area width :", ;

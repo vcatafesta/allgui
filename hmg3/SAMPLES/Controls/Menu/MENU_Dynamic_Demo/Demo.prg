@@ -3,11 +3,11 @@
 
 FUNCTION Main
 
-   aMenu := {{'File',            'Archivo'},;
-      {'Open',            'Abrir'},;
-      {'Save',            'Guardar'},;
-      {'Print',           'Imprimir'},;
-      {'Save As...',      'Guardar como...'},;
+   aMenu := {{'File',            'Archivo'}, ;
+      {'Open',            'Abrir'}, ;
+      {'Save',            'Guardar'}, ;
+      {'Print',           'Imprimir'}, ;
+      {'Save As...',      'Guardar como...'}, ;
       {'SPANISH/ENGLISH', 'INGLES/ESPAÑOL'}}
 
    DEFINE WINDOW Form_1 ;

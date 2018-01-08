@@ -16,14 +16,14 @@ FUNCTION formas_recebimento()
    ordsetfocus('nome')
    formas_recebimento->(dbgotop())
 
-   DEFINE WINDOW form_formas_recebimento;
-         at 000,000;
-         WIDTH 800;
-         HEIGHT 605;
-         TITLE 'Formas de Recebimento';
-         ICON path_imagens+'icone.ico';
-         modal;
-         nosize;
+   DEFINE WINDOW form_formas_recebimento ;
+         at 000,000 ;
+         WIDTH 800 ;
+         HEIGHT 605 ;
+         TITLE 'Formas de Recebimento' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
+         nosize ;
          ON INIT pesquisar()
 
       * botões (toolbar)
@@ -132,7 +132,7 @@ FUNCTION formas_recebimento()
 
       DEFINE SPLITBOX
          DEFINE GRID grid_formas_recebimento
-            parent form_formas_recebimento
+            PARENT form_formas_recebimento
             COL 000
             ROW 105
             WIDTH 795
@@ -149,7 +149,7 @@ FUNCTION formas_recebimento()
       END SPLITBOX
 
       DEFINE LABEL rodape_001
-         parent form_formas_recebimento
+         PARENT form_formas_recebimento
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
@@ -160,19 +160,19 @@ FUNCTION formas_recebimento()
          FONTCOLOR _cinza_001
          TRANSPARENT .T.
       END LABEL
-      @ 540,160 textbox tbox_pesquisa;
-         of form_formas_recebimento;
-         HEIGHT 027;
-         WIDTH 300;
-         VALUE '';
-         MAXLENGTH 040;
-         FONT 'verdana' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase;
+      @ 540,160 textbox tbox_pesquisa ;
+         of form_formas_recebimento ;
+         HEIGHT 027 ;
+         WIDTH 300 ;
+         VALUE '' ;
+         MAXLENGTH 040 ;
+         FONT 'verdana' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         uppercase ;
          ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
-         parent form_formas_recebimento
+         PARENT form_formas_recebimento
          COL form_formas_recebimento.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
@@ -227,76 +227,76 @@ STATIC FUNCTION dados(parametro)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW form_dados;
-         at 000,000;
-         WIDTH 325;
-         HEIGHT 260;
-         TITLE (titulo);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_dados ;
+         at 000,000 ;
+         WIDTH 325 ;
+         HEIGHT 260 ;
+         TITLE (titulo) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 010,005 label lbl_001;
-         of form_dados;
-         VALUE 'Nome';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_dados ;
+         VALUE 'Nome' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,005 textbox tbox_001;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_nome;
-         MAXLENGTH 020;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 060,005 label lbl_003;
-         of form_dados;
-         VALUE 'Banco/Conta';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,005 textbox tbox_001 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_nome ;
+         MAXLENGTH 020 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 060,005 label lbl_003 ;
+         of form_dados ;
+         VALUE 'Banco/Conta' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,005 textbox tbox_003;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_banco;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 080,005 textbox tbox_003 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_banco ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_banco('form_dados','tbox_003')
-      @ 080,070 label lbl_nome_banco;
-         of form_dados;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 080,070 label lbl_nome_banco ;
+         of form_dados ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
-      @ 110,005 label lbl_004;
-         of form_dados;
-         VALUE 'Dias para receber';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 110,005 label lbl_004 ;
+         of form_dados ;
+         VALUE 'Dias para receber' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,005 textbox tbox_004;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_dias;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 130,005 textbox tbox_004 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_dias ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          NUMERIC
 
       * linha separadora
@@ -590,13 +590,13 @@ STATIC FUNCTION getcode_banco(value)
    bancos->(ordsetfocus('nome'))
    bancos->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -616,7 +616,7 @@ STATIC FUNCTION getcode_banco(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_banco()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa

@@ -359,11 +359,11 @@ DEFINE WINDOW TEMPLATE ;
       COL    60
       WIDTH  50
       HEIGHT 20
-      ACTION MsgMulty( GetDIRList( HL_List2Arry( GetParams.txbFilter.Value ),;
-         GetParams.txbTitle.Value,;
-         GetParams.txbBegFold.Value,;
-         GetParams.rdgIncludes.Value,;
-         GetParams.rdgMultSel.Value<2,;
+      ACTION MsgMulty( GetDIRList( HL_List2Arry( GetParams.txbFilter.Value ), ;
+         GetParams.txbTitle.Value, ;
+         GetParams.txbBegFold.Value, ;
+         GetParams.rdgIncludes.Value, ;
+         GetParams.rdgMultSel.Value<2, ;
          GetParams.rdgCD.Value<2 ), "Result" )
       CAPTION "Apply"
       FONTNAME "Arial"

@@ -68,7 +68,7 @@ STATIC PROCEDURE s_CreateMenu()
 #xtranslate _PICT_INFO => aPictInfo[BM_WIDTH], aPictInfo[BM_HEIGHT]
 
                IF "jpeg" $ aMimeType[i]
-                  MENUITEM '&Save as '+ aMimeType[i] action;
+                  MENUITEM '&Save as '+ aMimeType[i] action ;
                      MsgInfo( iif( gSave( hPicture, cPicture+".jpeg", _PICT_INFO, "image/jpeg", 90 ), "Saved", "Failure" ), "Result" )
                ENDIF
 

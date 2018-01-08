@@ -86,7 +86,7 @@ FUNCTION HMG_MakeVersion ( cVersion_NUMBER , cVersion_WIN32_STABLE , cVersion_WI
    LOCAL cVersion := ""
 
    IF .NOT. EMPTY ( AllTrim (cVersion_NUMBER) )
-      cVersion := alltrim (cVersion_NUMBER) + " ";
+      cVersion := alltrim (cVersion_NUMBER) + " " ;
          + IF ( Is64Bits, alltrim(cVersion_WIN64_STABLE), alltrim(cVersion_WIN32_STABLE) ) ;
          + IF (.NOT. EMPTY(alltrim(cVersion_PATCH)) , " Patch "+alltrim(cVersion_PATCH), "") ;
          + IF ( Is64Bits, " (64 bits)", " (32 bits)" )
@@ -103,10 +103,10 @@ FUNCTION HMGVersion()   // constants defined in minigui.ch
 FUNCTION HMG_GetCompileVersionRaw ( HMG_cPath )
 
    LOCAL i, pPP, cCommandPP, cCommand, Number
-   LOCAL aVersion := { {"_HMG_VERSION_NUMBER_",       ""},;
-      {"_HMG_VERSION_WIN32_STABLE_", ""},;
-      {"_HMG_VERSION_WIN64_STABLE_", ""},;
-      {"_HMG_VERSION_PATCH_",        ""},;
+   LOCAL aVersion := { {"_HMG_VERSION_NUMBER_",       ""}, ;
+      {"_HMG_VERSION_WIN32_STABLE_", ""}, ;
+      {"_HMG_VERSION_WIN64_STABLE_", ""}, ;
+      {"_HMG_VERSION_PATCH_",        ""}, ;
       {"_HMG_VERSION_STABLE_",       ""} }   // for compatibility whit old version
 
    pPP := __pp_Init ( HMG_cPath + "\INCLUDE" , "HMG.CH" )   // Init Harbour PreProcesor

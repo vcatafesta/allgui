@@ -35,16 +35,16 @@ STATIC Light_Level          := 0
 
 PROCEDURE Main
 
-   DEFINE WINDOW Form_1;
-         AT 0,0;
-         WIDTH 800;
-         HEIGHT 600;
-         VIRTUAL WIDTH  10000;
-         VIRTUAL HEIGHT 10000;
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 600 ;
+         VIRTUAL WIDTH  10000 ;
+         VIRTUAL HEIGHT 10000 ;
          TITLE 'View BMP Image' ;
-         MAIN;
-         ON RELEASE Release_Handle ();
-         ON MAXIMIZE Changue_Size ();
+         MAIN ;
+         ON RELEASE Release_Handle () ;
+         ON MAXIMIZE Changue_Size () ;
          ON SIZE Changue_Size ()
 
       DEFINE MAIN MENU
@@ -71,7 +71,7 @@ PROCEDURE Main
          END POPUP
 
          POPUP "&Info"
-            ITEM "Author" ACTION MsgInfo ("Dr. Claudio Soto"+ space (20) +chr(13)+;
+            ITEM "Author" ACTION MsgInfo ("Dr. Claudio Soto"+ space (20) +chr(13)+ ;
                "srvet@adinet.com.uy"+chr(13)+"Artigas - Uruguay"+chr(13)+"June 2010", "View BMP Image")
          END POPUP
       END MENU
@@ -275,12 +275,12 @@ PROCEDURE Transform_Image
       RETURN
    ENDIF
 
-   DEFINE WINDOW Form_aux;
-         AT (Form_1.Height - H_AUX)/2 + Form_1.Row,(Form_1.Width - W_AUX)/2 + Form_1.Col;
-         WIDTH  W_AUX;
-         HEIGHT H_AUX;
-         TITLE 'Define Transforms';
-         MODAL;
+   DEFINE WINDOW Form_aux ;
+         AT (Form_1.Height - H_AUX)/2 + Form_1.Row,(Form_1.Width - W_AUX)/2 + Form_1.Col ;
+         WIDTH  W_AUX ;
+         HEIGHT H_AUX ;
+         TITLE 'Define Transforms' ;
+         MODAL ;
          NOSIZE NOSYSMENU
 
       @ 10  ,120 CHECKBOX Checkbox_RH CAPTION "Reflect Horizontal" VALUE Reflect_Horizontal WIDTH 120

@@ -128,7 +128,7 @@ FUNCTION LoadGrid(aRows,lmultiselect,lcelled,leditable)
       COL      10
       WIDTH      615
       HEIGHT      300
-      Parent      oWindow
+      PARENT      oWindow
       WIDTHS      {150,60,70,40,90,40,100}
       HEADERS      {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6','Column 7'}
       ITEMS      aRows
@@ -137,28 +137,28 @@ FUNCTION LoadGrid(aRows,lmultiselect,lcelled,leditable)
       CELLNAVIGATION   lcelled
       MultiSelect   lmultiselect
       JUSTIFY      {0,1,0,0,0,1,0}
-      COLUMNCONTROLS   {{'TEXTBOX','CHARACTER'},;
-         {'TEXTBOX','NUMERIC','9,999.99'},;
-         {'TEXTBOX','DATE'},;
-         {'CHECKBOX','Yes','No'},;
-         {"DATEPICKER","UPDOWN"},{"SPINNER",1,1000},;
-         {"COMBOBOX",{"January","February","March","April","May","June","July","August","September","October","November","December"}};
+      COLUMNCONTROLS   {{'TEXTBOX','CHARACTER'}, ;
+         {'TEXTBOX','NUMERIC','9,999.99'}, ;
+         {'TEXTBOX','DATE'}, ;
+         {'CHECKBOX','Yes','No'}, ;
+         {"DATEPICKER","UPDOWN"},{"SPINNER",1,1000}, ;
+         {"COMBOBOX",{"January","February","March","April","May","June","July","August","September","October","November","December"}} ;
          }
-      COLUMNWHEN {{||.f.},;
-         {||.t.},;
-         {||.t.},;
-         {||.t.},;
-         {||.t.},;
-         {||.t.},;
-         {||.t.};
+      COLUMNWHEN {{||.f.}, ;
+         {||.t.}, ;
+         {||.t.}, ;
+         {||.t.}, ;
+         {||.t.}, ;
+         {||.t.}, ;
+         {||.t.} ;
          }
-      COLUMNVALID {{||.t.},;
-         {||.t.},;
-         {||.t.},;
-         {||.t.},;
-         {||.t.},;
-         {||.t.},;
-         {||msgyesno('Is this valid ?','Confirm')};
+      COLUMNVALID {{||.t.}, ;
+         {||.t.}, ;
+         {||.t.}, ;
+         {||.t.}, ;
+         {||.t.}, ;
+         {||.t.}, ;
+         {||msgyesno('Is this valid ?','Confirm')} ;
          }
       ONDBLCLICK MsgInfo("Double Click event!")
       DYNAMICBACKCOLOR {bColor,bColor,bColor,bColor,bColor,bColor,bColor}

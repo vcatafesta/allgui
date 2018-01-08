@@ -221,7 +221,7 @@ STATIC PROCEDURE StartUp()
                   VALUE cFind                      ;
                   MAXLENGTH 60                  ;
                   ON CHANGE cFind := Alltrim( Form_2.TextBox_2.Value ) ;
-                  ON ENTER SearchItem( Form_2.Tab_1.Value, cFind, .T. );
+                  ON ENTER SearchItem( Form_2.Tab_1.Value, cFind, .T. ) ;
                   FONT 'MS Sans Serif'               ;
                   SIZE 10                     ;
                   TOOLTIP "Press Enter for find next"
@@ -678,7 +678,7 @@ FUNCTION MyInputWindow( Title, aLabels, aValues, aFormats )
 
    PRIVATE aResult[l]
 
-   DEFINE WINDOW _MyInputWindow;
+   DEFINE WINDOW _MyInputWindow ;
          AT 0,0 ;
          WIDTH 410 ;
          HEIGHT (l*30) + 80 ;

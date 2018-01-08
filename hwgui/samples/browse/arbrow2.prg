@@ -14,7 +14,7 @@ FUNCTION Main()
    LOCAL i, a, b
 
    INIT WINDOW oWinMain MAIN  ;
-      TITLE "Test scroll in HBrowse" AT 0, 0 SIZE 600,400;
+      TITLE "Test scroll in HBrowse" AT 0, 0 SIZE 600,400 ;
       FONT HFont():Add( 'Verdana',0,-13,400,,,) ;
       STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER
 

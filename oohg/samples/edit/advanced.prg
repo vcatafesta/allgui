@@ -92,14 +92,14 @@ PROCEDURE CloseTable()
 
 PROCEDURE AdvTest()
 
-   LOCAL aFields   := { "Nombre", "Apellidos", "Dirección", "Población " ,;
-      "Estado", "Codigo ZIP", "F. Nacimiento", "Casado",;
+   LOCAL aFields   := { "Nombre", "Apellidos", "Dirección", "Población " , ;
+      "Estado", "Codigo ZIP", "F. Nacimiento", "Casado", ;
       "Edad", "Salario", "Notas"    }
    LOCAL aReadOnly := { .f., .f., .f., .f., .f., .f., .f., .f., .t., .f., .f. }
    LOCAL bSave     := {|aContent, lEdit| AdvTestSave( aContent, lEdit ) }
 
    // Advise.
-   MsgInfo( "This sample show advanced features of EDIT." + Chr(13) + Chr(13) +;
+   MsgInfo( "This sample show advanced features of EDIT." + Chr(13) + Chr(13) + ;
       "It's designed for Spanish language, so changing to" + Chr(13) + ;
       "Spanish language for better performance", "" )
    HB_LANGSELECT( "ES" )
@@ -118,8 +118,8 @@ PROCEDURE AdvTest()
 PROCEDURE AdvTestSave( aContent, lEdit )
 
    LOCAL i
-   LOCAL aFields  := { "Nombre", "Apellidos", "Dirección", "Población " ,;
-      "Estado", "Codigo ZIP", "F. Nacimiento", "Casado",;
+   LOCAL aFields  := { "Nombre", "Apellidos", "Dirección", "Población " , ;
+      "Estado", "Codigo ZIP", "F. Nacimiento", "Casado", ;
       "Edad", "Salario", "Notas"    }
 
    // Chek content.
@@ -150,61 +150,61 @@ PROCEDURE AdvTestSave( aContent, lEdit )
 
 PROCEDURE SelecLang()
 
-   LOCAL aLangName := { "Basque"             ,;
-      "Czech 852"          ,;
-      "Czech ISO-8859-2"   ,;
-      "Czech KAM"          ,;
-      "Catalan"            ,;
-      "English"            ,;
-      "French"             ,;
-      "Galician"           ,;
-      "German"             ,;
-      "Hebrew 862"         ,;
-      "Hebrew 1255"        ,;
-      "Hungarian 852"      ,;
-      "Hungarian CWI-2"    ,;
-      "Hungarian WINDOWS-1",;
-      "Italian"            ,;
-      "Polish 852"         ,;
-      "Polish ISO-8859-1"  ,;
-      "Polish Mozowia"     ,;
-      "Portuguese"         ,;
-      "Romanian"           ,;
-      "Russian WINDOWS-1"  ,;
-      "Serbian ISO-8859-2" ,;
-      "Serbian 852"        ,;
+   LOCAL aLangName := { "Basque"             , ;
+      "Czech 852"          , ;
+      "Czech ISO-8859-2"   , ;
+      "Czech KAM"          , ;
+      "Catalan"            , ;
+      "English"            , ;
+      "French"             , ;
+      "Galician"           , ;
+      "German"             , ;
+      "Hebrew 862"         , ;
+      "Hebrew 1255"        , ;
+      "Hungarian 852"      , ;
+      "Hungarian CWI-2"    , ;
+      "Hungarian WINDOWS-1", ;
+      "Italian"            , ;
+      "Polish 852"         , ;
+      "Polish ISO-8859-1"  , ;
+      "Polish Mozowia"     , ;
+      "Portuguese"         , ;
+      "Romanian"           , ;
+      "Russian WINDOWS-1"  , ;
+      "Serbian ISO-8859-2" , ;
+      "Serbian 852"        , ;
       "Spanish"             }
 
-   LOCAL aLangID   := { "EU"    ,;
-      "CS852" ,;
-      "CSISO" ,;
-      "CSKAM" ,;
-      "CA"    ,;
-      "EN"    ,;
-      "FR"    ,;
-      "GL"    ,;
-      "DE"    ,;
-      "HE862" ,;
-      "HEWIN" ,;
-      "HU852" ,;
-      "HUCWI" ,;
-      "HUWIN" ,;
-      "IT"    ,;
-      "PL852" ,;
-      "PLISO" ,;
-      "PLMAZ" ,;
-      "PT"    ,;
-      "RO"    ,;
-      "RUWIN" ,;
-      "SRISO" ,;
-      "SR852" ,;
+   LOCAL aLangID   := { "EU"    , ;
+      "CS852" , ;
+      "CSISO" , ;
+      "CSKAM" , ;
+      "CA"    , ;
+      "EN"    , ;
+      "FR"    , ;
+      "GL"    , ;
+      "DE"    , ;
+      "HE862" , ;
+      "HEWIN" , ;
+      "HU852" , ;
+      "HUCWI" , ;
+      "HUWIN" , ;
+      "IT"    , ;
+      "PL852" , ;
+      "PLISO" , ;
+      "PLMAZ" , ;
+      "PT"    , ;
+      "RO"    , ;
+      "RUWIN" , ;
+      "SRISO" , ;
+      "SR852" , ;
       "ES"     }
 
    LOCAL nItem
 
    // Language selection.
    MsgInfo( "You can change EDIT interface language, by changing" + Chr(13) + ;
-      "[x]Harbour default language with HB_LANGSELECT() fuction." + Chr( 13 ) + Chr( 13 ) +;
+      "[x]Harbour default language with HB_LANGSELECT() fuction." + Chr( 13 ) + Chr( 13 ) + ;
       "If your language is not supported and you want translate" + Chr( 13 ) + ;
       "the EDIT interface to it, please post a message to the" + Chr( 13 ) + ;
       "MiniGUI discussion group at Yahoo Groups." , "" )

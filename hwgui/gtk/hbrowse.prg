@@ -157,7 +157,7 @@ CLASS HBrowse INHERIT HControl
    DATA nCursor   INIT 0
 
    METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
-      bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,lNoBorder,;
+      bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,lNoBorder, ;
       lAppend,lAutoedit,bUpdate,bKeyDown,bPosChg,lMultiSelect )
 
    METHOD InitBrw( nType )
@@ -229,7 +229,7 @@ CLASS HBrowse INHERIT HControl
    ENDCLASS
 
 METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
-      bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,;
+      bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll, ;
       lNoBorder,lAppend,lAutoedit,bUpdate,bKeyDown,bPosChg,lMultiSelect ) CLASS HBrowse
 
    nStyle   := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), WS_CHILD+WS_VISIBLE+ ;
@@ -377,9 +377,9 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HBrowse
          ::MouseMove( wParam, lParam )
 
       ELSEIF msg == WM_MOUSEWHEEL
-         ::MouseWheel( hwg_Loword( wParam ),;
-            If( hwg_Hiword( wParam ) > 32768,;
-            hwg_Hiword( wParam ) - 65535, hwg_Hiword( wParam ) ),;
+         ::MouseWheel( hwg_Loword( wParam ), ;
+            If( hwg_Hiword( wParam ) > 32768, ;
+            hwg_Hiword( wParam ) - 65535, hwg_Hiword( wParam ) ), ;
             hwg_Loword( lParam ), hwg_Hiword( lParam ) )
       ELSEIF msg == WM_DESTROY
          ::End()
@@ -775,7 +775,7 @@ METHOD HeaderOut( hDC ) CLASS HBrowse
          // Ahora Titulos Justificados !!!
          cStr := oColumn:heading + ';'
          FOR nLine := 1 to ::nHeadRows
-            hwg_Drawtext( hDC, hb_tokenGet(@cStr, nLine, ';'), x, ::y1-(::height)*(::nHeadRows-nLine+1)+1, x+xSize-1,::y1-(::height)*(::nHeadRows-nLine),;
+            hwg_Drawtext( hDC, hb_tokenGet(@cStr, nLine, ';'), x, ::y1-(::height)*(::nHeadRows-nLine+1)+1, x+xSize-1,::y1-(::height)*(::nHeadRows-nLine), ;
                oColumn:nJusHead  + if(oColumn:lSpandHead, DT_NOCLIP, 0) )
          NEXT
       ENDIF
@@ -841,8 +841,8 @@ METHOD FooterOut( hDC ) CLASS HBrowse
       IF oColumn:footing <> nil
          cStr := oColumn:footing + ';'
          FOR nLine := 1 to ::nFootRows
-            hwg_Drawtext( hDC, hb_tokenGet(@cStr, nLine, ';'),;
-               x, ::y1+(::rowCount+nLine-1)*(::height+1)+1, x+xSize-1, ::y1+(::rowCount+nLine)*(::height+1),;
+            hwg_Drawtext( hDC, hb_tokenGet(@cStr, nLine, ';'), ;
+               x, ::y1+(::rowCount+nLine-1)*(::height+1)+1, x+xSize-1, ::y1+(::rowCount+nLine)*(::height+1), ;
                oColumn:nJusLin + if(oColumn:lSpandFoot, DT_NOCLIP, 0) )
          NEXT
       ENDIF
@@ -1386,9 +1386,9 @@ METHOD ButtonDown( lParam ) CLASS HBrowse
          hwg_Invalidaterect( ::area, 0, ::x1, ::y1+(::height+1)*::rowPos-::height, ::x2, ::y1+(::height+1)*::rowPos )
       ENDIF
 
-   ELSEIF ::lDispHead .and.;
-         nLine >= -::nHeadRows .and.;
-         fif <= Len( ::aColumns ) .AND.;
+   ELSEIF ::lDispHead .and. ;
+         nLine >= -::nHeadRows .and. ;
+         fif <= Len( ::aColumns ) .AND. ;
          ::aColumns[fif]:bHeadClick != nil
 
       Eval(::aColumns[fif]:bHeadClick, Self, fif)
@@ -1852,7 +1852,7 @@ METHOD ShowSizes() CLASS HBrowse
 
    LOCAL cText := ""
 
-   aeval( ::aColumns,;
+   aeval( ::aColumns, ;
       { | v,e | cText += ::aColumns[e]:heading + ": " + str( round(::aColumns[e]:width/8,0)-2  ) + chr(10)+chr(13) } )
    hwg_Msginfo( cText )
 

@@ -20,19 +20,19 @@ FUNCTION Main()
 
    SET MENUSTYLE EXTENDED
 
-   PUBLIC aButStyles:={;
-      {0,1, {106,131,160},{106,131,160},{106,131,160},{106,131,160}, BLACK,BLACK,1, {106,131,160},RED },;
-      {1,3, {182,189,210}, {220,220,220}, {182,189,210}  ,WHITE, BLACK,BLACK,1, {220,220,220},WHITE },;
-      {2,4, {106,131,160}, {220,220,220}, {220,220,220}  ,{220,220,220}, BLACK,BLACK,0, {220,220,220},WHITE },;
-      {3,4, {192,192,192}, {192,192,192}, {192,192,192} ,{192,192,192}, BLACK,BLACK,0, {82,189,210},BLACK },;
-      {4,2, GRAY ,{255,255,255},   {106,131,160} ,{255,255,255}, BLACK,BLACK,1, GRAY,{106,131,160} },;
-      {5,2, GRAY ,{220,220,220},   GRAY ,{255,255,255}, BLACK,{196,0,0},1, GRAY,RED },;
-      {6,4, GRAY ,{220,220,220},   {106,131,160} ,{255,255,255}, BLACK,BLACK,1, GRAY,{106,131,160} },;
-      {7,2, GRAY ,{255,255,255},   {106,131,160} ,{255,255,255}, BLACK,BLACK,2, GRAY,{106,131,160} },;
-      {8,2, GRAY ,{220,220,220},   GRAY ,{255,255,255}, BLACK,{196,0,0},2, GRAY,RED },;
-      {9,4, GRAY ,{220,220,220},   {106,131,160} ,{255,255,255}, BLACK,BLACK,2, GRAY,{106,131,160} },;
-      {10,1,{196,164,164},{196,164,164},{196,164,164},{196,164,164}, WHITE,WHITE,0, {106,131,160},RED },;
-      {11,1,{196,164,164},{196,164,164},{196,164,164},{196,164,164}, BLACK,RED,0, {106,131,160},RED };
+   PUBLIC aButStyles:={ ;
+      {0,1, {106,131,160},{106,131,160},{106,131,160},{106,131,160}, BLACK,BLACK,1, {106,131,160},RED }, ;
+      {1,3, {182,189,210}, {220,220,220}, {182,189,210}  ,WHITE, BLACK,BLACK,1, {220,220,220},WHITE }, ;
+      {2,4, {106,131,160}, {220,220,220}, {220,220,220}  ,{220,220,220}, BLACK,BLACK,0, {220,220,220},WHITE }, ;
+      {3,4, {192,192,192}, {192,192,192}, {192,192,192} ,{192,192,192}, BLACK,BLACK,0, {82,189,210},BLACK }, ;
+      {4,2, GRAY ,{255,255,255},   {106,131,160} ,{255,255,255}, BLACK,BLACK,1, GRAY,{106,131,160} }, ;
+      {5,2, GRAY ,{220,220,220},   GRAY ,{255,255,255}, BLACK,{196,0,0},1, GRAY,RED }, ;
+      {6,4, GRAY ,{220,220,220},   {106,131,160} ,{255,255,255}, BLACK,BLACK,1, GRAY,{106,131,160} }, ;
+      {7,2, GRAY ,{255,255,255},   {106,131,160} ,{255,255,255}, BLACK,BLACK,2, GRAY,{106,131,160} }, ;
+      {8,2, GRAY ,{220,220,220},   GRAY ,{255,255,255}, BLACK,{196,0,0},2, GRAY,RED }, ;
+      {9,4, GRAY ,{220,220,220},   {106,131,160} ,{255,255,255}, BLACK,BLACK,2, GRAY,{106,131,160} }, ;
+      {10,1,{196,164,164},{196,164,164},{196,164,164},{196,164,164}, WHITE,WHITE,0, {106,131,160},RED }, ;
+      {11,1,{196,164,164},{196,164,164},{196,164,164},{196,164,164}, BLACK,RED,0, {106,131,160},RED } ;
       }
 
    DEFINE WINDOW WinMain AT 0,0 WIDTH 440 HEIGHT 350 ;
@@ -97,7 +97,7 @@ FUNCTION Main()
       DEFINE CONTEXT MENU CONTROL MenuBut1
          FOR i=1 TO 4
             cItemName:='MenuBut1_'+Hb_NToS(i)
-            MENUITEM 'MenuBut1_'+Hb_NToS(i);
+            MENUITEM 'MenuBut1_'+Hb_NToS(i) ;
                ACTION MsgInfo(This.Name) NAME &cItemName
          NEXT
       END MENU
@@ -111,7 +111,7 @@ FUNCTION Main()
       DEFINE CONTEXT MENU CONTROL MenuBut2
          FOR i=1 TO 4
             cItemName:='MenuBut2_'+Hb_NToS(i)
-            MENUITEM 'MenuBut2_'+Hb_NToS(i);
+            MENUITEM 'MenuBut2_'+Hb_NToS(i) ;
                ACTION MsgInfo(This.Name) NAME &cItemName
          NEXT
       END MENU
@@ -125,7 +125,7 @@ FUNCTION Main()
       DEFINE CONTEXT MENU CONTROL MenuBut3
          FOR i=1 TO 4
             cItemName:='MenuBut3_'+Hb_NToS(i)
-            MENUITEM 'MenuBut3_'+Hb_NToS(i);
+            MENUITEM 'MenuBut3_'+Hb_NToS(i) ;
                ACTION MsgInfo(This.Name) NAME &cItemName
          NEXT
       END MENU
@@ -139,7 +139,7 @@ FUNCTION Main()
       DEFINE CONTEXT MENU CONTROL MenuBut4
          FOR i=1 TO 4
             cItemName:='MenuBut4_'+Hb_NToS(i)
-            MENUITEM 'MenuBut4_'+Hb_NToS(i);
+            MENUITEM 'MenuBut4_'+Hb_NToS(i) ;
                ACTION MsgInfo(This.Name) NAME &cItemName
          NEXT
       END MENU

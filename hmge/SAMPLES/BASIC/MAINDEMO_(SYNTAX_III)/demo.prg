@@ -189,7 +189,7 @@ FUNCTION Main
                WIDTH 410 ;
                HEIGHT 140 ;
                HEADERS { '','Last Name','First Name'} ;
-               WIDTHS { 0,220,220};
+               WIDTHS { 0,220,220} ;
                ITEMS { { 0,'Simpson','Homer'} , {1,'Mulder','Fox'} } VALUE 1 ;
                TOOLTIP 'Grid Control' ;
                ON HEADCLICK { {|| MsgInfo('Header 1 Clicked !')} , { || MsgInfo('Header 2 Clicked !')} } ;
@@ -506,7 +506,7 @@ PROCEDURE EditGrid_Click
          WIDTH 405 ;
          HEIGHT 330 ;
          HEADERS {'Last Name','First Name','Phone'} ;
-         WIDTHS {140,140,140};
+         WIDTHS {140,140,140} ;
          ITEMS aRows ;
          VALUE 1 ;
          TOOLTIP 'Editable Grid Control' ;
@@ -705,7 +705,7 @@ PROCEDURE Modal_CLick
          WIDTH 250 ;
          HEIGHT 135 ;
          HEADERS {'Last Name','First Name'} ;
-         WIDTHS {120,120};
+         WIDTHS {120,120} ;
          ITEMS { {'Simpson','Homer'} , {'Mulder','Fox'} , {'Smart','Max'} } ;
          VALUE { 2 , 3 } ;
          FONT 'Arial' ;

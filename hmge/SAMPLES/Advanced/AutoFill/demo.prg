@@ -21,11 +21,11 @@ PROCEDURE Main()
 
    ASORT( aCountries )             // This Array MUST be sorted
 
-   DEFINE WINDOW frmAFTest;
-         AT 0,0;
-         WIDTH  550;
-         HEIGHT 300;
-         TITLE 'AutoFill in Text Box (by Bicahi Esgici)';
+   DEFINE WINDOW frmAFTest ;
+         AT 0,0 ;
+         WIDTH  550 ;
+         HEIGHT 300 ;
+         TITLE 'AutoFill in Text Box (by Bicahi Esgici)' ;
          MAIN
 
       ON KEY ESCAPE ACTION frmAFTest.Release
@@ -69,11 +69,11 @@ PROCEDURE AutoFill( ;        // Auto filling text box
       aList,;      // Items list
       nCaller )    // NIL : OnChange, 1: UP, 2: Down
 
-   STATIC cLastVal := '',;
+   STATIC cLastVal := '', ;
       n1Result := 0
 
-   LOCAL  cFrmName,;
-      cTxBname,;
+   LOCAL  cFrmName, ;
+      cTxBname, ;
       cTxBValue,;        // Text Box Value
       nCarePos,;         // Text Box CaretPos
       cCurval := ''
@@ -132,10 +132,10 @@ PROCEDURE AutoFill( ;        // Auto filling text box
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
-PROCEDURE AF_Apply(;
-      cFrmName,;
-      cTxBName,;
-      cValue,;
+PROCEDURE AF_Apply( ;
+      cFrmName, ;
+      cTxBName, ;
+      cValue, ;
       nPosit )
 
    SetProperty( cFrmName, cTxBName, "Value", cValue )

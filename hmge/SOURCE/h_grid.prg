@@ -510,12 +510,12 @@ FUNCTION _EditItem ( GridHandle )
 
    COL := GCol + ( ( GWidth - 260 ) / 2 )
 
-   DEFINE WINDOW _EditItem;
-         AT GRow, Col;
-         WIDTH 260;
-         HEIGHT ( l * 30 ) + 70 + GetTitleHeight();
-         TITLE _HMG_MESSAGE [5];
-         MODAL;
+   DEFINE WINDOW _EditItem ;
+         AT GRow, Col ;
+         WIDTH 260 ;
+         HEIGHT ( l * 30 ) + 70 + GetTitleHeight() ;
+         TITLE _HMG_MESSAGE [5] ;
+         MODAL ;
          NOSIZE
 
       FOR i := 1 TO l
@@ -525,14 +525,14 @@ FUNCTION _EditItem ( GridHandle )
          @ ( i * 30 ) - 20 , 120 TEXTBOX &TN OF _EditItem VALUE g[i]
       NEXT i
 
-      @ ( l * 30 ) + 20 , 20 BUTTON BUTTON_1;
-         OF _EDITITEM;
-         CAPTION _HMG_MESSAGE [6];
+      @ ( l * 30 ) + 20 , 20 BUTTON BUTTON_1 ;
+         OF _EDITITEM ;
+         CAPTION _HMG_MESSAGE [6] ;
          ACTION { || _EditItemOk ( ControlName , FormName , Item , l ) }
 
-      @ ( l * 30 ) + 20 , 130 BUTTON BUTTON_2;
-         OF _EDITITEM;
-         CAPTION _HMG_MESSAGE [7];
+      @ ( l * 30 ) + 20 , 130 BUTTON BUTTON_2 ;
+         OF _EDITITEM ;
+         CAPTION _HMG_MESSAGE [7] ;
          ACTION _EditItem.Release
 
    END WINDOW

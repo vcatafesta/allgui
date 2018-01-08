@@ -52,7 +52,7 @@ STATIC _HMG_xPopupMenuFont, _HMG_xContextPopupMenuFont
 PROCEDURE _DefineMainMenu ( Parent )
 
    IF ValType( Parent ) == 'U'
-      Parent := _HMG_ActiveFormName
+      PARENT := _HMG_ActiveFormName
    ENDIF
 
    _HMG_xMenuType := 'MAIN'
@@ -668,7 +668,7 @@ PROCEDURE _DefineContextMenu ( Parent )
    _HMG_xMenuPopupLevel := 0
 
    IF ValType( Parent ) == 'U'
-      Parent := _HMG_ActiveFormName
+      PARENT := _HMG_ActiveFormName
    ENDIF
 
    _HMG_xContextMenuParentHandle := GetFormHandle ( Parent )
@@ -689,7 +689,7 @@ PROCEDURE _DefineNotifyMenu ( Parent )
    _HMG_xMenuPopupLevel := 0
 
    IF ValType( Parent ) == 'U'
-      Parent := _HMG_ActiveFormName
+      PARENT := _HMG_ActiveFormName
    ENDIF
 
    _HMG_xContextMenuParentHandle := GetFormHandle ( Parent )
@@ -710,7 +710,7 @@ PROCEDURE _DefineDropDownMenu ( Button , Parent )
    _HMG_xMenuPopupLevel := 0
 
    IF ValType( Parent ) == 'U'
-      Parent := _HMG_ActiveFormName
+      PARENT := _HMG_ActiveFormName
    ENDIF
 
    _HMG_xContextMenuButtonIndex := GetControlIndex ( Button , Parent )
@@ -734,7 +734,7 @@ PROCEDURE _DefineControlContextMenu ( Control , Parent )
    _HMG_xMenuPopupLevel := 0
 
    IF ValType( Parent ) == 'U'
-      Parent := _HMG_ActiveFormName
+      PARENT := _HMG_ActiveFormName
    ENDIF
 
    IF ValType( Control ) == "A"

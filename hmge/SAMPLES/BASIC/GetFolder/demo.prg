@@ -19,7 +19,7 @@ PROCEDURE Main()
          AT 0,0 WIDTH 530 HEIGHT 145 ;
          MAIN ;
          TITLE "GetFolder Sample by Jacek Kubica <kubica@wssk.wroc.pl>" ;
-         BACKCOLOR { 212, 208, 200};
+         BACKCOLOR { 212, 208, 200} ;
          NOSIZE
 
       DEFINE MAIN MENU
@@ -36,7 +36,7 @@ PROCEDURE Main()
          END POPUP
       END MENU
 
-      @ 25,461 BUTTON Button_1 PICTURE 'OPEN_BMP' WIDTH 39 HEIGHT 24;
+      @ 25,461 BUTTON Button_1 PICTURE 'OPEN_BMP' WIDTH 39 HEIGHT 24 ;
          ACTION  {|| Form_1.Textbox_1.Value := GetFolder("Browse for ...",Form_1.Textbox_1.Value) }
       @ 26,97  TEXTBOX TextBox_1 VALUE cWinDir BACKCOLOR {255,255,255} WIDTH 359 HEIGHT 21 FONT "MS Sans Serif"
       @ 27,18  LABEL Label_1 VALUE "Folder" WIDTH 73 HEIGHT 20 FONT "MS Sans serif" BOLD TRANSPARENT

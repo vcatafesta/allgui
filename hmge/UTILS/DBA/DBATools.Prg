@@ -38,8 +38,8 @@ PROC F_CopyFile()
                      PROC FindStrg()                           // Search a string into file(s)
                         *  TODO : include sub-dirs
 
-                        LOCA lIncLiNo := .T.,;
-                           lIngCase := .T.,;
+                        LOCA lIncLiNo := .T., ;
+                           lIngCase := .T., ;
                            lOnlCoun := .F.
 
                         DEFINE WINDOW frmFindStrg ;
@@ -85,18 +85,18 @@ PROC F_CopyFile()
                         *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                         PROC FndStrAply(;                           // Apply rutin for FindStrg()
-                              cSrchStr ,;
-                              lIncLiNo ,;
-                              lIngCase ,;
+                              cSrchStr , ;
+                              lIncLiNo , ;
+                              lIngCase , ;
                               lOnlCoun )
 
-                           LOCA aFiles   := {},;
-                              c1FilNam := '',;
-                              cFilStrg := '',;
-                              cResStrg := '',;
-                              nFileNum :=  0,;
-                              c1Line   := '',;
-                              nLineNum :=  0,;
+                           LOCA aFiles   := {}, ;
+                              c1FilNam := '', ;
+                              cFilStrg := '', ;
+                              cResStrg := '', ;
+                              nFileNum :=  0, ;
+                              c1Line   := '', ;
+                              nLineNum :=  0, ;
                               nFindCou :=  0
 
                            IF !EMPTY( cSrchStr )
@@ -145,12 +145,12 @@ PROC F_CopyFile()
                            *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                            PROC SetUPrefers()                            // Set User Preferences
-                              LOCA cPrefFNm := cProgFold + "\" + SUBS( PROCNAME(), 4 ) + ".lst",;
-                                 cPrefStr := '',;
-                                 cPVarNam := '',;
-                                 lPValVal := .F.,;
-                                 nVInd    :=  0,;
-                                 c1VarNam := '',;
+                              LOCA cPrefFNm := cProgFold + "\" + SUBS( PROCNAME(), 4 ) + ".lst", ;
+                                 cPrefStr := '', ;
+                                 cPVarNam := '', ;
+                                 lPValVal := .F., ;
+                                 nVInd    :=  0, ;
+                                 c1VarNam := '', ;
                                  lNew     := .F.
 
                               IF FILE( cPrefFNm  )
@@ -177,9 +177,9 @@ PROC F_CopyFile()
 
                               FUNC UsPVals2Str()                        // User Preferences Values to String
 
-                                 LOCA cRVal    := '',;
-                                    nVInd    :=  0,;
-                                    c1VarNam := '',;
+                                 LOCA cRVal    := '', ;
+                                    nVInd    :=  0, ;
+                                    c1VarNam := '', ;
                                     l1Value  := .F.
 
                                  FOR nVInd := 1 TO LEN( aUPPromts )
@@ -195,17 +195,17 @@ PROC F_CopyFile()
 
                                     LOCA cPrefFNm := cProgFold + "\" + SUBS( PROCNAME(), 4 ) + ".lst"
 
-                                    LOCA cPrefStr  := MEMOREAD( cPrefFNm ),;
-                                       aUPrefrs  := {},;
-                                       c1VarNam  := '',;
-                                       lPValVal  := '',;
-                                       nUPInd    :=  0,;
-                                       nVInd     :=  0,;
+                                    LOCA cPrefStr  := MEMOREAD( cPrefFNm ), ;
+                                       aUPrefrs  := {}, ;
+                                       c1VarNam  := '', ;
+                                       lPValVal  := '', ;
+                                       nUPInd    :=  0, ;
+                                       nVInd     :=  0, ;
                                        nResultCF :=  0
 
-                                    LOCA cCbFTitl := "Set User Preferences" ,;
-                                       aLabels  := {},;
-                                       aValues  := {},;
+                                    LOCA cCbFTitl := "Set User Preferences" , ;
+                                       aLabels  := {}, ;
+                                       aValues  := {}, ;
                                        aButtons := {{ ,;               // 1. Button Length : NIL for non-pict caption
                                        "Apply Only",;    // 2. Button Caption
                                        "",;              // 3. Button Tooltip

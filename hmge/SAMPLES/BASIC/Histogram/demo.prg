@@ -10,7 +10,7 @@
 #xtranslate PRINT GRAPH [ OF ] <windowname> ;
    [ <lpreview : PREVIEW> ] ;
    [ <ldialog : DIALOG> ] ;
-   =>;
+   => ;
    printgraph ( <"windowname"> , <.lpreview.> , <.ldialog.> )
 
 STATIC aSer, aClr, aSern, aYVal, cTit
@@ -31,8 +31,8 @@ PROCEDURE Presenta(nTipo)
    CASE nTipo = 0         //  Histogram
 
       aSer:= {{Grafico.Text_5.value,Grafico.Text_9.value,Grafico.Text_13.value}, ;
-         {Grafico.Text_6.value,Grafico.Text_10.value,Grafico.Text_14.value},;
-         {Grafico.Text_7.value,Grafico.Text_11.value,Grafico.Text_15.value},;
+         {Grafico.Text_6.value,Grafico.Text_10.value,Grafico.Text_14.value}, ;
+         {Grafico.Text_7.value,Grafico.Text_11.value,Grafico.Text_15.value}, ;
          {Grafico.Text_8.value,Grafico.Text_12.value,Grafico.Text_16.value} }
 
       aClr:= {Grafico.Label_5.Fontcolor,Grafico.Label_6.Fontcolor, ;
@@ -74,19 +74,19 @@ PROCEDURE Presenta(nTipo)
    CASE nTipo = 5       //  Pie 5
 
       cTit:= Grafico.Text_17.value
-      aSer:= {Grafico.Text_5.value,Grafico.Text_6.value,;
+      aSer:= {Grafico.Text_5.value,Grafico.Text_6.value, ;
          Grafico.Text_7.value,Grafico.Text_8.value }
 
    CASE nTipo = 6       //  Pie 6
 
       cTit:= Grafico.Text_18.value
-      aSer:= {Grafico.Text_9.value ,Grafico.Text_10.value,;
+      aSer:= {Grafico.Text_9.value ,Grafico.Text_10.value, ;
          Grafico.Text_11.value,Grafico.Text_12.value }
 
    CASE nTipo = 7       //  Pie 7
 
       cTit:= Grafico.Text_19.value
-      aSer:= {Grafico.Text_13.value,Grafico.Text_14.value,;
+      aSer:= {Grafico.Text_13.value,Grafico.Text_14.value, ;
          Grafico.Text_15.value,Grafico.Text_16.value }
 
    ENDCASE
@@ -97,9 +97,9 @@ PROCEDURE Presenta(nTipo)
          aClr:= {Grafico.Label_3.Fontcolor,Grafico.Label_4.Fontcolor, ;
             Grafico.Label_11.Fontcolor }
       ELSE
-         aYVal:={Grafico.Text_1.value,Grafico.Text_2.value,;
+         aYVal:={Grafico.Text_1.value,Grafico.Text_2.value, ;
             Grafico.Text_3.value,Grafico.Text_4.value }
-         aClr:= {Grafico.Label_5.Fontcolor,Grafico.Label_6.Fontcolor,;
+         aClr:= {Grafico.Label_5.Fontcolor,Grafico.Label_6.Fontcolor, ;
             Grafico.Label_7.Fontcolor,Grafico.Label_8.Fontcolor }
       ENDIF
       SET Font To "Arial", 12

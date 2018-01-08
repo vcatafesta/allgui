@@ -831,7 +831,7 @@ FUNCTION SoControles
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
 
-   INIT DIALOG oDlgx AT 0,0 SIZE 400,99 TITLE "Toolbars - Classes ";
+   INIT DIALOG oDlgx AT 0,0 SIZE 400,99 TITLE "Toolbars - Classes " ;
       FONT oFont                                                  ;
       STYLE WS_VISIBLE + WS_SYSMENU + DS_SYSMODAL + WS_SIZEBOX + MB_USERICON    ;
       ON EXIT {||  oDlgx := Nil, .t.}

@@ -416,8 +416,8 @@ METHOD Send( bIgnoreTOError, bRequestReturnReceipt ) CLASS TSMTP
                   dDate := Date()
                   cOldLang := Set( _SET_LANGUAGE, "EN" )
                   //Date: Sat, 14 Aug 2004 14:18:08 +0100
-                  cHeader := "Date: " + left(cDoW(dDate), 3) + ", " + ltrim(trans(Day(dDate), "99 "));
-                     + trans(cMonth(dDate), "AAA") + " " + trans(Year(dDate), "9999 ") + Time();
+                  cHeader := "Date: " + left(cDoW(dDate), 3) + ", " + ltrim(trans(Day(dDate), "99 ")) ;
+                     + trans(cMonth(dDate), "AAA") + " " + trans(Year(dDate), "9999 ") + Time() ;
                      + " " + GETTIMEZONEDIFF() +CHR(13)+CHR(10)
 
                   Set( _SET_LANGUAGE, cOldLang )
@@ -435,7 +435,7 @@ METHOD Send( bIgnoreTOError, bRequestReturnReceipt ) CLASS TSMTP
 
                   //## add properties to modify it
                   cHeader += "X-Mailer: Harbour TSMTP by Matteo Baccan" +CHR(13)+CHR(10)
-                  cHeader += "X-Priority: " + trans(::nPriority, "9 ") + "(";
+                  cHeader += "X-Priority: " + trans(::nPriority, "9 ") + "(" ;
                      + if(::nPriority==1, "Highest", if(::nPriority==5, "Low", "Normal")) + ")" +CHR(13)+CHR(10)
                   IF bRequestReturnReceipt
                      cHeader += "Disposition-Notification-To: " +::cEmail +CHR(13)+CHR(10)

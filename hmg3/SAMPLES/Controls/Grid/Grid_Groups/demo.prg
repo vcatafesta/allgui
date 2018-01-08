@@ -42,14 +42,14 @@ FUNCTION Main
       @ 50,10 GRID Grid_1 ;
          WIDTH 750 ;
          HEIGHT 340 ;
-         HEADERS {'Last Name', 'First Name', 'Assistance'};
-         WIDTHS  {140, 140, 140};
-         ITEMS aRows;
-         COLUMNCONTROLS { NIL, NIL, {'COMBOBOX',{'Confirmed','Unconfirmed'}} };
-         COLUMNWHEN  { {||.F.}, {||.F.}, {|| .T. } };
-         COLUMNVALID { {||.T.}, {||.T.}, {|| ChangeGroup() } };
-         VALUE 1;
-         EDIT;
+         HEADERS {'Last Name', 'First Name', 'Assistance'} ;
+         WIDTHS  {140, 140, 140} ;
+         ITEMS aRows ;
+         COLUMNCONTROLS { NIL, NIL, {'COMBOBOX',{'Confirmed','Unconfirmed'}} } ;
+         COLUMNWHEN  { {||.F.}, {||.F.}, {|| .T. } } ;
+         COLUMNVALID { {||.T.}, {||.T.}, {|| ChangeGroup() } } ;
+         VALUE 1 ;
+         EDIT ;
          CELLNAVIGATION
 
       /*

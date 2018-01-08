@@ -16,14 +16,14 @@ FUNCTION grupo_fornecedores()
    ordsetfocus('nome')
    grupo_fornecedores->(dbgotop())
 
-   DEFINE WINDOW form_grupo_fornecedores;
-         at 000,000;
-         WIDTH 800;
-         HEIGHT 605;
-         TITLE 'Grupos Fornecedores';
-         ICON path_imagens+'icone.ico';
-         modal;
-         nosize;
+   DEFINE WINDOW form_grupo_fornecedores ;
+         at 000,000 ;
+         WIDTH 800 ;
+         HEIGHT 605 ;
+         TITLE 'Grupos Fornecedores' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
+         nosize ;
          ON INIT pesquisar()
 
       * botões (toolbar)
@@ -132,7 +132,7 @@ FUNCTION grupo_fornecedores()
 
       DEFINE SPLITBOX
          DEFINE GRID grid_grupo_fornecedores
-            parent form_grupo_fornecedores
+            PARENT form_grupo_fornecedores
             COL 000
             ROW 105
             WIDTH 795
@@ -149,7 +149,7 @@ FUNCTION grupo_fornecedores()
       END SPLITBOX
 
       DEFINE LABEL rodape_001
-         parent form_grupo_fornecedores
+         PARENT form_grupo_fornecedores
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
@@ -160,19 +160,19 @@ FUNCTION grupo_fornecedores()
          FONTCOLOR _cinza_001
          TRANSPARENT .T.
       END LABEL
-      @ 540,160 textbox tbox_pesquisa;
-         of form_grupo_fornecedores;
-         HEIGHT 027;
-         WIDTH 300;
-         VALUE '';
-         MAXLENGTH 040;
-         FONT 'verdana' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase;
+      @ 540,160 textbox tbox_pesquisa ;
+         of form_grupo_fornecedores ;
+         HEIGHT 027 ;
+         WIDTH 300 ;
+         VALUE '' ;
+         MAXLENGTH 040 ;
+         FONT 'verdana' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         uppercase ;
          ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
-         parent form_grupo_fornecedores
+         PARENT form_grupo_fornecedores
          COL form_grupo_fornecedores.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
@@ -223,34 +223,34 @@ STATIC FUNCTION dados(parametro)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW form_dados;
-         at 000,000;
-         WIDTH 325;
-         HEIGHT 200;
-         TITLE (titulo);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_dados ;
+         at 000,000 ;
+         WIDTH 325 ;
+         HEIGHT 200 ;
+         TITLE (titulo) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 010,005 label lbl_001;
-         of form_dados;
-         VALUE 'Nome';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_dados ;
+         VALUE 'Nome' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,005 textbox tbox_001;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_nome;
-         MAXLENGTH 020;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
+      @ 030,005 textbox tbox_001 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_nome ;
+         MAXLENGTH 020 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
 
       * linha separadora
       DEFINE LABEL linha_rodape

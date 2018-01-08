@@ -48,9 +48,9 @@ PROCEDURE Main()
 
       @ 20, 20 BUTTON btnHelp CAPTION "?" BOLD WIDTH 20 HEIGHT 20 ;
          TOOLTIP "Keys" ;
-         ACTION MsgInfo( "HOME : Restart"    + CRLF +;
-         "NEXT : Next Style" + CRLF +;
-         "DOWN : Next Color" + CRLF +;
+         ACTION MsgInfo( "HOME : Restart"    + CRLF + ;
+         "NEXT : Next Style" + CRLF + ;
+         "DOWN : Next Color" + CRLF + ;
          "RIGHT : Next Shape" )
 
    END WINDOW // frmPlayDraw
@@ -64,44 +64,44 @@ PROCEDURE Main()
 
 PROCEDURE GoDraw()                       // Drawing lines by predefined styles
 
-   LOCAL nStyleNum    := 1,;
-      nFormWidth,;
-      nFormHeigth,;
-      nFormCenterX,;
-      nFormCenterY,;
-      nHorRadius,;
-      nVerRadius,;
+   LOCAL nStyleNum    := 1, ;
+      nFormWidth, ;
+      nFormHeigth, ;
+      nFormCenterX, ;
+      nFormCenterY, ;
+      nHorRadius, ;
+      nVerRadius, ;
       nLinePenW
 
    LOCAL aPCCounts := { ;                       // Point & Corner Counts per Style
       { 12, 48, 48, 32 },;       // Point Counts
       { 12, 48,  3,  1 } }       // Corner Counts
 
-   LOCAL nPCount,;
-      nCCount,;
+   LOCAL nPCount, ;
+      nCCount, ;
       nRatio
 
-   LOCAL nHDecrement,;
-      nVDecrement,;
+   LOCAL nHDecrement, ;
+      nVDecrement, ;
       nZStep       := 0
 
    LOCAL aParams
 
-   LOCAL nFactor,;
-      nLineBeg,;
+   LOCAL nFactor, ;
+      nLineBeg, ;
       nLineEnd
 
-   LOCAL nFactBeg,;
-      nFactEnd,;
-      nFactStp,;
-      nLBegBeg,;
-      nLBegEnd,;
-      nLBegStp,;
-      nLCrmBeg,;
-      nLCrmEnd,;
+   LOCAL nFactBeg, ;
+      nFactEnd, ;
+      nFactStp, ;
+      nLBegBeg, ;
+      nLBegEnd, ;
+      nLBegStp, ;
+      nLCrmBeg, ;
+      nLCrmEnd, ;
       nLCrmStp
 
-   LOCAL a1Color, aColorNo, nDelay, nCornCremnt, nHRadius, nVRadius,;
+   LOCAL a1Color, aColorNo, nDelay, nCornCremnt, nHRadius, nVRadius, ;
       nLineBegY, nLineBegX, nLineEndY, nLineEndX, nBaseCrm
 
    WHILE .T.

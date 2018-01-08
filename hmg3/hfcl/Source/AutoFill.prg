@@ -17,11 +17,11 @@ PROC AutoFill( ;              // Auto filling text box
       nCaller,;     // NIL : OnChange, 1: UP, 2: Down
       cControlName )
 
-   STATIC cLastVal := '',;
+   STATIC cLastVal := '', ;
       n1Result := 0
 
-   LOCAL  cFrmName := '',;
-      cTxBname := '',;
+   LOCAL  cFrmName := '', ;
+      cTxBname := '', ;
       cTxBValue := '',;     // Text Box Value
       nCarePos  := 0,;  // Text Box CaretPos
       cCurval   := ''
@@ -84,9 +84,9 @@ PROC AutoFill( ;              // Auto filling text box
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
    PROC AF_Apply( ;
-         cFrmName,;
-         cTxBName,;
-         cValue,;
+         cFrmName, ;
+         cTxBName, ;
+         cValue, ;
          nPosit )
 
       SetProperty( cFrmName, cTxBName, "Value", cValue )
@@ -96,9 +96,9 @@ PROC AutoFill( ;              // Auto filling text box
 
       *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
-      PROC AFKeySet(;
+      PROC AFKeySet( ;
             aitems )
-         LOCAL cFrmName := thiswindow.name,;
+         LOCAL cFrmName := thiswindow.name, ;
             cTxBName := this.name
 
          ON KEY UP   OF &cFrmName  ACTION AutoFill(  aitems, 1,cTxBName )

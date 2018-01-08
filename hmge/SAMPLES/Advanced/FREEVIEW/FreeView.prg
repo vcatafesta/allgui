@@ -176,13 +176,13 @@ FUNCTION Main( fname )
          TOOLTIP 'Save as' ;
          ACTION FileSaveAs()
 
-      BUTTON Button_3;
+      BUTTON Button_3 ;
          PICTUREINDEX 4 ;
          ADJUST ;
          TOOLTIP 'Print' ;
          ACTION FilePrint() SEPARATOR
 
-      BUTTON Button_4;
+      BUTTON Button_4 ;
          PICTUREINDEX 10 ;
          ADJUST ;
          TOOLTIP 'Info' ;

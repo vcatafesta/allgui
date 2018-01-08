@@ -5,8 +5,8 @@
 
 PROC NewTableBD()                         // Build by defining a New Table and USE
 
-   LOCA cNewTNam := '',;
-      aNewStru := DBStructOps( , 3 ),;
+   LOCA cNewTNam := '', ;
+      aNewStru := DBStructOps( , 3 ), ;
       lDone    := .F.
 
    IF !EMPTY( aNewStru )
@@ -20,11 +20,11 @@ PROC NewTableBD()                         // Build by defining a New Table and U
          ELSE
             IF FILE( cNewTNam )
                IF ASCAN( aOpnDatas, { | a1 | cNewTNam == a1[ 3 ] } ) > 0
-                  MsgStop( "This table is already in use;" + CRLF2 +;
+                  MsgStop( "This table is already in use;" + CRLF2 + ;
                      "Try Another" )
                ELSE
                   IF lPref0102
-                     lDone := MsgYesNo( cNewTNam + " File exist;" + CRLF2 +;
+                     lDone := MsgYesNo( cNewTNam + " File exist;" + CRLF2 + ;
                         "Overwrite them ?" )
                   ELSE
                      lDone := .T.
@@ -58,12 +58,12 @@ PROC NewTableBD()                         // Build by defining a New Table and U
 
    PROC NewTableSE()                         // Build New Table from stru extended
 
-      LOCA aComPars  := {},;
-         cCbFTitl  := "Building New Table from Structure Extended...",;
-         aComOpts  := {},;
-         cNewTNam  := '',;
-         cStETNam  := '',;
-         nCurSel   := SELECT(),;
+      LOCA aComPars  := {}, ;
+         cCbFTitl  := "Building New Table from Structure Extended...", ;
+         aComOpts  := {}, ;
+         cNewTNam  := '', ;
+         cStETNam  := '', ;
+         nCurSel   := SELECT(), ;
          lDone     := .F.
 
       WHILE !lDone
@@ -109,11 +109,11 @@ PROC NewTableBD()                         // Build by defining a New Table and U
 
       PROC NewTableES()                          // Build New EMPTY stru extended table
 
-         LOCA aComPars  := {},;
-            cCbFTitl  := "Building New EMPTY Structure Extended table...",;
-            aComOpts  := {},;
-            cNewTNam  := '',;
-            nCurSel   := SELECT(),;
+         LOCA aComPars  := {}, ;
+            cCbFTitl  := "Building New EMPTY Structure Extended table...", ;
+            aComOpts  := {}, ;
+            cNewTNam  := '', ;
+            nCurSel   := SELECT(), ;
             lDone     := .F.
 
          aComPars  := { { SPAC( 256 ), "Table", "*.dbf", .F. } }  // Target FILE
@@ -144,10 +144,10 @@ PROC NewTableBD()                         // Build by defining a New Table and U
          FUNC StExTValid( ;                        // Struct Extended file valid
                cStETNam )
 
-            LOCA lRVal   := .T.,;
-               nFlds   := 0,;
-               nProp   := 0,;
-               nCurSel := SELECT(),;
+            LOCA lRVal   := .T., ;
+               nFlds   := 0, ;
+               nProp   := 0, ;
+               nCurSel := SELECT(), ;
                aStruct := {}
 
             IF FILE( cStETNam )

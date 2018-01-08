@@ -1,7 +1,7 @@
 
 STATIC FUNCTION FilSysMet()
 
-   LOCAL aMetrics := {;
+   LOCAL aMetrics := { ;
       { "WIN_SM_CXSCREEN", "0", "The width of the screen of the primary display monitor, in pixels. This is the same value obtained by calling GetDeviceCaps as follows: GetDeviceCaps( hdcPrimaryMonitor, HORZRES)." }, ;
       { "WIN_SM_CYSCREEN", "1", "The height of the screen of the primary display monitor, in pixels. This is the same value obtained by calling GetDeviceCaps as follows: GetDeviceCaps( hdcPrimaryMonitor, VERTRES)." }, ;
       { "WIN_SM_CXVSCROLL", "2", "The width of a vertical scroll bar, in pixels." }, ;

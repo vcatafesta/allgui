@@ -286,7 +286,7 @@ METHOD addItem( nDos, cFile, cPath ) CLASS FileMan
    valud DOS file handle.  If <xItem> is character, then it will
    be assumed the name of the file.  If <xItem> is neither numeric
    or character or if the value of ::nLastDosMessage is not 0,
-   then the method will return a logical false (.F.) value;
+   then the method will return a logical false (.F.) value ;
    otherwise, a logical true (.T.) will be returned.
    */
 
@@ -295,7 +295,7 @@ METHOD delItem( xItem ) CLASS FileMan
    LOCAL nPosition     // as int
    LOCAL lSuccess  := pTRUE                // as logical
 
-   // if xItem is N/Numeric, then seek on first element;
+   // if xItem is N/Numeric, then seek on first element ;
    // if xItem is C/Character, then seek on second element
 
    IF ::nLastDosMessage == 0            // No DOS error!

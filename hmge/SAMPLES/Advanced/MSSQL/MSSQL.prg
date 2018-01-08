@@ -24,8 +24,8 @@ FUNCTION main()
 
    DEFINE WINDOW Win1 ;
          AT 0,0 WIDTH 600 HEIGHT 250 ;
-         TITLE "Microsoft SQL demo";
-         NOSIZE NOMAXIMIZE;
+         TITLE "Microsoft SQL demo" ;
+         NOSIZE NOMAXIMIZE ;
          MAIN
 
       @ 32 , 30 label   labLabel1   value "Server:"           width 60
@@ -136,7 +136,7 @@ PROCEDURE Table_Browse()
          AT Win1.row+100,Win1.col+10 ;
          WIDTH 500 HEIGHT 400 ;
          TITLE 'Browse MSSQL data' ;
-         MODAL;
+         MODAL ;
          FONT 'Arial' SIZE 10
 
       ON KEY ESCAPE ACTION ThisWindow.Release
@@ -148,7 +148,7 @@ PROCEDURE Table_Browse()
          WIDTHS {   80   ,  80   ,  100  ,  80  } ;
          WORKAREA table ;
          FIELDS { 'table->date', 'table->time', 'table->text', 'table->type'} ;
-         JUSTIFY { BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT};
+         JUSTIFY { BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT} ;
          FONT "MS Sans serif" SIZE 09
 
    END WINDOW

@@ -19,21 +19,21 @@ indicates the right coordinates of <xData>
 
 PROCEDURE  PrintTest6()
 
-   LOCAL lSuccess := .F.,;
+   LOCAL lSuccess := .F., ;
       nVMargin := 20,;    // Vertical margin
       nHMargin := 20      // Horizantal margin
 
    LOCAL nPrintRow :=  0,;   // Row ( line ) number in printed page
       nPrintCol :=  0,;   // Column  number in printed page
-      cFontName := "Verdana",;
+      cFontName := "Verdana", ;
       nFontSize := 10,;   // In pixel
       nLine_Num :=  0
 
-   LOCAL nPageLength := 210 - nHMargin * 2,;
-      nPageHeigth := 297 - nVMargin * 2,;
+   LOCAL nPageLength := 210 - nHMargin * 2, ;
+      nPageHeigth := 297 - nVMargin * 2, ;
       nChrsPerLin :=  80
 
-   LOCAL nCharLength := 2.25,;
+   LOCAL nCharLength := 2.25, ;
       nLineHeigth := 6.8
 
    LOCAL cItem2Prnt

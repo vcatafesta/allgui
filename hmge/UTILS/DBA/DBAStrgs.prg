@@ -4,7 +4,7 @@
 *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNC Txt2Arr(cText,bInclude)
-   LOCA aRVal := {},;
+   LOCA aRVal := {}, ;
       cLine := ""
 
    DEFAULT bInclude TO {||.T.}
@@ -21,7 +21,7 @@ RETU aRVal // Txt2Arr(cText)
 *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNC MakMPrgNam(cName1)         // from main proc name
-   LOCA cRValu := "",;
+   LOCA cRValu := "", ;
       nPnter := 0
 
    WHIL ++nPnter <= LEN(cName1) .AND. ISALPHA(SUBS(cName1,nPnter,1))
@@ -45,7 +45,7 @@ Delâil : <nVal> : Formatlanacak sayýsal deðer
 F :   "     "      "   sýfýrla
 Alâka : f.FUsing(), MakePict()
 f.FUsingAP'de formatlanmýþ halinin boyu,
-bunda formatlanmamýþ  "     "   veriliyor;
+bunda formatlanmamýþ  "     "   veriliyor ;
 Yâni nLen ile nDec STRU'daki deðerler.
 Sýnýf : CNV      A D D D E F F K K M M N P S S S C P U L M M A S
 R A B B R L R B M N S U D C E T N R I O M E F P
@@ -96,10 +96,10 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
       * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 
       FUNC IndInglz(cKatar)                     // TürkChr'larý Ýng.e Ýndirgeme
-         LOCA cRVal := '',;
-            nCInd :=  0,;
-            cChr1 := '',;
-            nCPos :=  0,;
+         LOCA cRVal := '', ;
+            nCInd :=  0, ;
+            cChr1 := '', ;
+            nCPos :=  0, ;
             cTUpC := "ÇÐIÝÖÞÜâäàåîûôêëèïÄÅÉÆôòùø£áíóúñÑ",; // daha ne'dîm ???
             cIngC := "CGIIOSUAAAAIUOEEEIAAEAOOUCLAIOUNN"
          FOR nCInd := 1 TO LEN(cKatar)
@@ -118,7 +118,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                cKatar, ;
                cDelimiter )
 
-            LOCA aRVal  := {},;
+            LOCA aRVal  := {}, ;
                x1Val  := NIL
 
             DEFAULT cDelimiter TO ";"
@@ -212,8 +212,8 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
 
                         */
                         FUNC MaxLine( cString )
-                           LOCA nRVal := 0,;
-                              nBeg  := 1,;
+                           LOCA nRVal := 0, ;
+                              nBeg  := 1, ;
                               nEnd  := 0
                            IF ISCHAR( cString ) .AND. !EMPTY( cString )
                               WHIL .T.
@@ -238,8 +238,8 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                         */
 
                         FUNC NumLine( cString )
-                           LOCA nRVal := 0,;
-                              nBeg  := 1,;
+                           LOCA nRVal := 0, ;
+                              nBeg  := 1, ;
                               nEnd  := 0
                            IF ISCHAR( cString ) .AND. !EMPTY( cString )
                               WHIL .T.
@@ -273,15 +273,15 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
 
                         6503 : lRForm added    ( for only C type )
 
-                        VALTYPE() 'M' sonucu ver(E)mez gibi geldiyse de, veriyormuþ;
+                        VALTYPE() 'M' sonucu ver(E)mez gibi geldiyse de, veriyormuþ ;
                         ÝBG bak : ama nasýl ?
 
                         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-                        FUNC AnyToStr( xAny,;
+                        FUNC AnyToStr( xAny, ;
                               lRForm )  // // Convert CHR(0..31) to readable format
 
-                           LOCA cRVal := '',;
+                           LOCA cRVal := '', ;
                               cVTip := VALTYPE( xAny )
 
                            * MsgBox( cVTip )
@@ -340,14 +340,14 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                               Description :
 
                               ExtrcSFS() : Bir katarýn baþýndan (solundan) belirtilen (sýnýrlayýcý)
-                              katar'a kadar olan katarý;
+                              katar'a kadar olan katarý ;
 
                               ExtrcSIS() : Bir katarýn ÝÇÝNDEN belirtilen ÝKÝ (sýnýr) katar arasýndaki
                               katarý
 
                               çýkarýr.
 
-                              iki func'da da sýnýrlayýcý katarlar;
+                              iki func'da da sýnýrlayýcý katarlar ;
 
                               alt (yeni) katara dahil edilmez,
 
@@ -367,7 +367,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                               boþ alt katar döndürülür,
                               üst katar deðiþmez.
 
-                              1.nci sýnýrlayýcý var;
+                              1.nci sýnýrlayýcý var ;
 
                               2.ci sýnýrlayýcý :
 
@@ -389,8 +389,8 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                     cDelm1,;    // Delimiter - 1
                                     cDelm2)     // Delimiter - 2
 
-                                 LOCA cRVal := '',;
-                                    nPos1 :=  0,;
+                                 LOCA cRVal := '', ;
+                                    nPos1 :=  0, ;
                                     nPos2 :=  0
 
                                  IF cDelm1 $ cUpStr
@@ -427,11 +427,11 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                           lExcExtn,;     // Exclude file extention ( Default : .F. )
                                           lSqueez )      // Squeez to 11 ( Default : .F. )
 
-                                       LOCA cRVal := cFFName,;
-                                          cName := '',;
+                                       LOCA cRVal := cFFName, ;
+                                          cName := '', ;
                                           cExtn := ''
 
-                                       DEFAULT lExcExtn TO .F.,;
+                                       DEFAULT lExcExtn TO .F., ;
                                           lSqueez  TO .F.
 
                                        IF "\" $ cRVal
@@ -476,9 +476,9 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
 
                                              * WTAltSeq    : Turkish Alternate Collating Sequence
                                              FUNC WTAltSeq(InStr)                       // Turkish Alt.Collating Sequence
-                                                LOCA OutStr   := '',;
-                                                   Sayac    :=  0,;
-                                                   ChrPtr   :=  0,;
+                                                LOCA OutStr   := '', ;
+                                                   Sayac    :=  0, ;
+                                                   ChrPtr   :=  0, ;
                                                    TAltPtrn := GeTWinPt()
 
                                                 FOR  Sayac  := 1 TO LEN(InStr)
@@ -491,7 +491,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                 *_.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
                                                 FUNC Char2Hex( cString )
-                                                   LOCA cRVal := '',;
+                                                   LOCA cRVal := '', ;
                                                       nSInd := 0
 
                                                    FOR nSInd := 1 TO LEN( cString )
@@ -506,7 +506,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
 
                                                    FUNC RFCtrlCods( cString )                // Convert CHR(0..31) to readable format
 
-                                                      LOCA cRVal := cString,;
+                                                      LOCA cRVal := cString, ;
                                                          nCInd
 
                                                       FOR nCInd := 0 TO 32
@@ -522,7 +522,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
 
                                                       FUNC StpCtrlCods( cString )                // Strip Out  CHR(0..31)
 
-                                                         LOCA cRVal := cString,;
+                                                         LOCA cRVal := cString, ;
                                                             nCInd
 
                                                          FOR nCInd := 0 TO 32
@@ -537,10 +537,10 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                          FUNC SEVAL(;                              // String Evaluation
                                                                cSource ,; // Source (String)
                                                                xRVal ,;   // Return Value ( any type )
-                                                               nStep ,;
+                                                               nStep , ;
                                                                bBlock )   // Code Block tý evaluate
 
-                                                            LOCA nSInd  := 0,;
+                                                            LOCA nSInd  := 0, ;
                                                                c1Char := ''
 
                                                             DEFAULT nStep TO 1
@@ -555,8 +555,8 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                                             FUNC SubStrng2( ;                         // Sub String defined two position
-                                                                  cString,;
-                                                                  nBegPos,;
+                                                                  cString, ;
+                                                                  nBegPos, ;
                                                                   nEndPos )
 
                                                                LOCA cRVal := ''
@@ -574,11 +574,11 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                FUNC ExpL2Arr( ;                           // Expression List to Array
                                                                      cExpList )
 
-                                                                  LOCA aRVal  := {},;
-                                                                     c1Char := '',;
-                                                                     c1Expr := '',;
-                                                                     cDelmt := ',',;
-                                                                     nPnter :=  0,;
+                                                                  LOCA aRVal  := {}, ;
+                                                                     c1Char := '', ;
+                                                                     c1Expr := '', ;
+                                                                     cDelmt := ',', ;
+                                                                     nPnter :=  0, ;
                                                                      nOpBlk :=  0,;             // Open Block Count
                                                                      cBlBeg := '',;             // Block beginning Char
                                                                      cBlEnd := '',;             // Block ending Char
@@ -637,7 +637,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
 
                                                                   PROC TestExpr( cExprs )
                                                                   LOCA cResult := ExprChek( cExprs )
-                                                                  MsgBox( IF( EMPTY( cResult ), "passed.",;
+                                                                  MsgBox( IF( EMPTY( cResult ), "passed.", ;
                                                                   "Syntax error in expression :" + CRLF2 + cResult ) )
 
                                                                   RETU // TestExpr()
@@ -646,9 +646,9 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
 
                                                                   FUNC ExprChek( cExpress )
 
-                                                                     LOCA aExpress := ExpL2Arr( cExpress ),;
-                                                                        nEInd    :=  0,;
-                                                                        c1Exprsn := '',;
+                                                                     LOCA aExpress := ExpL2Arr( cExpress ), ;
+                                                                        nEInd    :=  0, ;
+                                                                        c1Exprsn := '', ;
                                                                         cRVal    := ''
 
                                                                      FOR nEInd := 1 TO LEN( aExpress )
@@ -671,22 +671,22 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                      FUNC Exp1Chek( ;                          // Syntax Checking on a single expression
                                                                            c1Exprsn )
 
-                                                                        LOCA cRVal   := '',;
-                                                                           c1Char  := '',;
-                                                                           c1Atom  := '',;
-                                                                           cDelmt  := ',',;
-                                                                           nPnter  :=  0,;
+                                                                        LOCA cRVal   := '', ;
+                                                                           c1Char  := '', ;
+                                                                           c1Atom  := '', ;
+                                                                           cDelmt  := ',', ;
+                                                                           nPnter  :=  0, ;
                                                                            cBPrnts := "([{'" + '"',;  // Parantesis Begin
                                                                            cEPrnts := ")]}'" + '"',;  // Parantesis End
-                                                                           cOprtrs := "+-/*,@$&!<>=#",;
-                                                                           cVoidEs := '"(' + "'",;
-                                                                           c1stChr := '',;
-                                                                           aLogics := { "AND", "OR", "NOT"  },;
-                                                                           aBrackts := { 0, 0, 0, 0, 0 },;
+                                                                           cOprtrs := "+-/*,@$&!<>=#", ;
+                                                                           cVoidEs := '"(' + "'", ;
+                                                                           c1stChr := '', ;
+                                                                           aLogics := { "AND", "OR", "NOT"  }, ;
+                                                                           aBrackts := { 0, 0, 0, 0, 0 }, ;
                                                                            nBracket := 0
 
-                                                                        LOCA cTermtors := cBPrnts + cEPrnts + cOprtrs + ". ",;
-                                                                           nAInd := 0,;
+                                                                        LOCA cTermtors := cBPrnts + cEPrnts + cOprtrs + ". ", ;
+                                                                           nAInd := 0, ;
                                                                            c1ExpSav := c1Exprsn
 
                                                                         c1Exprsn := STRTRAN( c1Exprsn,' ', '' )  // Is this NoP ?
@@ -765,7 +765,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                         *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                                                         FUNC ExpTChek(;                           // Expression Type Check
-                                                                              cExpression,;
+                                                                              cExpression, ;
                                                                               cType )
 
                                                                            LOCA lRVal := ( VALTYPE( &cExpression ) == cType )

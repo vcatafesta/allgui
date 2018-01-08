@@ -157,7 +157,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
       ::bSize   := {|o,x,y|ctrlOnSize(o,x,y)}
       ::SetColor( ::tcolor,::bcolor )
       // :LFB pos
-      statusbarmsg(,'x: '+ltrim(str(::nLeft))+'  y: '+ltrim(str(::nTop)),;
+      statusbarmsg(,'x: '+ltrim(str(::nLeft))+'  y: '+ltrim(str(::nTop)), ;
          'w: '+ltrim(str(::nWidth))+'  h: '+ltrim(str(::nHeight)))
       // :END LFB
    ENDIF
@@ -1145,7 +1145,7 @@ FUNCTION selsobjetos(odlg,xi,yi,xpos,ypos)
       oCtrl := oDlg:aControls[i]
       IF ((yi <= oCtrl:nTop +  oCtrl:nHeight .AND. yPos >= oCtrl:nTop) .OR. ;
             (yPos <= oCtrl:nTop + oCtrl:nHeight .AND. yi >= oCtrl:nTop)) .AND. ;
-            ((xi <= oCtrl:nLeft + oCtrl:nWidth .AND. xPos >= oCtrl:nLeft) .OR.;
+            ((xi <= oCtrl:nLeft + oCtrl:nWidth .AND. xPos >= oCtrl:nLeft) .OR. ;
             (xPos <= oCtrl:nLeft + oCtrl:nWidth .AND. xi >= oCtrl:nLeft))
          SetCtrlSelected( oCtrl:oParent,oCtrl,,-128)
       ENDIF

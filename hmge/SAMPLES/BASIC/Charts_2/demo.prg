@@ -16,25 +16,25 @@ STATIC aClrs, nGraphType
 
 PROCEDURE Main
 
-   aClrs := { RED,;
-      LGREEN,;
-      YELLOW,;
-      BLUE,;
-      WHITE,;
-      GRAY,;
-      FUCHSIA,;
-      TEAL,;
-      NAVY,;
-      MAROON,;
-      GREEN,;
-      OLIVE,;
-      PURPLE,;
-      SILVER,;
-      AQUA,;
-      BLACK,;
-      RED,;
-      LGREEN,;
-      YELLOW,;
+   aClrs := { RED, ;
+      LGREEN, ;
+      YELLOW, ;
+      BLUE, ;
+      WHITE, ;
+      GRAY, ;
+      FUCHSIA, ;
+      TEAL, ;
+      NAVY, ;
+      MAROON, ;
+      GREEN, ;
+      OLIVE, ;
+      PURPLE, ;
+      SILVER, ;
+      AQUA, ;
+      BLACK, ;
+      RED, ;
+      LGREEN, ;
+      YELLOW, ;
       BLUE   }
 
    DEFINE WINDOW GraphTest ;

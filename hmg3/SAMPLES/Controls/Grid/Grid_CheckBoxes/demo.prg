@@ -41,11 +41,11 @@ FUNCTION Main
       @ 50,10 GRID Grid_1 ;
          WIDTH 750 ;
          HEIGHT 350 ;
-         HEADERS {'Last Name', 'First Name'};
-         WIDTHS  {140, 140};
-         ITEMS aRows;
-         VALUE 1;
-         CELLNAVIGATION;
+         HEADERS {'Last Name', 'First Name'} ;
+         WIDTHS  {140, 140} ;
+         ITEMS aRows ;
+         VALUE 1 ;
+         CELLNAVIGATION ;
          ON CHECKBOXCLICKED MsgInfo ({"Row: ", This.CellRowClicked, " is checked: ", Form_1.Grid_1.CheckBoxItem (This.CellRowClicked)}, "On CheckBoxClicked")
 
       Form_1.Grid_1.CheckBoxEnabled := .T.

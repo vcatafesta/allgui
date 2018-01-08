@@ -349,23 +349,23 @@ PROCEDURE SelectLang()
 
    LOCAL cMessage  := ""
    LOCAL nItem     := 0
-   LOCAL aLangName := { "Basque"             ,;
-      "Dutch"              ,;
-      "English"            ,;
-      "French"             ,;
-      "German"             ,;
-      "Italian"            ,;
-      "Polish"             ,;
-      "Portuguese"         ,;
+   LOCAL aLangName := { "Basque"             , ;
+      "Dutch"              , ;
+      "English"            , ;
+      "French"             , ;
+      "German"             , ;
+      "Italian"            , ;
+      "Polish"             , ;
+      "Portuguese"         , ;
       "Spanish"             }
-   LOCAL aLangID   := { "EU"    ,;
-      "NL"    ,;
-      "EN"    ,;
-      "FR"    ,;
-      "DE"    ,;
-      "IT"    ,;
-      "PLWIN" ,;
-      "PT"    ,;
+   LOCAL aLangID   := { "EU"    , ;
+      "NL"    , ;
+      "EN"    , ;
+      "FR"    , ;
+      "DE"    , ;
+      "IT"    , ;
+      "PLWIN" , ;
+      "PT"    , ;
       "ES"     }
 
    // Language selection.

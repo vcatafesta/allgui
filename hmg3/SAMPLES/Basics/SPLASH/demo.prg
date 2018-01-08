@@ -20,7 +20,7 @@ FUNCTION Main
    DEFINE WINDOW Form_Splash ;
          AT 0,0 ;
          WIDTH 500 HEIGHT 200 ;
-         TITLE '';
+         TITLE '' ;
          TOPMOST NOCAPTION ;
          ON INIT SplashDelay() ;
          ON RELEASE Form_Main.Maximize()

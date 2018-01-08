@@ -46,7 +46,7 @@ FUNCTION Main
          NOMAXIMIZE NOSIZE ;
          ON INIT initcheckboxes()
 
-      @ 20, 50 LABEL Label_1;
+      @ 20, 50 LABEL Label_1 ;
          VALUE "Checkbox items allows us to select an aleatory items. More flexible!" ;
          WIDTH  120 ;
          HEIGHT 25 ;
@@ -66,15 +66,15 @@ FUNCTION Main
          CHECKBOXES ;
          ON CHECKBOXCLICKED { |nSpace| checkboxesRefresh(nSpace) }
 
-      @ 400, 60 BUTTON Button_1;
+      @ 400, 60 BUTTON Button_1 ;
          CAPTION "Checked Items" ;
-         ON CLICK Getcheckeditems();
+         ON CLICK Getcheckeditems() ;
          WIDTH  120 ;
          HEIGHT 25
 
-      @ 400, 200 BUTTON Button_2;
+      @ 400, 200 BUTTON Button_2 ;
          CAPTION "Selected Items" ;
-         ON CLICK GetSelecteditems();
+         ON CLICK GetSelecteditems() ;
          WIDTH  120 ;
          HEIGHT 25
 

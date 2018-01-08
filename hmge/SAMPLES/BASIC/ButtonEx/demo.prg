@@ -15,8 +15,8 @@ FUNCTION Main()
          AT 0, 0 ;
          WIDTH 458 ;
          HEIGHT 362 ;
-         MAIN;
-         ICON "pressit";
+         MAIN ;
+         ICON "pressit" ;
          TITLE 'ButtonEx Demo by Jacek Kubica <kubica@wssk.wroc.pl>'
 
       // SET NAVIGATION EXTENDED // it works for BUTTONEX controls

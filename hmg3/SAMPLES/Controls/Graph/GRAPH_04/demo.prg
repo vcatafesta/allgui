@@ -30,16 +30,16 @@ FUNCTION showpie
 
    ERASE WINDOW m
 
-   DRAW GRAPH IN WINDOW m AT 100,100;
+   DRAW GRAPH IN WINDOW m AT 100,100 ;
       TO 500,500 ;
       TITLE "Sales" ;
-      TYPE PIE;
-      SERIES {1500,1800,200,500,800};
-      DEPTH 25;
-      SERIENAMES {"Product 1","Product 2","Product 3","Product 4","Product 5"};
-      COLORS {{255,0,0},{0,0,255},{255,255,0},{0,255,0},{255,128,64},{128,0,128}};
-      3DVIEW;
-      SHOWXVALUES;
+      TYPE PIE ;
+      SERIES {1500,1800,200,500,800} ;
+      DEPTH 25 ;
+      SERIENAMES {"Product 1","Product 2","Product 3","Product 4","Product 5"} ;
+      COLORS {{255,0,0},{0,0,255},{255,255,0},{0,255,0},{255,128,64},{128,0,128}} ;
+      3DVIEW ;
+      SHOWXVALUES ;
       SHOWLEGENDS NOBORDER
 
    RETURN NIL

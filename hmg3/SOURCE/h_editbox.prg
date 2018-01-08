@@ -143,7 +143,7 @@ FUNCTION _DefineEditbox ( ControlName, ParentForm, x, y, w, h, value, ;
          Containerhandle := _HMG_SYSDATA [ 87 ] [i]
 
          IF Valtype (Value) == 'C' ;
-               .or.;
+               .or. ;
                Valtype (Value) == 'M'
 
             IF .Not. Empty (Value)
@@ -164,7 +164,7 @@ FUNCTION _DefineEditbox ( ControlName, ParentForm, x, y, w, h, value, ;
       ENDIF
 
       IF Valtype (Value) == 'C' ;
-            .or.;
+            .or. ;
             Valtype (Value) == 'M'
 
          IF .Not. Empty (Value)

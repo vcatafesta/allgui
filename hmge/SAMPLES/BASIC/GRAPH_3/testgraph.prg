@@ -18,7 +18,7 @@ FUNCTION Main
    GTWVW   12   27
    Wvt   6   16
    */
-   LOCAL aSer:={ {226,220,30,29,17,15,12,6},;
+   LOCAL aSer:={ {226,220,30,29,17,15,12,6}, ;
       {706,692,111,71,45,45,27,16} }
 
    DEFINE WINDOW GraphTest ;

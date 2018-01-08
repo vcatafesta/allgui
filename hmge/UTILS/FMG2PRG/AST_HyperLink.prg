@@ -42,7 +42,7 @@ FUNCTION AST_HyperLink(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -82,7 +82,7 @@ FUNCTION AST_HyperLink(cReadString,cTerminator)
    //      [ HELPID <nHelpId> ]
    //      [ HANDCURSOR ]
    //      [ INVISIBLE ]
-   // @ <nRow> ,<nCol> LABEL <ControlName> OF <ParentWindowName> VALUE <cValue>;
+   // @ <nRow> ,<nCol> LABEL <ControlName> OF <ParentWindowName> VALUE <cValue> ;
    //    ADDRESS <cLinkAddress> WIDTH <nWidth> HEIGHT <nHeight> FONT <cFontName> SIZE <nFontSize> HANDCURSOR
 
    aProperties_[ 1] := ALLTRIM(STRTRAN(aDefCommandList_[ 1],"DEFINE HYPERLINK",""))   // DEFINE HYPERLINK url_DaleAid
@@ -111,9 +111,9 @@ FUNCTION AST_HyperLink(cReadString,cTerminator)
    aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " HYPERLINK " +;
-      aProperties_[6] + ";" + CRLF +;
-      LDCS_iLevel(3) + aProperties_[7] + " " + aProperties_[4] + " " + aProperties_[5] + " " +;
+   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " HYPERLINK " + ;
+      aProperties_[6] + ";" + CRLF + ;
+      LDCS_iLevel(3) + aProperties_[7] + " " + aProperties_[4] + " " + aProperties_[5] + " " + ;
       aProperties_[8] + " " + aProperties_[9] + " HANDCURSOR" + CRLF
 
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF

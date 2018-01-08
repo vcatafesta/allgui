@@ -43,23 +43,23 @@ FUNCTION main()
       DEFINE MAIN MENU
          DEFINE POPUP "&Test Effects"
             MENUITEM "Top Right Down..." ;
-               MESSAGE "Show Top Right Down";
+               MESSAGE "Show Top Right Down" ;
                ACTION toprightdown( Application.FormName )
             MENUITEM "Top Left Down..." ;
-               MESSAGE "Show Top Left Down";
+               MESSAGE "Show Top Left Down" ;
                ACTION topleftdown( Application.FormName )
             MENUITEM "Fade..." ;
-               MESSAGE "Show Fade";
+               MESSAGE "Show Fade" ;
                ACTION Fade( Application.Handle )
             MENUITEM "From Center..." ;
-               MESSAGE "Show From Center";
+               MESSAGE "Show From Center" ;
                ACTION fromcenter( Application.FormName )
             MENUITEM "Open Dialog..." ;
-               MESSAGE "Open Dialog";
+               MESSAGE "Open Dialog" ;
                ACTION opendlg()
             SEPARATOR
             MENUITEM "E&xit" ;
-               MESSAGE "Click here to Exit";
+               MESSAGE "Click here to Exit" ;
                ACTION ( close_wnd( Application.Handle , .t. ), Form_Main.Release() )
          END POPUP
          DEFINE POPUP 'H&elp'
@@ -84,7 +84,7 @@ FUNCTION opendlg()
          OF Form_Main ;
          AT ColChartopix(14),Rowchartopix(7) ;
          WIDTH ColChartopix(45) ;
-         HEIGHT Rowchartopix(19);
+         HEIGHT Rowchartopix(19) ;
          CAPTION "Dialog Fade" ;
          ON RELEASE close_wnd(GetFormHandle("f_Dialog"), .f.)
 

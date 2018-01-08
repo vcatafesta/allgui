@@ -15,7 +15,7 @@ STATIC cStatWinWait  := ""
 // для старта цикла в окне "ожидания"/ for the start of the cycle in the window "waiting"
 STATIC lStatWinWait  := .T.
 // массив картинок для окна "ожидания" / an array of images to window "waiting"
-STATIC aStatPictWait := {"FR01","FR02","FR03","FR04","FR05","FR06","FR07","FR08",;
+STATIC aStatPictWait := {"FR01","FR02","FR03","FR04","FR05","FR06","FR07","FR08", ;
    "FR09","FR10","FR11","FR12"}
 
 PROCEDURE MAIN

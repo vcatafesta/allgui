@@ -597,9 +597,9 @@ METHOD Close()
    // kids
    ::aReport[ REFS ][ 2 ] := ::aReport[ DOCLEN ]
    cTemp := ;
-      "1 0 obj"+CRLF+;
-      "<<"+CRLF+;
-      "/Type /Pages /Count " + LTRIM(STR(::aReport[ REPORTPAGE ])) + CRLF +;
+      "1 0 obj"+CRLF+ ;
+      "<<"+CRLF+ ;
+      "/Type /Pages /Count " + LTRIM(STR(::aReport[ REPORTPAGE ])) + CRLF + ;
       "/Kids ["
 
    FOR nI := 1 to ::aReport[ REPORTPAGE ]
@@ -707,7 +707,7 @@ METHOD Close()
 
    ++::aReport[ REPORTOBJ ]
    cTemp += "xref" + CRLF + ;
-      "0 " + LTRIM(STR( ::aReport[ REPORTOBJ ] )) + CRLF +;
+      "0 " + LTRIM(STR( ::aReport[ REPORTOBJ ] )) + CRLF + ;
       HMG_PADL( ::aReport[ REFS ][ 1 ], 10, "0") + " 65535 f" + CRLF
 
    FOR nI := 2 to HMG_LEN( ::aReport[ REFS ] )
@@ -2479,7 +2479,7 @@ METHOD ClosePage()
    aadd( ::aReport[ REFS ], ::aReport[ DOCLEN ] )
    cTemp := ;
       LTRIM(STR(::aReport[ REPORTOBJ ] - 1)) + " 0 obj" + CRLF + ;
-      "<<"+CRLF+;
+      "<<"+CRLF+ ;
       "/ColorSpace << /DeviceRGB /DeviceGray >>" + CRLF + ; //version 0.01
       "/ProcSet [ /PDF /Text /ImageB /ImageC ]"
 
@@ -2516,7 +2516,7 @@ METHOD ClosePage()
 
    aadd( ::aReport[ REFS ], ::aReport[ DOCLEN ] )
    cTemp := LTRIM(STR( ::aReport[ REPORTOBJ ] )) + " 0 obj << /Length " + ;
-      LTRIM(STR( ::aReport[ REPORTOBJ ] + 1 )) + " 0 R >>" + CRLF +;
+      LTRIM(STR( ::aReport[ REPORTOBJ ] + 1 )) + " 0 R >>" + CRLF + ;
       "stream"
 
    ::aReport[ DOCLEN ] += HMG_LEN( cTemp )

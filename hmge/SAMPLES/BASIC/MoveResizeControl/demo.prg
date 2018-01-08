@@ -11,11 +11,11 @@ FUNCTION MAIN
 
    LOCAL i, cLabelName
 
-   DEFINE WINDOW Form_1;
-         AT 0, 0;
-         WIDTH 700;
-         HEIGHT 400;
-         TITLE "Move and Resize Control With Cursor";
+   DEFINE WINDOW Form_1 ;
+         AT 0, 0 ;
+         WIDTH 700 ;
+         HEIGHT 400 ;
+         TITLE "Move and Resize Control With Cursor" ;
          MAIN
 
       @ 300, 10 LABEL Label_0 VALUE "Put the cursor over control and press F3 (Info), F5 (Move) or F9 (Resize), while Move or Resize ESC -> Undo" AUTOSIZE

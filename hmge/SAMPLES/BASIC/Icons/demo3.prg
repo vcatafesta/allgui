@@ -31,7 +31,7 @@ PROCEDURE main()
          TITLE 'Draw the bitmap or icon image using the Windows DrawState' ;
          MAIN ;
          NOMAXIMIZE nosize ;
-         on paint Form_Main_OnPaint( Form_Main.Handle, hIcon, w, h );
+         on paint Form_Main_OnPaint( Form_Main.Handle, hIcon, w, h ) ;
          ON RELEASE ;
          ( ;
          DestroyIcon( hIcon ) ;

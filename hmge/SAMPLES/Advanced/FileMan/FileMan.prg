@@ -1348,7 +1348,7 @@ FUNCTION TextEdit( cFile, cExt, lReadOnly )
       DEFINE WINDOW wTextEdit ;
             AT 0, 0 WIDTH Form_Main.Width - 20 HEIGHT Form_Main.Height - 44 ;
             TITLE cFile ;
-            ICON 'MAIN';
+            ICON 'MAIN' ;
             MODAL ;
             ON INIT IF(lReadOnly, wTextEdit.Btn_1.SetFocus, wTextEdit.Edit1.SetFocus) ;
             ON PAINT ResizeText() ;
@@ -1407,7 +1407,7 @@ FUNCTION ShowImage()
    DEFINE WINDOW wImage ;
          AT 0, 0 WIDTH IF(cExt = "ICO", 200, 400) HEIGHT IF(cExt = "ICO", 200, 400) ;
          TITLE cFile ;
-         ICON 'MAIN';
+         ICON 'MAIN' ;
          CHILD NOMAXIMIZE NOMINIMIZE NOSIZE ;
          ON RELEASE IF( nGridFocus = 1, SplitChild_1.Grid_1.SetFocus, SplitChild_2.Grid_2.SetFocus )
 
@@ -1432,7 +1432,7 @@ FUNCTION PlayVideo()
    DEFINE WINDOW wVideo ;
          AT 0, 0 WIDTH 400 HEIGHT 400 ;
          TITLE cFile ;
-         ICON 'MAIN';
+         ICON 'MAIN' ;
          CHILD NOMAXIMIZE NOMINIMIZE NOSIZE ;
          ON INIT wVideo.Ani_1.Play() ;
          ON RELEASE IF( nGridFocus = 1, SplitChild_1.Grid_1.SetFocus, SplitChild_2.Grid_2.SetFocus )
@@ -1461,7 +1461,7 @@ FUNCTION PlayMusic()
    DEFINE WINDOW wMusic ;
          AT 0, 0 WIDTH 400 HEIGHT 54 ;
          TITLE cFile ;
-         ICON 'MAIN';
+         ICON 'MAIN' ;
          CHILD NOMAXIMIZE NOMINIMIZE NOSIZE ;
          ON INIT wMusic.Play_1.Play() ;
          ON RELEASE IF( nGridFocus = 1, SplitChild_1.Grid_1.SetFocus, SplitChild_2.Grid_2.SetFocus )

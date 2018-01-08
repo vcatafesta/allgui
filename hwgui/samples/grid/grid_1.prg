@@ -31,18 +31,18 @@ FUNCTION Test()
 
    PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 
-   INIT DIALOG oForm CLIPPER NOEXIT TITLE "Grid Demo";
+   INIT DIALOG oForm CLIPPER NOEXIT TITLE "Grid Demo" ;
       FONT oFont ;
       AT 0, 0 SIZE 700, 425 ;
       STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
 
-   @ 10,10 GRID oGrid OF oForm SIZE 680,375;
+   @ 10,10 GRID oGrid OF oForm SIZE 680,375 ;
       ITEMCOUNT 10000 ;
       ON KEYDOWN {|oCtrl, key| OnKey(oCtrl, key) } ;
       ON POSCHANGE {|oCtrl, nRow| OnPoschange(oCtrl, nRow) } ;
       ON CLICK {|oCtrl| OnClick(oCtrl) } ;
       ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo( oCtrl, nRow, nCol ) } ;
-      COLOR hwg_VColor('D3D3D3');
+      COLOR hwg_VColor('D3D3D3') ;
       BACKCOLOR hwg_VColor('BEBEBE')
 
    ADD COLUMN TO GRID oGrid HEADER "Column 1" WIDTH 150

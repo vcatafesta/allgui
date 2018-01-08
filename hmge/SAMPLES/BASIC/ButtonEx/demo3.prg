@@ -15,8 +15,8 @@ FUNCTION Main()
          AT 0,0 ;
          WIDTH 660 ;
          HEIGHT 380 ;
-         MAIN;
-         ICON "pressit";
+         MAIN ;
+         ICON "pressit" ;
          TITLE 'AllButtons Demo by Jacek Kubica <kubica@wssk.wroc.pl>'
 
       DEFINE MAIN MENU

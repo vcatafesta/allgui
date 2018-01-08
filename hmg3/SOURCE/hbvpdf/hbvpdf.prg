@@ -456,9 +456,9 @@ FUNCTION pdfClose()                                                           /*
    // kids
    t_aReport[ REFS ][ 2 ] := t_aReport[ DOCLEN ]
    cTemp := ;
-      "1 0 obj"+CRLF+;
-      "<<"+CRLF+;
-      "/Type /Pages /Count " + LTRIM(STR(t_aReport[ REPORTPAGE ])) + CRLF +;
+      "1 0 obj"+CRLF+ ;
+      "<<"+CRLF+ ;
+      "/Type /Pages /Count " + LTRIM(STR(t_aReport[ REPORTPAGE ])) + CRLF + ;
       "/Kids ["
 
    FOR nI := 1 to t_aReport[ REPORTPAGE ]
@@ -564,7 +564,7 @@ FUNCTION pdfClose()                                                           /*
    ++t_aReport[ REPORTOBJ ]
 
    cTemp += "xref" + CRLF + ;
-      "0 " + LTRIM(STR( t_aReport[ REPORTOBJ ] )) + CRLF +;
+      "0 " + LTRIM(STR( t_aReport[ REPORTOBJ ] )) + CRLF + ;
       HMG_PADL( t_aReport[ REFS ][ 1 ], 10, "0") + " 65535 f" + CRLF
 
    FOR nI := 2 to HMG_LEN( t_aReport[ REFS ] )
@@ -615,7 +615,7 @@ STATIC FUNCTION pdfClosePage()                                                /*
    aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
    cTemp := ;
       LTRIM(STR(t_aReport[ REPORTOBJ ] - 1)) + " 0 obj" + CRLF + ;
-      "<<"+CRLF+;
+      "<<"+CRLF+ ;
       "/ColorSpace << /DeviceRGB /DeviceGray >>" + CRLF + ; //version 0.01
       "/ProcSet [ /PDF /Text /ImageB /ImageC ]"
 
@@ -652,7 +652,7 @@ STATIC FUNCTION pdfClosePage()                                                /*
 
    aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
    cTemp := LTRIM(STR( t_aReport[ REPORTOBJ ] )) + " 0 obj << /Length " + ;
-      LTRIM(STR( t_aReport[ REPORTOBJ ] + 1 )) + " 0 R >>" + CRLF +;
+      LTRIM(STR( t_aReport[ REPORTOBJ ] + 1 )) + " 0 R >>" + CRLF + ;
       "stream"
 
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )

@@ -32,7 +32,7 @@ FUNCTION Main
          VALUE 123 ;
          FONT 'Verdana' SIZE 12 ;
          TOOLTIP 'BtnTextBox Numeric Con Imagenes' ;
-         PICTURE "find.bmp";
+         PICTURE "find.bmp" ;
          MAXLENGTH 3 ;
          RIGHTALIGN ;
          ACTION FindCode("Form_1","TextBtn_01") ;
@@ -55,7 +55,7 @@ FUNCTION Main
          RIGHTALIGN WIDTH  125 TRANSPARENT
 
       @90,140 BTNTEXTBOX TextBtn_03 ;
-         HEIGHT 22;
+         HEIGHT 22 ;
          WIDTH 90 ;
          VALUE '' ;
          FONT 'Verdana' SIZE 12 ;
@@ -96,11 +96,11 @@ FUNCTION GetCode(nValue)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW Form_11;
+   DEFINE WINDOW Form_11 ;
          AT 0,0 ;
          WIDTH 350 HEIGHT 300 ;
          TITLE 'Lista de Articulos' ;
-         MODAL NOSIZE;
+         MODAL NOSIZE ;
          ON RELEASE CloseTables()
 
       @ 5,5 BROWSE Browse_1   ;

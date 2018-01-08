@@ -40,8 +40,8 @@ CLASS VAR winclass   INIT "EDIT"
    DATA lCreate    INIT .F. HIDDEN //
 
    METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-      oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
-      nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength,;
+      oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor, ;
+      nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength, ;
       bKeyDown, bChange, bOther, bClickUp ,bClickDown )
 
    METHOD Activate()
@@ -76,15 +76,15 @@ CLASS VAR winclass   INIT "EDIT"
    METHOD SetRange( nLower, nUpper )
 
    METHOD Move( x1, y1, width, height, nRepaint ) INLINE ;                             // + hwg_Getclientrect( ::hwndUpDown )[ 3 ] - 1
-      ::Super:Move( x1, y1 , IIF( width != Nil, width, ::nWidth ), height, nRepaint  ) ,;
-      hwg_Sendmessage( ::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0 ),;
+      ::Super:Move( x1, y1 , IIF( width != Nil, width, ::nWidth ), height, nRepaint  ) , ;
+      hwg_Sendmessage( ::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0 ), ;
       IIF( ::lHide, ::Hide(), ::Show() )
 
    ENDCLASS
 
 METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-      oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
-      nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength,;
+      oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor, ;
+      nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength, ;
       bKeyDown, bChange, bOther, bClickUp ,bClickDown ) CLASS HUpDown
 
    HB_SYMBOL_UNUSED( bOther )
@@ -142,7 +142,7 @@ METHOD Activate() CLASS HUpDown
    IF !empty( ::oParent:handle )
       ::lCreate := .T.
       ::oEditUpDown := HEditUpDown():New( ::oParent, ::id , val(::title) , ::bSetGet, ::Style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
-         ::oFont, ::bInit, ::bSize, ::bPaint, ::bGetfocus, ::bLostfocus, ::tooltip, ::tcolor, ::bcolor, ::cPicture,;
+         ::oFont, ::bInit, ::bSize, ::bPaint, ::bGetfocus, ::bLostfocus, ::tooltip, ::tcolor, ::bcolor, ::cPicture, ;
          ::lNoBorder, ::nMaxLength, , ::bKeyDown, ::bChange, ::bOther , ::controlsource)
       ::oEditUpDown:Name := "oEditUpDown"
       ::SetColor( ::tColor, ::oEditUpDown:bColor )

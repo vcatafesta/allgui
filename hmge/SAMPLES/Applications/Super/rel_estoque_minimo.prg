@@ -12,46 +12,46 @@ programador : marcelo neves
 
 FUNCTION relatorio_estoque_minimo()
 
-   DEFINE WINDOW form_est_minimo;
-         at 000,000;
-         WIDTH 400;
-         HEIGHT 250;
-         TITLE 'Relação estoque mínimo';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_est_minimo ;
+         at 000,000 ;
+         WIDTH 400 ;
+         HEIGHT 250 ;
+         TITLE 'Relação estoque mínimo' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
-      @ 010,010 label lbl_001;
-         of form_est_minimo;
-         VALUE 'Este relatório irá listar somente os produtos que';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,010 label lbl_001 ;
+         of form_est_minimo ;
+         VALUE 'Este relatório irá listar somente os produtos que' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,010 label lbl_002;
-         of form_est_minimo;
-         VALUE 'estejam com o estoque atual igual ou abaixo do mínimo';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,010 label lbl_002 ;
+         of form_est_minimo ;
+         VALUE 'estejam com o estoque atual igual ou abaixo do mínimo' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 050,010 label lbl_003;
-         of form_est_minimo;
-         VALUE 'cadastrado. Somente produtos que não sejam - pizza -';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 050,010 label lbl_003 ;
+         of form_est_minimo ;
+         VALUE 'cadastrado. Somente produtos que não sejam - pizza -' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 070,010 label lbl_004;
-         of form_est_minimo;
-         VALUE 'aparecerão no relatório.';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 070,010 label lbl_004 ;
+         of form_est_minimo ;
+         VALUE 'aparecerão no relatório.' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
 
       * linha separadora

@@ -1095,7 +1095,7 @@ STATIC FUNCTION CpuUsage()
    IF !IsWinNT()
       uVar := oReg:Get("KERNEL\CPUUsage","00")
    ELSE
-      oReg := TReg32():New(HKEY_LOCAL_MACHINE,;
+      oReg := TReg32():New(HKEY_LOCAL_MACHINE, ;
          "Software\Microsoft\Windows NT\CurrentVersion\Perflib\009")
       uuVar := oReg:Get("Counters","")
       uVar := Str(oReg:Get("% Processor Time",0))

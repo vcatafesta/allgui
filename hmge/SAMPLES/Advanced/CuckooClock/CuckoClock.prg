@@ -81,19 +81,19 @@ PROC Main()
 
    STATIC PROC CuckooClock( nCaller )
 
-      STATIC lIsColon := .T. ,;
-         lSound   := .T. ,;
-         lSeconds := .T. ,;
+      STATIC lIsColon := .T. , ;
+         lSound   := .T. , ;
+         lSeconds := .T. , ;
          aLMetrcs := { { 40, 10, 40, 10, 40 }, { 25, 40, 10, 40, 25 } }
 
-      LOCAL cFrmName    := '' ,;
-         aCCPrpArray := ARRAY( 5 ),;
-         cCurTime    := TIME(),;
-         aTmpColor   := {},;
-         nLblType ,;
-         nlblRow     := 5,;
-         nlblWidth,;
-         nDigit   ,;
+      LOCAL cFrmName    := '' , ;
+         aCCPrpArray := ARRAY( 5 ), ;
+         cCurTime    := TIME(), ;
+         aTmpColor   := {}, ;
+         nLblType , ;
+         nlblRow     := 5, ;
+         nlblWidth, ;
+         nDigit   , ;
          cDigit
 
       IF nCaller == NIL
@@ -236,7 +236,7 @@ PROC Main()
 
       STATIC PROC CCSetProp( cFrmName, cProperty, aValues )
 
-         LOCAL nDigit,;
+         LOCAL nDigit, ;
             cDigit
 
          FOR nDigit := 1 TO 5
@@ -250,7 +250,7 @@ PROC Main()
 
          STATIC PROC CoordsCorr()
 
-            LOCAL nTop := frmCuckooClock.Row,;
+            LOCAL nTop := frmCuckooClock.Row, ;
                nLeft := frmCuckooClock.Col
 
             IF nTop < 0

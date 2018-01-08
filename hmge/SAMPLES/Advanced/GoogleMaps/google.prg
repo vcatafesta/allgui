@@ -47,7 +47,7 @@ STATIC PROCEDURE fOpenActivex()
    GOOGLE.TEXT_2.VALUE  := cCity
    GOOGLE.TEXT_3.VALUE  := cCountry
 
-   oWActiveX := TActiveX():New( "GOOGLE", "Shell.Explorer.2" , 0 , 0 ,;
+   oWActiveX := TActiveX():New( "GOOGLE", "Shell.Explorer.2" , 0 , 0 , ;
       GetProperty( "GOOGLE" , "width" ) - 8 , GetProperty( "GOOGLE" , "height" ) - 150 )
    oActiveX := oWActiveX:Load()
 

@@ -540,9 +540,9 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent, nosize, nos
    ENDIF
 
    IF _HMG_InplaceParentHandle <> 0
-      Parent := _hmg_InplaceParentHandle
+      PARENT := _hmg_InplaceParentHandle
    ELSEIF ! _HMG_BeginWindowMDIActive
-      Parent := _hmg_MainHandle
+      PARENT := _hmg_MainHandle
    ENDIF
 
    _HMG_ActiveFormName := FormName
@@ -1127,12 +1127,12 @@ FUNCTION InputBox ( cInputPrompt, cDialogCaption, cDefaultValue, nTimeout, cTime
    hb_default( @cDialogCaption, '' )
    hb_default( @cDefaultValue, '' )
 
-   DEFINE WINDOW _InputBox;
-         AT 0, 0;
-         WIDTH 350 + nBordW;
-         HEIGHT 115 + nMLines + nTitleH;
-         TITLE cDialogCaption;
-         MODAL;
+   DEFINE WINDOW _InputBox ;
+         AT 0, 0 ;
+         WIDTH 350 + nBordW ;
+         HEIGHT 115 + nMLines + nTitleH ;
+         TITLE cDialogCaption ;
+         MODAL ;
          ON SIZE _InputBoxAdjust( nTitleH, nBordW ) ;
          ON INTERACTIVECLOSE iif( lOk, NIL, _HMG_DialogCancelled := lCanceled := .T. )
 
@@ -1148,13 +1148,13 @@ FUNCTION InputBox ( cInputPrompt, cDialogCaption, cDefaultValue, nTimeout, cTime
 
          _InputBox.MaxHeight := ( _InputBox.Height )
       ENDIF
-      @ 67 + nMLines, 120 BUTTON _Ok;
-         CAPTION _HMG_MESSAGE [ 6 ];
+      @ 67 + nMLines, 120 BUTTON _Ok ;
+         CAPTION _HMG_MESSAGE [ 6 ] ;
          ACTION ( lOk := .T., _HMG_DialogCancelled := lCanceled := .F., ;
          RetVal := _InputBox._TextBox.Value, _InputBox.Release )
 
-      @ 67 + nMLines, 230 BUTTON _Cancel;
-         CAPTION _HMG_MESSAGE [ 7 ];
+      @ 67 + nMLines, 230 BUTTON _Cancel ;
+         CAPTION _HMG_MESSAGE [ 7 ] ;
          ACTION Eval( bCancel )
 
       IF ISNUMERIC ( nTimeout )

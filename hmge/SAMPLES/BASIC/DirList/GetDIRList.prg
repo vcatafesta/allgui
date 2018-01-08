@@ -54,14 +54,14 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
    IF <v1> == NIL ; <v1> := <x1> ; END                           ;
       [; IF <vn> == NIL ; <vn> := <xn> ; END ]
 
-   MEMV aGDLRVal,;
-      aList1,;
-      aList2,;
-      aColOrder,;
-      aLocaRoots,;
+   MEMV aGDLRVal, ;
+      aList1, ;
+      aList2, ;
+      aColOrder, ;
+      aLocaRoots, ;
       aLocaCurnt
 
-   MEMV aLocaNames,;
+   MEMV aLocaNames, ;
       aLocaPaths
 
    MEMV npIncludes,;         // 1: Files, 2: DIRs, 3: DIRs and Files
@@ -75,7 +75,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
          lMultiSelect,;      // Allow Multiple selection
          lChangeDir )        // Allow Change DIR
 
-      LOCA aTypes := { "Only File(s)", "Only Folder(s)", "File(s) and Folder(s)" },;
+      LOCA aTypes := { "Only File(s)", "Only Folder(s)", "File(s) and Folder(s)" }, ;
          aGDLGFC    := ARRAY( 4 ),;    // GDL GRID Dynamic Fore Colors
          aImages    := { '01.bmp', '02.bmp' }
 
@@ -85,16 +85,16 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
       nIncludes := MAX( MIN( nIncludes, 3 ), 1 )
 
-      DEFAULT acFilter        TO { '*.*' },;
-         cBegFolder      TO GetCurrentFolder(),;
-         lMultiSelect    TO .T.,;
+      DEFAULT acFilter        TO { '*.*' }, ;
+         cBegFolder      TO GetCurrentFolder(), ;
+         lMultiSelect    TO .T., ;
          lChangeDir      TO .T.
 
-      PRIV aGDLRVal   := {},;
-         aList1     := {},;
-         aList2     := {{,,,,.F.},{,,,,.F.}},;
-         aColOrder  := ARRAY( 4 ),;
-         aLocaRoots := GDL_LocaRoots(),;
+      PRIV aGDLRVal   := {}, ;
+         aList1     := {}, ;
+         aList2     := {{,,,,.F.},{,,,,.F.}}, ;
+         aColOrder  := ARRAY( 4 ), ;
+         aLocaRoots := GDL_LocaRoots(), ;
          aLocaCurnt := {}
 
       cBegFolder += IF( RIGHT( cBegFolder, 1 ) # '\', '\','' )
@@ -103,7 +103,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
          cTitle := aTypes[ nIncludes ]
       ENDIF
 
-      PRIV aLocaNames := {},;
+      PRIV aLocaNames := {}, ;
          aLocaPaths := {}
 
       * PRIVATization !
@@ -155,7 +155,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
             "Select / Deselect" + c1Tab + ": Click, Shift/Ctrl + Click / Up / Down ..." + CRLF + ;
             "Select All"   + c2Tab + ": Ctrl + A" + CRLF + ;
             "DeSelect All" + c1Tab + ": Ctrl + D" + CRLF + ;
-            "Done / Apply" + c1Tab + ": Enter / DoubleClick", "Navigation On Grid" );
+            "Done / Apply" + c1Tab + ": Enter / DoubleClick", "Navigation On Grid" ) ;
             WIDTH 20 HEIGHT 20 ;
             FONT "FixedSys" SIZE 9 TOOLTIP "Navigation keys"
 
@@ -192,20 +192,20 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
          LOCA cCurrPath := frmGDL.txbPath.Value
 
-         LOCA cFileNam,;
-            cFileExt,;
-            nFileSiz,;
-            cFileDat,;
-            cFileTim,;
-            cFAttrib,;
-            lIsDIR,;
-            nFile,;
+         LOCA cFileNam, ;
+            cFileExt, ;
+            nFileSiz, ;
+            cFileDat, ;
+            cFileTim, ;
+            cFAttrib, ;
+            lIsDIR, ;
+            nFile, ;
             nLastDotPos
 
          LOCA cFilter := frmGDL.txbFilter.Value
 
-         LOCA nFileCo := 0,;
-            nFoldCo := 0,;
+         LOCA nFileCo := 0, ;
+            nFoldCo := 0, ;
             nSeqNum := 0
 
          IF EMPTY( cFilter )
@@ -263,7 +263,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
          AEVAL( aList2, { | a1 |  frmGDL.grdDIRList.AddItem( { a1[ 1 ],;       // 1° File ( Only) Name
             a1[ 2 ],;          // 2° File Extention
             IF( a1[ 5 ], '<DIR>', PADL( NTrim( a1[ 3 ]), 14 )),;  // 3° Size / <DIR>
-            IF( EMPTY( a1[ 4 ] ),;
+            IF( EMPTY( a1[ 4 ] ), ;
             ' ',DTOC( STOD( LEFT( a1[ 4 ], ;
             8 ) ) ) + SUBS( a1[ 4 ], 9 ) ) } ) } )   // 4° Date + Time
          frmGDL.grdDIRList.EnableUpdate()
@@ -287,7 +287,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
             IF !EMPTY( aSelected )
 
                AEVAL( aSelected, { | n1 | AADD( aGDLRVal, frmGDL.txbPath.Value + frmGDL.grdDIRList.Cell( n1, 1 ) + ;
-                  IF( EMPTY( frmGDL.grdDIRList.Cell( n1, 2 ) ), '',;
+                  IF( EMPTY( frmGDL.grdDIRList.Cell( n1, 2 ) ), '', ;
                   "." +      frmGDL.grdDIRList.Cell( n1, 2 ) ) ) } )
             ENDIF
 
@@ -297,11 +297,11 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-            PROC GDL_SortColm(;
+            PROC GDL_SortColm( ;
                   nColumnNo )
 
                LOCA nOrder  := aColOrder[ nColumnNo ],; // 0: Natural, 1: Ascend, 2: Descend
-                  aImages := ARRAY(4),;
+                  aImages := ARRAY(4), ;
                   lAscend
 
                nOrder := IF( nOrder < 2, nOrder + 1, 0 )
@@ -338,7 +338,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
                AEVAL( aList2, { | a1 |  frmGDL.grdDIRList.AddItem( { a1[ 1 ],;         // 1° File ( Only) Name
                   a1[ 2 ],;         // 2° File Extention
                   IF( a1[ 5 ], '<DIR>', PADL( NTrim( a1[ 3 ]), 14 )),;  // 3° Size / <DIR>
-                  IF( EMPTY( a1[ 4 ] ),;
+                  IF( EMPTY( a1[ 4 ] ), ;
                   ' ',DTOC( STOD( LEFT( a1[ 4 ], ;
                   8 ) ) ) + SUBS( a1[ 4 ], 9 ) ) } ) } )   // 4° Date + Time
                frmGDL.grdDIRList.EnableUpdate()
@@ -352,7 +352,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
                FUNC GDL_LocaRoots()
 
                   LOCA aDrives := HL_GetDriveList()
-                  aGDLRVal   := { { '00000', "My DeskTop",  GetDeskTopFolder() },;
+                  aGDLRVal   := { { '00000', "My DeskTop",  GetDeskTopFolder() }, ;
                      { '00001', "  My Documents", GetMyDocumentsFolder() } }
 
                   AEVAL( aDrives, { | c1, i1 | aDrives[ i1 ] += ' [ ' + HL_GetVolumLabel( c1 ) + ' ]'} )
@@ -410,10 +410,10 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
                               LOCA cCurrPath := frmGDL.txbPath.Value
 
-                              LOCA cCurrLoca := TOKEN( cCurrPath ),;
-                                 aBFTree,;
-                                 nDriveNo,;
-                                 nDrivCode,;
+                              LOCA cCurrLoca := TOKEN( cCurrPath ), ;
+                                 aBFTree, ;
+                                 nDriveNo, ;
+                                 nDrivCode, ;
                                  cNextSubD
 
                               IF lpChangeDir
@@ -433,7 +433,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
                                     AEVAL( aBFTree, { | c1, i1 |  ;
                                        cNextSubD += "\" + c1, ;
-                                       AADD( aLocaCurnt, { STRZERO( nDrivCode + i1, 4 ),;
+                                       AADD( aLocaCurnt, { STRZERO( nDrivCode + i1, 4 ), ;
                                        SPACE( ( i1 + 1 ) * 2 ) + c1, cNextSubD } ) } )
 
                                     ASORT( aLocaCurnt,,,{ | x, y | x[ 1 ] < y[ 1 ] } )
@@ -478,10 +478,10 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
                                  PROC GDL_DoneOrSel( lMultiSelect )
 
-                                    LOCA nGridRow  := This.CellRowIndex,;
-                                       cCurrPath := frmGDL.txbPath.Value,;
+                                    LOCA nGridRow  := This.CellRowIndex, ;
+                                       cCurrPath := frmGDL.txbPath.Value, ;
                                        cSelected := frmGDL.grdDIRList.Cell( nGridRow , 1 ) + ;
-                                       IF( EMPTY( frmGDL.grdDIRList.Cell( nGridRow , 2 ) ), '',;
+                                       IF( EMPTY( frmGDL.grdDIRList.Cell( nGridRow , 2 ) ), '', ;
                                        "." +  frmGDL.grdDIRList.Cell( nGridRow , 2 ) )
 
                                     cCurrPath += IF( RIGHT( cCurrPath, 1 ) # '\', '\','' )
@@ -495,7 +495,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
                                        IF !EMPTY(nGridRow)
                                           nGridRow := IF( lMultiSelect, nGridRow[ 1 ], nGridRow )
                                           aGDLRVal := { frmGDL.txbPath.Value + frmGDL.grdDIRList.Cell( nGridRow , 1 ) + ;
-                                             IF( EMPTY( frmGDL.grdDIRList.Cell( nGridRow , 2 ) ), '',;
+                                             IF( EMPTY( frmGDL.grdDIRList.Cell( nGridRow , 2 ) ), '', ;
                                              "." +  frmGDL.grdDIRList.Cell( nGridRow , 2 ) ) }
                                        ENDIF
                                        frmGDL.Release
@@ -524,14 +524,14 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
                                              nIncludes ,;   // 1: Only Files, 2: Only DIRs, 3: DIRs and Files
                                              lChangeDir )   // Does user will have ability for changing folder ?
 
-                                          LOCA aRVal   := {},;
-                                             aFilter := {},;
-                                             cAttrib := '',;
-                                             aEntry,;
+                                          LOCA aRVal   := {}, ;
+                                             aFilter := {}, ;
+                                             cAttrib := '', ;
+                                             aEntry, ;
                                              c1Entry := ''
 
-                                          DEFAULT cPath     TO GetCurrentFolder() ,;
-                                             cFilter   TO "*.*" ,;
+                                          DEFAULT cPath     TO GetCurrentFolder() , ;
+                                             cFilter   TO "*.*" , ;
                                              nIncludes TO 3
 
                                           cPath   := hb_DirSepAdd( cPath )
@@ -584,7 +584,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
                                              LOCA cRVal := ''
 
-                                             DEFAULT aArray     TO {},;
+                                             DEFAULT aArray     TO {}, ;
                                                 cDelimiter TO ','
 
                                              AEVAL( aArray, { | x1, i1 | cRVal += Any2Strg( x1 ) + IF( i1 < LEN( aArray ), cDelimiter, "" ) } )
@@ -612,7 +612,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
                                                 LOCA aRVal := {}
 
-                                                DEFAULT cList      TO '',;
+                                                DEFAULT cList      TO '', ;
                                                    cDelimiter TO ','
 
                                                 TOKENINIT( cList, cDelimiter )
@@ -652,7 +652,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
                                                 */
                                                 FUNC HL_IsFolderExist( cDirName )
 
-                                                   LOCA cCurDir := GetCurrentFolder(),;
+                                                   LOCA cCurDir := GetCurrentFolder(), ;
                                                       lRVal   := ( DIRCHANGE( cDirName ) == 0 )
 
                                                    SetCurrentFolder( cCurDir )
@@ -680,9 +680,9 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
                                                    FUNC HL_GetDriveList()
 
-                                                      LOCA aRVal := {},;
-                                                         nDriv,;
-                                                         cDriv,;
+                                                      LOCA aRVal := {}, ;
+                                                         nDriv, ;
+                                                         cDriv, ;
                                                          cCurDir := GetCurrentFolder()
 
                                                       FOR nDriv := 0 TO 28

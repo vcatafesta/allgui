@@ -56,23 +56,23 @@ PROCEDURE InitPGMessages
 
    // PropGrid MESSAGES (ENGLISH DEFAULT)
 
-   _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+   _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-   _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+   _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
    _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -96,23 +96,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
 
-      _HMG_PGLangButton := { "Apply"   ,;
-         "Help"    ,;
-         "Cancel"  ,;
-         "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+         "Help"    , ;
+         "Cancel"  , ;
+         "OK"      , ;
          "Save"    }
       /*
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", :"Error", "Warning" }
@@ -125,23 +125,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -154,23 +154,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", :"Error", "Warning" }
@@ -184,23 +184,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -214,23 +214,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -244,23 +244,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -274,23 +274,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
 
-      _HMG_PGLangButton := { "Akceptuj"   ,;
-         "Pomoc"    ,;
-         "Rezygnuj" ,;
-         "OK"      ,;
+      _HMG_PGLangButton := { "Akceptuj"   , ;
+         "Pomoc"    , ;
+         "Rezygnuj" , ;
+         "OK"      , ;
          "Zapisz"   }
 
-      _HMG_PGLangError  := { "Property Item typu: "                     ,;
-         " B³êdnie zdefiniowana."                          ,;
-         "Property Item ID podwójnie zdefiniowana"         ,;
-         "Property wartoœæ dla "                      ,;
-         "Property InputMask dla "                  ,;
-         "Property Data dla "                       ,;
-         "Item nie jest typu Category!"            ,;
-         "Category "                                ,;
-         " nie znaleziono!"                              ,;
-         "Property Item ID "                        ,;
-         " podwójnie zdefiniowano."+CRLF+" Item nie zosta³ dodany"  ,;
+      _HMG_PGLangError  := { "Property Item typu: "                     , ;
+         " B³êdnie zdefiniowana."                          , ;
+         "Property Item ID podwójnie zdefiniowana"         , ;
+         "Property wartoœæ dla "                      , ;
+         "Property InputMask dla "                  , ;
+         "Property Data dla "                       , ;
+         "Item nie jest typu Category!"            , ;
+         "Category "                                , ;
+         " nie znaleziono!"                              , ;
+         "Property Item ID "                        , ;
+         " podwójnie zdefiniowano."+CRLF+" Item nie zosta³ dodany"  , ;
          "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Czy jesteœ pewny ?' , "Nie zdefiniowano zbioru do zapisu", "B³¹d", "Ostrzerzenie" }
@@ -302,23 +302,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -332,23 +332,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -362,23 +362,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -392,23 +392,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -422,23 +422,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -452,23 +452,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -482,23 +482,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -512,23 +512,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -542,23 +542,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -572,23 +572,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }
@@ -602,23 +602,23 @@ PROCEDURE InitPGMessages
 
       // PropGrid MESSAGES
       /*
-      _HMG_PGLangButton := { "Apply"   ,;
-      "Help"    ,;
-      "Cancel"  ,;
-      "OK"      ,;
+      _HMG_PGLangButton := { "Apply"   , ;
+      "Help"    , ;
+      "Cancel"  , ;
+      "OK"      , ;
       "Save"    }
 
-      _HMG_PGLangError  := { "Property Item type: "                     ,;
-      " wrong defined."                          ,;
-      "Property Item ID double defined."         ,;
-      "Property Value for "                      ,;
-      "Property InputMask for "                  ,;
-      "Property Data for "                       ,;
-      "Item is not type of Category!"            ,;
-      "Category "                                ,;
-      " not found!"                              ,;
-      "Property Item ID "                        ,;
-      " double defined."+CRLF+" Not added Item"  ,;
+      _HMG_PGLangError  := { "Property Item type: "                     , ;
+      " wrong defined."                          , ;
+      "Property Item ID double defined."         , ;
+      "Property Value for "                      , ;
+      "Property InputMask for "                  , ;
+      "Property Data for "                       , ;
+      "Item is not type of Category!"            , ;
+      "Category "                                , ;
+      " not found!"                              , ;
+      "Property Item ID "                        , ;
+      " double defined."+CRLF+" Not added Item"  , ;
       "Invalid Entry"                            }
 
       _HMG_PGLangMessage := { 'Are you sure ?' , "No File to save", "Error", "Warning" }

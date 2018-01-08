@@ -44,92 +44,92 @@ FUNCTION Main()
 
       @140, 20 BUTTONEX REC_1 CAPTION "REC" FONTCOLOR RED WIDTH 54 HEIGHT 25 BOLD ACTION DOREC( lRecord )
 
-      @ 140, 91 BUTTONEX BUTTONEX_1 CAPTION "C" WIDTH 31 HEIGHT 91;
-         BACKCOLOR WHITE BOLD VERTICAL PICTURE "white";
-         ACTION  {|| ( PLAYTONE( This.Caption ) ) };
-         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) };
+      @ 140, 91 BUTTONEX BUTTONEX_1 CAPTION "C" WIDTH 31 HEIGHT 91 ;
+         BACKCOLOR WHITE BOLD VERTICAL PICTURE "white" ;
+         ACTION  {|| ( PLAYTONE( This.Caption ) ) } ;
+         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) } ;
          ON LOSTFOCUS {|| ( This.Picture := "white" ) }
 
-      @ 66, 108 BUTTONEX BUTTONEX_9 CAPTION "C#" WIDTH 26 HEIGHT 72 VERTICAL;
+      @ 66, 108 BUTTONEX BUTTONEX_9 CAPTION "C#" WIDTH 26 HEIGHT 72 VERTICAL ;
          BACKCOLOR iif( lThemed, NIL, BLACK ) ;
          FONTCOLOR iif( lThemed, NIL, WHITE ) ;
-         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "black" ) };
-         PICTURE "black";
+         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "black" ) } ;
+         PICTURE "black" ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) } UPPERTEXT
 
-      @ 140, 123 BUTTONEX BUTTONEX_2 CAPTION "D" WIDTH 31 HEIGHT 91;
+      @ 140, 123 BUTTONEX BUTTONEX_2 CAPTION "D" WIDTH 31 HEIGHT 91 ;
          BACKCOLOR WHITE BOLD VERTICAL PICTURE "white" ;
-         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "white" ) };
+         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "white" ) } ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) }
 
-      @ 66, 142 BUTTONEX BUTTONEX_10 CAPTION "D#" WIDTH 26 HEIGHT 72 VERTICAL;
-         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "black" ) };
+      @ 66, 142 BUTTONEX BUTTONEX_10 CAPTION "D#" WIDTH 26 HEIGHT 72 VERTICAL ;
+         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "black" ) } ;
          BACKCOLOR iif( lThemed, NIL, BLACK ) ;
          FONTCOLOR iif( lThemed, NIL, WHITE ) ;
-         PICTURE "black";
+         PICTURE "black" ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) } UPPERTEXT
 
-      @ 140, 155 BUTTONEX BUTTONEX_3 CAPTION "E" WIDTH 32 HEIGHT 91;
+      @ 140, 155 BUTTONEX BUTTONEX_3 CAPTION "E" WIDTH 32 HEIGHT 91 ;
          BACKCOLOR WHITE BOLD VERTICAL PICTURE "white" ;
-         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "white" ) };
+         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "white" ) } ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) }
 
-      @ 140, 188 BUTTONEX BUTTONEX_4 CAPTION "F" WIDTH 32 HEIGHT 91;
+      @ 140, 188 BUTTONEX BUTTONEX_4 CAPTION "F" WIDTH 32 HEIGHT 91 ;
          BACKCOLOR WHITE BOLD VERTICAL PICTURE "white" ;
-         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "white" ) };
+         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "white" ) } ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) }
 
-      @ 66, 208 BUTTONEX BUTTONEX_11 CAPTION "F#" WIDTH 26 HEIGHT 72 VERTICAL;
-         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "black" ) };
+      @ 66, 208 BUTTONEX BUTTONEX_11 CAPTION "F#" WIDTH 26 HEIGHT 72 VERTICAL ;
+         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "black" ) } ;
          BACKCOLOR iif( lThemed, NIL, BLACK ) ;
          FONTCOLOR iif( lThemed, NIL, WHITE ) ;
-         PICTURE "black";
+         PICTURE "black" ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) } UPPERTEXT
 
-      @ 140, 221 BUTTONEX BUTTONEX_5 CAPTION "G" WIDTH 32 HEIGHT 91;
+      @ 140, 221 BUTTONEX BUTTONEX_5 CAPTION "G" WIDTH 32 HEIGHT 91 ;
          BACKCOLOR WHITE BOLD VERTICAL PICTURE "white" ;
-         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "white" ) };
+         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "white" ) } ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) }
 
-      @ 66, 241 BUTTONEX BUTTONEX_12 CAPTION "G#" WIDTH 26 HEIGHT 72 VERTICAL;
-         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "black" ) };
+      @ 66, 241 BUTTONEX BUTTONEX_12 CAPTION "G#" WIDTH 26 HEIGHT 72 VERTICAL ;
+         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "black" ) } ;
          BACKCOLOR iif( lThemed, NIL, BLACK ) ;
          FONTCOLOR iif( lThemed, NIL, WHITE ) ;
-         PICTURE "black";
+         PICTURE "black" ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) } UPPERTEXT
 
-      @ 140, 254 BUTTONEX BUTTONEX_6 CAPTION "A" WIDTH 32 HEIGHT 91;
+      @ 140, 254 BUTTONEX BUTTONEX_6 CAPTION "A" WIDTH 32 HEIGHT 91 ;
          BACKCOLOR WHITE BOLD VERTICAL PICTURE "white" ;
-         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "white" ) };
+         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "white" ) } ;
          ACTION  {|| ( This.Picture := "whitedot", PLAYTONE( This.Caption ) ) }
 
-      @ 66, 274 BUTTONEX BUTTONEX_13 CAPTION "A#" WIDTH 26 HEIGHT 72 VERTICAL;
-         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "black" ) };
+      @ 66, 274 BUTTONEX BUTTONEX_13 CAPTION "A#" WIDTH 26 HEIGHT 72 VERTICAL ;
+         ON GOTFOCUS {|| ( This.Picture := "blackdot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "black" ) } ;
          BACKCOLOR iif( lThemed, NIL, BLACK ) ;
          FONTCOLOR iif( lThemed, NIL, WHITE ) ;
-         PICTURE "black";
+         PICTURE "black" ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) } UPPERTEXT
 
-      @ 140, 287 BUTTONEX BUTTONEX_7 CAPTION "H" WIDTH 32 HEIGHT 91;
+      @ 140, 287 BUTTONEX BUTTONEX_7 CAPTION "H" WIDTH 32 HEIGHT 91 ;
          BACKCOLOR WHITE BOLD VERTICAL PICTURE "white" ;
-         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "white" ) };
+         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "white" ) } ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) }
 
-      @ 140, 320 BUTTONEX BUTTONEX_8 CAPTION "C1" WIDTH 32 HEIGHT 91;
+      @ 140, 320 BUTTONEX BUTTONEX_8 CAPTION "C1" WIDTH 32 HEIGHT 91 ;
          BACKCOLOR WHITE BOLD VERTICAL PICTURE "white" ;
-         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) };
-         ON LOSTFOCUS {|| ( This.Picture := "white" ) };
+         ON GOTFOCUS {|| ( This.Picture := "whitedot" ) } ;
+         ON LOSTFOCUS {|| ( This.Picture := "white" ) } ;
          ACTION  {|| ( PLAYTONE( This.Caption ) ) }
 
    END WINDOW

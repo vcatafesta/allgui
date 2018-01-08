@@ -14,12 +14,12 @@ FUNCTION Main()
    ordSetFocus( 1 )
    dbGoTop()
 
-   DEFINE WINDOW wndMainForm;
-         AT 0, 0;
-         WIDTH 645;
-         HEIGHT 403;
-         TITLE "Browse Quick Search Demo";
-         MAIN;
+   DEFINE WINDOW wndMainForm ;
+         AT 0, 0 ;
+         WIDTH 645 ;
+         HEIGHT 403 ;
+         TITLE "Browse Quick Search Demo" ;
+         MAIN ;
          ON INIT cWindowName := This.Name ;
          ON RELEASE dbCloseArea( "MUSIC" )
 
@@ -31,15 +31,15 @@ FUNCTION Main()
       ON KEY ESCAPE ACTION ThisWindow.Release()
    END WINDOW
 
-   @ 5, 5 BROWSE brsMainBrowse;
-      OF wndMainForm;
-      WIDTH 620;
-      HEIGHT 332;
-      HEADERS { "Nummer", "Trk", "Artiest", "Titel" };
-      WIDTHS { 65, 35, 248, 249 };
-      WORKAREA MUSIC;
-      FIELDS { "MUSIC->NR", "MUSIC->DTR", "MUSIC->ARTIEST", "MUSIC->TITEL" };
-      JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT };
+   @ 5, 5 BROWSE brsMainBrowse ;
+      OF wndMainForm ;
+      WIDTH 620 ;
+      HEIGHT 332 ;
+      HEADERS { "Nummer", "Trk", "Artiest", "Titel" } ;
+      WIDTHS { 65, 35, 248, 249 } ;
+      WORKAREA MUSIC ;
+      FIELDS { "MUSIC->NR", "MUSIC->DTR", "MUSIC->ARTIEST", "MUSIC->TITEL" } ;
+      JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT } ;
       ON GOTFOCUS cBrowseName := This.Name
 
    CREATE EVENT PROCNAME BrowseQuickIndexSearch()

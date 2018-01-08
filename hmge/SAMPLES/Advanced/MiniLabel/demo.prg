@@ -47,10 +47,10 @@ PROCEDURE main()
 
    DEFINE WINDOW PR_FORM ;
          AT 100,100 ;
-         WIDTH 630;
+         WIDTH 630 ;
          HEIGHT 150 ;
          TITLE 'Minilabel Tests [Miniprint + '+ MiniguiVersion()+']' ;
-         ICON 'AASIC';
+         ICON 'AASIC' ;
          MAIN ;
          NOMAXIMIZE NOSIZE ;
          ON RELEASE ( dbclosearea(), ferase("lista.ntx") )
@@ -226,7 +226,7 @@ PROCEDURE PrintEti(modulo,ncopie)
          ORIENTATION PRINTER_ORIENT_PORTRAIT
       IF used();dbgoto(oldrec);endif
    ELSE
-      msgExclamation("I have not found the report necessary "+CRLF+;
+      msgExclamation("I have not found the report necessary "+CRLF+ ;
          "In order to create them confirmation printing in the SetPrinter section")
    ENDIF
    RELEASE att,linestep,c_rec,nPag,last_pag,eLine
@@ -391,7 +391,7 @@ PROCEDURE ExePrint(_aprint)
       OTHERWISE
          _arrycolor:= chkColor(_aprint[lv,10])
          _HMG_PRINTER_H_PRINT ( if(_BC,_hmg_printer_hdc,_HMG_SYSDATA [ 374 ]) ;
-            , eval(COMPILE(_aprint[lv,1]));
+            , eval(COMPILE(_aprint[lv,1])) ;
             , eval(COMPILE(_aprint[lv,2])) ;
             , _aprint[lv,4] ;
             , eval(COMPILE(_aprint[lv,5])) ;
@@ -399,10 +399,10 @@ PROCEDURE ExePrint(_aprint)
             , _arrycolor[2] ;
             , _arrycolor[3] ;
             , eval(COMPILE(_aprint[lv,3])) ;
-            , osts(_aprint[lv,6]);
-            , osts(_aprint[lv,7]);
-            , osts(_aprint[lv,8]);
-            , osts(_aprint[lv,9]);
+            , osts(_aprint[lv,6]) ;
+            , osts(_aprint[lv,7]) ;
+            , osts(_aprint[lv,8]) ;
+            , osts(_aprint[lv,9]) ;
             , if(_arrycolor[1]+_arrycolor[2]+_arrycolor[3]>0, .t.,.f.) ;
             , if(_aprint[lv,4] # '', .t.,.f.) ;
             , if(eval(COMPILE(_aprint[lv,5]))>0, .t.,.f.) ;

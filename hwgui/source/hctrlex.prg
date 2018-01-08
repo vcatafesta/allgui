@@ -1013,7 +1013,7 @@ METHOD Paint( lpDis ) CLASS HBUTTONEx
    uStyleTmp := HWG_GETWINDOWSTYLE( ::handle )
    itemRectOld := AClone( itemRect )
    IF hb_BitAnd( uStyleTmp, BS_MULTILINE ) != 0 .AND. !Empty( ::caption ) .AND. ;
-         Int( aTxtSize[ 2 ] ) !=  Int( hwg_Drawtext( dc, ::caption, itemRect[ 1 ], itemRect[ 2 ],;
+         Int( aTxtSize[ 2 ] ) !=  Int( hwg_Drawtext( dc, ::caption, itemRect[ 1 ], itemRect[ 2 ], ;
          itemRect[ 3 ] - iif( ::iStyle = ST_ALIGN_VERT, 0, aBmpSize[ 1 ] + 8 ), ;
          itemRect[ 4 ], DT_CALCRECT + uAlign + DT_WORDBREAK, itemRectOld ) )
       // *-INT( aTxtSize[ 2 ] ) !=  INT( hwg_Drawtext( dc, ::caption, itemRect,  DT_CALCRECT + uAlign + DT_WORDBREAK ) )
@@ -1280,7 +1280,7 @@ METHOD PAINT( lpdis ) CLASS HGroupEx
    aSize := hwg_TxtRect( iif( Empty( szText ), "A", szText ), Self )
    // distance from window top to group rect
    iUpDist := ( aSize[ 2 ] / 2 )
-   dwStyle := ::Style //HWG_GETWINDOWSTYLE( ::handle ) //GetStyle();
+   dwStyle := ::Style //HWG_GETWINDOWSTYLE( ::handle ) //GetStyle() ;
    rcText := { 0, rc[ 2 ] + iUpDist , 0, rc[ 2 ] + iUpDist  }
    IF Empty( szText )
    ELSEIF hb_BitAnd( dwStyle, BS_CENTER ) == BS_RIGHT // right aligned

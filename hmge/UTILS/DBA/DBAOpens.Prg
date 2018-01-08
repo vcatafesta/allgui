@@ -46,7 +46,7 @@ RETU // OpenUKnw()
 
 PROC OpenTabl()                           // Open a Table (.dbf) file
 
-   LOCA aTablNams := {},;
+   LOCA aTablNams := {}, ;
       cTablNam  := ''
 
    IF nOpTablCo < nMaxTablCo
@@ -67,33 +67,33 @@ PROC OpenTabl()                           // Open a Table (.dbf) file
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
    PROC Open1Tabl( ;                         // Open ( USE ) one table
-         cTablNam,;
+         cTablNam, ;
          lWarnOpen )  // 6e27  Prepare for user preferences
 
-      LOCA nDBFValid := DBValidate( cTablNam ),;
-         cTabAlia  := '',;
-         aBrwFilds := { "IF( DELETED(),0,1 )" },;
-         aBrwHeads := { NIL },;
-         aBrwJust  := {  0  },;
-         aBrwWidts := { 20  },;
-         nWorkArea :=  0,;
-         cErrMesaj := '',;
-         aDBStruct := {},;
+      LOCA nDBFValid := DBValidate( cTablNam ), ;
+         cTabAlia  := '', ;
+         aBrwFilds := { "IF( DELETED(),0,1 )" }, ;
+         aBrwHeads := { NIL }, ;
+         aBrwJust  := {  0  }, ;
+         aBrwWidts := { 20  }, ;
+         nWorkArea :=  0, ;
+         cErrMesaj := '', ;
+         aDBStruct := {}, ;
          nFErroNum :=  0
 
-      LOCA aFErrMesjs := { {  2, "File not found" },;
-         {  3, "Path not found" },;
-         {  4, "Too many files open" },;
-         {  5, "Access denied" },;
-         {  6, "Invalid handle" },;
-         {  8, "Insufficient memory" },;
-         { 15, "Invalid drive specified"},;
-         { 19, "Attempted to write to a write-protected disk" },;
-         { 21, "Drive not ready" },;
-         { 23, "Data CRC error" },;
-         { 29, "Write fault" },;
-         { 30, "Read fault" },;
-         { 32, "Sharing violation" },;
+      LOCA aFErrMesjs := { {  2, "File not found" }, ;
+         {  3, "Path not found" }, ;
+         {  4, "Too many files open" }, ;
+         {  5, "Access denied" }, ;
+         {  6, "Invalid handle" }, ;
+         {  8, "Insufficient memory" }, ;
+         { 15, "Invalid drive specified"}, ;
+         { 19, "Attempted to write to a write-protected disk" }, ;
+         { 21, "Drive not ready" }, ;
+         { 23, "Data CRC error" }, ;
+         { 29, "Write fault" }, ;
+         { 30, "Read fault" }, ;
+         { 32, "Sharing violation" }, ;
          { 33, "Lock Violation" } }
 
       LOCA cRDDName := "DBF" + IF( FILE( STRTRAN( UPPE( cTablNam ), ".DBF", ".CDX" ) ), "CDX", "NTX" )  // 8B30
@@ -126,9 +126,9 @@ PROC OpenTabl()                           // Open a Table (.dbf) file
             aDBStruct := DBSTRUCT()
 
             AEVAL( aDBStruct, { | a1 | ;
-               AADD( aBrwFilds, cTabAlia + "->" + a1[ 1 ] ),;
-               AADD( aBrwHeads, a1[ 1 ] ),;
-               AADD( aBrwJust,  IF( a1[2] # "N", 0, 1 ) ),;
+               AADD( aBrwFilds, cTabAlia + "->" + a1[ 1 ] ), ;
+               AADD( aBrwHeads, a1[ 1 ] ), ;
+               AADD( aBrwJust,  IF( a1[2] # "N", 0, 1 ) ), ;
                AADD( aBrwWidts, DispLeng( a1 ) * 10 ) } )
 
             AADD( aOpnDatas, {} )
@@ -185,8 +185,8 @@ PROC OpenTabl()                           // Open a Table (.dbf) file
 
       PROC ScrnPlay()                           // Playing on screen
 
-         LOCA cDatType := '',;
-            cTabAlia := '',;
+         LOCA cDatType := '', ;
+            cTabAlia := '', ;
             aReadOns := {}
 
          IF !EMPTY( aOpnDatas ) .AND. nCurDatNo > 0

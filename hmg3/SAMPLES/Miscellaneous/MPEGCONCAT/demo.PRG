@@ -55,9 +55,9 @@ FUNCTION Cria_FrmPrincipal()
 
       @020,110 TEXTBOX  Tb_Nome_Arquivo      ;
          WIDTH 340             ;
-         VALUE DiskName()+":\"+CurDir()+"\NOVO_ARQUIVO.MPG";
+         VALUE DiskName()+":\"+CurDir()+"\NOVO_ARQUIVO.MPG" ;
          FONT "Arial" Size 10          ;
-         TOOLTIP "Digite o Nome do Arquivo a ser Gerado";
+         TOOLTIP "Digite o Nome do Arquivo a ser Gerado" ;
          MAXLENGTH 50
 
       *------------ Grid ----------------*
@@ -73,7 +73,7 @@ FUNCTION Cria_FrmPrincipal()
 
       @ 070,350 BUTTON Adicionar_Arquivo ;
          CAPTION '&Adicionar'     ;
-         ACTION { || Bt_Adcionar()};
+         ACTION { || Bt_Adcionar()} ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 110,350 BUTTON Exluir_Arquivo        ;
@@ -121,16 +121,16 @@ FUNCTION Cria_FrmPrincipal()
 FUNCTION Sobre_o_Sistema()
 
    PlayExclamation()
-   MsgINFO (PadC("*** Anexador de Arquivos MPEG ***",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC(" Humberto_Fornazier  hfornazier@brfree.com.br",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC(" Desenvolvido com xHarbour 0.73.5 + HMG (Release 35)",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC("HMG / Roberto Lopez / Arqentina",60)+QUEBRA+;
-      PadC("mail.box.hmg@gmail.com = www.geocities.com/harbour_HMG",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC("xHarbour Compiler Build 0.73.5 (SimpLex)",60)+QUEBRA+;
+   MsgINFO (PadC("*** Anexador de Arquivos MPEG ***",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC(" Humberto_Fornazier  hfornazier@brfree.com.br",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC(" Desenvolvido com xHarbour 0.73.5 + HMG (Release 35)",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC("HMG / Roberto Lopez / Arqentina",60)+QUEBRA+ ;
+      PadC("mail.box.hmg@gmail.com = www.geocities.com/harbour_HMG",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC("xHarbour Compiler Build 0.73.5 (SimpLex)",60)+QUEBRA+ ;
       PadC("http://www.xharbour.org http://www.harbour-project.org/",60),SISTEMA)
 
    RETURN NIL
@@ -140,13 +140,13 @@ FUNCTION Sobre_o_Sistema()
 FUNCTION Ajuda_Sistema()
 
    PlayExclamation()
-   MsgINFO (PadC("*** Anexador de Arquivos MPEG ***",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC(" Adcionar  =  Adiciona Arquivo no GRID          ",60)+QUEBRA+;
-      PadC(" Excluir   =  Exclui   Arquivo no GRID          ",60)+QUEBRA+;
-      PadC(" Limpar    =  Exclui   Todos os Arquivos do GRID",60)+QUEBRA+;
-      PadC(" Gerar     =  Gera     Arquivo                  ",60)+QUEBRA+;
-      PadC(" Sair      =  Termina Programa                  ",60)+QUEBRA+;
+   MsgINFO (PadC("*** Anexador de Arquivos MPEG ***",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC(" Adcionar  =  Adiciona Arquivo no GRID          ",60)+QUEBRA+ ;
+      PadC(" Excluir   =  Exclui   Arquivo no GRID          ",60)+QUEBRA+ ;
+      PadC(" Limpar    =  Exclui   Todos os Arquivos do GRID",60)+QUEBRA+ ;
+      PadC(" Gerar     =  Gera     Arquivo                  ",60)+QUEBRA+ ;
+      PadC(" Sair      =  Termina Programa                  ",60)+QUEBRA+ ;
       PadC(" ",60),SISTEMA)
 
    RETURN NIL

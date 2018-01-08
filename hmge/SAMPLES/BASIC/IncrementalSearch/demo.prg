@@ -23,13 +23,13 @@ FUNCTION Main
    SET CODEPAGE TO RUSSIAN // Important for localize UPPER
    SET EVENTS FUNCTION TO MYEVENTS
 
-   DEFINE WINDOW Form_1;
-         AT 0,0;
-         WIDTH 640 HEIGHT 480;
-         TITLE "MiniGUI Browse/Grid Incremental Search Demo";
-         MAIN;
-         NOMAXIMIZE NOSIZE;
-         ON INIT OpenTables();
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE "MiniGUI Browse/Grid Incremental Search Demo" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         ON INIT OpenTables() ;
          ON RELEASE CloseTables()
 
       DEFINE MAIN MENU
@@ -45,18 +45,18 @@ FUNCTION Main
          STATUSITEM 'HMG Power Ready'
       END STATUSBAR
 
-      @ 10,10 BROWSE Browse_1;
-         WIDTH 610;
-         HEIGHT 200;
-         HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' };
-         WIDTHS { 100 , 150 , 150 , 150 , 150 };
-         WORKAREA Test;
-         FIELDS { 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' };
-         VALUE 1;
-         JUSTIFY { BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER,;
-         BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER };
-         HEADERIMAGE a_hdr_image;
-         ON HEADCLICK { {|| BrowseHeadClick(1)}, {|| BrowseHeadClick(2)}, , , };
+      @ 10,10 BROWSE Browse_1 ;
+         WIDTH 610 ;
+         HEIGHT 200 ;
+         HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
+         WIDTHS { 100 , 150 , 150 , 150 , 150 } ;
+         WORKAREA Test ;
+         FIELDS { 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' } ;
+         VALUE 1 ;
+         JUSTIFY { BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER } ;
+         HEADERIMAGE a_hdr_image ;
+         ON HEADCLICK { {|| BrowseHeadClick(1)}, {|| BrowseHeadClick(2)}, , , } ;
          ON GOTFOCUS {|| BrowseHeadClick( nSortColBrowse ) }
 
       aRows [1]  := {'Simpson','Homer','555-5555'}
@@ -80,14 +80,14 @@ FUNCTION Main
       aRows [19] := {'Pradon','Alejandra','???-????'}
       aRows [20] := {'Reyes','Monica','432-5836'}
 
-      @ 220,10 GRID Grid_1;
-         WIDTH 610;
-         HEIGHT 170;
-         HEADERS {'Column 1','Column 2','Column 3'};
-         WIDTHS {140,140,140};
-         ITEMS aRows;
-         HEADERIMAGE a_hdr_image;
-         ON HEADCLICK { {|| GridHeadClick(1)}, {|| GridHeadClick(2)}, };
+      @ 220,10 GRID Grid_1 ;
+         WIDTH 610 ;
+         HEIGHT 170 ;
+         HEADERS {'Column 1','Column 2','Column 3'} ;
+         WIDTHS {140,140,140} ;
+         ITEMS aRows ;
+         HEADERIMAGE a_hdr_image ;
+         ON HEADCLICK { {|| GridHeadClick(1)}, {|| GridHeadClick(2)}, } ;
          ON GOTFOCUS {|| GridHeadClick( nSortColGrid ) }
 
    END WINDOW
@@ -99,7 +99,7 @@ FUNCTION Main
 
 FUNCTION BrowseHeadClick( nCol )
 
-   cSearchText := "Sort&Search by < " +;
+   cSearchText := "Sort&Search by < " + ;
       GetProperty( "Form_1", "Browse_1", "Header", nCol ) + " >: "
    nSortColBrowse := nCol
    cPressedKeys := ""
@@ -124,7 +124,7 @@ FUNCTION GridHeadClick( nCol )
 
    LOCAL i
 
-   cSearchText := "Sort&Search by < " +;
+   cSearchText := "Sort&Search by < " + ;
       GetProperty( "Form_1", "Grid_1", "Header", nCol ) + " >: "
    nSortColGrid := nCol
    cPressedKeys := ""

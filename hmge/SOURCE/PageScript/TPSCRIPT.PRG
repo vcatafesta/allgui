@@ -1938,7 +1938,7 @@ METHOD TPageScript:SetPDFOwnerPassword(cPassword)
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPDFEncoding(<n>) -> Self
-   Description : Set the internal encoding for PDF documents, default = 0;
+   Description : Set the internal encoding for PDF documents, default = 0 ;
    : 0 -> WinAnsiEncoding  ( Regular encoding for Latin-text Type 1
    and TrueType fonts on Windows OS.)
    : 1 -> StandardEncoding (Adobe Latin-text encoding for standard and

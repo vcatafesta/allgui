@@ -11,53 +11,53 @@ ANNOUNCE RDDSYS
 
 #include "minigui.ch"
 
-STATIC anEventIds := {;
-   /*DisplayStartupMenu*/      305,;
-   /*DisplayRunDialog*/      401,;
-   /*DisplayLogoffDialog*/      402,;
-   /*ArrangeCascade*/      403,;
-   /*ArrangeTileHrz*/      404,;
-   /*ArrangeTileVrt*/      405,;
-   /*ShowDesktop*/         407,;
-   /*ShowDateTimeDialog*/      408,;
-   /*ShowTaskbarPrps*/      413,;
-   /*MinAll*/         415,;
-   /*MaxAll*/         416,;
-   /*ShowDesktop2*/      419,;
-   /*ShowTaskMngr   */      420,;
-   /*TaskBrCustomizeNtfy*/      421,;
-   /*LockTaskbar*/         424,;
-   /*HelpAndSuppCenter*/      503,;
-   /*ControlPanel*/      505,;
-   /*TurnOffCompDialog*/      506,;
-   /*PrintersAndFaxesDialog*/   510,;
-   /*FindFilesDialog*/      41093,;
-   /*FindComputers*/      41094;
+STATIC anEventIds := { ;
+   /*DisplayStartupMenu*/      305, ;
+   /*DisplayRunDialog*/      401, ;
+   /*DisplayLogoffDialog*/      402, ;
+   /*ArrangeCascade*/      403, ;
+   /*ArrangeTileHrz*/      404, ;
+   /*ArrangeTileVrt*/      405, ;
+   /*ShowDesktop*/         407, ;
+   /*ShowDateTimeDialog*/      408, ;
+   /*ShowTaskbarPrps*/      413, ;
+   /*MinAll*/         415, ;
+   /*MaxAll*/         416, ;
+   /*ShowDesktop2*/      419, ;
+   /*ShowTaskMngr   */      420, ;
+   /*TaskBrCustomizeNtfy*/      421, ;
+   /*LockTaskbar*/         424, ;
+   /*HelpAndSuppCenter*/      503, ;
+   /*ControlPanel*/      505, ;
+   /*TurnOffCompDialog*/      506, ;
+   /*PrintersAndFaxesDialog*/   510, ;
+   /*FindFilesDialog*/      41093, ;
+   /*FindComputers*/      41094 ;
    }
 
 FUNCTION Main
 
-   LOCAL aComtoItems := {;
-      "Start menu",;
-      "Run dialog",;
-      "Log off dialog",;
-      "Cascade windows",;
-      "Tile windows horizontally",;
-      "Tile windows vertically",;
-      "Show desktop",;
-      "Date time dialog",;
-      "Task bar properties",;
-      "Minimize all",;
-      "Maximize all",;
-      "Show desktop 2",;
-      "Show task manager",;
-      "Task bar customize notifications",;
-      "Lock taskbar",;
-      "Help and support center",;
-      "Control panel",;
-      "Turn off computer dialog",;
-      "Printers and faxes dialog",;
-      "Find files dialog",;
+   LOCAL aComtoItems := { ;
+      "Start menu", ;
+      "Run dialog", ;
+      "Log off dialog", ;
+      "Cascade windows", ;
+      "Tile windows horizontally", ;
+      "Tile windows vertically", ;
+      "Show desktop", ;
+      "Date time dialog", ;
+      "Task bar properties", ;
+      "Minimize all", ;
+      "Maximize all", ;
+      "Show desktop 2", ;
+      "Show task manager", ;
+      "Task bar customize notifications", ;
+      "Lock taskbar", ;
+      "Help and support center", ;
+      "Control panel", ;
+      "Turn off computer dialog", ;
+      "Printers and faxes dialog", ;
+      "Find files dialog", ;
       "Find computers" }
 
    DEFINE WINDOW Form_1 ;

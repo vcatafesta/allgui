@@ -349,7 +349,7 @@ PROCEDURE EditRow()
       cEMail   := AllTrim(oRow:fieldGet(3))
       oQuery:Destroy()
 
-      aResults := InputWindow   (;
+      aResults := InputWindow   ( ;
          'Edit Row'         , ;
          { 'Name:' , 'Email:' }, ;
          { cName , cEmail }   , ;

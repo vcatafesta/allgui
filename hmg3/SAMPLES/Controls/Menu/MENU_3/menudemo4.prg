@@ -6,9 +6,9 @@
 
 FUNCTION Main
 
-   PUBLIC aMenu :=   { {"Cadastro","MsgInfo('Cadastro')"} ,;
-      {"Consulta","MsgInfo('Consulta')"} ,;
-      {"Sair"    ,"MsgInfo('Sair')"    }},;
+   PUBLIC aMenu :=   { {"Cadastro","MsgInfo('Cadastro')"} , ;
+      {"Consulta","MsgInfo('Consulta')"} , ;
+      {"Sair"    ,"MsgInfo('Sair')"    }}, ;
       cAction
 
    DEFINE WINDOW Win_1 ;

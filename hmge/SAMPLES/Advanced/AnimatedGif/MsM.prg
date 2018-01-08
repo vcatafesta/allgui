@@ -80,16 +80,16 @@ PROC MsgMulty( xMesaj, cTitle )
 
    FUNC Any2Strg( xAny )
 
-      LOCA cRVal  := '???',;
-         nType  :=  0,;
-         aCases := { { "A", { | x | "{...}" } },;
-         { "B", { | x | "{||}" } },;
-         { "C", { | x | x }},;
-         { "M", { | x | x   } },;
-         { "D", { | x | DTOC( x ) } },;
-         { "L", { | x | IF( x,"On","Off") } },;
-         { "N", { | x | NTrim( x )  } },;
-         { "O", { | x | ":Object:" } },;
+      LOCA cRVal  := '???', ;
+         nType  :=  0, ;
+         aCases := { { "A", { | x | "{...}" } }, ;
+         { "B", { | x | "{||}" } }, ;
+         { "C", { | x | x }}, ;
+         { "M", { | x | x   } }, ;
+         { "D", { | x | DTOC( x ) } }, ;
+         { "L", { | x | IF( x,"On","Off") } }, ;
+         { "N", { | x | NTrim( x )  } }, ;
+         { "O", { | x | ":Object:" } }, ;
          { "U", { | x | "<NIL>" } } }
 
       IF (nType := ASCAN( aCases, { | a1 | VALTYPE( xAny ) == a1[ 1 ] } ) ) > 0

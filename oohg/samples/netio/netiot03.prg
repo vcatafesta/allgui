@@ -114,9 +114,9 @@ proc main()
    proc createdb( cName )
       LOCAL n
 
-      dbCreate( cName, {{"F1", "C", 20, 0},;
-         {"F2", "M",  4, 0},;
-         {"F3", "N", 10, 2},;
+      dbCreate( cName, {{"F1", "C", 20, 0}, ;
+         {"F2", "M",  4, 0}, ;
+         {"F3", "N", 10, 2}, ;
          {"F4", "T",  8, 0}} )
       ? "create neterr:", neterr(), hb_osError()
       USE (cName)

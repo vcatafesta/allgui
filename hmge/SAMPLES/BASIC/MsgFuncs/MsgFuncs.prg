@@ -4,7 +4,7 @@ MEMVAR aTestData, aTstDTyps
 
 PROCEDURE Main()
 
-   aTestData := { "String-1", Random( 2^16 ), DATE(), .T.,;
+   aTestData := { "String-1", Random( 2^16 ), DATE(), .T., ;
       { 'String-2', Random( 2^8 ), DATE() - Random( 2^5 ), .F. }, '' }
 
    aTstDTyps := { "Character", "Numeric", "Date", "Logical", "Array" }
@@ -25,10 +25,10 @@ PROCEDURE Main()
 
 PROCEDURE ApplyMsg()
 
-   LOCAL nMsgType  := MsgFTsts.cmbMsgTypes.Value,;
+   LOCAL nMsgType  := MsgFTsts.cmbMsgTypes.Value, ;
       nDataType := MsgFTsts.cmbDataTypes.Value
 
-   LOCAL xData := aTestData[ nDataType ],;
+   LOCAL xData := aTestData[ nDataType ], ;
       cDTyp := aTstDTyps[ nDataType ] + " type"
 
    SWITCH nMsgType
@@ -54,10 +54,10 @@ PROCEDURE ApplyMsg()
       MsgYesNo( xData, cDTyp)
       EXIT
    CASE 8 // MsgDebug
-      MsgDebug( aTestData[ 1 ],;
-         aTestData[ 2 ],;
-         aTestData[ 3 ],;
-         aTestData[ 4 ],;
+      MsgDebug( aTestData[ 1 ], ;
+         aTestData[ 2 ], ;
+         aTestData[ 3 ], ;
+         aTestData[ 4 ], ;
          aTestData[ 5 ] )
       EXIT
    CASE 9 // WhereIsIt

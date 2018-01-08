@@ -21,12 +21,12 @@ FUNCTION SqlEdit(cTable, db)
          AT 25,20  ;
          WIDTH 550 HEIGHT 380 ;
          HEADER "Field Name","Value" ;
-         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 400;
-         BACKCOLOR {240,240,240};
-         ITEMHEIGHT 25;
+         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 400 ;
+         BACKCOLOR {240,240,240} ;
+         ITEMHEIGHT 25 ;
          ITEMEXPAND ;
          OKBTN USEROKPROC AddNewRec(cTable, db, DBUstruct) APPLYBTN ;
-         CANCELBTN;
+         CANCELBTN ;
          ON CHANGEVALUE {||SetProperty('Form_Edit','Btn_1','Enabled',TRUE)} ;
          ITEMINFO
 
@@ -88,13 +88,13 @@ FUNCTION SqlEdit(cTable, db)
 
 END PROPGRID
 
-@ 420,20 BUTTON btn_1;
-   CAPTION "Add Record";
+@ 420,20 BUTTON btn_1 ;
+   CAPTION "Add Record" ;
    ACTION {|| AddNewRec(cTable, db, DBUstruct),  Form_Edit.release } ;
    WIDTH 100 HEIGHT 24
 
-@ 420,220 BUTTON btn_2;
-   CAPTION "Exit";
+@ 420,220 BUTTON btn_2 ;
+   CAPTION "Exit" ;
    ACTION {|| Form_Edit.release } ;
    WIDTH 100 HEIGHT 24
 
@@ -118,12 +118,12 @@ FUNCTION GetColumnData(cName,cType,nSize,nDec)
       nMLines := 150
    ENDIF
 
-   DEFINE WINDOW ImputValueBox;
-         AT 0, 0;
-         WIDTH 360;
+   DEFINE WINDOW ImputValueBox ;
+         AT 0, 0 ;
+         WIDTH 360 ;
          HEIGHT 135 + nMLines ;
-         TITLE 'Type of Column: '+cDialogCaption;
-         MODAL;
+         TITLE 'Type of Column: '+cDialogCaption ;
+         MODAL ;
          ON INTERACTIVECLOSE iif( lOk, NIL, Eval( bCancel ) )
 
       ON KEY ESCAPE ACTION Eval( bCancel )
@@ -135,35 +135,35 @@ FUNCTION GetColumnData(cName,cType,nSize,nDec)
          @ 30, 10 EDITBOX _TextBox VALUE cDefaultValue HEIGHT 26 + nMLines WIDTH 320
 
       CASE substr(cType,1,4) == 'CHAR'
-         @ 30, 10 TEXTBOX _TextBox VALUE cDefaultValue HEIGHT 26 WIDTH 320 MAXLENGTH nSize;
+         @ 30, 10 TEXTBOX _TextBox VALUE cDefaultValue HEIGHT 26 WIDTH 320 MAXLENGTH nSize ;
             ON ENTER IFEMPTY( ImputValueBox._TextBox.Value, Nil, ImputValueBox._Ok.OnClick )
 
       CASE cType == 'INTEGER'
          cMask := "'" + REPLICATE("9", nSize)+"'"
          @ 30, 10 TEXTBOX _TextBox VALUE cDefaultValue HEIGHT 26 WIDTH 320 ;
-            NUMERIC MAXLENGTH nSize;
+            NUMERIC MAXLENGTH nSize ;
             ON ENTER IFEMPTY( ImputValueBox._TextBox.Value, Nil, ImputValueBox._Ok.OnClick )
 
       CASE cType == 'FLOAT'
          cMask := "'"+REPLICATE("9", nSize-nDec-1)+'.'+REPLICATE("9", nDec)+"'"
          @ 30, 10 TEXTBOX _TextBox VALUE cDefaultValue HEIGHT 26 WIDTH 320 ;
-            NUMERIC INPUTMASK  &cMask;
+            NUMERIC INPUTMASK  &cMask ;
             ON ENTER IFEMPTY( ImputValueBox._TextBox.Value, Nil, ImputValueBox._Ok.OnClick )
 
       CASE cType == 'DATETIME'
          @ 30, 10 TEXTBOX _TextBox VALUE cDefaultValue HEIGHT 26 WIDTH 320 ;
-            INPUTMASK '9999-99-99 99:99:99';
+            INPUTMASK '9999-99-99 99:99:99' ;
             ON ENTER IFEMPTY( ImputValueBox._TextBox.Value, Nil, ImputValueBox._Ok.OnClick )
 
       ENDCASE
 
-      @ 67 + nMLines, 120 BUTTON _Ok;
-         CAPTION _HMG_MESSAGE [ 6 ];
+      @ 67 + nMLines, 120 BUTTON _Ok ;
+         CAPTION _HMG_MESSAGE [ 6 ] ;
          ACTION ( lOk := .T., _HMG_DialogCancelled  := .F., ;
          RetVal := Num2Char(ImputValueBox._TextBox.Value,cType,nSize,nDec), ImputValueBox.Release )
 
-      @ 67 + nMLines, 230 BUTTON _Cancel;
-         CAPTION _HMG_MESSAGE [ 7 ];
+      @ 67 + nMLines, 230 BUTTON _Cancel ;
+         CAPTION _HMG_MESSAGE [ 7 ] ;
          ACTION Eval( bCancel )
 
    END WINDOW

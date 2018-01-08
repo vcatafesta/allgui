@@ -263,26 +263,26 @@ PROCEDURE Click_9
 
 PROCEDURE Click_10
 
-   MsgPostIt(space(590)+"Cita con el cliente."+CRLF+CRLF+;
-      "Llevar un prototipo válido del programa, si es posible, para "+;
-      "que parezca que esta muy elaborado y de esta manera el cliente "+;
+   MsgPostIt(space(590)+"Cita con el cliente."+CRLF+CRLF+ ;
+      "Llevar un prototipo válido del programa, si es posible, para "+ ;
+      "que parezca que esta muy elaborado y de esta manera el cliente "+ ;
       "no se mosquee por el tiempo que llevamos sin ir a verle.",,,.F.)
 
-   MsgPostIt(space(330)+"Cita con el cliente."+CRLF+CRLF+;
-      "Este mensaje lleva una imagen que es opcional a la izquierda y por lo "+;
-      "tanto el texto sale algo desplazado a la derecha."+CRLF+CRLF+;
+   MsgPostIt(space(330)+"Cita con el cliente."+CRLF+CRLF+ ;
+      "Este mensaje lleva una imagen que es opcional a la izquierda y por lo "+ ;
+      "tanto el texto sale algo desplazado a la derecha."+CRLF+CRLF+ ;
       "Además incluye parpadeo para llamar más la atención del usuario",,"Users.Bmp",,{128, 255, 216} )
 
    RETURN
 
 PROCEDURE Click_11
 
-   MsgDesktop(space(250)+"Mensaje sobre el escritorio."+CRLF+CRLF+;
-      "Este mensaje se muestra fuera del form de la aplicación sobre el escritorio "+;
-      "así que permanece incluso si el form de la aplicación ha sido cerrada "+;
-      "ya que en realidad pertenece al escritorio."+CRLF+CRLF+;
-      "En realidad es un form al mismo nivel que el form principal de la aplicación "+;
-      "de forma que la aplicación global no se cierra hasta que se cierren "+;
+   MsgDesktop(space(250)+"Mensaje sobre el escritorio."+CRLF+CRLF+ ;
+      "Este mensaje se muestra fuera del form de la aplicación sobre el escritorio "+ ;
+      "así que permanece incluso si el form de la aplicación ha sido cerrada "+ ;
+      "ya que en realidad pertenece al escritorio."+CRLF+CRLF+ ;
+      "En realidad es un form al mismo nivel que el form principal de la aplicación "+ ;
+      "de forma que la aplicación global no se cierra hasta que se cierren "+ ;
       "todos los formularios.",,"Users.Bmp")
 
    RETURN
@@ -421,16 +421,16 @@ FUNCTION MsgEdit(cText, cTitle, uVar, cImage, lPassWord, lNoCancel, cPicture)
       IF lNoCancel
          @ 80,120 BUTTON _Ok CAPTION "&"+_HMG_MESSAGE [6] WIDTH 80 HEIGHT 25 DEFAULT ;
             ACTION If(ValType(uVar)<>"L", ;
-            ( If(MsgEditValid(_EditForm._TextBox.Value, uLimitInf, uLimitSup),;
-            (_HMG_DialogCancelled := .F. , uVar := _EditForm._TextBox.Value , _EditForm.Release),;
-            _EditForm._TextBox.SetFocus) ),;
+            ( If(MsgEditValid(_EditForm._TextBox.Value, uLimitInf, uLimitSup), ;
+            (_HMG_DialogCancelled := .F. , uVar := _EditForm._TextBox.Value , _EditForm.Release), ;
+            _EditForm._TextBox.SetFocus) ), ;
             (_HMG_DialogCancelled := .F. , uVar := _EditForm._TextBox.Value , _EditForm.Release))
       ELSE
          @ 80, 60 BUTTON _Ok CAPTION "&"+_HMG_MESSAGE [6] WIDTH 80 HEIGHT 25 DEFAULT ;
             ACTION If(ValType(uVar)<>"L", ;
-            ( If(MsgEditValid(_EditForm._TextBox.Value, uLimitInf, uLimitSup),;
-            (_HMG_DialogCancelled := .F. , _EditForm._Ok.SetFocus, uVar := _EditForm._TextBox.Value , _EditForm.Release),;
-            _EditForm._TextBox.SetFocus) ),;
+            ( If(MsgEditValid(_EditForm._TextBox.Value, uLimitInf, uLimitSup), ;
+            (_HMG_DialogCancelled := .F. , _EditForm._Ok.SetFocus, uVar := _EditForm._TextBox.Value , _EditForm.Release), ;
+            _EditForm._TextBox.SetFocus) ), ;
             (_HMG_DialogCancelled := .F. , uVar := _EditForm._TextBox.Value , _EditForm.Release))
 
          @ 80,180 BUTTON _Cancel CAPTION "&"+_HMG_MESSAGE [7] WIDTH 80 HEIGHT 25 ;

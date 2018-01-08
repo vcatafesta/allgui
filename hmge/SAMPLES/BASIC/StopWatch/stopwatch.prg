@@ -22,11 +22,11 @@ FUNCTION main()
 
       @ 15,60 LABEL Label_1 VALUE "00:00:00"  WIDTH 251 HEIGHT 37 ;
          FONT "ARIAL" SIZE 25 BOLD
-      @ 62,15 BUTTON Button_1 CAPTION "Start" WIDTH 78 HEIGHT 24;
+      @ 62,15 BUTTON Button_1 CAPTION "Start" WIDTH 78 HEIGHT 24 ;
          ACTION RunTest()
-      @ 62,97 BUTTON Button_2 CAPTION "Stop"  WIDTH 78 HEIGHT 24;
+      @ 62,97 BUTTON Button_2 CAPTION "Stop"  WIDTH 78 HEIGHT 24 ;
          ACTION {|| (lStop:=.t.)}
-      @ 62,180 BUTTON Button_3 CAPTION "Clear" WIDTH 78 HEIGHT 24;
+      @ 62,180 BUTTON Button_3 CAPTION "Clear" WIDTH 78 HEIGHT 24 ;
          ACTION {|| (Stopper.Label_1.Value := "00:00:00", lStop := .f.)}
 
    END WINDOW

@@ -139,7 +139,7 @@ STATIC FUNCTION FillDlg( cMsg, aOpciones, nLineas, cIcoFile )
 
    // calculo el ancho del area cliente
 
-   nWidthCli := Max( MARGEN_ICON + nMaxLin + MARGEN,;
+   nWidthCli := Max( MARGEN_ICON + nMaxLin + MARGEN, ;
       MARGEN + nLenBotones + MARGEN - HMARGEN_BOTON )
 
    nWidthDlg := nWidthCli + iif( _HMG_IsXPorLater, 2, 1 ) * GetBorderWidth()

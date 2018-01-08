@@ -27,9 +27,9 @@ FUNCTION TestXLS()
 
    DEFINE WINDOW Form_11 At 40,60 ;
          WIDTH 800 HEIGHT 540 ;
-         TITLE  "TSBrowse/Excel conectivity.    One Click From TSBrowse To Excel   And more...";
-         ICON "Demo.ico";
-         CHILD;
+         TITLE  "TSBrowse/Excel conectivity.    One Click From TSBrowse To Excel   And more..." ;
+         ICON "Demo.ico" ;
+         CHILD ;
 
       DEFINE BKGBRUSH newBrush PATTERN IN Form_11 BITMAP PAPER
 

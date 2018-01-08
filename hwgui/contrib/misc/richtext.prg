@@ -2225,7 +2225,7 @@ METHOD CurrDate( cFormat ) CLASS RichText
    aInches[ 2 ] := ROUND( aInches[ 2 ] * 1440, 0 )
    // initialize the metafile
    SETWNDEX( hDCOut, 0, 0 )
-   hwg_Setwindowextex( hDCOut, nWidth, nHeight );
+   hwg_Setwindowextex( hDCOut, nWidth, nHeight ) ;
 
    DibDraw( hDCOut, hDib, hPal, 0, 0, nWidth, nHeight, nRaster )
    GlobalFree( hDib )

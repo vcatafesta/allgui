@@ -9,13 +9,13 @@ MEMVAR aBackColor
 
 FUNCTION Main
 
-   PRIVATE aTypeItems :={;
-      "EAN13","EAN8","UPCA","UPCE","CODE39","ITF","MSI","CODABAR",;
+   PRIVATE aTypeItems :={ ;
+      "EAN13","EAN8","UPCA","UPCE","CODE39","ITF","MSI","CODABAR", ;
       "CODE93","CODE11","CODE128","PDF417","DATAMATRIX","QRCODE"}
 
-   PRIVATE aValues :={;
-      "477012345678","1234567","01234567891","123456","ABC123","12345678901","1234","1234567",;
-      "-1234","ABC-123","Code 128","Hello, World of Harbour! It's 2D barcode PDF417",;
+   PRIVATE aValues :={ ;
+      "477012345678","1234567","01234567891","123456","ABC123","12345678901","1234","1234567", ;
+      "-1234","ABC-123","Code 128","Hello, World of Harbour! It's 2D barcode PDF417", ;
       "Hello, World of Harbour! It's 2D barcode DataMatrix","http://harbour-project.org/"}
    PRIVATE aBarColor := { 0, 0, 0 }
    PRIVATE aBackColor := { 255, 255, 255 }
@@ -159,14 +159,14 @@ FUNCTION CreateBarCode
 
    LOCAL hBitMap
 
-   hBitMap := HMG_CreateBarCode( barcode.code.value,;
-      barcode.type.item( barcode.type.value ),;
-      barcode.linewidth.value,;
-      barcode.lineheight.value,;
-      barcode.showdigits.value,;
-      '',;
-      aBarColor,;
-      aBackColor,;
+   hBitMap := HMG_CreateBarCode( barcode.code.value, ;
+      barcode.type.item( barcode.type.value ), ;
+      barcode.linewidth.value, ;
+      barcode.lineheight.value, ;
+      barcode.showdigits.value, ;
+      '', ;
+      aBarColor, ;
+      aBackColor, ;
       barcode.checksum.value,;  // checksum
       barcode.wide2_5.value,;   // wide2_5
       barcode.wide3.value )     // wide3
@@ -179,7 +179,7 @@ FUNCTION CreateBarCode
       SET WINDOW barcode TRANSPARENT TO 150   // nAlphaBlend = 0 to 255 (completely transparent = 0, opaque = 255)
    ENDIF
 
-   DEFINE WINDOW Form1;
+   DEFINE WINDOW Form1 ;
          AT BT_DesktopHeight()/2, BT_DesktopWidth()/2 ;
          WIDTH  BT_BitmapWidth  ( hBitmap ) + 100 ;
          HEIGHT BT_BitmapHeight ( hBitmap ) + 100 ;
@@ -214,14 +214,14 @@ FUNCTION CreateBarCodepng
          RETURN NIL
       ENDIF
    ENDIF
-   HMG_CreateBarCode( barcode.code.value,;
-      barcode.type.item( barcode.type.value ),;
-      barcode.linewidth.value,;
-      barcode.lineheight.value,;
-      barcode.showdigits.value,;
-      cImageFileName,;
-      aBarColor,;
-      aBackColor,;
+   HMG_CreateBarCode( barcode.code.value, ;
+      barcode.type.item( barcode.type.value ), ;
+      barcode.linewidth.value, ;
+      barcode.lineheight.value, ;
+      barcode.showdigits.value, ;
+      cImageFileName, ;
+      aBarColor, ;
+      aBackColor, ;
       barcode.checksum.value,;  // checksum
       barcode.wide2_5.value,;   // wide2_5
       barcode.wide3.value )     // wide3

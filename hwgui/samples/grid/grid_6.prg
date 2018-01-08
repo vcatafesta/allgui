@@ -51,7 +51,7 @@ FUNCTION Test()
 
    PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 
-   INIT DIALOG oForm CLIPPER NOEXIT TITLE "Grid Demo";
+   INIT DIALOG oForm CLIPPER NOEXIT TITLE "Grid Demo" ;
       FONT oFont ;
       AT 0, 0 SIZE 700, 425 ;
       STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
@@ -62,7 +62,7 @@ FUNCTION Test()
       ON KEYDOWN {|oCtrl, key| OnKey(oCtrl, key) } ;
       ON POSCHANGE {|oCtrl, nRow| OnPoschange(oCtrl, nRow) } ;
       ON CLICK {|oCtrl| OnClick(oCtrl) } ;
-      COLOR hwg_VColor('D3D3D3');
+      COLOR hwg_VColor('D3D3D3') ;
       ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo( oCtrl, nRow, nCol ) } ;
       BACKCOLOR hwg_VColor('BEBEBE')  ;
       BITMAP { 2, 3, 4, 5 }   ITEMS aItems

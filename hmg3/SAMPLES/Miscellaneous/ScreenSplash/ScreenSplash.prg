@@ -33,17 +33,17 @@ PROCEDURE CreateScreenSplash (cFileName, nDelaySeconds, nAnimateSeconds)
       MsgHMGError ("File Opening Error. Program Terminated" )
    ENDIF
 
-   DEFINE WINDOW FormSplash;
-         AT 0,0;
-         WIDTH Image_Width;
-         HEIGHT Image_Height;
-         BACKCOLOR Image_BackColor;
-         NOSYSMENU;
-         NOSIZE;
-         NOMINIMIZE;
-         NOMAXIMIZE;
-         NOCAPTION;
-         TOPMOST;
+   DEFINE WINDOW FormSplash ;
+         AT 0,0 ;
+         WIDTH Image_Width ;
+         HEIGHT Image_Height ;
+         BACKCOLOR Image_BackColor ;
+         NOSYSMENU ;
+         NOSIZE ;
+         NOMINIMIZE ;
+         NOMAXIMIZE ;
+         NOCAPTION ;
+         TOPMOST ;
          CHILD
 
       SET WINDOW FormSplash TRANSPARENT TO COLOR Image_BackColor

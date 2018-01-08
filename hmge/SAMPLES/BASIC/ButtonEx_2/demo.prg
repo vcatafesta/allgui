@@ -22,14 +22,14 @@ FUNCTION Main()
 
    SET FONT TO "Arial", 9
 
-   DEFINE WINDOW Form1;
-         MAIN;
-         WIDTH  380;
-         HEIGHT 440;
-         TITLE  "Owner buttons";
-         NOSIZE;
-         NOMAXIMIZE;
-         NOMINIMIZE;
+   DEFINE WINDOW Form1 ;
+         MAIN ;
+         WIDTH  380 ;
+         HEIGHT 440 ;
+         TITLE  "Owner buttons" ;
+         NOSIZE ;
+         NOMAXIMIZE ;
+         NOMINIMIZE ;
          ON INTERACTIVECLOSE MessageBoxQuit()
 
       DEFINE MAINMENU
@@ -341,11 +341,11 @@ FUNCTION MessageBoxQuit(lQuit)
 
    DEFAULT lQuit := .F.
 
-   DEFINE WINDOW Form2;
-         WIDTH  200;
-         HEIGHT 120;
-         TITLE  "Owner buttons";
-         MODAL;
+   DEFINE WINDOW Form2 ;
+         WIDTH  200 ;
+         HEIGHT 120 ;
+         TITLE  "Owner buttons" ;
+         MODAL ;
          NOSIZE
 
       DEFINE LABEL Msg_LA

@@ -1064,7 +1064,7 @@ METHOD SetRefresh( nSeconds ) CLASS HBrowse
          ::oTimer:Interval := nSeconds * 1000
       ELSEIF nSeconds > 0
          SET TIMER ::oTimer OF hwg_GetParentForm( Self ) VALUE ( nSeconds * 1000 )  ACTION { || iif( hwg_Iswindowvisible( ::Handle ), ;
-            ( ::internal[ 1 ] := 12, hwg_Invalidaterect( ::handle, 0,;
+            ( ::internal[ 1 ] := 12, hwg_Invalidaterect( ::handle, 0, ;
             ::x1 , ;
             ::y1 , ;
             ::x1 + ::xAdjRight, ;
@@ -1750,7 +1750,7 @@ METHOD HeaderOut( hDC ) CLASS HBrowse
             aItemRect := { x   , ::y1 - ( ::nHeadHeight * ::nHeadRows ) - ::nyHeight - 1, ;
                x + xSize  , ::y1 + 1  }
             IF ! oColumn:lHeadClick
-               state := iif( ::hTheme != NIL, iif( ::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,;
+               state := iif( ::hTheme != NIL, iif( ::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3, ;
                   PBS_HOT, PBS_NORMAL ), PBS_NORMAL )
                axPosMouseOver  := iif( ::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3, { x, x + xsize }, axPosMouseOver )
             ELSE
@@ -2144,7 +2144,7 @@ METHOD LineOut( nRow, nCol, hDC, lSelected, lClear ) CLASS HBrowse
                   hwg_Selectobject( hDC, oPen:handle )
                   hwg_Roundrect( hDC, ::x1, ;
                      ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1  , ;
-                     ::xAdjRight - 2, ;  //::x2 - 1  ,;
+                     ::xAdjRight - 2, ;  //::x2 - 1  , ;
                      ::y1 + ( ::height + 1 ) * ::nPaintRow  , 0, 0 )
                   hwg_Deleteobject( oPen )
                   IF ( ( ::Highlight .OR. ! ::lEditable ) .AND. nCol = 0 )  .OR. ( ::HighlightStyle = 3 .AND. ! hwg_Selffocus( ::Handle ) )
@@ -2903,7 +2903,7 @@ METHOD ButtonRDown( lParam ) CLASS HBrowse
 
 METHOD ButtonDbl( lParam ) CLASS HBrowse
 
-   LOCAL nLine := Int( iif( ::lDispHead , ( ( hwg_Hiword( lParam ) - ( ::nHeadHeight * ::nHeadRows ) ) / ( ::height + 1 ) + 1 )  ,;
+   LOCAL nLine := Int( iif( ::lDispHead , ( ( hwg_Hiword( lParam ) - ( ::nHeadHeight * ::nHeadRows ) ) / ( ::height + 1 ) + 1 )  , ;
       hwg_Hiword( lParam ) / ( ::height + 1 ) + 1  ) )
 
    IF nLine > 0 .AND. nLine <= ::rowCurrCount
@@ -3114,7 +3114,7 @@ METHOD Edit( wParam, lParam ) CLASS HBrowse
                SIZE nWidth, ::height + 1      ;
                FONT oComboFont  ;
                DISPLAYCOUNT  iif( Len( oColumn:aList ) > ::rowCount , ::rowCount - 1, Len( oColumn:aList ) ) ;
-               VALID { | oColumn, oGet | ::ValidColumn( oColumn, oGet ) };
+               VALID { | oColumn, oGet | ::ValidColumn( oColumn, oGet ) } ;
                WHEN { | oColumn, oGet | ::WhenColumn( oColumn, oGet ) }
             oModDlg:AddEvent( 0, IDOK, { || oModDlg:lResult := .T. , oModDlg:close() } )
          ELSE
@@ -3128,7 +3128,7 @@ METHOD Edit( wParam, lParam ) CLASS HBrowse
                   STYLE ES_AUTOHSCROLL           ;
                   FONT ::oFont                   ;
                   PICTURE iif( Empty( oColumn:picture ), NIL, oColumn:picture )   ;
-                  VALID { | oColumn, oGet | ::ValidColumn( oColumn, oGet, oBtn ) };
+                  VALID { | oColumn, oGet | ::ValidColumn( oColumn, oGet, oBtn ) } ;
                   WHEN { | oColumn, oGet | ::WhenColumn( oColumn, oGet, oBtn ) }
                IF oColumn:bClick != NIL
                   IF Type != "D"

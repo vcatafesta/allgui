@@ -110,7 +110,7 @@ PROCEDURE Main
          TextBox txbSearch                    ;
          WIDTH 400                            ;
          HEIGHT 20                            ;
-         UpperCase                            ;
+         UPPERCASE                            ;
          ON CHANGE QSeek()                    ;
          ON ENTER wStock.grdContent.SetFocus  ;
          TOOLTIP 'String for search'

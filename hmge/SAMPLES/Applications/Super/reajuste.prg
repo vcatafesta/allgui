@@ -36,25 +36,25 @@ FUNCTION reajuste()
       subcategoria_produtos->(dbskip())
    END
 
-   DEFINE WINDOW form_reajuste;
-         at 000,000;
-         WIDTH 900;
-         HEIGHT 600;
-         TITLE 'Reajustar Preços de Produtos';
-         ICON path_imagens+'icone.ico';
-         modal;
-         nosize;
-         ON INIT zera_temporario();
+   DEFINE WINDOW form_reajuste ;
+         at 000,000 ;
+         WIDTH 900 ;
+         HEIGHT 600 ;
+         TITLE 'Reajustar Preços de Produtos' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
+         nosize ;
+         ON INIT zera_temporario() ;
          ON RELEASE zera_acesso()
 
       * fase 1
-      @ 010,005 label lbl_001;
-         of form_reajuste;
-         VALUE 'Quais produtos reajustar ?';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_reajuste ;
+         VALUE 'Quais produtos reajustar ?' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
       define comboboxex cbo_001
       ROW   030
@@ -66,13 +66,13 @@ FUNCTION reajuste()
    END comboboxex
 
    * fase 2
-   @ 070,005 label lbl_002;
-      of form_reajuste;
-      VALUE 'Selecione a Categoria';
-      autosize;
-      FONT 'tahoma' size 010;
-      bold;
-      FONTCOLOR _preto_001;
+   @ 070,005 label lbl_002 ;
+      of form_reajuste ;
+      VALUE 'Selecione a Categoria' ;
+      autosize ;
+      FONT 'tahoma' size 010 ;
+      bold ;
+      FONTCOLOR _preto_001 ;
       TRANSPARENT
    define comboboxex cbo_002
    ROW   090
@@ -85,13 +85,13 @@ FUNCTION reajuste()
 END comboboxex
 
 * fase 3
-@ 130,005 label lbl_003;
-   of form_reajuste;
-   VALUE 'Selecione a Subcategoria';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 130,005 label lbl_003 ;
+   of form_reajuste ;
+   VALUE 'Selecione a Subcategoria' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 define comboboxex cbo_003
 ROW   150
@@ -104,91 +104,91 @@ listwidth 300
 END comboboxex
 
 * fase 4
-@ 200,005 label lbl_004;
-   of form_reajuste;
-   VALUE 'SOMAR';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR BLUE;
+@ 200,005 label lbl_004 ;
+   of form_reajuste ;
+   VALUE 'SOMAR' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR BLUE ;
    TRANSPARENT
-@ 200,060 getbox tbox_004;
-   of form_reajuste;
-   HEIGHT 027;
-   WIDTH 080;
-   VALUE 0;
-   FONT 'tahoma' size 010;
-   BACKCOLOR _fundo_get;
-   FONTCOLOR _letra_get_1;
+@ 200,060 getbox tbox_004 ;
+   of form_reajuste ;
+   HEIGHT 027 ;
+   WIDTH 080 ;
+   VALUE 0 ;
+   FONT 'tahoma' size 010 ;
+   BACKCOLOR _fundo_get ;
+   FONTCOLOR _letra_get_1 ;
    PICTURE '@E 9,999.99'
-@ 200,150 label lbl_0044;
-   of form_reajuste;
-   VALUE 'ao preço';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 200,150 label lbl_0044 ;
+   of form_reajuste ;
+   VALUE 'ao preço' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
-@ 230,005 label lbl_00444;
-   of form_reajuste;
-   VALUE 'de venda já existente';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 230,005 label lbl_00444 ;
+   of form_reajuste ;
+   VALUE 'de venda já existente' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 
-@ 250,040 label lbl_ou;
-   of form_reajuste;
-   VALUE 'ou então';
-   autosize;
-   FONT 'tahoma' size 018;
-   bold;
-   FONTCOLOR _preto_001;
+@ 250,040 label lbl_ou ;
+   of form_reajuste ;
+   VALUE 'ou então' ;
+   autosize ;
+   FONT 'tahoma' size 018 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 
 * fase 5
-@ 290,005 label lbl_005;
-   of form_reajuste;
-   VALUE 'APLICAR';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR BLUE;
+@ 290,005 label lbl_005 ;
+   of form_reajuste ;
+   VALUE 'APLICAR' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR BLUE ;
    TRANSPARENT
-@ 290,070 getbox tbox_005;
-   of form_reajuste;
-   HEIGHT 027;
-   WIDTH 070;
-   VALUE 0;
-   FONT 'tahoma' size 010;
-   BACKCOLOR _fundo_get;
-   FONTCOLOR _letra_get_1;
+@ 290,070 getbox tbox_005 ;
+   of form_reajuste ;
+   HEIGHT 027 ;
+   WIDTH 070 ;
+   VALUE 0 ;
+   FONT 'tahoma' size 010 ;
+   BACKCOLOR _fundo_get ;
+   FONTCOLOR _letra_get_1 ;
    PICTURE '@R 999.99'
-@ 290,150 label lbl_0055;
-   of form_reajuste;
-   VALUE '% sobre';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 290,150 label lbl_0055 ;
+   of form_reajuste ;
+   VALUE '% sobre' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
-@ 320,005 label lbl_00555;
-   of form_reajuste;
-   VALUE 'o preço de venda já existente';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 320,005 label lbl_00555 ;
+   of form_reajuste ;
+   VALUE 'o preço de venda já existente' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 
 * botão filtrar
-@ 360,005 buttonex botao_filtrar;
-   parent form_reajuste;
-   CAPTION 'Filtrar informações';
-   WIDTH 200 height 040;
-   PICTURE path_imagens+'img_filtro.bmp';
-   ACTION filtrar_informacoes();
+@ 360,005 buttonex botao_filtrar ;
+   PARENT form_reajuste ;
+   CAPTION 'Filtrar informações' ;
+   WIDTH 200 height 040 ;
+   PICTURE path_imagens+'img_filtro.bmp' ;
+   ACTION filtrar_informacoes() ;
    TOOLTIP 'Clique aqui para separar as informações e visualizar os reajustes antes de efetivá-los'
 
 * separar a tela em 2 partes
@@ -203,29 +203,29 @@ DEFINE LABEL label_separador
 END LABEL
 
 * grid e opções do reajuste
-@ 010,220 label lbl_reajuste;
-   of form_reajuste;
-   VALUE 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 010,220 label lbl_reajuste ;
+   of form_reajuste ;
+   VALUE 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 
 * botões
-@ 520,405 buttonex botao_reajustar;
-   parent form_reajuste;
-   CAPTION 'Reajustar os preços com base na projeção';
-   WIDTH 300 height 040;
-   PICTURE path_imagens+'img_aplicar.bmp';
-   ACTION gravar_reajuste();
+@ 520,405 buttonex botao_reajustar ;
+   PARENT form_reajuste ;
+   CAPTION 'Reajustar os preços com base na projeção' ;
+   WIDTH 300 height 040 ;
+   PICTURE path_imagens+'img_aplicar.bmp' ;
+   ACTION gravar_reajuste() ;
    TOOLTIP 'Clique aqui para gravar as informações com reajuste no banco de dados'
-@ 520,710 buttonex botao_sair;
-   parent form_reajuste;
-   CAPTION 'Sair desta tela';
-   WIDTH 180 height 040;
-   PICTURE path_imagens+'img_sair.bmp';
-   ACTION (zera_acesso(),form_reajuste.release);
+@ 520,710 buttonex botao_sair ;
+   PARENT form_reajuste ;
+   CAPTION 'Sair desta tela' ;
+   WIDTH 180 height 040 ;
+   PICTURE path_imagens+'img_sair.bmp' ;
+   ACTION (zera_acesso(),form_reajuste.release) ;
    TOOLTIP 'Clique aqui para sair'
 
 ON KEY ESCAPE ACTION thiswindow.release
@@ -268,7 +268,7 @@ STATIC FUNCTION filtrar_informacoes()
    IF x_tipo == 1 //pizzas
       _conta_acesso ++
       DEFINE GRID grid_reajuste
-         parent form_reajuste
+         PARENT form_reajuste
          COL 220
          ROW 030
          WIDTH 665
@@ -284,7 +284,7 @@ STATIC FUNCTION filtrar_informacoes()
    ELSEIF x_tipo == 2 //demais produtos
       _conta_acesso ++
       DEFINE GRID grid_reajuste
-         parent form_reajuste
+         PARENT form_reajuste
          COL 220
          ROW 030
          WIDTH 665

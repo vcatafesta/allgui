@@ -77,11 +77,11 @@ FUNCTION Main( cHRBFile, cPar1, cPar2, cPar3, cPar4, cPar5, cPar6, cPar7, cPar8,
    LOCAL xRetVal
 
    IF Empty( cHRBFile )
-      hwg_Msginfo( "Harbour Runner - HwGUI version" + HB_OSNewLine() +;
-         "Copyright 1999-2000, http://www.harbour-project.org" + HB_OSNewLine() +;
-      HB_OSNewLine() +;
-         "Syntax:  hbrun <hrbfile[.hrb]> [parameters]" + HB_OSNewLine() +;
-         HB_OSNewLine() +;
+      hwg_Msginfo( "Harbour Runner - HwGUI version" + HB_OSNewLine() + ;
+         "Copyright 1999-2000, http://www.harbour-project.org" + HB_OSNewLine() + ;
+      HB_OSNewLine() + ;
+         "Syntax:  hbrun <hrbfile[.hrb]> [parameters]" + HB_OSNewLine() + ;
+         HB_OSNewLine() + ;
          "Note:  Linked with " + Version() + HB_OSNewLine() )
    ELSE
       xRetVal := __hrbRun( cHRBFile, cPar1, cPar2, cPar3, cPar4, cPar5, cPar6, cPar7, cPar8, cPar9 )

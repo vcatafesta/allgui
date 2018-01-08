@@ -32,21 +32,21 @@ History :
 #define CRLF2 CRLF + CRLF
 #define NTrim( n ) LTrim( TRAN( n,"999,999,999,999,999" ) )
 
-MEMV cBegFoldr,;
-   cTempFNam,;
-   nFilSize,;
-   aBrwHeds,;
-   aBrwLens,;
-   aBrwFlds,;
-   aBrwROCs,;
-   aTabStru,;
+MEMV cBegFoldr, ;
+   cTempFNam, ;
+   nFilSize, ;
+   aBrwHeds, ;
+   aBrwLens, ;
+   aBrwFlds, ;
+   aBrwROCs, ;
+   aTabStru, ;
    lFSContnu
 
 PROC Main()
 
-   PUBL cBegFoldr := GetCurrentFolder(),;
-      cTempFNam := '',;
-      nFilSize  := 0,;
+   PUBL cBegFoldr := GetCurrentFolder(), ;
+      cTempFNam := '', ;
+      nFilSize  := 0, ;
       aBrwHeds  := {},;    // Column Headers
       aBrwLens  := {},;    // Column Lengths ( in pixel )
       aBrwFlds  := {},;    // Field List
@@ -105,10 +105,10 @@ PROC Main()
                   cFolder,;                     // and build it in 0 length
                   cExtns )
 
-               LOCA aTFiles := {},;
-                  cFSpec  := '',;
-                  cTFName := DTOC(DATE()) + TIME(),;
-                  cRVal   := '',;
+               LOCA aTFiles := {}, ;
+                  cFSpec  := '', ;
+                  cTFName := DTOC(DATE()) + TIME(), ;
+                  cRVal   := '', ;
                   nHandle :=  0
 
                IF cExtns == NIL
@@ -157,9 +157,9 @@ PROC Main()
                         cBegFoldr ,;               // File Find Beginning folder
                         .F. ,;                     // Multiple Select
                         .T. )                      // Change Folder right
-                     LOCA cFileStr := '',;
-                        nFPntr   :=  0,;
-                        c1Line   :=  '',;
+                     LOCA cFileStr := '', ;
+                        nFPntr   :=  0, ;
+                        c1Line   :=  '', ;
                         nFldNum  :=  0
 
                      IF !EMPTY( cOpFName )
@@ -173,8 +173,8 @@ PROC Main()
                         ELSE
                            cBegFoldr := cOpFName
                            ClosFile()
-                           frmHVMain.StatusBar.Item(1) := IF( LEN( cOpFName ) > 70,;
-                              LEFT( cOpFName, 7 ) + '...' + RIGHT( cOpFName, 60 ),;
+                           frmHVMain.StatusBar.Item(1) := IF( LEN( cOpFName ) > 70, ;
+                              LEFT( cOpFName, 7 ) + '...' + RIGHT( cOpFName, 60 ), ;
                               cOpFName )
                            frmHVMain.StatusBar.Item(2) := PADC("0/"+NTrim(nFilSize),18)
                            MakTable()
@@ -187,7 +187,7 @@ PROC Main()
                                  c1Line :=  SUBS( cFileStr, nFPntr )
                               ENDIF
                               DBAPPEND()
-                              REPL     PT      WITH PADL(NTOC( nFPntr-1,16 ),8,'0'),;
+                              REPL     PT      WITH PADL(NTOC( nFPntr-1,16 ),8,'0'), ;
                                  ASCII   WITH c1Line
                               FOR nFldNum  := 2 TO LEN( c1Line ) + 1
                                  FIELDPUT( nFldNum, PADL(NTOC( ASC( SUBS( c1Line, nFldNum-1, 1 ) ), 16 ),2,"0") )
@@ -213,7 +213,7 @@ PROC Main()
 
                      PROC MakBrwArs()
 
-                        LOCA nColNum := 0,;
+                        LOCA nColNum := 0, ;
                            cFldNam := ''
 
                         AADD( aTabStru, { "PT", "C",  8, 0 } )  // Hex Pointer
@@ -241,13 +241,13 @@ PROC Main()
 
                         *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-                        FUNC GetOffset(;
+                        FUNC GetOffset( ;
                               lSkip )
 
-                           LOCA nOffset := 0,;
+                           LOCA nOffset := 0, ;
                               cOffset := InputBox( IF( lSkip, "Byte count to skip", "New Offset") + ;
-                              ' ( "0x" prefix for HEX values ) :',;
-                              IF( lSkip, "Skip n bytes", "Go to offset" ) ),;
+                              ' ( "0x" prefix for HEX values ) :', ;
+                              IF( lSkip, "Skip n bytes", "Go to offset" ) ), ;
                               lMinus  := .F.
 
                            IF !EMPTY( cOffset )
@@ -277,7 +277,7 @@ PROC Main()
 
                            PROC GoOffset()
 
-                              LOCA nOffset := GetOffset( .F. ),;
+                              LOCA nOffset := GetOffset( .F. ), ;
                                  nRecNum := 0
 
                               IF nOffset > 0
@@ -296,9 +296,9 @@ PROC Main()
 
                               PROC SkipNBytes()
 
-                                 LOCA nOffset := GetOffset( .T. ),;
-                                    nRecNum := 0,;
-                                    nRecNum1 := RECN() + INT( nOffset / 16 ) + 1,;
+                                 LOCA nOffset := GetOffset( .T. ), ;
+                                    nRecNum := 0, ;
+                                    nRecNum1 := RECN() + INT( nOffset / 16 ) + 1, ;
                                     nRecNum2 := MAX( 1, nRecNum1 )
 
                                  nRecNum  := MIN( nRecNum2 , RECC() )
@@ -321,15 +321,15 @@ PROC Main()
 
                                     PROC ApplyFS()
 
-                                       LOCA cFindText  := ALLTRIM( FS.txtFS.Value ),;
-                                          nDirection := FS.rgpDirect.Value ,;
-                                          lExctMatch := FS.rgpMatch.Value < 2,;
-                                          cHexString := '',;
-                                          nHexStrLen :=  0,;
-                                          c1HexValue := '',;
+                                       LOCA cFindText  := ALLTRIM( FS.txtFS.Value ), ;
+                                          nDirection := FS.rgpDirect.Value , ;
+                                          lExctMatch := FS.rgpMatch.Value < 2, ;
+                                          cHexString := '', ;
+                                          nHexStrLen :=  0, ;
+                                          c1HexValue := '', ;
                                           nHexStrPnt :=  0
 
-                                       LOCA nSkipValue := IF( nDirection < 2, -1, 1 ),;
+                                       LOCA nSkipValue := IF( nDirection < 2, -1, 1 ), ;
                                           bSearch    := IF( lExctMatch, { || cFindText $ TEMP->ASCII }, { || UPPER( cFindText ) $ UPPER( TEMP->ASCII ) } )
 
                                        IF lFSContnu

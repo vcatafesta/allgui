@@ -139,8 +139,8 @@ PROCEDURE _HMG_PRINTER_SHOWPREVIEW
 
    DEFINE WINDOW _HMG_PRINTER_SHOWPREVIEW ;
          AT 0,0 ;
-         WIDTH GetDesktopWidth() - 103 - iif ( IsVistaThemed , 25 , 0);
-         HEIGHT GetDesktopHeight() - 103  - iif ( IsVistaThemed , 25 , 0);
+         WIDTH GetDesktopWidth() - 103 - iif ( IsVistaThemed , 25 , 0) ;
+         HEIGHT GetDesktopHeight() - 103  - iif ( IsVistaThemed , 25 , 0) ;
          VIRTUAL WIDTH ( GetDesktopWidth() - 103 ) * 2 ;
          VIRTUAL HEIGHT ( GetDesktopHeight() - 103 ) * 2 ;
          TITLE _hmg_printer_usermessages [01] + ' [' + alltrim(str(_hmg_printer_CurrentPageNumber)) + '/' + ;
@@ -639,19 +639,19 @@ STATIC PROCEDURE CreateThumbNails
 
       cAction := "_HMG_MINIPRINT [4] := "+ alltrim(str(i)) +", _HMG_MINIPRINT [11] := .F., _HMG_PRINTER_PREVIEWRefresh(), _HMG_MINIPRINT [11] := .T."
 
-      _DefineEmfFile(;
-         cMacroTemp,;
-         '_HMG_PRINTER_SHOWTHUMBNAILS',;
-         10,;
-         ( i * (tHeight + 10) ) - tHeight,;
-         _hmg_printer_BasePageName + strzero(i,4) + ".emf",;
-         tWidth,;
-         tHeight,;
-         { || &cAction },;
-         Nil,;
-         .F.,;
-         .F.,;
-         .T.;
+      _DefineEmfFile( ;
+         cMacroTemp, ;
+         '_HMG_PRINTER_SHOWTHUMBNAILS', ;
+         10, ;
+         ( i * (tHeight + 10) ) - tHeight, ;
+         _hmg_printer_BasePageName + strzero(i,4) + ".emf", ;
+         tWidth, ;
+         tHeight, ;
+         { || &cAction }, ;
+         Nil, ;
+         .F., ;
+         .F., ;
+         .T. ;
          )
 
       SetToolTip ( GetControlHandle ( cMacroTemp, '_HMG_PRINTER_SHOWTHUMBNAILS' ), _hmg_printer_usermessages [01] + ' ' + AllTrim(Str(i)) + ' [Click]', ttHandle )

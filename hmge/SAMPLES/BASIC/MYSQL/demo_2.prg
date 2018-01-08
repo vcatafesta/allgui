@@ -28,7 +28,7 @@ PROCEDURE Main()
    DEFINE WINDOW Form_1 ;
          AT 5,5 ;
          WIDTH 640 ;
-         HEIGHT 480;
+         HEIGHT 480 ;
          TITLE "Harbour + MiniGui + MySql" ;
          MAIN ;
          NOMAXIMIZE ;
@@ -72,7 +72,7 @@ FUNCTION Grid_edit()
       @ 10,10 GRID Grid_1 ;
          WIDTH  415 ;
          HEIGHT 329 ;
-         HEADERS {"Code", "Name"};
+         HEADERS {"Code", "Name"} ;
          WIDTHS  {60, 335} ;
          VALUE 1 ;
          ON DBLCLICK Get_Fields(2)

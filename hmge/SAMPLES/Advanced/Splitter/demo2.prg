@@ -37,14 +37,14 @@ FUNCTION main()
          HEIGHT   h ;
          VALUE    LOREMIPSUM_L ;
          TOOLTIP  'EditBox_1' ;
-         nohscroll
+         NOHSCROLL
 
       @ 0, nXPos + nBorder editbox EditBox_2 ;
-         WIDTH    w  - ( nXPos + nBorder );
+         WIDTH    w  - ( nXPos + nBorder ) ;
          HEIGHT   h ;
          VALUE    LOREMIPSUM_R ;
          TOOLTIP  'EditBox_2' ;
-         nohscroll
+         NOHSCROLL
    END WINDOW
 
    // Add Vertical Splitter to Form_1

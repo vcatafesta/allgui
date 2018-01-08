@@ -31,8 +31,8 @@ PROCEDURE MAIN
          AT 0, 0 ;
          WIDTH 700 ;
          HEIGHT 600 ;
-         TITLE "Bos Taurus: Prototype Demo";
-         MAIN;
+         TITLE "Bos Taurus: Prototype Demo" ;
+         MAIN ;
          ON RELEASE BT_BitmapRelease( hBitmap ) ;
          ON PAINT Proc_ON_PAINT( hBitmap ) ;
          ON SIZE BT_ClientAreaInvalidateAll( "Win1", .F. )

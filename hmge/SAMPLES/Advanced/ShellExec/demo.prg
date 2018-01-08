@@ -27,7 +27,7 @@ PROCEDURE Main
 
       @ 100,100 BUTTONEX Button_3 ;
          WIDTH 230 HEIGHT 60 ;
-         CAPTION 'TerminateProcess()';
+         CAPTION 'TerminateProcess()' ;
          ACTION { || CloseProcess() }
 
       @ 180,100 BUTTONEX Button_2 ;

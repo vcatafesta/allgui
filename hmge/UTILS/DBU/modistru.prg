@@ -8,7 +8,7 @@ FUNCTION DBUmodistruct
       RETURN NIL
    ELSEIF IsWindowDefined( _DBUBrowse ) .or. IsWindowDefined( _DBUedit ) // (P.D. 21-06-2005)
       msgStop( 'Structure change not allowed' + HB_OSNewLine() + ;
-         'while browsing or editing records!',;
+         'while browsing or editing records!', ;
          'DBU Modify structure' )
 
       RETURN NIL
@@ -57,7 +57,7 @@ FUNCTION DBUmodistruct
          ROW 70
          COL 40
          WIDTH 150
-         uppercase .t.
+         UPPERCASE .t.
          BACKCOLOR _DBUgreenish
          MAXLENGTH 10
          VALUE ""
@@ -160,9 +160,9 @@ FUNCTION DBUmodistruct
       CASE _DBUstructarr[_DBUi,2] == "M"
          _DBUtype1 := "Memo"
       END CASE
-      _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1],;
-         _DBUtype1,;
-         str(_DBUstructarr[_DBUi,3],8,0),;
+      _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1], ;
+         _DBUtype1, ;
+         str(_DBUstructarr[_DBUi,3],8,0), ;
          str(_DBUstructarr[_DBUi,4],3,0)})
    NEXT _DBUi
    IF len(_DBUstructarr) > 0

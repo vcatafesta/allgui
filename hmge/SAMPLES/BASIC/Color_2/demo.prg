@@ -82,8 +82,8 @@ FUNCTION main_cas()
          x_var := 'lb_c' + alltrim( str( n ) )
 
          v_val := 'Color {' + ;
-            strzero( a_cor[n,1] , 3 ) + ',' +;
-            strzero( a_cor[n,2] , 3 ) + ',' +;
+            strzero( a_cor[n,1] , 3 ) + ',' + ;
+            strzero( a_cor[n,2] , 3 ) + ',' + ;
             strzero( a_cor[n,3] , 3 ) + '}'
 
          f_action := 'f_cor( a_cor[' + alltrim(str(n)) + '] )'

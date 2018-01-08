@@ -13,21 +13,21 @@ FUNCTION Main()
 
    QHTM_Init()
 
-   DEFINE WINDOW Form_1;
-         AT 0 , 0;
-         WIDTH 800 HEIGHT 600;
-         TITLE "QHTM Demo";
-         MAIN;
-         NOSIZE;
-         NOMAXIMIZE;
-         ON RELEASE  QHTM_end();
+   DEFINE WINDOW Form_1 ;
+         AT 0 , 0 ;
+         WIDTH 800 HEIGHT 600 ;
+         TITLE "QHTM Demo" ;
+         MAIN ;
+         NOSIZE ;
+         NOMAXIMIZE ;
+         ON RELEASE  QHTM_end() ;
 
       @ 10,10 QHTM Html_1 OF Form_1  ;
-         VALUE cHtml;
+         VALUE cHtml ;
          WIDTH 780  ;
          HEIGHT 450 ;
          FONT "Courier New" ;
-         SIZE 10;
+         SIZE 10 ;
          BORDER
 
       DEFINE BUTTON Button_1a

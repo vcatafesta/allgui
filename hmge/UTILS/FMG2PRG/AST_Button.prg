@@ -28,7 +28,7 @@ FUNCTION AST_Button(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
    LOCAL cIndention := ""
@@ -106,13 +106,13 @@ FUNCTION AST_Button(cReadString,cTerminator)
       //       [ HELPID <nHelpId> ]
       //       [ INVISIBLE ]
       // ========================================================
-      // @ <nRow>, <nCol> BUTTON <ControlName> OF <ParentWindowName>;
+      // @ <nRow>, <nCol> BUTTON <ControlName> OF <ParentWindowName> ;
       //    PICTURE <cPictureName> ACTION <ActionProcedureName> | bBlock> WIDTH <nWidth> HEIGHT <nHeight>
 
       cRetVal := LDCS_iLevel(2) + ;
-         "@ " + aProperties_[2] + "," + aProperties_[3] + " BUTTON " +;
+         "@ " + aProperties_[2] + "," + aProperties_[3] + " BUTTON " + ;
          aProperties_[1] + " OF ~LDCS_Form" + " ;" + CRLF + ;
-         LDCS_iLevel(3) + aProperties_[22] + " " + aProperties_[6] + " " +;
+         LDCS_iLevel(3) + aProperties_[22] + " " + aProperties_[6] + " " + ;
          aProperties_[4] + " " + aProperties_[5] + " " + CRLF
 
       *- Text Only
@@ -135,13 +135,13 @@ FUNCTION AST_Button(cReadString,cTerminator)
       //    [ HELPID <nHelpId> ]
       //    [ INVISIBLE ]
       // =======================================================
-      // @ <nRow>, <nCol> BUTTON <ControlName> OF <ParentWindowName> CAPTION <cCaption>;
-      //    ACTION <ActionProcedureName> | <bBlock> WIDTH <nWidth> HEIGHT <nHeight>;
+      // @ <nRow>, <nCol> BUTTON <ControlName> OF <ParentWindowName> CAPTION <cCaption> ;
+      //    ACTION <ActionProcedureName> | <bBlock> WIDTH <nWidth> HEIGHT <nHeight> ;
       //    FONT <cFontName> SIZE <nFontSize>
 
-      cRetVal := LDCS_iLevel(2) +;
-         "@ " + aProperties_[2] + "," + aProperties_[3] + " BUTTON " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[7] + " " +;
+      cRetVal := LDCS_iLevel(2) + ;
+         "@ " + aProperties_[2] + "," + aProperties_[3] + " BUTTON " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[7] + " " + ;
          aProperties_[6] + " " + aProperties_[8] + " " + aProperties_[9] + CRLF
 
       *- Text and Image
@@ -163,13 +163,13 @@ FUNCTION AST_Button(cReadString,cTerminator)
       //       [ NOTABSTOP ]
       //       [ HELPID <nHelpId> ]
       //       [ INVISIBLE ]
-      // @ <nRow>, <nCol> BUTTON <ControlName> OF <ParentWindowName> CAPTION <cCaption>;
+      // @ <nRow>, <nCol> BUTTON <ControlName> OF <ParentWindowName> CAPTION <cCaption> ;
       //    PICTURE <cPictureName> LEFT ACTION <ActionProcedureName> | <bBlock> WIDTH <nWidth> HEIGHT <nHeight>
 
-      cRetVal := LDCS_iLevel(2) +;
-         "@ " + aProperties_[2] + "," + aProperties_[3] + " BUTTON " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[7] + "; " + CRLF +;
-         LDCS_iLevel(3) + aProperties_[22] + " LEFT " + ";" + CRLF +;
+      cRetVal := LDCS_iLevel(2) + ;
+         "@ " + aProperties_[2] + "," + aProperties_[3] + " BUTTON " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[7] + "; " + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[22] + " LEFT " + ";" + CRLF + ;
          LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + CRLF
    ENDCASE
 

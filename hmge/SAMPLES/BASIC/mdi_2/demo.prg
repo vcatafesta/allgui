@@ -42,8 +42,8 @@ FUNCTION Main
          WIDTH nWidth ;
          HEIGHT nHeight ;
          TITLE 'Browse MDI demo ' ;
-         MAIN;
-         MDI;
+         MAIN ;
+         MDI ;
          FONT 'System' SIZE 10
 
       DEFINE MAIN MENU
@@ -87,7 +87,7 @@ FUNCTION Main
          OF Form_1 ;
          BUTTONSIZE 16 , 16  ;
          IMAGE {'BtnLst.bmp'} ;
-         COLORMASK CLR_DEFAULT;
+         COLORMASK CLR_DEFAULT ;
          IMAGECOUNT 6 MASK
 
       DEFINE SPLITBOX
@@ -159,9 +159,9 @@ FUNCTION CreateMDIClient(cFile)
          MDICHILD ;
          ON INIT ( ResizeEdit(), SetColumnsWidth() ) ;
          ON RELEASE ( CloseTables(), ReleaseMdiChild() ) ;
-         ON SIZE ResizeEdit();
-         ON MAXIMIZE ResizeEdit();
-         ON MINIMIZE ResizeEdit();
+         ON SIZE ResizeEdit() ;
+         ON MAXIMIZE ResizeEdit() ;
+         ON MINIMIZE ResizeEdit() ;
          ON MOUSECLICK SetEditFocus()
 
       @ 0,0 BROWSE BrwMdi                        ;

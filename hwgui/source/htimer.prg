@@ -25,7 +25,7 @@ CLASS VAR aTimers   INIT { }
 
    DATA   xName          HIDDEN
    ACCESS Name           INLINE ::xName
-   ASSIGN Name( cName )  INLINE IIF( !EMPTY( cName ) .AND. VALTYPE( cName) == "C" .AND. ! ":" $ cName .AND. ! "[" $ cName,;
+   ASSIGN Name( cName )  INLINE IIF( !EMPTY( cName ) .AND. VALTYPE( cName) == "C" .AND. ! ":" $ cName .AND. ! "[" $ cName, ;
       ( ::xName := cName, __objAddData( ::oParent, cName ), ::oParent: & ( cName ) := Self), Nil)
    ACCESS Interval       INLINE ::value
    ASSIGN Interval( x )  INLINE ::value := x, hwg_Settimer( ::oParent:handle, ::id, ::value )
@@ -101,7 +101,7 @@ FUNCTION hwg_TimerProc( hWnd, idTimer, Time )
 
    HB_SYMBOL_UNUSED( hWnd )
 
-   IF i != 0 .AND. HTimer():aTimers[ i ]:value > 0 .AND. HTimer():aTimers[ i ]:bAction != Nil .AND.;
+   IF i != 0 .AND. HTimer():aTimers[ i ]:value > 0 .AND. HTimer():aTimers[ i ]:bAction != Nil .AND. ;
          ValType( HTimer():aTimers[ i ]:bAction ) == "B"
       Eval( HTimer():aTimers[ i ]:bAction, HTimer():aTimers[i], time )
    ENDIF

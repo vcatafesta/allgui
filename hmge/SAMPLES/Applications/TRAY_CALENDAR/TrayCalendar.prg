@@ -139,8 +139,8 @@ PROCEDURE Calendar()
 
    DEFINE WINDOW Form_2            ;
          AT 0, 0               ;
-         WIDTH 448 - IF(IsXPThemeActive(), 48, 0);
-         HEIGHT 415 + IF(IsXPThemeActive(), 8, 0);
+         WIDTH 448 - IF(IsXPThemeActive(), 48, 0) ;
+         HEIGHT 415 + IF(IsXPThemeActive(), 8, 0) ;
          TITLE PROGRAM            ;
          ICON IDI_MAIN            ;
          MODAL NOAUTORELEASE NOSIZE      ;

@@ -264,8 +264,8 @@ FUNCTION DBUeditlastclick
 
 FUNCTION DBUeditnewrecclick
 
-   IF msgyesno("A new record will be appended to the dbf."+CR_LF+;
-         "You can edit the record and it will be saved only after you click 'Save'."+CR_LF+;
+   IF msgyesno("A new record will be appended to the dbf."+CR_LF+ ;
+         "You can edit the record and it will be saved only after you click 'Save'."+CR_LF+ ;
          "Are you sure to append a blank record?","DBU")
       APPEND BLANK
       DBUeditrefreshdbf()

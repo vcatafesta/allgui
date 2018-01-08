@@ -160,12 +160,12 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    // Graph info
    IF !Empty( cTitle )
       cNameObj := 'Obj_Name_' + hb_ntos( nGraphObj++ )
-      @ nTop - 36 * nResV, nLeft LABEL &cNameObj OF &parent VALUE cTitle;
-         WIDTH nRight - nLeft;
-         HEIGHT 24;
-         FONTCOLOR aClrFore;
-         BACKCOLOR iif( lPrint, WHITE, aClrBack );
-         FONT _HMG_DefaultFontName SIZE _HMG_DefaultFontSize + 3;
+      @ nTop - 36 * nResV, nLeft LABEL &cNameObj OF &parent VALUE cTitle ;
+         WIDTH nRight - nLeft ;
+         HEIGHT 24 ;
+         FONTCOLOR aClrFore ;
+         BACKCOLOR iif( lPrint, WHITE, aClrBack ) ;
+         FONT _HMG_DefaultFontName SIZE _HMG_DefaultFontSize + 3 ;
          BOLD CENTERALIGN VCENTERALIGN
       IF lPrint .OR. lRedraw
          RedrawWindow( GetControlHandle( cNameObj, parent ) )
@@ -176,13 +176,13 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    IF lLegends
       nPos := nTop
       FOR nI := 1 TO Len( aSeries )
-         DrawBar( parent, nRight + ( ( _HMG_DefaultFontSize - 1 ) * nResH ), nPos + _HMG_DefaultFontSize * nResV,;
+         DrawBar( parent, nRight + ( ( _HMG_DefaultFontSize - 1 ) * nResH ), nPos + _HMG_DefaultFontSize * nResV, ;
             ( _HMG_DefaultFontSize - 1 ) * nResH, ( _HMG_DefaultFontSize - 2 ) * nResV, l3D, 1, aColors[nI] )
          cNameObj := "Obj_Name_" + hb_ntos( nGraphObj++ )
-         @ nPos - 1, nRight + ( 4 + 2 * _HMG_DefaultFontSize ) * nResH LABEL &cNameObj OF &parent;
-            VALUE aSeries[nI] AUTOSIZE;
-            FONTCOLOR aClrFore;
-            BACKCOLOR iif( lPrint, WHITE, NIL );
+         @ nPos - 1, nRight + ( 4 + 2 * _HMG_DefaultFontSize ) * nResH LABEL &cNameObj OF &parent ;
+            VALUE aSeries[nI] AUTOSIZE ;
+            FONTCOLOR aClrFore ;
+            BACKCOLOR iif( lPrint, WHITE, NIL ) ;
             FONT _HMG_DefaultFontName SIZE _HMG_DefaultFontSize - 1 TRANSPARENT
          nPos += ( _HMG_DefaultFontSize + 7 ) * nResV
       NEXT nI
@@ -231,12 +231,12 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
       IF lxVal
          IF nRange * nI <= nXMax
             cNameObj := "Obj_Name_" + hb_ntos( nGraphObj++ )
-            @ nRPos, nLeft - nDeep - 75 LABEL &cNameObj OF &parent;
-               VALUE Transform( nRange * nI, cPicture );
-               WIDTH 65;
-               HEIGHT _HMG_DefaultFontSize + 3;
-               FONTCOLOR aClrFore;
-               BACKCOLOR iif( lPrint, WHITE, aClrBack );
+            @ nRPos, nLeft - nDeep - 75 LABEL &cNameObj OF &parent ;
+               VALUE Transform( nRange * nI, cPicture ) ;
+               WIDTH 65 ;
+               HEIGHT _HMG_DefaultFontSize + 3 ;
+               FONTCOLOR aClrFore ;
+               BACKCOLOR iif( lPrint, WHITE, aClrBack ) ;
                FONT _HMG_DefaultFontName SIZE _HMG_DefaultFontSize - 1 RIGHTALIGN
             IF lPrint .OR. lRedraw
                RedrawWindow( GetControlHandle( cNameObj, parent ) )
@@ -244,12 +244,12 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
          ENDIF
          IF nRange * ( - nI ) >= nXMin * ( -1 )
             cNameObj := "Obj_Name_" + hb_ntos( nGraphObj++ )
-            @ nRNeg, nLeft - nDeep - 75 LABEL &cNameObj OF &parent;
-               VALUE Transform( nRange *- nI, cPicture );
-               WIDTH 65;
-               HEIGHT _HMG_DefaultFontSize + 3;
-               FONTCOLOR aClrFore;
-               BACKCOLOR iif( lPrint, WHITE, aClrBack );
+            @ nRNeg, nLeft - nDeep - 75 LABEL &cNameObj OF &parent ;
+               VALUE Transform( nRange *- nI, cPicture ) ;
+               WIDTH 65 ;
+               HEIGHT _HMG_DefaultFontSize + 3 ;
+               FONTCOLOR aClrFore ;
+               BACKCOLOR iif( lPrint, WHITE, aClrBack ) ;
                FONT _HMG_DefaultFontName SIZE _HMG_DefaultFontSize - 1 RIGHTALIGN
             IF lPrint .OR. lRedraw
                RedrawWindow( GetControlHandle( cNameObj, parent ) )
@@ -309,10 +309,10 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
       nI := nLeft + nWideB
       FOR nJ := 1 TO nMax( aData )
          cNameObj := "Obj_Name_" + hb_ntos( nGraphObj++ )
-         @ nBottom + 8, nI - iif( l3D, nDeep, nDeep + 8 ) LABEL &cNameObj OF &parent;
-            VALUE aYVals[nJ] AUTOSIZE;
-            FONTCOLOR aClrFore;
-            BACKCOLOR iif( lPrint, WHITE, aClrBack );
+         @ nBottom + 8, nI - iif( l3D, nDeep, nDeep + 8 ) LABEL &cNameObj OF &parent ;
+            VALUE aYVals[nJ] AUTOSIZE ;
+            FONTCOLOR aClrFore ;
+            BACKCOLOR iif( lPrint, WHITE, aClrBack ) ;
             FONT _HMG_DefaultFontName SIZE _HMG_DefaultFontSize - 1
          nI += nWideB
       NEXT
@@ -382,10 +382,10 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
       ENDIF
       FOR nI := 1 TO nRange
          FOR nJ := 1 TO nSeries
-            DRAW TEXT IN WINDOW &parent;
-               AT nZero - ( aData[nJ,nI] / nMin + 2 * nDeep ), iif( nType == BARS, nPos - 18, nPos + 8 );
-               VALUE Transform( aData[nJ,nI], cPicture );
-               FONT _HMG_DefaultFontName SIZE _HMG_DefaultFontSize - 1 BOLD;
+            DRAW TEXT IN WINDOW &parent ;
+               AT nZero - ( aData[nJ,nI] / nMin + 2 * nDeep ), iif( nType == BARS, nPos - 18, nPos + 8 ) ;
+               VALUE Transform( aData[nJ,nI], cPicture ) ;
+               FONT _HMG_DefaultFontName SIZE _HMG_DefaultFontSize - 1 BOLD ;
                FONTCOLOR aClrFore TRANSPARENT
             nPos += iif( nType == BARS, nWide + nSep, 0 )
          NEXT nJ
@@ -684,7 +684,7 @@ FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname
       ENDIF
       cname := "title_of_pie" + hb_ntos( nPieObj++ )
       DEFINE LABEL &cname
-         parent &windowname
+         PARENT &windowname
          ROW fromrow + 10
          COL fromcol + iif( Len( ctitle ) * 8 > ( tocol - fromcol ), 0, 5 )
          WIDTH iif( Len( ctitle ) * 8 > ( tocol - fromcol ), Len( ctitle ) * 10, tocol - fromcol - 10 )
@@ -850,7 +850,7 @@ FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname
          cname := "pielegend_" + hb_ntos( nPieObj++ )
          drawrect( windowname, fromrow, fromcol, fromrow + 15, fromcol + 15, { 0, 0, 0 }, 1, colors[i] )
          DEFINE LABEL &cname
-            parent &windowname
+            PARENT &windowname
             ROW fromrow
             COL fromcol + 20
             FONTNAME _HMG_DefaultFontName
@@ -893,13 +893,13 @@ FUNCTION _PiePrint( cForm, fromrow, fromcol, torow, tocol, series, aname, colors
 
    _HMG_IsModalActive := .F.
    DEFAULT cLibrary := ""
-   DEFINE WINDOW _PieGraph;
-         At GetProperty( cForm, 'Row' ), GetProperty( cForm, 'Col' );
-         WIDTH GetProperty( cForm, 'Width' );
-         HEIGHT GetProperty( cForm, 'Height' );
-         Child;
-         ON INIT ( drawpiegraph( "_PieGraph",fromrow,fromcol,torow,tocol,series,aname,colors,ctitle,depth,l3d,lxval,lsleg,cPicture, .T., placement, .T. ),;
-         _bmpprint( ThisWindow.Name, x, y, iif( "HBPRINT" $ Upper( cLibrary ), 2, 1 ) ) );
+   DEFINE WINDOW _PieGraph ;
+         At GetProperty( cForm, 'Row' ), GetProperty( cForm, 'Col' ) ;
+         WIDTH GetProperty( cForm, 'Width' ) ;
+         HEIGHT GetProperty( cForm, 'Height' ) ;
+         Child ;
+         ON INIT ( drawpiegraph( "_PieGraph",fromrow,fromcol,torow,tocol,series,aname,colors,ctitle,depth,l3d,lxval,lsleg,cPicture, .T., placement, .T. ), ;
+         _bmpprint( ThisWindow.Name, x, y, iif( "HBPRINT" $ Upper( cLibrary ), 2, 1 ) ) ) ;
          BACKCOLOR WHITE
 
    END WINDOW
@@ -915,14 +915,14 @@ FUNCTION _GraphPrint( cForm, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
 
    _HMG_IsModalActive := .F.
    DEFAULT cLibrary := ""
-   DEFINE WINDOW _Graph;
-         At GetProperty( cForm, 'Row' ), GetProperty( cForm, 'Col' );
-         WIDTH GetProperty( cForm, 'Width' );
-         HEIGHT GetProperty( cForm, 'Height' );
-         Child;
-         ON INIT ( GraphShow("_Graph",nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle,aYVals,nBarD,nWideB,nSep,nXRanges,;
-         l3D, lGrid, lxGrid, lyGrid, lxVal, lyVal, lLegends, aSeries, aColors, nType, lViewVal, cPicture, nLegendsWidth, .T. , .T. ),;
-         _bmpprint( ThisWindow.Name, x, y, iif( "HBPRINT" $ Upper( cLibrary ), 2, 1 ) ) );
+   DEFINE WINDOW _Graph ;
+         At GetProperty( cForm, 'Row' ), GetProperty( cForm, 'Col' ) ;
+         WIDTH GetProperty( cForm, 'Width' ) ;
+         HEIGHT GetProperty( cForm, 'Height' ) ;
+         Child ;
+         ON INIT ( GraphShow("_Graph",nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle,aYVals,nBarD,nWideB,nSep,nXRanges, ;
+         l3D, lGrid, lxGrid, lyGrid, lxVal, lyVal, lLegends, aSeries, aColors, nType, lViewVal, cPicture, nLegendsWidth, .T. , .T. ), ;
+         _bmpprint( ThisWindow.Name, x, y, iif( "HBPRINT" $ Upper( cLibrary ), 2, 1 ) ) ) ;
          BACKCOLOR WHITE
 
    END WINDOW

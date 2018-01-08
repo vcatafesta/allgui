@@ -13,7 +13,7 @@ func main
    INIT dialog oDlg1 from resource DIALOG_1 clipper NOEXIT NOEXITESC  on init {|| buildtabPages(oTab,{adlg1,adlg2},{"pagina1","pagina2"})}
 
    /*
-   aDlg1:oParent:=oTab,aDlg2:oParent:=oTab,;
+   aDlg1:oParent:=oTab,aDlg2:oParent:=oTab, ;
    aDlg1:Activate(.t.),      aDlg2:Activate(.t.), ;
    aDlg2:hide(),    oTab:StartPage( "pagina1",aDlg1 ),    oTab:EndPage(), ;
    oTab:StartPage( "pagina2",aDlg2 ),    oTab:EndPage(),otab:changepage(1)

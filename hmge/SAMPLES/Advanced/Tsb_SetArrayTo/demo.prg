@@ -114,9 +114,9 @@ FUNCTION FormTbrTabField(cTitle, aBColor, nTabNum, cTabName)
          BACKCOLOR PURPLE       ;
          SIZE nFButtSize BOLD   ;
          NOXPSTYLE HANDCURSOR   ;
-         ON MOUSEHOVER ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco1x2 ) ,;
+         ON MOUSEHOVER ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco1x2 ) , ;
          SetProperty(ThisWindow.Name, This.Name, "fontcolor", aFButtColor2 ) ) ;
-         ON MOUSELEAVE ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco1x1 ) ,;
+         ON MOUSELEAVE ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco1x1 ) , ;
          SetProperty(ThisWindow.Name, This.Name, "fontcolor", aFButtColor1 ) ) ;
          ACTION { || MyLoadDim(cFormName), BrwSetFocus(cFormName) } ;
          NOTABSTOP        // if the focus is on the button will not work ESC,
@@ -132,9 +132,9 @@ FUNCTION FormTbrTabField(cTitle, aBColor, nTabNum, cTabName)
          BACKCOLOR LGREEN       ;
          SIZE nFButtSize BOLD   ;
          NOXPSTYLE HANDCURSOR   ;
-         ON MOUSEHOVER ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco2x2 ) ,;
+         ON MOUSEHOVER ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco2x2 ) , ;
          SetProperty(ThisWindow.Name, This.Name, "fontcolor", aFButtColor2 ) ) ;
-         ON MOUSELEAVE ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco2x1 ) ,;
+         ON MOUSELEAVE ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco2x1 ) , ;
          SetProperty(ThisWindow.Name, This.Name, "fontcolor", aFButtColor1 ) ) ;
          ACTION { || MySaveDim(cFormName), BrwSetFocus(cFormName) } ;
          NOTABSTOP        // если фокус будет на кнопке, не сработает ESC,
@@ -150,9 +150,9 @@ FUNCTION FormTbrTabField(cTitle, aBColor, nTabNum, cTabName)
          BACKCOLOR RED          ;
          SIZE nFButtSize BOLD   ;
          NOXPSTYLE HANDCURSOR   ;
-         ON MOUSEHOVER ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco3x2 ) ,;
+         ON MOUSEHOVER ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco3x2 ) , ;
          SetProperty(ThisWindow.Name, This.Name, "fontcolor", aFButtColor2 ) ) ;
-         ON MOUSELEAVE ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco3x1 ) ,;
+         ON MOUSELEAVE ( SetProperty(ThisWindow.Name, This.Name, "ICON", cIco3x1 ) , ;
          SetProperty(ThisWindow.Name, This.Name, "fontcolor", aFButtColor1 ) ) ;
          ACTION { || ThisWindow.Release } ;
          NOTABSTOP        // если фокус будет на кнопке, не сработает ESC,
@@ -204,7 +204,7 @@ STATIC FUNCTION CreateBrowseCnfCard(aDim,aBColor,cTabName,nTbrRow,nTbrCol,nTbrWi
 
    aFontHF := aFont[2]       //  bold  Header, Footer
 
-   oBrw52 := SetArrayTo( cTbrName, cForm, aArray, aFontHF, aHead, aFSize,;
+   oBrw52 := SetArrayTo( cTbrName, cForm, aArray, aFontHF, aHead, aFSize, ;
       aFoot, aPict, aAlign, aName )
 
    oBrw52:AddSuperHead(1, 4, "Tab: " + cTabName) // суперхидер
@@ -257,7 +257,7 @@ STATIC FUNCTION CreateBrowseCnfCard(aDim,aBColor,cTabName,nTbrRow,nTbrCol,nTbrWi
    // отработка ПОСЛЕ редактирования 4-колонки по функции
    // если [4] элемент == F то в [3] элемент пишем 0
    // ### 1-вариант:  ЭТО действия ДО коректировки для колонки [4]
-   // oBrw52:aColumns[4]:bPrevEdit := { || oBrw52:aArray[oBrw52:nAt][3] := IF(oBrw52:aArray[oBrw52:nAt][4],;
+   // oBrw52:aColumns[4]:bPrevEdit := { || oBrw52:aArray[oBrw52:nAt][3] := IF(oBrw52:aArray[oBrw52:nAt][4], ;
    //                                        oBrw52:aArray[oBrw52:nAt][3], 0 ) }
 
    // ### 2-вариант: ЭТО действия ПОСЛЕ коректировки для колонки [4] - "VIEW"
@@ -457,7 +457,7 @@ FUNCTION MyRGB(aDim)
 
 FUNCTION MyFormColor()
 
-   LOCAL aColor := { TEAL, BROWN, AQUA, FUCHSIA, ORANGE, GREEN, PURPLE,;
+   LOCAL aColor := { TEAL, BROWN, AQUA, FUCHSIA, ORANGE, GREEN, PURPLE, ;
       GRAY, BLUE, SILVER, MAROON, OLIVE, PINK, LGREEN, NAVY, YELLOW }
 
    nStatColor++

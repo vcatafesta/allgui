@@ -13,8 +13,8 @@ FUNCTION TestStop()
 
    DEFINE WINDOW Form_12 At 40,60 ;
          WIDTH 800 HEIGHT 540 ;
-         TITLE  "Stop browsing";
-         ICON "Demo.ico";
+         TITLE  "Stop browsing" ;
+         ICON "Demo.ico" ;
          CHILD
 
       DEFINE SPLITBOX
@@ -59,8 +59,8 @@ FUNCTION TestUserMenu()
 
    DEFINE WINDOW Form_12 At 40,60 ;
          WIDTH 800 HEIGHT 540 ;
-         TITLE  "Header User Menu";
-         ICON "Demo.ico";
+         TITLE  "Header User Menu" ;
+         ICON "Demo.ico" ;
          CHILD
 
       DEFINE STATUSBAR

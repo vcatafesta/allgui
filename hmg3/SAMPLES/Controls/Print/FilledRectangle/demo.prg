@@ -132,26 +132,26 @@ PROCEDURE PrintDoc
 
          @ 30,20 PRINT RECTANGLE ;
             TO 40,190 ;
-            PENWIDTH 0.1;
+            PENWIDTH 0.1 ;
             COLOR {255,255,0}
 
          @ 60,20 PRINT RECTANGLE ;
             TO 100,190 ;
-            PENWIDTH 0.1;
-            COLOR {255,255,0};
+            PENWIDTH 0.1 ;
+            COLOR {255,255,0} ;
             FILLED
 
          @ 110,20 PRINT RECTANGLE ;
             TO 150,190 ;
-            PENWIDTH 0.1;
-            COLOR {255,255,0};
+            PENWIDTH 0.1 ;
+            COLOR {255,255,0} ;
             ROUNDED
 
          @ 160,20 PRINT RECTANGLE ;
             TO 200,190 ;
-            PENWIDTH 0.1;
-            COLOR {255,255,0};
-            FILLED;
+            PENWIDTH 0.1 ;
+            COLOR {255,255,0} ;
+            FILLED ;
             ROUNDED
 
       END PRINTPAGE
@@ -167,18 +167,18 @@ PROCEDURE PrintDoc
 
          @ 60,20 PRINT RECTANGLE ;
             TO 100,190 ;
-            PENWIDTH 0.1;
+            PENWIDTH 0.1 ;
             FILLED
 
          @ 110,20 PRINT RECTANGLE ;
             TO 150,190 ;
-            PENWIDTH 0.1;
+            PENWIDTH 0.1 ;
             ROUNDED
 
          @ 160,20 PRINT RECTANGLE ;
             TO 200,190 ;
-            PENWIDTH 0.1;
-            FILLED;
+            PENWIDTH 0.1 ;
+            FILLED ;
             ROUNDED
 
       END PRINTPAGE

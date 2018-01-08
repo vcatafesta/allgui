@@ -16,10 +16,10 @@ PROCEDURE Main
    SET DEFAULT ICON TO "ZZZ_A_WINDOW"
    SET CENTERWINDOW RELATIVE PARENT
 
-   DEFINE WINDOW Win1;
-         AT 0,0 WIDTH 300 HEIGHT 400;
-         TITLE "HMG AChoice Test";
-         MAIN;
+   DEFINE WINDOW Win1 ;
+         AT 0,0 WIDTH 300 HEIGHT 400 ;
+         TITLE "HMG AChoice Test" ;
+         MAIN ;
          NOMAXIMIZE NOSIZE
 
       DEFINE MAINMENU
@@ -39,11 +39,11 @@ PROCEDURE Main
 
 FUNCTION Test()  // test stub module
 
-   LOCAL aChoices_ := { { "Date"          },;
-      { "Date Before"   },;
-      { "Date After"    },;
-      { "Month to Date" },;
-      { "Year to Date"  },;
+   LOCAL aChoices_ := { { "Date"          }, ;
+      { "Date Before"   }, ;
+      { "Date After"    }, ;
+      { "Month to Date" }, ;
+      { "Year to Date"  }, ;
       { "Date Range"    } }
 
    LOCAL nChoice
@@ -104,23 +104,23 @@ FUNCTION hmg_Achoice( cTitle, aSelection_, cHeading, cFont, nFontSize, lSort )
    nHeight    := INT( nHeight / 72 * 25.4 ) + 1
    nHeight    := nHeight * LEN( aSelection_ ) + GetTitleHeight() + GetBorderHeight() / 2
 
-   DEFINE WINDOW frmAchoice;
-         CLIENTAREA nWidth, nHeight;
-         TITLE cTitle;
-         MODAL NOSIZE;
+   DEFINE WINDOW frmAchoice ;
+         CLIENTAREA nWidth, nHeight ;
+         TITLE cTitle ;
+         MODAL NOSIZE ;
          ON MOUSECLICK ThisWindow.Release
 
       ON KEY ESCAPE ACTION ThisWindow.Release
       ON KEY RETURN ACTION ( nRetVal := frmAchoice.grdChoice.Value, ThisWindow.Release )
 
-      @  0, 0 GRID grdChoice;
-         WIDTH frmAchoice.Width HEIGHT frmAchoice.Height - 3;
-         HEADERS { cHeading } WIDTHS { nCellWidth };
-         ITEMS aSelection_ VALUE 1;
-         FONT cFont SIZE nFontSize;
-         ON CHANGE ( nRetVal := This.CellRowIndex );
-         ON DBLCLICK ( nRetVal := This.CellRowIndex, ThisWindow.Release );
-         NOLINES;
+      @  0, 0 GRID grdChoice ;
+         WIDTH frmAchoice.Width HEIGHT frmAchoice.Height - 3 ;
+         HEADERS { cHeading } WIDTHS { nCellWidth } ;
+         ITEMS aSelection_ VALUE 1 ;
+         FONT cFont SIZE nFontSize ;
+         ON CHANGE ( nRetVal := This.CellRowIndex ) ;
+         ON DBLCLICK ( nRetVal := This.CellRowIndex, ThisWindow.Release ) ;
+         NOLINES ;
          JUSTIFY { GRID_JTFY_CENTER }
 
    END WINDOW

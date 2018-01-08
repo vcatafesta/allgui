@@ -40,8 +40,8 @@ MEMVAR Thems_color
 
 PROCEDURE SetColorMenu( aColors, lSubMenu )
 
-   LOCAL aColor := { GetRed( aColors[1] ),;
-      GetGreen( aColors[1] ),;
+   LOCAL aColor := { GetRed( aColors[1] ), ;
+      GetGreen( aColors[1] ), ;
       GetBlue( aColors[1] ) }
 
    _ColorMenu( _HMG_MainHandle, aColor, lSubMenu )
@@ -91,8 +91,8 @@ FUNCTION MyGetControlHandle( cControlName )
 
 FUNCTION SetButtonColor( aColors, cButton )
 
-   LOCAL lp, aColor := { GetRed( aColors[1] ),;
-      GetGreen( aColors[1] ),;
+   LOCAL lp, aColor := { GetRed( aColors[1] ), ;
+      GetGreen( aColors[1] ), ;
       GetBlue( aColors[1] ) }
    IF cButton==nil
       lp:=AScan(_HMG_aControlType,'OBUTTON')
@@ -161,13 +161,13 @@ FUNCTION SetThemes( theme, bInvalidate )   // modified
    LOCAL aColors_DarkBlue   := { RGB(89, 135, 214), RGB(89, 135, 214), RGB(4, 57, 148) }
    LOCAL aColors_LightGreen := { RGB(235, 245, 214), RGB(235, 245, 214), RGB(195, 224, 133) }
    LOCAL aColorsTable := { ;
-      aColors_Office2003Blue,;
-      aColors_Office2003Green,;
-      aColors_Office2003Orange,;
-      aColors_Office2003Silver,;
-      aColors_Azure,;
-      aColors_DarkBlue,;
-      aColors_LightGreen;
+      aColors_Office2003Blue, ;
+      aColors_Office2003Green, ;
+      aColors_Office2003Orange, ;
+      aColors_Office2003Silver, ;
+      aColors_Azure, ;
+      aColors_DarkBlue, ;
+      aColors_LightGreen ;
       }
 
    DEFAULT bInvalidate TO TRUE
@@ -398,17 +398,17 @@ FUNCTION OwnButtonPaint(  pdis )   // modified
          DO CASE
          CASE M->buton_name="Ico_128x128".or.M->buton_name="Exit_Button"   // Updated: Sidorov Aleksandr 2012-07-25
 
-            FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T.,;
+            FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T., ;
                Thems_color,Thems_color)
          OTHERWISE
             IF lSelected
-               FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 3 ], aBtnRc[ 3 ], .T.,;
+               FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 3 ], aBtnRc[ 3 ], .T., ;
                   aColors[3],aColors[2])
             ELSEIF ! ( _HMG_aControlRangeMax [ i ] == 1 )
-               FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T.,;
+               FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T., ;
                   aColors[2],aColors[3])
             ELSE
-               FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T.,;
+               FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T., ;
                   aColors[3],aColors[2])
             ENDIF
 

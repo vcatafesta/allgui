@@ -82,7 +82,7 @@ FUNCTION MsgArray(aItems,aHeads,cText,cTitle,lCancel)
 
    //Controles previos
    IF Valtype(aItems)<>"A"    //Si no es un array
-      MsgStop("Imposible mostrar datos que no son un ARRAY en MsgArray()"+CRLF+CRLF+;
+      MsgStop("Imposible mostrar datos que no son un ARRAY en MsgArray()"+CRLF+CRLF+ ;
          "Tipo de datos "+Valtype(aItems))
 
       RETURN 0

@@ -417,7 +417,7 @@ PROCEDURE Main( cFile )
             VALUE ''        ;
             WIDTH 90        ;
             MAXLENGTH 10    ;
-            UpperCase
+            UPPERCASE
 
          // Field type
 
@@ -472,7 +472,7 @@ PROCEDURE Main( cFile )
             FONTCOLOR NAVY_COLOR
          @ 120, 15 EditBox edtComment ;
             VALUE ''           ;
-            NoHScroll          ;
+            NOHSCROLL          ;
             READONLY
 
          // Transformation rule of field contexts at the changing of value type
@@ -511,7 +511,7 @@ PROCEDURE Main( cFile )
 
          @ 30, 5 EditBox edtGeneral ;
             VALUE ''           ;
-            NoHScroll          ;
+            NOHSCROLL          ;
             READONLY
 
          // Buttons Apply/Discard changes

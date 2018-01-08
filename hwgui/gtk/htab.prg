@@ -28,7 +28,7 @@ CLASS VAR winclass   INIT "SysTabControl32"
    DATA  bAction
 
    METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-      oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC,;
+      oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC, ;
       bClick, bGetFocus, bLostFocus )
 
    METHOD Activate()

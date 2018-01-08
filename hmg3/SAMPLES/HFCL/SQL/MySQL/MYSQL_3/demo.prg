@@ -1,7 +1,7 @@
 /*
 *   HMG Basic MySql Access Sample.
 *   Roberto Lopez <mail.box.hmg@gmail.com>
-*   Based Upon Code Contributed by;
+*   Based Upon Code Contributed by ;
 *      Humberto Fornazier   <hfornazier@brfree.com.br>
 *      Mitja Podgornik      <yamamoto@rocketmail.com>
 */
@@ -341,7 +341,7 @@ PROCEDURE EditRow()
       cEMail   := AllTrim(oRow:fieldGet(3))
       oQuery:Destroy()
 
-      aResults := InputWindow   (;
+      aResults := InputWindow   ( ;
          'Edit Row'         , ;
          { 'Name:' , 'Email:' }, ;
          { cName , cEmail }   , ;

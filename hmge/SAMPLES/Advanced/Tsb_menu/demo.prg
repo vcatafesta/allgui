@@ -110,7 +110,7 @@ PROCEDURE main
       { '__' }, ;
       { '&C  Selected customer', { { '&A  Retail  ', {|| zysk3( 2 ) } }, ;
       { '__' }, ;
-      { '&B  Wholesale   ', {|| zysk3( 1 ) } } } } } },;
+      { '&B  Wholesale   ', {|| zysk3( 1 ) } } } } } }, ;
       { '&F Counting sales from number to number', { { "&A  Wholesale   ",  {|| pob_vat( 1 ) } }, ;
       { '__' }, ;
       { "&B  Retail", {|| pob_vat( 2 ) } }, ;
@@ -209,7 +209,7 @@ PROCEDURE main
       { '__', 0 }, ;
       { '&E  Improvement of sorts', { { '&A All Files    ', {|| sorty( .T. ) } }, ;
       { '_', 0 }, ;
-      { '&B Only selected', {|| sort2() }  } }, 'Sorts' },;
+      { '&B Only selected', {|| sort2() }  } }, 'Sorts' }, ;
       { '__', 0 }, ;
       { '&G  Changing the password **', 73 }, ;
       { '__', 0 }, ;

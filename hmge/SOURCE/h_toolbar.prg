@@ -356,7 +356,7 @@ FUNCTION _BeginToolBar ( name, parent, row, col, w, h, caption, ProcedureName, f
    ENDIF
 
    IF ValType ( parent ) == 'U'
-      parent := _HMG_ActiveFormName
+      PARENT := _HMG_ActiveFormName
    ENDIF
 
    _HMG_ActiveToolBarFormName := parent
@@ -391,7 +391,7 @@ FUNCTION _BeginToolBarEx( name, parent, row, col, w, h, caption, ProcedureName, 
    ENDIF
 
    IF ValType ( parent ) == 'U'
-      parent := _HMG_ActiveFormName
+      PARENT := _HMG_ActiveFormName
    ENDIF
 
    _HMG_ActiveToolBarFormName := parent

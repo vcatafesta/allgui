@@ -80,22 +80,22 @@ FUNCTION main()
 
       END MENU
 
-      @ 20,30 BUTTON btn_20;
-         CAPTION "Create Property";
+      @ 20,30 BUTTON btn_20 ;
+         CAPTION "Create Property" ;
          ACTION CreateTestPG("Form_1" ,"PropGrid_1",FormTest, PG_Test) ;
          WIDTH 120 HEIGHT 24
 
-      @ 20,200 BUTTON btn_21;
-         CAPTION "Add Item";
+      @ 20,200 BUTTON btn_21 ;
+         CAPTION "Add Item" ;
          ACTION AddItemPG( "Form_1", "PropGrid_1", FormTest, PG_Test) ;
          WIDTH 120 HEIGHT 24
 
       DEFINE PROPGRID PropGrid_1   ;
          AT 55,10   WIDTH 350 HEIGHT 380 ;
-         HEADER " Name","Value";
-         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 180;
-         BACKCOLOR {240,240,240};
-         ON CHANGEVALUE  ChdItem("PropGrid_1","Form_1");
+         HEADER " Name","Value" ;
+         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 180 ;
+         BACKCOLOR {240,240,240} ;
+         ON CHANGEVALUE  ChdItem("PropGrid_1","Form_1") ;
          ITEMINFO SINGLEEXPAND
 
       DEFINE CATEGORY 'Main PG Property' ID CTG_MAIN //INFO "To create a Property Grid, fill Property Items with correct data and press button Create Property"
@@ -242,16 +242,16 @@ FUNCTION CreateTestPG(FormName,ControlName,FormTest, PG_Test)
    Form_1.Btn_20.Enabled :=.f.
 
    DEFINE WINDOW &FormTest ;
-         AT 130,130 + xSize +xPos;
-         WIDTH xSize +xPos +200;
+         AT 130,130 + xSize +xPos ;
+         WIDTH xSize +xPos +200 ;
          HEIGHT ySize +100 ;
          TITLE 'PropertyGrid Test' ;
          ON RELEASE ReleaseTest() ;
          CHILD
 
       _DefinePropGrid ( PG_Test, FormTest, yPos,xPos , xSize, ySize, , , .f., , ;
-         aFont[1], aFont[2], , , ,.f., , , aFont[3], aFont[4], aFont[6], aFont[7],;
-         lPgExp, aBackColor, aFontColor, nIndent, nItemHeight, nDataWidth, 0, .f.,;
+         aFont[1], aFont[2], , , ,.f., , , aFont[3], aFont[4], aFont[6], aFont[7], ;
+         lPgExp, aBackColor, aFontColor, nIndent, nItemHeight, nDataWidth, 0, .f., ;
          lInfo, , , {cHdName,cHdValue}, lPgExp )
 
       DEFINE CATEGORY cInitCateg ID nDefId
@@ -265,35 +265,35 @@ FUNCTION CreateTestPG(FormName,ControlName,FormTest, PG_Test)
 END PROPGRID
 
 @ 10,380 FRAME Frame_1 WIDTH 140 HEIGHT 120 CAPTION "Property from:"
-@ 30,400 BUTTON btn_1;
-   CAPTION "File Txt";
+@ 30,400 BUTTON btn_1 ;
+   CAPTION "File Txt" ;
    ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.txt",FormName, ControlName) ;
    WIDTH 100 HEIGHT 24
 
-@ 60,400 BUTTON btn_2;
-   CAPTION "File Xml";
+@ 60,400 BUTTON btn_2 ;
+   CAPTION "File Xml" ;
    ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.xml",FormName, ControlName) ;
    WIDTH 100 HEIGHT 24
 
-@ 90,400 BUTTON btn_3;
-   CAPTION "File Ini";
-   ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.ini",FormName, ControlName);
+@ 90,400 BUTTON btn_3 ;
+   CAPTION "File Ini" ;
+   ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.ini",FormName, ControlName) ;
    WIDTH 100 HEIGHT 24
 
 @ 160,380 FRAME Frame_2 WIDTH 140 HEIGHT 130 CAPTION "Property save to:"
 
-@ 180,400 BUTTON btn_5;
-   CAPTION "File Txt";
+@ 180,400 BUTTON btn_5 ;
+   CAPTION "File Txt" ;
    ACTION SaveToFile(FormTest,PG_Test,"PgTest.txt",2) ;
    WIDTH 100 HEIGHT 24
 
-@ 215,400 BUTTON btn_6;
-   CAPTION "File Xml";
+@ 215,400 BUTTON btn_6 ;
+   CAPTION "File Xml" ;
    ACTION SaveToFile(FormTest,PG_Test,"PgTest.xml",1) ;
    WIDTH 100 HEIGHT 24
 
-@ 250,400 BUTTON btn_7;
-   CAPTION "File Ini";
+@ 250,400 BUTTON btn_7 ;
+   CAPTION "File Ini" ;
    ACTION SaveToFile(FormTest,PG_Test,"PgTest.ini",3) ;
    WIDTH 100 HEIGHT 24
 
@@ -312,7 +312,7 @@ FUNCTION ReleaseTest()
 
 FUNCTION AddItemPG( FormName, ControlName, FormTest, PG_Test)
 
-   LOCAL cCateg, cType,cName, cValue, cData, lDisab, lDisEd,;
+   LOCAL cCateg, cType,cName, cValue, cData, lDisab, lDisEd, ;
       nId, cInfo, cVarName, aValue,aData
 
    GET PROPERTYITEM &ControlName OF &FormName ID ITM_CTG TO cCateg
@@ -398,7 +398,7 @@ FUNCTION DefFunData( PGname, cForm, lData, cData )
       ENDIF
 
       IF ItType == PG_ARRAY  .or.( ItType == PG_ENUM .and. lData) .or. (ItType == PG_IMAGE .and. lData) .or. ;
-            ( ItType == PG_FLAG .and. lData) .or. ( ItType == PG_LIST .and. lData ).or. ( ItType == PG_FILE .and. lData ) .or.;
+            ( ItType == PG_FLAG .and. lData) .or. ( ItType == PG_LIST .and. lData ).or. ( ItType == PG_FILE .and. lData ) .or. ;
             ( ItType == PG_SIZE .and. lData)
          IF lData
             cData := CHARREPL (';', cData, ',')
@@ -466,7 +466,7 @@ FUNCTION InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
 
          bRetVal := {|| IF(_InputPG._DataBox.Value ==1,"true","false") }
 
-         @ 30 ,10 RADIOGROUP _DataBox  OPTIONS {"true","false"};
+         @ 30 ,10 RADIOGROUP _DataBox  OPTIONS {"true","false"} ;
             VALUE 1 HORIZONTAL ;
             ON CHANGE  (  RetVal := Eval(bRetVal) )
 
@@ -877,15 +877,15 @@ FUNCTION DisplPGInfo(PGname,cForm,nId)
 
    LOCAL xValue,aValue,n
    LOCAL cStr
-   LOCAL aType := {"Name      - ",;
-      "Value     - ",;
-      "Data      - ",;
-      "Disabled  - ",;
-      "Changed   - ",;
-      "Item Type - ",;
-      "Item ID   - ",;
-      "Variable  - ",;
-      "Info      - ",;
+   LOCAL aType := {"Name      - ", ;
+      "Value     - ", ;
+      "Data      - ", ;
+      "Disabled  - ", ;
+      "Changed   - ", ;
+      "Item Type - ", ;
+      "Item ID   - ", ;
+      "Variable  - ", ;
+      "Info      - ", ;
       "InitValue - "}
 
    IF nId==0
@@ -1000,14 +1000,14 @@ FUNCTION About()
       DEFINE WINDOW Form_About ;
             AT 0,0 ;
             WIDTH 250 HEIGHT 110 ;
-            TITLE '';
+            TITLE '' ;
             TOPMOST NOCAPTION ;
 
-         @ 10 ,10 IMAGE Icon_1;
+         @ 10 ,10 IMAGE Icon_1 ;
             PICTURE "PgGen.ico" ;
             WIDTH 50 HEIGHT 50
 
-         @ 5 ,5 FRAME Frame_1;
+         @ 5 ,5 FRAME Frame_1 ;
             WIDTH 235  HEIGHT 90
 
          @ 10,70 LABEL Label_1 ;
@@ -1027,7 +1027,7 @@ FUNCTION About()
 
          @ 65,15  BUTTON Btn_splash ;
             CAPTION 'OK' ;
-            ACTION  {|| Form_About.Release };
+            ACTION  {|| Form_About.Release } ;
             WIDTH 40 HEIGHT 20 ;
             FONT 'Arial' SIZE 9 Bold
 

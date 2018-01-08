@@ -33,7 +33,7 @@ FUNCTION Main
          WIDTH 420 ;
          HEIGHT 326 ;
          HEADERS {'Column 1','Column 2','Column 3'} ;
-         WIDTHS {132,132,132};
+         WIDTHS {132,132,132} ;
          VIRTUAL ;
          ITEMCOUNT Len(aData) ;
          ON QUERYDATA QueryTest(aData) ;

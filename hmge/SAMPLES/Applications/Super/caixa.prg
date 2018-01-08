@@ -11,13 +11,13 @@ programador : marcelo neves
 
 FUNCTION caixa()
 
-   DEFINE WINDOW form_caixa;
-         at 000,000;
-         WIDTH 800;
-         HEIGHT 605;
-         TITLE 'Movimentação do Caixa';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_caixa ;
+         at 000,000 ;
+         WIDTH 800 ;
+         HEIGHT 605 ;
+         TITLE 'Movimentação do Caixa' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * botões (toolbar)
@@ -109,7 +109,7 @@ FUNCTION caixa()
 
       DEFINE SPLITBOX
          DEFINE GRID grid_caixa
-            parent form_caixa
+            PARENT form_caixa
             COL 000
             ROW 105
             WIDTH 795
@@ -126,7 +126,7 @@ FUNCTION caixa()
       END SPLITBOX
 
       DEFINE LABEL rodape_001
-         parent form_caixa
+         PARENT form_caixa
          COL 005
          ROW 545
          VALUE 'Escolha o período'
@@ -138,7 +138,7 @@ FUNCTION caixa()
          TRANSPARENT .T.
       END LABEL
       DEFINE LABEL rodape_002
-         parent form_caixa
+         PARENT form_caixa
          COL 250
          ROW 545
          VALUE 'até'
@@ -149,26 +149,26 @@ FUNCTION caixa()
          FONTCOLOR _cinza_001
          TRANSPARENT .T.
       END LABEL
-      @ 540,140 datepicker dp_inicio;
-         parent form_caixa;
-         VALUE date();
-         WIDTH 100;
+      @ 540,140 datepicker dp_inicio ;
+         PARENT form_caixa ;
+         VALUE date() ;
+         WIDTH 100 ;
          FONT 'verdana' size 010
-      @ 540,280 datepicker dp_final;
-         parent form_caixa;
-         VALUE date();
-         WIDTH 100;
+      @ 540,280 datepicker dp_final ;
+         PARENT form_caixa ;
+         VALUE date() ;
+         WIDTH 100 ;
          FONT 'verdana' size 010
-      @ 540,390 buttonex botao_filtrar;
-         parent form_caixa;
-         CAPTION 'Filtrar';
-         WIDTH 100 height 030;
-         ACTION atualizar();
-         bold;
+      @ 540,390 buttonex botao_filtrar ;
+         PARENT form_caixa ;
+         CAPTION 'Filtrar' ;
+         WIDTH 100 height 030 ;
+         ACTION atualizar() ;
+         bold ;
          TOOLTIP 'Clique aqui para mostrar as informações com base no período selecionado'
 
       DEFINE LABEL rodape_003
-         parent form_caixa
+         PARENT form_caixa
          COL form_caixa.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
@@ -224,84 +224,84 @@ STATIC FUNCTION dados(parametro)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW form_dados;
-         at 000,000;
-         WIDTH 325;
-         HEIGHT 270;
-         TITLE (titulo);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_dados ;
+         at 000,000 ;
+         WIDTH 325 ;
+         HEIGHT 270 ;
+         TITLE (titulo) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 010,005 label lbl_001;
-         of form_dados;
-         VALUE 'Data';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_dados ;
+         VALUE 'Data' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,005 textbox tbox_001;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_data;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 030,005 textbox tbox_001 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_data ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          date
-      @ 060,005 label lbl_002;
-         of form_dados;
-         VALUE 'Histórico';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 060,005 label lbl_002 ;
+         of form_dados ;
+         VALUE 'Histórico' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,005 textbox tbox_002;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_historico;
-         MAXLENGTH 030;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 110,005 label lbl_003;
-         of form_dados;
-         VALUE 'Entrada';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 080,005 textbox tbox_002 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_historico ;
+         MAXLENGTH 030 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 110,005 label lbl_003 ;
+         of form_dados ;
+         VALUE 'Entrada' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 130,005 getbox tbox_003;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_entrada;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 130,005 getbox tbox_003 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_entrada ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
-      @ 110,140 label lbl_004;
-         of form_dados;
-         VALUE 'Saída';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _vermelho_002;
+      @ 110,140 label lbl_004 ;
+         of form_dados ;
+         VALUE 'Saída' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _vermelho_002 ;
          TRANSPARENT
-      @ 130,140 getbox tbox_004;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_saida;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 130,140 getbox tbox_004 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_saida ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
 
       * linha separadora

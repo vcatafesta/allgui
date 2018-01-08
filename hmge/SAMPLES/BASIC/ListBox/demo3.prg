@@ -29,7 +29,7 @@ FUNCTION main()
          VALUE 2 ;
          ON CHANGE cas_change() ;
          ON DBLCLICK msginfo( ;
-         'this.value = ' + str(this.value) +chr(13)+;
+         'this.value = ' + str(this.value) +chr(13)+ ;
          'this.item( this.value ) = ' + this.item(this.value) )
 
       @ 200,10 button bt1 caption '<Insert>' action cas_add()
@@ -49,8 +49,8 @@ FUNCTION main()
       LOCAL x2 := alltrim(str( form_1.listbox_1.ItemCount ))
       LOCAL x3 := form_1.listbox_1.Item( val(x1) )
       Form_1.StatusBar.Item(1) := ;
-         "form_1.listbox_1.value = "     + x1 +space(15)+;
-         "form_1.listbox_1.ItemCount = " + x2 +space(15)+;
+         "form_1.listbox_1.value = "     + x1 +space(15)+ ;
+         "form_1.listbox_1.ItemCount = " + x2 +space(15)+ ;
          "form_1.listbox_1.Item(" + x1 + ") = " + x3
 
       RETURN

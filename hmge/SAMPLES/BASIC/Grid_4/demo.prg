@@ -59,7 +59,7 @@ PROCEDURE Main
          {'TEXTBOX','NUMERIC', '9,999' } , ;
          {'TEXTBOX','NUMERIC', '999.99' } , ;
          {'TEXTBOX','NUMERIC', '9,999,999.99' } ;
-         };
+         } ;
          COLUMNWHEN { ;
          { || Empty ( This.CellValue ) } , ;
          { || This.CellValue >= 'M' } , ;
@@ -72,11 +72,11 @@ PROCEDURE Main
          { || SETVIRTUALITEM() } , ;
          { || SETVIRTUALITEM() } , ;
          } ;
-         JUSTIFY { GRID_JTFY_LEFT,;
-         GRID_JTFY_RIGHT,;
-         GRID_JTFY_RIGHT,;
-         GRID_JTFY_RIGHT,;
-         GRID_JTFY_RIGHT,;
+         JUSTIFY { GRID_JTFY_LEFT, ;
+         GRID_JTFY_RIGHT, ;
+         GRID_JTFY_RIGHT, ;
+         GRID_JTFY_RIGHT, ;
+         GRID_JTFY_RIGHT, ;
          GRID_JTFY_RIGHT }
 
    END WINDOW

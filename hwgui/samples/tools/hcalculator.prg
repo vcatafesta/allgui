@@ -100,7 +100,7 @@ METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )  CLASS HCa
    ::oFormCalc:minWidth  := 150
 
    @ 4,3 CONTAINER oCnt1 SIZE 190,58 ;
-      STYLE 2;
+      STYLE 2 ;
       BACKCOLOR 16578289 ;
       BACKSTYLE 2
    oCnt1:Anchor := 75
@@ -193,12 +193,12 @@ METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )  CLASS HCa
       ON CLICK {|| ::Calculando( " ")  }
    hwg_SetFontStyle( oBtn4, .T. ) // oBtn4:FontBold := .T.
    @ 21,24 SAY oVisor CAPTION "0"  SIZE 168,33 ;
-      STYLE SS_RIGHT +DT_VCENTER+DT_SINGLELINE;
+      STYLE SS_RIGHT +DT_VCENTER+DT_SINGLELINE ;
       BACKCOLOR 16578289  ;
       FONT HFont():Add( 'Consolas',0,-24,400,,,)
    oVisor:Anchor := 75
    @ 7,29 SAY oMemory CAPTION ""  SIZE 15,26 ;
-      STYLE DT_VCENTER+DT_SINGLELINE;
+      STYLE DT_VCENTER+DT_SINGLELINE ;
       COLOR 6250335  BACKCOLOR 16578289  ;
       FONT HFont():Add( 'Arial',0,-13,700,,,)
    oMemory:Anchor := 75
@@ -296,7 +296,7 @@ METHOD Calculando( cNumero ) CLASS HCalculator
          nCalculo2 := ::aOperando[ 2 ]
          ::aOperando[ 1 ] := &( "nCalculo1" + cOperar + "nCalculo2" )
       ENDIF
-      ::aOperando[ 1 ] := IIf( ::aOperando[ 1 ] - Int( ::aOperando[ 1 ] ) = 0 ,;
+      ::aOperando[ 1 ] := IIf( ::aOperando[ 1 ] - Int( ::aOperando[ 1 ] ) = 0 , ;
          Int( ::aOperando[ 1 ]), ::aOperando[ 1 ] )
       oForm:oVisor:Caption := Ltrim( Str(::aOperando[ 1 ] ) )
       ::aOperando[ 3 ] := ::aOperando[ 2 ]

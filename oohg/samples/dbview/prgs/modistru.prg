@@ -193,9 +193,9 @@ FUNCTION DBUmodistruct(cBase)
          OTHERWISE
             _DBUtype1 := "Other"
          END CASE
-         _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1],;
-            _DBUtype1,;
-            str(_DBUstructarr[_DBUi,3],8,0),;
+         _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1], ;
+            _DBUtype1, ;
+            str(_DBUstructarr[_DBUi,3],8,0), ;
             str(_DBUstructarr[_DBUi,4],3,0)})
       NEXT _DBUi
       IF len(_DBUstructarr) > 0
@@ -211,10 +211,10 @@ FUNCTION DBUmodistruct(cBase)
 
 FUNCTION DBUmodistructure(cBase)
 
-   IF !msgyesno( PadC("C A U T I O N",70)+ CRLF + CRLF +;
-         PadC("If you had modified either the field name or the field type,",70) + CRLF +;
-         PadC("the data for that fields can not be saved in the modified .DBF",70) + CRLF +;
-         PadC("However, a backup file (.BAK) will be created.",70) + CRLF + CRLF +;
+   IF !msgyesno( PadC("C A U T I O N",70)+ CRLF + CRLF + ;
+         PadC("If you had modified either the field name or the field type,",70) + CRLF + ;
+         PadC("the data for that fields can not be saved in the modified .DBF",70) + CRLF + ;
+         PadC("However, a backup file (.BAK) will be created.",70) + CRLF + CRLF + ;
          PadC("Are you sure to modify the structure?",70), PROGRAM+VERSION )
 
       RETURN (.F.)
@@ -355,7 +355,7 @@ FUNCTION cFilePath( cPathMask )
 
    LOCAL n := RAt( "\", cPathMask ), cDisk
 
-   RETURN If( n > 0, Upper( Left( cPathMask, n ) ),;
+   RETURN If( n > 0, Upper( Left( cPathMask, n ) ), ;
       ( cDisk := cFileDisc( cPathMask ) ) + If( ! Empty( cDisk ), "\", "" ) )
 
 FUNCTION cFileDisc( cPathMask )

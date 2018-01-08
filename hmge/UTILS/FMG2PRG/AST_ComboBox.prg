@@ -42,7 +42,7 @@ FUNCTION AST_ComboBox(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -88,7 +88,7 @@ FUNCTION AST_ComboBox(cReadString,cTerminator)
    //      [ INVISIBLE ]
    //      [ SORT ]
    // =============================================================
-   // @ <nRow> ,<nCol> COMBOBOX <ControlName> OF <ParentWindowName> ITEMS <caItems> VALUE <nValue>;
+   // @ <nRow> ,<nCol> COMBOBOX <ControlName> OF <ParentWindowName> ITEMS <caItems> VALUE <nValue> ;
    //    WIDTH <nWidth> HEIGHT <nHeight> FONT <cFontName> SIZE <nFontSize> ON LOSTFOCUS <OnLostFocusProcedure> | <bBlock>
 
    aProperties_[ 1] := ALLTRIM(STRTRAN(aDefCommandList_[ 1],"DEFINE COMBOBOX",""))               // DEFINE COMBOBOX cboMemVar
@@ -122,8 +122,8 @@ FUNCTION AST_ComboBox(cReadString,cTerminator)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
    cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " COMBOBOX " + ;
-      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + " " + aProperties_[7] + ";" + CRLF +;
-      LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " + aProperties_[8] + " " +;
+      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + " " + aProperties_[7] + ";" + CRLF + ;
+      LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " + aProperties_[8] + " " + ;
       aProperties_[9] + " " + aProperties_[13] + CRLF
 
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF

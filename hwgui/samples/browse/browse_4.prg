@@ -24,10 +24,10 @@ FUNCTION Main
       TESTE->NOME:= 'NOME '+ALLTRIM(STR(I))
    END
    GO TOP
-   INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Browse MultiSelect";
+   INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Browse MultiSelect" ;
       AT 218,143 SIZE 487,270 FONT HFont():Add( "Arial",0,-11)
 
-   @  9, 8 BROWSE oBrowse DATABASE SIZE 466,196 STYLE   WS_VSCROLL + WS_HSCROLL;
+   @  9, 8 BROWSE oBrowse DATABASE SIZE 466,196 STYLE   WS_VSCROLL + WS_HSCROLL ;
       MULTISELECT
 
    @ 9, 214 say 'Pressione a tecla CTRL e clique no registro a selecionar,'+chr(13)+chr(10)+'se clicar sem o CTRL a multiseleção é limpa' size 466,42
@@ -38,11 +38,11 @@ FUNCTION Main
    oBrowse:aColumns := {}
 
    ADD COLUMN FieldBlock(Fieldname(1) ) TO oBrowse ;
-      HEADER 'Código';
-      TYPE 'N';
+      HEADER 'Código' ;
+      TYPE 'N' ;
       LENGTH 3 ;
       DEC 0 ;
-      PICTURE "@E 999";
+      PICTURE "@E 999" ;
       JUSTIFY HEAD DT_CENTER ;
       JUSTIFY LINE DT_RIGHT
 

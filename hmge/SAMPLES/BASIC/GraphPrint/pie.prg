@@ -31,17 +31,17 @@ FUNCTION showpie
 
    ERASE WINDOW m
 
-   DRAW GRAPH IN WINDOW m;
-      AT 80,40;
-      TO 460,600;
-      TITLE "Product Sales in 2010 (1,000$)";
-      TYPE PIE;
-      SERIES {1800,1500,1200,800,600,300};
-      DEPTH 25;
-      SERIENAMES {"Product 1","Product 2","Product 3","Product 4","Product 5","Product 6"};
-      COLORS {{255,0,0},{0,0,255},{255,255,0},{0,255,0},{255,128,64},{128,0,128}};
-      3DVIEW;
-      SHOWXVALUES;
+   DRAW GRAPH IN WINDOW m ;
+      AT 80,40 ;
+      TO 460,600 ;
+      TITLE "Product Sales in 2010 (1,000$)" ;
+      TYPE PIE ;
+      SERIES {1800,1500,1200,800,600,300} ;
+      DEPTH 25 ;
+      SERIENAMES {"Product 1","Product 2","Product 3","Product 4","Product 5","Product 6"} ;
+      COLORS {{255,0,0},{0,0,255},{255,255,0},{0,255,0},{255,128,64},{128,0,128}} ;
+      3DVIEW ;
+      SHOWXVALUES ;
       SHOWLEGENDS RIGHT DATAMASK "99,999"
 
    RETURN NIL
@@ -59,17 +59,17 @@ FUNCTION printpie
 
    SetDefaultPrinter (cPrinter)
 
-   PRINT GRAPH IN WINDOW m;
-      AT 80,40;
-      TO 460,600;
-      TITLE "Product Sales in 2010 (1,000$)";
-      TYPE PIE;
-      SERIES {1800,1500,1200,800,600,300};
-      DEPTH 25;
-      SERIENAMES {"Product 1","Product 2","Product 3","Product 4","Product 5","Product 6"};
-      COLORS {{255,0,0},{0,0,255},{255,255,0},{0,255,0},{255,128,64},{128,0,128}};
-      3DVIEW;
-      SHOWXVALUES;
+   PRINT GRAPH IN WINDOW m ;
+      AT 80,40 ;
+      TO 460,600 ;
+      TITLE "Product Sales in 2010 (1,000$)" ;
+      TYPE PIE ;
+      SERIES {1800,1500,1200,800,600,300} ;
+      DEPTH 25 ;
+      SERIENAMES {"Product 1","Product 2","Product 3","Product 4","Product 5","Product 6"} ;
+      COLORS {{255,0,0},{0,0,255},{255,255,0},{0,255,0},{255,128,64},{128,0,128}} ;
+      3DVIEW ;
+      SHOWXVALUES ;
       SHOWLEGENDS RIGHT DATAMASK "99,999"
 
    RETURN NIL

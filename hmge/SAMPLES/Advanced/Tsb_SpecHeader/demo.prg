@@ -122,17 +122,17 @@ PROCEDURE CloseTable
 
 PROCEDURE CreateTable
 
-   DbCreate( "Employee.mdb;table1", {{"FIRST",     "C",20, 0 },;
-      { "LAST",      "C",20, 0 },;
-      { "STREET",    "C",30, 0 },;
-      { "CITY",      "C",30, 0 },;
-      { "STATE",     "C", 2, 0 },;
-      { "ZIP",       "C",10, 0 },;
-      { "AGE",       "N", 2, 0 },;
-      { "SALARY",    "N", 6, 0 },;
+   DbCreate( "Employee.mdb;table1", {{"FIRST",     "C",20, 0 }, ;
+      { "LAST",      "C",20, 0 }, ;
+      { "STREET",    "C",30, 0 }, ;
+      { "CITY",      "C",30, 0 }, ;
+      { "STATE",     "C", 2, 0 }, ;
+      { "ZIP",       "C",10, 0 }, ;
+      { "AGE",       "N", 2, 0 }, ;
+      { "SALARY",    "N", 6, 0 }, ;
       { "NOTES",     "C",70, 0 }}, "ADORDD" )
 
-   DbCreate( "Employee.mdb;table2", {{"STATE",    "C", 2, 0 },;
+   DbCreate( "Employee.mdb;table2", {{"STATE",    "C", 2, 0 }, ;
       { "NAME",      "C",30, 0 }}, "ADORDD" )
 
    RETURN
@@ -211,7 +211,7 @@ FUNCTION EditDan(aHead,aFld,aWidth)
    IF RecCount() > 0
       IF .Not. IsWIndowActive (Form_Ed)
 
-         DEFINE WINDOW Form_Ed;
+         DEFINE WINDOW Form_Ed ;
                AT aPos[1]+50,aPos[2]+20 ;
                WIDTH 600 HEIGHT 125+ 30*Len(aHead) ;
                TITLE 'Edit current record' ;
@@ -236,7 +236,7 @@ FUNCTION EditDan(aHead,aFld,aWidth)
                AUTO
 
             @ 50+n*30,160 GETBOX &cGBox ;
-               HEIGHT 24 WIDTH aWidth[n];
+               HEIGHT 24 WIDTH aWidth[n] ;
                VALUE &cValue ;
                FONT "Arial" SIZE 9
          NEXT
@@ -307,7 +307,7 @@ FUNCTION ViewState(met,nVer)
       DEFINE WINDOW Form_Gr ;
             AT aPos[1]+50,aPos[2]+20 ;
             WIDTH 740 HEIGHT 580 ;
-            TITLE tyt;
+            TITLE tyt ;
             CHILD NOMAXIMIZE ;
             ON INIT Refresh_Win("Form_Gr", Brw_1) ;
             ON RELEASE CloseTable()
@@ -315,15 +315,15 @@ FUNCTION ViewState(met,nVer)
          DEFINE IMAGELIST Im_edit ;
             BUTTONSIZE 26 , 26  ;
             IMAGE {'edit'} ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 5;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 5 ;
             MASK
 
          DEFINE IMAGELIST im_navi ;
             BUTTONSIZE 20 , 20  ;
             IMAGE {'navi2'} ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 6;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 6 ;
             MASK
 
          DEFINE SPLITBOX
@@ -373,7 +373,7 @@ CASE nVer == 1
       WIDTHS  110 , 150 ,150, 150,50, 80, 50, 80, 200 ;
       FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
       ENUMERATOR ;
-      VALUE nRec;
+      VALUE nRec ;
       ON CHANGE Refresh_Win("Form_Gr",Brw_1) ;
       ON DBLCLICK  (EditDan(aHead,aFld,aWidth), Refresh_Win("Form_Gr", Brw_1))
 END TBROWSE
@@ -387,8 +387,8 @@ DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
    WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
    FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
    AUTOSEARCH  ;
-   CELLED EDIT;
-   VALUE nRec;
+   CELLED EDIT ;
+   VALUE nRec ;
    ON CHANGE Refresh_Win("Form_Gr",Brw_1) ;
    ON DBLCLICK  (EditDan(aHead,aFld,aWidth), Refresh_Win("Form_Gr", Brw_1))
 
@@ -408,8 +408,8 @@ IF met== 2
       WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
       FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
       AUTOFILTER USERFILTER {|x,y,z| SetFlt(x,y,z) } ;
-      CELLED EDIT;
-      VALUE nRec;
+      CELLED EDIT ;
+      VALUE nRec ;
       ON CHANGE Refresh_Win("Form_Gr",Brw_1)
 
 END TBROWSE
@@ -423,8 +423,8 @@ DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
    WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
    FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
    AUTOFILTER  ;
-   CELLED EDIT;
-   VALUE nRec;
+   CELLED EDIT ;
+   VALUE nRec ;
    ON CHANGE Refresh_Win("Form_Gr",Brw_1)
 
 END TBROWSE
@@ -540,34 +540,34 @@ FUNCTION TsGrid (nVer)
       DEFINE WINDOW Form_11 ;
             AT aPos[1]+20,aPos[2]+10 ;
             WIDTH 640 HEIGHT 450 ;
-            TITLE 'Browse of Tables (Grid Form)';
+            TITLE 'Browse of Tables (Grid Form)' ;
             CHILD NOMAXIMIZE ;
-            ON INIT  LoadTabDan(Grid1,aRows);
+            ON INIT  LoadTabDan(Grid1,aRows) ;
 
          DO CASE
 
          CASE nVer == 1
 
-            @ 10,10 TBROWSE Grid1 ARRAY aTab;
+            @ 10,10 TBROWSE Grid1 ARRAY aTab ;
                WIDTH 620 ;
                HEIGHT 326 ;
                HEADERS ' ','Last~Name','First~Name','Phone','Value~Data Types','Date~Data Types','Num.~Data Types','Logic~Data Types' ;
                WIDTHS 18,100,100,100,60,80,40,40 ;
                ENUMERATOR ;
-               IMAGE "br_em","br_ok","br_no";
-               EDIT CELLED;
+               IMAGE "br_em","br_ok","br_no" ;
+               EDIT CELLED ;
                JUSTIFY { DT_CENTER, DT_LEFT, DT_LEFT, DT_CENTER, DT_RIGHT, DT_CENTER, DT_RIGHT, DT_CENTER}
 
          CASE nVer == 2
 
-            @ 10,10 TBROWSE Grid1 ARRAY aTab;
+            @ 10,10 TBROWSE Grid1 ARRAY aTab ;
                WIDTH 620 ;
                HEIGHT 326 ;
                HEADERS ' ','Last~Name','First~Name','Phone','Value~Data Types','Date~Data Types','Num.~Data Types','Logic~Data Types' ;
                WIDTHS 18,100,100,100,60,80,40,40 ;
                AUTOSEARCH ;
-               IMAGE "br_em","br_ok","br_no";
-               EDIT CELLED;
+               IMAGE "br_em","br_ok","br_no" ;
+               EDIT CELLED ;
                JUSTIFY { DT_CENTER, DT_LEFT, DT_LEFT, DT_CENTER, DT_RIGHT, DT_CENTER, DT_RIGHT, DT_CENTER}
 
             Grid1:aColumns[ 1 ]:lBitMap  := .t.
@@ -586,7 +586,7 @@ FUNCTION TsGrid (nVer)
          Grid1:SetColor( { 1, 3, 5, 6, 13, 15 ,17}, ;
             { CLR_BLACK,  CLR_YELLOW, CLR_WHITE, ;
             { CLR_HBLUE, CLR_BLUE }, ; // degraded cursor background color
-            CLR_HGREEN, CLR_BLACK ,;
+            CLR_HGREEN, CLR_BLACK , ;
             CLR_HRED } )  // text superheader
          Grid1:SetColor( { 2, 4, 14,16 }, ;
             { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
@@ -649,15 +649,15 @@ FUNCTION TsSQL (nVer)
       DEFINE WINDOW Form_SQL ;
             AT aPos[1]+50,aPos[2]+20 ;
             WIDTH 740 HEIGHT 580 ;
-            TITLE 'Browse of SQL Tables';
+            TITLE 'Browse of SQL Tables' ;
             CHILD NOMAXIMIZE ;
             ON INIT {|| LoadTabSQL(Grid1,pDb) }
 
          DEFINE IMAGELIST im_navi ;
             BUTTONSIZE 20 , 20  ;
             IMAGE {'navi2'} ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 6;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 6 ;
             MASK
 
          DEFINE SPLITBOX
@@ -683,26 +683,26 @@ FUNCTION TsSQL (nVer)
 
    CASE nVer == 1
 
-      DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab;
+      DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab ;
          WIDTH 710   ;
          HEIGHT 390   ;
          HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
          WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
          ENUMERATOR ;
-         ON CHANGE Change_TsSql(pDb,Grid1);
+         ON CHANGE Change_TsSql(pDb,Grid1) ;
 
    END TBROWSE
 
 CASE nVer == 2
 
-   DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab;
+   DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab ;
       WIDTH 710   ;
       HEIGHT 390   ;
       HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
       WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
       AUTOSEARCH  ;
-      CELLED EDIT;
-      ON CHANGE Change_TsSql(pDb,Grid1);
+      CELLED EDIT ;
+      ON CHANGE Change_TsSql(pDb,Grid1) ;
 
    :aColumns[ 3 ]:lEditSpec := .F.
    :aColumns[ 6 ]:lEditSpec := .F.
@@ -714,14 +714,14 @@ END TBROWSE
 
 CASE nVer == 3
 
-DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab;
+DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab ;
    WIDTH 710   ;
    HEIGHT 390   ;
    HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
    WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
    AUTOFILTER USERFILTER {|x,y,z| SetFltSQL(x,y,z) } ;
-   CELLED EDIT;
-   ON CHANGE Change_TsSql(pDb,Grid1);
+   CELLED EDIT ;
+   ON CHANGE Change_TsSql(pDb,Grid1) ;
 
 :aColumns[ 3 ]:lEditSpec := .F.
 :aColumns[ 6 ]:lEditSpec := .F.
@@ -783,11 +783,11 @@ FUNCTION LoadTabSql(Grid1,db,cWar)
    Grid1:DeleteRow(.t.)
 
    IF Empty(cWar )
-      cQuery :=  'SELECT FIRST ,LAST, STREET, CITY, STATE, ZIP, HIREDATE, '+;
+      cQuery :=  'SELECT FIRST ,LAST, STREET, CITY, STATE, ZIP, HIREDATE, '+ ;
          'MARRIED, AGE, SALARY, NOTES  FROM '+ cTable + ' ORDER BY FIRST '
    ELSE
-      cQuery :=  'SELECT FIRST ,LAST, STREET, CITY, STATE, ZIP, HIREDATE, '+;
-         'MARRIED, AGE, SALARY, NOTES  FROM '+ cTable +;
+      cQuery :=  'SELECT FIRST ,LAST, STREET, CITY, STATE, ZIP, HIREDATE, '+ ;
+         'MARRIED, AGE, SALARY, NOTES  FROM '+ cTable + ;
          ' WHERE '+ cWar+ ' ORDER BY FIRST '
    ENDIF
 
@@ -795,8 +795,8 @@ FUNCTION LoadTabSql(Grid1,db,cWar)
 
    IF Len(aResult) > 0
       FOR i := 1 TO Len(aResult) STEP 11
-         ADD ITEM  { aResult[i], aResult[i+1], aResult[i+2], aResult[i+3], aResult[i+4],;
-            aResult[i+5], aResult[i+6],ctod(aResult[i+7]), aResult[i+8],;
+         ADD ITEM  { aResult[i], aResult[i+1], aResult[i+2], aResult[i+3], aResult[i+4], ;
+            aResult[i+5], aResult[i+6],ctod(aResult[i+7]), aResult[i+8], ;
             , aResult[i+9], aResult[i+10]} TO Grid1 OF Form_SQL
       NEXT
    ENDIF
@@ -982,21 +982,21 @@ FUNCTION QueryCrea(cTable,met)
 
    DO CASE
    CASE met ==0
-      cQuery := "create table " + cTable + "( FIRST CHAR(20) , "+;
-         "LAST CHAR(20), "+;
-         "STREET CHAR(30), "+;
-         "CITY CHAR(30), "+;
-         "STATE CHAR(2), "+;
-         "ZIP CHAR(10), "+;
-         "HIREDATE DATE , "+;
-         "MARRIED INTEGER , "+;
-         "AGE INTEGER , "+;
-         "SALARY INTEGER, "+;
+      cQuery := "create table " + cTable + "( FIRST CHAR(20) , "+ ;
+         "LAST CHAR(20), "+ ;
+         "STREET CHAR(30), "+ ;
+         "CITY CHAR(30), "+ ;
+         "STATE CHAR(2), "+ ;
+         "ZIP CHAR(10), "+ ;
+         "HIREDATE DATE , "+ ;
+         "MARRIED INTEGER , "+ ;
+         "AGE INTEGER , "+ ;
+         "SALARY INTEGER, "+ ;
          "NOTES TEXT ); "
 
    CASE met == 1
 
-      cQuery := 'INSERT INTO '+ cTable + ' ( FIRST ,LAST, STREET, CITY, STATE, ZIP, HIREDATE, '+;
+      cQuery := 'INSERT INTO '+ cTable + ' ( FIRST ,LAST, STREET, CITY, STATE, ZIP, HIREDATE, '+ ;
          'MARRIED, AGE, SALARY, NOTES  ) VALUES ( "'
       cQuery += RTrim(Employee->FIRST)+'" , "'+RTrim(Employee->LAST)+'", "'+RTrim(Employee->STREET)+'" , "'
       cQuery += RTrim(Employee->CITY)+'" , "'+RTrim(Employee->STATE)+'" , "'+RTrim(Employee->ZIP)+'" , "'
@@ -1004,7 +1004,7 @@ FUNCTION QueryCrea(cTable,met)
       cQuery += str(Employee->AGE,2)+' , '+str(Employee->SALARY,6)+' , "'+RTrim(Employee->NOTES)+ '"  );'
 
    CASE met == 2
-      cQuery := 'SELECT FIRST ,LAST, STREET, CITY, STATE, ZIP, HIREDATE, '+;
+      cQuery := 'SELECT FIRST ,LAST, STREET, CITY, STATE, ZIP, HIREDATE, '+ ;
          'MARRIED, AGE, SALARY, NOTES  FROM '+ cTable + ' ORDER BY FIRST '
 
    ENDCASE
@@ -1018,8 +1018,8 @@ FUNCTION SQLITE_TABLEEXISTS( cTable )
    LOCAL lCreateIfNotExist := .f.
    LOCAL db := sqlite3_open( DB_NAME, lCreateIfNotExist )
 
-   cStatement := "SELECT name FROM sqlite_master "    +;
-      "WHERE type ='table' AND tbl_name='" +;
+   cStatement := "SELECT name FROM sqlite_master "    + ;
+      "WHERE type ='table' AND tbl_name='" + ;
       cTable + "'"
 
    IF DB_IS_OPEN( db )

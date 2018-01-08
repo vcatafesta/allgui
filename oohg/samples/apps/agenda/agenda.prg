@@ -53,13 +53,13 @@ FUNCTION Cria_frmPrincipal()
          TOOLTIP 'Cadastro dos Contatos'
 
       @ 008,050 BUTTON Bt_Tabelas_Grupos  ;
-         PICTURE 'TABELAS';
+         PICTURE 'TABELAS' ;
          ACTION  CadastroGenerico( "Tipos" ,  "Tipos de Contato") ;
          WIDTH 40 HEIGHT 27 ;
          TOOLTIP 'Cadastro dos Tipos de Contato'
 
       @ 008,090 BUTTON Bt_Imprime_Agenda  ;
-         PICTURE 'PRINT';
+         PICTURE 'PRINT' ;
          ACTION  Relatorio_Contatos() ;
          WIDTH 40 HEIGHT 27 ;
          TOOLTIP 'Imprime Contatos Cadastrados'
@@ -73,7 +73,7 @@ FUNCTION Cria_frmPrincipal()
       @385,130 FRAME Panel_Msg WIDTH 520 HEIGHT 40 OPAQUE
 
       @ 392,175 LABEL Label_Mensagem          ;
-         VALUE "O Clipper não Morreu!!   Conheça o Harbour / xHarbour & o MiniGUI";
+         VALUE "O Clipper não Morreu!!   Conheça o Harbour / xHarbour & o MiniGUI" ;
          WIDTH 450              ;
          HEIGHT 27              ;
          FONT "Arial" SIZE 10                ;
@@ -117,16 +117,16 @@ FUNCTION Btn_Sair_Sistema()
 FUNCTION Sobre_o_Sistema()
 
    PlayExclamation()
-   MsgINFO (PadC("*** Agenda de Contatos ***",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC(" Humberto_Fornazier  hfornazier@brfree.com.br",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC(" Desenvolvido com xHarbour 0.73.5 + MiniGui (Release 35)",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC("Minigui / Roberto Lopez / Arqentina",60)+QUEBRA+;
-      PadC("roblez@ciudad.com.ar = www.geocities.com/harbour_minigui",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC("xHarbour Compiler Build 0.73.5 (SimpLex)",60)+QUEBRA+;
+   MsgINFO (PadC("*** Agenda de Contatos ***",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC(" Humberto_Fornazier  hfornazier@brfree.com.br",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC(" Desenvolvido com xHarbour 0.73.5 + MiniGui (Release 35)",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC("Minigui / Roberto Lopez / Arqentina",60)+QUEBRA+ ;
+      PadC("roblez@ciudad.com.ar = www.geocities.com/harbour_minigui",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC("xHarbour Compiler Build 0.73.5 (SimpLex)",60)+QUEBRA+ ;
       PadC("http://www.xharbour.org https://harbour.github.io/",60),SISTEMA)
 
    RETURN NIL

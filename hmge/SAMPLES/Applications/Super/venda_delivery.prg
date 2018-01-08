@@ -55,25 +55,25 @@ FUNCTION venda_delivery()
    ZAP
    PACK
 
-   DEFINE WINDOW form_delivery;
-         at 000,000;
-         WIDTH getdesktopwidth();
-         HEIGHT getdesktopheight();
-         TITLE 'Venda Delivery';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_delivery ;
+         at 000,000 ;
+         WIDTH getdesktopwidth() ;
+         HEIGHT getdesktopheight() ;
+         TITLE 'Venda Delivery' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          ON INIT zera_tabelas()
 
       * mostrar texto explicando como fechar o pedido
-      @ getdesktopheight()-100,000 label label_fechar_pedido;
-         of form_delivery;
-         WIDTH getdesktopwidth();
-         HEIGHT 040;
-         VALUE 'F9-fechar este pedido  ESC-sair';
-         FONT 'verdana' size 022;
-         bold;
-         BACKCOLOR _preto_001;
-         FONTCOLOR _cinza_001;
+      @ getdesktopheight()-100,000 label label_fechar_pedido ;
+         of form_delivery ;
+         WIDTH getdesktopwidth() ;
+         HEIGHT 040 ;
+         VALUE 'F9-fechar este pedido  ESC-sair' ;
+         FONT 'verdana' size 022 ;
+         bold ;
+         BACKCOLOR _preto_001 ;
+         FONTCOLOR _cinza_001 ;
          centeralign
 
       * separar a tela em 2 partes distintas
@@ -88,93 +88,93 @@ FUNCTION venda_delivery()
       END LABEL
 
       * digitar o telefone
-      @ 010,010 label label_telefone;
-         of form_delivery;
-         VALUE 'Telefone';
-         autosize;
-         FONT 'courier new' size 012;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,010 label label_telefone ;
+         of form_delivery ;
+         VALUE 'Telefone' ;
+         autosize ;
+         FONT 'courier new' size 012 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,010 textbox tbox_telefone;
-         of form_delivery;
-         HEIGHT 030;
-         WIDTH 150;
-         VALUE '';
-         MAXLENGTH 015;
-         FONT 'courier new' size 016;
-         bold;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 030,010 textbox tbox_telefone ;
+         of form_delivery ;
+         HEIGHT 030 ;
+         WIDTH 150 ;
+         VALUE '' ;
+         MAXLENGTH 015 ;
+         FONT 'courier new' size 016 ;
+         bold ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          ON ENTER procura_cliente('form_delivery','tbox_telefone')
 
       * botão para cadastrar cliente caso não exista
-      @ 020,170 buttonex botao_cadastrar_cliente;
-         parent form_delivery;
-         CAPTION 'Cadastrar novo cliente';
-         WIDTH 220 height 040;
-         PICTURE path_imagens+'cadastrar_cliente.bmp';
-         ACTION cadastrar_novo_cliente();
-         notabstop;
+      @ 020,170 buttonex botao_cadastrar_cliente ;
+         PARENT form_delivery ;
+         CAPTION 'Cadastrar novo cliente' ;
+         WIDTH 220 height 040 ;
+         PICTURE path_imagens+'cadastrar_cliente.bmp' ;
+         ACTION cadastrar_novo_cliente() ;
+         notabstop ;
          TOOLTIP 'Clique aqui para cadastrar um cliente novo, sem precisar sair desta tela'
 
       * mostrar nome do cliente
-      @ 070,010 label label_nome_cliente;
-         of form_delivery;
-         VALUE '';
-         autosize;
-         FONT 'courier new' size 016;
-         bold;
-         FONTCOLOR BLUE;
+      @ 070,010 label label_nome_cliente ;
+         of form_delivery ;
+         VALUE '' ;
+         autosize ;
+         FONT 'courier new' size 016 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
 
       * mostrar o endereço
-      @ 100,010 label label_endereco_001;
-         of form_delivery;
-         VALUE '';
-         autosize;
-         FONT 'courier new' size 014;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 100,010 label label_endereco_001 ;
+         of form_delivery ;
+         VALUE '' ;
+         autosize ;
+         FONT 'courier new' size 014 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 120,010 label label_endereco_002;
-         of form_delivery;
-         VALUE '';
-         autosize;
-         FONT 'courier new' size 014;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 120,010 label label_endereco_002 ;
+         of form_delivery ;
+         VALUE '' ;
+         autosize ;
+         FONT 'courier new' size 014 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 140,010 label label_endereco_003;
-         of form_delivery;
-         VALUE '';
-         autosize;
-         FONT 'courier new' size 014;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 140,010 label label_endereco_003 ;
+         of form_delivery ;
+         VALUE '' ;
+         autosize ;
+         FONT 'courier new' size 014 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
 
       * histórico do cliente
-      @ 180,010 grid grid_historico;
-         parent form_delivery;
-         WIDTH 380;
-         HEIGHT 200;
-         HEADERS {'id cliente','Onde','Data','Hora','Valor R$'};
-         WIDTHS {001,100,100,075,090};
-         FONT 'tahoma' size 010;
-         bold;
-         BACKCOLOR _branco_001;
-         FONTCOLOR BLUE;
+      @ 180,010 grid grid_historico ;
+         PARENT form_delivery ;
+         WIDTH 380 ;
+         HEIGHT 200 ;
+         HEADERS {'id cliente','Onde','Data','Hora','Valor R$'} ;
+         WIDTHS {001,100,100,075,090} ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         BACKCOLOR _branco_001 ;
+         FONTCOLOR BLUE ;
          ON CHANGE mostra_detalhamento()
-      @ 390,010 grid grid_detalhamento;
-         parent form_delivery;
-         WIDTH 380;
-         HEIGHT (getdesktopheight()-390)-105;
-         HEADERS {'Qtd.','Produto','Valor R$'};
-         WIDTHS {080,190,100};
-         FONT 'tahoma' size 010;
-         bold;
-         BACKCOLOR _branco_001;
+      @ 390,010 grid grid_detalhamento ;
+         PARENT form_delivery ;
+         WIDTH 380 ;
+         HEIGHT (getdesktopheight()-390)-105 ;
+         HEADERS {'Qtd.','Produto','Valor R$'} ;
+         WIDTHS {080,190,100} ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         BACKCOLOR _branco_001 ;
          FONTCOLOR BLUE
 
       n_largura_janela := form_delivery.width - 410
@@ -187,13 +187,13 @@ FUNCTION venda_delivery()
       aadd(a_tamanhos_pedacos,_tamanho_005+' - '+alltrim(str(_pedaco_005))+' pedaços')
       aadd(a_tamanhos_pedacos,_tamanho_006+' - '+alltrim(str(_pedaco_006))+' pedaços')
 
-      @ 010,410 label label_pizza;
-         of form_delivery;
-         VALUE 'Escolha o tamanho da pizza';
-         autosize;
-         FONT 'courier new' size 12;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,410 label label_pizza ;
+         of form_delivery ;
+         VALUE 'Escolha o tamanho da pizza' ;
+         autosize ;
+         FONT 'courier new' size 12 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
       define comboboxex cbo_tamanhos
       ROW 30
@@ -211,24 +211,24 @@ FUNCTION venda_delivery()
    * grids
 
    * pizzas
-   @ 060,410 label label_sabores;
-      of form_delivery;
-      VALUE 'Defina os sabores';
-      autosize;
-      FONT 'courier new' size 12;
-      bold;
-      FONTCOLOR _preto_001;
+   @ 060,410 label label_sabores ;
+      of form_delivery ;
+      VALUE 'Defina os sabores' ;
+      autosize ;
+      FONT 'courier new' size 12 ;
+      bold ;
+      FONTCOLOR _preto_001 ;
       TRANSPARENT
-   @ 080,410 label label_sabores_2;
-      of form_delivery;
-      VALUE 'duplo-clique/enter seleciona';
-      autosize;
-      FONT 'courier new' size 12;
-      bold;
-      FONTCOLOR _azul_001;
+   @ 080,410 label label_sabores_2 ;
+      of form_delivery ;
+      VALUE 'duplo-clique/enter seleciona' ;
+      autosize ;
+      FONT 'courier new' size 12 ;
+      bold ;
+      FONTCOLOR _azul_001 ;
       TRANSPARENT
    DEFINE GRID grid_pizzas
-      parent form_delivery
+      PARENT form_delivery
       COL 410
       ROW 100
       WIDTH n_largura_grid
@@ -247,51 +247,51 @@ FUNCTION venda_delivery()
       Of         form_delivery   ;
       WIDTH      n_largura_grid              ;
       HEIGHT     100              ;
-      HEADERS    {'ID','Nome'};
+      HEADERS    {'ID','Nome'} ;
       WIDTHS     {1,n_largura_grid - 30}         ;
       WORKAREA   montagem ;
-      FIELDS     {'montagem->codigo','montagem->nome'};
+      FIELDS     {'montagem->codigo','montagem->nome'} ;
       VALUE      1                 ;
       FONT        'courier new'        ;
       Size 12                      ;
-      JUSTIFY     {BROWSE_JTFY_CENTER,BROWSE_JTFY_LEFT};
+      JUSTIFY     {BROWSE_JTFY_CENTER,BROWSE_JTFY_LEFT} ;
       BACKCOLOR   _amarelo_001            ;
       FONTCOLOR   _preto_001
 
-   @ 403,410 buttonex botao_fecha_pizza;
-      parent form_delivery;
-      CAPTION 'Pizza montada';
-      WIDTH 120 height 35;
-      PICTURE path_imagens+'adicionar.bmp';
+   @ 403,410 buttonex botao_fecha_pizza ;
+      PARENT form_delivery ;
+      CAPTION 'Pizza montada' ;
+      WIDTH 120 height 35 ;
+      PICTURE path_imagens+'adicionar.bmp' ;
       ACTION fecha_montagem_pizza()
-   @ 403,535 buttonex botao_exclui_pizza;
-      parent form_delivery;
-      CAPTION 'Excluir sabor';
-      WIDTH 120 height 35;
-      PICTURE path_imagens+'img_cancela.bmp';
+   @ 403,535 buttonex botao_exclui_pizza ;
+      PARENT form_delivery ;
+      CAPTION 'Excluir sabor' ;
+      WIDTH 120 height 35 ;
+      PICTURE path_imagens+'img_cancela.bmp' ;
       ACTION excluir_sabor()
 
    * observações da pizza, borda e TOTAL
-   @ 403,(410 + n_largura_grid + 10) textbox tbox_obs_1;
-      of form_delivery;
-      HEIGHT 027;
-      WIDTH 250;
-      VALUE x_observacao_1;
-      MAXLENGTH 30;
-      FONT 'tahoma' size 010;
-      BACKCOLOR _fundo_get;
-      FONTCOLOR _letra_get_1;
-      uppercase
-   @ 431,(410 + n_largura_grid + 10) textbox tbox_obs_2;
-      of form_delivery;
-      HEIGHT 027;
-      WIDTH 250;
-      VALUE x_observacao_2;
-      MAXLENGTH 30;
-      FONT 'tahoma' size 010;
-      BACKCOLOR _fundo_get;
-      FONTCOLOR _letra_get_1;
-      uppercase
+   @ 403,(410 + n_largura_grid + 10) textbox tbox_obs_1 ;
+      of form_delivery ;
+      HEIGHT 027 ;
+      WIDTH 250 ;
+      VALUE x_observacao_1 ;
+      MAXLENGTH 30 ;
+      FONT 'tahoma' size 010 ;
+      BACKCOLOR _fundo_get ;
+      FONTCOLOR _letra_get_1 ;
+      UPPERCASE
+   @ 431,(410 + n_largura_grid + 10) textbox tbox_obs_2 ;
+      of form_delivery ;
+      HEIGHT 027 ;
+      WIDTH 250 ;
+      VALUE x_observacao_2 ;
+      MAXLENGTH 30 ;
+      FONT 'tahoma' size 010 ;
+      BACKCOLOR _fundo_get ;
+      FONTCOLOR _letra_get_1 ;
+      UPPERCASE
    define comboboxex cbo_bordas
    ROW 460
    COL (410 + n_largura_grid + 10)
@@ -304,54 +304,54 @@ FUNCTION venda_delivery()
    FONTCOLOR BLUE
    ONCHANGE adiciona_borda()
 END comboboxex
-@ 490,(410 + n_largura_grid + 10) label label_total_0;
-   of form_delivery;
-   WIDTH 250;
-   HEIGHT 20;
-   VALUE 'TOTAL DO PEDIDO';
-   FONT 'courier new' size 12;
-   bold;
-   FONTCOLOR _branco_001;
-   BACKCOLOR _azul_002;
+@ 490,(410 + n_largura_grid + 10) label label_total_0 ;
+   of form_delivery ;
+   WIDTH 250 ;
+   HEIGHT 20 ;
+   VALUE 'TOTAL DO PEDIDO' ;
+   FONT 'courier new' size 12 ;
+   bold ;
+   FONTCOLOR _branco_001 ;
+   BACKCOLOR _azul_002 ;
    centeralign
-@ 510,(410 + n_largura_grid + 10) label label_total;
-   of form_delivery;
-   WIDTH 250;
-   HEIGHT 50;
-   VALUE '0,00';
-   FONT 'courier new' size 24;
-   bold;
-   FONTCOLOR _vermelho_001;
-   BACKCOLOR _ciano_001;
+@ 510,(410 + n_largura_grid + 10) label label_total ;
+   of form_delivery ;
+   WIDTH 250 ;
+   HEIGHT 50 ;
+   VALUE '0,00' ;
+   FONT 'courier new' size 24 ;
+   bold ;
+   FONTCOLOR _vermelho_001 ;
+   BACKCOLOR _ciano_001 ;
    RIGHTALIGN
 * botão para imprimir o cupom
-@ 520,(410 + n_largura_grid + 265) buttonex botao_cupom;
-   parent form_delivery;
-   CAPTION '';
-   WIDTH 40 height 40;
-   PICTURE path_imagens+'img_relatorio.bmp';
-   ACTION imprimir_cupom('-',0,0,0,0,0);
+@ 520,(410 + n_largura_grid + 265) buttonex botao_cupom ;
+   PARENT form_delivery ;
+   CAPTION '' ;
+   WIDTH 40 height 40 ;
+   PICTURE path_imagens+'img_relatorio.bmp' ;
+   ACTION imprimir_cupom('-',0,0,0,0,0) ;
    TOOLTIP 'Emitir CUPOM'
 
 * bebidas e outros
-@ 060,(410 + n_largura_grid + 10) label label_bebidas;
-   of form_delivery;
-   VALUE 'Bebidas / Outros';
-   autosize;
-   FONT 'courier new' size 12;
-   bold;
-   FONTCOLOR _preto_001;
+@ 060,(410 + n_largura_grid + 10) label label_bebidas ;
+   of form_delivery ;
+   VALUE 'Bebidas / Outros' ;
+   autosize ;
+   FONT 'courier new' size 12 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
-@ 080,(410 + n_largura_grid + 10) label label_bebidas_2;
-   of form_delivery;
-   VALUE 'duplo-clique/enter seleciona';
-   autosize;
-   FONT 'courier new' size 12;
-   bold;
-   FONTCOLOR _azul_001;
+@ 080,(410 + n_largura_grid + 10) label label_bebidas_2 ;
+   of form_delivery ;
+   VALUE 'duplo-clique/enter seleciona' ;
+   autosize ;
+   FONT 'courier new' size 12 ;
+   bold ;
+   FONTCOLOR _azul_001 ;
    TRANSPARENT
 DEFINE GRID grid_produtos
-   parent form_delivery
+   PARENT form_delivery
    COL 410 + n_largura_grid + 10
    ROW 100
    WIDTH n_largura_grid - 20
@@ -368,33 +368,33 @@ DEFINE GRID grid_produtos
 END GRID
 
 * pedido completo
-@ 545,410 label label_pedido;
-   of form_delivery;
-   VALUE 'Pedido do cliente';
-   autosize;
-   FONT 'courier new' size 12;
-   bold;
-   FONTCOLOR _preto_001;
+@ 545,410 label label_pedido ;
+   of form_delivery ;
+   VALUE 'Pedido do cliente' ;
+   autosize ;
+   FONT 'courier new' size 12 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
-@ 540,585 buttonex botao_exclui_item_pedido;
-   parent form_delivery;
-   CAPTION 'excluir item pedido';
-   WIDTH 130 height 25;
-   FONTCOLOR RED;
+@ 540,585 buttonex botao_exclui_item_pedido ;
+   PARENT form_delivery ;
+   CAPTION 'excluir item pedido' ;
+   WIDTH 130 height 25 ;
+   FONTCOLOR RED ;
    ACTION excluir_item_pedido()
 
 @ 565,410 Browse grid_pedido        ;
    Of         form_delivery   ;
    WIDTH      form_delivery.width - 420              ;
    HEIGHT     form_delivery.height - 670              ;
-   HEADERS    {'SEQ','Item','Qtd','Unit.R$','SubTotal R$'};
+   HEADERS    {'SEQ','Item','Qtd','Unit.R$','SubTotal R$'} ;
    WIDTHS     {1,400,60,140,150}         ;
    WORKAREA   tmp_tela ;
-   FIELDS     {'tmp_tela->seq','tmp_tela->item','tmp_tela->qtd','tmp_tela->unitario','tmp_tela->subtotal'};
+   FIELDS     {'tmp_tela->seq','tmp_tela->item','tmp_tela->qtd','tmp_tela->unitario','tmp_tela->subtotal'} ;
    VALUE      1                 ;
    FONT        'courier new'        ;
    Size 12                      ;
-   JUSTIFY     {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT};
+   JUSTIFY     {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT} ;
    BACKCOLOR   _branco_001            ;
    FONTCOLOR   _azul_002
 
@@ -516,13 +516,13 @@ STATIC FUNCTION getcode_clientes(value)
    clientes->(ordsetfocus('nome'))
    clientes->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 690;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 690 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -542,7 +542,7 @@ STATIC FUNCTION getcode_clientes(value)
          WIDTH 600
          MAXLENGTH 040
          ONCHANGE find_clientes()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
@@ -630,17 +630,17 @@ STATIC FUNCTION procura_produto()
 
 STATIC FUNCTION mostra_listagem_produto()
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 560;
-         HEIGHT 610;
-         TITLE 'Produtos';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 560 ;
+         HEIGHT 610 ;
+         TITLE 'Produtos' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE GRID grid_pesquisa
-         parent form_pesquisa
+         PARENT form_pesquisa
          COL 000
          ROW 000
          WIDTH 555
@@ -745,17 +745,17 @@ STATIC FUNCTION procura_pizza()
 
 STATIC FUNCTION mostra_listagem_pizza()
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 410;
-         HEIGHT 610;
-         TITLE 'Pizzas';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 410 ;
+         HEIGHT 610 ;
+         TITLE 'Pizzas' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE GRID grid_pesquisa
-         parent form_pesquisa
+         PARENT form_pesquisa
          COL 000
          ROW 000
          WIDTH 405
@@ -841,259 +841,259 @@ STATIC FUNCTION cadastrar_novo_cliente()
    LOCAL x_aniv_dia := 0
    LOCAL x_aniv_mes := 0
 
-   DEFINE WINDOW form_incluir_novo_cliente;
-         at 000,000;
-         WIDTH 585;
-         HEIGHT 380;
-         TITLE 'Incluir novo cliente';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_incluir_novo_cliente ;
+         at 000,000 ;
+         WIDTH 585 ;
+         HEIGHT 380 ;
+         TITLE 'Incluir novo cliente' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 010,005 label lbl_001;
-         of form_incluir_novo_cliente;
-         VALUE 'Nome';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Nome' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,005 textbox tbox_001;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_nome;
-         MAXLENGTH 040;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 010,325 label lbl_002;
-         of form_incluir_novo_cliente;
-         VALUE 'Telefone fixo';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,005 textbox tbox_001 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_nome ;
+         MAXLENGTH 040 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 010,325 label lbl_002 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Telefone fixo' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,325 textbox tbox_002;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_fixo;
-         MAXLENGTH 010;
-         FONT 'verdana' size 012;
-         bold;
-         BACKCOLOR BLUE;
-         FONTCOLOR WHITE;
-         uppercase
-      @ 010,455 label lbl_003;
-         of form_incluir_novo_cliente;
-         VALUE 'Telefone celular';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,325 textbox tbox_002 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_fixo ;
+         MAXLENGTH 010 ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         BACKCOLOR BLUE ;
+         FONTCOLOR WHITE ;
+         UPPERCASE
+      @ 010,455 label lbl_003 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Telefone celular' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,455 textbox tbox_003;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_celular;
-         MAXLENGTH 010;
-         FONT 'verdana' size 012;
-         bold;
-         BACKCOLOR BLUE;
-         FONTCOLOR WHITE;
-         uppercase
-      @ 060,005 label lbl_004;
-         of form_incluir_novo_cliente;
-         VALUE 'Endereço';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,455 textbox tbox_003 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_celular ;
+         MAXLENGTH 010 ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         BACKCOLOR BLUE ;
+         FONTCOLOR WHITE ;
+         UPPERCASE
+      @ 060,005 label lbl_004 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Endereço' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,005 textbox tbox_004;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_endereco;
-         MAXLENGTH 040;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 060,325 label lbl_005;
-         of form_incluir_novo_cliente;
-         VALUE 'Número';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 080,005 textbox tbox_004 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_endereco ;
+         MAXLENGTH 040 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 060,325 label lbl_005 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Número' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,325 textbox tbox_005;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_numero;
-         MAXLENGTH 006;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 060,395 label lbl_006;
-         of form_incluir_novo_cliente;
-         VALUE 'Complemento';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 080,325 textbox tbox_005 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_numero ;
+         MAXLENGTH 006 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 060,395 label lbl_006 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Complemento' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,395 textbox tbox_006;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 180;
-         VALUE x_complem;
-         MAXLENGTH 020;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 110,005 label lbl_007;
-         of form_incluir_novo_cliente;
-         VALUE 'Bairro';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 080,395 textbox tbox_006 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 180 ;
+         VALUE x_complem ;
+         MAXLENGTH 020 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 110,005 label lbl_007 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Bairro' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,005 textbox tbox_007;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 180;
-         VALUE x_bairro;
-         MAXLENGTH 020;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 110,195 label lbl_008;
-         of form_incluir_novo_cliente;
-         VALUE 'Cidade';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 130,005 textbox tbox_007 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 180 ;
+         VALUE x_bairro ;
+         MAXLENGTH 020 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 110,195 label lbl_008 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Cidade' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,195 textbox tbox_008;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 180;
-         VALUE x_cidade;
-         MAXLENGTH 020;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 110,385 label lbl_009;
-         of form_incluir_novo_cliente;
-         VALUE 'UF';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 130,195 textbox tbox_008 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 180 ;
+         VALUE x_cidade ;
+         MAXLENGTH 020 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 110,385 label lbl_009 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'UF' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,385 textbox tbox_009;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 040;
-         VALUE x_uf;
-         MAXLENGTH 002;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 110,435 label lbl_010;
-         of form_incluir_novo_cliente;
-         VALUE 'CEP';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 130,385 textbox tbox_009 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 040 ;
+         VALUE x_uf ;
+         MAXLENGTH 002 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 110,435 label lbl_010 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'CEP' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,435 textbox tbox_010;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 080;
-         VALUE x_cep;
-         MAXLENGTH 008;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 160,005 label lbl_011;
-         of form_incluir_novo_cliente;
-         VALUE 'e-mail';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 130,435 textbox tbox_010 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 080 ;
+         VALUE x_cep ;
+         MAXLENGTH 008 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 160,005 label lbl_011 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'e-mail' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 180,005 textbox tbox_011;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 450;
-         VALUE x_email;
-         MAXLENGTH 050;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 180,005 textbox tbox_011 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 450 ;
+         VALUE x_email ;
+         MAXLENGTH 050 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          lowercase
-      @ 210,005 label lbl_012;
-         of form_incluir_novo_cliente;
-         VALUE 'Dia aniversário';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 210,005 label lbl_012 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Dia aniversário' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 230,005 textbox tbox_012;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 080;
-         VALUE x_aniv_dia;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 230,005 textbox tbox_012 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 080 ;
+         VALUE x_aniv_dia ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          NUMERIC
-      @ 210,120 label lbl_013;
-         of form_incluir_novo_cliente;
-         VALUE 'Mês aniversário';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 210,120 label lbl_013 ;
+         of form_incluir_novo_cliente ;
+         VALUE 'Mês aniversário' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 230,120 textbox tbox_013;
-         of form_incluir_novo_cliente;
-         HEIGHT 027;
-         WIDTH 080;
-         VALUE x_aniv_mes;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 230,120 textbox tbox_013 ;
+         of form_incluir_novo_cliente ;
+         HEIGHT 027 ;
+         WIDTH 080 ;
+         VALUE x_aniv_mes ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          NUMERIC
 
       * texto de observação
-      @ 265,005 label lbl_observacao;
-         of form_incluir_novo_cliente;
-         VALUE '* os campos na cor azul, telefones fixo e celular, serão utilizados no DELIVERY';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 265,005 label lbl_observacao ;
+         of form_incluir_novo_cliente ;
+         VALUE '* os campos na cor azul, telefones fixo e celular, serão utilizados no DELIVERY' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
 
       * linha separadora
@@ -1294,58 +1294,58 @@ STATIC FUNCTION fecha_pizza()
       RETURN NIL
    ENDIF
 
-   DEFINE WINDOW form_finaliza_pizza;
-         at 000,000;
-         WIDTH 1000;
-         HEIGHT 400;
-         TITLE 'Finalizar pizza';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_finaliza_pizza ;
+         at 000,000 ;
+         WIDTH 1000 ;
+         HEIGHT 400 ;
+         TITLE 'Finalizar pizza' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
-      @ 005,005 label lbl_001;
-         of form_finaliza_pizza;
-         VALUE '1- Selecione o tamanho da pizza';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 005,005 label lbl_001 ;
+         of form_finaliza_pizza ;
+         VALUE '1- Selecione o tamanho da pizza' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 025,005 label lbl_002;
-         of form_finaliza_pizza;
-         VALUE '2- Você poderá escolher entre o menor e o maior preço à ser cobrado, no caso de ter mais de 1 sabor na mesma pizza';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 025,005 label lbl_002 ;
+         of form_finaliza_pizza ;
+         VALUE '2- Você poderá escolher entre o menor e o maior preço à ser cobrado, no caso de ter mais de 1 sabor na mesma pizza' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 045,005 label lbl_003;
-         of form_finaliza_pizza;
-         VALUE '3- Caso deseje, ao fechamento deste pedido, poderá conceder um desconto especial ao cliente';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 045,005 label lbl_003 ;
+         of form_finaliza_pizza ;
+         VALUE '3- Caso deseje, ao fechamento deste pedido, poderá conceder um desconto especial ao cliente' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 065,005 label lbl_004;
-         of form_finaliza_pizza;
-         VALUE '4- Para finalizar esta pizza e continuar vendendo, dê duplo-clique ou enter sobre o tamanho/preço escolhido';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 065,005 label lbl_004 ;
+         of form_finaliza_pizza ;
+         VALUE '4- Para finalizar esta pizza e continuar vendendo, dê duplo-clique ou enter sobre o tamanho/preço escolhido' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 085,005 label lbl_005;
-         of form_finaliza_pizza;
-         VALUE '5- ESC fecha esta janela e retorna para a tela de vendas';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _vermelho_002;
+      @ 085,005 label lbl_005 ;
+         of form_finaliza_pizza ;
+         VALUE '5- ESC fecha esta janela e retorna para a tela de vendas' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _vermelho_002 ;
          TRANSPARENT
 
       DEFINE GRID grid_finaliza_pizza
-         parent form_finaliza_pizza
+         PARENT form_finaliza_pizza
          COL 005
          ROW 105
          WIDTH 985
@@ -1502,13 +1502,13 @@ STATIC FUNCTION fecha_pedido()
       temp_vendas->(dbskip())
    END
 
-   DEFINE WINDOW form_fecha_pedido;
-         at 000,000;
-         WIDTH 500;
-         HEIGHT 540;
-         TITLE 'Fechamento do pedido';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_fecha_pedido ;
+         at 000,000 ;
+         WIDTH 500 ;
+         HEIGHT 540 ;
+         TITLE 'Fechamento do pedido' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * linhas para separar os elementos na tela
@@ -1537,230 +1537,230 @@ STATIC FUNCTION fecha_pedido()
       go x_borda
       x_preco := bordas->preco
 
-      @ 010,020 label label_001;
-         of form_fecha_pedido;
-         VALUE 'SUBTOTAL PIZZAS';
-         autosize;
-         FONT 'verdana' size 012;
-         bold;
-         FONTCOLOR BLUE;
+      @ 010,020 label label_001 ;
+         of form_fecha_pedido ;
+         VALUE 'SUBTOTAL PIZZAS' ;
+         autosize ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 010,250 label label_001_valor;
-         of form_fecha_pedido;
-         VALUE trans(x_valor_pizza,'@E 999,999.99');
-         autosize;
-         FONT 'courier new' size 016;
-         bold;
-         FONTCOLOR BLUE;
+      @ 010,250 label label_001_valor ;
+         of form_fecha_pedido ;
+         VALUE trans(x_valor_pizza,'@E 999,999.99') ;
+         autosize ;
+         FONT 'courier new' size 016 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
 
       IF .not. empty(x_preco)
-         @ 004,390 label label_b001;
-            of form_fecha_pedido;
-            VALUE 'valor da borda';
-            autosize;
-            FONT 'tahoma' size 8;
-            bold;
-            FONTCOLOR BLACK;
+         @ 004,390 label label_b001 ;
+            of form_fecha_pedido ;
+            VALUE 'valor da borda' ;
+            autosize ;
+            FONT 'tahoma' size 8 ;
+            bold ;
+            FONTCOLOR BLACK ;
             TRANSPARENT
-         @ 018,390 label label_b002;
-            of form_fecha_pedido;
-            VALUE trans(x_preco,'@E 9,999.99');
-            autosize;
-            FONT 'courier new' size 014;
-            bold;
-            FONTCOLOR BLUE;
+         @ 018,390 label label_b002 ;
+            of form_fecha_pedido ;
+            VALUE trans(x_preco,'@E 9,999.99') ;
+            autosize ;
+            FONT 'courier new' size 014 ;
+            bold ;
+            FONTCOLOR BLUE ;
             TRANSPARENT
       ENDIF
-      @ 040,020 label label_002;
-         of form_fecha_pedido;
-         VALUE 'SUBTOTAL PRODUTOS';
-         autosize;
-         FONT 'verdana' size 012;
-         bold;
-         FONTCOLOR BLUE;
+      @ 040,020 label label_002 ;
+         of form_fecha_pedido ;
+         VALUE 'SUBTOTAL PRODUTOS' ;
+         autosize ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 040,250 label label_002_valor;
-         of form_fecha_pedido;
-         VALUE trans(x_valor_prod,'@E 999,999.99');
-         autosize;
-         FONT 'courier new' size 016;
-         bold;
-         FONTCOLOR BLUE;
+      @ 040,250 label label_002_valor ;
+         of form_fecha_pedido ;
+         VALUE trans(x_valor_prod,'@E 999,999.99') ;
+         autosize ;
+         FONT 'courier new' size 016 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 070,020 label label_003;
-         of form_fecha_pedido;
-         VALUE 'TAXA DE ENTREGA';
-         autosize;
-         FONT 'verdana' size 012;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 070,020 label label_003 ;
+         of form_fecha_pedido ;
+         VALUE 'TAXA DE ENTREGA' ;
+         autosize ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 070,250 getbox tbox_taxa;
-         of form_fecha_pedido;
-         HEIGHT 030;
-         WIDTH 130;
-         VALUE 0;
-         FONT 'courier new' size 016;
-         bold;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 070,250 getbox tbox_taxa ;
+         of form_fecha_pedido ;
+         HEIGHT 030 ;
+         WIDTH 130 ;
+         VALUE 0 ;
+         FONT 'courier new' size 016 ;
+         bold ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 9,999.99'
-      @ 110,020 label label_004;
-         of form_fecha_pedido;
-         VALUE 'DESCONTO';
-         autosize;
-         FONT 'verdana' size 012;
-         bold;
-         FONTCOLOR _vermelho_002;
+      @ 110,020 label label_004 ;
+         of form_fecha_pedido ;
+         VALUE 'DESCONTO' ;
+         autosize ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         FONTCOLOR _vermelho_002 ;
          TRANSPARENT
-      @ 110,250 getbox tbox_desconto;
-         of form_fecha_pedido;
-         HEIGHT 030;
-         WIDTH 130;
-         VALUE 0;
-         FONT 'courier new' size 016;
-         bold;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _vermelho_002;
-         PICTURE '@E 9,999.99';
-         ON CHANGE setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod+form_fecha_pedido.tbox_taxa.value+x_preco)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'));
+      @ 110,250 getbox tbox_desconto ;
+         of form_fecha_pedido ;
+         HEIGHT 030 ;
+         WIDTH 130 ;
+         VALUE 0 ;
+         FONT 'courier new' size 016 ;
+         bold ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _vermelho_002 ;
+         PICTURE '@E 9,999.99' ;
+         ON CHANGE setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod+form_fecha_pedido.tbox_taxa.value+x_preco)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99')) ;
          ON LOSTFOCUS setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod+form_fecha_pedido.tbox_taxa.value+x_preco)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'))
-      @ 150,020 label label_005;
-         of form_fecha_pedido;
-         VALUE 'TOTAL DESTE PEDIDO';
-         autosize;
-         FONT 'verdana' size 012;
-         bold;
-         FONTCOLOR BLUE;
+      @ 150,020 label label_005 ;
+         of form_fecha_pedido ;
+         VALUE 'TOTAL DESTE PEDIDO' ;
+         autosize ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 150,250 label label_005_valor;
-         of form_fecha_pedido;
-         VALUE '';
-         autosize;
-         FONT 'courier new' size 016;
-         bold;
-         FONTCOLOR BLUE;
+      @ 150,250 label label_005_valor ;
+         of form_fecha_pedido ;
+         VALUE '' ;
+         autosize ;
+         FONT 'courier new' size 016 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
 
       * escolher formas de recebimento
-      @ 200,020 label label_006;
-         of form_fecha_pedido;
-         VALUE 'Você pode escolher até 3 formas de recebimento';
-         autosize;
-         FONT 'verdana' size 012;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 200,020 label label_006 ;
+         of form_fecha_pedido ;
+         VALUE 'Você pode escolher até 3 formas de recebimento' ;
+         autosize ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
       * formas de recebimento
       * 1º
-      @ 230,020 combobox combo_1;
-         itemsource formas_recebimento->nome;
-         valuesource formas_recebimento->codigo;
-         VALUE 1;
-         WIDTH 250;
+      @ 230,020 combobox combo_1 ;
+         itemsource formas_recebimento->nome ;
+         valuesource formas_recebimento->codigo ;
+         VALUE 1 ;
+         WIDTH 250 ;
          FONT 'courier new' size 010
-      @ 230,300 getbox tbox_fr001;
-         of form_fecha_pedido;
-         HEIGHT 030;
-         WIDTH 130;
-         VALUE 0;
-         FONT 'courier new' size 014;
-         bold;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 230,300 getbox tbox_fr001 ;
+         of form_fecha_pedido ;
+         HEIGHT 030 ;
+         WIDTH 130 ;
+         VALUE 0 ;
+         FONT 'courier new' size 014 ;
+         bold ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 99,999.99'
       * 2º
-      @ 270,020 combobox combo_2;
-         itemsource formas_recebimento->nome;
-         valuesource formas_recebimento->codigo;
-         VALUE 1;
-         WIDTH 250;
+      @ 270,020 combobox combo_2 ;
+         itemsource formas_recebimento->nome ;
+         valuesource formas_recebimento->codigo ;
+         VALUE 1 ;
+         WIDTH 250 ;
          FONT 'courier new' size 010
-      @ 270,300 getbox tbox_fr002;
-         of form_fecha_pedido;
-         HEIGHT 030;
-         WIDTH 130;
-         VALUE 0;
-         FONT 'courier new' size 014;
-         bold;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 270,300 getbox tbox_fr002 ;
+         of form_fecha_pedido ;
+         HEIGHT 030 ;
+         WIDTH 130 ;
+         VALUE 0 ;
+         FONT 'courier new' size 014 ;
+         bold ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 99,999.99'
       * 3º
-      @ 310,020 combobox combo_3;
-         itemsource formas_recebimento->nome;
-         valuesource formas_recebimento->codigo;
-         VALUE 1;
-         WIDTH 250;
+      @ 310,020 combobox combo_3 ;
+         itemsource formas_recebimento->nome ;
+         valuesource formas_recebimento->codigo ;
+         VALUE 1 ;
+         WIDTH 250 ;
          FONT 'courier new' size 010
-      @ 310,300 getbox tbox_fr003;
-         of form_fecha_pedido;
-         HEIGHT 030;
-         WIDTH 130;
-         VALUE 0;
-         FONT 'courier new' size 014;
-         bold;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         PICTURE '@E 99,999.99';
+      @ 310,300 getbox tbox_fr003 ;
+         of form_fecha_pedido ;
+         HEIGHT 030 ;
+         WIDTH 130 ;
+         VALUE 0 ;
+         FONT 'courier new' size 014 ;
+         bold ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         PICTURE '@E 99,999.99' ;
          ON LOSTFOCUS calcula_final(x_preco)
 
-      @ 360,020 label label_011;
-         of form_fecha_pedido;
-         VALUE 'TOTAL RECEBIDO';
-         autosize;
-         FONT 'verdana' size 012;
-         bold;
-         FONTCOLOR BLUE;
+      @ 360,020 label label_011 ;
+         of form_fecha_pedido ;
+         VALUE 'TOTAL RECEBIDO' ;
+         autosize ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 360,250 label label_011_valor;
-         of form_fecha_pedido;
-         VALUE '';
-         autosize;
-         FONT 'courier new' size 016;
-         bold;
-         FONTCOLOR BLUE;
+      @ 360,250 label label_011_valor ;
+         of form_fecha_pedido ;
+         VALUE '' ;
+         autosize ;
+         FONT 'courier new' size 016 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
 
-      @ 400,020 label label_012;
-         of form_fecha_pedido;
-         VALUE 'TROCO';
-         autosize;
-         FONT 'verdana' size 012;
-         bold;
-         FONTCOLOR _vermelho_002;
+      @ 400,020 label label_012 ;
+         of form_fecha_pedido ;
+         VALUE 'TROCO' ;
+         autosize ;
+         FONT 'verdana' size 012 ;
+         bold ;
+         FONTCOLOR _vermelho_002 ;
          TRANSPARENT
-      @ 400,250 label label_012_valor;
-         of form_fecha_pedido;
-         VALUE '';
-         autosize;
-         FONT 'courier new' size 016;
-         bold;
-         FONTCOLOR BLUE;
+      @ 400,250 label label_012_valor ;
+         of form_fecha_pedido ;
+         VALUE '' ;
+         autosize ;
+         FONT 'courier new' size 016 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
 
       * botões
-      @ 460,005 buttonex botao_cupom;
-         parent form_fecha_pedido;
-         CAPTION 'Imprimir CUPOM';
-         WIDTH 155 height 040;
-         PICTURE path_imagens+'img_relatorio.bmp';
-         ACTION imprimir_cupom('-',x_valor_pizza+x_valor_prod,form_fecha_pedido.tbox_taxa.value,x_preco,form_fecha_pedido.tbox_desconto.value,0);
+      @ 460,005 buttonex botao_cupom ;
+         PARENT form_fecha_pedido ;
+         CAPTION 'Imprimir CUPOM' ;
+         WIDTH 155 height 040 ;
+         PICTURE path_imagens+'img_relatorio.bmp' ;
+         ACTION imprimir_cupom('-',x_valor_pizza+x_valor_prod,form_fecha_pedido.tbox_taxa.value,x_preco,form_fecha_pedido.tbox_desconto.value,0) ;
          TOOLTIP 'Clique aqui imprimir o cupom'
-      @ 460,165 buttonex botao_ok;
-         parent form_fecha_pedido;
-         CAPTION 'Fechar pedido';
-         WIDTH 140 height 040;
-         PICTURE path_imagens+'img_pedido.bmp';
-         ACTION fechamento_geral(x_preco);
+      @ 460,165 buttonex botao_ok ;
+         PARENT form_fecha_pedido ;
+         CAPTION 'Fechar pedido' ;
+         WIDTH 140 height 040 ;
+         PICTURE path_imagens+'img_pedido.bmp' ;
+         ACTION fechamento_geral(x_preco) ;
          TOOLTIP 'Clique aqui para finalizar o pedido'
-      @ 460,310 buttonex botao_voltar;
-         parent form_fecha_pedido;
-         CAPTION 'Voltar tela anterior';
-         WIDTH 180 height 040;
-         PICTURE path_imagens+'img_sair.bmp';
-         ACTION form_fecha_pedido.release;
+      @ 460,310 buttonex botao_voltar ;
+         PARENT form_fecha_pedido ;
+         CAPTION 'Voltar tela anterior' ;
+         WIDTH 180 height 040 ;
+         PICTURE path_imagens+'img_sair.bmp' ;
+         ACTION form_fecha_pedido.release ;
          TOOLTIP 'Clique aqui para voltar a vender'
 
       ON KEY ESCAPE ACTION thiswindow.release
@@ -2102,38 +2102,38 @@ STATIC FUNCTION pede_quantidade()
    LOCAL x_nome := alltrim(valor_coluna('grid_produtos','form_delivery',2))
    LOCAL x_unitario := alltrim(valor_coluna('grid_produtos','form_delivery',3))
 
-   DEFINE WINDOW form_pquantidade;
-         at 0,0;
-         WIDTH 300;
-         HEIGHT 150;
-         TITLE 'Digitação';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pquantidade ;
+         at 0,0 ;
+         WIDTH 300 ;
+         HEIGHT 150 ;
+         TITLE 'Digitação' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
-      @ 10,10 label label_1;
-         VALUE 'Digite a quantidade';
-         autosize;
-         FONT 'courier new' size 12;
-         bold;
+      @ 10,10 label label_1 ;
+         VALUE 'Digite a quantidade' ;
+         autosize ;
+         FONT 'courier new' size 12 ;
+         bold ;
          TRANSPARENT
-      @ 10,230 textbox tbox_quantidade;
-         HEIGHT 30;
-         WIDTH 60;
-         VALUE '';
-         numeric;
-         FONT 'courier new' size 12;
-         bold;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 10,230 textbox tbox_quantidade ;
+         HEIGHT 30 ;
+         WIDTH 60 ;
+         VALUE '' ;
+         numeric ;
+         FONT 'courier new' size 12 ;
+         bold ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          ON ENTER transfere_produto_pedido(x_codigo,x_nome,x_unitario)
-      @ 50,10 label label_2;
-         WIDTH form_pquantidade.width;
-         VALUE 'e tecle ENTER';
-         FONT 'courier new' size 12;
-         FONTCOLOR BLUE;
-         bold;
-         transparent;
+      @ 50,10 label label_2 ;
+         WIDTH form_pquantidade.width ;
+         VALUE 'e tecle ENTER' ;
+         FONT 'courier new' size 12 ;
+         FONTCOLOR BLUE ;
+         bold ;
+         transparent ;
          centeralign
 
       ON KEY ESCAPE ACTION thiswindow.release

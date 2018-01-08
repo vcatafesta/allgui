@@ -6,34 +6,34 @@ FUNCTION NuevaDBF()
 
    PRIVATE Nuevo := .T.
 
-   DEFINE WINDOW Win_2;
-         AT 0, 0;
-         WIDTH 555;
-         HEIGHT 485;
-         TITLE 'Crear o modificar una base de datos';
-         MODAL;
+   DEFINE WINDOW Win_2 ;
+         AT 0, 0 ;
+         WIDTH 555 ;
+         HEIGHT 485 ;
+         TITLE 'Crear o modificar una base de datos' ;
+         MODAL ;
          ON INIT InicializaVariables()
 
       DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 58,36 IMAGESIZE 20,20  FLAT BORDER
 
-         BUTTON NUEVO;
-            CAPTION '&Nuevo';
-            PICTURE 'NUEVO1';
+         BUTTON NUEVO ;
+            CAPTION '&Nuevo' ;
+            PICTURE 'NUEVO1' ;
             ACTION ( Nuevo() )
 
-         BUTTON EDITAR;
-            CAPTION '&Editar';
-            PICTURE 'EDITAR1';
+         BUTTON EDITAR ;
+            CAPTION '&Editar' ;
+            PICTURE 'EDITAR1' ;
             ACTION ( Editar() )
 
-         BUTTON GUARDAR;
-            CAPTION '&Guardar';
-            PICTURE 'EDITAR1';
+         BUTTON GUARDAR ;
+            CAPTION '&Guardar' ;
+            PICTURE 'EDITAR1' ;
             ACTION ( Guardar(), cArchivo := '', InicializaVariables() )
 
-         BUTTON CERRAR;
-            CAPTION '&Cerrar';
-            PICTURE 'CERRAR1';
+         BUTTON CERRAR ;
+            CAPTION '&Cerrar' ;
+            PICTURE 'CERRAR1' ;
             ACTION ( cArchivo := '' , Win_2.release )
 
       END TOOLBAR
@@ -52,12 +52,12 @@ FUNCTION NuevaDBF()
       @110,360 TEXTBOX  LARGO_CAMPO     WIDTH 80  NUMERIC INPUTMASK '999'      RIGHTALIGN
       @110,450 TEXTBOX  DECIMALES_CAMPO WIDTH 80  NUMERIC INPUTMASK '99'       RIGHTALIGN ON ENTER AgregaCampo()
 
-      @140,10 GRID ESTRUCTURA;
-         WIDTH  520;
-         HEIGHT 300;
-         HEADERS {'Nombre','Tipo','Longitud','Decimales'};
-         WIDTHS { 260,80,80,80 };
-         JUSTIFY { 0,0,1,1 };
+      @140,10 GRID ESTRUCTURA ;
+         WIDTH  520 ;
+         HEIGHT 300 ;
+         HEADERS {'Nombre','Tipo','Longitud','Decimales'} ;
+         WIDTHS { 260,80,80,80 } ;
+         JUSTIFY { 0,0,1,1 } ;
          ITEMS {}
 
       DEFINE CONTEXT MENU
@@ -187,9 +187,9 @@ STATIC FUNCTION AgregaCampo()
 
    IF Nuevo
 
-      Win_2.ESTRUCTURA.AddItem( { Win_2.NOMBRE_CAMPO.Value,;
-         Win_2.TIPO_CAMPO.Item(Win_2.TIPO_CAMPO.Value),;
-         hb_ntos(Win_2.LARGO_CAMPO.Value),;
+      Win_2.ESTRUCTURA.AddItem( { Win_2.NOMBRE_CAMPO.Value, ;
+         Win_2.TIPO_CAMPO.Item(Win_2.TIPO_CAMPO.Value), ;
+         hb_ntos(Win_2.LARGO_CAMPO.Value), ;
          hb_ntos(Win_2.DECIMALES_CAMPO.Value) } )
 
    ELSE

@@ -106,13 +106,13 @@ PROCEDURE Main
       AAdd(aLabels,'label')
       AAdd(aValues, 2)
       AAdd(aFormats,{100,'CB',200,,{'item 1','item 2','item 3','item 4'}})
-      InputWindowEx('InputWindowEx test',;
-         aLabels,;
-         aValues,;
+      InputWindowEx('InputWindowEx test', ;
+         aLabels, ;
+         aValues, ;
          aFormats,,,.t. )
-      InputWindowEx('InputWindowEx modified by external codeblock',;
-         aLabels,;
-         aValues,;
+      InputWindowEx('InputWindowEx modified by external codeblock', ;
+         aLabels, ;
+         aValues, ;
          aFormats,,,.t.,,{||xTestCode()} )
 
       // InputWindow compatibility test
@@ -136,9 +136,9 @@ PROCEDURE Main
       AAdd(aLabels,'6. datepicker')
       AAdd(aValues,date())
       AAdd(aFormats,nil)
-      InputWindowEx('InputWindow compatibility test',;
-         aLabels,;
-         aValues,;
+      InputWindowEx('InputWindow compatibility test', ;
+         aLabels, ;
+         aValues, ;
          aFormats,,,.t.)
 
       RETURN
@@ -165,9 +165,9 @@ PROCEDURE Main
          AAdd(aLabels,'6. datepicker')
          AAdd(aValues,date())
          AAdd(aFormats,nil)
-         InputWindow('InputWindow standard test',;
-            aLabels,;
-            aValues,;
+         InputWindow('InputWindow standard test', ;
+            aLabels, ;
+            aValues, ;
             aFormats,,,,,120)
 
          RETURN

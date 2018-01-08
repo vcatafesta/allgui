@@ -8,13 +8,13 @@ PROCEDURE inicio
    oConexion = todbc():new('DBQ=bd1.mdb;Driver={Microsoft Access Driver (*.mdb)}')
    oConexion:Open()
 
-   DEFINE WINDOW form1;
-         at 0,0 width 400 height 400 title 'Demo Odbc/Access';
-         Main;
-         ON INIT ( ajustar(), cargar_datos(1) );
-         on maximize ( ajustar() );
-         on size ( ajustar() );
-         ON RELEASE ( oConexion:Destroy() );
+   DEFINE WINDOW form1 ;
+         at 0,0 width 400 height 400 title 'Demo Odbc/Access' ;
+         Main ;
+         ON INIT ( ajustar(), cargar_datos(1) ) ;
+         on maximize ( ajustar() ) ;
+         on size ( ajustar() ) ;
+         ON RELEASE ( oConexion:Destroy() ) ;
          FONT 'ms sans serif' size 8
 
       @ 0,  0 button btn1 caption '&Agregar'    width 80 height 20 action eventos(1)
@@ -30,7 +30,7 @@ PROCEDURE inicio
          HEADERS {'Id','Descripcion'}
          WIDTHS { 60, 300 }
          ON DBLCLICK    eventos(2)
-         ON CHANGE    form1.statusbar.item(1) := "Registro "+;
+         ON CHANGE    form1.statusbar.item(1) := "Registro "+ ;
             ltrim(str(form1.grid1.value))+" de "+alltrim(str(form1.grid1.itemcount))
          COLUMNCONTROLS   { ;
             {'TEXTBOX','NUMERIC',repl('9',10)} , ;
@@ -79,10 +79,10 @@ PROCEDURE eventos(n)
       IF n = 2
          cNombre := form1.grid1.cell( form1.grid1.value, 2 )
       END
-      DEFINE WINDOW form1a;
-            at 0,0 width 350 height 120;
-            TITLE iif(n = 2,'Edicion','Agregar');
-            modal;
+      DEFINE WINDOW form1a ;
+            at 0,0 width 350 height 120 ;
+            TITLE iif(n = 2,'Edicion','Agregar') ;
+            modal ;
             FONT 'ms sans serif' size 8
 
          @ 10, 10 label label1 width 80 height 20 value 'Nombre sucursal'
@@ -105,7 +105,7 @@ PROCEDURE eventos(n)
             n := form1.grid1.value
             form1.grid1.deleteitem( n )
             form1.grid1.value := iif(n > 1, n-1, 1)
-            form1.statusbar.item(1) := "Registro "+;
+            form1.statusbar.item(1) := "Registro "+ ;
                ltrim(str(form1.grid1.value))+" de "+alltrim(str(form1.grid1.itemcount))
          END
          oConexion:Close()
@@ -122,7 +122,7 @@ PROCEDURE grabar_datos(n)
    IF n = 1
       Cad := "INSERT INTO sucursal (nombre) VALUES ('"+form1a.text1.value+"')"
    ELSE
-      Cad := "UPDATE sucursal SET nombre='"+form1a.text1.value+;
+      Cad := "UPDATE sucursal SET nombre='"+form1a.text1.value+ ;
          "' WHERE id="+str(form1.grid1.cell(form1.grid1.value,1))
    END
    oConexion:Setsql( Cad )
@@ -135,7 +135,7 @@ PROCEDURE grabar_datos(n)
    ELSE
       form1.grid1.cell( form1.grid1.value, 2 ) := form1a.text1.value
    END
-   form1.statusbar.item(1) := "Registro "+;
+   form1.statusbar.item(1) := "Registro "+ ;
       ltrim(str(form1.grid1.value))+" de "+alltrim(str(form1.grid1.itemcount))
    form1a.release
 

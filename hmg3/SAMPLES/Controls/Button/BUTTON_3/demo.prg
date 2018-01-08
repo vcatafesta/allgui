@@ -12,7 +12,7 @@ FUNCTION Main()
          AT 0,0 ;
          WIDTH 200 ;
          HEIGHT 200 ;
-         MAIN;
+         MAIN ;
          TITLE 'Button Test'
 
       DEFINE MAIN MENU

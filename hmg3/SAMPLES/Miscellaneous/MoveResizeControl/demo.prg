@@ -7,11 +7,11 @@ FUNCTION MAIN
 
    LOCAL i, cLabelName
 
-   DEFINE WINDOW Form_1;
-         At 0,0;
-         WIDTH 700;
-         HEIGHT 400;
-         TITLE "Move and Resize Control With Cursor";
+   DEFINE WINDOW Form_1 ;
+         At 0,0 ;
+         WIDTH 700 ;
+         HEIGHT 400 ;
+         TITLE "Move and Resize Control With Cursor" ;
          MAIN
 
       @ 300, 10 LABEL Label_0 VALUE "Put the cursor over control and press F3 (Info), F5 (Move) or F9 (Resize), while Move or Resize ESC -> Undo" AUTOSIZE
@@ -81,9 +81,9 @@ PROCEDURE New_Form
             WIDTH 400 ;
             HEIGHT 300 ;
             HEADERS {'Last Name','First Name','Phone'} ;
-            WIDTHS {140,140,140};
+            WIDTHS {140,140,140} ;
             ITEMS aRows ;
-            VALUE 1;
+            VALUE 1 ;
             JUSTIFY { GRID_JTFY_LEFT,GRID_JTFY_LEFT, GRID_JTFY_RIGHT }
       END WINDOW
       ACTIVATE WINDOW Form_2
@@ -130,10 +130,10 @@ PROCEDURE HMG_InfoControlWithCursor
    hWnd := WindowFromPoint (nCol, nRow)
    IF GetControlIndexByHandle (hWnd) > 0
       GetControlNameByHandle (hWnd, @cControlName, @cFormName)
-      MsgInfo ({ cFormName +"."+ cControlName, HB_OSNEWLINE(),HB_OSNEWLINE(),;
-         "Row    : ", GetProperty (cFormName, cControlName, "Row"), HB_OSNEWLINE(),;
-         "Col    : ", GetProperty (cFormName, cControlName, "Col"), HB_OSNEWLINE(),;
-         "Width  : ", GetProperty (cFormName, cControlName, "Width"), HB_OSNEWLINE(),;
+      MsgInfo ({ cFormName +"."+ cControlName, HB_OSNEWLINE(),HB_OSNEWLINE(), ;
+         "Row    : ", GetProperty (cFormName, cControlName, "Row"), HB_OSNEWLINE(), ;
+         "Col    : ", GetProperty (cFormName, cControlName, "Col"), HB_OSNEWLINE(), ;
+         "Width  : ", GetProperty (cFormName, cControlName, "Width"), HB_OSNEWLINE(), ;
          "Height : ", GetProperty (cFormName, cControlName, "Height")},"Control Info")
    ENDIF
 

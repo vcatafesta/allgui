@@ -23,12 +23,12 @@ FUNCTION Main()
 
    SET TOOLTIPBALLOON ON
 
-   DEFINE WINDOW Agenda;
-         AT 0, 0;
-         CLIENTAREA 310, 390;
-         TITLE "Calendar";
-         ICON 'AGENDA.ICO';
-         MAIN;
+   DEFINE WINDOW Agenda ;
+         AT 0, 0 ;
+         CLIENTAREA 310, 390 ;
+         TITLE "Calendar" ;
+         ICON 'AGENDA.ICO' ;
+         MAIN ;
          NOMAXIMIZE NOSIZE
 
       // Select a picture for season of year
@@ -164,20 +164,20 @@ FUNCTION Main()
 
       @ 310, 30 BUTTON ANTERIOR ;
          CAPTION '&Previous' ;  // '&Anterior'
-         WIDTH 80;
-         HEIGHT 28;
+         WIDTH 80 ;
+         HEIGHT 28 ;
          ACTION Anterior()
 
       @ 310, 110 BUTTON HOY ;
          CAPTION '&Today' ;     // '&Hoy'
-         WIDTH 80;
-         HEIGHT 28;
+         WIDTH 80 ;
+         HEIGHT 28 ;
          ACTION Hoy()
 
       @ 310, 190 BUTTON POSTERIOR ;
          CAPTION '&Next' ;      // '&Siguiente'
-         WIDTH 80;
-         HEIGHT 28;
+         WIDTH 80 ;
+         HEIGHT 28 ;
          ACTION Posterior()
 
       @ 5, 200 HYPERLINK Label_0 ;

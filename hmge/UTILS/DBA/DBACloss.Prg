@@ -10,15 +10,15 @@ PROC ClosData(;              // Close Current Data
       cDataType,;   // Data Type ( A : All, T: Table, U: UnKonwn ...
       cClosType )   // Clos Type : A : All, M: Multiple, C : Current
 
-   LOCA cDatType := '',;
-      cTabAlia := '',;
-      aDatNum1 := {},;
-      aDatNums := {},;
-      nDataNum :=  0,;
+   LOCA cDatType := '', ;
+      cTabAlia := '', ;
+      aDatNum1 := {}, ;
+      aDatNums := {}, ;
+      nDataNum :=  0, ;
       nDInd    :=  0,;     // Data indice
       cCDaType := '',;     // Type of Current Data
-      aSelData := {},;
-      aSelectd := {},;
+      aSelData := {}, ;
+      aSelectd := {}, ;
       a1Data   := {}
 
    DEFAULT cDataType TO "T",;   // Default Data Type is T : Table
@@ -27,8 +27,8 @@ PROC ClosData(;              // Close Current Data
    DO CASE
    CASE cClosType == "M"  // Multiple
 
-      AEVAL( aOpnDatas, { | a1, i1 | IF( cDataType == "A" .OR. cDataType == a1[ 1 ],;
-         ( AADD( aSelData, ExOFNFFP( a1[ 3 ] ) ),;
+      AEVAL( aOpnDatas, { | a1, i1 | IF( cDataType == "A" .OR. cDataType == a1[ 1 ], ;
+         ( AADD( aSelData, ExOFNFFP( a1[ 3 ] ) ), ;
          AADD( aDatNum1, i1 ) ), ) } )
 
       aSelectd := GFUSList( aSelData, "Select to close", .T. )

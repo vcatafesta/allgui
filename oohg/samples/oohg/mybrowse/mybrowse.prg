@@ -57,7 +57,7 @@ FUNCTION CreaBrowse( cBase, aNomb, aLong, aJust )
 
    aHdr[1] := Nil
 
-   DEFINE WINDOW oWndBase AT nRow , nCol OBJ oWndBase;
+   DEFINE WINDOW oWndBase AT nRow , nCol OBJ oWndBase ;
          WIDTH nWidth HEIGHT nHeight ;
          TITLE "(c)2009-2017 MigSoft - MyBrowse" ;
          ICON "main" ;

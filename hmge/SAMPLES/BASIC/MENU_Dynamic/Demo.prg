@@ -4,11 +4,11 @@ MEMVAR aMenu
 
 FUNCTION Main
 
-   PRIVATE aMenu := {{'File',            'Archivo'},;
-      {'Open',            'Abrir'},;
-      {'Save',            'Guardar'},;
-      {'Print',           'Imprimir'},;
-      {'Save As...',      'Guardar como...'},;
+   PRIVATE aMenu := {{'File',            'Archivo'}, ;
+      {'Open',            'Abrir'}, ;
+      {'Save',            'Guardar'}, ;
+      {'Print',           'Imprimir'}, ;
+      {'Save As...',      'Guardar como...'}, ;
       {'SPANISH/ENGLISH', 'INGLES/ESPANOL'}}
 
    SET MENUSTYLE EXTENDED

@@ -16,17 +16,17 @@ FUNCTION MAIN
    PRIVATE hBitmap2   := 0
    PRIVATE nMode      := 0
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH 800;
-         HEIGHT 630;
-         TITLE "Demo4: Wallpaper";
-         MAIN;
-         ON INIT    Proc_ON_INIT ();
-         ON RELEASE Proc_ON_RELEASE ();
-         ON PAINT   Proc_ON_PAINT ();
-         VIRTUAL WIDTH  1100;
-         VIRTUAL HEIGHT 1100;
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 630 ;
+         TITLE "Demo4: Wallpaper" ;
+         MAIN ;
+         ON INIT    Proc_ON_INIT () ;
+         ON RELEASE Proc_ON_RELEASE () ;
+         ON PAINT   Proc_ON_PAINT () ;
+         VIRTUAL WIDTH  1100 ;
+         VIRTUAL HEIGHT 1100 ;
 
       DEFINE MAIN MENU
          DEFINE POPUP "Automatic"
@@ -35,10 +35,10 @@ FUNCTION MAIN
       END MENU
       Win1.Flag_Automatic.Checked := .F.
 
-      DEFINE TAB Tab_1;
-            AT 30,10;
-            WIDTH 400;
-            HEIGHT 300;
+      DEFINE TAB Tab_1 ;
+            AT 30,10 ;
+            WIDTH 400 ;
+            HEIGHT 300 ;
             VALUE 1 FONT "ARIAL" SIZE 10
 
          PAGE "Page1"
@@ -51,11 +51,11 @@ FUNCTION MAIN
          END PAGE
       END TAB
 
-      @ 10, 450 GRID Grid_1 WIDTH 300 HEIGHT 330;
-         HEADERS {"Column 1","Column 2","Column 3"};
-         WIDTHS {140,140,140};
-         VIRTUAL;
-         ITEMCOUNT 30;
+      @ 10, 450 GRID Grid_1 WIDTH 300 HEIGHT 330 ;
+         HEADERS {"Column 1","Column 2","Column 3"} ;
+         WIDTHS {140,140,140} ;
+         VIRTUAL ;
+         ITEMCOUNT 30 ;
          ON QUERYDATA {||This.QueryData := Str ( This.QueryRowIndex ) + "," + Str ( This.QueryColIndex )}
 
       @ 350,100 IMAGE Image_1 PICTURE "Img1.bmp" WIDTH 160 HEIGHT 120 STRETCH

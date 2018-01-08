@@ -61,7 +61,7 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
 
    LOCAL sReadLine := ""
@@ -154,7 +154,7 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
    CASE SyntaxType == "CHRP"
       // La DALE-Aid Creative Solutions @ ... Command TEXTBOX PASSWORD Syntax:
       // ---------------------------------------------------------------------
-      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> VALUE <nValue> WIDTH <nWidth>;
+      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> VALUE <nValue> WIDTH <nWidth> ;
       //    PASSWORD MAXLENGTH <nInputLength> UPPERCASE ON LOSTFOCUS <OnLostFocusProcedure> | <bBlock>
 
       aProperties_[ 1] := ALLTRIM(STRTRAN(aDefCommandList_[ 1],"DEFINE TEXTBOX",""))               // DEFINE TEXTBOX txbPassword
@@ -189,14 +189,14 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[27] +;
-         " " + aProperties_[4] + ";" + CRLF + LDCS_iLevel(3) + "PASSWORD MAXLENGTH 10 UPPERCASE " +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[27] + ;
+         " " + aProperties_[4] + ";" + CRLF + LDCS_iLevel(3) + "PASSWORD MAXLENGTH 10 UPPERCASE " + ;
          aProperties_[11] + CRLF
 
    CASE SyntaxType == "CHRF"
-      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> FIELD <FieldName>;
-      //    VALUE <nValue> WIDTH <nWidth> FONT <cFontName> SIZE <nFontSize> TOOLTIP <cToolTipText>;
+      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> FIELD <FieldName> ;
+      //    VALUE <nValue> WIDTH <nWidth> FONT <cFontName> SIZE <nFontSize> TOOLTIP <cToolTipText> ;
       //    MAXLENGTH <nInputLegnth> [UPPERCASE] ON LOSTFOCUS <OnLostFocusProcedure> | <bBlock>
 
       IF UpperLower
@@ -234,10 +234,10 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
          aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
          aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-         cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + aProperties_[1] +;
-            " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[26] + "; " + CRLF +;
-            LDCS_iLevel(3) + aProperties_[29] + " " + aProperties_[4] + " " + aProperties_[6] + " " +;
-            aProperties_[7] + " " + aProperties_[8] + "; " + CRLF +;
+         cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + aProperties_[1] + ;
+            " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[26] + "; " + CRLF + ;
+            LDCS_iLevel(3) + aProperties_[29] + " " + aProperties_[4] + " " + aProperties_[6] + " " + ;
+            aProperties_[7] + " " + aProperties_[8] + "; " + CRLF + ;
             LDCS_iLevel(3) + aProperties_[23] + " " + aProperties_[22] + " " + aProperties_[11] + CRLF
       ELSE
          aProperties_[ 1] := ALLTRIM(STRTRAN(aDefCommandList_[ 1],"DEFINE TEXTBOX",""))           // DEFINE TEXTBOX txbField
@@ -273,10 +273,10 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
          aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
          aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-         cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + aProperties_[1] +;
-            " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[26] + "; " + CRLF +;
-            LDCS_iLevel(3) + aProperties_[28] + " " + aProperties_[4] + " " + aProperties_[6] + " " +;
-            aProperties_[7] + " " + aProperties_[8] + "; " + CRLF +;
+         cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + aProperties_[1] + ;
+            " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[26] + "; " + CRLF + ;
+            LDCS_iLevel(3) + aProperties_[28] + " " + aProperties_[4] + " " + aProperties_[6] + " " + ;
+            aProperties_[7] + " " + aProperties_[8] + "; " + CRLF + ;
             LDCS_iLevel(3) + aProperties_[23] + " " + aProperties_[11] + CRLF
       ENDIF
 
@@ -314,19 +314,19 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> VALUE <nValue> WIDTH <nWidth>;
+      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> VALUE <nValue> WIDTH <nWidth> ;
       //    FONT <cFontName> SIZE <nFontSize> TOOLTIP <cToolTipText> MAXLENGTH <nInputLegnth> ON LOSTFOCUS <ProcName>
       IF UpperLower
-         cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " +;
-            aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[27] + " " +;
+         cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + ;
+            aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[27] + " " + ;
             aProperties_[4] + ";" + CRLF + ;
-            LDCS_iLevel(3) + aProperties_[6] + " " + aProperties_[7] + " " + aProperties_[8] + " " +;
+            LDCS_iLevel(3) + aProperties_[6] + " " + aProperties_[7] + " " + aProperties_[8] + " " + ;
             aProperties_[22] + " UPPERCASE " + aProperties_[11] + CRLF
       ELSE
-         cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " +;
-            aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[27] + " " +;
+         cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + ;
+            aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[27] + " " + ;
             aProperties_[4] + ";" + CRLF + ;
-            LDCS_iLevel(3) + aProperties_[6] + " " + aProperties_[7] + " " + aProperties_[8] + " " +;
+            LDCS_iLevel(3) + aProperties_[6] + " " + aProperties_[7] + " " + aProperties_[8] + " " + ;
             aProperties_[22] + " " + aProperties_[11] + CRLF
 
       ENDIF
@@ -366,15 +366,15 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> FIELD <FieldName>;
-      //    VALUE <nValue> WIDTH <nWidth> NUMERIC INPUTMASK <cMask> FONT <cFontName> SIZE <nFontSize>;
+      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> FIELD <FieldName> ;
+      //    VALUE <nValue> WIDTH <nWidth> NUMERIC INPUTMASK <cMask> FONT <cFontName> SIZE <nFontSize> ;
       //    TOOLTIP <cToolTipText> ON LOSTFOCUS <OnLostFocusProcedure> | <bBlock> ]
 
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " +;
-         aProperties_[24] + "; " + CRLF +;
-         LDCS_iLevel(3) + aProperties_[28] + " " + aProperties_[4] + " NUMERIC " +;
-         aProperties_[25] + " " + aProperties_[6] + " " + aProperties_[7] + ";" + CRLF +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " + ;
+         aProperties_[24] + "; " + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[28] + " " + aProperties_[4] + " NUMERIC " + ;
+         aProperties_[25] + " " + aProperties_[6] + " " + aProperties_[7] + ";" + CRLF + ;
          LDCS_iLevel(3) + aProperties_[8] + " " + aProperties_[11] + CRLF
 
    CASE SyntaxType == "NUMV"
@@ -411,14 +411,14 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight>;
-      //    VALUE <nValue> WIDTH <nWidth> NUMERIC INPUTMASK <cMask> FONT <cFontName> SIZE <nFontSize>;
+      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> ;
+      //    VALUE <nValue> WIDTH <nWidth> NUMERIC INPUTMASK <cMask> FONT <cFontName> SIZE <nFontSize> ;
       //    TOOLTIP <cToolTipText> ON LOSTFOCUS <OnLostFocusProcedure> | <bBlock> ]
 
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + "; " + CRLF +;
-         LDCS_iLevel(3) + aProperties_[27] + " " + aProperties_[4] + " NUMERIC " +;
-         aProperties_[24] + " " + aProperties_[6] + " " + aProperties_[7] + ";" + CRLF +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + "; " + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[27] + " " + aProperties_[4] + " NUMERIC " + ;
+         aProperties_[24] + " " + aProperties_[6] + " " + aProperties_[7] + ";" + CRLF + ;
          LDCS_iLevel(3) + aProperties_[8] + " " + aProperties_[11] + CRLF
 
    CASE SyntaxType == "DTEF"
@@ -456,14 +456,14 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> FIELD <FieldName>;
-      //    VALUE <nValue> WIDTH <nWidth>  FONT <cFontName> SIZE <nFontSize> TOOLTIP <cToolTipText>;
+      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> FIELD <FieldName> ;
+      //    VALUE <nValue> WIDTH <nWidth>  FONT <cFontName> SIZE <nFontSize> TOOLTIP <cToolTipText> ;
       //    DATE ON LOSTFOCUS <OnLostFocusProcedure> | <bBlock> ]
 
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[24] + ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[28] + " " + aProperties_[4] + " " + aProperties_[6] +;
-         " " + aProperties_[7] + " " + aProperties_[8] + "; " + CRLF +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] + " " + aProperties_[24] + ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[28] + " " + aProperties_[4] + " " + aProperties_[6] + ;
+         " " + aProperties_[7] + " " + aProperties_[8] + "; " + CRLF + ;
          LDCS_iLevel(3) + "DATE " + aProperties_[11] + CRLF
 
    CASE SyntaxType == "DTEV"
@@ -500,14 +500,14 @@ FUNCTION AST_TextBox(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> FIELD <FieldName>;
-      //    VALUE <nValue> WIDTH <nWidth>  FONT <cFontName> SIZE <nFontSize> TOOLTIP <cToolTipText>;
+      // @ <nRow> ,<nCol> TEXTBOX <ControlName> OF <ParentWindowName> HEIGHT <nHeight> FIELD <FieldName> ;
+      //    VALUE <nValue> WIDTH <nWidth>  FONT <cFontName> SIZE <nFontSize> TOOLTIP <cToolTipText> ;
       //    DATE ON LOSTFOCUS <OnLostFocusProcedure> | <bBlock> ]
 
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] +  ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[27] + " " + aProperties_[4] + " " + aProperties_[6] +;
-         " " + aProperties_[7] + " " + aProperties_[8] + "; " + CRLF +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " TEXTBOX " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[5] +  ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[27] + " " + aProperties_[4] + " " + aProperties_[6] + ;
+         " " + aProperties_[7] + " " + aProperties_[8] + "; " + CRLF + ;
          LDCS_iLevel(3) + "DATE " + aProperties_[11] + CRLF
 
    ENDCASE

@@ -178,7 +178,7 @@ FUNCTION MyTsb( nBrw, aBase )
 
       // переназначим цвет: строка маркера/курсора текущй записи базы
       aCursorBC := { 4915199,255}
-      :SetColor( { 6}, { { |a,b,c,d| a:=d, IF( c:nCell == b, aCursorBC ,;
+      :SetColor( { 6}, { { |a,b,c,d| a:=d, IF( c:nCell == b, aCursorBC , ;
          { aMarker[1], aMarker[2] })  }  } )
 
       // -------------------- Установить цвета в таблице ------------------------------

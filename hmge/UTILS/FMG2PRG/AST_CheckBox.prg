@@ -28,7 +28,7 @@ FUNCTION AST_CheckBox(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
 
    LOCAL sReadLine := ""
@@ -74,8 +74,8 @@ FUNCTION AST_CheckBox(cReadString,cTerminator)
    //         [ NOTABSTOP ]
    // DBF and Non-DBF CHECKBOX SYNTAX:
    // --------------------------------
-   // @ <nRow> ,<nCol> LABEL <ControlName> OF <ParentWindowName>;
-   //    CAPTION <cCaption>;
+   // @ <nRow> ,<nCol> LABEL <ControlName> OF <ParentWindowName> ;
+   //    CAPTION <cCaption> ;
    //      WIDTH <nWidth> HEIGHT <nHeight> VALUE <lValue> [ FIELD <FieldName> ]
 
    DO CASE
@@ -110,9 +110,9 @@ FUNCTION AST_CheckBox(cReadString,cTerminator)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
       cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " CHECKBOX " + ;
-         aProperties_[1] + " OF ~LDCS_Form " + ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[6] + ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " +;
+         aProperties_[1] + " OF ~LDCS_Form " + ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[6] + ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " + ;
          aProperties_[7] + CRLF
 
    CASE cSyntaxType == "DBFIELD"
@@ -147,9 +147,9 @@ FUNCTION AST_CheckBox(cReadString,cTerminator)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
       cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " CHECKBOX " + ;
-         aProperties_[1] + " OF ~LDCS_Form " + ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[6] + ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " +;
+         aProperties_[1] + " OF ~LDCS_Form " + ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[6] + ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " + ;
          aProperties_[7] + " " + aProperties_[18] + CRLF
 
    ENDCASE

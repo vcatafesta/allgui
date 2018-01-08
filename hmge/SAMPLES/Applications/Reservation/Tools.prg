@@ -184,8 +184,8 @@ PROCEDURE CancFile(File,msg)
    DEFAULT msg to .F.
    IF file(File)
       IF FERASE(File) == -1
-         Msgt(3,"Al momento non è possibile cancellare il file:"+CRLF+CRLF+File+;
-            Space(10)+CRLF+CRLF+"Riprovare più tardi!", "Errorre "+zaps(FERROR())+;
+         Msgt(3,"Al momento non è possibile cancellare il file:"+CRLF+CRLF+File+ ;
+            Space(10)+CRLF+CRLF+"Riprovare più tardi!", "Errorre "+zaps(FERROR())+ ;
             " su "+PROCNAME(1)+" Linea "+zaps(Procline(1)),"EXCLAMATION")
       ENDIF
    ELSE

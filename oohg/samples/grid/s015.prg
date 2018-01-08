@@ -91,7 +91,7 @@ FUNCTION Main
          VALUE "See what happens when you are editing a cell and a " + ;
          "cursor key is pressed or when you click the mouse " + ;
          "outside the edit window. Edition can be started with " + ;
-         "Enter, DblClick, F2 and the buttons.";
+         "Enter, DblClick, F2 and the buttons." ;
          WIDTH oForm:ClientWidth - 40 ;
          HEIGHT 30
 

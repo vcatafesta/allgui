@@ -29,7 +29,7 @@ FUNCTION Main
          WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
          ROWSOURCE "Test" ;
          COLUMNFIELDS { 'Code' , 'First' , 'Last' , 'Birth' , 'Married' , 'Bio' } ;
-         COLUMNCONTROLS {{'TEXTBOX','NUMERIC','999'},{'TEXTBOX','CHARACTER'},{'TEXTBOX','CHARACTER'},{'TEXTBOX','DATE'},{'CHECKBOX'},{'TEXTBOX','CHARACTER'}};
+         COLUMNCONTROLS {{'TEXTBOX','NUMERIC','999'},{'TEXTBOX','CHARACTER'},{'TEXTBOX','CHARACTER'},{'TEXTBOX','DATE'},{'CHECKBOX'},{'TEXTBOX','CHARACTER'}} ;
          ALLOWDELETE ;
          EDIT
 

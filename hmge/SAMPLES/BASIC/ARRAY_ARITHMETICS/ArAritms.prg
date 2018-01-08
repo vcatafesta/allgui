@@ -25,15 +25,15 @@ History : July 2010; 1.st release
 */
 
 FUNC ACOUNT( ;                            // Count from an array.
-      aArry2Count ,;
+      aArry2Count , ;
       nFORColNo ,;  // For clause indise
       bFORClaus )   // For clause block
 
-   LOCAL l2Dim  := HB_ISARRAY( aArry2Count[ 1 ] ),;
-      nIndis :=  0,;
+   LOCAL l2Dim  := HB_ISARRAY( aArry2Count[ 1 ] ), ;
+      nIndis :=  0, ;
       nRVal  := 0
 
-   DEFAULT nFORColNo TO 1,;
+   DEFAULT nFORColNo TO 1, ;
       bFORClaus TO { || .T.}
 
    IF l2Dim
@@ -73,14 +73,14 @@ FUNC ACOUNT( ;                            // Count from an array.
    */
 
    FUNC ASUM( ;                              // sum value(s) from an array.
-         aArry2Sum ,;
+         aArry2Sum , ;
          xFields,;     // Fields (columns) to sum
          nFORColNo ,;  // For clause indise
          bFORClaus )   // For clause block
 
-      LOCAL l2Dim  := HB_ISARRAY( aArry2Sum[ 1 ] ),;
-         a1     := {},;
-         nIndis :=  0,;
+      LOCAL l2Dim  := HB_ISARRAY( aArry2Sum[ 1 ] ), ;
+         a1     := {}, ;
+         nIndis :=  0, ;
          xRVal
 
       IF xFields == NIL
@@ -92,7 +92,7 @@ FUNC ACOUNT( ;                            // Count from an array.
          xFields := { xFields }
       ENDIF
 
-      DEFAULT  nFORColNo TO 1,;
+      DEFAULT  nFORColNo TO 1, ;
          bFORClaus TO { || .T.}
 
       IF l2Dim
@@ -102,9 +102,9 @@ FUNC ACOUNT( ;                            // Count from an array.
 
          FOR EACH a1 IN aArry2Sum
             IF EVAL( bFORClaus, a1[ nFORColNo ] )
-               AEVAL( a1, { | x1, i1 | IF( ASCAN( xFields, i1 ) > 0 .AND.;
-                  HB_ISNUMERIC( x1 ) .AND.;
-                  HB_ISNUMERIC( xRVal[ i1 ] ),;
+               AEVAL( a1, { | x1, i1 | IF( ASCAN( xFields, i1 ) > 0 .AND. ;
+                  HB_ISNUMERIC( x1 ) .AND. ;
+                  HB_ISNUMERIC( xRVal[ i1 ] ), ;
                   xRVal[ i1 ] += x1, ) } )
             ENDIF
          NEXT a1
@@ -144,14 +144,14 @@ FUNC ACOUNT( ;                            // Count from an array.
       */
 
       FUNC AAVERAGE( ;
-            aArry2Sum ,;
+            aArry2Sum , ;
             xFields,;     // Fields (columns) to sum
             nFORColNo ,;  // For clause indise
             bFORClaus )   // For clause block
 
-         LOCAL l2Dim  := HB_ISARRAY( aArry2Sum[ 1 ] ),;
-            a1     := {},;
-            nIndis :=  0,;
+         LOCAL l2Dim  := HB_ISARRAY( aArry2Sum[ 1 ] ), ;
+            a1     := {}, ;
+            nIndis :=  0, ;
             nRowCo :=  0,;  // Row count to average
             xRVal
 
@@ -164,7 +164,7 @@ FUNC ACOUNT( ;                            // Count from an array.
             xFields := { xFields }
          ENDIF
 
-         DEFAULT  nFORColNo TO 1,;
+         DEFAULT  nFORColNo TO 1, ;
             bFORClaus TO { || .T.}
 
          IF l2Dim
@@ -173,9 +173,9 @@ FUNC ACOUNT( ;                            // Count from an array.
             FOR EACH a1 IN aArry2Sum
                IF EVAL( bFORClaus, a1[ nFORColNo ] )
                   ++nRowCo
-                  AEVAL( a1, { | x1, i1 | IF( ASCAN( xFields, i1 ) > 0 .AND.;
-                     HB_ISNUMERIC( x1 ) .AND.;
-                     HB_ISNUMERIC( xRVal[ i1 ] ),;
+                  AEVAL( a1, { | x1, i1 | IF( ASCAN( xFields, i1 ) > 0 .AND. ;
+                     HB_ISNUMERIC( x1 ) .AND. ;
+                     HB_ISNUMERIC( xRVal[ i1 ] ), ;
                      xRVal[ i1 ] += x1, ) } )
                ENDIF
             NEXT a1
@@ -217,19 +217,19 @@ FUNC ACOUNT( ;                            // Count from an array.
          */
 
          FUNC ATOTAL( ;
-               aArry2Total ,;
+               aArry2Total , ;
                xFields,;     // Fields (columns) to sum
                nONColNo ,;   // ON clause indise
                bONClaus ,;   // ON clause block
                nFORColNo ,;  // FOR clause indise
                bFORClaus )   // FOR clause codeblock
 
-            LOCAL l2Dim  := HB_ISARRAY( aArry2Total[ 1 ] ),;
-               a1     := {},;
-               nIndis :=  0,;
-               aRVal  := {},;
-               a1RVal := {},;
-               c1Key  := '',;
+            LOCAL l2Dim  := HB_ISARRAY( aArry2Total[ 1 ] ), ;
+               a1     := {}, ;
+               nIndis :=  0, ;
+               aRVal  := {}, ;
+               a1RVal := {}, ;
+               c1Key  := '', ;
                nSTInd :=  0     // Sub-total indise
 
             IF xFields == NIL
@@ -241,9 +241,9 @@ FUNC ACOUNT( ;                            // Count from an array.
                xFields := { xFields }
             ENDIF
 
-            DEFAULT  nONColNo  TO 0,;
-               bONClaus  TO { || .T.},;
-               nFORColNo TO 1,;
+            DEFAULT  nONColNo  TO 0, ;
+               bONClaus  TO { || .T.}, ;
+               nFORColNo TO 1, ;
                bFORClaus TO { || .T.}
 
             IF l2Dim
@@ -258,9 +258,9 @@ FUNC ACOUNT( ;                            // Count from an array.
                         AADD( aRVal, a1RVal )
                         nSTInd := LEN( aRVal )
                      ENDIF
-                     AEVAL( a1, { | x1, i1 | IF( ASCAN( xFields, i1 ) > 0 .AND.;
-                        HB_ISNUMERIC( x1 ) .AND.;
-                        HB_ISNUMERIC( aRVal[ nSTInd, i1 ] ),;
+                     AEVAL( a1, { | x1, i1 | IF( ASCAN( xFields, i1 ) > 0 .AND. ;
+                        HB_ISNUMERIC( x1 ) .AND. ;
+                        HB_ISNUMERIC( aRVal[ nSTInd, i1 ] ), ;
                         aRVal[ nSTInd, i1 ] += x1, ) } )
                   ENDIF
                NEXT a1

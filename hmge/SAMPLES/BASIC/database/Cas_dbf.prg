@@ -163,9 +163,9 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
    LOCAL x_indice  := "Indice: " +alltrim(str(m_pos))
 
    Form_1.StatusBar.Item(1) := ;
-      x_indice + "   Indexing..." +;
-      cComplete + "%" +;
-      "     Time:" + elaptime( t_time , time() ) +' - '+;
+      x_indice + "   Indexing..." + ;
+      cComplete + "%" + ;
+      "     Time:" + elaptime( t_time , time() ) +' - '+ ;
       "    Total:" + elaptime( t_inicio , time() )
 
    RETURN .T.
@@ -174,9 +174,9 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
 
    func f_change
       Form_1.StatusBar.Item(1) := ;
-         'Lastrec '+alltrim(str(lastrec())) +' / '+;
-         alltrim(str(recno())) + ' Recno      Itens filtrado(s) = ' + alltrim(str(f_filtros())) +;
-         '       OrdKeyNo() = ' + alltrim(str( OrdKeyNo() )) +;
+         'Lastrec '+alltrim(str(lastrec())) +' / '+ ;
+         alltrim(str(recno())) + ' Recno      Itens filtrado(s) = ' + alltrim(str(f_filtros())) + ;
+         '       OrdKeyNo() = ' + alltrim(str( OrdKeyNo() )) + ;
          '       Porc = ' + alltrim(str( OrdKeyNo() / m_filtrado * 100 ) ) + '%'
       retu nil
 
@@ -207,10 +207,10 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
                LOCAL varios := .t.   && selecionar varios arquivos
 
                LOCAL arq_mp3 := GetFile ( { ;
-                  {'Files DBF' ,;
-                  '*.DBF;*.DBF'} ,;
-                  {'All Files .DBF' , '*.dbf'} ,;
-                  {'All Files .DBF' , '*.DBF'}  } ,;
+                  {'Files DBF' , ;
+                  '*.DBF;*.DBF'} , ;
+                  {'All Files .DBF' , '*.dbf'} , ;
+                  {'All Files .DBF' , '*.DBF'}  } , ;
                   'Open File DBF' , '' , varios , .t. )
 
                IF len( arq_mp3 ) = 0

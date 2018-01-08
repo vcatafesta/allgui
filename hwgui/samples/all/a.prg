@@ -93,7 +93,7 @@ FUNCTION CreateChildWindow
 
    PREPARE FONT oFontBtn NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
 
-   INIT WINDOW oChildWnd MDICHILD TITLE "Child";
+   INIT WINDOW oChildWnd MDICHILD TITLE "Child" ;
       STYLE WS_CHILD+ WS_OVERLAPPEDWINDOW
    //STYLE WS_VISIBLE + WS_OVERLAPPEDWINDOW
 
@@ -145,7 +145,7 @@ FUNCTION MdiChildFromPrg( o )
    // Local aTabs := { "Monday","Tuesday","Wednesday","Thursday","Friday" }
    LOCAL oCmd1, oCmd2, oCmd3
 
-   INIT WINDOW oChildWnd MDICHILD TITLE "Child";
+   INIT WINDOW oChildWnd MDICHILD TITLE "Child" ;
       AT 210,10  SIZE 350,350                    ;
       FONT oFont                                 ;
       STYLE WS_CHILD+ WS_OVERLAPPEDWINDOW        ;
@@ -207,7 +207,7 @@ FUNCTION NoExit()
    INIT DIALOG oDlg TITLE "No Exit Enter and Esc"     ;
       AT 190,10  SIZE 360,240   NOEXIT NOEXITESC
    @ 10, 10 GET oGet VAR vGET SIZE 200, 32
-   @ 20,190  BUTTON "Ok" SIZE 100, 32;
+   @ 20,190  BUTTON "Ok" SIZE 100, 32 ;
       ON CLICK {|| oDlg:Close()}
    oDlg:Activate()
 
@@ -503,7 +503,7 @@ FUNCTION TestTab()
    INIT DIALOG oDlg CLIPPER NOEXIT AT 0, 0 SIZE 200, 200
 
    @ 10, 10 TAB oTab ITEMS {} SIZE 180, 180 ;
-      ON LOSTFOCUS {||hwg_Msginfo("Lost Focus")};
+      ON LOSTFOCUS {||hwg_Msginfo("Lost Focus")} ;
       ON INIT  {||hwg_Setfocus(oDlg:getlist[1]:handle)}
 
    BEGIN PAGE "Page 01" of oTab

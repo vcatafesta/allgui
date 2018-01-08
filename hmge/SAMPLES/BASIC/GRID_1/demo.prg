@@ -69,7 +69,7 @@ FUNCTION Main
          WIDTH 300 ;
          HEIGHT 330 ;
          HEADERS {'Last Name','First Name','Phone'} ;
-         WIDTHS {100,100,70};
+         WIDTHS {100,100,70} ;
          ITEMS aRows ;
          VALUE 1 ;
          TOOLTIP 'Editable Grid Control' ;
@@ -82,7 +82,7 @@ FUNCTION Main
          WIDTH 300 ;
          HEIGHT 330 ;
          HEADERS {'Last Name','First Name','Phone'} ;
-         WIDTHS {100,100,70};
+         WIDTHS {100,100,70} ;
          ITEMS aRows ;
          VALUE 1 ;
          TOOLTIP 'No Editable Grid Control' ;

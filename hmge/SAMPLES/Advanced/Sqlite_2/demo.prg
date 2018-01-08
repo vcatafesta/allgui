@@ -295,7 +295,7 @@ FUNCTION BrowseData()
          @ 10,10 GRID Grid_1 ;
             WIDTH  415 ;
             HEIGHT 329 ;
-            HEADERS {"Code", "Name"};
+            HEADERS {"Code", "Name"} ;
             WIDTHS  {60, 335} ;
             VALUE 1 ;
             PAINTDOUBLEBUFFER ;
@@ -314,17 +314,17 @@ FUNCTION BrowseData()
 
          @ 397-IF(IsThemed(),7,0),11 BUTTON Bt_New ;
             CAPTION '&New' ;
-            ACTION Get_Fields(db, 1);
+            ACTION Get_Fields(db, 1) ;
             WIDTH 80
 
          @ 397-IF(IsThemed(),7,0),91 BUTTON Bt_Edit ;
             CAPTION '&Edit' ;
-            ACTION Get_Fields(db, 2);
+            ACTION Get_Fields(db, 2) ;
             WIDTH 80
 
          @ 397-IF(IsThemed(),7,0),171 BUTTON Bt_Delete ;
             CAPTION '&Delete' ;
-            ACTION Delete_Record(db);
+            ACTION Delete_Record(db) ;
             WIDTH 80
 
          @ 397-IF(IsThemed(),7,0),251 BUTTON Bt_Print ;
@@ -334,7 +334,7 @@ FUNCTION BrowseData()
 
          @ 397-IF(IsThemed(),7,0),331 BUTTON Bt_exit ;
             CAPTION '&Exit' ;
-            ACTION ThisWindow.Release;
+            ACTION ThisWindow.Release ;
             WIDTH 80
 
       END WINDOW
@@ -539,8 +539,8 @@ FUNCTION SQLITE_TABLEEXISTS( cTable )
    LOCAL lCreateIfNotExist := .f.
    LOCAL db := sqlite3_open( "test.db", lCreateIfNotExist )
 
-   cStatement := "SELECT name FROM sqlite_master "    +;
-      "WHERE type ='table' AND tbl_name='" +;
+   cStatement := "SELECT name FROM sqlite_master "    + ;
+      "WHERE type ='table' AND tbl_name='" + ;
       cTable + "'"
 
    IF DB_IS_OPEN( db )
@@ -630,12 +630,12 @@ FUNCTION SQLITE_TABLES()
    LOCAL lCreateIfNotExist := .f.
    LOCAL db := sqlite3_open( "test.db", lCreateIfNotExist )
 
-   cStatement := "SELECT name FROM sqlite_master "      +;
-      "WHERE type IN ('table','view') "      +;
-      "AND name NOT LIKE 'sqlite_%' "        +;
-      "UNION ALL "                           +;
-      "SELECT name FROM sqlite_temp_master " +;
-      "WHERE type IN ('table','view') "      +;
+   cStatement := "SELECT name FROM sqlite_master "      + ;
+      "WHERE type IN ('table','view') "      + ;
+      "AND name NOT LIKE 'sqlite_%' "        + ;
+      "UNION ALL "                           + ;
+      "SELECT name FROM sqlite_temp_master " + ;
+      "WHERE type IN ('table','view') "      + ;
       "ORDER BY 1;"
 
    IF DB_IS_OPEN( db )

@@ -15,26 +15,26 @@ MEMVAR a1Dim, aRows
 
 PROC Main()
 
-   PRIVATE a1Dim := ARRAY( 10 ),;
-      aRows := { {'Simpson',   'Homer',     10, '555-5555'},;
-      {'Mulder',    'Fox',       10, '324-6432'},;
-      {'Smart',     'Max',       10, '432-5892'},;
-      {'Grillo',    'Pepe',      10, '894-2332'},;
-      {'Kirk',      'James',     10, '346-9873'},;
-      {'Barriga',   'Carlos',    10, '394-9654'},;
-      {'Flanders',  'Ned',       10, '435-3211'},;
-      {'Smith',     'John',      10, '123-1234'},;
-      {'Pedemonti', 'Flavio',    10, '000-0000'},;
-      {'Gomez',     'Juan',      10, '583-4832'},;
-      {'Fernandez', 'Raul',      10, '321-4332'},;
-      {'Borges',    'Javier',    10, '326-9430'},;
-      {'Alvarez',   'Alberto',   10, '543-7898'},;
-      {'Gonzalez',  'Ambo',      10, '437-8473'},;
-      {'Batistuta', 'Gol',       10, '485-2843'},;
-      {'Vinazzi',   'Amigo',     10, '394-5983'},;
-      {'Pedemonti', 'Flavio',    10, '534-7984'},;
-      {'Samarbide', 'Armando',   10, '854-7873'},;
-      {'Pradon',    'Alejandra', 10, '???-????'},;
+   PRIVATE a1Dim := ARRAY( 10 ), ;
+      aRows := { {'Simpson',   'Homer',     10, '555-5555'}, ;
+      {'Mulder',    'Fox',       10, '324-6432'}, ;
+      {'Smart',     'Max',       10, '432-5892'}, ;
+      {'Grillo',    'Pepe',      10, '894-2332'}, ;
+      {'Kirk',      'James',     10, '346-9873'}, ;
+      {'Barriga',   'Carlos',    10, '394-9654'}, ;
+      {'Flanders',  'Ned',       10, '435-3211'}, ;
+      {'Smith',     'John',      10, '123-1234'}, ;
+      {'Pedemonti', 'Flavio',    10, '000-0000'}, ;
+      {'Gomez',     'Juan',      10, '583-4832'}, ;
+      {'Fernandez', 'Raul',      10, '321-4332'}, ;
+      {'Borges',    'Javier',    10, '326-9430'}, ;
+      {'Alvarez',   'Alberto',   10, '543-7898'}, ;
+      {'Gonzalez',  'Ambo',      10, '437-8473'}, ;
+      {'Batistuta', 'Gol',       10, '485-2843'}, ;
+      {'Vinazzi',   'Amigo',     10, '394-5983'}, ;
+      {'Pedemonti', 'Flavio',    10, '534-7984'}, ;
+      {'Samarbide', 'Armando',   10, '854-7873'}, ;
+      {'Pradon',    'Alejandra', 10, '???-????'}, ;
       {'Reyes',     'Monica',    10, '432-5836'} }
 
    AFILL( a1Dim, 1 )
@@ -143,8 +143,8 @@ PROC Main()
          nTest,;    // Test No : 1: Count, 2: Sum, 3: Average, 4: Total
          nOptn  )   // Options
 
-      LOCAL aResults := {},;
-         aDescrpt := {},;
+      LOCAL aResults := {}, ;
+         aDescrpt := {}, ;
          cDescrpt := ''
 
       aResults := {}

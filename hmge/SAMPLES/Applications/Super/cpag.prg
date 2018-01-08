@@ -11,13 +11,13 @@ programador : marcelo neves
 
 FUNCTION cpag()
 
-   DEFINE WINDOW form_cpag;
-         at 000,000;
-         WIDTH 1000;
-         HEIGHT 680;
-         TITLE 'Contas a Pagar';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_cpag ;
+         at 000,000 ;
+         WIDTH 1000 ;
+         HEIGHT 680 ;
+         TITLE 'Contas a Pagar' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * botões (toolbar)
@@ -108,7 +108,7 @@ FUNCTION cpag()
       END BUTTONEX
 
       DEFINE GRID grid_cpag
-         parent form_cpag
+         PARENT form_cpag
          COL 005
          ROW 105
          WIDTH 980
@@ -124,7 +124,7 @@ FUNCTION cpag()
       END GRID
 
       DEFINE LABEL rodape_001
-         parent form_cpag
+         PARENT form_cpag
          COL 005
          ROW 615
          VALUE 'Escolha o período'
@@ -136,7 +136,7 @@ FUNCTION cpag()
          TRANSPARENT .T.
       END LABEL
       DEFINE LABEL rodape_002
-         parent form_cpag
+         PARENT form_cpag
          COL 250
          ROW 615
          VALUE 'até'
@@ -147,26 +147,26 @@ FUNCTION cpag()
          FONTCOLOR _cinza_001
          TRANSPARENT .T.
       END LABEL
-      @ 610,140 datepicker dp_inicio;
-         parent form_cpag;
-         VALUE date();
-         WIDTH 100;
+      @ 610,140 datepicker dp_inicio ;
+         PARENT form_cpag ;
+         VALUE date() ;
+         WIDTH 100 ;
          FONT 'verdana' size 010
-      @ 610,280 datepicker dp_final;
-         parent form_cpag;
-         VALUE date();
-         WIDTH 100;
+      @ 610,280 datepicker dp_final ;
+         PARENT form_cpag ;
+         VALUE date() ;
+         WIDTH 100 ;
          FONT 'verdana' size 010
-      @ 610,390 buttonex botao_filtrar;
-         parent form_cpag;
-         CAPTION 'Filtrar';
-         WIDTH 100 height 030;
-         ACTION atualizar_cpag();
-         bold;
+      @ 610,390 buttonex botao_filtrar ;
+         PARENT form_cpag ;
+         CAPTION 'Filtrar' ;
+         WIDTH 100 height 030 ;
+         ACTION atualizar_cpag() ;
+         bold ;
          TOOLTIP 'Clique aqui para mostrar as informações com base no período selecionado'
 
       DEFINE LABEL rodape_003
-         parent form_cpag
+         PARENT form_cpag
          COL form_cpag.width - 270
          ROW 615
          VALUE 'DUPLO CLIQUE : Alterar informação'
@@ -223,142 +223,142 @@ STATIC FUNCTION dados_cpag(parametro)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW form_dados;
-         at 000,000;
-         WIDTH 430;
-         HEIGHT 330;
-         TITLE (titulo);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_dados ;
+         at 000,000 ;
+         WIDTH 430 ;
+         HEIGHT 330 ;
+         TITLE (titulo) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 010,005 label lbl_001;
-         of form_dados;
-         VALUE 'Fornecedor';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_dados ;
+         VALUE 'Fornecedor' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,005 textbox tbox_001;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_fornecedor;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 030,005 textbox tbox_001 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_fornecedor ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_fornecedor('form_dados','tbox_001')
-      @ 030,075 label lbl_nome_fornecedor;
-         of form_dados;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 030,075 label lbl_nome_fornecedor ;
+         of form_dados ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
-      @ 060,005 label lbl_002;
-         of form_dados;
-         VALUE 'Forma Pagamento';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 060,005 label lbl_002 ;
+         of form_dados ;
+         VALUE 'Forma Pagamento' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,005 textbox tbox_002;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_forma;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 080,005 textbox tbox_002 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_forma ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_forma_pagamento('form_dados','tbox_002')
-      @ 080,075 label lbl_nome_forma_pagamento;
-         of form_dados;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 080,075 label lbl_nome_forma_pagamento ;
+         of form_dados ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
 
-      @ 110,005 label lbl_003;
-         of form_dados;
-         VALUE 'Data';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 110,005 label lbl_003 ;
+         of form_dados ;
+         VALUE 'Data' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 130,005 textbox tbox_003;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_data;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 130,005 textbox tbox_003 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_data ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          date
 
-      @ 110,140 label lbl_004;
-         of form_dados;
-         VALUE 'Valor R$';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _vermelho_002;
+      @ 110,140 label lbl_004 ;
+         of form_dados ;
+         VALUE 'Valor R$' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _vermelho_002 ;
          TRANSPARENT
-      @ 130,140 getbox tbox_004;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_valor;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 130,140 getbox tbox_004 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_valor ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
 
-      @ 110,270 label lbl_005;
-         of form_dados;
-         VALUE 'Número documento';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 110,270 label lbl_005 ;
+         of form_dados ;
+         VALUE 'Número documento' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,270 textbox tbox_005;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 150;
-         VALUE x_numero;
-         MAXLENGTH 015;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
+      @ 130,270 textbox tbox_005 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 150 ;
+         VALUE x_numero ;
+         MAXLENGTH 015 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
 
-      @ 160,005 label lbl_006;
-         of form_dados;
-         VALUE 'Observação';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 160,005 label lbl_006 ;
+         of form_dados ;
+         VALUE 'Observação' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 180,005 textbox tbox_006;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 200;
-         VALUE x_obs;
-         MAXLENGTH 030;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
+      @ 180,005 textbox tbox_006 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 200 ;
+         VALUE x_obs ;
+         MAXLENGTH 030 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
 
       * linha separadora
       DEFINE LABEL linha_rodape
@@ -554,13 +554,13 @@ STATIC FUNCTION getcode_fornecedores(value)
    fornecedores->(ordsetfocus('nome'))
    fornecedores->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -580,7 +580,7 @@ STATIC FUNCTION getcode_fornecedores(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_fornecedores()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
@@ -673,13 +673,13 @@ STATIC FUNCTION getcode_formas_pagamento(value)
    formas_pagamento->(ordsetfocus('nome'))
    formas_pagamento->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -699,7 +699,7 @@ STATIC FUNCTION getcode_formas_pagamento(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_formas_pagamento()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa

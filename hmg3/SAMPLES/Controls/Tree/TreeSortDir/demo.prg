@@ -12,12 +12,12 @@ PROCEDURE Main
 
    SET FONT TO "Tahoma", 9
 
-   DEFINE WINDOW Form_1;
-         AT 0 , 0;
-         WIDTH 560 HEIGHT 600;
-         TITLE "Sort Tree Directory";
-         MAIN;
-         NOMAXIMIZE;
+   DEFINE WINDOW Form_1 ;
+         AT 0 , 0 ;
+         WIDTH 560 HEIGHT 600 ;
+         TITLE "Sort Tree Directory" ;
+         MAIN ;
+         NOMAXIMIZE ;
          NOSIZE
 
       DEFINE STATUSBAR
@@ -36,24 +36,24 @@ PROCEDURE Main
 
       @ 60, 435 BUTTON ButtonScan  CAPTION "Scan" ACTION  BuildTree()
 
-      DEFINE TREE Tree_1;
-            AT 110, 5;
-            WIDTH 540;
-            HEIGHT 255;
+      DEFINE TREE Tree_1 ;
+            AT 110, 5 ;
+            WIDTH 540 ;
+            HEIGHT 255 ;
             NODEIMAGES { "folder.bmp" } ;
-            ITEMIMAGES { "documents.bmp" };
-            ON DBLCLICK MsgInfo ({" Value          = ",Form_1.Tree_1.Value, HB_OsNewLine(),;
-            " Item           = ",Form_1.Tree_1.Item (Form_1.Tree_1.Value), HB_OsNewLine(),;
-            " IsTrueNode     = ",Form_1.Tree_1.IsTrueNode (Form_1.Tree_1.Value), HB_OsNewLine(),;
-            " FlagNode       = ",Form_1.Tree_1.NodeFlag (Form_1.Tree_1.Value), HB_OsNewLine(),;
-            " ImageIndex     = ",HB_VALTOEXP(Form_1.Tree_1.ImageIndex (Form_1.Tree_1.Value)), HB_OsNewLine(),;
-            " RootValue      = ",Form_1.Tree_1.RootValue, HB_OsNewLine(),;
-            " FirstItemValue = ",Form_1.Tree_1.FirstItemValue, HB_OsNewLine(),;
-            " ParentValue    = ",Form_1.Tree_1.ParentValue(Form_1.Tree_1.Value), HB_OsNewLine(), HB_OsNewLine(),;
-            " ChildValues    = ",HB_VALTOEXP(Form_1.Tree_1.ChildValue (Form_1.Tree_1.Value)), HB_OsNewLine(), HB_OsNewLine(),;
-            " ChildText      = ",HB_VALTOEXP(Form_1.Tree_1.ItemText(Form_1.Tree_1.ChildValue (Form_1.Tree_1.Value))), HB_OsNewLine(), HB_OsNewLine(),;
-            " SiblingValues  = ",HB_VALTOEXP(Form_1.Tree_1.SiblingValue (Form_1.Tree_1.Value)), HB_OsNewLine(), HB_OsNewLine(),;
-            " SiblingText    = ",HB_VALTOEXP(Form_1.Tree_1.ItemText(Form_1.Tree_1.SiblingValue (Form_1.Tree_1.Value)))});
+            ITEMIMAGES { "documents.bmp" } ;
+            ON DBLCLICK MsgInfo ({" Value          = ",Form_1.Tree_1.Value, HB_OsNewLine(), ;
+            " Item           = ",Form_1.Tree_1.Item (Form_1.Tree_1.Value), HB_OsNewLine(), ;
+            " IsTrueNode     = ",Form_1.Tree_1.IsTrueNode (Form_1.Tree_1.Value), HB_OsNewLine(), ;
+            " FlagNode       = ",Form_1.Tree_1.NodeFlag (Form_1.Tree_1.Value), HB_OsNewLine(), ;
+            " ImageIndex     = ",HB_VALTOEXP(Form_1.Tree_1.ImageIndex (Form_1.Tree_1.Value)), HB_OsNewLine(), ;
+            " RootValue      = ",Form_1.Tree_1.RootValue, HB_OsNewLine(), ;
+            " FirstItemValue = ",Form_1.Tree_1.FirstItemValue, HB_OsNewLine(), ;
+            " ParentValue    = ",Form_1.Tree_1.ParentValue(Form_1.Tree_1.Value), HB_OsNewLine(), HB_OsNewLine(), ;
+            " ChildValues    = ",HB_VALTOEXP(Form_1.Tree_1.ChildValue (Form_1.Tree_1.Value)), HB_OsNewLine(), HB_OsNewLine(), ;
+            " ChildText      = ",HB_VALTOEXP(Form_1.Tree_1.ItemText(Form_1.Tree_1.ChildValue (Form_1.Tree_1.Value))), HB_OsNewLine(), HB_OsNewLine(), ;
+            " SiblingValues  = ",HB_VALTOEXP(Form_1.Tree_1.SiblingValue (Form_1.Tree_1.Value)), HB_OsNewLine(), HB_OsNewLine(), ;
+            " SiblingText    = ",HB_VALTOEXP(Form_1.Tree_1.ItemText(Form_1.Tree_1.SiblingValue (Form_1.Tree_1.Value)))}) ;
             ITEMIDS
       END TREE
 

@@ -12,35 +12,35 @@ programador : marcelo neves
 
 FUNCTION movimentacao_caixa()
 
-   DEFINE WINDOW form_mov_caixa;
-         at 000,000;
-         WIDTH 400;
-         HEIGHT 250;
-         TITLE 'Movimentação do Caixa';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_mov_caixa ;
+         at 000,000 ;
+         WIDTH 400 ;
+         HEIGHT 250 ;
+         TITLE 'Movimentação do Caixa' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
-      @ 010,010 label lbl_001;
-         of form_mov_caixa;
-         VALUE 'Escolha o intervalo de datas';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,010 label lbl_001 ;
+         of form_mov_caixa ;
+         VALUE 'Escolha o intervalo de datas' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
 
-      @ 040,010 datepicker dp_inicio;
-         parent form_mov_caixa;
-         VALUE date();
-         WIDTH 150;
-         HEIGHT 030;
+      @ 040,010 datepicker dp_inicio ;
+         PARENT form_mov_caixa ;
+         VALUE date() ;
+         WIDTH 150 ;
+         HEIGHT 030 ;
          FONT 'verdana' size 014
-      @ 040,170 datepicker dp_final;
-         parent form_mov_caixa;
-         VALUE date();
-         WIDTH 150;
-         HEIGHT 030;
+      @ 040,170 datepicker dp_final ;
+         PARENT form_mov_caixa ;
+         VALUE date() ;
+         WIDTH 150 ;
+         HEIGHT 030 ;
          FONT 'verdana' size 014
 
       * linha separadora

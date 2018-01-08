@@ -9,8 +9,8 @@ HMG Fill Directory List Demo
 
 PROCEDURE MAIN()
 
-   DEFINE WINDOW frmTestDirList;
-         AT 0, 0;
+   DEFINE WINDOW frmTestDirList ;
+         AT 0, 0 ;
          WIDTH  500 ;
          HEIGHT 500 ;
          TITLE "Test DIR List" ;

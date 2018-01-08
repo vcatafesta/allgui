@@ -58,7 +58,7 @@ FUNCTION MAIN()
    aDirectory := DIRECTORY("*.DBF")
    AEVAL( aDirectory, {|aFile| AADD(aFilesDBF,SUBSTR(aFile[F_NAME],1,AT(".",aFile[F_NAME])-1))} )
 
-   DEFINE WINDOW Form_1 AT 0,0 WIDTH 160 HEIGHT 180 TITLE 'Quick Browse Generator';
+   DEFINE WINDOW Form_1 AT 0,0 WIDTH 160 HEIGHT 180 TITLE 'Quick Browse Generator' ;
          MAIN ;
          ON MOUSECLICK nil ;
          ICON '1Register' ;
@@ -545,7 +545,7 @@ FUNCTION MyScreen(nOption)
          BACKCOLOR m->aColorWinB ;
          ON MOUSECLICK SelectControl(This.Name) ;
          ON INIT (AddControls(),AddFields() ) ;
-         ON RELEASE ( dbcloseall(), form_1.setfocus , Form_1.HEIGHT := 180 , Form_1.WIDTH := 180 ,(aControlsOrder := {}), Form_1.Button_1.Visible:= .F., CloseForm() );
+         ON RELEASE ( dbcloseall(), form_1.setfocus , Form_1.HEIGHT := 180 , Form_1.WIDTH := 180 ,(aControlsOrder := {}), Form_1.Button_1.Visible:= .F., CloseForm() ) ;
          ON PAINT ReDrawgrid()
 
       DEFINE STATUSBAR FONT 'Arial' SIZE 12
@@ -714,14 +714,14 @@ STATIC FUNCTION Scatter()
 FUNCTION Any2Strg( xAny )
 
    LOCAL  cRVal  := '???', nType ;
-      ,aCases := { { "A", { |  | "{...}" } },;
-      { "B", { |  | "{||}" } },;
-      { "C", { | x | x }},;
-      { "M", { | x | x   } },;
-      { "D", { | x | DTOC( x ) } },;
-      { "L", { | x | IF( x,"On","Off") } },;
-      { "N", { | x | NTrim( x )  } },;
-      { "O", { |  | ":Object:" } },;
+      ,aCases := { { "A", { |  | "{...}" } }, ;
+      { "B", { |  | "{||}" } }, ;
+      { "C", { | x | x }}, ;
+      { "M", { | x | x   } }, ;
+      { "D", { | x | DTOC( x ) } }, ;
+      { "L", { | x | IF( x,"On","Off") } }, ;
+      { "N", { | x | NTrim( x )  } }, ;
+      { "O", { |  | ":Object:" } }, ;
       { "U", { |  | "<NIL>" } } }
 
    IF (nType := ASCAN( aCases, { | a1 | VALTYPE( xAny ) == a1[ 1 ] } ) ) > 0
@@ -1008,7 +1008,7 @@ PROCEDURE KillControl()
    LOCAL nControl := ASCAN(m->aControlList, cControl)
 
    IF ascan({'Win_1','Grid_1'},cControl) > 0
-      MessageBoxTimeout (padc(upper(cControl),50)+CRLF+CRLF;
+      MessageBoxTimeout (padc(upper(cControl),50)+CRLF+CRLF ;
          +"This control CANNOT be Erased !!","Error", MB_ICONSTOP, 1500 )
    ELSE
       Win_1.&(cControl).Release
@@ -1269,7 +1269,7 @@ PROCEDURE AssignProperties()
          ENDIF
 
       CASE cProperty = 'Action'
-         MessageBoxTimeout (padc(upper(cproperty),40)+CRLF+CRLF;
+         MessageBoxTimeout (padc(upper(cproperty),40)+CRLF+CRLF ;
             +"This property CANNOT be Edited !!","Error", MB_ICONSTOP, 2500 )
       ENDCASE
    ENDIF
@@ -1558,7 +1558,7 @@ PROCEDURE ConfigValores()
 
       CASE 'BUTTON' //
 
-         m->aProperties :={{"Row",""},{"Col",""},{"Caption",""},{"Action",""},{"Width",""},{"Height",""},{"FontName",""},{"FontSize",""};
+         m->aProperties :={{"Row",""},{"Col",""},{"Caption",""},{"Action",""},{"Width",""},{"Height",""},{"FontName",""},{"FontSize",""} ;
             ,{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"ToolTip",""} }
 
          Form_1.Grid_1.DeleteAllItems
@@ -1637,11 +1637,11 @@ PROCEDURE SelectControl(cControl)
 
 FUNCTION GridBackColor()
 
-   LOCAL aColors := {{ aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
-      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
-      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
-      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
-      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
+   LOCAL aColors := {{ aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid ;
+      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid ;
+      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid ;
+      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid ;
+      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid ;
       , aColorBackGrid, aColorBackGrid, aColorBackGrid }}
 
    RETURN aColors [1] [ This.CellColIndex ]
@@ -3612,7 +3612,7 @@ PROCEDURE  Fld_add(All)
    ENDIF
 
    IF nn > 21
-      MessageBoxTimeout (padc("Too many Fields",50 )+CRLF+CRLF;
+      MessageBoxTimeout (padc("Too many Fields",50 )+CRLF+CRLF ;
          +padc("This Field CANNOT be add !!",50),"Error Max 22 Fields !", MB_ICONSTOP, 2000 )
 
       RETURN
@@ -3696,7 +3696,7 @@ FUNCTION UpFld()
    LOCAL cAux2 := GetProperty( 'Form_PF', 'ListBox_2', 'item', i - 1 )
 
    IF i = 1
-      MessageBoxTimeout (padc('Use the DOWN button !',50 )+CRLF+CRLF;
+      MessageBoxTimeout (padc('Use the DOWN button !',50 )+CRLF+CRLF ;
          +padc("You have reached the top of list !!",50),"Error Top of list !", MB_ICONSTOP, 2300 )
    ENDIF
    IF i > 1
@@ -3722,7 +3722,7 @@ FUNCTION DownFld()
       SetProperty( 'Form_PF', 'ListBox_2', 'value', i + 1 )
       DoMethod( 'Form_PF', 'ListBox_2', 'setfocus' )
    ELSE
-      MessageBoxTimeout (padc('Use the UP button !',50 )+CRLF+CRLF;
+      MessageBoxTimeout (padc('Use the UP button !',50 )+CRLF+CRLF ;
          +padc("You have reached the bottom of list !!",50),"Error Bottom of list !", MB_ICONSTOP, 2300 )
    ENDIF
 

@@ -188,7 +188,7 @@ STATIC PROCEDURE SetOptions()
             ON GOTFOCUS ( cCtrl := Form_2.FocusedControl )
 
          @ 238, 12 CHECKBOX Check_2            ;
-            CAPTION '&Exit after time has been synced';
+            CAPTION '&Exit after time has been synced' ;
             WIDTH 200                  ;
             HEIGHT 16                  ;
             VALUE lAutoExit               ;

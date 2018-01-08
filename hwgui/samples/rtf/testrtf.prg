@@ -63,37 +63,37 @@ FUNCTION TestRtf()
 
    // Cajas de Texto
 
-   BEGIN TEXTBOX oRtf;
+   BEGIN TEXTBOX oRtf ;
          SIZE {9.0,0.30};     // Tamaño Caja de texto
-         TEXT "Cajas de Texto";
-         FONTNUMBER 2;
+         TEXT "Cajas de Texto" ;
+         FONTNUMBER 2 ;
          FONTSIZE 12 ;
-         APPEARANCE BOLD_ON+CAPS_ON;
+         APPEARANCE BOLD_ON+CAPS_ON ;
          INDENT 0
 
    END TEXTBOX oRtf
 
    NEW PARAGRAPH oRTF TEXT ""
-   NEW PARAGRAPH oRTF TEXT "";
+   NEW PARAGRAPH oRTF TEXT "" ;
       ALIGN RIGHT
 
    SETDATE oRtf FORMAT LONGFORMAT
 
    // Parrafos con estilo
 
-   NEW PARAGRAPH oRTF TEXT "Estilo Prueba";
+   NEW PARAGRAPH oRTF TEXT "Estilo Prueba" ;
       STYLE 2
 
-   NEW PARAGRAPH oRTF TEXT "CON LETRAS DE COLORES";
-      APPEARANCE BOLD_OFF+ITALIC_OFF+CAPS_OFF;
-      FONTNUMBER 2;
-      FONTCOLOR 3;
-      STYLE 1;
+   NEW PARAGRAPH oRTF TEXT "CON LETRAS DE COLORES" ;
+      APPEARANCE BOLD_OFF+ITALIC_OFF+CAPS_OFF ;
+      FONTNUMBER 2 ;
+      FONTCOLOR 3 ;
+      STYLE 1 ;
       ALIGN CENTER
 
    // Lineas
 
-   LINEA oRtf;
+   LINEA oRtf ;
       INICIO {0.1,1.0};         //Inicio
       FIN {10.0,1.0};          // Final
       TIPO "SOLIDA"      // Tipo de linea
@@ -103,13 +103,13 @@ FUNCTION TestRtf()
 
    // Notas a pie de pagina
 
-   NEW PARAGRAPH oRTF TEXT "Notas pie de pagina";
-      FONTCOLOR 1;
+   NEW PARAGRAPH oRTF TEXT "Notas pie de pagina" ;
+      FONTCOLOR 1 ;
       ALIGN LEFT
 
    FOOTNOTE oRtf ;
-      TEXT "Prueba de pie de pagina";
-      CHARACTER "*";//        AUTO;
+      TEXT "Prueba de pie de pagina" ;
+      CHARACTER "*";//        AUTO ;
       UPPER
 
    cTexto:=".La unica forma que he encontrado para introducir imagenes. Sin utilizar"
@@ -143,12 +143,12 @@ FUNCTION TestRtf()
       CELLBORDERS SINGLE ;          // Outline cells with thin border
       COLSHADE aMarca;               // Sombras en columnas
       HEADERROWS 2;                // dos lineas de titulos
-      HEADER {"Sala","Generador","","","","","ACTIVIDAD",;
-      "NºEXPOSICIONES AÑO POR TUBO","CARGA DE TRABAJO mA. min/semana"},;
-      {"","Marca","Modelo","Tension Pico (kVp)","Intensidad (mA)",;
+      HEADER {"Sala","Generador","","","","","ACTIVIDAD", ;
+      "NºEXPOSICIONES AÑO POR TUBO","CARGA DE TRABAJO mA. min/semana"}, ;
+      {"","Marca","Modelo","Tension Pico (kVp)","Intensidad (mA)", ;
       "Nº Tubos","","",""};       // Titulos. Cada linea es una matriz
-      HEADERSHADE 0;
-      HEADERFONTSIZE 10;
+      HEADERSHADE 0 ;
+      HEADERFONTSIZE 10 ;
       HEADERHALIGN CENTER
    // 2,3 y 5,6 de la primera linea de titulos
    // van a estar unidas en una sola.
@@ -198,8 +198,8 @@ STATIC FUNCTION SetupRTF(cOutFile)
 
    DEFINE RTF oRTF FILE cOutFile ;
       FONTS "Times New Roman", "Arial", "Courier New" ;
-      FONTFAMILY "froman","fswiss","fmodern";
-      CHARSET 0,0,10;
+      FONTFAMILY "froman","fswiss","fmodern" ;
+      CHARSET 0,0,10 ;
       FONTSIZE 12 ;
       TWIPFACTOR 1440
 
@@ -207,12 +207,12 @@ STATIC FUNCTION SetupRTF(cOutFile)
 
    BEGIN ESTILOS oRTF
 
-      DEFINE ESTILO oRtf;
+      DEFINE ESTILO oRtf ;
          NAME "Prueba";          //Nombre del estilo
          TYPE PARAGRAPH;         // Tipo del estilo
          FONTNUMBER 3;           // Fuente
          FONTCOLOR 6;            // Color
-         APPEARANCE BOLD_ON+ITALIC_ON;
+         APPEARANCE BOLD_ON+ITALIC_ON ;
          ALIGN CENTER;           // Alineacion
          SHADE 25;               // Sombreado
          LUPDATE
@@ -230,14 +230,14 @@ STATIC FUNCTION SetupRTF(cOutFile)
 
    // Formato del documento. Se puede cambiar luego con el setup. Tiene
    // que ir siempre detras del bloque de informacion si existe
-   DOCUMENT FORMAT oRtf;
+   DOCUMENT FORMAT oRtf ;
       TAB 0.5;           // Tabuladores
       LINE 1;            // Linea Inicial
       BACKUP;            // Backup al grabar
       DEFLANG 1034;           // Lenguaje del documento
       FOOTTYPE BOTH;          // Notas Pie de Pagina y Final Documento
       FOOTNOTES SECTION;      // Al final de la seccion
-      ENDNOTES SECTION;
+      ENDNOTES SECTION ;
       FOOTNUMBER SIMBOL;      // Numeracion por simbolos
       PAGESTART 1;            // Pagina Inicial
       PROTECT NONE;           // Tipo de proteccion
@@ -249,9 +249,9 @@ STATIC FUNCTION SetupRTF(cOutFile)
 
    DEFINE PAGESETUP oRTF MARGINS 0.5, 0.5, 0.5, 0.5 ;
       PAGEWIDTH (aSize[2]/25.4) ;
-      PAGEHEIGHT (aSize[1]/25.4);
+      PAGEHEIGHT (aSize[1]/25.4) ;
       TABWIDTH .5 ;
-      ALIGN TOP;
+      ALIGN TOP ;
       LANDSCAPE
 
    BEGIN HEADER oRTF
@@ -266,13 +266,13 @@ STATIC FUNCTION SetupRTF(cOutFile)
          ROWHEIGHT .2  ;              // Minimum row height is .25"
          CELLBORDERS NONE           // Outline cells with thin border
 
-      WRITE NEWCELL oRTF TEXT "";
-         FONTNUMBER 2;
+      WRITE NEWCELL oRTF TEXT "" ;
+         FONTNUMBER 2 ;
          FONTSIZE 8 ;
          ALIGN LEFT
 
-      WRITE NEWCELL oRTF TEXT "Clase RichText";
-         FONTNUMBER 2;
+      WRITE NEWCELL oRTF TEXT "Clase RichText" ;
+         FONTNUMBER 2 ;
          FONTSIZE 14 ;
          FONTCOLOR 2;                            // Colores
          APPEARANCE BOLD_ON+CAPS_ON+ITALIC_ON ;
@@ -294,9 +294,9 @@ END HEADER oRTF
 
 BEGIN FOOTER oRTF
    NEW PARAGRAPH oRTF TEXT "Pagina " ;
-      FONTNUMBER 2;
+      FONTNUMBER 2 ;
       FONTSIZE 8 ;
-      BORDER "TOP";
+      BORDER "TOP" ;
       ALIGN LEFT
 
    // Nuevo. Escribe en ese lugar el numero de pagina actual.

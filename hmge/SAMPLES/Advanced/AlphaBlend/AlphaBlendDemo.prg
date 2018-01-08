@@ -59,7 +59,7 @@ FUNCTION Main()
       @ 260, 60 BUTTON Button_1 CAPTION "hdcDest IMG2" ;
          ACTION ( Form_1.Button_2.Enabled := FALSE, ;
          ABlend( GetControlHandle( "Image_2", "Form_1" ), ;
-         aSize1[1], aSize1[2],;
+         aSize1[1], aSize1[2], ;
          GetControlHandle( "Image_1", "Form_1" ), ;
          aSize2[1], aSize2[2], 125) ) ;
          WIDTH 110 HEIGHT 26
@@ -69,7 +69,7 @@ FUNCTION Main()
          ABlend( GetControlHandle( "Image_1", "Form_1" ), ;
          aSize1[1], aSize1[2], ;
          GetControlHandle( "Image_2", "Form_1" ), ;
-         aSize2[1], aSize2[2], 125) );
+         aSize2[1], aSize2[2], 125) ) ;
          WIDTH 110 HEIGHT 26
 
       @ 300, 60 BUTTON Button_3 CAPTION "&Reset" ;
@@ -84,19 +84,19 @@ FUNCTION Main()
 
       @ 300, 260 BUTTON Button_4 CAPTION "&Loop" ;
          ACTION ( Form_1.Image_1.Picture := cImage1, ;
-         Form_1.Image_2.Picture := cImage2,;
+         Form_1.Image_2.Picture := cImage2, ;
          Form_1.Button_1.Enabled := FALSE, ;
          Form_1.Button_2.Enabled := FALSE, ;
-         Form_1.Button_4.Enabled := FALSE,;
+         Form_1.Button_4.Enabled := FALSE, ;
          bLoop := TRUE, ;
-         Form_1.Timer_1.Enabled := TRUE );
+         Form_1.Timer_1.Enabled := TRUE ) ;
          WIDTH 110 HEIGHT 26
 
       @ 360, 150 BUTTON Button_5 CAPTION "&Close" ;
          ACTION ( Form_1.Timer_1.Release, ThisWindow.Release ) ;
          WIDTH 140 HEIGHT 26 DEFAULT
 
-      DEFINE TIMER Timer_1 OF Form_1 INTERVAL 75;
+      DEFINE TIMER Timer_1 OF Form_1 INTERVAL 75 ;
          ACTION ( LoopBlend( GetControlHandle( "Image_1", "Form_1" ), ;
          aSize1[1], aSize1[2], ;
          GetControlHandle( "Image_2", "Form_1" ), ;

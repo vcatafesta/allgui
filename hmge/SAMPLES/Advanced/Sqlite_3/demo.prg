@@ -124,7 +124,7 @@ STATIC FUNCTION CreateAndPopulateTableTest()
 
    FOR nRecord := 1 TO 100
 
-      // expect these INSERT operations to be very slow;
+      // expect these INSERT operations to be very slow ;
       // for details, take a look at SQLite FAQ, question 19:
       // "INSERT is really slow - I can only do few dozen INSERTs per second"
       // [http://www.sqlite.org/faq.html#q19]

@@ -11,36 +11,36 @@ FUNCTION main()
 
    LOCAL aProperty
 
-   aProperty :=  {{'category','Category 1','','',.t.,.f.,.F.,100,''},;
-      {'string','Property 1','Value for Property 1','',.f.,.f.,.F.,101,'Info for Property 1'},;
-      {'string','Property 2','Value for Property 2 (Disabled)','',.t.,.f.,.F.,102,'Info for Property 2'},;
-      {'string','Property 3','Value for Property 3 (Disable Edit)','',.f.,.f.,.T.,103,'Info for Property 3'},;
-      {'category','end'},;
-      {'category','Category 2','','',.t.,.f.,.F.,200,''},;
-      {'string','Property 1','Value for Property 1','',.f.,.f.,.F.,201,'Info for Property 1'},;
-      {'string','Property 2','Value for Property 2 (Disabled )','',.t.,.f.,.F.,202,'Info for Property 2'},;
-      {'category','Category 3','','',.t.,.f.,.F.,203,''},;
-      {'string','Property 2.1','Value for Property 2.1','',.f.,.f.,.F.,2031,'Info for Property 2.1'},;
-      {'string','Property 2.2','Value for Property 2.2','',.f.,.f.,.F.,2032,'Info for Property 2.2'},;
-      {'string','Property 2.3','Value for Property 2.3 (Disabled)','',.t.,.f.,.F.,2033,'Info for Property 2.3'},;
-      {'string','Property 2.4','Value for Property 2.4 (Changed)','',.f.,.t.,.T.,2034,'Info for Property 2.4'},;
-      {'string','Property 2.5','Value for Property 2.5','',.f.,.f.,.F.,2035,'Info for Property 2.5'},;
-      {'string','Property 2.6','Value for Property 2.6 (Changed)','',.f.,.t.,.f.,2036,'Info for Property 2.6'},;
-      {'string','Property 2.7','Value for Property 2.7 (Disable Edit)','',.f.,.f.,.T.,2037,'Info for Property 2.7'},;
-      {'string','Property 2.8','Value for Property 2.8','',.f.,.f.,.F.,2038,'Info for Property 2.8'},;
-      {'category','end'},;
-      {'string','Property 3','Value for Property 3','',.t.,.f.,.T.,204,'Info for Property 3'},;
-      {'category','end'},;
-      {'category','Category 3','','',.t.,.f.,300,''},;
-      {'string','Property 1','Value for Property 1','',.f.,.f.,.F.,301,'Info for Property 1'},;
-      {'string','Property 2','Value for Property 2','',.f.,.f.,.F.,302,'Info for Property 2'},;
-      {'string','Property 3','Value for Property 3','',.f.,.f.,.F.,303,'Info for Property 3'},;
-      {'category','Category 3','','',.t.,.f.,3030,''},;
-      {'string','Property 3.1','Value for Property 3.1','',.f.,.f.,.F.,3031,'Info for Property 3.1'},;
-      {'string','Property 3.2','Value for Property 3.2','',.f.,.f.,.F.,3032,'Info for Property 3.2'},;
-      {'category','end'},;
-      {'category','end'},;
-      {'category','Category 4','','',.t.,.f.,.T.,400,''},;
+   aProperty :=  {{'category','Category 1','','',.t.,.f.,.F.,100,''}, ;
+      {'string','Property 1','Value for Property 1','',.f.,.f.,.F.,101,'Info for Property 1'}, ;
+      {'string','Property 2','Value for Property 2 (Disabled)','',.t.,.f.,.F.,102,'Info for Property 2'}, ;
+      {'string','Property 3','Value for Property 3 (Disable Edit)','',.f.,.f.,.T.,103,'Info for Property 3'}, ;
+      {'category','end'}, ;
+      {'category','Category 2','','',.t.,.f.,.F.,200,''}, ;
+      {'string','Property 1','Value for Property 1','',.f.,.f.,.F.,201,'Info for Property 1'}, ;
+      {'string','Property 2','Value for Property 2 (Disabled )','',.t.,.f.,.F.,202,'Info for Property 2'}, ;
+      {'category','Category 3','','',.t.,.f.,.F.,203,''}, ;
+      {'string','Property 2.1','Value for Property 2.1','',.f.,.f.,.F.,2031,'Info for Property 2.1'}, ;
+      {'string','Property 2.2','Value for Property 2.2','',.f.,.f.,.F.,2032,'Info for Property 2.2'}, ;
+      {'string','Property 2.3','Value for Property 2.3 (Disabled)','',.t.,.f.,.F.,2033,'Info for Property 2.3'}, ;
+      {'string','Property 2.4','Value for Property 2.4 (Changed)','',.f.,.t.,.T.,2034,'Info for Property 2.4'}, ;
+      {'string','Property 2.5','Value for Property 2.5','',.f.,.f.,.F.,2035,'Info for Property 2.5'}, ;
+      {'string','Property 2.6','Value for Property 2.6 (Changed)','',.f.,.t.,.f.,2036,'Info for Property 2.6'}, ;
+      {'string','Property 2.7','Value for Property 2.7 (Disable Edit)','',.f.,.f.,.T.,2037,'Info for Property 2.7'}, ;
+      {'string','Property 2.8','Value for Property 2.8','',.f.,.f.,.F.,2038,'Info for Property 2.8'}, ;
+      {'category','end'}, ;
+      {'string','Property 3','Value for Property 3','',.t.,.f.,.T.,204,'Info for Property 3'}, ;
+      {'category','end'}, ;
+      {'category','Category 3','','',.t.,.f.,300,''}, ;
+      {'string','Property 1','Value for Property 1','',.f.,.f.,.F.,301,'Info for Property 1'}, ;
+      {'string','Property 2','Value for Property 2','',.f.,.f.,.F.,302,'Info for Property 2'}, ;
+      {'string','Property 3','Value for Property 3','',.f.,.f.,.F.,303,'Info for Property 3'}, ;
+      {'category','Category 3','','',.t.,.f.,3030,''}, ;
+      {'string','Property 3.1','Value for Property 3.1','',.f.,.f.,.F.,3031,'Info for Property 3.1'}, ;
+      {'string','Property 3.2','Value for Property 3.2','',.f.,.f.,.F.,3032,'Info for Property 3.2'}, ;
+      {'category','end'}, ;
+      {'category','end'}, ;
+      {'category','Category 4','','',.t.,.f.,.T.,400,''}, ;
       {'category','end'}}
 
    DEFINE WINDOW Form_1 ;
@@ -89,67 +89,67 @@ FUNCTION main()
       END STATUSBAR
 
       /*
-      @ 35,10 PROPGRID PropertyGrid_1 WIDTH 430 HEIGHT 380 FROMFILE "PropGrid.xml" XML;
-      FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 280;
+      @ 35,10 PROPGRID PropertyGrid_1 WIDTH 430 HEIGHT 380 FROMFILE "PropGrid.xml" XML ;
+      FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 280 ;
       BACKCOLOR {240,240,240}
       */
 
-      @ 35,10 PROPGRID PropertyGrid_1 WIDTH 430 HEIGHT 380 ARRAYITEM aProperty;
-         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 280;
+      @ 35,10 PROPGRID PropertyGrid_1 WIDTH 430 HEIGHT 380 ARRAYITEM aProperty ;
+         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 280 ;
          BACKCOLOR {240,240,240} ;
          ON CHANGEVALUE  msgInfo('Item Value Changed') ;
          ITEMINFO
 
       @ 10,480 FRAME Frame_1 WIDTH 140 HEIGHT 140 CAPTION "Property from:"
-      @ 30,500 BUTTON btn_1;
-         CAPTION "File Txt";
-         ACTION  LoadDemoFile("PropGrid.txt");
+      @ 30,500 BUTTON btn_1 ;
+         CAPTION "File Txt" ;
+         ACTION  LoadDemoFile("PropGrid.txt") ;
          WIDTH 100 HEIGHT 24
 
-      @ 60,500 BUTTON btn_2;
-         CAPTION "File Xml";
-         ACTION LoadDemoFile("PropGrid.xml",.t.);
+      @ 60,500 BUTTON btn_2 ;
+         CAPTION "File Xml" ;
+         ACTION LoadDemoFile("PropGrid.xml",.t.) ;
          WIDTH 100 HEIGHT 24
 
-      @ 90,500 BUTTON btn_3;
-         CAPTION "File Ini";
-         ACTION LoadDemoFile("PropGrid.ini");
+      @ 90,500 BUTTON btn_3 ;
+         CAPTION "File Ini" ;
+         ACTION LoadDemoFile("PropGrid.ini") ;
          WIDTH 100 HEIGHT 24
 
-      @ 120,500 BUTTON btn_4;
-         CAPTION "Array";
-         ACTION LoadPropertyArray("Form_1","PropertyGrid_1",aProperty);
+      @ 120,500 BUTTON btn_4 ;
+         CAPTION "Array" ;
+         ACTION LoadPropertyArray("Form_1","PropertyGrid_1",aProperty) ;
          WIDTH 100 HEIGHT 24
 
       @ 160,480 FRAME Frame_2 WIDTH 140 HEIGHT 110 CAPTION "Saving a copy to:"
 
-      @ 180,500 BUTTON btn_5;
-         CAPTION "File Txt";
+      @ 180,500 BUTTON btn_5 ;
+         CAPTION "File Txt" ;
          ACTION PgSaveFile("Form_1","PropertyGrid_1","PropGrid1.txt") ;
          WIDTH 100 HEIGHT 24
 
-      @ 210,500 BUTTON btn_6;
-         CAPTION "File Xml";
+      @ 210,500 BUTTON btn_6 ;
+         CAPTION "File Xml" ;
          ACTION PgSaveFile("Form_1","PropertyGrid_1","PropGrid1.xml") ;
          WIDTH 100 HEIGHT 24
 
-      @ 240,500 BUTTON btn_7;
-         CAPTION "File Ini";
+      @ 240,500 BUTTON btn_7 ;
+         CAPTION "File Ini" ;
          ACTION PgSaveFile("Form_1","PropertyGrid_1","PropGrid1.ini") ;
          WIDTH 100 HEIGHT 24
 
-      @ 290,490 BUTTON btn_10;
-         CAPTION "Collapse/Expand";
+      @ 290,490 BUTTON btn_10 ;
+         CAPTION "Collapse/Expand" ;
          ACTION ToggleExpandPG("Form_1","PropertyGrid_1") ;
          WIDTH 120 HEIGHT 24
 
-      @ 330,490 BUTTON btn_11;
-         CAPTION "Test Property 2";
+      @ 330,490 BUTTON btn_11 ;
+         CAPTION "Test Property 2" ;
          ACTION TestPG2() ;
          WIDTH 120 HEIGHT 24
 
-      @ 370,490 BUTTON btn_12;
-         CAPTION "Info Hide/Show";
+      @ 370,490 BUTTON btn_12 ;
+         CAPTION "Info Hide/Show" ;
          ACTION _ShowInfoItem  ("Form_1","PropertyGrid_1") ;
          WIDTH 120 HEIGHT 24
 
@@ -163,7 +163,7 @@ FUNCTION main()
 
 FUNCTION StatMem(ver)
 
-   LOCAL aName:= { "Total memory","Available memory","Total page memory",;
+   LOCAL aName:= { "Total memory","Available memory","Total page memory", ;
       "Total page memory","Total Virtual Memory","Available virtual memory" }
    IF ver>0
 
@@ -211,8 +211,8 @@ FUNCTION TestPG2()
 
       DEFINE PROPGRID PropertyGrid_2   ;
          AT 35,10   WIDTH 430 HEIGHT 380 ;
-         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 280;
-         BACKCOLOR {240,240,240};
+         FONTCOLOR {0,0,0} INDENT  10  DATAWIDTH 280 ;
+         BACKCOLOR {240,240,240} ;
          //     ITEMINFO
 
       DEFINE CATEGORY 'Category 1'
@@ -251,23 +251,23 @@ END PROPGRID
 
 @ 160,480 FRAME Frame_2 WIDTH 140 HEIGHT 100 CAPTION "Property save to:"
 
-@ 180,500 BUTTON btn_1;
-   CAPTION "File txt";
+@ 180,500 BUTTON btn_1 ;
+   CAPTION "File txt" ;
    ACTION PgSaveFile("Form_2","PropertyGrid_2","PropGrid2.txt") ;
    WIDTH 100 HEIGHT 24
 
-@ 215,500 BUTTON btn_2;
-   CAPTION "File Xml";
+@ 215,500 BUTTON btn_2 ;
+   CAPTION "File Xml" ;
    ACTION PgSaveFile("Form_2","PropertyGrid_2","PropGrid2.xml") ;
    WIDTH 100 HEIGHT 24
 
-@ 290,490 BUTTON btn_3;
-   CAPTION "Collapse/Expand";
+@ 290,490 BUTTON btn_3 ;
+   CAPTION "Collapse/Expand" ;
    ACTION ToggleExpandPG("Form_2","PropertyGrid_2") ;
    WIDTH 120 HEIGHT 24
 
-@ 330,490 BUTTON btn_4;
-   CAPTION "Close Window";
+@ 330,490 BUTTON btn_4 ;
+   CAPTION "Close Window" ;
    ACTION Form_2.Release ;
    WIDTH 120 HEIGHT 24
 
@@ -440,15 +440,15 @@ FUNCTION DisplPGInfo(PGname,cForm,nId)
 
    LOCAL xValue,aValue,n
    LOCAL cStr
-   LOCAL aType := {"Name        - ",;
-      "Value       - ",;
-      "Data        - ",;
-      "Disabled    - ",;
-      "Changed     - ",;
-      "DisableEdit - ",;
-      "Item Type   - ",;
-      "Item ID     - ",;
-      "Info        - ",;
+   LOCAL aType := {"Name        - ", ;
+      "Value       - ", ;
+      "Data        - ", ;
+      "Disabled    - ", ;
+      "Changed     - ", ;
+      "DisableEdit - ", ;
+      "Item Type   - ", ;
+      "Item ID     - ", ;
+      "Info        - ", ;
       "Variable    - "}
 
    IF nId==0
@@ -493,13 +493,13 @@ FUNCTION AddItemPG(PGname,cForm,lCat)
       ADD PROPERTYITEM &PGname OF &cForm ;
          CATEGORY "Category 2" ;
          ITEMTYPE "string" ;
-         NAMEITEM "New Item";
+         NAMEITEM "New Item" ;
          VALUE "New Value" ;
          ID nId
    ELSE
       ADD PROPERTYITEM &PGname OF &cForm ;
          ITEMTYPE "string" ;
-         NAMEITEM "New Item";
+         NAMEITEM "New Item" ;
          VALUE "New Value" ;
          ID nId
    ENDIF

@@ -208,33 +208,33 @@ FUNCTION HTML_ERRORLOG
 FUNCTION HTML_INI(ARCH,TIT)
 
    LOCAL HTMARCH
-   LOCAL cStilo:= "<style> "                       +;
-      "body{ "                       +;
-      "font-family: sans-serif;"   +;
-      "background-color: #ffffff;" +;
-      "font-size: 75%;"            +;
-      "color: #000000;"            +;
-      "}"                          +;
-      "h1{"                          +;
-      "font-family: sans-serif;"   +;
-      "font-size: 150%;"           +;
-      "color: #0000cc;"            +;
-      "font-weight: bold;"         +;
-      "background-color: #f0f0f0;" +;
-      "}"                          +;
-      ".updated{"                    +;
-      "font-family: sans-serif;"   +;
-      "color: #cc0000;"            +;
-      "font-size: 110%;"           +;
-      "}"                          +;
-      ".normaltext{"                 +;
-      "font-family: sans-serif;"    +;
-      "font-size: 100%;"            +;
-      "color: #000000;"             +;
-      "font-weight: normal;"        +;
-      "text-transform: none;"       +;
-      "text-decoration: none;"      +;
-      "}"                             +;
+   LOCAL cStilo:= "<style> "                       + ;
+      "body{ "                       + ;
+      "font-family: sans-serif;"   + ;
+      "background-color: #ffffff;" + ;
+      "font-size: 75%;"            + ;
+      "color: #000000;"            + ;
+      "}"                          + ;
+      "h1{"                          + ;
+      "font-family: sans-serif;"   + ;
+      "font-size: 150%;"           + ;
+      "color: #0000cc;"            + ;
+      "font-weight: bold;"         + ;
+      "background-color: #f0f0f0;" + ;
+      "}"                          + ;
+      ".updated{"                    + ;
+      "font-family: sans-serif;"   + ;
+      "color: #cc0000;"            + ;
+      "font-size: 110%;"           + ;
+      "}"                          + ;
+      ".normaltext{"                 + ;
+      "font-family: sans-serif;"    + ;
+      "font-size: 100%;"            + ;
+      "color: #000000;"             + ;
+      "font-weight: normal;"        + ;
+      "text-transform: none;"       + ;
+      "text-decoration: none;"      + ;
+      "}"                             + ;
       "</style>"
 
    HTMARCH := FCREATE(ARCH)

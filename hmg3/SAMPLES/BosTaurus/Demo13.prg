@@ -13,14 +13,14 @@ FUNCTION MAIN
    PRIVATE hBitmap1 := 0
    PRIVATE hBitmap2 := 0
 
-   DEFINE WINDOW Win1;
+   DEFINE WINDOW Win1 ;
          AT 0,0 ;
          WIDTH 600 ;
          HEIGHT 650 ;
-         TITLE "Demo13: Resize Image and Set Control Image";
-         MAIN;
-         NOMAXIMIZE;
-         NOSIZE;
+         TITLE "Demo13: Resize Image and Set Control Image" ;
+         MAIN ;
+         NOMAXIMIZE ;
+         NOSIZE ;
          ON INIT Proc_ON_INIT ()
 
       @   5, 50 IMAGE Image1 PICTURE "" ON CLICK Proc_Image ("Image1", "HMG Control Image 1", RED)

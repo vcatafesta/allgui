@@ -52,12 +52,12 @@ FUNCTION Main
                HEADERS {'Active','Folders Origin','Folders Target','Type'} ;
                WIDTHS {50,300,300,50}           ;
                VALUE 1 ;
-               ON DBLCLICK {|| Properties() };
+               ON DBLCLICK {|| Properties() } ;
                WORKAREA MySync ;
-               FIELDS {;
-               [if( Field->Active == .T. , 'ON' , 'OFF' )],;
-               'Field->Origin',;
-               'Target',;
+               FIELDS { ;
+               [if( Field->Active == .T. , 'ON' , 'OFF' )], ;
+               'Field->Origin', ;
+               'Target', ;
                [if(Field->Flag2 == 0, 'INC',if(Field->Flag2 == 1,'FULL','ZIP') )]}
             JUSTIFY {BROWSE_JTFY_CENTER, BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT, BROWSE_JTFY_CENTER }
             @ 390,20  Button  NewButton  caption 'New Record'  Width 100 Height 30 Action {|| NewRecord() }
@@ -200,11 +200,11 @@ PROCEDURE OpenDbf()
    MakeDir('DB')
    MakeDir('ZIP')
    IF !File('.\DB\MySync.Dbf')
-      aDbf := {;
-         {'ORIGIN','C',100,0},;
-         {'TARGET','C',100,0},;
-         {'ACTIVE','L',  1,0},;
-         {'FLAG1' ,'L',  1,0},;
+      aDbf := { ;
+         {'ORIGIN','C',100,0}, ;
+         {'TARGET','C',100,0}, ;
+         {'ACTIVE','L',  1,0}, ;
+         {'FLAG1' ,'L',  1,0}, ;
          {'FLAG2' ,'N',  1,0}}
       DBCREATE('.\DB\MySync.Dbf',aDbf,'DBFCDX')
    ENDIF
@@ -416,11 +416,11 @@ PROCEDURE SaveFolders()
                   c1 += '\'+a1[i]
                   MakeDir(c1)
                NEXT
-               SaveFiles(;
-                  Trim(Field->Origin),;
-                  Trim(Field->Target),;
-                  Field->Flag1,;
-                  Main.Check_1.Value,;
+               SaveFiles( ;
+                  Trim(Field->Origin), ;
+                  Trim(Field->Target), ;
+                  Field->Flag1, ;
+                  Main.Check_1.Value, ;
                   Main.Check_2.Value)
             ENDIF
          ENDIF
@@ -485,12 +485,12 @@ STATIC FUNCTION ReadDir3(a,aRay,nLen)
          IF 'D' $ aFiles[i,F_ATTR].and. Left(aFiles[i,F_NAME],1) != '.'
             AAdd(aDirTmp,a[j]+aFiles[i,F_NAME]+'\')
          ELSEIF Left(aFiles[i,F_NAME],1) != '.'
-            AAdd(aRay,{;
-               SubStr(a[j]+aFiles[i,F_NAME],nLen),;
-               aFiles[i,F_SIZE],;
-               Val(DToS(aFiles[i,F_DATE])),;
-               Secs(aFiles[i,F_TIME]),;
-               .F.,;
+            AAdd(aRay,{ ;
+               SubStr(a[j]+aFiles[i,F_NAME],nLen), ;
+               aFiles[i,F_SIZE], ;
+               Val(DToS(aFiles[i,F_DATE])), ;
+               Secs(aFiles[i,F_TIME]), ;
+               .F., ;
                Val(DToS(aFiles[i,F_DATE])+StrZero(Secs(aFiles[i,F_TIME]),5))})
          ENDIF
       NEXT
@@ -509,7 +509,7 @@ PROCEDURE Fill_List_2()
       asort(aFiles,,,{|x,y| x[1]<y[1]})
       FOR i := 1 To Len(aFiles)
          Main.List_2.AddItem(afiles[i,1])
-         aadd(aTemp,{i,;
+         aadd(aTemp,{i, ;
             Val(DToS(aFiles[i,F_DATE])+StrZero(Secs(aFiles[i,F_TIME]),5))})
       NEXT
       asort(aTemp,,,{|x,y| x[1]<y[1]})
@@ -1024,8 +1024,8 @@ PROCEDURE ZipWithHBZipArc(cZip,cFolder)
    Main.Progress_2.RangeMin := 1
    Main.Progress_2.RangeMax := len(aFiles)
    Main.Progress_2.Value    := 0
-   hb_ZipFile( cZip,aFiles,8,;
-      {|cFile,nPos| Main.Progress_2.Value := nPos  },;
+   hb_ZipFile( cZip,aFiles,8, ;
+      {|cFile,nPos| Main.Progress_2.Value := nPos  }, ;
       .T.,'pass',.T.,.F.,,.T.,nil)
    Main.Progress_2.Value    := 0
 
@@ -1044,7 +1044,7 @@ PROCEDURE ZipWithCab(cCab,cFolder)
       Main.Progress_2.Value    := 0
       FOR i := 1 To Len(aFiles)
          Main.Progress_2.Value    := i
-         oCab:AddFile(;
+         oCab:AddFile( ;
             aFiles[i]    ,;  // filename
             substr(aFiles[i],AT('\',aFiles[i])+1)) // folders+filename
       NEXT

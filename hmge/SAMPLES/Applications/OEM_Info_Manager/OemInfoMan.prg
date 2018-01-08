@@ -157,7 +157,7 @@ PROCEDURE OpenPicture()
          DoMethod( "Main", "Image_1", "Refresh" )
 
       ELSE
-         MsgAlert( "This selected logo cannot be saved because the maximum size is exceeded." + CRLF +;
+         MsgAlert( "This selected logo cannot be saved because the maximum size is exceeded." + CRLF + ;
             "Please resize it (until 180 x 112) and try again.", "Size Mismatched" )
       ENDIF
 

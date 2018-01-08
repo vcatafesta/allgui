@@ -25,14 +25,14 @@ FUNCTION MAIN
 
    PRIVATE hBitmap := 0
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  700;
-         HEIGHT 600;
-         TITLE "Bos Taurus: Prototype Demo";
-         MAIN;
-         ON INIT     Proc_ON_INIT ();
-         ON RELEASE  Proc_ON_RELEASE ();
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  700 ;
+         HEIGHT 600 ;
+         TITLE "Bos Taurus: Prototype Demo" ;
+         MAIN ;
+         ON INIT     Proc_ON_INIT () ;
+         ON RELEASE  Proc_ON_RELEASE () ;
          ON PAINT    Proc_ON_PAINT ()
 
       @  500, 280 BUTTON Button_1 CAPTION "Click" ACTION MsgInfo (BT_InfoName() + Space(3) + BT_InfoVersion() + CRLF + BT_InfoAuthor (), "Info")

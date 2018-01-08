@@ -72,7 +72,7 @@ FUNCTION loginattempt( level )
          COL 90
          WIDTH 100
          VALUE username
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
       DEFINE LABEL passwordlabel
          ROW 40
@@ -86,7 +86,7 @@ FUNCTION loginattempt( level )
          WIDTH 100
          password .T.
          VALUE ""
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
       DEFINE BUTTON login
          ROW 80

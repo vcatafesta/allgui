@@ -2219,8 +2219,8 @@ FUNCTION OPGEDITEVENTS( hWnd, nMsg, wParam, lParam, hWndPG, hItem )
             cData := PG_GETITEM( hWndPG, hItem, PGI_DATA )
             aData := PgIdentData( cData, PG_FONT )
             aDataNew := GetFont ( aData[1,3], Val( aData[2,3] ) , ;
-               if(len(aData)>=3,aData[3,3] == "true",.f.) ,;
-               if(len(aData)>=4,aData[4,3] == "true",.f.) , ,;
+               if(len(aData)>=3,aData[3,3] == "true",.f.) , ;
+               if(len(aData)>=4,aData[4,3] == "true",.f.) , , ;
                if(len(aData)>=5,aData[5,3] == "true",.f.) , ;
                if(len(aData)>=6,aData[6,3] == "true",.f.) )
             IF !Empty( aDataNew[1] )
@@ -2576,7 +2576,7 @@ FUNCTION ArrayDlg( cArr, FormName )
       DEFINE FONT Font_7 FONTNAME "Arial" SIZE 9
 
       DEFINE DIALOG Dlg_1 OF &FormName  AT nRow, nCol WIDTH 270 HEIGHT 300 FONT "Font_7" ;
-         CAPTION "Array Property" MODAL;
+         CAPTION "Array Property" MODAL ;
          DIALOGPROC  DialogFun( @lOk, @aItem, aItemOld ) ;
          ON INIT SetInitItem( aItem, 0 )
 

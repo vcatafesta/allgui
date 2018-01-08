@@ -23,7 +23,7 @@ FUNCTION Main()
          MAIN NOMAXIMIZE ;
          ON RELEASE CloseTable()
 
-      @ 15,20 LABEL Lbl_1;
+      @ 15,20 LABEL Lbl_1 ;
          VALUE "States" ;
          WIDTH 350 HEIGHT 35 ;
          FONT "Arial" SIZE 18 BOLD ;
@@ -56,25 +56,25 @@ FUNCTION Main()
 
    @ 50, 430  FRAME Frame_1 CAPTION "Search in Employee for:" WIDTH 190 HEIGHT 200
 
-   @ 70,440 RADIOGROUP Radio_1;
-      OPTIONS { 'City', 'First Name', 'Last Name' };
+   @ 70,440 RADIOGROUP Radio_1 ;
+      OPTIONS { 'City', 'First Name', 'Last Name' } ;
       VALUE 1
 
    @ 160, 460 GETBOX GBox_1 ;
-      HEIGHT 24 WIDTH 120;
+      HEIGHT 24 WIDTH 120 ;
       VALUE "                  " ;
       FONT "Arial" SIZE 9 ;
-      ON CHANGE FindChg();
+      ON CHANGE FindChg() ;
       PICTURE  '@XXXXXXXXXXXXXXXXXXXXXXX'
 
-   @ 190,470 BUTTONEX Btn_1;
+   @ 190,470 BUTTONEX Btn_1 ;
       CAPTION "Find" ;
       WIDTH 80 ;
       PICTURE "Find" ;
       ON CLICK FindPos( Form_1.Radio_1.Value, Form_1.GBox_1.Value, Brw_1 ) ;
       DEFAULT
 
-   @ 500,470 BUTTONEX Btn_2;
+   @ 500,470 BUTTONEX Btn_2 ;
       CAPTION "Exit" ;
       WIDTH 80 ;
       PICTURE "Exit2" ;
@@ -195,7 +195,7 @@ FUNCTION ViewState( cState, lFound )
       DEFINE WINDOW Form_Gr ;
             AT aPos[ 1 ] + 50, aPos[ 2 ] + 20 ;
             WIDTH 740 HEIGHT 580 ;
-            TITLE tyt;
+            TITLE tyt ;
             CHILD NOMAXIMIZE ;
             ON INIT Refresh_Win( "Form_Gr", Brw_1 ) ;
             ON RELEASE {||  cState := EMPLOYEE->State, DelFlt() }
@@ -203,15 +203,15 @@ FUNCTION ViewState( cState, lFound )
          DEFINE IMAGELIST Im_edit ;
             BUTTONSIZE 26, 26  ;
             IMAGE { 'edit' } ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 5;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 5 ;
             MASK
 
          DEFINE IMAGELIST im_navi ;
             BUTTONSIZE 20, 20  ;
             IMAGE { 'navi2' } ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 6;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 6 ;
             MASK
 
          DEFINE SPLITBOX
@@ -253,7 +253,7 @@ DEFINE TBROWSE Brw_1 AT 50, 10 ;
    HEADERS 'First', 'Last', 'Street', 'City', 'Zip', 'Age', 'Salary', 'Notes' ;
    WIDTHS  110, 150, 150, 200, 80, 65, 95, 200 ;
    FIELDS EMPLOYEE->First, EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City, EMPLOYEE->Zip, EMPLOYEE->Age, EMPLOYEE->Salary, EMPLOYEE->Notes ;
-   VALUE nRec;
+   VALUE nRec ;
    ON CHANGE Refresh_Win( "Form_Gr", Brw_1 ) ;
    ON DBLCLICK ( EditDan( aHead, aFld, aWidth ), Refresh_Win( "Form_Gr", Brw_1 ) )
 
@@ -357,7 +357,7 @@ FUNCTION EditDan( aHead, aFld, aWidth )
    IF RecCount() > 0
       IF .NOT. IsWindowActive ( Form_Ed )
 
-         DEFINE WINDOW Form_Ed;
+         DEFINE WINDOW Form_Ed ;
                AT aPos[ 1 ] + 50, aPos[ 2 ] + 20 ;
                WIDTH 600 HEIGHT 125 + 30 * Len( aHead ) ;
                TITLE 'Edit a current record' ;

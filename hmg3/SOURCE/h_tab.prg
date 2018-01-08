@@ -338,11 +338,11 @@ FUNCTION _BeginTab( name , parent , row , col , w , h , value , f , s , tooltip 
    IF _HMG_SYSDATA [ 183 ] > 0
       COL    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
       ROW    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
-      Parent   := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
+      PARENT   := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
    ENDIF
 
    IF valtype (parent) == 'U'
-      parent := _HMG_SYSDATA [ 223 ]
+      PARENT := _HMG_SYSDATA [ 223 ]
    ENDIF
    IF valtype (value) == 'U'
       VALUE := 1
@@ -425,31 +425,31 @@ FUNCTION _EndTabPage()
 
 FUNCTION _EndTab()
 
-   _DefineTab ( _HMG_SYSDATA [ 225 ] ,;
-      _HMG_SYSDATA [ 226 ] ,;
-      _HMG_SYSDATA [ 186 ] ,;
-      _HMG_SYSDATA [ 185 ] ,;
-      _HMG_SYSDATA [ 187 ] ,;
-      _HMG_SYSDATA [ 188 ] ,;
-      _HMG_SYSDATA [ 141 ] ,;
-      _HMG_SYSDATA [ 140 ] ,;
-      _HMG_SYSDATA [ 189 ] ,;
-      _HMG_SYSDATA [ 227 ] ,;
-      _HMG_SYSDATA [ 190 ] ,;
-      _HMG_SYSDATA [ 228 ] ,;
-      _HMG_SYSDATA [ 308 ] ,;
-      _HMG_SYSDATA [ 266 ] ,;
-      _HMG_SYSDATA [ 267 ] ,;
-      _HMG_SYSDATA [ 268 ] ,;
-      _HMG_SYSDATA [ 269 ] ,;
-      _HMG_SYSDATA [ 270 ] ,;
-      _HMG_SYSDATA [ 229 ] ,;
-      _HMG_SYSDATA [ 301 ] ,;
-      _HMG_SYSDATA [ 302 ] ,;
-      _HMG_SYSDATA [ 303 ] ,;
-      _HMG_SYSDATA [ 304 ] ,;
-      _HMG_SYSDATA [ 305 ] ,;
-      _HMG_SYSDATA [ 204 ] ,;
+   _DefineTab ( _HMG_SYSDATA [ 225 ] , ;
+      _HMG_SYSDATA [ 226 ] , ;
+      _HMG_SYSDATA [ 186 ] , ;
+      _HMG_SYSDATA [ 185 ] , ;
+      _HMG_SYSDATA [ 187 ] , ;
+      _HMG_SYSDATA [ 188 ] , ;
+      _HMG_SYSDATA [ 141 ] , ;
+      _HMG_SYSDATA [ 140 ] , ;
+      _HMG_SYSDATA [ 189 ] , ;
+      _HMG_SYSDATA [ 227 ] , ;
+      _HMG_SYSDATA [ 190 ] , ;
+      _HMG_SYSDATA [ 228 ] , ;
+      _HMG_SYSDATA [ 308 ] , ;
+      _HMG_SYSDATA [ 266 ] , ;
+      _HMG_SYSDATA [ 267 ] , ;
+      _HMG_SYSDATA [ 268 ] , ;
+      _HMG_SYSDATA [ 269 ] , ;
+      _HMG_SYSDATA [ 270 ] , ;
+      _HMG_SYSDATA [ 229 ] , ;
+      _HMG_SYSDATA [ 301 ] , ;
+      _HMG_SYSDATA [ 302 ] , ;
+      _HMG_SYSDATA [ 303 ] , ;
+      _HMG_SYSDATA [ 304 ] , ;
+      _HMG_SYSDATA [ 305 ] , ;
+      _HMG_SYSDATA [ 204 ] , ;
       /*_HMG_SYSDATA [ 463 ]*/ _HMG_TAB_IMAGE_NOTRANSPARET )
 
    _HMG_SYSDATA [ 265 ] := .F.

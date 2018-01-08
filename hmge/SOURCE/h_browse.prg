@@ -1618,12 +1618,12 @@ FUNCTION _EditRecord ( Title , aLabels , aValues , aFormats , row , col , aValid
       TH := H + 1
    ENDIF
 
-   DEFINE WINDOW _EditRecord;
-         AT row, col;
-         WIDTH 310;
-         HEIGHT h - 19 + GetTitleHeight();
-         TITLE Title;
-         MODAL NOSIZE;
+   DEFINE WINDOW _EditRecord ;
+         AT row, col ;
+         WIDTH 310 ;
+         HEIGHT h - 19 + GetTitleHeight() ;
+         TITLE Title ;
+         MODAL NOSIZE ;
          ON INIT _SetFocus ( ControlFocused , '_Split_1' )
 
       ON KEY ALT + O ACTION _EditRecordOk ( aValid, TmpNames, aValidMessages )
@@ -1631,10 +1631,10 @@ FUNCTION _EditRecord ( Title , aLabels , aValues , aFormats , row , col , aValid
 
       DEFINE SPLITBOX
 
-         DEFINE WINDOW _Split_1;
-               WIDTH 310;
-               HEIGHT H - 90;
-               VIRTUAL HEIGHT TH;
+         DEFINE WINDOW _Split_1 ;
+               WIDTH 310 ;
+               HEIGHT H - 90 ;
+               VIRTUAL HEIGHT TH ;
                SPLITCHILD NOCAPTION FONT 'Arial' SIZE 10 BREAK FOCUSED
 
             ON KEY ALT + O ACTION _EditRecordOk ( aValid, TmpNames, aValidMessages )
@@ -1652,35 +1652,35 @@ FUNCTION _EditRecord ( Title , aLabels , aValues , aFormats , row , col , aValid
                SWITCH ValType ( aValues [i] )
                CASE 'L'
 
-                  @ ControlRow , 120 CHECKBOX &CN OF _Split_1 CAPTION '' VALUE aValues[i];
+                  @ ControlRow , 120 CHECKBOX &CN OF _Split_1 CAPTION '' VALUE aValues[i] ;
                      ON LOSTFOCUS _WHENEVAL()
                   ControlRow += 30
                   EXIT
                CASE 'D'
 
-                  @ ControlRow , 120 DATEPICKER &CN  OF _Split_1 VALUE aValues[i] WIDTH 140;
-                     ON LOSTFOCUS _WHENEVAL();
+                  @ ControlRow , 120 DATEPICKER &CN  OF _Split_1 VALUE aValues[i] WIDTH 140 ;
+                     ON LOSTFOCUS _WHENEVAL() ;
                      SHOWNONE
                   ControlRow += 30
                   EXIT
                CASE 'N'
 
                   IF ValType ( aFormats [i] ) == 'A'
-                     @ ControlRow , 120 COMBOBOX &CN  OF _Split_1 ITEMS aFormats[i] VALUE aValues[i] WIDTH 140  FONT 'Arial' SIZE 10;
+                     @ ControlRow , 120 COMBOBOX &CN  OF _Split_1 ITEMS aFormats[i] VALUE aValues[i] WIDTH 140  FONT 'Arial' SIZE 10 ;
                         ON GOTFOCUS ( LN := _Split_1.FocusedControl, ;
-                        SendMessage ( GetControlHandle( LN , '_Split_1' ) , EM_SETSEL , 0 , -1 ) );
+                        SendMessage ( GetControlHandle( LN , '_Split_1' ) , EM_SETSEL , 0 , -1 ) ) ;
                         ON LOSTFOCUS _WHENEVAL()
 
                   ELSEIF ValType ( aFormats [i] ) == 'C'
 
-                     @ ControlRow , 120 GETBOX &CN  OF _Split_1 VALUE aValues[i] WIDTH 140 FONT 'Arial' SIZE 10 PICTURE aFormats [i];
+                     @ ControlRow , 120 GETBOX &CN  OF _Split_1 VALUE aValues[i] WIDTH 140 FONT 'Arial' SIZE 10 PICTURE aFormats [i] ;
                         ON GOTFOCUS ( LN := _Split_1.FocusedControl, ;
-                        SendMessage ( GetControlHandle( LN , '_Split_1' ) , EM_SETSEL , 0 , -1 ) );
+                        SendMessage ( GetControlHandle( LN , '_Split_1' ) , EM_SETSEL , 0 , -1 ) ) ;
                         ON LOSTFOCUS _WHENEVAL()
                   ELSE
-                     @ ControlRow , 120 GETBOX &CN  OF _Split_1 VALUE aValues[i] WIDTH 140 FONT 'Arial' SIZE 10;
+                     @ ControlRow , 120 GETBOX &CN  OF _Split_1 VALUE aValues[i] WIDTH 140 FONT 'Arial' SIZE 10 ;
                         ON GOTFOCUS ( LN := _Split_1.FocusedControl, ;
-                        SendMessage ( GetControlHandle( LN , '_Split_1' ) , EM_SETSEL , 0 , -1 ) );
+                        SendMessage ( GetControlHandle( LN , '_Split_1' ) , EM_SETSEL , 0 , -1 ) ) ;
                         ON LOSTFOCUS _WHENEVAL()
                   ENDIF
                   ControlRow += 30
@@ -1689,14 +1689,14 @@ FUNCTION _EditRecord ( Title , aLabels , aValues , aFormats , row , col , aValid
 
                   IF ValType ( aFormats [i] ) == 'N'
                      IF  aFormats [i] <= 32
-                        @ ControlRow , 120 GETBOX &CN  OF _Split_1 VALUE aValues[i] WIDTH 140 FONT 'Arial' SIZE 10 PICTURE Replicate( "X", aFormats [i] );
+                        @ ControlRow , 120 GETBOX &CN  OF _Split_1 VALUE aValues[i] WIDTH 140 FONT 'Arial' SIZE 10 PICTURE Replicate( "X", aFormats [i] ) ;
                            ON GOTFOCUS ( LN := _Split_1.FocusedControl, ;
-                           SendMessage ( GetControlHandle( LN , '_Split_1' ) , EM_SETSEL , 0 , -1 ) );
+                           SendMessage ( GetControlHandle( LN , '_Split_1' ) , EM_SETSEL , 0 , -1 ) ) ;
                            ON LOSTFOCUS _WHENEVAL()
                         ControlRow += 30
                      ELSE
                         _Split_1.&(LN).Height := 90
-                        @ ControlRow , 120 EDITBOX &CN  OF _Split_1 WIDTH 140 HEIGHT 90 VALUE aValues[i] FONT 'Arial' SIZE 10 MAXLENGTH aFormats[i];
+                        @ ControlRow , 120 EDITBOX &CN  OF _Split_1 WIDTH 140 HEIGHT 90 VALUE aValues[i] FONT 'Arial' SIZE 10 MAXLENGTH aFormats[i] ;
                            ON LOSTFOCUS _WHENEVAL()
                         ControlRow += 94
                      ENDIF
@@ -1722,19 +1722,19 @@ FUNCTION _EditRecord ( Title , aLabels , aValues , aFormats , row , col , aValid
 
          END WINDOW
 
-         DEFINE WINDOW _Split_2;
-               WIDTH 300;
-               HEIGHT 50;
+         DEFINE WINDOW _Split_2 ;
+               WIDTH 300 ;
+               HEIGHT 50 ;
                SPLITCHILD NOCAPTION FONT 'Arial' SIZE 10 BREAK
 
-            @ 10, 40 BUTTON BUTTON_1;
-               OF _Split_2;
-               CAPTION _HMG_BRWLangButton[4];
+            @ 10, 40 BUTTON BUTTON_1 ;
+               OF _Split_2 ;
+               CAPTION _HMG_BRWLangButton[4] ;
                ACTION _EditRecordOk ( aValid , TmpNames , aValidMessages )
 
-            @ 10, 150 BUTTON BUTTON_2;
-               OF _Split_2;
-               CAPTION _HMG_BRWLangButton[3];
+            @ 10, 150 BUTTON BUTTON_2 ;
+               OF _Split_2 ;
+               CAPTION _HMG_BRWLangButton[3] ;
                ACTION _EditRecordCancel()
 
          END WINDOW

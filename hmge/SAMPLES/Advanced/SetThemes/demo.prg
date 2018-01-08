@@ -89,8 +89,8 @@ PROCEDURE main()
 
 PROCEDURE SetColorMenu( aColors, lSubMenu )
 
-   LOCAL aColor := { GetRed( aColors[1] ),;
-      GetGreen( aColors[1] ),;
+   LOCAL aColor := { GetRed( aColors[1] ), ;
+      GetGreen( aColors[1] ), ;
       GetBlue( aColors[1] ) }
 
    _ColorMenu( _HMG_MainHandle, aColor, lSubMenu )
@@ -201,13 +201,13 @@ FUNCTION SetThemes( theme, bInvalidate )   // modified
    LOCAL aColors_DarkBlue   := { RGB(89, 135, 214), RGB(89, 135, 214), RGB(4, 57, 148) }, h
    LOCAL aColors_LightGreen := { RGB(235, 245, 214), RGB(235, 245, 214), RGB(195, 224, 133) }
    LOCAL aColorsTable := { ;
-      aColors_Office2003Blue,;
-      aColors_Office2003Green,;
-      aColors_Office2003Orange,;
-      aColors_Office2003Silver,;
-      aColors_Azure,;
-      aColors_DarkBlue,;
-      aColors_LightGreen;
+      aColors_Office2003Blue, ;
+      aColors_Office2003Green, ;
+      aColors_Office2003Orange, ;
+      aColors_Office2003Silver, ;
+      aColors_Azure, ;
+      aColors_DarkBlue, ;
+      aColors_LightGreen ;
       }
 
    DEFAULT bInvalidate TO TRUE
@@ -450,13 +450,13 @@ FUNCTION OwnButtonPaint(  pdis )   // modified
 
          // paint button background
          IF lSelected
-            FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 3 ], aBtnRc[ 3 ], .T.,;
+            FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 3 ], aBtnRc[ 3 ], .T., ;
                aColors[3],aColors[2])
          ELSEIF ! ( _HMG_aControlRangeMax [ i ] == 1 )
-            FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T.,;
+            FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T., ;
                aColors[2],aColors[3])
          ELSE
-            FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T.,;
+            FillGradient( hDC, aBtnRc[ 2 ], aBtnRc[ 1 ], aBtnRc[ 4 ], aBtnRc[ 3 ], .T., ;
                aColors[3],aColors[2])
          ENDIF
 

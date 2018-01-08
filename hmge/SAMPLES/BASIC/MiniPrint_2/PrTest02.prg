@@ -18,11 +18,11 @@ write to four corners and center of paper.
 
 PROCEDURE  PrintTest2()
 
-   LOCAL lSuccess := .F.,;
-      cTestString := "This is a test",;
+   LOCAL lSuccess := .F., ;
+      cTestString := "This is a test", ;
       nVertMargin  := 20,;   // Vertical margin
       nHorzMargin  := 20,;   // Horizontal margin
-      nMostRightCol := 210 - nHorzMargin,;
+      nMostRightCol := 210 - nHorzMargin, ;
       nMostBottmRow := 297 - nVertMargin
 
    SELECT PRINTER DEFAULT TO lSuccess PREVIEW

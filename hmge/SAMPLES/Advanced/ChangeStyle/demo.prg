@@ -40,7 +40,7 @@ FUNCTION MAIN()
       bColor2 := {|x,nItem| if( nItem/2 == int(nItem/2), RGB(0,0,255), RGB(0,0,128) )}
 
       @ 21,19 TEXTBOX TextBox_1 ;
-         BACKCOLOR {255,255,0};
+         BACKCOLOR {255,255,0} ;
          FONTCOLOR {255,0,0} ;
          VALUE "TextBox_1" ;
          WIDTH 120 HEIGHT 24
@@ -50,7 +50,7 @@ FUNCTION MAIN()
          BACKCOLOR {0,0,195} FONTCOLOR {255,255,0} WIDTH 120 HEIGHT 120 VALUE "EditBox_1"
       @ 22,158 GRID Grid_1 WIDTH 240 HEIGHT 256 ;
          HEADERS {'Last Name','First Name','Phone'} ;
-         WIDTHS {100,100,70};
+         WIDTHS {100,100,70} ;
          ITEMS aRows ;
          TOOLTIP 'Editable Grid Control' ;
          EDIT ;

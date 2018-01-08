@@ -195,10 +195,10 @@ FUNCTION Main()
 
       @ 60,10 COMBOBOXEX ComboEx_2 ;
          WIDTH 150 ;
-         ITEMSOURCE CITIES->NAME;
+         ITEMSOURCE CITIES->NAME ;
          VALUE 1 ;
          FONT 'MS Sans serif' SIZE 9 ;
-         ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
+         ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected") ;
          IMAGE {{"br0","br2"},"br2"} ;
          TOOLTIP "Extend Data ComboEx_2 - Edit disabled"
 
@@ -210,7 +210,7 @@ FUNCTION Main()
          WIDTH 150 ;
          ITEMS {"one            ","two            ","tree           "} ;
          VALUE 1 ;
-         DISPLAYEDIT;
+         DISPLAYEDIT ;
          ON ENTER MsgBox(This.DisplayValue,Str(this.Value)) ;
          FONT 'MS Sans serif' SIZE 9 ;
          TOOLTIP "Extend ComboEx_3 - Edit enabled" ;
@@ -222,7 +222,7 @@ FUNCTION Main()
          WIDTH 530 ;
          ITEMS {"http://hmgextended.com","http://harbourminigui.blogspot.com","http://harbour-project.org","http://groups.yahoo.com/group/harbourminigui"} ;
       VALUE 1 ;
-         DISPLAYEDIT;
+         DISPLAYEDIT ;
          ON ENTER RunMSIE(This.DisplayValue) ;
          FONT 'MS Sans serif' SIZE 10 ;
          TOOLTIP "Select or modify URL and press RETURN Key to open Browser" ;
@@ -237,7 +237,7 @@ FUNCTION Main()
 
       @ 10,200 COMBOBOX Combo_1std ;
          WIDTH 50 ;
-         LISTWIDTH 150;
+         LISTWIDTH 150 ;
          ITEMS aDriveTypes ;
          VALUE 1 ;
          ON ENTER TONE(800) ;
@@ -250,12 +250,12 @@ FUNCTION Main()
 
       @ 60,200 COMBOBOX Combo_2std ;
          WIDTH 150 ;
-         ITEMSOURCE CITIES->NAME;
+         ITEMSOURCE CITIES->NAME ;
          VALUE 5 ;
          ON ENTER msgbox("Here I am") ;
          FONT 'MS Sans serif' SIZE 9 ;
-         ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
-         TOOLTIP "Standard Data Combo_2std";
+         ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected") ;
+         TOOLTIP "Standard Data Combo_2std" ;
 
       @ 83,200 Label Label_2std Value "Standard Data Combo_2std" AUTOSIZE
 
@@ -277,10 +277,10 @@ FUNCTION Main()
          WIDTH 150 ;
          ITEMS aDriveTypes ;
          VALUE 1 ;
-         ON GOTFOCUS  {|| (This.FontBold := .T.) };
-         ON LOSTFOCUS {|| (This.FontBold := .F.)};
+         ON GOTFOCUS  {|| (This.FontBold := .T.) } ;
+         ON LOSTFOCUS {|| (This.FontBold := .F.)} ;
          ON ENTER MsgBox ( Str(This.value),"This.Value" ) ;
-         FONT 'MS Sans serif' SIZE 9;
+         FONT 'MS Sans serif' SIZE 9 ;
          TOOLTIP "Extend ComboEx_1wi without images - Edit disabled"
 
       @ 33,390 Label Label_1wi Value "Extend ComboEx_1wi w/o img." AUTOSIZE
@@ -289,10 +289,10 @@ FUNCTION Main()
 
       @ 60,390 COMBOBOXEX ComboEx_2wi ;
          WIDTH 150 ;
-         ITEMSOURCE CITIES->NAME;
+         ITEMSOURCE CITIES->NAME ;
          VALUE 2 ;
          FONT 'MS Sans serif' SIZE 9 ;
-         ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
+         ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected") ;
          TOOLTIP "Extend Data ComboEx_2wi without images - Edit disabled"
 
       @ 83,390 Label Label_2wi Value "Extend ComboEx_2wi w/o img." AUTOSIZE

@@ -42,7 +42,7 @@ FUNCTION AST_Grid(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
 
    LOCAL sReadLine := ""
@@ -95,7 +95,7 @@ FUNCTION AST_Grid(cReadString,cTerminator)
    //      [ JUSTIFY <anJustifyValue> ]
    //      [ HELPID <nHelpId> ]
    //      [ BREAK ]
-   // @ <nRow> ,<nCol> GRID <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight>;
+   // @ <nRow> ,<nCol> GRID <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight> ;
    //    HEADERS <acHeaders> WIDTHS <anWidths> ITEMS <acItems> VALUE <nValue>
 
    aProperties_[ 1] := ALLTRIM(STRTRAN(aDefCommandList_[ 1],"DEFINE GRID",""))   // DEFINE GRID Grid_1
@@ -142,11 +142,11 @@ FUNCTION AST_Grid(cReadString,cTerminator)
    aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-   // @ <nRow> ,<nCol> GRID <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight>;
+   // @ <nRow> ,<nCol> GRID <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight> ;
    //    HEADERS <acHeaders> WIDTHS <anWidths> ITEMS <acItems> VALUE <nValue>
 
    cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " GRID " + ;
-      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF +;
+      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF + ;
       LDCS_iLevel(3) + aProperties_[9] + " " + aProperties_[8] + " " + aProperties_[6] + ;
       " " + aProperties_[7] + CRLF
 

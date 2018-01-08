@@ -179,7 +179,7 @@ FUNCTION _DefineEditbox ( ControlName, ParentFormName, x, y, w, h, value, ;
             AddSplitBoxItem ( Controlhandle , _HMG_aFormReBarHandle [i] , w , break , , , , _HMG_ActiveSplitBoxInverted )
             Containerhandle := _HMG_aFormReBarHandle [i]
 
-            IF ValType ( Value ) == 'C';
+            IF ValType ( Value ) == 'C' ;
                   .OR. ;
                   ValType ( Value ) == 'M'
 
@@ -195,7 +195,7 @@ FUNCTION _DefineEditbox ( ControlName, ParentFormName, x, y, w, h, value, ;
 
          ControlHandle := InitEditBox ( ParentFormHandle, 0, x, y, w, h, '', 0 , maxlength , readonly, invisible, notabstop , novscroll , nohscroll )
 
-         IF ValType ( Value ) == 'C';
+         IF ValType ( Value ) == 'C' ;
                .OR. ;
                ValType ( Value ) == 'M'
 

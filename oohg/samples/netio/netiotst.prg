@@ -37,9 +37,9 @@ PROCEDURE createdb( cName )
 
    LOCAL n
 
-   dbCreate( cName, {{"F1", "C", 20, 0},;
-      {"F2", "C",  4, 0},;
-      {"F3", "N", 10, 2},;
+   dbCreate( cName, {{"F1", "C", 20, 0}, ;
+      {"F2", "C",  4, 0}, ;
+      {"F3", "N", 10, 2}, ;
       {"F4", "D",  8, 0}} )
    USE (cName)
    n:=0

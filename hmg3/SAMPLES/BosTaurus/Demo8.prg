@@ -33,23 +33,23 @@ FUNCTION MAIN
 
    PRIVATE hBitmap := 0
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  700;
-         HEIGHT 600;
-         TITLE "Demo8: Draw in BITMAP";
-         NOSIZE;
-         NOMAXIMIZE;
-         MAIN;
-         ON INIT     Proc_ON_INIT ();
-         ON RELEASE  Proc_ON_RELEASE ();
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  700 ;
+         HEIGHT 600 ;
+         TITLE "Demo8: Draw in BITMAP" ;
+         NOSIZE ;
+         NOMAXIMIZE ;
+         MAIN ;
+         ON INIT     Proc_ON_INIT () ;
+         ON RELEASE  Proc_ON_RELEASE () ;
          ON PAINT    Proc_ON_PAINT ()
 
-      DEFINE TAB Tab_1;
-            ROW 100;
-            COL 50;
-            WIDTH  400;
-            HEIGHT 300;
+      DEFINE TAB Tab_1 ;
+            ROW 100 ;
+            COL 50 ;
+            WIDTH  400 ;
+            HEIGHT 300 ;
             ON CHANGE Win1.RadioGroup_1.Value := Win1.Tab_1.Value
 
          DEFINE PAGE "Image"
@@ -57,15 +57,15 @@ FUNCTION MAIN
          END PAGE
 
          DEFINE PAGE "Grid"
-            @ 40, 30  GRID Grid_1;
-               WIDTH  350;
-               HEIGHT 220;
-               HEADERS {"Last Name","First Name","Phone"};
-               WIDTHS {140,140,140};
-               ITEMS aRows;
-               VALUE {1,1};
-               EDIT;
-               JUSTIFY {GRID_JTFY_CENTER, GRID_JTFY_RIGHT, GRID_JTFY_RIGHT};
+            @ 40, 30  GRID Grid_1 ;
+               WIDTH  350 ;
+               HEIGHT 220 ;
+               HEADERS {"Last Name","First Name","Phone"} ;
+               WIDTHS {140,140,140} ;
+               ITEMS aRows ;
+               VALUE {1,1} ;
+               EDIT ;
+               JUSTIFY {GRID_JTFY_CENTER, GRID_JTFY_RIGHT, GRID_JTFY_RIGHT} ;
                CELLNAVIGATION
          END PAGE
 
@@ -88,7 +88,7 @@ FUNCTION MAIN
 
       @ 450, 200 BUTTON Button_1 CAPTION "On/Off" ACTION {|| Win1.Tab_1.Visible := .NOT.(Win1.Tab_1.Visible), Win1.RadioGroup_1.Visible := Win1.Tab_1.Visible}
 
-      @ 230, 500  RADIOGROUP RadioGroup_1 OPTIONS {"Image","Grid","EditBox","ActiveX"} VALUE 1;
+      @ 230, 500  RADIOGROUP RadioGroup_1 OPTIONS {"Image","Grid","EditBox","ActiveX"} VALUE 1 ;
          ON CHANGE Win1.Tab_1.Value := Win1.RadioGroup_1.Value
 
    END WINDOW

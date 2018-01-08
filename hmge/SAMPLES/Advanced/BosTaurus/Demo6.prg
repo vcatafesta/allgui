@@ -18,20 +18,20 @@ FUNCTION MAIN
    PRIVATE Image_Width  := 0
    PRIVATE Image_Height := 0
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  700;
-         HEIGHT 600;
-         TITLE "Demo6: Clipboard Monitor";
-         MAIN;
-         ON INIT     Proc_ON_INIT ();
-         ON RELEASE  Proc_ON_RELEASE ();
-         ON PAINT    Proc_ON_PAINT ();
-         ON SIZE      BT_ClientAreaInvalidateAll ("Win1");
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  700 ;
+         HEIGHT 600 ;
+         TITLE "Demo6: Clipboard Monitor" ;
+         MAIN ;
+         ON INIT     Proc_ON_INIT () ;
+         ON RELEASE  Proc_ON_RELEASE () ;
+         ON PAINT    Proc_ON_PAINT () ;
+         ON SIZE      BT_ClientAreaInvalidateAll ("Win1") ;
          ON MAXIMIZE  BT_ClientAreaInvalidateAll ("Win1")
 
-      @ 200, 200 EDITBOX EditBox_1 WIDTH 250 HEIGHT 100;
-         VALUE "Copy an image to the clipboard with Microsoft Paint or another graphic tool.";
+      @ 200, 200 EDITBOX EditBox_1 WIDTH 250 HEIGHT 100 ;
+         VALUE "Copy an image to the clipboard with Microsoft Paint or another graphic tool." ;
          BOLD BACKCOLOR ORANGE NOHSCROLL
 
       @ 400, 280 BUTTON Button_1 CAPTION "Click" ACTION MsgInfo ("Hello HMG World !!!")

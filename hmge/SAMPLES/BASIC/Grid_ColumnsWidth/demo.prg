@@ -10,11 +10,11 @@
 
 FUNCTION Main()
 
-   DEFINE WINDOW Main_WA;
-         MAIN;
-         CLIENTAREA 440, 206;
-         TITLE 'Grid Columns Width - see in StatusBar';
-         MINWIDTH 456 - iif(IsThemed(), 0, 2*GetBorderWidth());
+   DEFINE WINDOW Main_WA ;
+         MAIN ;
+         CLIENTAREA 440, 206 ;
+         TITLE 'Grid Columns Width - see in StatusBar' ;
+         MINWIDTH 456 - iif(IsThemed(), 0, 2*GetBorderWidth()) ;
          MINHEIGHT 244 - iif(IsThemed(), 0, 2*GetBorderHeight())
 
       DEFINE GRID Users_GR

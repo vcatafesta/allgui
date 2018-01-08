@@ -53,12 +53,12 @@ PARTICULAR PURPOSE.
 
 PROCEDURE Main()
 
-   DEFINE WINDOW FrmTMsgTest;
-         AT 0, 0;
-         WIDTH 300;
-         HEIGHT 200;
-         TITLE "Timed Message Test";
-         MAIN;
+   DEFINE WINDOW FrmTMsgTest ;
+         AT 0, 0 ;
+         WIDTH 300 ;
+         HEIGHT 200 ;
+         TITLE "Timed Message Test" ;
+         MAIN ;
          ON INIT (Msgt(3,"Timed Message Test" + CRLF + "Duration is 3 seconds","Info"),test2())
 
    END WINDOW
@@ -72,12 +72,12 @@ PROCEDURE Test2()
 
    SET NAVIGATION EXTENDED
 
-   DEFINE WINDOW FrmTest2;
-         AT 0, 0;
-         WIDTH 400;
-         HEIGHT 200;
-         TITLE "Timed Message";
-         ON INIT Msgt(5,"2° Timed Message Test" + CRLF + "Duration is 5 seconds","2 Info");
+   DEFINE WINDOW FrmTest2 ;
+         AT 0, 0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE "Timed Message" ;
+         ON INIT Msgt(5,"2° Timed Message Test" + CRLF + "Duration is 5 seconds","2 Info") ;
          ON INTERACTIVECLOSE ReleaseAllWindows()
 
       @ 10,10 LABEL label_1 ;
@@ -89,7 +89,7 @@ PROCEDURE Test2()
          ON ENTER Msgt("On enter - No Timer!",[test2])
 
       @ 40,120 TEXTBOX text_3 ;
-         VALUE 'Test3';
+         VALUE 'Test3' ;
          ON ENTER Msgt(2,"on enter",[test3],"YESNO")
 
       @ 70,120 TEXTBOX text_4 ;

@@ -31,7 +31,7 @@ FUNCTION SBAlign()
             CHILD
 
          DEFINE TBROWSE oBrw AT 10,15 ALIAS "Test2" ;
-            OF "Form_2" WIDTH 340 HEIGHT 240 CELLED;
+            OF "Form_2" WIDTH 340 HEIGHT 240 CELLED ;
             COLORS {CLR_BLACK, CLR_PINK}
 
          // see new behaviour of VALID clause
@@ -39,7 +39,7 @@ FUNCTION SBAlign()
             HEADER "Name" ;
             DATA FieldWBlock( "Field1", Select() ) ;
             PICTURE "@!" ;
-            VALID {|uVar| ! Empty( uVar ) };
+            VALID {|uVar| ! Empty( uVar ) } ;
             3DLOOK FALSE SIZE 200 ;
             EDITABLE MOVE DT_MOVE_RIGHT
 
@@ -47,7 +47,7 @@ FUNCTION SBAlign()
             HEADER "Result" ;
             DATA { | uVar | If( uVar == Nil, Test2->Field2, ;
             If( ! Empty( uVar ), Test2->Field2 := uVar, ;
-            If( oBrw:lAppendMode, ( oBrw:skip( - 1 ),oBrw:Refresh(.T.) ), Nil ) ) ) };
+            If( oBrw:lAppendMode, ( oBrw:skip( - 1 ),oBrw:Refresh(.T.) ), Nil ) ) ) } ;
             COLORS CLR_BLACK,CLR_PINK ;
             ALIGN DT_CENTER ;
             SIZE 70 PIXELS ;

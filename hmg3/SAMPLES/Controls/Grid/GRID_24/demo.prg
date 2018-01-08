@@ -29,7 +29,7 @@ FUNCTION Main
          WIDTH 400 ;
          HEIGHT 330 ;
          HEADERS {'Column 1','Column 2','Column 3'} ;
-         WIDTHS {140,140,140};
+         WIDTHS {140,140,140} ;
          VIRTUAL ;
          ITEMCOUNT 10000 ;
          ON QUERYDATA QueryTest() ;

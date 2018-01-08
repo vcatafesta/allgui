@@ -86,11 +86,11 @@ FUNCTION Main
    PRIVATE aJustify := {GRID_JTFY_RIGHT,GRID_JTFY_RIGHT,GRID_JTFY_CENTER,GRID_JTFY_RIGHT,GRID_JTFY_RIGHT,GRID_JTFY_CENTER}
    PRIVATE bDynamicBackColor := {|| IF (This.CellRowIndex/2 == int(This.CellRowIndex/2), {222,222,222}, {192,192,192})}
 
-   PRIVATE aColumnControls:= { {'TEXTBOX','NUMERIC','$ 999,999.99'},;
-      {'TEXTBOX','CHARACTER'} ,;
-      {'DATEPICKER','DROPDOWN'} ,;
-      {'COMBOBOX',{'One','Two','Three'}} ,;
-      {'SPINNER', 0 , 20 } ,;
+   PRIVATE aColumnControls:= { {'TEXTBOX','NUMERIC','$ 999,999.99'}, ;
+      {'TEXTBOX','CHARACTER'} , ;
+      {'DATEPICKER','DROPDOWN'} , ;
+      {'COMBOBOX',{'One','Two','Three'}} , ;
+      {'SPINNER', 0 , 20 } , ;
       {'CHECKBOX', 'Yes' , 'No' } }
 
    PRIVATE data := {100.50, "HMG", CTOD("07/08/2012"), 1, 0, .T.}  // Default data of aColumnControls

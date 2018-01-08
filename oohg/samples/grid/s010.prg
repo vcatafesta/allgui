@@ -47,7 +47,7 @@ FUNCTION Main
       aRows[ 19 ] := {'Pradon, Alejandra'}
       aRows[ 20 ] := {'Reyes, Monica'}
 
-      @ 10,10 GRID Grid_1 OBJ oGrid;
+      @ 10,10 GRID Grid_1 OBJ oGrid ;
          WIDTH oForm:ClientWidth - 20 ;
          HEIGHT 100 ;
          HEADERS {'Data'} ;

@@ -27,13 +27,13 @@ FUNCTION Main
          WIDTH 760 ;
          HEIGHT 240 ;
          HEADERS {'Character','Number','Number','Date'} ;
-         WIDTHS {140,140,140,140};
+         WIDTHS {140,140,140,140} ;
          ITEMS aItems ;
-         EDIT;
-         CELLNAVIGATION;
-         COLUMNCONTROLS { {'TEXTBOX','CHARACTER'}, {'TEXTBOX','NUMERIC'}, {'SPINNER', 1, 50}, {'DATEPICKER','DROPDOWN'} };
-         ON INPLACEEDITEVENT ProcGridInplaceEditEvent();
-         ON KEY ProcOnKeyEvent();
+         EDIT ;
+         CELLNAVIGATION ;
+         COLUMNCONTROLS { {'TEXTBOX','CHARACTER'}, {'TEXTBOX','NUMERIC'}, {'SPINNER', 1, 50}, {'DATEPICKER','DROPDOWN'} } ;
+         ON INPLACEEDITEVENT ProcGridInplaceEditEvent() ;
+         ON KEY ProcOnKeyEvent() ;
          ON CLICK ProcOnClickEvent()
 
    END WINDOW
@@ -56,13 +56,13 @@ FUNCTION ProcGridInplaceEditEvent()
 
       GetControlNameByHandle ( This.InplaceEditControlHandle, @cControlName, @cFormParentName )
 
-      Form_1.Label_2.VALUE := { "InplaceEdit Control: ", cFormParentName, ".", cControlName,;
+      Form_1.Label_2.VALUE := { "InplaceEdit Control: ", cFormParentName, ".", cControlName, ;
          " --> ", GetControlTypeByIndex ( This.InplaceEditControlIndex ) }
 
    CASE This.IsInplaceEditEventRun == .T.
 
-      Form_1.Label_3.VALUE := { "Last Key Press: ", HMG_GetLastVirtualKeyDown(),;
-         "    Last Char Press: ", HMG_GetLastCharacter(),;
+      Form_1.Label_3.VALUE := { "Last Key Press: ", HMG_GetLastVirtualKeyDown(), ;
+         "    Last Char Press: ", HMG_GetLastCharacter(), ;
          "    Current Value: ", GetProperty(cFormParentName, cControlName, "VALUE") }
 
    CASE This.IsInplaceEditEventFinish == .T.

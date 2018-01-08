@@ -390,7 +390,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
             hwg_GetSkip( ::oParent, ::handle, , - 1 )
 
             RETURN 0
-         ELSEIF wParam = VK_ESCAPE .AND. hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE //.OR.;
+         ELSEIF wParam = VK_ESCAPE .AND. hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE //.OR. ;
 
             RETURN 0
          ENDIF

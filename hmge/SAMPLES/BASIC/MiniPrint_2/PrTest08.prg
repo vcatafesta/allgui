@@ -20,23 +20,23 @@ add column headers
 
 PROCEDURE PrintTest8()
 
-   LOCAL lSuccess := .F.,;
+   LOCAL lSuccess := .F., ;
       nVMargin := 20,;    // Vertical margin
       nHMargin := 20,;      // Horizontal margin
-      cFontName := "Verdana",;
+      cFontName := "Verdana", ;
       nFontSize := 10,;   // In pixel
       nLine_Num :=  0
 
-   LOCAL nPageLength := 210 - nHMargin * 2,;
+   LOCAL nPageLength := 210 - nHMargin * 2, ;
       nPageHeigth := 297 - nVMargin * 3,;  // 1 Top Margin + 1 Column Headers + 1 Bottom margin
       nChrsPerLin :=  80
 
    LOCAL cItem2Prnt
 
-   PRIVATE nCharLength := 2.25,;
+   PRIVATE nCharLength := 2.25, ;
       nLineHeigth := 6.8
 
-   PRIVATE nLinsPerPag := nPageHeigth / nLineHeigth,;
+   PRIVATE nLinsPerPag := nPageHeigth / nLineHeigth, ;
       nLineNo1Pag := 0
 
    PRIVATE nPrintRow :=  0,;   // Row ( line ) number in printed page

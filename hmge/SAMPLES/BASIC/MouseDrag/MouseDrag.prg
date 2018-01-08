@@ -63,12 +63,12 @@ PROCEDURE UpdaSBar()
 
 PROCEDURE DrawShape()
 
-   LOCAL nCorner,;
-      a1Corner,;
-      a2Corner,;
-      nCorner1Y,;
-      nCorner1X,;
-      nCorner2Y,;
+   LOCAL nCorner, ;
+      a1Corner, ;
+      a2Corner, ;
+      nCorner1Y, ;
+      nCorner1X, ;
+      nCorner2Y, ;
       nCorner2X
 
    ERASE WINDOW frmMousDrag

@@ -355,27 +355,27 @@ PROCEDURE SelectLang()
 
    LOCAL cMessage  := ""
    LOCAL nItem     := 0
-   LOCAL aLangName := { "Basque"             ,;
-      "Dutch"              ,;
-      "English"            ,;
-      "French"             ,;
-      "German"             ,;
-      "Italian"            ,;
-      "Polish"             ,;
-      "Portuguese"         ,;
-      "Russian"            ,;
-      "Spanish"            ,;
+   LOCAL aLangName := { "Basque"             , ;
+      "Dutch"              , ;
+      "English"            , ;
+      "French"             , ;
+      "German"             , ;
+      "Italian"            , ;
+      "Polish"             , ;
+      "Portuguese"         , ;
+      "Russian"            , ;
+      "Spanish"            , ;
       "Ukranian"           }
-   LOCAL aLangID   := { "EU"    ,;
-      "NL"    ,;
-      "EN"    ,;
-      "FR"    ,;
-      "DE"    ,;
-      "IT"    ,;
-      "PLWIN" ,;
-      "PT"    ,;
-      "RUWIN" ,;
-      "ES"    ,;
+   LOCAL aLangID   := { "EU"    , ;
+      "NL"    , ;
+      "EN"    , ;
+      "FR"    , ;
+      "DE"    , ;
+      "IT"    , ;
+      "PLWIN" , ;
+      "PT"    , ;
+      "RUWIN" , ;
+      "ES"    , ;
       "UAWIN" }
 
    // Language selection.

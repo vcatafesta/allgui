@@ -29,7 +29,7 @@ PROCEDURE Main()
    PRIVATE cDataBase   := "Cadastros"
    PRIVATE lLogin           := .F.
 
-   DEFINE WINDOW Form_1 AT 05,05 WIDTH 640 HEIGHT 480;
+   DEFINE WINDOW Form_1 AT 05,05 WIDTH 640 HEIGHT 480 ;
          TITLE "Harbour + HMG + MySql" MAIN NOSIZE NOMINIMIZE ON INIT Login() ON RELEASE My_Fechar_Conexao_com_Base_De_Dados()
 
       @ 00,565 IMAGE Flag01 PICTURE "Argentina.bmp" WIDTH 32 HEIGHT 22
@@ -40,21 +40,21 @@ PROCEDURE Main()
       END STATUSBAR
 
       @ 100,40 LABEL Label_Info1  ;
-         VALUE "*** ATENCAO ***";
+         VALUE "*** ATENCAO ***" ;
          WIDTH 450 HEIGHT 27 FONT "Arial" SIZE 10 FONTCOLOR RED BOLD
       @ 130,40 LABEL Label_Info2  ;
-         VALUE "Antes de Executar o Grid:";
+         VALUE "Antes de Executar o Grid:" ;
          WIDTH 450 HEIGHT 27 FONT "Arial" SIZE 10 FONTCOLOR RED BOLD
       @ 160,40  LABEL Label_Info3  ;
-         VALUE "1) Execute primeiro a opção para Conectar e Criar a base de Dados e a Tabela";
+         VALUE "1) Execute primeiro a opção para Conectar e Criar a base de Dados e a Tabela" ;
          WIDTH 500 HEIGHT 27 FONT "Arial" SIZE 10 FONTCOLOR RED BOLD
       @ 190,40  LABEL Label_Info4  ;
-         VALUE "2) A Exportação pode demorar uns segundos porque irá importar 500 Registros";
+         VALUE "2) A Exportação pode demorar uns segundos porque irá importar 500 Registros" ;
          WIDTH 500 HEIGHT 27 FONT "Arial" SIZE 10 FONTCOLOR RED BOLD
 
       @ 355,65   FRAME Panel_Msg WIDTH 520 HEIGHT 40 OPAQUE
       @ 365,145 LABEL Label_Mensagem     ;
-         VALUE "O Clipper não Morreu!!   Conheça o xHarbour & o HMG";
+         VALUE "O Clipper não Morreu!!   Conheça o xHarbour & o HMG" ;
          WIDTH 400 HEIGHT 27 FONT "Arial" SIZE 10 FONTCOLOR WHITE BOLD
 
       DEFINE MAIN MENU
@@ -85,7 +85,7 @@ FUNCTION Grid_Pesquisa()
 
    DEFINE WINDOW Grid_Nomes AT 05,05 WIDTH 425 HEIGHT 460 TITLE "Nomes Cadastrados" CHILD NOSYSMENU
 
-      @ 010,010 GRID Grid_1   WIDTH  400  HEIGHT 329 HEADERS {"Código","Nome"};
+      @ 010,010 GRID Grid_1   WIDTH  400  HEIGHT 329 HEADERS {"Código","Nome"} ;
          WIDTHS  {60,333}   VALUE 1 FONT "Arial" SIZE 09 ;
          ON DBLCLICK Tela_Nomes(2)
 
@@ -224,7 +224,7 @@ FUNCTION  Tela_Nomes( nOperacao )
          VALUE "Código"                     ;
          WIDTH 150          ;
          HEIGHT 35          ;
-         FONT "Arial" SIZE 09;
+         FONT "Arial" SIZE 09 ;
          BACKCOLOR BLUE ;
          FONTCOLOR WHITE BOLD
 
@@ -232,7 +232,7 @@ FUNCTION  Tela_Nomes( nOperacao )
          VALUE "Nome              "        ;
          WIDTH 120          ;
          HEIGHT 35          ;
-         FONT "Arial" SIZE 09;
+         FONT "Arial" SIZE 09 ;
          BACKCOLOR BLUE ;
          FONTCOLOR WHITE BOLD
 
@@ -240,7 +240,7 @@ FUNCTION  Tela_Nomes( nOperacao )
          VALUE "Endereço         "        ;
          WIDTH 120          ;
          HEIGHT 35          ;
-         FONT "Arial" SIZE 09;
+         FONT "Arial" SIZE 09 ;
          BACKCOLOR BLUE ;
          FONTCOLOR WHITE BOLD
 
@@ -248,7 +248,7 @@ FUNCTION  Tela_Nomes( nOperacao )
          VALUE "e-Mail              "        ;
          WIDTH 120          ;
          HEIGHT 35          ;
-         FONT "Arial" SIZE 09;
+         FONT "Arial" SIZE 09 ;
          BACKCOLOR BLUE ;
          FONTCOLOR WHITE BOLD
 
@@ -387,7 +387,7 @@ FUNCTION  Login()
          VALUE "HostName/IP"            ;
          WIDTH 150          ;
          HEIGHT 35          ;
-         FONT "Arial" SIZE 09;
+         FONT "Arial" SIZE 09 ;
          BACKCOLOR BLUE ;
          FONTCOLOR WHITE BOLD
 
@@ -395,7 +395,7 @@ FUNCTION  Login()
          VALUE "User                "        ;
          WIDTH 120          ;
          HEIGHT 35          ;
-         FONT "Arial" SIZE 09;
+         FONT "Arial" SIZE 09 ;
          BACKCOLOR BLUE ;
          FONTCOLOR WHITE BOLD
 
@@ -403,7 +403,7 @@ FUNCTION  Login()
          VALUE "Password        "        ;
          WIDTH 120          ;
          HEIGHT 35          ;
-         FONT "Arial" SIZE 09;
+         FONT "Arial" SIZE 09 ;
          BACKCOLOR BLUE ;
          FONTCOLOR WHITE BOLD
 
@@ -425,7 +425,7 @@ FUNCTION  Login()
          VALUE cPassWord               ;
          PASSWORD                         ;
          FONT "Arial" SIZE 09             ;
-         TOOLTIP "Senha de Acesso";
+         TOOLTIP "Senha de Acesso" ;
          ON ENTER  Iif( !Empty( Form_0.p_password.Value ) , Set_Variaveis() , Form_0.p_password.SetFocus )
 
       @ 130,030 BUTTON Bt_Login                 ;
@@ -724,14 +724,14 @@ FUNCTION My_Fechar_Conexao_com_Base_De_Dados()
 FUNCTION Sobre_o_Sistema()
 
    PlayExclamation()
-   MsgINFO ( PadC("*** Sistema de Exemplo ***",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC(" xHarbour + HMG + MySQL",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC("Desenvolvido por Humberto_Fornazier  hfornazier@brfree.com.br",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
-      PadC("HMG = Roberto Lopez = mail.box.hmg@gmail.com",60)+QUEBRA+;
-      PadC(" ",30)+QUEBRA+;
+   MsgINFO ( PadC("*** Sistema de Exemplo ***",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC(" xHarbour + HMG + MySQL",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC("Desenvolvido por Humberto_Fornazier  hfornazier@brfree.com.br",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
+      PadC("HMG = Roberto Lopez = mail.box.hmg@gmail.com",60)+QUEBRA+ ;
+      PadC(" ",30)+QUEBRA+ ;
       PadC("xharbour = www.xharbour.org",60),"Exemplo xHarbour + HMG + MYSql")
 
    RETURN NIL

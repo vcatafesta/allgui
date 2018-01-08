@@ -34,7 +34,7 @@ FUNCTION Main
          COL 160
          ONCHANGE ( _cAnywhereSearchStr := getproperty( ThisWindow.Name, 'textbox', 'VALUE' ), ;
             setproperty( ThisWindow.Name, '_anywherelabel', 'VALUE', _cAnywhereSearchStr ), ;
-            iif( empty(_HMGAnywhereSearch( cActiveControl, ThisWindow.Name, .t. )),;
+            iif( empty(_HMGAnywhereSearch( cActiveControl, ThisWindow.Name, .t. )), ;
             ( setproperty( ThisWindow.Name, 'textbox', 'VALUE', _cAnywhereSearchStr ), ;
             main.textbox.caretpos := len(_cAnywhereSearchStr) ), ) ;
             )

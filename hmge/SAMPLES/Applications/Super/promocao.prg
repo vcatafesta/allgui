@@ -36,25 +36,25 @@ FUNCTION promocao()
       subcategoria_produtos->(dbskip())
    END
 
-   DEFINE WINDOW form_promocao;
-         at 000,000;
-         WIDTH 900;
-         HEIGHT 600;
-         TITLE 'Incluir ou Excluir Promoção';
-         ICON path_imagens+'icone.ico';
-         modal;
-         nosize;
-         ON INIT zera_temporario_2();
+   DEFINE WINDOW form_promocao ;
+         at 000,000 ;
+         WIDTH 900 ;
+         HEIGHT 600 ;
+         TITLE 'Incluir ou Excluir Promoção' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
+         nosize ;
+         ON INIT zera_temporario_2() ;
          ON RELEASE zera_acesso_2()
 
       * fase 1
-      @ 010,005 label lbl_001;
-         of form_promocao;
-         VALUE 'Quais produtos em promoção ?';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_promocao ;
+         VALUE 'Quais produtos em promoção ?' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
       define comboboxex cbo_001
       ROW   030
@@ -66,13 +66,13 @@ FUNCTION promocao()
    END comboboxex
 
    * fase 2
-   @ 070,005 label lbl_002;
-      of form_promocao;
-      VALUE 'Selecione a Categoria';
-      autosize;
-      FONT 'tahoma' size 010;
-      bold;
-      FONTCOLOR _preto_001;
+   @ 070,005 label lbl_002 ;
+      of form_promocao ;
+      VALUE 'Selecione a Categoria' ;
+      autosize ;
+      FONT 'tahoma' size 010 ;
+      bold ;
+      FONTCOLOR _preto_001 ;
       TRANSPARENT
    define comboboxex cbo_002
    ROW   090
@@ -85,13 +85,13 @@ FUNCTION promocao()
 END comboboxex
 
 * fase 3
-@ 130,005 label lbl_003;
-   of form_promocao;
-   VALUE 'Selecione a Subcategoria';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 130,005 label lbl_003 ;
+   of form_promocao ;
+   VALUE 'Selecione a Subcategoria' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 define comboboxex cbo_003
 ROW   150
@@ -104,91 +104,91 @@ listwidth 300
 END comboboxex
 
 * fase 4
-@ 200,005 label lbl_004;
-   of form_promocao;
-   VALUE 'DIMINUIR';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _vermelho_002;
+@ 200,005 label lbl_004 ;
+   of form_promocao ;
+   VALUE 'DIMINUIR' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _vermelho_002 ;
    TRANSPARENT
-@ 200,070 getbox tbox_004;
-   of form_promocao;
-   HEIGHT 027;
-   WIDTH 070;
-   VALUE 0;
-   FONT 'tahoma' size 010;
-   BACKCOLOR _fundo_get;
-   FONTCOLOR _letra_get_1;
+@ 200,070 getbox tbox_004 ;
+   of form_promocao ;
+   HEIGHT 027 ;
+   WIDTH 070 ;
+   VALUE 0 ;
+   FONT 'tahoma' size 010 ;
+   BACKCOLOR _fundo_get ;
+   FONTCOLOR _letra_get_1 ;
    PICTURE '@E 9,999.99'
-@ 200,150 label lbl_0044;
-   of form_promocao;
-   VALUE 'no preço';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 200,150 label lbl_0044 ;
+   of form_promocao ;
+   VALUE 'no preço' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
-@ 230,005 label lbl_00444;
-   of form_promocao;
-   VALUE 'de venda já existente';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 230,005 label lbl_00444 ;
+   of form_promocao ;
+   VALUE 'de venda já existente' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 
-@ 250,040 label lbl_ou;
-   of form_promocao;
-   VALUE 'ou então';
-   autosize;
-   FONT 'tahoma' size 018;
-   bold;
-   FONTCOLOR _preto_001;
+@ 250,040 label lbl_ou ;
+   of form_promocao ;
+   VALUE 'ou então' ;
+   autosize ;
+   FONT 'tahoma' size 018 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 
 * fase 5
-@ 290,005 label lbl_005;
-   of form_promocao;
-   VALUE 'APLICAR';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _vermelho_002;
+@ 290,005 label lbl_005 ;
+   of form_promocao ;
+   VALUE 'APLICAR' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _vermelho_002 ;
    TRANSPARENT
-@ 290,070 getbox tbox_005;
-   of form_promocao;
-   HEIGHT 027;
-   WIDTH 060;
-   VALUE 0;
-   FONT 'tahoma' size 010;
-   BACKCOLOR _fundo_get;
-   FONTCOLOR _letra_get_1;
+@ 290,070 getbox tbox_005 ;
+   of form_promocao ;
+   HEIGHT 027 ;
+   WIDTH 060 ;
+   VALUE 0 ;
+   FONT 'tahoma' size 010 ;
+   BACKCOLOR _fundo_get ;
+   FONTCOLOR _letra_get_1 ;
    PICTURE '@R 999.99'
-@ 290,150 label lbl_0055;
-   of form_promocao;
-   VALUE '%';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 290,150 label lbl_0055 ;
+   of form_promocao ;
+   VALUE '%' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
-@ 320,005 label lbl_00555;
-   of form_promocao;
-   VALUE 'a menos sobre preço de venda';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 320,005 label lbl_00555 ;
+   of form_promocao ;
+   VALUE 'a menos sobre preço de venda' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 
 * botão filtrar
-@ 360,005 buttonex botao_filtrar;
-   parent form_promocao;
-   CAPTION 'Filtrar informações';
-   WIDTH 200 height 040;
-   PICTURE path_imagens+'img_filtro.bmp';
-   ACTION filtrar_informacoes_2();
+@ 360,005 buttonex botao_filtrar ;
+   PARENT form_promocao ;
+   CAPTION 'Filtrar informações' ;
+   WIDTH 200 height 040 ;
+   PICTURE path_imagens+'img_filtro.bmp' ;
+   ACTION filtrar_informacoes_2() ;
    TOOLTIP 'Clique aqui para separar as informações e visualizar as promoções antes de efetivá-las'
 
 * separar a tela em 2 partes
@@ -203,36 +203,36 @@ DEFINE LABEL label_separador
 END LABEL
 
 * grid e opções do reajuste
-@ 010,220 label lbl_reajuste;
-   of form_promocao;
-   VALUE 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado';
-   autosize;
-   FONT 'tahoma' size 010;
-   bold;
-   FONTCOLOR _preto_001;
+@ 010,220 label lbl_reajuste ;
+   of form_promocao ;
+   VALUE 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado' ;
+   autosize ;
+   FONT 'tahoma' size 010 ;
+   bold ;
+   FONTCOLOR _preto_001 ;
    TRANSPARENT
 
 * botões
-@ 520,250 buttonex botao_excluir_promocao;
-   parent form_promocao;
-   CAPTION 'Excluir promoção';
-   WIDTH 150 height 040;
-   PICTURE path_imagens+'img_rpromo.bmp';
-   ACTION tira_da_promocao();
+@ 520,250 buttonex botao_excluir_promocao ;
+   PARENT form_promocao ;
+   CAPTION 'Excluir promoção' ;
+   WIDTH 150 height 040 ;
+   PICTURE path_imagens+'img_rpromo.bmp' ;
+   ACTION tira_da_promocao() ;
    TOOLTIP 'Clique aqui para retirar da promoção todos os produtos selecionados'
-@ 520,405 buttonex botao_reajustar;
-   parent form_promocao;
-   CAPTION 'Ativar as promoções com base na projeção';
-   WIDTH 300 height 040;
-   PICTURE path_imagens+'img_aplicar.bmp';
-   ACTION gravar_reajuste_2();
+@ 520,405 buttonex botao_reajustar ;
+   PARENT form_promocao ;
+   CAPTION 'Ativar as promoções com base na projeção' ;
+   WIDTH 300 height 040 ;
+   PICTURE path_imagens+'img_aplicar.bmp' ;
+   ACTION gravar_reajuste_2() ;
    TOOLTIP 'Clique aqui para gravar a promoção no banco de dados'
-@ 520,710 buttonex botao_sair;
-   parent form_promocao;
-   CAPTION 'Sair desta tela';
-   WIDTH 180 height 040;
-   PICTURE path_imagens+'img_sair.bmp';
-   ACTION (zera_acesso_2(),form_promocao.release);
+@ 520,710 buttonex botao_sair ;
+   PARENT form_promocao ;
+   CAPTION 'Sair desta tela' ;
+   WIDTH 180 height 040 ;
+   PICTURE path_imagens+'img_sair.bmp' ;
+   ACTION (zera_acesso_2(),form_promocao.release) ;
    TOOLTIP 'Clique aqui para sair'
 
 ON KEY ESCAPE ACTION thiswindow.release
@@ -275,7 +275,7 @@ STATIC FUNCTION filtrar_informacoes_2()
    IF x_tipo == 1 //pizzas
       _conta_acesso_2 ++
       DEFINE GRID grid_promocao
-         parent form_promocao
+         PARENT form_promocao
          COL 220
          ROW 030
          WIDTH 665
@@ -291,7 +291,7 @@ STATIC FUNCTION filtrar_informacoes_2()
    ELSEIF x_tipo == 2 //demais produtos
       _conta_acesso_2 ++
       DEFINE GRID grid_promocao
-         parent form_promocao
+         PARENT form_promocao
          COL 220
          ROW 030
          WIDTH 665

@@ -79,9 +79,9 @@ PROCEDURE ImgSize (Index)
       Win_1.Frame_1.Release
    ENDIF
    n:= 2
-   @ (Win_1.Image_1.ROW -n), (Win_1.Image_1.COL -n) FRAME Frame_1 OF Win_1;
-      WIDTH  (Win_1.Image_1.WIDTH  +n+n);
-      HEIGHT (Win_1.Image_1.HEIGHT +n+n);
+   @ (Win_1.Image_1.ROW -n), (Win_1.Image_1.COL -n) FRAME Frame_1 OF Win_1 ;
+      WIDTH  (Win_1.Image_1.WIDTH  +n+n) ;
+      HEIGHT (Win_1.Image_1.HEIGHT +n+n) ;
       TRANSPARENT
 
    RETURN

@@ -292,11 +292,11 @@ FUNCTION WinRepInt(filename,db_arc,_NREC,_MainArea,_psd,_prw,drv)
 
 FUNCTION StampeEsegui(_MainArea,_psd,db_arc,_prw)
 
-   LOCAL oldrec   := recno(), rtv := .F. ,;
-      landscape:=.F., lpreview :=.F., lselect  :=.F. ,;
+   LOCAL oldrec   := recno(), rtv := .F. , ;
+      landscape:=.F., lpreview :=.F., lselect  :=.F. , ;
       str1:=[] , StrFlt := [], ;
       ncpl , nfsize, aprinters, ;
-      lbody := 0, miocont:= 0, miocnt:= 0 ,;
+      lbody := 0, miocont:= 0, miocnt:= 0 , ;
       Amx_pg := {}
 
    PRIVATE ONEATLEAST := .F., shd := .t., sbt := .t., sgh := .t., insgh:=.F.
@@ -743,16 +743,16 @@ PROCEDURE MsgMulty( xMesaj, cTitle ) // Created By Bicahi Esgici <esgici@gmail.c
    /*
    */
    FUNC Any2Strg( xAny )
-      loca cRVal  := '???',;
-         nType  :=  0,;
-         aCases := { { "A", { |  | "{...}" } },;
-         { "B", { |  | "{||}" } },;
-         { "C", { | x | x }},;
-         { "M", { | x | x   } },;
-         { "D", { | x | DTOC( x ) } },;
-         { "L", { | x | IF( x,"On","Off") } },;
-         { "N", { | x | NTrim( x )  } },;
-         { "O", { |  | ":Object:" } },;
+      loca cRVal  := '???', ;
+         nType  :=  0, ;
+         aCases := { { "A", { |  | "{...}" } }, ;
+         { "B", { |  | "{||}" } }, ;
+         { "C", { | x | x }}, ;
+         { "M", { | x | x   } }, ;
+         { "D", { | x | DTOC( x ) } }, ;
+         { "L", { | x | IF( x,"On","Off") } }, ;
+         { "N", { | x | NTrim( x )  } }, ;
+         { "O", { |  | ":Object:" } }, ;
          { "U", { |  | "<NIL>" } } }
 
       IF (nType := ASCAN( aCases, { | a1 | VALTYPE( xAny ) == a1[ 1 ] } ) ) > 0
@@ -787,7 +787,7 @@ FUNCTION HexaToDec(cString)
    LOCAL nLen:=Len(cNewString)
 
    FOR nX:=1 to nLen
-      nNumber+=(At(SubStr(cNewString,nX,1),'0123456789ABCDEF')-1)*;
+      nNumber+=(At(SubStr(cNewString,nX,1),'0123456789ABCDEF')-1)* ;
          (16**(nLen-nX))
    NEXT nX
 
@@ -950,15 +950,15 @@ CREATE CLASS WREPORT
       'Falign'     => .F., ;
       'Fangle'     => 0  , ;
       'Fcolor'     =>    , ;
-      'HRuler'     => {0,.F.} ,;
-      'VRuler'     => {0,.F.} ,;
+      'HRuler'     => {0,.F.} , ;
+      'VRuler'     => {0,.F.} , ;
       'DebugType'  => "LINE", ;
-      'Hbcompatible'=> 0 ,;
-      'MarginTop'   => 0 ,;
+      'Hbcompatible'=> 0 , ;
+      'MarginTop'   => 0 , ;
       'MarginLeft'  => 0 ;
       }
 
-   DATA Ach              INIT  {;
+   DATA Ach              INIT  { ;
       {"DMPAPER_FIRST",               1}; /*  */
       ,{"DMPAPER_LETTER",              1}; /*   Letter 8 1/2 x 11 in               */
       ,{"DMPAPER_LETTERSMALL",         2}; /*   Letter Small 8 1/2 x 11 in         */
@@ -1078,166 +1078,166 @@ CREATE CLASS WREPORT
       ,{"DMPAPER_PENV_8_ROTATED",      116}; /*  PRC Envelope #8 Rotated 309 x 120 mm */
       ,{"DMPAPER_PENV_9_ROTATED",      117}; /*  PRC Envelope #9 Rotated 324 x 229 mm */
       ,{"DMPAPER_PENV_10_ROTATED",     118}; /*  PRC Envelope #10 Rotated 458 x 324 mm */
-      ,{"DMPAPER_USER",                256};
+      ,{"DMPAPER_USER",                256} ;
       ,{"DMBIN_FIRST",          1};   /* bin selections */
-      ,{"DMBIN_UPPER",          1};
-      ,{"DMBIN_ONLYONE",        1};
-      ,{"DMBIN_LOWER",          2};
-      ,{"DMBIN_MIDDLE",         3};
-      ,{"DMBIN_MANUAL",         4};
-      ,{"DMBIN_ENVELOPE",       5};
-      ,{"DMBIN_ENVMANUAL",      6};
-      ,{"DMBIN_AUTO",           7};
-      ,{"DMBIN_TRACTOR",        8};
-      ,{"DMBIN_SMALLFMT",       9};
-      ,{"DMBIN_LARGEFMT",      10};
-      ,{"DMBIN_LARGECAPACITY", 11};
-      ,{"DMBIN_CASSETTE",      14};
-      ,{"DMBIN_FORMSOURCE",    15};
-      ,{"DMBIN_LAST",          15};
+      ,{"DMBIN_UPPER",          1} ;
+      ,{"DMBIN_ONLYONE",        1} ;
+      ,{"DMBIN_LOWER",          2} ;
+      ,{"DMBIN_MIDDLE",         3} ;
+      ,{"DMBIN_MANUAL",         4} ;
+      ,{"DMBIN_ENVELOPE",       5} ;
+      ,{"DMBIN_ENVMANUAL",      6} ;
+      ,{"DMBIN_AUTO",           7} ;
+      ,{"DMBIN_TRACTOR",        8} ;
+      ,{"DMBIN_SMALLFMT",       9} ;
+      ,{"DMBIN_LARGEFMT",      10} ;
+      ,{"DMBIN_LARGECAPACITY", 11} ;
+      ,{"DMBIN_CASSETTE",      14} ;
+      ,{"DMBIN_FORMSOURCE",    15} ;
+      ,{"DMBIN_LAST",          15} ;
       ,{"DMBIN_USER",         256};     /* device specific bins start here */
       ,{"ANSI_CHARSET",              0};  /*  _acharset :={; */
-      ,{"DEFAULT_CHARSET",           1};
-      ,{"SYMBOL_CHARSET",            2};
-      ,{"SHIFTJIS_CHARSET",        128};
-      ,{"HANGEUL_CHARSET",         129};
-      ,{"HANGUL_CHARSET",          129};
-      ,{"GB2312_CHARSET",          134};
-      ,{"CHINESEBIG5_CHARSET",     136};
-      ,{"OEM_CHARSET",             255};
-      ,{"JOHAB_CHARSET",           130};
-      ,{"HEBREW_CHARSET",          177};
-      ,{"ARABIC_CHARSET",          178};
-      ,{"GREEK_CHARSET",           161};
-      ,{"TURKISH_CHARSET",         162};
-      ,{"VIETNAMESE_CHARSET",      163};
-      ,{"THAI_CHARSET",            222};
-      ,{"EASTEUROPE_CHARSET",      238};
-      ,{"RUSSIAN_CHARSET",         204};
-      ,{"MAC_CHARSET",              77};
-      ,{"BALTIC_CHARSET",          186};
+      ,{"DEFAULT_CHARSET",           1} ;
+      ,{"SYMBOL_CHARSET",            2} ;
+      ,{"SHIFTJIS_CHARSET",        128} ;
+      ,{"HANGEUL_CHARSET",         129} ;
+      ,{"HANGUL_CHARSET",          129} ;
+      ,{"GB2312_CHARSET",          134} ;
+      ,{"CHINESEBIG5_CHARSET",     136} ;
+      ,{"OEM_CHARSET",             255} ;
+      ,{"JOHAB_CHARSET",           130} ;
+      ,{"HEBREW_CHARSET",          177} ;
+      ,{"ARABIC_CHARSET",          178} ;
+      ,{"GREEK_CHARSET",           161} ;
+      ,{"TURKISH_CHARSET",         162} ;
+      ,{"VIETNAMESE_CHARSET",      163} ;
+      ,{"THAI_CHARSET",            222} ;
+      ,{"EASTEUROPE_CHARSET",      238} ;
+      ,{"RUSSIAN_CHARSET",         204} ;
+      ,{"MAC_CHARSET",              77} ;
+      ,{"BALTIC_CHARSET",          186} ;
       ,{"PS_SOLID",            0};       /* Pen Styles */
       ,{"PS_DASH",             1};       /* -------  */
       ,{"PS_DOT",              2};       /* .......  */
       ,{"PS_DASHDOT",          3};       /* _._._._  */
       ,{"PS_DASHDOTDOT",       4};       /* _.._.._  */
-      ,{"PS_NULL",             5};
-      ,{"PS_INSIDEFRAME",      6};
-      ,{"PS_USERSTYLE",        7};
-      ,{"PS_ALTERNATE",        8};
-      ,{"PS_STYLE_MASK",       0x0000000F};
+      ,{"PS_NULL",             5} ;
+      ,{"PS_INSIDEFRAME",      6} ;
+      ,{"PS_USERSTYLE",        7} ;
+      ,{"PS_ALTERNATE",        8} ;
+      ,{"PS_STYLE_MASK",       0x0000000F} ;
       ,{"BS_SOLID",            0};       /* Brush Styles */
-      ,{"BS_NULL",             1};
-      ,{"BS_HOLLOW",           1};
-      ,{"BS_HATCHED",          2};
-      ,{"BS_PATTERN",          3};
-      ,{"BS_INDEXED",          4};
-      ,{"BS_DIBPATTERN",       5};
-      ,{"BS_DIBPATTERNPT",     6};
-      ,{"BS_PATTERN8X8",       7};
-      ,{"BS_DIBPATTERN8X8",    8};
-      ,{"BS_MONOPATTERN",      9};
+      ,{"BS_NULL",             1} ;
+      ,{"BS_HOLLOW",           1} ;
+      ,{"BS_HATCHED",          2} ;
+      ,{"BS_PATTERN",          3} ;
+      ,{"BS_INDEXED",          4} ;
+      ,{"BS_DIBPATTERN",       5} ;
+      ,{"BS_DIBPATTERNPT",     6} ;
+      ,{"BS_PATTERN8X8",       7} ;
+      ,{"BS_DIBPATTERN8X8",    8} ;
+      ,{"BS_MONOPATTERN",      9} ;
       ,{"ALTERNATE",            1}; /* PolyFill() Modes */
-      ,{"WINDING",              2};
-      ,{"POLYFILL_LAST",        2};
+      ,{"WINDING",              2} ;
+      ,{"POLYFILL_LAST",        2} ;
       ,{"TRANSPARENT",         1}; /* Background Modes */
-      ,{"OPAQUE",              2};
-      ,{"BKMODE_LAST",         2};
+      ,{"OPAQUE",              2} ;
+      ,{"BKMODE_LAST",         2} ;
       ,{"TA_NOUPDATECP",       0}; /* Text Alignment Options */
-      ,{"TA_UPDATECP",         1};
-      ,{"TA_LEFT",             0};
-      ,{"TA_RIGHT",            2};
-      ,{"TA_CENTER",           6};
-      ,{"LEFT",                0};
-      ,{"RIGHT",               2};
-      ,{"CENTER",              6};
-      ,{"TA_TOP",              0};
-      ,{"TA_BOTTOM",           8};
-      ,{"TA_BASELINE",         24};
-      ,{"TA_RTLREADING",       256};
-      ,{"TA_MASK",       (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING)};
+      ,{"TA_UPDATECP",         1} ;
+      ,{"TA_LEFT",             0} ;
+      ,{"TA_RIGHT",            2} ;
+      ,{"TA_CENTER",           6} ;
+      ,{"LEFT",                0} ;
+      ,{"RIGHT",               2} ;
+      ,{"CENTER",              6} ;
+      ,{"TA_TOP",              0} ;
+      ,{"TA_BOTTOM",           8} ;
+      ,{"TA_BASELINE",         24} ;
+      ,{"TA_RTLREADING",       256} ;
+      ,{"TA_MASK",       (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING)} ;
       ,{"RGN_AND",             1};  /* CombineRgn() Styles */
-      ,{"RGN_OR",              2};
-      ,{"RGN_XOR",             3};
-      ,{"RGN_DIFF",            4};
-      ,{"RGN_COPY",            5};
-      ,{"RGN_MIN",       RGN_AND};
-      ,{"RGN_MAX",      RGN_COPY};
-      ,{"AND",                 1};
-      ,{"OR",                  2};
-      ,{"XOR",                 3};
-      ,{"DIFF",                4};
-      ,{"COPY",                5};
-      ,{"MIN",           RGN_AND};
-      ,{"MAX",          RGN_COPY};
+      ,{"RGN_OR",              2} ;
+      ,{"RGN_XOR",             3} ;
+      ,{"RGN_DIFF",            4} ;
+      ,{"RGN_COPY",            5} ;
+      ,{"RGN_MIN",       RGN_AND} ;
+      ,{"RGN_MAX",      RGN_COPY} ;
+      ,{"AND",                 1} ;
+      ,{"OR",                  2} ;
+      ,{"XOR",                 3} ;
+      ,{"DIFF",                4} ;
+      ,{"COPY",                5} ;
+      ,{"MIN",           RGN_AND} ;
+      ,{"MAX",          RGN_COPY} ;
       ,{"DMCOLOR_MONOCHROME", 1}; /* color enable/disable for color printers */
-      ,{"DMCOLOR_COLOR",      2};
-      ,{"MONO",               1};
-      ,{"COLOR",              2};
+      ,{"DMCOLOR_COLOR",      2} ;
+      ,{"MONO",               1} ;
+      ,{"COLOR",              2} ;
       ,{"DMRES_DRAFT",    -1};  /* print qualities */
-      ,{"DMRES_LOW",      -2};
-      ,{"DMRES_MEDIUM",   -3};
-      ,{"DMRES_HIGH",     -4};
-      ,{"DRAFT",          -1};
-      ,{"LOW",            -2};
-      ,{"MEDIUM",         -3};
-      ,{"HIGH",           -4};
+      ,{"DMRES_LOW",      -2} ;
+      ,{"DMRES_MEDIUM",   -3} ;
+      ,{"DMRES_HIGH",     -4} ;
+      ,{"DRAFT",          -1} ;
+      ,{"LOW",            -2} ;
+      ,{"MEDIUM",         -3} ;
+      ,{"HIGH",           -4} ;
       ,{"ILD_NORMAL",     0x0000}; /* IMAGELIST DRAWING STYLES */
-      ,{"ILD_MASK",       0x0010};
-      ,{"ILD_BLEND25",    0x0002};
-      ,{"ILD_BLEND50",    0x0004};
+      ,{"ILD_MASK",       0x0010} ;
+      ,{"ILD_BLEND25",    0x0002} ;
+      ,{"ILD_BLEND50",    0x0004} ;
       ,{"DMDUP_SIMPLEX"   ,1};   /* duplex enable */
-      ,{"DMDUP_VERTICAL"  ,2};
-      ,{"DMDUP_HORIZONTAL",3};
-      ,{"OFF"             ,1};
-      ,{"SIMPLEX"         ,1};
-      ,{"VERTICAL"        ,2};
-      ,{"HORIZONTAL"      ,3};
-      ,{"DT_TOP"                 , 0x00000000};
-      ,{"DT_LEFT"                , 0x00000000};
-      ,{"DT_CENTER"              , 0x00000001};
-      ,{"DT_RIGHT"               , 0x00000002};
-      ,{"DT_VCENTER"             , 0x00000004};
-      ,{"DT_BOTTOM"              , 0x00000008};
-      ,{"DT_WORDBREAK"           , 0x00000010};
-      ,{"DT_SINGLELINE"          , 0x00000020};
-      ,{"DT_EXPANDTABS"          , 0x00000040};
-      ,{"DT_TABSTOP"             , 0x00000080};
-      ,{"DT_NOCLIP"              , 0x00000100};
-      ,{"DT_EXTERNALLEADING"     , 0x00000200};
-      ,{"DT_CALCRECT"            , 0x00000400};
-      ,{"DT_NOPREFIX"            , 0x00000800};
-      ,{"DT_INTERNAL"            , 0x00001000};
-      ,{"DT_EDITCONTROL"         , 0x00002000};
-      ,{"DT_PATH_ELLIPSIS"       , 0x00004000};
-      ,{"DT_END_ELLIPSIS"        , 0x00008000};
-      ,{"DT_MODIFYSTRING"        , 0x00010000};
-      ,{"DT_RTLREADING"          , 0x00020000};
-      ,{"DT_WORD_ELLIPSIS"       , 0x00040000};
-      ,{"DT_NOFULLWIDTHCHARBREAK", 0x00080000};
-      ,{"DT_HIDEPREFIX"          , 0x00100000};
-      ,{"DT_PREFIXONLY"          , 0x00200000};
-      ,{"HB_ZEBRA_FLAG_CHECKSUM" ,          1};
+      ,{"DMDUP_VERTICAL"  ,2} ;
+      ,{"DMDUP_HORIZONTAL",3} ;
+      ,{"OFF"             ,1} ;
+      ,{"SIMPLEX"         ,1} ;
+      ,{"VERTICAL"        ,2} ;
+      ,{"HORIZONTAL"      ,3} ;
+      ,{"DT_TOP"                 , 0x00000000} ;
+      ,{"DT_LEFT"                , 0x00000000} ;
+      ,{"DT_CENTER"              , 0x00000001} ;
+      ,{"DT_RIGHT"               , 0x00000002} ;
+      ,{"DT_VCENTER"             , 0x00000004} ;
+      ,{"DT_BOTTOM"              , 0x00000008} ;
+      ,{"DT_WORDBREAK"           , 0x00000010} ;
+      ,{"DT_SINGLELINE"          , 0x00000020} ;
+      ,{"DT_EXPANDTABS"          , 0x00000040} ;
+      ,{"DT_TABSTOP"             , 0x00000080} ;
+      ,{"DT_NOCLIP"              , 0x00000100} ;
+      ,{"DT_EXTERNALLEADING"     , 0x00000200} ;
+      ,{"DT_CALCRECT"            , 0x00000400} ;
+      ,{"DT_NOPREFIX"            , 0x00000800} ;
+      ,{"DT_INTERNAL"            , 0x00001000} ;
+      ,{"DT_EDITCONTROL"         , 0x00002000} ;
+      ,{"DT_PATH_ELLIPSIS"       , 0x00004000} ;
+      ,{"DT_END_ELLIPSIS"        , 0x00008000} ;
+      ,{"DT_MODIFYSTRING"        , 0x00010000} ;
+      ,{"DT_RTLREADING"          , 0x00020000} ;
+      ,{"DT_WORD_ELLIPSIS"       , 0x00040000} ;
+      ,{"DT_NOFULLWIDTHCHARBREAK", 0x00080000} ;
+      ,{"DT_HIDEPREFIX"          , 0x00100000} ;
+      ,{"DT_PREFIXONLY"          , 0x00200000} ;
+      ,{"HB_ZEBRA_FLAG_CHECKSUM" ,          1} ;
       ,{"HB_ZEBRA_FLAG_WIDE2"    ,       0x00};  // Dummy flag - default
-      ,{"HB_ZEBRA_FLAG_WIDE2_5"  ,       0x40};
-      ,{"HB_ZEBRA_FLAG_WIDE3"    ,       0x80};
-      ,{"HB_ZEBRA_FLAG_PDF417_TRUNCATED"    , 0x0100};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL_MASK"   , 0xF000};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL0"       , 0x1000};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL1"       , 0x2000};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL2"       , 0x3000};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL3"       , 0x4000};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL4"       , 0x5000};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL5"       , 0x6000};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL6"       , 0x7000};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL7"       , 0x8000};
-      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL8"       , 0x9000};
-      ,{"HB_ZEBRA_FLAG_DATAMATRIX_SQUARE"   , 0x0100};
-      ,{"HB_ZEBRA_FLAG_DATAMATRIX_RECTANGLE", 0x0200};
-      ,{"HB_ZEBRA_FLAG_QR_LEVEL_MASK"       , 0x0700};
-      ,{"HB_ZEBRA_FLAG_QR_LEVEL_L"          , 0x0100};
-      ,{"HB_ZEBRA_FLAG_QR_LEVEL_M"          , 0x0200};
-      ,{"HB_ZEBRA_FLAG_QR_LEVEL_Q"          , 0x0300};
+      ,{"HB_ZEBRA_FLAG_WIDE2_5"  ,       0x40} ;
+      ,{"HB_ZEBRA_FLAG_WIDE3"    ,       0x80} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_TRUNCATED"    , 0x0100} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL_MASK"   , 0xF000} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL0"       , 0x1000} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL1"       , 0x2000} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL2"       , 0x3000} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL3"       , 0x4000} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL4"       , 0x5000} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL5"       , 0x6000} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL6"       , 0x7000} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL7"       , 0x8000} ;
+      ,{"HB_ZEBRA_FLAG_PDF417_LEVEL8"       , 0x9000} ;
+      ,{"HB_ZEBRA_FLAG_DATAMATRIX_SQUARE"   , 0x0100} ;
+      ,{"HB_ZEBRA_FLAG_DATAMATRIX_RECTANGLE", 0x0200} ;
+      ,{"HB_ZEBRA_FLAG_QR_LEVEL_MASK"       , 0x0700} ;
+      ,{"HB_ZEBRA_FLAG_QR_LEVEL_L"          , 0x0100} ;
+      ,{"HB_ZEBRA_FLAG_QR_LEVEL_M"          , 0x0200} ;
+      ,{"HB_ZEBRA_FLAG_QR_LEVEL_Q"          , 0x0300} ;
       ,{"HB_ZEBRA_FLAG_QR_LEVEL_H"          , 0x0400}}
 
    METHOD New ()  CONSTRUCTOR
@@ -1299,7 +1299,7 @@ METHOD New() CLASS WREPORT
 
 METHOD End() CLASS WREPORT
 
-   RELEASE ::F_HANDLE,::aDeclare,::AHead,::ABody,::AFeet,::Hb,::Valore,::mx_ln_doc;
+   RELEASE ::F_HANDLE,::aDeclare,::AHead,::ABody,::AFeet,::Hb,::Valore,::mx_ln_doc ;
       ,       ::PRNDRV,::argm,::aStat
    RELEASE ::ach , ::filename
 
@@ -1328,7 +1328,7 @@ METHOD COUNTSECT(EXEC) CLASS WREPORT
 
    DEFAULT EXEC TO .F.
    IF EXEC
-      ::HB := eval(::Valore,::aHead[1] );
+      ::HB := eval(::Valore,::aHead[1] ) ;
          +  eval(::Valore,::aBody[1] )
       ::mx_ln_doc := ::hb + eval(::Valore,::aFeet[1])
    ENDIF
@@ -1395,8 +1395,8 @@ METHOD COLSTEP(nfsize,width) CLASS WREPORT
 
 METHOD pGenSet() CLASS WREPORT
 
-   LOCAL Plist:= {'ORIENTATION','PAPERSIZE','PAPERLENGTH','PAPERWIDTH';
-      ,'COPIES','BIN','DEFAULTSOURCE','QUALITY','COLORMODE','DUPLEX';
+   LOCAL Plist:= {'ORIENTATION','PAPERSIZE','PAPERLENGTH','PAPERWIDTH' ;
+      ,'COPIES','BIN','DEFAULTSOURCE','QUALITY','COLORMODE','DUPLEX' ;
       ,'COLLATE'}
    LOCAL arrypar := {} , s , k
    LOCAL blso := {|x| if(val(x)> 0,min(val(x),1),if(x=".T.".or. x ="ON",1,0))}
@@ -1404,9 +1404,9 @@ METHOD pGenSet() CLASS WREPORT
    // return two array
    FOR EACH s IN oWr:aDeclare
       k := HB_enumindex(s)
-      aeval(Plist,{|x| if(x $ upper(s[1]);
+      aeval(Plist,{|x| if(x $ upper(s[1]) ;
          , aadd(arrypar ;
-         ,HB_ATOKENS(upper(::aDeclare[k][1]),chr(07),.T.,.F. ));
+         ,HB_ATOKENS(upper(::aDeclare[k][1]),chr(07),.T.,.F. )) ;
          ,NIL) } )
    NEXT
    // Set adeguate parameter
@@ -1449,8 +1449,8 @@ METHOD pGenSet() CLASS WREPORT
 
          CASE ascan(arrypar[HB_enumindex(s)],[COLORMODE])= 2
             ::aStat[ 'ColorMode' ] := ;
-               if(val(arrypar[HB_enumindex(s),3])>0,val(arrypar[HB_enumindex(s),3]);
-               ,if(arrypar[HB_enumindex(s),3]=".T.",2;
+               if(val(arrypar[HB_enumindex(s),3])>0,val(arrypar[HB_enumindex(s),3]) ;
+               ,if(arrypar[HB_enumindex(s),3]=".T.",2 ;
                ,::what_ele(eval(chblk,arrypar[HB_enumindex(s)],[COLORMODE]),::aCh,"_acolor")))
             ::aStat[ 'ColorMode' ] := MIN (::aStat[ 'ColorMode' ] ,2)
 
@@ -1666,7 +1666,7 @@ METHOD Transpace(arg1,arg2,arg3) CLASS WREPORT // The core of parser
    LOCAL last_func  := rat(")",arg1), last_sapex := rat(['],arg1)
    LOCAL last_Dapex := rat(["],arg1), last_codeb := rat([}],arg1)
    LOCAL arges := '' ;
-      , aFsrc :={"SELECT"+CHR(7)+"FONT","DRAW"+CHR(7)+"TEXT","TEXTOUT"+CHR(7),"SAY"+CHR(7);
+      , aFsrc :={"SELECT"+CHR(7)+"FONT","DRAW"+CHR(7)+"TEXT","TEXTOUT"+CHR(7),"SAY"+CHR(7) ;
       ,"PRINT" +CHR(7),"GET"+CHR(7)+"TEXT","DEFINE"+CHR(7)+"FONT"}
 
    STATIC xcl := .F.
@@ -1782,7 +1782,7 @@ METHOD MACROCOMPILE(cStr, lMesg,cmdline,section) CLASS WREPORT
          //msgBox(alltrim(cStr),"Error in evaluation of:")
          errorblock (bOld)
          IF ::aStat [ 'Control' ]
-            MsgMiniGuiError("Program Report Interpreter"+CRLF+"Section "+section+CRLF+"I have found error on line "+;
+            MsgMiniGuiError("Program Report Interpreter"+CRLF+"Section "+section+CRLF+"I have found error on line "+ ;
                zaps(cmdline)+CRLF+"Error is in: "+alltrim(cStr)+CRLF+"Please revise it!","MiniGUI Error")
             Break
          ELSE
@@ -1888,7 +1888,7 @@ METHOD Traduci(elemento,ctrl,cmdline) CLASS WREPORT  // The interpreter
    IF "{" $ left(TransPar[1],2)
       ev1th := alltrim(substr(TransPar[1],at("||",TransPar[1])+2,at("}",Transpar[1])-4))
       IF empty(ev1th)
-         MsgMiniGuiError("Program Report Interpreter"+CRLF+"Section: "+procname(1);
+         MsgMiniGuiError("Program Report Interpreter"+CRLF+"Section: "+procname(1) ;
             +" command nÝ "+zaps(cmdline)+CRLF+"Program terminated","MiniGUI Error")
       ENDIF
       DO CASE
@@ -1954,7 +1954,7 @@ METHOD Traduci(elemento,ctrl,cmdline) CLASS WREPORT  // The interpreter
             MsgBox("Section "+ssection+" Line is n° "+zaps(cmdline)+CRLF+"String = "+string ;
                ,::Filename+[ Pag n°]+zaps(npag))
          ELSEIF ::aStat['DebugType'] = "STEP"
-            aeval(Arrypar,{|x,y|x:=nil,MsgBox("Section "+ssection+" Line is n° "+zaps(cmdline)+CRLF+"String =";
+            aeval(Arrypar,{|x,y|x:=nil,MsgBox("Section "+ssection+" Line is n° "+zaps(cmdline)+CRLF+"String =" ;
                +string+CRLF+CRLF+"Argument N°-> "+zaps(y)+[ ]+ArryPar[y],::Filename+[ Pag n°]+zaps(npag))})
          ENDIF
       ENDIF
@@ -1977,8 +1977,8 @@ METHOD Traduci(elemento,ctrl,cmdline) CLASS WREPORT  // The interpreter
 
 METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpreter
 
-   LOCAL _arg1,_arg2, _arg3,__elex ,aX:={} , _varmem ,;
-      blse := {|x| if(val(x)> 0,.t.,if(x=".T.".or. x ="ON",.T.,.F.))}, al, _align;
+   LOCAL _arg1,_arg2, _arg3,__elex ,aX:={} , _varmem , ;
+      blse := {|x| if(val(x)> 0,.t.,if(x=".T.".or. x ="ON",.T.,.F.))}, al, _align ;
 
    string1 := ''
    empty(_arg3)
@@ -2059,11 +2059,11 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
          hbprn:polybezierto(&(arrypar[2]),eval(chblk,arrypar,[PEN]))
 
       CASE ArryPar[1]+ArryPar[2]=[DEFINEBRUSH]
-         hbprn:definebrush(Arrypar[3],::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_abrush");
+         hbprn:definebrush(Arrypar[3],::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_abrush") ;
             ,::UsaColor(eval(chblk,arrypar,[COLOR])),::HATCH(eval(chblk,arrypar,[HATCH])))
 
       CASE ArryPar[1]+ArryPar[2]=[CHANGEBRUSH]
-         hbprn:changebrush(Arrypar[3],::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_abrush");
+         hbprn:changebrush(Arrypar[3],::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_abrush") ;
             ,color(eval(chblk,arrypar,[COLOR])),::HATCH(eval(chblk,arrypar,[HATCH])))
 
       CASE ArryPar[1]+ArryPar[2]=[CHANGEPEN]
@@ -2075,23 +2075,23 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
       CASE ascan(arrypar,[IMAGELIST]) > 0 .and. len(arrypar) > 6
          DO CASE
          CASE ascan(arryPar,[BLEND25]) > 0
-            hbprn:drawimagelist(eval(chblk,arrypar,[IMAGELIST]),val(eval(chblk,arrypar,[ICON]));
-               ,eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]);
+            hbprn:drawimagelist(eval(chblk,arrypar,[IMAGELIST]),val(eval(chblk,arrypar,[ICON])) ;
+               ,eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]) ;
                ,ILD_BLEND25,::UsaColor(eval(chblk,arrypar,[BACKGROUND])))
 
          CASE ascan(arryPar,[BLEND50]) > 0
-            hbprn:drawimagelist(eval(chblk,arrypar,[IMAGELIST]),val(eval(chblk,arrypar,[ICON]));
-               ,eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]);
+            hbprn:drawimagelist(eval(chblk,arrypar,[IMAGELIST]),val(eval(chblk,arrypar,[ICON])) ;
+               ,eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]) ;
                ,ILD_BLEND50,::UsaColor(eval(chblk,arrypar,[BACKGROUND])))
 
          CASE ascan(arryPar,[MASK]) > 0
-            hbprn:drawimagelist(eval(chblk,arrypar,[IMAGELIST]),val(eval(chblk,arrypar,[ICON]));
-               ,eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]);
+            hbprn:drawimagelist(eval(chblk,arrypar,[IMAGELIST]),val(eval(chblk,arrypar,[ICON])) ;
+               ,eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]) ;
                ,ILD_MASK,::UsaColor(eval(chblk,arrypar,[BACKGROUND])))
 
          OTHERWISE
-            hbprn:drawimagelist(eval(chblk,arrypar,[IMAGELIST]),val(eval(chblk,arrypar,[ICON]));
-               ,eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]);
+            hbprn:drawimagelist(eval(chblk,arrypar,[IMAGELIST]),val(eval(chblk,arrypar,[ICON])) ;
+               ,eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]) ;
                ,ILD_NORMAL,::UsaColor(eval(chblk,arrypar,[BACKGROUND])))
 
          ENDCASE
@@ -2100,52 +2100,52 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
          hbprn:definepen(Arrypar[3],::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_apen"),val(eval(chblk,arrypar,[WIDTH])),color(eval(chblk,arrypar,[COLOR])))
 
       CASE ArryPar[1]+ArryPar[2]=[DEFINERECT]
-         hbprn:definerectrgn(eval(chblk,arrypar,[REGION]),val(eval(chblk,arrypar,[AT]));
+         hbprn:definerectrgn(eval(chblk,arrypar,[REGION]),val(eval(chblk,arrypar,[AT])) ;
             ,val(Arrypar[7]),val(Arrypar[8]),val(Arrypar[9]))
 
       CASE ArryPar[1]+ArryPar[2]=[DEFINEROUNDRECT]
-         hbprn:defineroundrectrgn(eval(chblk,arrypar,[REGION]),val(eval(chblk,arrypar,[AT]));
-            ,val(Arrypar[7]),val(Arrypar[8]),val(Arrypar[9]);
+         hbprn:defineroundrectrgn(eval(chblk,arrypar,[REGION]),val(eval(chblk,arrypar,[AT])) ;
+            ,val(Arrypar[7]),val(Arrypar[8]),val(Arrypar[9]) ;
             ,eval(chblk,arrypar,[ELLIPSE]),Val(ArryPar[12]))
 
       CASE ArryPar[1]+ArryPar[2]=[DEFINEPOLYGON]
-         hbprn:definepolygonrgn(eval(chblk,arrypar,[REGION]),&(eval(chblk,arrypar,[VERTEX]));
+         hbprn:definepolygonrgn(eval(chblk,arrypar,[REGION]),&(eval(chblk,arrypar,[VERTEX])) ;
             ,eval(chblk,arrypar,[STYLE]))
 
       CASE ArryPar[1]+ArryPar[2]=[DEFINEELLIPTIC]
-         hbprn:defineEllipticrgn(eval(chblk,arrypar,[REGION]),val(eval(chblk,arrypar,[AT]));
+         hbprn:defineEllipticrgn(eval(chblk,arrypar,[REGION]),val(eval(chblk,arrypar,[AT])) ;
             ,eval(epar,ArryPar[7]),eval(epar,ArryPar[8]),eval(epar,ArryPar[9]))
 
       CASE ArryPar[1]+arryPar[2]=[DEFINEFONT]
          //                    1        2      3      4       5        6        7            8            9
          //hbprn:definefont(<cfont>,<cface>,<size>,<width>,<angle>,<.bold.>,<.italic.>,<.underline.>,<.strikeout.>)
-         hbprn:definefont(if(ascan(arryPar,[FONT])=2,ArryPar[3],NIL);
-            ,if(ascan(arryPar,[NAME])=4,ArryPar[5],NIL);
-            ,if(ascan(arryPar,[SIZE])=6,VAL(ArryPar[7]),NIL);
-            ,if(ascan(arryPar,[WIDTH])# 0, VAL(eval(chblk,arrypar,[WIDTH])),NIL);
-            ,if(ascan(arryPar,[ANGLE])# 0,VAL(eval(chblk,arrypar,[ANGLE])),NIL);
-            ,if(ascan(arryPar,[BOLD])# 0,1,"");
-            ,if(ascan(arryPar,[ITALIC])# 0,1,"");
-            ,if(ascan(arryPar,[UNDERLINE])# 0,1,"");
+         hbprn:definefont(if(ascan(arryPar,[FONT])=2,ArryPar[3],NIL) ;
+            ,if(ascan(arryPar,[NAME])=4,ArryPar[5],NIL) ;
+            ,if(ascan(arryPar,[SIZE])=6,VAL(ArryPar[7]),NIL) ;
+            ,if(ascan(arryPar,[WIDTH])# 0, VAL(eval(chblk,arrypar,[WIDTH])),NIL) ;
+            ,if(ascan(arryPar,[ANGLE])# 0,VAL(eval(chblk,arrypar,[ANGLE])),NIL) ;
+            ,if(ascan(arryPar,[BOLD])# 0,1,"") ;
+            ,if(ascan(arryPar,[ITALIC])# 0,1,"") ;
+            ,if(ascan(arryPar,[UNDERLINE])# 0,1,"") ;
             ,if(ascan(arryPar,[STRIKEOUT])# 0,1,""))
 
       CASE ArryPar[1]+arryPar[2]=[CHANGEFONT]
-         hbprn:modifyfont(if(ascan(arryPar,[FONT])=2,ArryPar[3],NIL);
-            ,if(ascan(arryPar,[NAME])=4,ArryPar[5],NIL);
-            ,if(ascan(arryPar,[SIZE])=6,VAL(ArryPar[7]),NIL);
-            ,if(ascan(arryPar,[WIDTH])# 0, VAL(eval(chblk,arrypar,[WIDTH])),NIL);
-            ,if(ascan(arryPar,[ANGLE])# 0,VAL(eval(chblk,arrypar,[ANGLE])),NIL);
-            ,if(ascan(arryPar,[BOLD])#0,.T.,.F.);
-            ,if(ascan(arryPar,[NOBOLD])#0,.T.,.F.);
-            ,if(ascan(arryPar,[ITALIC])#0,.t.,.F.);
-            ,if(ascan(arryPar,[NOITALIC])#0,.t.,.F.);
-            ,if(ascan(arryPar,[UNDERLINE])#0,.t.,.F.);
-            ,if(ascan(arryPar,[NOUNDERLINE])#0,.t.,.F.);
-            ,if(ascan(arryPar,[STRIKEOUT])#0,.t.,.F.);
+         hbprn:modifyfont(if(ascan(arryPar,[FONT])=2,ArryPar[3],NIL) ;
+            ,if(ascan(arryPar,[NAME])=4,ArryPar[5],NIL) ;
+            ,if(ascan(arryPar,[SIZE])=6,VAL(ArryPar[7]),NIL) ;
+            ,if(ascan(arryPar,[WIDTH])# 0, VAL(eval(chblk,arrypar,[WIDTH])),NIL) ;
+            ,if(ascan(arryPar,[ANGLE])# 0,VAL(eval(chblk,arrypar,[ANGLE])),NIL) ;
+            ,if(ascan(arryPar,[BOLD])#0,.T.,.F.) ;
+            ,if(ascan(arryPar,[NOBOLD])#0,.T.,.F.) ;
+            ,if(ascan(arryPar,[ITALIC])#0,.t.,.F.) ;
+            ,if(ascan(arryPar,[NOITALIC])#0,.t.,.F.) ;
+            ,if(ascan(arryPar,[UNDERLINE])#0,.t.,.F.) ;
+            ,if(ascan(arryPar,[NOUNDERLINE])#0,.t.,.F.) ;
+            ,if(ascan(arryPar,[STRIKEOUT])#0,.t.,.F.) ;
             ,if(ascan(arryPar,[NOSTRIKEOUT])#0,.t.,.F.))
 
       CASE ArryPar[1]+arryPar[2]=[COMBINEREGIONS]
-         hbprn:combinergn(eval(chblk,arrypar,[TO]),ArryPar[3],ArryPar[4];
+         hbprn:combinergn(eval(chblk,arrypar,[TO]),ArryPar[3],ArryPar[4] ;
             ,if( val(ArryPar[8])>0,val(ArryPar[8]),::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_aRegion")))
 
       CASE ascan(arryPar,"SELECT")=1 .and. len(ArryPar)=3
@@ -2202,7 +2202,7 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
             ::aStat[ 'Orient' ] := if([LAND]$ _arg1,2,1)
             ::aStat[ 'PaperSize' ] := ::what_ele(eval(chblk,arrypar,[PAPERSIZE]),::aCh,"_apaper")
             _arg2 :=eval(chblk,arrypar,[FONT])
-            hbprn:setpage(if(val(_arg1)>0,val(_arg1),::aStat[ 'Orient' ]);
+            hbprn:setpage(if(val(_arg1)>0,val(_arg1),::aStat[ 'Orient' ]) ;
                ,::aStat[ 'PaperSize' ],_arg2)
 
          CASE ascan(arryPar,[ALIGN])=3
@@ -2356,8 +2356,8 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
             hbprn:settextcharextra(Val(eval(chblk,arrypar,[EXTRA])))
 
          CASE ArryPar[2]= [COLORMODE] //=1
-            ::aStat[ 'ColorMode' ] :=;
-               if(val(arrypar[3])>0,val(arrypar[3]),if(arrypar[3]=".T.",2;
+            ::aStat[ 'ColorMode' ] := ;
+               if(val(arrypar[3])>0,val(arrypar[3]),if(arrypar[3]=".T.",2 ;
                ,::what_ele(eval(chblk,arrypar,[COLORMODE]),::aCh,"_acolor")))
             hbprn:setdevmode(DM_COLOR,::aStat[ 'ColorMode'])
 
@@ -2399,7 +2399,7 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
             ENDIF
 
          CASE ascan(arryPar,[EXTENT])> 0
-            hbprn:gettextextent(eval(chblk,arrypar,[EXTENT]);
+            hbprn:gettextextent(eval(chblk,arrypar,[EXTENT]) ;
                ,&(eval(chblk,arrypar,[TO])),if(ascan(arryPar,[FONT])>0,eval(chblk,arrypar,[FONT]),NIL))
 
          CASE ArryPar[1]+ArryPar[2]+ArryPar[3]+ArryPar[4]=[GETPOLYFILLMODETO]
@@ -2432,20 +2432,20 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
          ENDIF
 
       CASE ascan(arryPar,[POLYGON])=1
-         hbprn:polygon(&(arrypar[2]),eval(chblk,arrypar,[PEN]);
+         hbprn:polygon(&(arrypar[2]),eval(chblk,arrypar,[PEN]) ;
             ,eval(chblk,arrypar,[BRUSH]),eval(chblk,arrypar,[STYLE]))
 
       CASE ascan(arryPar,[DRAW])=5 .and. ascan(arryPar,[TEXT])=6
          /*
          aeval(arrypar,{|x,y|msginfo(x,zaps(y)) } )
-         #xcommand @ <row>,<col>,<row2>,<col2> DRAW TEXT <txt> [STYLE <style>] [FONT <cfont>];
+         #xcommand @ <row>,<col>,<row2>,<col2> DRAW TEXT <txt> [STYLE <style>] [FONT <cfont>] ;
          => hbprn:drawtext(<row>,<col>,<row2>,<col2>,<txt>,<style>,<cfont>)
          */
          //msgbox(zaps(::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_STYLE")),"GGGGG")
          al := ::UsaFont(arrypar)
 
-         hbprn:drawtext(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]);
-            ,eval(epar,ArryPar[3]),eval(epar,Arrypar[4]),eval(chblk,arrypar,[TEXT]);
+         hbprn:drawtext(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]) ;
+            ,eval(epar,ArryPar[3]),eval(epar,Arrypar[4]),eval(chblk,arrypar,[TEXT]) ;
             ,::what_ele(eval(chblk,arrypar,[STYLE]),::aCh,"_STYLE"), "Fx" )
 
          hbprn:settextalign( al[1] )
@@ -2453,46 +2453,46 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
 
       CASE ascan(arryPar,[RECTANGLE])=5
          //MSG([PEN=]+eval(chblk,arrypar,[PEN])+CRLF+[BRUSH=]+eval(chblk,arrypar,[BRUSH]),[RETTANGOLO])
-         hbprn:rectangle(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,Arrypar[4]);
+         hbprn:rectangle(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,Arrypar[4]) ;
             ,eval(chblk,arrypar,[PEN]),eval(chblk,arrypar,[BRUSH]))
 
       CASE ascan(ArryPar,[FRAMERECT])=5 .OR. ascan(ArryPar,[FOCUSRECT])=5
-         hbprn:framerect(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,Arrypar[4]);
+         hbprn:framerect(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,Arrypar[4]) ;
             ,eval(chblk,arrypar,[BRUSH]))
 
       CASE ascan(ArryPar,[FILLRECT])=5
-         hbprn:fillrect(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,Arrypar[4]);
+         hbprn:fillrect(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,Arrypar[4]) ;
             ,eval(chblk,arrypar,[BRUSH]))
 
       CASE ascan(ArryPar,[INVERTRECT])=5
          hbprn:invertrect(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,Arrypar[4]))
 
       CASE ascan(ArryPar,[ELLIPSE])=5
-         hbprn:ellipse(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,Arrypar[4]);
+         hbprn:ellipse(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,Arrypar[4]) ;
             ,eval(chblk,arrypar,[PEN]), eval(chblk,arrypar,[BRUSH]))
 
       CASE ascan(arryPar,[RADIAL1])>0
          DO CASE
          CASE arrypar[5]=[ARC]
-            hbprn:arc(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]);
-               ,eval(epar,Arrypar[4]),eval(epar,Arrypar[7]),eval(epar,Arrypar[8]);
+            hbprn:arc(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]) ;
+               ,eval(epar,Arrypar[4]),eval(epar,Arrypar[7]),eval(epar,Arrypar[8]) ;
                ,eval(epar,Arrypar[10]),eval(epar,Arrypar[11]),eval(chblk,arrypar,[PEN]))
 
          CASE arrypar[3]=[ARCTO]
-            hbprn:arcto(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[5]);
-               ,eval(epar,Arrypar[6]),eval(epar,Arrypar[8]),eval(epar,Arrypar[9]);
+            hbprn:arcto(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[5]) ;
+               ,eval(epar,Arrypar[6]),eval(epar,Arrypar[8]),eval(epar,Arrypar[9]) ;
                ,eval(chblk,arrypar,[PEN]))
 
          CASE arrypar[5]=[CHORD]
-            hbprn:chord(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]);
-               ,eval(epar,Arrypar[4]),eval(epar,Arrypar[7]),eval(epar,Arrypar[8]);
-               ,eval(epar,Arrypar[10]),eval(epar,Arrypar[11]),eval(chblk,arrypar,[PEN]);
+            hbprn:chord(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]) ;
+               ,eval(epar,Arrypar[4]),eval(epar,Arrypar[7]),eval(epar,Arrypar[8]) ;
+               ,eval(epar,Arrypar[10]),eval(epar,Arrypar[11]),eval(chblk,arrypar,[PEN]) ;
                ,eval(chblk,arrypar,[BRUSH]))
 
          CASE arrypar[5]=[PIE]
-            hbprn:pie(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]);
-               ,eval(epar,Arrypar[4]),eval(epar,Arrypar[7]),eval(epar,Arrypar[8]);
-               ,eval(epar,Arrypar[10]),eval(epar,Arrypar[11]),eval(chblk,arrypar,[PEN]);
+            hbprn:pie(eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]) ;
+               ,eval(epar,Arrypar[4]),eval(epar,Arrypar[7]),eval(epar,Arrypar[8]) ;
+               ,eval(epar,Arrypar[10]),eval(epar,Arrypar[11]),eval(chblk,arrypar,[PEN]) ;
                ,eval(chblk,arrypar,[BRUSH]))
 
          ENDCASE
@@ -2532,12 +2532,12 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
 
       CASE ascan(ArryPar,[ROUNDRECT])=5   //da rivedere
          /*
-         @ <row>,<col>,<row2>,<col2> ROUNDRECT  [ROUNDR <tor>] [ROUNDC <toc>] [PEN <cpen>] [BRUSH <cbrush>];
+         @ <row>,<col>,<row2>,<col2> ROUNDRECT  [ROUNDR <tor>] [ROUNDC <toc>] [PEN <cpen>] [BRUSH <cbrush>] ;
          => hbprn:roundrect(<row>,<col>,<row2>,<col2>,<tor>,<toc>,<cpen>,<cbrush>)
          RoundRect(row,col,torow,tocol,widthellipse,heightellipse,defpen,defbrush)
          */
          SET exact on
-         hbprn:roundrect( eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]);
+         hbprn:roundrect( eval(epar,ArryPar[1]),eval(epar,ArryPar[2]),eval(epar,ArryPar[3]),eval(epar,ArryPar[4]) ;
             ,val(eval(chblk,arrypar,[ROUNDR])),val(eval(chblk,arrypar,[ROUNDC])),eval(chblk,arrypar,[PEN]),eval(chblk,arrypar,[BRUSH]))
          SET exact off
 
@@ -2569,14 +2569,14 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
          al := ::UsaFont(arrypar,cmdline,section)
          /*
          if eval(chblk,arrypar,[FONT])="TIMES"
-         msgmulty({eval(epar,arrypar[1]),eval(epar,arrypar[2]),hbprn:convert({eval(epar,arrypar[1]),eval(epar,arrypar[2])})[1],hbprn:convert({eval(epar,arrypar[1]),eval(epar,arrypar[2])})[2];
+         msgmulty({eval(epar,arrypar[1]),eval(epar,arrypar[2]),hbprn:convert({eval(epar,arrypar[1]),eval(epar,arrypar[2])})[1],hbprn:convert({eval(epar,arrypar[1]),eval(epar,arrypar[2])})[2] ;
          ,"---",hbprn:devcaps[5],hbprn:devcaps[6],hbprn:devcaps[9],hbprn:devcaps[10]})
          Endif
          */
-         hbprn:say(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])),eval(epar,ArryPar[2]);
-            ,if("->" $ ArryPar[4] .or. [(] $ ArryPar[4],::MACROCOMPILE(ArryPar[4],.t.,cmdline,section),ArryPar[4]);
+         hbprn:say(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])),eval(epar,ArryPar[2]) ;
+            ,if("->" $ ArryPar[4] .or. [(] $ ArryPar[4],::MACROCOMPILE(ArryPar[4],.t.,cmdline,section),ArryPar[4]) ;
             ,if(ascan(hbprn:Fonts[2],eval(chblk,arrypar,[FONT]) )> 0,eval(chblk,arrypar,[FONT]),"FX")  ;
-            ,if(ascan(arryPar,[COLOR])>0,::UsaColor(eval(chblk,arrypar,[COLOR])),NIL);
+            ,if(ascan(arryPar,[COLOR])>0,::UsaColor(eval(chblk,arrypar,[COLOR])),NIL) ;
             ,nil )
          //,if(ascan(arryPar,[ALIGN])>0,::what_ele(eval(chblk,arrypar,[ALIGN]),::aCh,"_aAlign"),NIL))
 
@@ -2590,14 +2590,14 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
          ::MemoSay(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])) ;
             ,eval(epar,ArryPar[2]) ;
             ,::MACROCOMPILE(ArryPar[4],.t.,cmdline,section) ;
-            ,if(ascan(arryPar,[LEN])>0,if(valtype(oWr:argm[3])=="A",;
+            ,if(ascan(arryPar,[LEN])>0,if(valtype(oWr:argm[3])=="A", ;
             ::MACROCOMPILE(eval(chblk,arrypar,[LEN]),.t.,cmdline,section) , ;
             val(eval(chblk,arrypar,[LEN]))),NIL) ;
-            ,if(ascan(arryPar,[FONT])>0,"FX",NIL);
-            ,if(ascan(arryPar,[COLOR])>0,::UsaColor(eval(chblk,arrypar,[COLOR])),NIL);
+            ,if(ascan(arryPar,[FONT])>0,"FX",NIL) ;
+            ,if(ascan(arryPar,[COLOR])>0,::UsaColor(eval(chblk,arrypar,[COLOR])),NIL) ;
             ,NIL ;
-            ;//,if(ascan(arryPar,[ALIGN])>0,::what_ele(eval(chblk,arrypar,[ALIGN]),::aCh,"_aAlign"),NIL);
-            ,if(ascan(arryPar,[.F.])>0,".F.","");
+            ;//,if(ascan(arryPar,[ALIGN])>0,::what_ele(eval(chblk,arrypar,[ALIGN]),::aCh,"_aAlign"),NIL) ;
+            ,if(ascan(arryPar,[.F.])>0,".F.","") ;
             ,arrypar)
 
          hbprn:settextalign( al[1] )
@@ -2625,13 +2625,13 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
          hbprn:settexcolor ( al[2] )
 
       CASE ascan(ArryPar,[BARCODE])=3
-         oWr:DrawBarcode(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])),eval(epar,ArryPar[2]);
-            , VAL(eval(chblk,arrypar,[HEIGHT]));
+         oWr:DrawBarcode(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])),eval(epar,ArryPar[2]) ;
+            , VAL(eval(chblk,arrypar,[HEIGHT])) ;
             , VAL(eval(chblk,arrypar,[WIDTH])) ;
             , eval(chblk,arrypar,[TYPE])  ;
-            , if("->" $ ArryPar[4] .or. [(] $ ArryPar[4],::MACROCOMPILE(ArryPar[4],.t.,cmdline,section),ArryPar[4]);
-            , oWr:UseFlags(eval(chblk,arrypar,[FLAG]));
-            ,(ascan(arryPar,[SUBTITLE])>0);
+            , if("->" $ ArryPar[4] .or. [(] $ ArryPar[4],::MACROCOMPILE(ArryPar[4],.t.,cmdline,section),ArryPar[4]) ;
+            , oWr:UseFlags(eval(chblk,arrypar,[FLAG])) ;
+            ,(ascan(arryPar,[SUBTITLE])>0) ;
             ,(ascan(arryPar,[INTERNAL])< 1) ;
             , cmdline ;
             ,VAL(eval(chblk,arrypar,[VSH])) )
@@ -2649,9 +2649,9 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
 
 METHOD WHAT_ELE(Arg1,Arg2,Arg3) CLASS WREPORT
 
-   LOCAL rtv ,sets:='',kl := 0 , ltemp := '' ,;
-      Asr := {{"_APAPER","DMPAPER_A4"} ,{"_ABIN","DMBIN_AUTO"},{"_APEN","PS_SOLID"},;
-      {"_ABRUSH","BS_SOLID"},{"_APOLY","ALTERNATE"},{"_ABKMODE","TRANSPARENT"},;
+   LOCAL rtv ,sets:='',kl := 0 , ltemp := '' , ;
+      Asr := {{"_APAPER","DMPAPER_A4"} ,{"_ABIN","DMBIN_AUTO"},{"_APEN","PS_SOLID"}, ;
+      {"_ABRUSH","BS_SOLID"},{"_APOLY","ALTERNATE"},{"_ABKMODE","TRANSPARENT"}, ;
       {"_AALIGN","TA_LEFT"} ,{"_AREGION","RGN_AND"} ,{"_ACOLOR","MONO"}, ;
       {"_AQLT","DMRES_DRAFT"}, {"_STYLE","DT_TOP"}}
    DEFAULT arg3 to "_APAPER"
@@ -2909,10 +2909,10 @@ METHOD MixMsay(arg1,arg2,argm1,argl1,argf1,argsize,abold,aita,aunder,astrike,arg
          , argcolor1[2] ;
          , argcolor1[3] ;
          , arrymemo[1] ;
-         , abold;
-         , aita;
-         , aunder;
-         , astrike;
+         , abold ;
+         , aita ;
+         , aunder ;
+         , astrike ;
          , if(valtype(argcolor1)=="A", .t.,.F.) ;
          , if(valtype(argf1)=="C", .t.,.F.) ;
          , if(valtype(argsize)=="N", .t.,.F.) ;
@@ -2927,7 +2927,7 @@ METHOD MixMsay(arg1,arg2,argm1,argl1,argf1,argsize,abold,aita,aunder,astrike,arg
          ENDIF
          _HMG_PRINTER_H_PRINT ( if(MGSYS,_HMG_SYSDATA [ 374 ],_hmg_printer_hdc) ;
             , (nline*lstep)-oWr:aStat[ 'Hbcompatible' ]-_arg5 , arg2, argf1 , argsize , argcolor1[1], argcolor1[2], argcolor1[3] ;
-            , arrymemo[mcl], abold, aita, aunder, astrike;
+            , arrymemo[mcl], abold, aita, aunder, astrike ;
             , if(valtype(argcolor1)=="A", .t.,.F.) ;
             , if(valtype(argf1)=="C", .t.,.F.) ;
             , if(valtype(argsize)=="N", .t.,.F.) ;
@@ -2945,7 +2945,7 @@ METHOD MixMsay(arg1,arg2,argm1,argl1,argf1,argsize,abold,aita,aunder,astrike,arg
 
 METHOD HATCH(arg1) CLASS WREPORT
 
-   LOCAL ritorno := 0 ,;
+   LOCAL ritorno := 0 , ;
       Asr := {"HS_HORIZONTAL","HS_VERTICAL","HS_FDIAGONAL","HS_BDIAGONAL","HS_CROSS","HS_DIAGCROSS"}
    ritorno := max(0, ascan(Asr,arg1)-1 )
 
@@ -3041,7 +3041,7 @@ METHOD GROUP(GField, s_head, s_col, gftotal, wheregt, s_total, t_col, p_f_e_g) C
       IF "{||" = LEFT(S_HEAD,3)
          EXV := alltrim(substr(S_HEAD,at("||",S_HEAD)+2,at("}",S_HEAD)-4))
       ENDIF
-      GHstring:=substr(::aBody[posiz,1],1,P1)+;
+      GHstring:=substr(::aBody[posiz,1],1,P1)+ ;
          IF("{||" = LEFT(S_HEAD,3), Any2Strg(eval({||exv })) ;
          ,"(["+ s_head+"]+"+::Hgconvert(substr(::aBody[posiz,1],P1+1,P2-p1))+")" ) ;
          +substr(::aBody[posiz,1],p2+1)
@@ -3162,14 +3162,14 @@ METHOD UsaFont(arrypar, cmdline , section) CLASS WREPORT
 
    empty(cmdline);empty(section)
 
-   hbprn:modifyfont("Fx",;
-      if("->" $ eval(chblk,arrypar,[FONT]) .or. [(] $ eval(chblk,arrypar,[FONT]),::MACROCOMPILE(eval(chblk,arrypar,[FONT]),.t.,cmdline,section),eval(chblk,arrypar,[FONT])) ,;
-      if("->" $ eval(chblk,arrypar,[SIZE]) .or. [(] $ eval(chblk,arrypar,[SIZE]),::MACROCOMPILE(eval(chblk,arrypar,[SIZE]),.t.,cmdline,section),val(eval(chblk,arrypar,[SIZE]))) ,;
-      val(eval(chblk,arrypar,[WIDTH]) ) ,;
-      val(eval(chblk,arrypar,[ANGLE]) ) ,;
+   hbprn:modifyfont("Fx", ;
+      if("->" $ eval(chblk,arrypar,[FONT]) .or. [(] $ eval(chblk,arrypar,[FONT]),::MACROCOMPILE(eval(chblk,arrypar,[FONT]),.t.,cmdline,section),eval(chblk,arrypar,[FONT])) , ;
+      if("->" $ eval(chblk,arrypar,[SIZE]) .or. [(] $ eval(chblk,arrypar,[SIZE]),::MACROCOMPILE(eval(chblk,arrypar,[SIZE]),.t.,cmdline,section),val(eval(chblk,arrypar,[SIZE]))) , ;
+      val(eval(chblk,arrypar,[WIDTH]) ) , ;
+      val(eval(chblk,arrypar,[ANGLE]) ) , ;
       (ascan(arryPar,[BOLD])>0),!(ascan(arryPar,[BOLD])>0) , ;
-      (ascan(arryPar,[ITALIC])>0),!(ascan(arryPar,[ITALIC])>0) ,;
-      (ascan(arryPar,[UNDERLINE])>0) ,!(ascan(arryPar,[UNDERLINE])>0) ,;
+      (ascan(arryPar,[ITALIC])>0),!(ascan(arryPar,[ITALIC])>0) , ;
+      (ascan(arryPar,[UNDERLINE])>0) ,!(ascan(arryPar,[UNDERLINE])>0) , ;
       (ascan(arryPar,[STRIKEOUT])>0),!(ascan(arryPar,[STRIKEOUT])>0) )
 
    IF ascan(arryPar,[COLOR]) > 0
@@ -3197,10 +3197,10 @@ METHOD UsaColor(arg1) CLASS WREPORT
    IF "X" $ upper(arg1)
       arg1 := substr( arg1,at("X",arg1)+1)
       IF ::PrnDrv = "HBPR"
-         ritorno := Rgb(HEXATODEC(substr(arg1,-2));
+         ritorno := Rgb(HEXATODEC(substr(arg1,-2)) ;
             ,HEXATODEC(substr(arg1,5,2)),HEXATODEC(substr(arg1,3,2)) )
       ELSE
-         ritorno := {HEXATODEC(substr(arg1,-2));
+         ritorno := {HEXATODEC(substr(arg1,-2)) ;
             ,HEXATODEC(substr(arg1,5,2) ),HEXATODEC(substr(arg1,3,2)) }
       ENDIF
    ELSE
@@ -3213,146 +3213,146 @@ METHOD UsaColor(arg1) CLASS WREPORT
 
 METHOD DXCOLORS(par) CLASS WREPORT
 
-   LOCAL rgbColorNames:=;
-      {{ "aliceblue",             0xfffff8f0 },;
-      { "antiquewhite",          0xffd7ebfa },;
-      { "aqua",                  0xffffff00 },;
-      { "aquamarine",            0xffd4ff7f },;
-      { "azure",                 0xfffffff0 },;
-      { "beige",                 0xffdcf5f5 },;
-      { "bisque",                0xffc4e4ff },;
-      { "black",                 0xff000000 },;
-      { "blanchedalmond",        0xffcdebff },;
-      { "blue",                  0xffff0000 },;
-      { "blueviolet",            0xffe22b8a },;
-      { "brown",                 0xff2a2aa5 },;
-      { "burlywood",             0xff87b8de },;
-      { "cadetblue",             0xffa09e5f },;
-      { "chartreuse",            0xff00ff7f },;
-      { "chocolate",             0xff1e69d2 },;
-      { "coral",                 0xff507fff },;
-      { "cornflowerblue",        0xffed9564 },;
-      { "cornsilk",              0xffdcf8ff },;
-      { "crimson",               0xff3c14dc },;
-      { "cyan",                  0xffffff00 },;
-      { "darkblue",              0xff8b0000 },;
-      { "darkcyan",              0xff8b8b00 },;
-      { "darkgoldenrod",         0xff0b86b8 },;
-      { "darkgray",              0xffa9a9a9 },;
-      { "darkgreen",             0xff006400 },;
-      { "darkkhaki",             0xff6bb7bd },;
-      { "darkmagenta",           0xff8b008b },;
-      { "darkolivegreen",        0xff2f6b55 },;
-      { "darkorange",            0xff008cff },;
-      { "darkorchid",            0xffcc3299 },;
-      { "darkred",               0xff00008b },;
-      { "darksalmon",            0xff7a96e9 },;
-      { "darkseagreen",          0xff8fbc8f },;
-      { "darkslateblue",         0xff8b3d48 },;
-      { "darkslategray",         0xff4f4f2f },;
-      { "darkturquoise",         0xffd1ce00 },;
-      { "darkviolet",            0xffd30094 },;
-      { "deeppink",              0xff9314ff },;
-      { "deepskyblue",           0xffffbf00 },;
-      { "dimgray",               0xff696969 },;
-      { "dodgerblue",            0xffff901e },;
-      { "firebrick",             0xff2222b2 },;
-      { "floralwhite",           0xfff0faff },;
-      { "forestgreen",           0xff228b22 },;
-      { "fuchsia",               0xffff00ff },;
-      { "gainsboro",             0xffdcdcdc },;
-      { "ghostwhite",            0xfffff8f8 },;
-      { "gold",                  0xff00d7ff },;
-      { "goldenrod",             0xff20a5da },;
-      { "gray",                  0xff808080 },;
-      { "green",                 0xff008000 },;
-      { "greenyellow",           0xff2fffad },;
-      { "honeydew",              0xfff0fff0 },;
-      { "hotpink",               0xffb469ff },;
-      { "indianred",             0xff5c5ccd },;
-      { "indigo",                0xff82004b },;
-      { "ivory",                 0xfff0ffff },;
-      { "khaki",                 0xff8ce6f0 },;
-      { "lavender",              0xfffae6e6 },;
-      { "lavenderblush",         0xfff5f0ff },;
-      { "lawngreen",             0xff00fc7c },;
-      { "lemonchiffon",          0xffcdfaff },;
-      { "lightblue",             0xffe6d8ad },;
-      { "lightcoral",            0xff8080f0 },;
-      { "lightcyan",             0xffffffe0 },;
-      { "lightgoldenrodyellow",  0xffd2fafa },;
-      { "lightgreen",            0xff90ee90 },;
-      { "lightgrey",             0xffd3d3d3 },;
-      { "lightpink",             0xffc1b6ff },;
-      { "lightsalmon",           0xff7aa0ff },;
-      { "lightseagreen",         0xffaab220 },;
-      { "lightskyblue",          0xffface87 },;
-      { "lightslategray",        0xff998877 },;
-      { "lightsteelblue",        0xffdec4b0 },;
-      { "lightyellow",           0xffe0ffff },;
-      { "lime",                  0xff00ff00 },;
-      { "limegreen",             0xff32cd32 },;
-      { "linen",                 0xffe6f0fa },;
-      { "magenta",               0xffff00ff },;
-      { "maroon",                0xff000080 },;
-      { "mediumaquamarine",      0xffaacd66 },;
-      { "mediumblue",            0xffcd0000 },;
-      { "mediumorchid",          0xffd355ba },;
-      { "mediumpurple",          0xffdb7093 },;
-      { "mediumseagreen",        0xff71b33c },;
-      { "mediumslateblue",       0xffee687b },;
-      { "mediumspringgreen",     0xff9afa00 },;
-      { "mediumturquoise",       0xffccd148 },;
-      { "mediumvioletred",       0xff8515c7 },;
-      { "midnightblue",          0xff701919 },;
-      { "mintcream",             0xfffafff5 },;
-      { "mistyrose",             0xffe1e4ff },;
-      { "moccasin",              0xffb5e4ff },;
-      { "navajowhite",           0xffaddeff },;
-      { "navy",                  0xff800000 },;
-      { "oldlace",               0xffe6f5fd },;
-      { "olive",                 0xff008080 },;
-      { "olivedrab",             0xff238e6b },;
-      { "orange",                0xff00a5ff },;
-      { "orangered",             0xff0045ff },;
-      { "orchid",                0xffd670da },;
-      { "palegoldenrod",         0xffaae8ee },;
-      { "palegreen",             0xff98fb98 },;
-      { "paleturquoise",         0xffeeeeaf },;
-      { "palevioletred",         0xff9370db },;
-      { "papayawhip",            0xffd5efff },;
-      { "peachpuff",             0xffb9daff },;
-      { "peru",                  0xff3f85cd },;
-      { "pink",                  0xffcbc0ff },;
-      { "plum",                  0xffdda0dd },;
-      { "powderblue",            0xffe6e0b0 },;
-      { "purple",                0xff800080 },;
-      { "red",                   0xff0000ff },;
-      { "rosybrown",             0xff8f8fbc },;
-      { "royalblue",             0xffe16941 },;
-      { "saddlebrown",           0xff13458b },;
-      { "salmon",                0xff7280fa },;
-      { "sandybrown",            0xff60a4f4 },;
-      { "seagreen",              0xff578b2e },;
-      { "seashell",              0xffeef5ff },;
-      { "sienna",                0xff2d52a0 },;
-      { "silver",                0xffc0c0c0 },;
-      { "skyblue",               0xffebce87 },;
-      { "slateblue",             0xffcd5a6a },;
-      { "slategray",             0xff908070 },;
-      { "snow",                  0xfffafaff },;
-      { "springgreen",           0xff7fff00 },;
-      { "steelblue",             0xffb48246 },;
-      { "tan",                   0xff8cb4d2 },;
-      { "teal",                  0xff808000 },;
-      { "thistle",               0xffd8bfd8 },;
-      { "tomato",                0xff4763ff },;
-      { "turquoise",             0xffd0e040 },;
-      { "violet",                0xffee82ee },;
-      { "wheat",                 0xffb3def5 },;
-      { "white",                 0xffffffff },;
-      { "whitesmoke",            0xfff5f5f5 },;
-      { "yellow",                0xff00ffff },;
+   LOCAL rgbColorNames:= ;
+      {{ "aliceblue",             0xfffff8f0 }, ;
+      { "antiquewhite",          0xffd7ebfa }, ;
+      { "aqua",                  0xffffff00 }, ;
+      { "aquamarine",            0xffd4ff7f }, ;
+      { "azure",                 0xfffffff0 }, ;
+      { "beige",                 0xffdcf5f5 }, ;
+      { "bisque",                0xffc4e4ff }, ;
+      { "black",                 0xff000000 }, ;
+      { "blanchedalmond",        0xffcdebff }, ;
+      { "blue",                  0xffff0000 }, ;
+      { "blueviolet",            0xffe22b8a }, ;
+      { "brown",                 0xff2a2aa5 }, ;
+      { "burlywood",             0xff87b8de }, ;
+      { "cadetblue",             0xffa09e5f }, ;
+      { "chartreuse",            0xff00ff7f }, ;
+      { "chocolate",             0xff1e69d2 }, ;
+      { "coral",                 0xff507fff }, ;
+      { "cornflowerblue",        0xffed9564 }, ;
+      { "cornsilk",              0xffdcf8ff }, ;
+      { "crimson",               0xff3c14dc }, ;
+      { "cyan",                  0xffffff00 }, ;
+      { "darkblue",              0xff8b0000 }, ;
+      { "darkcyan",              0xff8b8b00 }, ;
+      { "darkgoldenrod",         0xff0b86b8 }, ;
+      { "darkgray",              0xffa9a9a9 }, ;
+      { "darkgreen",             0xff006400 }, ;
+      { "darkkhaki",             0xff6bb7bd }, ;
+      { "darkmagenta",           0xff8b008b }, ;
+      { "darkolivegreen",        0xff2f6b55 }, ;
+      { "darkorange",            0xff008cff }, ;
+      { "darkorchid",            0xffcc3299 }, ;
+      { "darkred",               0xff00008b }, ;
+      { "darksalmon",            0xff7a96e9 }, ;
+      { "darkseagreen",          0xff8fbc8f }, ;
+      { "darkslateblue",         0xff8b3d48 }, ;
+      { "darkslategray",         0xff4f4f2f }, ;
+      { "darkturquoise",         0xffd1ce00 }, ;
+      { "darkviolet",            0xffd30094 }, ;
+      { "deeppink",              0xff9314ff }, ;
+      { "deepskyblue",           0xffffbf00 }, ;
+      { "dimgray",               0xff696969 }, ;
+      { "dodgerblue",            0xffff901e }, ;
+      { "firebrick",             0xff2222b2 }, ;
+      { "floralwhite",           0xfff0faff }, ;
+      { "forestgreen",           0xff228b22 }, ;
+      { "fuchsia",               0xffff00ff }, ;
+      { "gainsboro",             0xffdcdcdc }, ;
+      { "ghostwhite",            0xfffff8f8 }, ;
+      { "gold",                  0xff00d7ff }, ;
+      { "goldenrod",             0xff20a5da }, ;
+      { "gray",                  0xff808080 }, ;
+      { "green",                 0xff008000 }, ;
+      { "greenyellow",           0xff2fffad }, ;
+      { "honeydew",              0xfff0fff0 }, ;
+      { "hotpink",               0xffb469ff }, ;
+      { "indianred",             0xff5c5ccd }, ;
+      { "indigo",                0xff82004b }, ;
+      { "ivory",                 0xfff0ffff }, ;
+      { "khaki",                 0xff8ce6f0 }, ;
+      { "lavender",              0xfffae6e6 }, ;
+      { "lavenderblush",         0xfff5f0ff }, ;
+      { "lawngreen",             0xff00fc7c }, ;
+      { "lemonchiffon",          0xffcdfaff }, ;
+      { "lightblue",             0xffe6d8ad }, ;
+      { "lightcoral",            0xff8080f0 }, ;
+      { "lightcyan",             0xffffffe0 }, ;
+      { "lightgoldenrodyellow",  0xffd2fafa }, ;
+      { "lightgreen",            0xff90ee90 }, ;
+      { "lightgrey",             0xffd3d3d3 }, ;
+      { "lightpink",             0xffc1b6ff }, ;
+      { "lightsalmon",           0xff7aa0ff }, ;
+      { "lightseagreen",         0xffaab220 }, ;
+      { "lightskyblue",          0xffface87 }, ;
+      { "lightslategray",        0xff998877 }, ;
+      { "lightsteelblue",        0xffdec4b0 }, ;
+      { "lightyellow",           0xffe0ffff }, ;
+      { "lime",                  0xff00ff00 }, ;
+      { "limegreen",             0xff32cd32 }, ;
+      { "linen",                 0xffe6f0fa }, ;
+      { "magenta",               0xffff00ff }, ;
+      { "maroon",                0xff000080 }, ;
+      { "mediumaquamarine",      0xffaacd66 }, ;
+      { "mediumblue",            0xffcd0000 }, ;
+      { "mediumorchid",          0xffd355ba }, ;
+      { "mediumpurple",          0xffdb7093 }, ;
+      { "mediumseagreen",        0xff71b33c }, ;
+      { "mediumslateblue",       0xffee687b }, ;
+      { "mediumspringgreen",     0xff9afa00 }, ;
+      { "mediumturquoise",       0xffccd148 }, ;
+      { "mediumvioletred",       0xff8515c7 }, ;
+      { "midnightblue",          0xff701919 }, ;
+      { "mintcream",             0xfffafff5 }, ;
+      { "mistyrose",             0xffe1e4ff }, ;
+      { "moccasin",              0xffb5e4ff }, ;
+      { "navajowhite",           0xffaddeff }, ;
+      { "navy",                  0xff800000 }, ;
+      { "oldlace",               0xffe6f5fd }, ;
+      { "olive",                 0xff008080 }, ;
+      { "olivedrab",             0xff238e6b }, ;
+      { "orange",                0xff00a5ff }, ;
+      { "orangered",             0xff0045ff }, ;
+      { "orchid",                0xffd670da }, ;
+      { "palegoldenrod",         0xffaae8ee }, ;
+      { "palegreen",             0xff98fb98 }, ;
+      { "paleturquoise",         0xffeeeeaf }, ;
+      { "palevioletred",         0xff9370db }, ;
+      { "papayawhip",            0xffd5efff }, ;
+      { "peachpuff",             0xffb9daff }, ;
+      { "peru",                  0xff3f85cd }, ;
+      { "pink",                  0xffcbc0ff }, ;
+      { "plum",                  0xffdda0dd }, ;
+      { "powderblue",            0xffe6e0b0 }, ;
+      { "purple",                0xff800080 }, ;
+      { "red",                   0xff0000ff }, ;
+      { "rosybrown",             0xff8f8fbc }, ;
+      { "royalblue",             0xffe16941 }, ;
+      { "saddlebrown",           0xff13458b }, ;
+      { "salmon",                0xff7280fa }, ;
+      { "sandybrown",            0xff60a4f4 }, ;
+      { "seagreen",              0xff578b2e }, ;
+      { "seashell",              0xffeef5ff }, ;
+      { "sienna",                0xff2d52a0 }, ;
+      { "silver",                0xffc0c0c0 }, ;
+      { "skyblue",               0xffebce87 }, ;
+      { "slateblue",             0xffcd5a6a }, ;
+      { "slategray",             0xff908070 }, ;
+      { "snow",                  0xfffafaff }, ;
+      { "springgreen",           0xff7fff00 }, ;
+      { "steelblue",             0xffb48246 }, ;
+      { "tan",                   0xff8cb4d2 }, ;
+      { "teal",                  0xff808000 }, ;
+      { "thistle",               0xffd8bfd8 }, ;
+      { "tomato",                0xff4763ff }, ;
+      { "turquoise",             0xffd0e040 }, ;
+      { "violet",                0xffee82ee }, ;
+      { "wheat",                 0xffb3def5 }, ;
+      { "white",                 0xffffffff }, ;
+      { "whitesmoke",            0xfff5f5f5 }, ;
+      { "yellow",                0xff00ffff }, ;
       { "yellowgreen",           0xff32cd9a }}
    LOCAL ltemp:=0
 
@@ -3375,10 +3375,10 @@ METHOD SetMyRgb(dato) CLASS WREPORT
    DEFAULT dato to 0
    hexNumber := DECTOHEXA(dato)
    IF ::PrnDrv = "HBPR"
-      r := Rgb(HEXATODEC(substr(HexNumber,-2));
+      r := Rgb(HEXATODEC(substr(HexNumber,-2)) ;
          ,HEXATODEC(substr(HexNumber,5,2)),HEXATODEC(substr(HexNumber,3,2)) )
    ELSE
-      r:={HEXATODEC(substr(HexNumber,-2));
+      r:={HEXATODEC(substr(HexNumber,-2)) ;
          ,HEXATODEC(substr(HexNumber,5,2)),HEXATODEC(substr(HexNumber,3,2)) }
    ENDIF
 
@@ -3821,7 +3821,7 @@ METHOD DrawBarcode( nRow,nCol,nHeight, nLineWidth, cType, cCode, nFlags, SubTitl
                      _HMG_PRINTER_H_PRINT ( _hmg_printer_hdc , nRow+nHeight-if(sf < 9,0,-.5) ,(kj[1]+nSh-nCol)/2+ncol  ;
                         , "HELVETICA" , sF ,0 ,0 ,0 , cTxt , .T. , .F. , .F. , .F. , .F. , .T. , .T. , "CENTER" )
                   ELSE
-                     _HMG_PRINTER_H_RECTANGLE ( _hmg_printer_hdc , nrow+nHeight-asize[1]+2;
+                     _HMG_PRINTER_H_RECTANGLE ( _hmg_printer_hdc , nrow+nHeight-asize[1]+2 ;
                         , KL , nRow+nHeight , KH , 0 , 255 , 255 , 255 , .T. , .T. , .T. , .T. )
                      _HMG_PRINTER_H_PRINT ( _hmg_printer_hdc , nRow+nHeight-asize[1]+if(sf < 9,1.5,2) ,(kj[1]+nSh-nCol)/2+ncol  ;
                         , "HELVETICA" , sF ,0 ,0 ,0 , cTxt , .T. , .F. , .F. , .F. , .F. , .T. , .T. , "CENTER" )

@@ -16,8 +16,8 @@ FUNCTION main()
          END POPUP
       END MENU
 
-      DEFINE TREE Tree_1 AT 10,10 WIDTH 200 HEIGHT 400 VALUE 3;
-            NODEIMAGES { 'cl_fl', 'op_fl' };
+      DEFINE TREE Tree_1 AT 10,10 WIDTH 200 HEIGHT 400 VALUE 3 ;
+            NODEIMAGES { 'cl_fl', 'op_fl' } ;
             NOROOTBUTTON
 
          NODE 'Root' IMAGES { 'world' }

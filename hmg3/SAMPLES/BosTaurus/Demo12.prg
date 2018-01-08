@@ -26,13 +26,13 @@ FUNCTION MAIN
          AT 0,0 ;
          WIDTH 720 ;
          HEIGHT 600 ;
-         TITLE "Demo12: Unicode Text (in japanese)";
-         MAIN;
-         NOMAXIMIZE;
-         NOSIZE;
-         BACKCOLOR WHITE;
-         ON INIT     Proc_ON_INIT ();
-         ON RELEASE  Proc_ON_RELEASE ();
+         TITLE "Demo12: Unicode Text (in japanese)" ;
+         MAIN ;
+         NOMAXIMIZE ;
+         NOSIZE ;
+         BACKCOLOR WHITE ;
+         ON INIT     Proc_ON_INIT () ;
+         ON RELEASE  Proc_ON_RELEASE () ;
          ON PAINT    Proc_ON_PAINT ()
 
    END WINDOW

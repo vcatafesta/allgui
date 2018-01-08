@@ -34,7 +34,7 @@ FUNCTION Main
          WIDTH nWidth ;
          HEIGHT nHeight ;
          TITLE 'MDI demo ' ;
-         MAIN MDI;
+         MAIN MDI ;
          FONT 'System' SIZE 12 ;
          BACKCOLOR BLUE
 
@@ -150,7 +150,7 @@ FUNCTION CreateMDIClient(Buffer,title)
       @ 0 ,0 EDITBOX EditMdi ;
          WIDTH 200 ;
          HEIGHT 200 ;
-         VALUE Buffer;
+         VALUE Buffer ;
          TOOLTIP "Hello Tooltip" ;
          ON CHANGE SetChange()
 

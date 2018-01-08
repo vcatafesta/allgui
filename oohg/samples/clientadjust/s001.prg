@@ -23,7 +23,7 @@ FUNCTION Main()
 
    DEFINE WINDOW Form_1 ;
          AT 0,0 ;
-         WIDTH 658;
+         WIDTH 658 ;
          HEIGHT 480 ;
          TITLE 'ooHG - ClientAdjust Sample' ;
          MAIN

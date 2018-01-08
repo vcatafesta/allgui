@@ -2139,8 +2139,8 @@ METHOD Box (nRow ,nCol ,nToRow ,nToCol ,nWidth , aColor, ;
    END
 
    ::GetDc()
-   C_RECTANGLE(::Hdc ,nRow ,nCol ,nToRow ,nToCol ,nWidth ,;
-      aColor[1] ,aColor[2] ,aColor[3] ,.t. ,.t., !empty(nStyle) ,nStyle , !empty(nBrStyle),;
+   C_RECTANGLE(::Hdc ,nRow ,nCol ,nToRow ,nToCol ,nWidth , ;
+      aColor[1] ,aColor[2] ,aColor[3] ,.t. ,.t., !empty(nStyle) ,nStyle , !empty(nBrStyle), ;
       nBrStyle, lBrColor , aBrColor[1],aBrColor[2],aBrColor[3]  )
    ::ReleaseDc()
 
@@ -2164,8 +2164,8 @@ METHOD ROUNDbox (nRow ,nCol ,nToRow ,nToCol ,nWidth , aColor, lStyle, ;
    END
 
    ::GetDc()
-   C_ROUNDRECTANGLE(::Hdc ,nRow ,nCol ,nToRow ,nToCol ,nWidth ,;
-      aColor[1] ,aColor[2] ,aColor[3] ,.t. ,.t., !empty(nStyle),nStyle ,!empty(nBrStyle),;
+   C_ROUNDRECTANGLE(::Hdc ,nRow ,nCol ,nToRow ,nToCol ,nWidth , ;
+      aColor[1] ,aColor[2] ,aColor[3] ,.t. ,.t., !empty(nStyle),nStyle ,!empty(nBrStyle), ;
       nBrStyle, lBrushColor, aBrColor[1],aBrColor[2],aBrColor[3] )
    ::ReleaseDc()
 
@@ -2189,8 +2189,8 @@ METHOD Ellipse (nRow ,nCol ,nToRow ,nToCol ,nWidth , aColor, lStyle, ;
    END
 
    ::GetDc()
-   C_ELLIPSE(::Hdc ,nRow ,nCol ,nToRow ,nToCol ,nWidth ,;
-      aColor[1] ,aColor[2] ,aColor[3] ,.t. ,.t., !empty(nStyle),nStyle ,!empty(nBrStyle),;
+   C_ELLIPSE(::Hdc ,nRow ,nCol ,nToRow ,nToCol ,nWidth , ;
+      aColor[1] ,aColor[2] ,aColor[3] ,.t. ,.t., !empty(nStyle),nStyle ,!empty(nBrStyle), ;
       nBrStyle, lBrushColor, aBrColor[1],aBrColor[2],aBrColor[3] )
    ::ReleaseDc()
 
@@ -2225,8 +2225,8 @@ METHOD Pie(nRow ,nCol ,nToRow ,nToCol,x1,y1,x2,y2,nWidth , aColor, lStyle, ;
    END
 
    ::GetDc()
-   C_PIE(::Hdc ,nRow ,nCol ,nToRow ,nToCol ,x1 ,y1 ,x2 ,y2 ,nWidth ,;
-      aColor[1] ,aColor[2] ,aColor[3] ,.t. ,.t., !empty(nStyle),nStyle ,!empty(nBrStyle),;
+   C_PIE(::Hdc ,nRow ,nCol ,nToRow ,nToCol ,x1 ,y1 ,x2 ,y2 ,nWidth , ;
+      aColor[1] ,aColor[2] ,aColor[3] ,.t. ,.t., !empty(nStyle),nStyle ,!empty(nBrStyle), ;
       nBrStyle, lBrushColor, aBrColor[1],aBrColor[2],aBrColor[3] )
    ::ReleaseDc()
 

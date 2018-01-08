@@ -28,7 +28,7 @@ FUNCTION AST_Browse(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -88,9 +88,9 @@ FUNCTION AST_Browse(cReadString,cTerminator)
    //       [ BREAK ]
    // La DALE-Aid Creative Solutions @ ... Command BROWSE Syntax:
    // ===========================================================
-   // @ <nRow>,<nCol> BROWSE <ControlName> OF <ParentwindowName> WIDTH <nWidth> HEIGHT <nHeight>;
-   //    HEADERS <acHeaders> WIDTHS <anWidths> WORKAREA <WorkAreaName> FIELDS <acFields>;
-   //    VALUE <nValue> FONT <cFontName> SIZE <nFontSize> ON DBLCLICK <OnDblClickProcedure> | <bBlock>;
+   // @ <nRow>,<nCol> BROWSE <ControlName> OF <ParentwindowName> WIDTH <nWidth> HEIGHT <nHeight> ;
+   //    HEADERS <acHeaders> WIDTHS <anWidths> WORKAREA <WorkAreaName> FIELDS <acFields> ;
+   //    VALUE <nValue> FONT <cFontName> SIZE <nFontSize> ON DBLCLICK <OnDblClickProcedure> | <bBlock> ;
    //    ON HEADCLICK <abBlock>
 
    aProperties_[ 1] := ALLTRIM(STRTRAN(aDefCommandList_[ 1],"DEFINE BROWSE",""))   // DEFINE BROWSE brwTopics
@@ -139,12 +139,12 @@ FUNCTION AST_Browse(cReadString,cTerminator)
    aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " BROWSE " +;
-      aProperties_[1] + " OF ~LDSC_Form " + aProperties_[4] + " " + aProperties_[5] + "; " + CRLF +;
-      LDCS_iLevel(3) + aProperties_[8] + " " + aProperties_[7] + " " +;
+   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " BROWSE " + ;
+      aProperties_[1] + " OF ~LDSC_Form " + aProperties_[4] + " " + aProperties_[5] + "; " + CRLF + ;
+      LDCS_iLevel(3) + aProperties_[8] + " " + aProperties_[7] + " " + ;
       aProperties_[9] + " " + aProperties_[10] + "; " + CRLF + ;
-      LDCS_iLevel(3) + aProperties_[11] + " " + aProperties_[12] +;
-      " ON DBLCLICK " + aProperties_[21] + "; " + CRLF +;
+      LDCS_iLevel(3) + aProperties_[11] + " " + aProperties_[12] + ;
+      " ON DBLCLICK " + aProperties_[21] + "; " + CRLF + ;
       LDCS_iLevel(3) + "ON HEADCLICK " + aProperties_[24] + CRLF
 
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF

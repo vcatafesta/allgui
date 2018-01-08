@@ -117,7 +117,7 @@ FUNCTION main()
 
                         FOR n_for = 1 to len( m_array )
                            nn := m_array[ n_for ]
-                           xx_var += alltrim(str( nn )) +space(10)+;
+                           xx_var += alltrim(str( nn )) +space(10)+ ;
                               form_1.ListBox_1.item( nn ) + chr(13)
                         NEXT
                         msginfo( xx_var , 'Items: ' + alltrim( str(form_1.listbox_1.ItemCount) ) )

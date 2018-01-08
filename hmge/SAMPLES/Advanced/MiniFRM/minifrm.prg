@@ -427,9 +427,9 @@ STATIC PROCEDURE EjecutoReporte
          ENDIF
 
          ******** Veo si cambio el grupo *********
-         IF HB_VALTOSTR(EVAL(aReportData[RP_GROUPS,nGroup,RG_EXP]),;
+         IF HB_VALTOSTR(EVAL(aReportData[RP_GROUPS,nGroup,RG_EXP]), ;
                aReportData[RP_GROUPS,nGroup,RG_TYPE]) != aGroupTotals[nGroup]
-            AADD( aRecordHeader, IF(nGroup==1,NationMsg(_RF_SUBTOTAL),;
+            AADD( aRecordHeader, IF(nGroup==1,NationMsg(_RF_SUBTOTAL), ;
                NationMsg(_RF_SUBSUBTOTAL)) )
             AADD( aRecordHeader, "" )
 
@@ -487,8 +487,8 @@ STATIC PROCEDURE EjecutoReporte
       IF HB_VALTOSTR(EVAL(aReportData[RP_GROUPS,nGroup,RG_EXP]),aReportData[RP_GROUPS,nGroup,RG_TYPE]) == aGroupTotals[nGroup]
       ELSE
          AADD( aRecordHeader, "" )
-         AADD( aRecordHeader, IF(nGroup==1,"** ","* ") +;
-            aReportData[RP_GROUPS,nGroup,RG_HEADER] + " " +;
+         AADD( aRecordHeader, IF(nGroup==1,"** ","* ") + ;
+            aReportData[RP_GROUPS,nGroup,RG_HEADER] + " " + ;
             HB_VALTOSTR(EVAL(aReportData[RP_GROUPS,nGroup,RG_EXP]), ;
             aReportData[RP_GROUPS,nGroup,RG_TYPE]) )
       ENDIF
@@ -534,7 +534,7 @@ STATIC PROCEDURE EjecutoReporte
 
    ************ Reseteo grupos ************
    FOR nGroup := 1 TO LEN(aReportData[RP_GROUPS])
-      aGroupTotals[nGroup] := HB_VALTOSTR(EVAL(aReportData[RP_GROUPS,nGroup,RG_EXP]),;
+      aGroupTotals[nGroup] := HB_VALTOSTR(EVAL(aReportData[RP_GROUPS,nGroup,RG_EXP]), ;
          aReportData[RP_GROUPS,nGroup,RG_TYPE])
    NEXT
 
@@ -543,7 +543,7 @@ STATIC PROCEDURE EjecutoReporte
       nMaxLines := 1
       FOR nCol := 1 TO LEN(aReportData[RP_COLUMNS])
          IF aReportData[RP_COLUMNS,nCol,RC_TYPE] $ "CM"
-            nMaxLines := MAX(XMLCOUNT(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP]),;
+            nMaxLines := MAX(XMLCOUNT(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP]), ;
                aReportData[RP_COLUMNS,nCol,RC_WIDTH]), nMaxLines)
          ENDIF
       NEXT
@@ -557,16 +557,16 @@ STATIC PROCEDURE EjecutoReporte
          FOR nLine := 1 TO nMaxLines
             ***** Cargo las variables tipo MEMO o CHARACTER **********
             IF aReportData[RP_COLUMNS,nCol,RC_TYPE] $ "CM"
-               cLine := XMEMOLINE(TRIM(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP])),;
+               cLine := XMEMOLINE(TRIM(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP])), ;
                   aReportData[RP_COLUMNS,nCol,RC_WIDTH], nLine )
                cLine := PADR( cLine, aReportData[RP_COLUMNS,nCol,RC_WIDTH] )
             ELSE
                IF nLine == 1
                   ********* Aqui le puse los separadores de miles, que no está por defecto en los frm
                   ********* Si se desea quitar, descomentar estas líneas y comentar las siguientes
-                  *                  cLine := TRANSFORM(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP]),;
+                  *                  cLine := TRANSFORM(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP]), ;
                   *                           aReportData[RP_COLUMNS,nCol,RC_PICT])
-                  cLine := TRANSFORM(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP]),;
+                  cLine := TRANSFORM(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP]), ;
                      ConvPic(aReportData[RP_COLUMNS,nCol,RC_PICT]))
 
                   cLine := PADR( cLine, aReportData[RP_COLUMNS,nCol,RC_WIDTH] )
@@ -672,7 +672,7 @@ STATIC PROCEDURE CabezalReporte
 
          ****** Agrego las líneas del cabezal al array *****
          FOR nHeadLine := 1 TO nLinesInHeader
-            AADD( aPageHeader, SPACE( 15 ) + PADC( TRIM( XMEMOLINE( LTRIM( aTempPgHeader[ nLine ] ),;
+            AADD( aPageHeader, SPACE( 15 ) + PADC( TRIM( XMEMOLINE( LTRIM( aTempPgHeader[ nLine ] ), ;
                nHeadingLength, nHeadLine ) ), nHeadingLength ) )
          NEXT nHeadLine
 
@@ -720,10 +720,10 @@ STATIC PROCEDURE CabezalReporte
             aPageHeader[ nLinesInHeader + nLine ] += SPACE( aReportData[RP_COLUMNS,nCol,RC_WIDTH] )
          ELSE
             IF aReportData[RP_COLUMNS,nCol,RC_TYPE] == "N"
-               aPageHeader[ nLinesInHeader + nLine ] += PADL(aReportData[RP_COLUMNS,nCol,RC_HEADER,nLine],;
+               aPageHeader[ nLinesInHeader + nLine ] += PADL(aReportData[RP_COLUMNS,nCol,RC_HEADER,nLine], ;
                   aReportData[RP_COLUMNS,nCol,RC_WIDTH])
             ELSE
-               aPageHeader[ nLinesInHeader + nLine ] += PADR(aReportData[RP_COLUMNS,nCol,RC_HEADER,nLine],;
+               aPageHeader[ nLinesInHeader + nLine ] += PADR(aReportData[RP_COLUMNS,nCol,RC_HEADER,nLine], ;
                   aReportData[RP_COLUMNS,nCol,RC_WIDTH])
             ENDIF
          ENDIF
@@ -986,7 +986,7 @@ FUNCTION __FrmLoad( cFrmFile )
 
          IF nFileError = F_OK
             *** Verifico que sea un FRM ****
-            IF BIN2W(SUBSTR(cFileBuff, 1, 2)) = 2 .AND.;
+            IF BIN2W(SUBSTR(cFileBuff, 1, 2)) = 2 .AND. ;
                   BIN2W(SUBSTR(cFileBuff, SIZE_FILE_BUFF - 1, 2)) = 2
                nFileError = F_OK
             ELSE

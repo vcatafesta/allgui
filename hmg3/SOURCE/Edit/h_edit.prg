@@ -319,9 +319,9 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
 
    // Propiedades de los botones.-------------------------------------------------
    _aBotones := { "btnCerrar", "btnNuevo", "btnEditar", ;
-      "btnBorrar", "btnBuscar", "btnIr",;
-      "btnListado","btnPrimero", "btnAnterior",;
-      "btnSiguiente", "btnUltimo", "btnGuardar",;
+      "btnBorrar", "btnBuscar", "btnIr", ;
+      "btnListado","btnPrimero", "btnAnterior", ;
+      "btnSiguiente", "btnUltimo", "btnGuardar", ;
       "btnCancelar" }
 
    // Defincinión de la ventana de edición.---------------------------------------
@@ -1324,12 +1324,12 @@ FUNCTION ABMListadoEvento( nEvento )
          nAnchoTitulo := HMG_LEN( _aCampos[nIndice] )
          nAnchoCampo  := _aEstructura[nIndice,3]
          IF _aEstructura[nIndice,2] == "D"
-            aAdd( _aAnchoCampo, iif( nAnchoTitulo > nAnchoCampo,;
-               nAnchoTitulo+4,;
+            aAdd( _aAnchoCampo, iif( nAnchoTitulo > nAnchoCampo, ;
+               nAnchoTitulo+4, ;
                nAnchoCampo+4 ) )
          ELSE
-            aAdd( _aAnchoCampo, iif( nAnchoTitulo > nAnchoCampo,;
-               nAnchoTitulo+2,;
+            aAdd( _aAnchoCampo, iif( nAnchoTitulo > nAnchoCampo, ;
+               nAnchoTitulo+2, ;
                nAnchoCampo+2 ) )
          ENDIF
       NEXT

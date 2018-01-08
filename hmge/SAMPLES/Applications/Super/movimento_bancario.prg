@@ -21,13 +21,13 @@ FUNCTION movimento_bancario()
       bancos->(dbskip())
    END
 
-   DEFINE WINDOW form_movban;
-         at 000,000;
-         WIDTH 800;
-         HEIGHT 605;
-         TITLE 'Movimentação Bancária';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_movban ;
+         at 000,000 ;
+         WIDTH 800 ;
+         HEIGHT 605 ;
+         TITLE 'Movimentação Bancária' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * botões (toolbar)
@@ -119,7 +119,7 @@ FUNCTION movimento_bancario()
 
       DEFINE SPLITBOX
          DEFINE GRID grid_movban
-            parent form_movban
+            PARENT form_movban
             COL 000
             ROW 105
             WIDTH 795
@@ -136,7 +136,7 @@ FUNCTION movimento_bancario()
       END SPLITBOX
 
       DEFINE LABEL rodape_000
-         parent form_movban
+         PARENT form_movban
          COL 005
          ROW 500
          VALUE 'Escolha o banco'
@@ -157,7 +157,7 @@ FUNCTION movimento_bancario()
    END comboboxex
 
    DEFINE LABEL rodape_001
-      parent form_movban
+      PARENT form_movban
       COL 005
       ROW 545
       VALUE 'Escolha o período'
@@ -169,7 +169,7 @@ FUNCTION movimento_bancario()
       TRANSPARENT .T.
    END LABEL
    DEFINE LABEL rodape_002
-      parent form_movban
+      PARENT form_movban
       COL 250
       ROW 545
       VALUE 'até'
@@ -180,26 +180,26 @@ FUNCTION movimento_bancario()
       FONTCOLOR _cinza_001
       TRANSPARENT .T.
    END LABEL
-   @ 540,140 datepicker dp_inicio;
-      parent form_movban;
-      VALUE date();
-      WIDTH 100;
+   @ 540,140 datepicker dp_inicio ;
+      PARENT form_movban ;
+      VALUE date() ;
+      WIDTH 100 ;
       FONT 'verdana' size 010
-   @ 540,280 datepicker dp_final;
-      parent form_movban;
-      VALUE date();
-      WIDTH 100;
+   @ 540,280 datepicker dp_final ;
+      PARENT form_movban ;
+      VALUE date() ;
+      WIDTH 100 ;
       FONT 'verdana' size 010
-   @ 540,390 buttonex botao_filtrar;
-      parent form_movban;
-      CAPTION 'Filtrar';
-      WIDTH 100 height 030;
-      ACTION atualizar();
-      bold;
+   @ 540,390 buttonex botao_filtrar ;
+      PARENT form_movban ;
+      CAPTION 'Filtrar' ;
+      WIDTH 100 height 030 ;
+      ACTION atualizar() ;
+      bold ;
       TOOLTIP 'Clique aqui para mostrar as informações com base no período selecionado'
 
    DEFINE LABEL rodape_003
-      parent form_movban
+      PARENT form_movban
       COL form_movban.width - 270
       ROW 545
       VALUE 'DUPLO CLIQUE : Alterar informação'
@@ -257,110 +257,110 @@ STATIC FUNCTION dados(parametro)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW form_dados;
-         at 000,000;
-         WIDTH 325;
-         HEIGHT 320;
-         TITLE (titulo);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_dados ;
+         at 000,000 ;
+         WIDTH 325 ;
+         HEIGHT 320 ;
+         TITLE (titulo) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 010,005 label lbl_000;
-         of form_dados;
-         VALUE 'Banco';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_000 ;
+         of form_dados ;
+         VALUE 'Banco' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,005 textbox tbox_000;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_banco;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 030,005 textbox tbox_000 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_banco ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_banco_2('form_dados','tbox_000')
-      @ 030,070 label lbl_nome_banco;
-         of form_dados;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 030,070 label lbl_nome_banco ;
+         of form_dados ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
-      @ 060,005 label lbl_001;
-         of form_dados;
-         VALUE 'Data';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 060,005 label lbl_001 ;
+         of form_dados ;
+         VALUE 'Data' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,005 textbox tbox_001;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_data;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 080,005 textbox tbox_001 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_data ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          date
-      @ 110,005 label lbl_002;
-         of form_dados;
-         VALUE 'Histórico';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 110,005 label lbl_002 ;
+         of form_dados ;
+         VALUE 'Histórico' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,005 textbox tbox_002;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_historico;
-         MAXLENGTH 030;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 160,005 label lbl_003;
-         of form_dados;
-         VALUE 'Entrada';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 130,005 textbox tbox_002 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_historico ;
+         MAXLENGTH 030 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 160,005 label lbl_003 ;
+         of form_dados ;
+         VALUE 'Entrada' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 180,005 getbox tbox_003;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_entrada;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 180,005 getbox tbox_003 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_entrada ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
-      @ 160,140 label lbl_004;
-         of form_dados;
-         VALUE 'Saída';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _vermelho_002;
+      @ 160,140 label lbl_004 ;
+         of form_dados ;
+         VALUE 'Saída' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _vermelho_002 ;
          TRANSPARENT
-      @ 180,140 getbox tbox_004;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_saida;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 180,140 getbox tbox_004 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_saida ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
 
       * linha separadora
@@ -569,13 +569,13 @@ STATIC FUNCTION getcode_banco_2(value)
    bancos->(ordsetfocus('nome'))
    bancos->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -595,7 +595,7 @@ STATIC FUNCTION getcode_banco_2(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_banco_2()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa

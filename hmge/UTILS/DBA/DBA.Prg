@@ -83,8 +83,8 @@ PROC Main( cOpFName )
 
          PROC RefrMenu()                           // Refresh Menu items
 
-            LOCA nMItem  :=  0,;
-               c1Item  := '',;
+            LOCA nMItem  :=  0, ;
+               c1Item  := '', ;
                b1Item
 
             FOR nMItem := 1 TO LEN( aMnuItems )
@@ -103,12 +103,12 @@ PROC Main( cOpFName )
             PROC RefrStBar( cMark )
 
                LOCA cDbgInfo := AnyToStr( cMark ) + ": " + ;
-                  "OpnDat : " + NTrim( nOpTablCo ) + "; " +;
-                  "CurDat : " + NTrim( nCurDatNo ) + "; " +;
-                  "OpnPag : " + NTrim( nOpnPagCo ) + "; " +;
-                  "CurPag : " + NTrim( nCurPagNo ) + "; " +;
-                  "1PagDt : " + NTrim( n1PagDtNo ) + "; " +;
-                  "BtnLen : " + NTrim( nBtnWidth ) ,;
+                  "OpnDat : " + NTrim( nOpTablCo ) + "; " + ;
+                  "CurDat : " + NTrim( nCurDatNo ) + "; " + ;
+                  "OpnPag : " + NTrim( nOpnPagCo ) + "; " + ;
+                  "CurPag : " + NTrim( nCurPagNo ) + "; " + ;
+                  "1PagDt : " + NTrim( n1PagDtNo ) + "; " + ;
+                  "BtnLen : " + NTrim( nBtnWidth ) , ;
                   aStatus  := {}
 
                IF lFBDebug
@@ -118,7 +118,7 @@ PROC Main( cOpFName )
                      aStatus  := { '', '', '' }
                   ELSE
                      aStatus  := { NTrim(nCurDatNo) + "°" + aOpnDatas[ nCurDatNo, 3 ] ,; // Full File Name
-                        PADC( NTrim( RECN() ) + '\' + NTrim( LASTREC() ) ,17) ,;
+                        PADC( NTrim( RECN() ) + '\' + NTrim( LASTREC() ) ,17) , ;
                         IF( CDIsTable() .AND. DELETED(),'*','') }
                   ENDIF
                   _SetItem ( "StatusBar", cMWinName, 1, aStatus[ 1 ]  )
@@ -141,7 +141,7 @@ PROC Main( cOpFName )
                   FUNC HasIndex()                          // Is Current Data Is a table and it has index ?
                      LOCA lRVal := .F.
                      IF CDIsTable()
-                        lRVal := ( LEN( aOpnDatas[ nCurDatNo ] ) > 5 .AND.;
+                        lRVal := ( LEN( aOpnDatas[ nCurDatNo ] ) > 5 .AND. ;
                            !EMPTY( aOpnDatas[ nCurDatNo, 6 ] ) )
                      ENDIF CDIsTable()
                      RETU lRVal // HasIndex()
@@ -167,8 +167,8 @@ PROC Main( cOpFName )
                         PROC Recents(;             // Set/Reset Recent ( Last Opened ) Datas ( Files )
                               aCurrents )  // Currently open data's full file names
 
-                           LOCA cRecsFNm := cProgFold + "\" + PROCNAME() + ".lst",;
-                              cRecsStr := '',;
+                           LOCA cRecsFNm := cProgFold + "\" + PROCNAME() + ".lst", ;
+                              cRecsStr := '', ;
                               c1FFName := ''
 
                            IF aCurrents == NIL
@@ -273,24 +273,24 @@ PROC Main( cOpFName )
 
                                        LOCA cDBAbout := ;
                                           "{\rtf1\ansi\ansicpg1254\deff0\deflang1055\deflangfe1055{\fonttbl{\f0\fswiss\fprq2\" + ;
-                                          "fcharset162 Verdana;}{\f1\fswiss\fprq2\fcharset0 Verdana;}}{\colortbl;\red0\green0\blue255;}"+;
-                                          "{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\nowidctlpar\ri-1418\f0\fs18\par"+;
-                                          "               HMG Data Base Assistant v." + ExeFD2Vrs() + "\par"+;
-                                          "\pard\nowidctlpar\ri-1748\qj\fs16\par                          \'a9 \cf1 esgici@gmail.com\par"+;
-                                          "\cf0\b\par     \b0 DBA\b  \b0 is an imitative work to the \'a9 \b dBASE III'\b0 s Assistant.\par"+;
-                                          "\par     It may be an easy tool for people who are familiar to \par"+;
-                                          "        this \b base\b0  architecture of  the whole  xBase family. \par"+;
-                                          "\par     Many thanks to : \par\par"+;
-                                          "            \b Antonio Linares  \b0 ( Initiator of \'a9 \b Harbour\b0  ) and\par"+;
-                                          "            \i Le Roy \b\i0 Roberto Lopez \b0 ( Initiator of \'a9 \b MiniGUI  \b0 ).\par"+;
-                                          "\par   Without this two big men and their volunteer coworkers, \par"+;
-                                          "\b       \b0 DBA ( and many others of course) couldn't be exist.\par"+;
-                                          "\par\pard\sb100\sa100             \cf1\lang1033\f1 http://www.Harbour-Project.org\cf0\lang1055\f0\par"+;
+                                          "fcharset162 Verdana;}{\f1\fswiss\fprq2\fcharset0 Verdana;}}{\colortbl;\red0\green0\blue255;}"+ ;
+                                          "{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\nowidctlpar\ri-1418\f0\fs18\par"+ ;
+                                          "               HMG Data Base Assistant v." + ExeFD2Vrs() + "\par"+ ;
+                                          "\pard\nowidctlpar\ri-1748\qj\fs16\par                          \'a9 \cf1 esgici@gmail.com\par"+ ;
+                                          "\cf0\b\par     \b0 DBA\b  \b0 is an imitative work to the \'a9 \b dBASE III'\b0 s Assistant.\par"+ ;
+                                          "\par     It may be an easy tool for people who are familiar to \par"+ ;
+                                          "        this \b base\b0  architecture of  the whole  xBase family. \par"+ ;
+                                          "\par     Many thanks to : \par\par"+ ;
+                                          "            \b Antonio Linares  \b0 ( Initiator of \'a9 \b Harbour\b0  ) and\par"+ ;
+                                          "            \i Le Roy \b\i0 Roberto Lopez \b0 ( Initiator of \'a9 \b MiniGUI  \b0 ).\par"+ ;
+                                          "\par   Without this two big men and their volunteer coworkers, \par"+ ;
+                                          "\b       \b0 DBA ( and many others of course) couldn't be exist.\par"+ ;
+                                          "\par\pard\sb100\sa100             \cf1\lang1033\f1 http://www.Harbour-Project.org\cf0\lang1055\f0\par"+ ;
                                        "\pard\nowidctlpar\ri-1748\qj\cf1             http://harbourminigui.googlepages.com\cf0\par}"
 
                                        LOCA cCmd3Head := 'Close'
 
-                                       DEFINE WINDOW frmAbout;
+                                       DEFINE WINDOW frmAbout ;
                                              AT 0, 0 ;
                                              WIDTH  374 ;
                                              HEIGHT 314 ;
@@ -334,8 +334,8 @@ PROC Main( cOpFName )
 
                                           LOCA dEFDate := FILEDATE( GetProgramFileName() )
 
-                                          LOCA cRVal   := NTrim( YEAR( dEFDate ) - 2007 ) + '.' +;
-                                             NTrim( MONT( dEFDate ) ) + '.' +;
+                                          LOCA cRVal   := NTrim( YEAR( dEFDate ) - 2007 ) + '.' + ;
+                                             NTrim( MONT( dEFDate ) ) + '.' + ;
                                              NTrim( DAY( dEFDate ) )
 
                                           RETU cRVal // ExeFD2Vrs()

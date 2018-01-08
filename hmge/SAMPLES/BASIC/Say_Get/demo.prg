@@ -2,7 +2,7 @@
    => ;
    CreateTextboxWithLabel( <(name)>, <nRow>, <nCol>, <cCaption>, <nW> )
 
-#xcommand END LBLTEXTBOX =>;
+#xcommand END LBLTEXTBOX => ;
 
 #include "hmg.ch"
 

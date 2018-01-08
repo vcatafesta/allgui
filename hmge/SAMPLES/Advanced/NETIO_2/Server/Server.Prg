@@ -54,50 +54,50 @@ FUNCTION Main
          ITEM 'Exit Server'     ACTION Form_1.Release
       END MENU
 
-      @ 10,10 FRAME Frame_1;
-         WIDTH  560;
-         HEIGHT 120;
+      @ 10,10 FRAME Frame_1 ;
+         WIDTH  560 ;
+         HEIGHT 120 ;
          OPAQUE
 
-      @ 20,20 LABEL Label_1;
-         WIDTH  40;
-         HEIGHT 20;
+      @ 20,20 LABEL Label_1 ;
+         WIDTH  40 ;
+         HEIGHT 20 ;
          VALUE "Port"
 
-      @ 20,110 TEXTBOX Text_1;
-         WIDTH  40;
-         HEIGHT 20;
-         VALUE c_Port;
+      @ 20,110 TEXTBOX Text_1 ;
+         WIDTH  40 ;
+         HEIGHT 20 ;
+         VALUE c_Port ;
          INPUTMASK "9999"
 
-      @ 50,20 LABEL Label_2;
-         WIDTH  90;
-         HEIGHT 20;
+      @ 50,20 LABEL Label_2 ;
+         WIDTH  90 ;
+         HEIGHT 20 ;
          VALUE "Database Path"
 
-      @ 50,110 TEXTBOX Text_2;
-         WIDTH  410;
-         HEIGHT 20;
-         VALUE c_Path;
-         READONLY;
+      @ 50,110 TEXTBOX Text_2 ;
+         WIDTH  410 ;
+         HEIGHT 20 ;
+         VALUE c_Path ;
+         READONLY ;
          MAXLENGTH 100
 
-      @ 50,530 BUTTON Button_1;
-         CAPTION "...";
-         ON CLICK SetProperty( "Form_1", "Text_2", "Value", GetFolder( "Database Path" ) );
-         WIDTH  30;
+      @ 50,530 BUTTON Button_1 ;
+         CAPTION "..." ;
+         ON CLICK SetProperty( "Form_1", "Text_2", "Value", GetFolder( "Database Path" ) ) ;
+         WIDTH  30 ;
          HEIGHT 20
 
-      @ 90,20 BUTTON Button_2;
-         CAPTION "Start Server";
-         ON CLICK ( Form_1.Hide, Write_Ini() );
-         WIDTH  100;
+      @ 90,20 BUTTON Button_2 ;
+         CAPTION "Start Server" ;
+         ON CLICK ( Form_1.Hide, Write_Ini() ) ;
+         WIDTH  100 ;
          HEIGHT 28
 
-      @ 90,460 BUTTON Button_3;
-         CAPTION "Close";
-         ON CLICK Form_1.Hide;
-         WIDTH  100;
+      @ 90,460 BUTTON Button_3 ;
+         CAPTION "Close" ;
+         ON CLICK Form_1.Hide ;
+         WIDTH  100 ;
          HEIGHT 28
 
    END WINDOW
@@ -164,7 +164,7 @@ FUNCTION Show_Status()
 
    IF !empty( pListenSocket )
       MsgInfo( "Hmg Server NetIO is running at Port: " ;
-         + AllTrim(Form_1.Text_1.Value) + CHR(13);
+         + AllTrim(Form_1.Text_1.Value) + CHR(13) ;
          + "Database Path : " + AllTrim(Form_1.Text_2.Value), c_TITLE )
    ELSE
       MsgInfo( "Hmg Server NetIO is stopped!", c_TITLE )

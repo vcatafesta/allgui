@@ -61,7 +61,7 @@ MEMVAR _HMG_SYSDATA_nControlHandle
 FUNCTION _DefineMainMenu ( Parent )
 
    IF valtype(Parent) == 'U'
-      Parent := _HMG_SYSDATA [ 223 ]
+      PARENT := _HMG_SYSDATA [ 223 ]
    ENDIF
 
    IF IsMainMenuDefined (Parent) == .T.     // ADD
@@ -499,7 +499,7 @@ FUNCTION _IsMenuItemEnabled ( ItemName , FormName )
 FUNCTION _DefineContextMenu ( Parent )
 
    IF valtype(Parent) == 'U'
-      Parent := _HMG_SYSDATA [ 223 ]
+      PARENT := _HMG_SYSDATA [ 223 ]
    ENDIF
 
    PUBLIC _HMG_SYSDATA_cButtonName := ""   // ADD
@@ -527,7 +527,7 @@ FUNCTION _DefineContextMenu ( Parent )
 FUNCTION _DefineNotifyMenu ( Parent )
 
    IF valtype(Parent) == 'U'
-      Parent := _HMG_SYSDATA [ 223 ]
+      PARENT := _HMG_SYSDATA [ 223 ]
    ENDIF
 
    PUBLIC _HMG_SYSDATA_cButtonName := ""   // ADD
@@ -555,7 +555,7 @@ FUNCTION _DefineNotifyMenu ( Parent )
 FUNCTION _DefineDropDownMenu ( cButton , Parent )
 
    IF valtype(Parent) == 'U'
-      Parent := _HMG_SYSDATA [ 223 ]
+      PARENT := _HMG_SYSDATA [ 223 ]
    ENDIF
 
    PUBLIC _HMG_SYSDATA_cButtonName := cButton   // ADD

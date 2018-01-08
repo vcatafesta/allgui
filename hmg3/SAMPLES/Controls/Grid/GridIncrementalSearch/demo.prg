@@ -38,35 +38,35 @@ FUNCTION Main
          MAIN
 
       @  10, 10 Label L1 ;
-         WIDTH 80;
-         HEIGHT 20;
+         WIDTH 80 ;
+         HEIGHT 20 ;
          VALUE "Search string:"
 
       @  10, 100 Label Label_WhatToSearch ;
-         WIDTH 600;
-         HEIGHT 20;
-         VALUE "???";
+         WIDTH 600 ;
+         HEIGHT 20 ;
+         VALUE "???" ;
          AUTOSIZE
 
       @  40, 10 Label L2 ;
-         WIDTH 120;
-         HEIGHT 20;
+         WIDTH 120 ;
+         HEIGHT 20 ;
          VALUE "Last pressed char:"
 
       @  40, 140 Label Label_PressedChar ;
-         WIDTH 120;
-         HEIGHT 20;
+         WIDTH 120 ;
+         HEIGHT 20 ;
          VALUE ""
 
       @ 80,10 GRID Grid_1 ;
          WIDTH 760 ;
          HEIGHT 500 ;
          HEADERS {'Last Name','First Name','Phone'} ;
-         WIDTHS {140,140,140};
+         WIDTHS {140,140,140} ;
          ITEMS aRows ;
-         VALUE 1;
-         EDIT;
-         JUSTIFY { GRID_JTFY_LEFT,GRID_JTFY_LEFT, GRID_JTFY_RIGHT };
+         VALUE 1 ;
+         EDIT ;
+         JUSTIFY { GRID_JTFY_LEFT,GRID_JTFY_LEFT, GRID_JTFY_RIGHT } ;
          ON KEY Proc_GridSearchString()
 
    END WINDOW

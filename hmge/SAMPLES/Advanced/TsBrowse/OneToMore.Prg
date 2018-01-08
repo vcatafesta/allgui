@@ -26,8 +26,8 @@ FUNCTION OneToMore(Invert)
    DEFINE WINDOW Form_10 At 40,60 ;
          WIDTH 807 HEIGHT 427 ;
          TITLE if(invert,"More To One Demo","One To More Demo") ;
-         ICON "Demo.ico";
-         CHILD;
+         ICON "Demo.ico" ;
+         CHILD ;
 
       DEFINE STATUSBAR
          STATUSITEM '' WIDTH 0

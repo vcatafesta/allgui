@@ -41,9 +41,9 @@ PROCEDURE Main
       aSort[ 4 ] := .F.
       aSort[ Len(aSort) ] := .F.
       /*
-      @ 10,10 BROWSE Brw_1;
+      @ 10,10 BROWSE Brw_1 ;
       WIDTH 600 ;
-      HEIGHT 420;
+      HEIGHT 420 ;
       WORKAREA TEST ;
       HEADERS aHead ;
       WIDTHS aWidth ;

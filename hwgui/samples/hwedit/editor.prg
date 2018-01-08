@@ -25,48 +25,48 @@
 FUNCTION Main()
 
    LOCAL oPanel ,oIcon := HIcon():AddRESOURCE( "MAINICON" )
-   PUBLIC alterado:=.F.,;
-      ID_COLORB:=8454143,;
-      ID_COLORF:=0,;
+   PUBLIC alterado:=.F., ;
+      ID_COLORB:=8454143, ;
+      ID_COLORF:=0, ;
       ID_FONT:=HFont():Add( "Courier New",0,-12 )
 
    Set(_SET_INSERT)
-   PRIVATE oMainWindow,;
-      maxi:=.f.,;
-      oText,;
-      TEXTo:= '',;
-      vText,;
-      aTermMetr := { 800 },;
-      auto:=5001,;
-      oIconchild := HIcon():AddFile( "prg.ico" ),;
-      form_panel,;
-      cfontenome:='Courier New',;
+   PRIVATE oMainWindow, ;
+      maxi:=.f., ;
+      oText, ;
+      TEXTo:= '', ;
+      vText, ;
+      aTermMetr := { 800 }, ;
+      auto:=5001, ;
+      oIconchild := HIcon():AddFile( "prg.ico" ), ;
+      form_panel, ;
+      cfontenome:='Courier New', ;
       TEXTo:=''
 
    // variaveis para indiomas
-   PUBLIC ID_indioma:=8001,;
-      m_arquivo,;
-      m_novo,;
-      m_abrir,;
-      m_salvar,;
-      m_salvarcomo,;
-      m_fechar,;
-      m_sair,;
-      m_config,;
-      m_fonte,;
-      m_color_b,;
-      m_indioma,;
-      reiniciar,;
-      m_janela,;
-      m_lado,;
-      m_ajuda,;
-      m_sobre,;
-      desenvolvimento,;
-      Bnovo,;
-      babrir,;
-      Bsalvar,;
-      m_pesquisa,;
-      m_linha,;
+   PUBLIC ID_indioma:=8001, ;
+      m_arquivo, ;
+      m_novo, ;
+      m_abrir, ;
+      m_salvar, ;
+      m_salvarcomo, ;
+      m_fechar, ;
+      m_sair, ;
+      m_config, ;
+      m_fonte, ;
+      m_color_b, ;
+      m_indioma, ;
+      reiniciar, ;
+      m_janela, ;
+      m_lado, ;
+      m_ajuda, ;
+      m_sobre, ;
+      desenvolvimento, ;
+      Bnovo, ;
+      babrir, ;
+      Bsalvar, ;
+      m_pesquisa, ;
+      m_linha, ;
       m_site
 
    // carregando as variaveis de configuracoes
@@ -139,18 +139,18 @@ FUNCTION Main()
    SET CENTURY ON
    PUBLIC funcoes:={}
 
-   INIT WINDOW oMainWindow MDI;
-      ICON oIcon;
+   INIT WINDOW oMainWindow MDI ;
+      ICON oIcon ;
       TITLE "HwEDIT for [x]Harbour/Hwgui" ;
       MENUPOS 4
 
    MENU OF oMainWindow
 
    MENU TITLE  "&"+m_arquivo
-   MENUITEM "&"+m_novo+chr(9)+'CTRL+N' ACTION novo();
+   MENUITEM "&"+m_novo+chr(9)+'CTRL+N' ACTION novo() ;
       ACCELERATOR FCONTROL,Asc("N")
    MENUITEM "&"+m_abrir ACTION texto()
-   MENUITEM "&"+m_salvar+chr(9)+'CTRL+S' ACTION Salvar_Projeto(1);
+   MENUITEM "&"+m_salvar+chr(9)+'CTRL+S' ACTION Salvar_Projeto(1) ;
       ACCELERATOR FCONTROL,Asc("S")
    SEPARATOR
    MENUITEM "&"+m_salvarcomo ACTION Salvar_Projeto(2)
@@ -207,12 +207,12 @@ FUNCTION novo(tipo)
    alterado:=.F.
    i:=alltrim(str(auto))
    oFunc:={}
-   PRIVATE vText&i:=Memoread(vText),;
+   PRIVATE vText&i:=Memoread(vText), ;
       oEdit&i
    INIT  window o&i MDICHILD TITLE 'Novo Arquivo-'+i //STYLE WS_VISIBLE + WS_MAXIMIZE
    painel2(o&I,oFunc)
    //@ 650, 2 get COMBOBOX oCombo ITEMS oFunc SIZE 140,20
-   @ 01,31 richedit oEdit&i TEXT vText&i SIZE 799,451;
+   @ 01,31 richedit oEdit&i TEXT vText&i SIZE 799,451 ;
       OF o&I ID ID_TEXTO BACKCOLOR ID_COLORB FONT ID_FONT ;
       STYLE WS_HSCROLL+WS_VSCROLL+ES_LEFT+ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL
    auto++
@@ -235,7 +235,7 @@ FUNCTION Texto()
    LOCAL oIcone := HIcon():AddFile( "CHILD.ico" )
    LOCAL cBuffer   := ''
    LOCAL NPOS      := 0
-   LOCAL nlenpos,;
+   LOCAL nlenpos, ;
       oCombo
 
    m_a001:={}
@@ -293,8 +293,8 @@ FUNCTION Texto()
    alterado:=.F.
    INIT  WINDOW o&i MDICHILD TITLE vText
    painel2(o&I,oFunc)
-   @ 01,31 RichEdit oEdit&i TEXT vText&i SIZE 799,451;//481;
-      OF o&I ID ID_TEXTO;
+   @ 01,31 RichEdit oEdit&i TEXT vText&i SIZE 799,451;//481 ;
+      OF o&I ID ID_TEXTO ;
       STYLE WS_HSCROLL+WS_VSCROLL+ES_LEFT+ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL
    oEdit&i:bOther := {|o,m,wp,lp|richeditProc(o,m,wp,lp)}
    oEdit&i:lChanged := .f.

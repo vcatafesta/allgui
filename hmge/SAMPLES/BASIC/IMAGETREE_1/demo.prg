@@ -19,7 +19,7 @@ FUNCTION main()
          END POPUP
       END MENU
 
-      DEFINE TREE Tree_1 AT 10,10 WIDTH 320 HEIGHT 400 VALUE 3;
+      DEFINE TREE Tree_1 AT 10,10 WIDTH 320 HEIGHT 400 VALUE 3 ;
             NODEIMAGES {"0.bmp"} ON DBLCLICK ChangeItemImage()
 
          NODE 'Root' IMAGES {"2.bmp"}

@@ -155,7 +155,7 @@ METHOD New( cHeading, bData, cPicture, aColors, aAlign, nWidth, ;
       lBitMap, lEdit, bValid, lNoLite, cOrder, cFooting, ;
       bPrevEdit, bPostEdit, nEditMove, lFixLite, a3DLook, ;
       bWhen, oBrw, cData, cWhen, cValid, cPrevEdit, cPostEdit, cMsg, cToolTip, lTotal, ;
-      lSpinner, bUp, bDown, bMin, bMax, cError, cSpcHeading,;
+      lSpinner, bUp, bDown, bMin, bMax, cError, cSpcHeading, ;
       cDefData, cName ) CLASS TSColumn
 
    LOCAL nEle, uAlign, xVar, aList, ;
@@ -252,7 +252,7 @@ METHOD New( cHeading, bData, cPicture, aColors, aAlign, nWidth, ;
          aTmpColor[ 12 ] := CLR_GRAY                       , ; // nClrSeleBack  NO focused
          aTmpColor[ 13 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrOrdeFore
          aTmpColor[ 14 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrLine
-         aTmpColor[ 15 ] := CLR_BLACK ,;
+         aTmpColor[ 15 ] := CLR_BLACK , ;
          aTmpColor[ 16 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrSupHeadFore
          aTmpColor[ 17 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrSupHeadBack
          aTmpColor[ 18 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrSpecHeadFore
@@ -304,7 +304,7 @@ METHOD New( cHeading, bData, cPicture, aColors, aAlign, nWidth, ;
 
    DEFAULT aTmpAlign[ 1 ] := DT_LEFT, ;
       aTmpAlign[ 2 ] := DT_CENTER, ;
-      aTmpAlign[ 3 ] := DT_RIGHT,;
+      aTmpAlign[ 3 ] := DT_RIGHT, ;
       aTmpAlign[ 4 ] := DT_CENTER
 
    FOR nEle := 1 TO 4

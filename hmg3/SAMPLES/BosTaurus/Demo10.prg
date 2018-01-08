@@ -10,9 +10,9 @@
 
 /*
 
-BT_aFILTER := { k1, k2, k3,;
-k4, k5, k6,;
-k7, k8, k9,;
+BT_aFILTER := { k1, k2, k3, ;
+k4, k5, k6, ;
+k7, k8, k9, ;
 divisor, bias}
 
 *   RULES OF THUMB TO CREATE USER DEFINED FILTERS       *
@@ -148,16 +148,16 @@ FUNCTION MAIN
    PRIVATE hBitmap_Source := 0
    PRIVATE hBitmap := 0
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  700;
-         HEIGHT 600;
-         VIRTUAL WIDTH  1000;
-         VIRTUAL HEIGHT 1000;
-         TITLE "Demo10: Digital Image Processing";
-         MAIN;
-         ON INIT     Proc_ON_INIT ();
-         ON RELEASE  Proc_ON_RELEASE ();
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  700 ;
+         HEIGHT 600 ;
+         VIRTUAL WIDTH  1000 ;
+         VIRTUAL HEIGHT 1000 ;
+         TITLE "Demo10: Digital Image Processing" ;
+         MAIN ;
+         ON INIT     Proc_ON_INIT () ;
+         ON RELEASE  Proc_ON_RELEASE () ;
          ON PAINT    Proc_ON_PAINT ()
 
       DEFINE MAIN MENU

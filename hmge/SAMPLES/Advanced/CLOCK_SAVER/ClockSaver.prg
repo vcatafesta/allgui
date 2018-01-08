@@ -157,10 +157,10 @@ PROCEDURE DrawClock()
 
 FUNCTION MsgAbout()
 
-   RETURN MsgInfo( PROGRAM + VERSION + CRLF +;
-      "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF +;
-      "eMail: gfilatov@inbox.ru" + CRLF + CRLF +;
-      "This Screen Saver is Freeware!" + CRLF +;
+   RETURN MsgInfo( PROGRAM + VERSION + CRLF + ;
+      "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
+      "eMail: gfilatov@inbox.ru" + CRLF + CRLF + ;
+      "This Screen Saver is Freeware!" + CRLF + ;
       padc("Copying is allowed!", 30), "About..." )
 
 FUNCTION RadToDeg(x); RETURN 180.0*x/PI()

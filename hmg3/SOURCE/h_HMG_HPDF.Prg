@@ -49,12 +49,12 @@ FUNCTION _HMG_HPDF_INIT ( cPDFFile, nOrientation, nPaperSize, nPaperLength, nPap
       IF lLog
          nFhandle := FCreate( 'UsedFonts.htm', 0 )
          Html_Table_Ini(nFHandle,"TruType Fonts used",1024,3)
-         HTML_TABLE_LINE( nFHandle,{{HTML_BOLD(nFHandle,"Line (pixels)"),"#ABABAB",.t.},;
-            {HTML_BOLD(nFHandle,"Column (pixels)"),"#ABABAB",.t.},;
-            {HTML_BOLD(nFHandle,"Page"),"#ABABAB",.t.},;
-            {HTML_BOLD(nFHandle,"Given Font Name"),"#ABABAB",.f.},;
-            {HTML_BOLD(nFHandle,"Size"),"#ABABAB",.t.},;
-            {HTML_BOLD(nFHandle,"Properties"),"#ABABAB",.f.},;
+         HTML_TABLE_LINE( nFHandle,{{HTML_BOLD(nFHandle,"Line (pixels)"),"#ABABAB",.t.}, ;
+            {HTML_BOLD(nFHandle,"Column (pixels)"),"#ABABAB",.t.}, ;
+            {HTML_BOLD(nFHandle,"Page"),"#ABABAB",.t.}, ;
+            {HTML_BOLD(nFHandle,"Given Font Name"),"#ABABAB",.f.}, ;
+            {HTML_BOLD(nFHandle,"Size"),"#ABABAB",.t.}, ;
+            {HTML_BOLD(nFHandle,"Properties"),"#ABABAB",.f.}, ;
             {HTML_BOLD(nFHandle,"Reassigned Font Name"),"#ABABAB",.f.}} )
       ENDIF
 
@@ -362,12 +362,12 @@ FUNCTION _HMG_HPDF_PRINT ( nRow, nCol, cFontName, nFontSize, nRColor, nGColor, n
       HPDF_Page_EndText( _HMG_SYSDATA[ 150 ][ 7 ] )
 
       IF lDoLog
-         HTML_TABLE_LINE(nFHandle,{{StrZero(nRow,4,0)+" ("+StrZero(nyPos,7,2)+")","#FFFFFF",.t.},;
-            {StrZero(nCol,4,0)+" ("+StrZero(nxPos,7,2)+")","#FFFFFF",.t.},;
-            {StrZero(_HMG_SYSDATA[ 150 ][ 13 ],3,0),"#FFFFFF",.t.},;
-            {PadR(If(Empty(cTtfFnt),"<Default>",cTtfFnt),If(HMG_Len(cTtfFnt)>30,HMG_Len(cTtfFnt),30)),"#FFFFFF",.f.},;
-            {StrZero(nFontSize,2,0),"#FFFFFF",.t.},;
-            {If(lBold,"BOLD" ,Space(4))+If(lItalic," ITALIC",Space(7)),"#FFFFFF",.f.},;
+         HTML_TABLE_LINE(nFHandle,{{StrZero(nRow,4,0)+" ("+StrZero(nyPos,7,2)+")","#FFFFFF",.t.}, ;
+            {StrZero(nCol,4,0)+" ("+StrZero(nxPos,7,2)+")","#FFFFFF",.t.}, ;
+            {StrZero(_HMG_SYSDATA[ 150 ][ 13 ],3,0),"#FFFFFF",.t.}, ;
+            {PadR(If(Empty(cTtfFnt),"<Default>",cTtfFnt),If(HMG_Len(cTtfFnt)>30,HMG_Len(cTtfFnt),30)),"#FFFFFF",.f.}, ;
+            {StrZero(nFontSize,2,0),"#FFFFFF",.t.}, ;
+            {If(lBold,"BOLD" ,Space(4))+If(lItalic," ITALIC",Space(7)),"#FFFFFF",.f.}, ;
             {cFontName,If(If(Empty(cTtfFnt),HMG_Len(cFontName),HMG_Len(cTtfFnt))==HMG_Len(cFontName),"#FFFFFF","#FFFF66"),.f.}})
       ENDIF
    ENDIF
@@ -466,12 +466,12 @@ FUNCTION _HMG_HPDF_MULTILINE_PRINT ( nRow, nCol, nToRow, nToCol, cFontName, nFon
       HPDF_Page_EndText( _HMG_SYSDATA[ 150 ][ 7 ] )
 
       IF lDoLog // Pablo June, 2014
-         HTML_TABLE_LINE(nFHandle,{{StrZero(nRow,4,0)+" ("+StrZero(nyPos,7,2)+")","#FFFFFF",.t.},;
-            {StrZero(nCol,4,0)+" ("+StrZero(nxPos,7,2)+")","#FFFFFF",.t.},;
-            {StrZero(_HMG_SYSDATA[ 150 ][ 13 ],3,0),"#FFFFFF",.t.},;
-            {PadR(If(Empty(cTtfFnt),"<Default>",cTtfFnt),If(HMG_Len(cTtfFnt)>30,HMG_Len(cTtfFnt),30)),"#FFFFFF",.f.},;
-            {StrZero(nFontSize,2,0),"#FFFFFF",.t.},;
-            {If(lBold,"BOLD" ,Space(4))+If(lItalic," ITALIC",Space(7)),"#FFFFFF",.f.},;
+         HTML_TABLE_LINE(nFHandle,{{StrZero(nRow,4,0)+" ("+StrZero(nyPos,7,2)+")","#FFFFFF",.t.}, ;
+            {StrZero(nCol,4,0)+" ("+StrZero(nxPos,7,2)+")","#FFFFFF",.t.}, ;
+            {StrZero(_HMG_SYSDATA[ 150 ][ 13 ],3,0),"#FFFFFF",.t.}, ;
+            {PadR(If(Empty(cTtfFnt),"<Default>",cTtfFnt),If(HMG_Len(cTtfFnt)>30,HMG_Len(cTtfFnt),30)),"#FFFFFF",.f.}, ;
+            {StrZero(nFontSize,2,0),"#FFFFFF",.t.}, ;
+            {If(lBold,"BOLD" ,Space(4))+If(lItalic," ITALIC",Space(7)),"#FFFFFF",.f.}, ;
             {cFontName,If(If(Empty(cTtfFnt),HMG_Len(cFontName),HMG_Len(cTtfFnt))==HMG_Len(cFontName),"#FFFFFF","#FFFF66"),.f.}})
       ENDIF
    ENDIF
@@ -1945,19 +1945,19 @@ FUNCTION _HMG_HPDF_SetFont( cFntName, lBold, lItalic )
 
 FUNCTION _HMG_HPDF_SeekHaruFonts(cFontName,lBold,lItalic)
 
-   LOCAL aHpdf_Font := {"Courier",;
-      "Courier-Bold",;
-      "Courier-Oblique",;
-      "Courier-BoldOblique",;
-      "Helvetica",;
-      "Helvetica-Bold",;
-      "Helvetica-Oblique",;
-      "Helvetica-BoldOblique",;
-      "Times-Roman",;
-      "Times-Bold",;
-      "Times-Italic",;
-      "Times-BoldItalic",;
-      "Symbol",;
+   LOCAL aHpdf_Font := {"Courier", ;
+      "Courier-Bold", ;
+      "Courier-Oblique", ;
+      "Courier-BoldOblique", ;
+      "Helvetica", ;
+      "Helvetica-Bold", ;
+      "Helvetica-Oblique", ;
+      "Helvetica-BoldOblique", ;
+      "Times-Roman", ;
+      "Times-Bold", ;
+      "Times-Italic", ;
+      "Times-BoldItalic", ;
+      "Symbol", ;
       "ZapfDingbats"}
    LOCAL nPos, cFnt, cFont, cFntHaru
 
@@ -2101,16 +2101,16 @@ FUNCTION HTML_TABLE_INI(nFHandle,cTit,nWidth,nPading)
    DEFAULT nPading := 3
    DEFAULT nWidth := 1024
 
-   cStyle := '<html><head>'+CRLF+;
-      '<style>'+CRLF+;
-      'table,th,td'+CRLF+;
-      '{'+CRLF+;
-      'border:1px solid black;'+CRLF+;
-      'border-collapse:collapse;'+CRLF+;
-      '}'+CRLF+;
-      '</style>'+CRLF+;
-      '</head>'+CRLF+;
-      '<body>'+CRLF+;
+   cStyle := '<html><head>'+CRLF+ ;
+      '<style>'+CRLF+ ;
+      'table,th,td'+CRLF+ ;
+      '{'+CRLF+ ;
+      'border:1px solid black;'+CRLF+ ;
+      'border-collapse:collapse;'+CRLF+ ;
+      '}'+CRLF+ ;
+      '</style>'+CRLF+ ;
+      '</head>'+CRLF+ ;
+      '<body>'+CRLF+ ;
       '<table style='+Chr(34)+'width:'+StrZero(nWidth,4,0)+'px'+Chr(34)+' cellpadding='+Chr(34)+Str(nPading,1,0)+Chr(34)+'>'
    cTit := alltrim( cTit )
    FWriteLine( nFHandle,cStyle)

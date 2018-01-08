@@ -23,11 +23,11 @@ PROCEDURE Test_DBF
       Value[5] := if ( Value[5] == .T. , 'Yes' , 'No' ), ;
       Value[6] := "<memo>" } )
 
-   @ 10,10 GRID Grid_1 OF Form1;
+   @ 10,10 GRID Grid_1 OF Form1 ;
       WIDTH 300 ;
       HEIGHT 340 ;
       HEADERS {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6'} ;
-      WIDTHS {100,140,140,100,100,100};
+      WIDTHS {100,140,140,100,100,100} ;
       VIRTUAL ;
       ITEMCOUNT Len(aData) ;
       ON QUERYDATA QueryTest(aData) ;

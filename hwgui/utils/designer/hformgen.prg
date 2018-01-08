@@ -1161,7 +1161,7 @@ STATIC FUNCTION MessagesProc( oDlg, msg, wParam, lParam )
       ENDIF
       // :LFB
       IF oCtrl != NIL
-         statusbarmsg(,'x: '+ltrim(str(oCtrl:nLeft))+'  y: '+ltrim(str(oCtrl:nTop)),;
+         statusbarmsg(,'x: '+ltrim(str(oCtrl:nLeft))+'  y: '+ltrim(str(oCtrl:nTop)), ;
             'w: '+ltrim(str(oCtrl:nWidth))+'  h: '+ltrim(str(oCtrl:nHeight)))
       ELSE
          statusbarmsg(,'','')
@@ -1339,7 +1339,7 @@ STATIC FUNCTION LButtonDown( oDlg, xPos, yPos )
    ENDIF
    // :LFB
    IF oCtrl != NIL
-      statusbarmsg(,'x: '+ltrim(str(oCtrl:nLeft))+'  y: '+ltrim(str(oCtrl:nTop)),;
+      statusbarmsg(,'x: '+ltrim(str(oCtrl:nLeft))+'  y: '+ltrim(str(oCtrl:nTop)), ;
          'w: '+ltrim(str(oCtrl:nWidth))+'  h: '+ltrim(str(oCtrl:nHeight)))
    ENDIF
    // :ENDLFB

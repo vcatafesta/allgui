@@ -18,9 +18,9 @@ FUNCTION Main()
          TITLE 'HMG Demo' ;
          ICON 'DEMO.ICO' ;
          MAIN ;
-         ON INIT AutoAdjust( ThisWindow.Name );
-         ON MAXIMIZE AutoAdjust( ThisWindow.Name );
-         ON SIZE AutoAdjust( ThisWindow.Name );
+         ON INIT AutoAdjust( ThisWindow.Name ) ;
+         ON MAXIMIZE AutoAdjust( ThisWindow.Name ) ;
+         ON SIZE AutoAdjust( ThisWindow.Name ) ;
          FONT 'Arial' SIZE 10
 
       ON KEY ESCAPE ACTION ThisWindow.Release

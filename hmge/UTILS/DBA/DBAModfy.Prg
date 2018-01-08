@@ -28,23 +28,23 @@ PROC T_MdfFormat()
 
                   PROC T_MdfTable()                         // Modify Table Structure
 
-                     LOCA aStruct  := DBSTRUCT(),;
-                        aNewStru := {},;
+                     LOCA aStruct  := DBSTRUCT(), ;
+                        aNewStru := {}, ;
                         aDBFInf  := { aOpnDatas[ nCurDatNo, 4 ],;                   // 1. file name
                         LUPDATE(),;                                   // 2. Last Modification Date
                         LASTREC(),;                                   // 3. Record Count
                         RECSIZE(),;                                   // 4. Record Length
                         FCOUNT() },;                                  // 5. Field Count
-                        cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ),;
-                        cTmpFNam  := '',;
-                        nWAreaNo  := SELE(),;
-                        cCurFFNm  := aOpnDatas[ nCurDatNo, 3 ],;
-                        cAlias    := aOpnDatas[ nCurDatNo, 2 ],;
-                        cOldFFNm  := '',;
-                        nOldFNum  :=  1,;
-                        cMOldFNam := '',;
-                        cMNewFNam := '',;
-                        cMemoFNam := '',;
+                        cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ), ;
+                        cTmpFNam  := '', ;
+                        nWAreaNo  := SELE(), ;
+                        cCurFFNm  := aOpnDatas[ nCurDatNo, 3 ], ;
+                        cAlias    := aOpnDatas[ nCurDatNo, 2 ], ;
+                        cOldFFNm  := '', ;
+                        nOldFNum  :=  1, ;
+                        cMOldFNam := '', ;
+                        cMNewFNam := '', ;
+                        cMemoFNam := '', ;
                         cMemoTFNm := ''
 
                      * MsgMulty( RDDNAME() )

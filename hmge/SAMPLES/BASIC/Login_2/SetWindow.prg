@@ -52,17 +52,17 @@ PROCEDURE CheckUser()
 
    IF GetImageInfo( cPictFNm, @nPicWidth, @nPicHeight )
 
-      DEFINE WINDOW frmCheckUser;
-            AT 0,0;
-            WIDTH nPicWidth;
-            HEIGHT nPicHeight;
-            BACKCOLOR aPicBackColor;
-            NOSYSMENU;
-            NOSIZE;
-            NOMINIMIZE;
-            NOMAXIMIZE;
-            NOCAPTION;
-            TOPMOST;
+      DEFINE WINDOW frmCheckUser ;
+            AT 0,0 ;
+            WIDTH nPicWidth ;
+            HEIGHT nPicHeight ;
+            BACKCOLOR aPicBackColor ;
+            NOSYSMENU ;
+            NOSIZE ;
+            NOMINIMIZE ;
+            NOMAXIMIZE ;
+            NOCAPTION ;
+            TOPMOST ;
             CHILD ;
             ON INIT SetCoords() ;
             ON MOUSEDRAG MoveForm() ;
@@ -110,7 +110,7 @@ PROCEDURE ConfirmUser()
    LOCAL n2Right, n2Left, nRepeat
    LOCAL nColumn, nStep
 
-   LOCAL cUserID := frmCheckUser.txbUserID.Value,;
+   LOCAL cUserID := frmCheckUser.txbUserID.Value, ;
       cPassword := frmCheckUser.txbPasswrd.Value
 
    IF cUserID == "demo" .AND. cPassword == "demo"
@@ -145,13 +145,13 @@ PROCEDURE ConfirmUser()
 
    PROC MoveForm()
 
-      LOCAL nCurWRow  := frmCheckUser.Row,;
+      LOCAL nCurWRow  := frmCheckUser.Row, ;
          nCurWCol  := frmCheckUser.Col
 
-      LOCAL nCursRowC := GetCursorRow(),;
+      LOCAL nCursRowC := GetCursorRow(), ;
          nCursColC := GetCursorCol()
 
-      LOCAL nDiffVert := nCursRow - nCurWRow,;
+      LOCAL nDiffVert := nCursRow - nCurWRow, ;
          nDiffHorz := nCursCol - nCurWCol
 
       nCurWRow := MAX( nCursRowC - nDiffVert, 0 )

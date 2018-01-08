@@ -39,7 +39,7 @@ FUNCTION Main
          aRows[ i + 20 ] := aClone( aRows[ i ] )
       NEXT i
 
-      @ 10,10 GRID Grid_2 OBJ oGrid;
+      @ 10,10 GRID Grid_2 OBJ oGrid ;
          WIDTH 350 ;
          HEIGHT 330 ;
          HEADERS { 'Last Name','First Name','Phone','Job' } ;

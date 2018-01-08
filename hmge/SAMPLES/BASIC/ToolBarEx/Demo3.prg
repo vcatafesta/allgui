@@ -66,12 +66,12 @@ FUNCTION Main
          BUTTON Button_1 ;
             CAPTION '&New' ;
             PICTURE 'Btn01.bmp' ;
-            ACTION MsgInfo('Click! 1');
+            ACTION MsgInfo('Click! 1') ;
 
          BUTTON Button_2 ;
             CAPTION '&Open' ;
             PICTURE 'Btn02.bmp' ;
-            TOOLTIP 'Open file';
+            TOOLTIP 'Open file' ;
             ACTION MsgInfo('Click! 2')
 
          BUTTON Button_3 ;
@@ -82,18 +82,18 @@ FUNCTION Main
          BUTTON Button_4 ;
             CAPTION '&Save' ;
             PICTURE 'Btn04.bmp' ;
-            ACTION MsgInfo('Click! 4');
+            ACTION MsgInfo('Click! 4') ;
             SEPARATOR
 
          BUTTON Button_5 ;
             CAPTION '&Printer' ;
             PICTURE 'Btn11.bmp' ;
-            ACTION MsgInfo('Click! 5');
+            ACTION MsgInfo('Click! 5') ;
 
          BUTTON Button_6 ;
             CAPTION 'Pre&view' ;
             PICTURE 'Btn12.bmp' ;
-            ACTION MsgInfo('Click! 6');
+            ACTION MsgInfo('Click! 6') ;
 
       END TOOLBAR
 
@@ -102,12 +102,12 @@ FUNCTION Main
       BUTTON Button_1a ;
          CAPTION '&New' ;
          PICTURE 'Btn01.bmp' ;
-         ACTION MsgInfo('Click! 1');
+         ACTION MsgInfo('Click! 1') ;
 
       BUTTON Button_2a ;
          CAPTION '&Open' ;
          PICTURE 'Btn02.bmp' ;
-         TOOLTIP 'Open file';
+         TOOLTIP 'Open file' ;
          ACTION MsgInfo('Click! 2')
 
       BUTTON Button_3a ;
@@ -118,18 +118,18 @@ FUNCTION Main
       BUTTON Button_4a ;
          CAPTION '&Save' ;
          PICTURE 'Btn04.bmp' ;
-         ACTION MsgInfo('Click! 4');
+         ACTION MsgInfo('Click! 4') ;
          SEPARATOR
 
       BUTTON Button_5a ;
          CAPTION '&Printer' ;
          PICTURE 'Btn11.bmp' ;
-         ACTION MsgInfo('Click! 5');
+         ACTION MsgInfo('Click! 5') ;
 
       BUTTON Button_6a ;
          CAPTION 'Pre&view' ;
          PICTURE 'Btn12.bmp' ;
-         ACTION MsgInfo('Click! 6');
+         ACTION MsgInfo('Click! 6') ;
 
    END TOOLBAR
 

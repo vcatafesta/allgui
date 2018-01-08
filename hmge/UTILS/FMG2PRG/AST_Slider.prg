@@ -42,7 +42,7 @@ FUNCTION AST_Slider(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
 
    LOCAL sReadLine := ""
@@ -84,10 +84,10 @@ FUNCTION AST_Slider(cReadString,cTerminator)
    //      [ HELPID <nHelpId> ]
    //      [ INVISIBLE ]
    //      [ NOTABSTOP ]
-   // @ <nRow> ,<nCol> SLIDER <ControlName> OF <ParentWindowName> RANGE <nRangeMin> , <nRangeMax>;
+   // @ <nRow> ,<nCol> SLIDER <ControlName> OF <ParentWindowName> RANGE <nRangeMin> , <nRangeMax> ;
    //    VALUE <nValue> WIDTH <nWidth> HEIGHT <nHeight> TOOLTIP <cToolTipText> ON CHANGE <OnChangeProcedure>
-   // @ <nRow> ,<nCol> SLIDER <ControlName> OF <ParentWindowName> RANGE <nRangeMin> , <nRangeMax>;
-   //    VALUE <nValue> WIDTH <nWidth> HEIGHT <nHeight> TOOLTIP <cToolTipText>;
+   // @ <nRow> ,<nCol> SLIDER <ControlName> OF <ParentWindowName> RANGE <nRangeMin> , <nRangeMax> ;
+   //    VALUE <nValue> WIDTH <nWidth> HEIGHT <nHeight> TOOLTIP <cToolTipText> ;
    //    ON CHANGE <OnChangeProcedure> VERTICAL
 
    DO CASE
@@ -112,13 +112,13 @@ FUNCTION AST_Slider(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      // @ <nRow> ,<nCol> SLIDER <ControlName> OF <ParentWindowName> RANGE <nRangeMin> , <nRangeMax>;
+      // @ <nRow> ,<nCol> SLIDER <ControlName> OF <ParentWindowName> RANGE <nRangeMin> , <nRangeMax> ;
       //    VALUE <nValue> WIDTH <nWidth> HEIGHT <nHeight> TOOLTIP <cToolTipText> ON CHANGE <OnChangeProcedure>
 
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " SLIDER " +;
-         aProperties_[1] + " OF ~LDCS_Form RANGE " + aProperties_[6] + "," + aProperties_[7] + ";" +;
-         CRLF +;
-         LDCS_iLevel(3) + aProperties_[8] + " " + aProperties_[4] + " " + aProperties_[5] + " " +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " SLIDER " + ;
+         aProperties_[1] + " OF ~LDCS_Form RANGE " + aProperties_[6] + "," + aProperties_[7] + ";" + ;
+         CRLF + ;
+         LDCS_iLevel(3) + aProperties_[8] + " " + aProperties_[4] + " " + aProperties_[5] + " " + ;
          aProperties_[9] + " " + aProperties_[10] + CRLF
 
    CASE cSyntax == "VERTICAL"
@@ -143,15 +143,15 @@ FUNCTION AST_Slider(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      // @ <nRow> ,<nCol> SLIDER <ControlName> OF <ParentWindowName> RANGE <nRangeMin> , <nRangeMax>;
-      //    VALUE <nValue> WIDTH <nWidth> HEIGHT <nHeight> TOOLTIP <cToolTipText>;
+      // @ <nRow> ,<nCol> SLIDER <ControlName> OF <ParentWindowName> RANGE <nRangeMin> , <nRangeMax> ;
+      //    VALUE <nValue> WIDTH <nWidth> HEIGHT <nHeight> TOOLTIP <cToolTipText> ;
       //    ON CHANGE <OnChangeProcedure> VERTICAL
 
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " SLIDER " +;
-         aProperties_[1] + " OF ~LDCS_Form RANGE " + aProperties_[6] + "," + aProperties_[7] + ";" +;
-         CRLF +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " SLIDER " + ;
+         aProperties_[1] + " OF ~LDCS_Form RANGE " + aProperties_[6] + "," + aProperties_[7] + ";" + ;
+         CRLF + ;
          LDCS_iLevel(3) + aProperties_[8] + " " + aProperties_[4] + " " + aProperties_[5] + " " + ;
-         aProperties_[9] + ";" + CRLF +;
+         aProperties_[9] + ";" + CRLF + ;
          LDCS_iLevel(3) + aProperties_[10] + " VERTICAL" + CRLF
 
    ENDCASE

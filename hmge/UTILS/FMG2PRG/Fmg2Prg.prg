@@ -32,13 +32,13 @@ FUNCTION Main()
    PRIVATE cOutputFile   := ""
    PRIVATE cTargetFolder := ""
 
-   DEFINE WINDOW frmFmg2Prg;
-         AT 0,0;
-         WIDTH 483 HEIGHT 328;
-         TITLE "HMG Prg (Source Code) Generator";
-         ICON "DaleAid.ico";
-         MAIN NOMAXIMIZE;
-         ON INTERACTIVECLOSE ValidationInProgress := TRUE;
+   DEFINE WINDOW frmFmg2Prg ;
+         AT 0,0 ;
+         WIDTH 483 HEIGHT 328 ;
+         TITLE "HMG Prg (Source Code) Generator" ;
+         ICON "DaleAid.ico" ;
+         MAIN NOMAXIMIZE ;
+         ON INTERACTIVECLOSE ValidationInProgress := TRUE ;
          FONT "Arial" SIZE 9
 
       DEFINE MAINMENU
@@ -52,53 +52,53 @@ FUNCTION Main()
 
       END MENU
 
-      @ 23, 20 LABEL lblSourceFile OF frmFmg2Prg VALUE "&Source HMG Form File:";
+      @ 23, 20 LABEL lblSourceFile OF frmFmg2Prg VALUE "&Source HMG Form File:" ;
          WIDTH 135 HEIGHT 20 FONT "ARIAL" SIZE 9
 
-      @ 20,157 TEXTBOX txbSourceFile OF frmFmg2Prg HEIGHT 24 VALUE "" WIDTH 250;
+      @ 20,157 TEXTBOX txbSourceFile OF frmFmg2Prg HEIGHT 24 VALUE "" WIDTH 250 ;
          FONT "ARIAL" SIZE 9 TOOLTIP "" MAXLENGTH 2000 ON LOSTFOCUS Validation(This.Name)
 
-      @ 18,410 BUTTON btnSourceFile OF frmFmg2Prg;
-         PICTURE "folder.bmp" ACTION ButtonSourceFile();
-         WIDTH 28 HEIGHT 27;
+      @ 18,410 BUTTON btnSourceFile OF frmFmg2Prg ;
+         PICTURE "folder.bmp" ACTION ButtonSourceFile() ;
+         WIDTH 28 HEIGHT 27 ;
          TOOLTIP "Specify source file to convert."
 
       @ 53, 22 FRAME FrameOutput OF frmFmg2Prg CAPTION "Output:" WIDTH 432 HEIGHT 80
 
-      @ 73, 30 LABEL lblTargetFolder OF frmFmg2Prg VALUE "Output Folder Location:";
+      @ 73, 30 LABEL lblTargetFolder OF frmFmg2Prg VALUE "Output Folder Location:" ;
          WIDTH 130 HEIGHT 20 FONT "ARIAL" SIZE 9
 
-      @ 70,166 TEXTBOX txbTargetFolder OF frmFmg2Prg HEIGHT 24 VALUE "" WIDTH 250;
+      @ 70,166 TEXTBOX txbTargetFolder OF frmFmg2Prg HEIGHT 24 VALUE "" WIDTH 250 ;
          FONT "ARIAL" SIZE 9 TOOLTIP "" MAXLENGTH 2000
 
-      @ 69,419 BUTTON btnTargetFolder OF frmFmg2Prg;
+      @ 69,419 BUTTON btnTargetFolder OF frmFmg2Prg ;
          PICTURE "folder.bmp" ACTION frmFmg2Prg.txbTargetFolder.Value := GETFOLDER() WIDTH 28 HEIGHT 27
 
-      @ 103,30 LABEL lblOutputFileName OF frmFmg2Prg VALUE "Output File Name:";
+      @ 103,30 LABEL lblOutputFileName OF frmFmg2Prg VALUE "Output File Name:" ;
          WIDTH 100 HEIGHT 20 FONT "ARIAL" SIZE 9
 
-      @ 100,140 TEXTBOX txbOutputFileName OF frmFmg2Prg HEIGHT 24;
-         VALUE "" WIDTH 305;
+      @ 100,140 TEXTBOX txbOutputFileName OF frmFmg2Prg HEIGHT 24 ;
+         VALUE "" WIDTH 305 ;
          FONT "ARIAL" SIZE 9 TOOLTIP "" MAXLENGTH 255 ON LOSTFOCUS Validation(This.Name)
 
-      @ 240,20 BUTTON btnFmg2Prg OF frmFmg2Prg CAPTION "Generate &Prg Source File";
+      @ 240,20 BUTTON btnFmg2Prg OF frmFmg2Prg CAPTION "Generate &Prg Source File" ;
          ACTION AST_CodeConverter() WIDTH 250 HEIGHT 24
 
-      @ 240,270 BUTTON btnCancel OF frmFmg2Prg CAPTION "&Exit" ACTION frmFmg2Prg.Release;
+      @ 240,270 BUTTON btnCancel OF frmFmg2Prg CAPTION "&Exit" ACTION frmFmg2Prg.Release ;
          WIDTH 185 HEIGHT 24
 
       @ 140,22 FRAME FrameOption OF frmFmg2Prg CAPTION "File Convertion Options:" WIDTH 432 HEIGHT 90
 
-      @ 157,40 CHECKBOX chkDirectives OF frmFmg2PrG;
-         CAPTION "Include Compiler Directives";
+      @ 157,40 CHECKBOX chkDirectives OF frmFmg2PrG ;
+         CAPTION "Include Compiler Directives" ;
          WIDTH 390 HEIGHT 18 VALUE .F.
 
-      @ 178,40 CHECKBOX chkSourceComment OF frmFmg2Prg;
-         CAPTION "Insert Source File Comment Header";
+      @ 178,40 CHECKBOX chkSourceComment OF frmFmg2Prg ;
+         CAPTION "Insert Source File Comment Header" ;
          WIDTH 390 HEIGHT 18 VALUE .F.
 
-      @ 201,40 CHECKBOX chkFunctionComment OF frmFmg2Prg;
-         CAPTION "Insert Function Comment Header";
+      @ 201,40 CHECKBOX chkFunctionComment OF frmFmg2Prg ;
+         CAPTION "Insert Function Comment Header" ;
          WIDTH 390 HEIGHT 18 VALUE .F.
 
    END WINDOW
@@ -148,7 +148,7 @@ STATIC FUNCTION Validation(ControlName)
             frmFmg2Prg.txbTargetFolder.Value := SUBSTR(Tvar1,1,TVar2-1)
 
             IF FILE(frmFmg2Prg.txbTargetFolder.Value + "\" + frmFmg2Prg.txbOutputFileName.Value)
-               MSGSTOP("A source code of the same name as the output file name is already exist." + CRLF +;
+               MSGSTOP("A source code of the same name as the output file name is already exist." + CRLF + ;
                   "Please choose another name for the output file.","HMG Assistant Write Error")
                frmFmg2Prg.txbOutputFilename.Setfocus()
                BREAK
@@ -157,7 +157,7 @@ STATIC FUNCTION Validation(ControlName)
 
       CASE ControlObject == "TXBOUTPUTFILENAME"
          IF FILE(frmFmg2Prg.txbTargetFolder.Value + "\" + frmFmg2Prg.txbOutputFileName.Value)
-            MSGSTOP("A source code of the same name as the output file name is already exist." + CRLF +;
+            MSGSTOP("A source code of the same name as the output file name is already exist." + CRLF + ;
                "Please choose another name for the output file.","HMG Assistant Write Error")
             frmFmg2Prg.txbOutputFilename.Setfocus()
             BREAK
@@ -309,72 +309,72 @@ STATIC FUNCTION AST_CodeConverter()
 
 STATIC FUNCTION LDCS_TextStub()
 
-   LOCAL cDate    := "",;
+   LOCAL cDate    := "", ;
       acMonth_ := {"January","February","March","April","May","June","July","August","September","October","November","December"}
 
-   cDate := "Date Created: " + ALLTRIM(STR(DAY(DATE()))) + " " + acMonth_[ MONTH(DATE()) ] + " " +;
+   cDate := "Date Created: " + ALLTRIM(STR(DAY(DATE()))) + " " + acMonth_[ MONTH(DATE()) ] + " " + ;
       ALLTRIM(STR(YEAR(DATE()))) + " Time: " + TIME()
 
-   RETURN "*************************************************************************************" + CRLF +;
-      "** This file has been automatically generated by HMG Assistant® Release 2007" + CRLF +;
-      "** " + CRLF +;
-      "** " + cDate + CRLF +;
-      "** " + CRLF +;
-      "** HMG Assistant® Release 2007  Created by Danny A. del Pilar" + CRLF +;
-      "** Copyright © 2007 La DALE-Aid® Creative Solutions, All Rights Reserved." + CRLF +;
-      "**"  + CRLF +;
+   RETURN "*************************************************************************************" + CRLF + ;
+      "** This file has been automatically generated by HMG Assistant® Release 2007" + CRLF + ;
+      "** " + CRLF + ;
+      "** " + cDate + CRLF + ;
+      "** " + CRLF + ;
+      "** HMG Assistant® Release 2007  Created by Danny A. del Pilar" + CRLF + ;
+      "** Copyright © 2007 La DALE-Aid® Creative Solutions, All Rights Reserved." + CRLF + ;
+      "**"  + CRLF + ;
       "*************************************************************************************" + CRLF + CRLF
 
 STATIC FUNCTION LDCS_SourceComment()
 
-   RETURN CRLF +;
-      "/************************************************************************************" + CRLF +;
-      " * Program Name....: " + CRLF +;
-      " * System Name.....: " + CRLF +;
-      " * Purpose ........: " + CRLF +;
-      " *" + CRLF +;
-      " * Syntax..........: Harbour MiniGUI Library by Roberto Lopez <harbourminigui@gmail.com>" + CRLF +;
-      " *                   http://harbourminigui.googlepages.com" + CRLF +;
-   " *  " + CRLF +;
-      " * Author..........: Danny A. del Pilar" + CRLF +;
-      " * E-mail..........: dhaine_adp@yahoo.com" + CRLF +;
-      " * Note............: Copyright © 2007 Danny A. del Pilar, All Rights Reserved." + CRLF +;
-      " *                   La DALE-Aid® Creative Solutions, Philippines" + CRLF +;
-      " *" + CRLF +;
-      " * Date Created....: "  + CRLF +;
-      " * Last Updated....: " + CRLF +;
-      " * " + CRLF +;
-      " * CHANGE LOG:" + CRLF +;
-      " * "  + CRLF +;
-      " * "  + CRLF +;
-      " * "  + CRLF +;
-      " * TODO LIST:" + CRLF +;
-      " * "  + CRLF +;
-      " * "  + CRLF +;
-      " * Revision History:" + CRLF +;
-      " * -----------------" + CRLF +;
-      " * " + CRLF +;
-      " * " + CRLF +;
+   RETURN CRLF + ;
+      "/************************************************************************************" + CRLF + ;
+      " * Program Name....: " + CRLF + ;
+      " * System Name.....: " + CRLF + ;
+      " * Purpose ........: " + CRLF + ;
+      " *" + CRLF + ;
+      " * Syntax..........: Harbour MiniGUI Library by Roberto Lopez <harbourminigui@gmail.com>" + CRLF + ;
+      " *                   http://harbourminigui.googlepages.com" + CRLF + ;
+   " *  " + CRLF + ;
+      " * Author..........: Danny A. del Pilar" + CRLF + ;
+      " * E-mail..........: dhaine_adp@yahoo.com" + CRLF + ;
+      " * Note............: Copyright © 2007 Danny A. del Pilar, All Rights Reserved." + CRLF + ;
+      " *                   La DALE-Aid® Creative Solutions, Philippines" + CRLF + ;
+      " *" + CRLF + ;
+      " * Date Created....: "  + CRLF + ;
+      " * Last Updated....: " + CRLF + ;
+      " * " + CRLF + ;
+      " * CHANGE LOG:" + CRLF + ;
+      " * "  + CRLF + ;
+      " * "  + CRLF + ;
+      " * "  + CRLF + ;
+      " * TODO LIST:" + CRLF + ;
+      " * "  + CRLF + ;
+      " * "  + CRLF + ;
+      " * Revision History:" + CRLF + ;
+      " * -----------------" + CRLF + ;
+      " * " + CRLF + ;
+      " * " + CRLF + ;
       " *************************************************************************************/" + CRLF
 
 STATIC FUNCTION LDCS_FunctionComment()
 
-   RETURN CRLF +;
-      "**************************************************************************************" + CRLF +;
-      "** Function Name...:" + CRLF +;
-      "** Called by.......:" + CRLF +;
-      "**" + CRLF +;
-      "** Syntax..........:" + CRLF +;
-      "**" + CRLF +;
-      "** Parameters......:" + CRLF +;
-      "**" + CRLF +;
-      "** Returns.........:" + CRLF +;
-      "**" + CRLF +;
-      "** Description.....:" + CRLF +;
-      "**" + CRLF +;
-      "** Notes...........:" + CRLF +;
-      "**" + CRLF +;
-      "***************************************************************************************" + CRLF +;
+   RETURN CRLF + ;
+      "**************************************************************************************" + CRLF + ;
+      "** Function Name...:" + CRLF + ;
+      "** Called by.......:" + CRLF + ;
+      "**" + CRLF + ;
+      "** Syntax..........:" + CRLF + ;
+      "**" + CRLF + ;
+      "** Parameters......:" + CRLF + ;
+      "**" + CRLF + ;
+      "** Returns.........:" + CRLF + ;
+      "**" + CRLF + ;
+      "** Description.....:" + CRLF + ;
+      "**" + CRLF + ;
+      "** Notes...........:" + CRLF + ;
+      "**" + CRLF + ;
+      "***************************************************************************************" + CRLF + ;
       "function Main()" + CRLF
 
 STATIC FUNCTION LDCS_CompilerOptions()

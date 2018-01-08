@@ -10,10 +10,10 @@ MEMVAR _HMG_SYSDATA
 
 FUNCTION MAIN
 
-   DEFINE WINDOW Form_1;
-         AT 0,0;
-         WIDTH 1000;
-         HEIGHT 700;
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 1000 ;
+         HEIGHT 700 ;
          MAIN
 
       DEFINE LABEL Label_1
@@ -91,8 +91,8 @@ PROCEDURE ProcDrawGraph()
 #define COLOR2   { 255, 102,  10 }
 #define COLOR3   {  55, 201,  48 }
 
-         aSerieValues := { { 14280,  20420,  12870,  25347,   7640 },;
-            {  8350,  10315,  15870,   5347,  12340 },;
+         aSerieValues := { { 14280,  20420,  12870,  25347,   7640 }, ;
+            {  8350,  10315,  15870,   5347,  12340 }, ;
             { 12345,  -8945,  10560,  15600,  17610 } }
 
          aSerieYNames :=   { "Jan",  "Feb",  "Mar",  "Apr",  "May" }

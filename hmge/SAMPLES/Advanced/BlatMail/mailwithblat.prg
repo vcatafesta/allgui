@@ -295,7 +295,7 @@ METHOD SetCommandLine() CLASS BLATMAIL
    IF ::lDontUseRegistry
 
       * Basic SMTP server information
-      ::cCommand+='-server '+::cSMTPServer+' -f '+::cSendAddress+;
+      ::cCommand+='-server '+::cSMTPServer+' -f '+::cSendAddress+ ;
          IIF(::nSMTPPort!=25,' -port '+LTRIM(STR(::nSMTPPort,3,0)),'')+' '
 
       * Login for SMTP
@@ -493,14 +493,14 @@ METHOD SetProfile(cProfile) CLASS BLATMAIL
       * No SMTP logins required
       CallSend('-install '+::cSMTPServer+' '+::cSendAddress+' - '+LTRIM(STR(::nSMTPPort,3,0)) + cActualProfile)
    ELSE
-      CallSend('-install '+::cSMTPServer+' '+::cSendAddress+' - '+LTRIM(STR(::nSMTPPort,3,0))+' '+cActualProfile;
+      CallSend('-install '+::cSMTPServer+' '+::cSendAddress+' - '+LTRIM(STR(::nSMTPPort,3,0))+' '+cActualProfile ;
          +' '+::cSMTPLogin+' '+::cSMTPPassword+' -q')
    ENDIF
 
    * IF POP3 login is needed then set that
 
    IF !EMPTY(::cPOP3Server).AND.!EMPTY(::cPOP3Login)
-      CallSend('-installPOP3 '+::cPOP3Server+' - - '+LTRIM(STR(::nPOP3Port,3,0))+' '+::cProfile+' '+::cPOP3Login;
+      CallSend('-installPOP3 '+::cPOP3Server+' - - '+LTRIM(STR(::nPOP3Port,3,0))+' '+::cProfile+' '+::cPOP3Login ;
          +' '+::cPOP3Password+' -q')
    ENDIF
 

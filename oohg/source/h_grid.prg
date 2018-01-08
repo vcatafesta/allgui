@@ -1552,7 +1552,7 @@ METHOD EditItem2( nItem, aItems, aEditControls, aMemVars, cTitle ) CLASS TGrid
 
       IF lSplitWindow
          DEFINE SPLITBOX
-            DEFINE WINDOW 0 OBJ oWnd;
+            DEFINE WINDOW 0 OBJ oWnd ;
                   WIDTH nWidth ;
                   HEIGHT nControlsMaxHeight ;
                   VIRTUAL HEIGHT nRow + 20 ;

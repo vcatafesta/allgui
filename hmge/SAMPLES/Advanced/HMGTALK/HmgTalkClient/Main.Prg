@@ -138,7 +138,7 @@ FUNCTION Read_MSG()
                IF  Main.Check_1.Value
                   FOR i := 1 to len( a_Msgs )
                      MsgBalloon( Alltrim( a_Msgs[i][2] ), ;
-                        Alltrim( a_Msgs[i][1] ) +;
+                        Alltrim( a_Msgs[i][1] ) + ;
                         " Say:" )
                   NEXT i
                ENDIF

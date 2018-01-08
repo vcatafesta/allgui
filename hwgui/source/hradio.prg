@@ -77,7 +77,7 @@ METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle ) CLASS HRadioGroup
    RETURN SELF
 
 METHOD NewRg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
-      cCaption, oFont, bInit, bSize,tcolor, bColor,bClick,;
+      cCaption, oFont, bInit, bSize,tcolor, bColor,bClick, ;
       bGFocus,lTransp ) CLASS HRadioGroup
 
    ::oGroupCurrent := Self
@@ -251,7 +251,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
    ::title   := cCaption
    ::oGroup  := HRadioGroup():oGroupCurrent
    ::Enabled := ! Hwg_BitAnd( nStyle, WS_DISABLED ) > 0
-   ::style   := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), BS_RADIOBUTTON + ; // BS_AUTORADIOBUTTON+;
+   ::style   := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), BS_RADIOBUTTON + ; // BS_AUTORADIOBUTTON+ ;
       BS_NOTIFY + ;  // WS_CHILD + WS_VISIBLE
       IIf( ::oGroup != NIL .AND. Empty( ::oGroup:aButtons ), WS_GROUP , 0 ) )
    ::Super:New( oWndParent, nId, ::Style, nLeft, nTop, nWidth, nHeight, ;

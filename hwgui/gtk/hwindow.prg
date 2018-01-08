@@ -106,7 +106,7 @@ CLASS VAR szAppName  SHARED INIT "HwGUI_App"
    ENDCLASS
 
 METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
-      bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,;
+      bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther, ;
       cAppName,oBmp,cHelp,nHelpId ) CLASS HWindow
 
    ::oDefaultParent := Self

@@ -10,8 +10,8 @@ STATIC pantadat := "1"
 STATIC recitip := 1
 STATIC jacinto, jeranio, alfa
 
-FIELD NOMBRE,DIRECCION,LOCALIDAD,PAIS,CODPOST,;
-   MAIL,PROFESIO,RELACION,TELE1,TELE2,TELE3,;
+FIELD NOMBRE,DIRECCION,LOCALIDAD,PAIS,CODPOST, ;
+   MAIL,PROFESIO,RELACION,TELE1,TELE2,TELE3, ;
    TELE4,TELE5,TELE6,TELE7,OBSERV1,OBSERV2,OBSERTO
 
 PROCEDURE Main
@@ -232,7 +232,7 @@ PROCEDURE Main
       END STATUSBAR
 
       @ 227 , 342 LABEL LABEL_T1 ;
-         VALUE 'Person in process: ';
+         VALUE 'Person in process: ' ;
          WIDTH 200 ;
          TRANSPARENT
 
@@ -323,7 +323,7 @@ PROCEDURE Main
                FONT "Arial" SIZE 9 ;
                BOLD ;
                BACKCOLOR {250,250,210} ;
-               MAXLENGTH 7;
+               MAXLENGTH 7 ;
                UPPERCASE
 
             @ 150, 95 TEXTBOX Control_M7 ;
@@ -332,7 +332,7 @@ PROCEDURE Main
                FONT "Arial" SIZE 9 ;
                BOLD ;
                BACKCOLOR {250,250,210} ;
-               MAXLENGTH 50;
+               MAXLENGTH 50 ;
                UPPERCASE
 
             @ 174, 95 TEXTBOX Control_M8 ;

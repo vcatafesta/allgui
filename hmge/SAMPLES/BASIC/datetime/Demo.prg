@@ -81,7 +81,7 @@ FUNCTION Main
       END DATEPICKER
 
       @ 60,10 DATEPICKER Date_2 ;
-         WIDTH 170;
+         WIDTH 170 ;
          VALUE Date() ;
          TOOLTIP "DatePicker Control ShowNone Dateformat dd/MM/yyyy" ;
          SHOWNONE ;
@@ -101,14 +101,14 @@ FUNCTION Main
       END TIMEPICKER
 
       @ 180,10 TIMEPICKER Time_2 ;
-         WIDTH 80;
+         WIDTH 80 ;
          TOOLTIP "Time_2 TimePicker Control ShowNone HH:mm" ;
          SHOWNONE ;
          TIMEFORMAT "HH:mm" ;
          VALUE "22:25"
 
       @ 130,10 TIMEPICKER Time_3 ;
-         WIDTH 170;
+         WIDTH 170 ;
          TOOLTIP " Time_3 TimePicker Control  " ;
          TIMEFORMAT "'Current Time 'HH:mm:ss"
 
@@ -118,36 +118,36 @@ FUNCTION Main
 
       @ 10,210 BROWSE Browse_1 WIDTH 260 HEIGHT 180 ;
          WORKAREA TEST ;
-         HEADERS {"Date","TimeShort","TimeLong","Remarks"};
-         WIDTHS {40,40,40,40};
+         HEADERS {"Date","TimeShort","TimeLong","Remarks"} ;
+         WIDTHS {40,40,40,40} ;
          FIELDS { 'Test->Datev' , 'Test->Timev' , 'Test->Timev1' , 'Test->Remarks'} ;
          ON CHANGE {|| (  Form_1.Date_5.Refresh , Form_1.Time_4.Refresh , Form_1.Time_5.Refresh )} ;
          FONT "MS Sans serif" SIZE 09
 
       @ 210,210 DATEPICKER Date_5 ;
-         WIDTH 180;
+         WIDTH 180 ;
          TOOLTIP "Date_5 DatePicker Control ShowNone 'Date 'dd/MM/yyyy" ;
          FIELD test->Datev  ;
          DATEFORMAT "'Date 'dd/MM/yyyy" ;
-         ON LOSTFOCUS {|| (This.Save,Form_1.Browse_1.Refresh) };
+         ON LOSTFOCUS {|| (This.Save,Form_1.Browse_1.Refresh) } ;
          ON CHANGE {|| (This.Save,Form_1.Browse_1.Refresh) }
 
       @ 250,210 TIMEPICKER Time_4 ;
-         WIDTH 180;
+         WIDTH 180 ;
          TOOLTIP "Time_4 TimePicker Control ShowNone HH:mm" ;
          SHOWNONE ;
          FIELD test->Timev  ;
          TIMEFORMAT "'Time Short' HH:mm " ;
-         ON LOSTFOCUS {|| (This.Save,Form_1.Browse_1.Refresh) };
+         ON LOSTFOCUS {|| (This.Save,Form_1.Browse_1.Refresh) } ;
          ON CHANGE {|| (This.Save,Form_1.Browse_1.Refresh) }
 
       @ 290,210 TIMEPICKER Time_5 ;
-         WIDTH 180;
+         WIDTH 180 ;
          TOOLTIP "Time_5 TimePicker Control ShowNone HH:mm:ss" ;
          SHOWNONE ;
          FIELD test->Timev1  ;
          TIMEFORMAT "' Time Long 'HH:mm:ss" ;
-         ON LOSTFOCUS {|| (This.Save,Form_1.Browse_1.Refresh) };
+         ON LOSTFOCUS {|| (This.Save,Form_1.Browse_1.Refresh) } ;
          ON CHANGE {|| (This.Save,Form_1.Browse_1.Refresh) }
 
    END WINDOW

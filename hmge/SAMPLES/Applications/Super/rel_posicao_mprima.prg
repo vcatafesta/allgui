@@ -12,30 +12,30 @@ programador : marcelo neves
 
 FUNCTION posicao_mprima()
 
-   DEFINE WINDOW form_estoque_mprima;
-         at 000,000;
-         WIDTH 400;
-         HEIGHT 250;
-         TITLE 'Posição do estoque (matéria prima)';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_estoque_mprima ;
+         at 000,000 ;
+         WIDTH 400 ;
+         HEIGHT 250 ;
+         TITLE 'Posição do estoque (matéria prima)' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
-      @ 010,010 label lbl_001;
-         of form_estoque_mprima;
-         VALUE 'Este relatório irá listar todas as matérias primas em';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,010 label lbl_001 ;
+         of form_estoque_mprima ;
+         VALUE 'Este relatório irá listar todas as matérias primas em' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,010 label lbl_002;
-         of form_estoque_mprima;
-         VALUE 'estoque, mostrando a quantidade atual disponível.';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,010 label lbl_002 ;
+         of form_estoque_mprima ;
+         VALUE 'estoque, mostrando a quantidade atual disponível.' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
 
       * linha separadora

@@ -26,8 +26,8 @@ FUNCTION Main
          ROW 0 COL 0 ;
          WIDTH 455 HEIGHT 280 ;
          TITLE PROGRAM ;
-         ICON "ICON_MAIN";
-         WINDOWTYPE MAIN;
+         ICON "ICON_MAIN" ;
+         WINDOWTYPE MAIN ;
          NOSIZE NOMAXIMIZE NOMINIMIZE ;
          FONT 'Tahoma' SIZE 10
 
@@ -42,7 +42,7 @@ FUNCTION Main
 
       @ 100,20 PROGRESSBAR Pg_1 ;
          RANGE 0,100 ;
-         VALUE 0;
+         VALUE 0 ;
          WIDTH 410 HEIGHT 34 ;
          TOOLTIP "Progress of downloading"
 
@@ -53,19 +53,19 @@ FUNCTION Main
 
       @ 180,40 BUTTONEX BUTTON_1 ;
          CAPTION "Open folder" ;
-         ACTION OpenFolder();
+         ACTION OpenFolder() ;
          WIDTH 120 HEIGHT 38 ;
          FONT 'Tahoma' SIZE 12 BOLD
 
       @ 180,170 BUTTONEX BUTTON_2 ;
          CAPTION "Download file" ;
-         ACTION ButtonMain();
+         ACTION ButtonMain() ;
          WIDTH 130 HEIGHT 38 ;
          FONT 'Tahoma' SIZE 12 BOLD
 
       @ 180,310 BUTTONEX BUTTON_3 ;
          CAPTION "Exit" ;
-         ACTION ReleaseAllWindows();
+         ACTION ReleaseAllWindows() ;
          WIDTH 120 HEIGHT 38 ;
          FONT 'Tahoma' SIZE 12 BOLD
 

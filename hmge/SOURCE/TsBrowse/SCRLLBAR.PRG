@@ -27,51 +27,51 @@ CLASS TSBScrlBar FROM TControl
    DATA   bWhen                                      // TWindow
    DATA   bValid                                     // TWindow
 
-   CLASSDATA aProperties INIT { "cVarName", "nMin", "nMax",;
+   CLASSDATA aProperties INIT { "cVarName", "nMin", "nMax", ;
       "nPgStep", "nTop", "nLeft", "Cargo" }
 
-   METHOD New( nRow, nCol, nMin, nMax, nPgStep, lVertical, oWnd, nWidth, nHeight,;
-      bUpAct, bDownAct, bPgUp, bPgDown, bPos, lPixel, nClrText,;
+   METHOD New( nRow, nCol, nMin, nMax, nPgStep, lVertical, oWnd, nWidth, nHeight, ;
+      bUpAct, bDownAct, bPgUp, bPgDown, bPos, lPixel, nClrText, ;
       nClrBack, cMsg, lUpdate, bWhen, bValid, lDesign ) CONSTRUCTOR
 
-   METHOD WinNew( nMin, nMax, nPgStep, lVertical, oWnd, bUpAction,;
-      bDownAction, bPgUp, bPgDown, bPos, nClrText, nClrBack,;
+   METHOD WinNew( nMin, nMax, nPgStep, lVertical, oWnd, bUpAction, ;
+      bDownAction, bPgUp, bPgDown, bPos, nClrText, nClrBack, ;
       lUpdate, bWhen, bValid ) CONSTRUCTOR
 
-   METHOD GetPos() INLINE GetScrollPos( If( ::lIsChild, ::oWnd:hWnd, ::hWnd ),;
+   METHOD GetPos() INLINE GetScrollPos( If( ::lIsChild, ::oWnd:hWnd, ::hWnd ), ;
       If( ::lIsChild, If( ::lVertical, SB_VERT, SB_HORZ ), SB_CTL ) )
 
-   METHOD GetRange() INLINE GetScrlRange( If( ::lIsChild, ::oWnd:hWnd, ::hWnd ),;
+   METHOD GetRange() INLINE GetScrlRange( If( ::lIsChild, ::oWnd:hWnd, ::hWnd ), ;
       If( ::lIsChild, If( ::lVertical, SB_VERT, SB_HORZ ), SB_CTL ) )
 
    METHOD HandleEvent( nMsg, nWParam, nLParam )
 
    //   METHOD Initiate( hDlg ) INLINE  ::Super:Initiate( hDlg ), Tone(500), ;
-   //                               ::SetRange( ::nMin, ::nMax ),;
+   //                               ::SetRange( ::nMin, ::nMax ), ;
    //                               ::SetPos( ::nMin )
 
    // These two have to be BLOCK
 
-   METHOD GoUp()   BLOCK { | Self, nPos | nPos := ::GetPos(),;
-      if( nPos > ::GetRange()[ 1 ],;
-      ::SetPos( --nPos ), ),;
+   METHOD GoUp()   BLOCK { | Self, nPos | nPos := ::GetPos(), ;
+      if( nPos > ::GetRange()[ 1 ], ;
+      ::SetPos( --nPos ), ), ;
       If( ::bGoUp != Nil, Eval( ::bGoUp ),) }
 
-   METHOD GoDown() BLOCK { | Self, nPos | nPos := ::GetPos(),;
-      if( nPos < ::nMax,;
-      ::SetPos( ++nPos ), ),;
+   METHOD GoDown() BLOCK { | Self, nPos | nPos := ::GetPos(), ;
+      if( nPos < ::nMax, ;
+      ::SetPos( ++nPos ), ), ;
       If( ::bGoDown != Nil, Eval( ::bGoDown ),) }
 
-   METHOD GoTop() INLINE  ::SetPos( ::nMin ),;
+   METHOD GoTop() INLINE  ::SetPos( ::nMin ), ;
       If( ::bGoTop != Nil, Eval( ::bGoTop ),)
 
-   METHOD GoBottom() INLINE  ::SetPos( ::nMax ),;
+   METHOD GoBottom() INLINE  ::SetPos( ::nMax ), ;
       If( ::bGoBottom != Nil, Eval( ::bGoBottom ),)
 
-   METHOD PageUp() INLINE  If( ::bPageUp != Nil, Eval( ::bPageUp ),),;
+   METHOD PageUp() INLINE  If( ::bPageUp != Nil, Eval( ::bPageUp ),), ;
       ::SetPos( ::GetPos() - ::nPgStep )
 
-   METHOD PageDown() INLINE  If( ::bPageDown != Nil, Eval( ::bPageDown ),),;
+   METHOD PageDown() INLINE  If( ::bPageDown != Nil, Eval( ::bPageDown ),), ;
       ::SetPos( ::GetPos() + ::nPgStep )
 
    METHOD SetMode( l32Bit )
@@ -104,17 +104,17 @@ CLASS TSBScrlBar FROM TControl
    * METHOD TSBScrlBar:New() Version 5.0 27/Feb/2002
    * ============================================================================
 
-METHOD New( nRow, nCol, nMin, nMax, nPgStep, lVertical, oWnd, nWidth, nHeight,;
-      bUpAct, bDownAct, bPgUp, bPgDown, bPos, lPixel, nClrText,;
+METHOD New( nRow, nCol, nMin, nMax, nPgStep, lVertical, oWnd, nWidth, nHeight, ;
+      bUpAct, bDownAct, bPgUp, bPgDown, bPos, lPixel, nClrText, ;
       nClrBack, cMsg, lUpdate, bWhen, bValid, lDesign ) CLASS TSBScrlBar
 
-   DEFAULT nRow := 0, nCol := 0,;
-      nMin := 0, nMax := 0, nPgStep := 1,;
-      lVertical := .T., nWidth := If( lVertical, 16, 100 ),;
-      nHeight   := If( lVertical, 100, 17 ),;
-      lPixel    := .F.,;
-      nClrText  := GetSysColor( COLOR_WINDOW ),;
-      nClrBack  := GetSysColor( COLOR_SCROLLBAR ),;
+   DEFAULT nRow := 0, nCol := 0, ;
+      nMin := 0, nMax := 0, nPgStep := 1, ;
+      lVertical := .T., nWidth := If( lVertical, 16, 100 ), ;
+      nHeight   := If( lVertical, 100, 17 ), ;
+      lPixel    := .F., ;
+      nClrText  := GetSysColor( COLOR_WINDOW ), ;
+      nClrBack  := GetSysColor( COLOR_SCROLLBAR ), ;
       lUpdate   := .F., lDesign := .F.
 
    ::cCaption   = ""
@@ -127,8 +127,8 @@ METHOD New( nRow, nCol, nMin, nMax, nPgStep, lVertical, oWnd, nWidth, nHeight,;
    ::nPgStep    = nPgStep
    ::lVertical  = lVertical
    ::lReDraw    = .T.
-   ::nStyle     = nOr( WS_CHILD, WS_VISIBLE, WS_TABSTOP,;
-      If( lVertical, SBS_VERT, SBS_HORZ ),;
+   ::nStyle     = nOr( WS_CHILD, WS_VISIBLE, WS_TABSTOP, ;
+      If( lVertical, SBS_VERT, SBS_HORZ ), ;
       If( lDesign, WS_CLIPSIBLINGS, 0 ) )
    ::bGoUp      = bUpAct
    ::bGoDown    = bDownAct
@@ -163,13 +163,13 @@ METHOD New( nRow, nCol, nMin, nMax, nPgStep, lVertical, oWnd, nWidth, nHeight,;
    * They are NOT controls but we consider them as real Objects!
    * ============================================================================
 
-METHOD WinNew( nMin, nMax, nPgStep, lVertical, oWnd, bUpAction,;
-      bDownAction, bPgUp, bPgDown, bPos, nClrText, nClrBack,;
+METHOD WinNew( nMin, nMax, nPgStep, lVertical, oWnd, bUpAction, ;
+      bDownAction, bPgUp, bPgDown, bPos, nClrText, nClrBack, ;
       lUpdate, bWhen, bValid ) CLASS TSBScrlBar
 
-   DEFAULT nMin := 1, nMax := 2, nPgStep := 1, lVertical := .T.,;
-      nClrText  := GetSysColor( COLOR_WINDOW ),;
-      nClrBack  := GetSysColor( COLOR_SCROLLBAR ),;
+   DEFAULT nMin := 1, nMax := 2, nPgStep := 1, lVertical := .T., ;
+      nClrText  := GetSysColor( COLOR_WINDOW ), ;
+      nClrBack  := GetSysColor( COLOR_SCROLLBAR ), ;
       lUpdate   := .F.
 
    ::oWnd      = oWnd
@@ -269,7 +269,7 @@ METHOD SetPage( nSize, lReDraw ) CLASS TSBScrlBar
 
    ::nPgStep := nSize
 
-   SetScrollInfo( If( ! Empty( ::hWnd ), ::oWnd:hWnd, ::hWnd ),;
+   SetScrollInfo( If( ! Empty( ::hWnd ), ::oWnd:hWnd, ::hWnd ), ;
       nFlags, nSize, lReDraw, ::lShowDisabled )
 
    RETURN NIL

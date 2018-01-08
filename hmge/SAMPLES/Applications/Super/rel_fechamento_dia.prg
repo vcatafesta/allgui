@@ -21,53 +21,53 @@ MEMVAR x_old_id
 
 FUNCTION fechamento_dia()
 
-   DEFINE WINDOW form_fechamento;
-         at 000,000;
-         WIDTH 400;
-         HEIGHT 250;
-         TITLE 'Fechamento do dia de trabalho';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_fechamento ;
+         at 000,000 ;
+         WIDTH 400 ;
+         HEIGHT 250 ;
+         TITLE 'Fechamento do dia de trabalho' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
-      @ 010,010 label lbl_001;
-         of form_fechamento;
-         VALUE 'Escolha o dia';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,010 label lbl_001 ;
+         of form_fechamento ;
+         VALUE 'Escolha o dia' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,010 label lbl_002;
-         of form_fechamento;
-         VALUE 'Este relatório totaliza todas as operações realizadas no';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 080,010 label lbl_002 ;
+         of form_fechamento ;
+         VALUE 'Este relatório totaliza todas as operações realizadas no' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 100,010 label lbl_003;
-         of form_fechamento;
-         VALUE 'dia escolhido pelo usuário, oferecendo um mapa de';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 100,010 label lbl_003 ;
+         of form_fechamento ;
+         VALUE 'dia escolhido pelo usuário, oferecendo um mapa de' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
-      @ 120,010 label lbl_004;
-         of form_fechamento;
-         VALUE 'informações muito útil.';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR BLUE;
+      @ 120,010 label lbl_004 ;
+         of form_fechamento ;
+         VALUE 'informações muito útil.' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR BLUE ;
          TRANSPARENT
 
-      @ 040,010 datepicker dp_data;
-         parent form_fechamento;
-         VALUE date();
-         WIDTH 150;
-         HEIGHT 030;
+      @ 040,010 datepicker dp_data ;
+         PARENT form_fechamento ;
+         VALUE date() ;
+         WIDTH 150 ;
+         HEIGHT 030 ;
          FONT 'verdana' size 014
 
       * linha separadora

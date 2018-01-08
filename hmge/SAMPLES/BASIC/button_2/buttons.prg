@@ -15,8 +15,8 @@ FUNCTION Main()
          AT 0,0 ;
          WIDTH 410 ;
          HEIGHT 180 ;
-         MAIN;
-         ICON "aMAIN";
+         MAIN ;
+         ICON "aMAIN" ;
          TITLE 'ImageButtons Demo by Jacek Kubica <kubica@wssk.wroc.pl>'
 
       DEFINE MAIN MENU

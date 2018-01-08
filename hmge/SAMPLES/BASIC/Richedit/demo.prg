@@ -49,7 +49,7 @@ FUNCTION Main
          HEIGHT 140 ;
          FILE cFile ;
          VALUE '' ;
-         TOOLTIP 'RichEditBox';
+         TOOLTIP 'RichEditBox' ;
          ON CHANGE Form_1.Btn_2.Enabled :=.t. ;
          NOHSCROLL
 
@@ -58,14 +58,14 @@ FUNCTION Main
          AUTOSIZE ;
          FONT "Arial" SIZE 10 BOLD
 
-      @ 235 ,10  BROWSE Browse_1;
+      @ 235 ,10  BROWSE Browse_1 ;
          WIDTH 300 ;
          HEIGHT 140 ;
          HEADERS { 'Code' , 'First Name' , 'Biography' } ;
          WIDTHS { 50 , 120 , 110 } ;
          WORKAREA Test ;
          FIELDS { 'Test->Code' , 'Test->First' , 'Test->Bio' } ;
-         VALUE 1;
+         VALUE 1 ;
          ON CHANGE ChangeTest()
 
       @ 235,315 RICHEDITBOX Edit_2 ;
@@ -73,33 +73,33 @@ FUNCTION Main
          HEIGHT 140 ;
          FIELD test->bio ;
          VALUE '' ;
-         TOOLTIP 'RichEditBox';
+         TOOLTIP 'RichEditBox' ;
          ON CHANGE Form_1.Btn_3.Enabled :=.t.
 
       @ 390,20 BUTTON Btn_1 ;
          CAPTION 'Open File' ;
-         ACTION Open_File();
+         ACTION Open_File() ;
          WIDTH 80 ;
          HEIGHT 24 ;
          TOOLTIP 'Load Rich Text File'
 
       @ 390,120 BUTTON Btn_2 ;
          CAPTION 'Save File' ;
-         ACTION Save_File(0);
+         ACTION Save_File(0) ;
          WIDTH 80 ;
          HEIGHT 24 ;
          TOOLTIP 'Save Rich Text File'
 
       @ 390,320 BUTTON Btn_3 ;
          CAPTION 'Save Field' ;
-         ACTION SaveField();
+         ACTION SaveField() ;
          WIDTH 80 ;
          HEIGHT 24 ;
          TOOLTIP 'Save data from RichEditBox'
 
       @ 390,420 BUTTON Btn_4 ;
          CAPTION 'Exit' ;
-         ACTION Form_1.Release;
+         ACTION Form_1.Release ;
          WIDTH 80 ;
          HEIGHT 24 ;
          TOOLTIP 'Exit form program'

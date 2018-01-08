@@ -27,14 +27,14 @@ FUNCTION Main
          BACKCOLOR CYAN
 
       @ 0,300 IMAGE Img_1 ;
-         WIDTH 200;
-         HEIGHT 150;
+         WIDTH 200 ;
+         HEIGHT 150 ;
          PICTURE 'oohg.gif' ;
          ON CLICK MsgBox( "I'm an IMAGE control !!!")
 
       @ 0,0 PICTURE Img_2 ;
-         WIDTH 200;
-         HEIGHT 150;
+         WIDTH 200 ;
+         HEIGHT 150 ;
          PICTURE 'oohg.gif' ;
          ON CLICK MsgBox( "I'm a PICTURE control !!!")
 

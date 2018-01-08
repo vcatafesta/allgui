@@ -779,20 +779,20 @@ PROCEDURE HMG_CheckType( lSoft, ... )
 
    LOCAL i, j
    LOCAL aParams, aData
-   LOCAL aType := {;
-      { "ARRAY"      , "A" } ,;
-      { "BLOCK"      , "B" } ,;
-      { "CHARACTER"  , "C" } ,;
-      { "DATE"       , "D" } ,;
-      { "HASH"       , "H" } ,;
-      { "LOGICAL"    , "L" } ,;
-      { "NIL"        , "U" } ,;
-      { "NUMERIC"    , "N" } ,;
-      { "MEMO"       , "M" } ,;
-      { "POINTER"    , "P" } ,;
-      { "SYMBOL"     , "S" } ,;
-      { "TIMESTAMP"  , "T" } ,;
-      { "OBJECT"     , "O" } ,;
+   LOCAL aType := { ;
+      { "ARRAY"      , "A" } , ;
+      { "BLOCK"      , "B" } , ;
+      { "CHARACTER"  , "C" } , ;
+      { "DATE"       , "D" } , ;
+      { "HASH"       , "H" } , ;
+      { "LOGICAL"    , "L" } , ;
+      { "NIL"        , "U" } , ;
+      { "NUMERIC"    , "N" } , ;
+      { "MEMO"       , "M" } , ;
+      { "POINTER"    , "P" } , ;
+      { "SYMBOL"     , "S" } , ;
+      { "TIMESTAMP"  , "T" } , ;
+      { "OBJECT"     , "O" } , ;
       { "USUAL"      , ""  }}
 
    aParams := hb_aParams()

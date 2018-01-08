@@ -26,7 +26,7 @@ FUNCTION Main()
          AT 0,0                ;
          WIDTH 480   ;
          HEIGHT 470  ;
-         TITLE "Agenda de Contatos";
+         TITLE "Agenda de Contatos" ;
          MAIN                  ;
          ICON "AGENDA"   ;
          NOMAXIMIZE  ;
@@ -149,7 +149,7 @@ FUNCTION Novo_Registro( lNovo_Registro  )
          AT 0,0               ;
          WIDTH 490  ;
          HEIGHT 300 ;
-         TITLE "Agenda de Contatos - "+Iif( lNovo , "Novo Registro" , "Alterando Registro");
+         TITLE "Agenda de Contatos - "+Iif( lNovo , "Novo Registro" , "Alterando Registro") ;
          ICON "AGENDA"  ;
          MODAL      ;
          NOSIZE     ;
@@ -254,7 +254,7 @@ FUNCTION Novo_Registro( lNovo_Registro  )
          OF Form_2      ;
          WIDTH 400        ;
          VALUE cEndereco      ;
-         TOOLTIP 'Endereço do Contato';
+         TOOLTIP 'Endereço do Contato' ;
          MAXLENGTH 40     ;
          UPPERCASE        ;
          ON GOTFOCUS Form_2.Btn_Salvar.Enabled := .T.  ;
@@ -291,7 +291,7 @@ FUNCTION Novo_Registro( lNovo_Registro  )
          OF Form_2     ;
          WIDTH 30      ;
          VALUE cEstado     ;
-         TOOLTIP 'Estado do Contato';
+         TOOLTIP 'Estado do Contato' ;
          MAXLENGTH 02      ;
          UPPERCASE     ;
          ON ENTER Form_2.T_Fone1.SetFocus
@@ -300,7 +300,7 @@ FUNCTION Novo_Registro( lNovo_Registro  )
          OF Form_2       ;
          WIDTH 110     ;
          VALUE cFone1      ;
-         TOOLTIP 'Telefone do Contato';
+         TOOLTIP 'Telefone do Contato' ;
          MAXLENGTH 10      ;
          UPPERCASE     ;
          ON ENTER Form_2.T_Fone2.SetFocus
@@ -309,7 +309,7 @@ FUNCTION Novo_Registro( lNovo_Registro  )
          OF Form_2     ;
          WIDTH 80      ;
          VALUE cFone2      ;
-         TOOLTIP 'Telefone do Contato';
+         TOOLTIP 'Telefone do Contato' ;
          MAXLENGTH 10      ;
          UPPERCASE     ;
          ON ENTER Form_2.T_Email.SetFocus
@@ -562,14 +562,14 @@ FUNCTION Imprimir()
 
    cArquivo :=memoRead("REL.TMP")
 
-   DEFINE WINDOW Form_3;
+   DEFINE WINDOW Form_3 ;
          At 0,0              ;
          WIDTH 450        ;
          HEIGHT 500       ;
-         TITLE "Contatos Cadastrados com Letra "+cLetra;
-         ICON "AGENDA";
+         TITLE "Contatos Cadastrados com Letra "+cLetra ;
+         ICON "AGENDA" ;
          CHILD ;
-         NOSYSMENU;
+         NOSYSMENU ;
          NOSIZE       ;
          BACKCOLOR WHITE
 
@@ -583,19 +583,19 @@ FUNCTION Imprimir()
       @ 01,01 BUTTON Bt_Zoom_Mais  ;
          CAPTION '&Zoom(+)'             ;
          WIDTH 120 HEIGHT 17    ;
-         ACTION ZoomLabel(1);
+         ACTION ZoomLabel(1) ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 01,125 BUTTON Bt_Zoom_menos  ;
          CAPTION '&Zoom(-)'             ;
          WIDTH 120 HEIGHT 17    ;
-         ACTION ZoomLabel(2);
+         ACTION ZoomLabel(2) ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 01,321 BUTTON Sair_1  ;
          CAPTION '&Sair'             ;
          WIDTH 120 HEIGHT 17    ;
-         ACTION Form_3.Release;
+         ACTION Form_3.Release ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
    END WINDOW

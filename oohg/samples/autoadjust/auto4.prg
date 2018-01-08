@@ -275,7 +275,7 @@ FUNCTION Main()
             @ 213,43 CHECKBOX ltodos ;
                CAPTION 'Todos los items' ;
                WIDTH 151 ;
-               HEIGHT 27;
+               HEIGHT 27 ;
                VALUE .F. ;
                FONT 'MS Sans Serif' ;
                SIZE 10 ;

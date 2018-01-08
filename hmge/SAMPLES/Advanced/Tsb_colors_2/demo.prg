@@ -50,40 +50,40 @@ FUNCTION Main()
          AT     20, 20 ;
          WIDTH  680 ;
          HEIGHT 480 ;
-         ON CHANGE {|| CorrectionFirstLast( oBrw ) };
+         ON CHANGE {|| CorrectionFirstLast( oBrw ) } ;
          CELL
    END TBROWSE
 
    oBrw:SetArray( aVar )
 
-   ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 1;
-      HEADER CRLF + "#";
-      SIZE 40;
+   ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 1 ;
+      HEADER CRLF + "#" ;
+      SIZE 40 ;
       COLORS { CLR_BLACK, WHITE } ;
       ALIGN DT_CENTER
 
-   ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 2;
-      HEADER CRLF + "Variable name";
-      SIZE 170;
+   ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 2 ;
+      HEADER CRLF + "Variable name" ;
+      SIZE 170 ;
       COLORS { CLR_BLACK, WHITE } ;
       ALIGN DT_LEFT
 
-   ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 3;
-      HEADER CRLF + "Name in the table";
-      SIZE 340;
+   ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 3 ;
+      HEADER CRLF + "Name in the table" ;
+      SIZE 340 ;
       COLORS { CLR_BLACK, WHITE } ;
       ALIGN DT_LEFT
 
-   ADD COLUMN TO TBROWSE oBrw DATA {|| '***' };
-      HEADER "Color " + CRLF + " User" + CRLF + "(change!!!)";
-      SIZE 80;
-      ALIGN DT_CENTER;
-      MOVE DT_MOVE_DOWN;
+   ADD COLUMN TO TBROWSE oBrw DATA {|| '***' } ;
+      HEADER "Color " + CRLF + " User" + CRLF + "(change!!!)" ;
+      SIZE 80 ;
+      ALIGN DT_CENTER ;
+      MOVE DT_MOVE_DOWN ;
       EDITABLE
 
    ADD COLUMN TO TBROWSE oBrw DATA {|| '.' } ;
-      HEADER CRLF + "Color by " + CRLF + " default";
-      SIZE 80;
+      HEADER CRLF + "Color by " + CRLF + " default" ;
+      SIZE 80 ;
       ALIGN DT_CENTER
 
    ADD  SUPER  HEADER TO oBrw ;
@@ -258,7 +258,7 @@ FUNCTION MyButtonsBottom( aVar )  // buttons at the bottom of the window
 
    @ 510, 620 BUTTONEX BUTTON_5 ;
       CAPTION "Exit" ;
-      ACTION ReleaseAllWindows();
+      ACTION ReleaseAllWindows() ;
       WIDTH 80 HEIGHT 38
 
    RETURN NIL

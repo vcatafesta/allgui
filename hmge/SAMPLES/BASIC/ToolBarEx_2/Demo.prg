@@ -63,17 +63,17 @@ FUNCTION Main
          BUTTON Button_1b ;
             CAPTION '&Cut' ;
             PICTURE 'cut.bmp' ;
-            ACTION MsgInfo('Click! 1');
+            ACTION MsgInfo('Click! 1') ;
 
          BUTTON Button_2b ;
             CAPTION 'Copy' ;
             PICTURE 'Copy.bmp' ;
-            ACTION MsgInfo('Click! 2');
+            ACTION MsgInfo('Click! 2') ;
 
          BUTTON Button_3b ;
             CAPTION '&Paste' ;
             PICTURE 'Paste.bmp' ;
-            ACTION MsgInfo('Click! 3');
+            ACTION MsgInfo('Click! 3') ;
             SEPARATOR
 
          BUTTON Button_5b ;

@@ -500,30 +500,30 @@ FUNCTION nMonth(param)
 
 PROCEDURE Head_click( nCol )
 
-   LOCAL nPos := IF( nGridFocus = 1, ftp.Grid_1.Value, ftp.Grid_2.Value ),;
+   LOCAL nPos := IF( nGridFocus = 1, ftp.Grid_1.Value, ftp.Grid_2.Value ), ;
       nOldCol := aSortCol[nGridFocus]
 
    IF nCol = 2
-      Asort(aDirectory[nGridFocus], , , {|a,b| if(valtype(a[3]) # "N" .AND. valtype(b[3]) # "N",;
-         SUBSTR(a[2],2) < SUBSTR(b[2],2), if(valtype(a[3]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1],;
+      Asort(aDirectory[nGridFocus], , , {|a,b| if(valtype(a[3]) # "N" .AND. valtype(b[3]) # "N", ;
+         SUBSTR(a[2],2) < SUBSTR(b[2],2), if(valtype(a[3]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], ;
          if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[1] < b[1])))})
    ELSEIF nCol = 3
-      Asort(aDirectory[nGridFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N",;
-         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1],;
+      Asort(aDirectory[nGridFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N", ;
+         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], ;
          if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[2] < b[2])))})
    ELSEIF nCol = 4
-      Asort(aDirectory[nGridFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N",;
-         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1],;
+      Asort(aDirectory[nGridFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N", ;
+         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], ;
          if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[3] < b[3])))})
    ELSEIF nCol = 5
-      Asort(aDirectory[nGridFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N",;
-         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1],;
+      Asort(aDirectory[nGridFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N", ;
+         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], ;
          if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[4] < b[4])))})
    ENDIF
 
    IF nGridFocus = 1
-      _SetGridCaption( "Grid_1", "FTP", nOldCol,;
-         Substr( ftp.Grid_1.Header(nOldCol), 2, Len(ftp.Grid_1.Header(nOldCol)) - 2 ),;
+      _SetGridCaption( "Grid_1", "FTP", nOldCol, ;
+         Substr( ftp.Grid_1.Header(nOldCol), 2, Len(ftp.Grid_1.Header(nOldCol)) - 2 ), ;
          if(nOldCol=1, BROWSE_JTFY_LEFT, if(nOldCol=2, BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER )))
    ENDIF
 
@@ -686,8 +686,8 @@ FUNCTION GetName()
    LOCAL cText := "", nPos
 
    IF ( nPos := IF( nGridFocus = 1, ftp.Grid_1.Value, ftp.Grid_2.Value ) ) > 0
-      cText:= IF( valtype(aDirectory[nGridFocus][ nPos, 2 ]) # "N",;
-         Substr(aDirectory[nGridFocus][ nPos, 1], 2, Len(aDirectory[nGridFocus][ nPos, 1 ]) - 2),;
+      cText:= IF( valtype(aDirectory[nGridFocus][ nPos, 2 ]) # "N", ;
+         Substr(aDirectory[nGridFocus][ nPos, 1], 2, Len(aDirectory[nGridFocus][ nPos, 1 ]) - 2), ;
          aDirectory[nGridFocus][ nPos, 1] )
    ENDIF
 

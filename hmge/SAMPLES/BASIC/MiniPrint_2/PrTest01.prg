@@ -22,8 +22,8 @@ PROCEDURE  PrintTest1()
    Default paper size is A4 Sheet; 210- by 297-millimeters
    */
 
-   LOCAL lSuccess := .F.,;
-      cTestString   := "This is a test",;
+   LOCAL lSuccess := .F., ;
+      cTestString   := "This is a test", ;
       nMostRightCol := 210,;  // Default page size is A4 : 210 x 297 mm
       nMostBottmRow := 297
 

@@ -91,6 +91,6 @@ FUNCTION FillBlue( hWnd )
       aRect[2] += 5
    NEXT
 
-   ReleaseDC( hWnd, hDC );
+   ReleaseDC( hWnd, hDC ) ;
 
    RETURN 1

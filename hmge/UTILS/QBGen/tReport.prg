@@ -48,30 +48,30 @@ PROCEDURE URE( aHdr1,alen1 )
    LOCAL nMax,  cTf ,  apaper:= aclone(apapeles) , aEdit3 ,   aGrp3:={"None","EVERY PAGE"}
 
    LOCAL aEdit:={;           // types for 'DYNAMIC'
-      { 'TEXTBOX','CHARACTER'}                ,;
-      { 'TEXTBOX','CHARACTER'}                ,;
-      { 'TEXTBOX','NUMERIC','9,999.99'}          ,;
-      { 'CHECKBOX' , 'Yes' , 'No' }           ,;
+      { 'TEXTBOX','CHARACTER'}                , ;
+      { 'TEXTBOX','CHARACTER'}                , ;
+      { 'TEXTBOX','NUMERIC','9,999.99'}          , ;
+      { 'CHECKBOX' , 'Yes' , 'No' }           , ;
       { 'TEXTBOX','CHARACTER'} }
 
    LOCAL bBlock :={ |r,c| RetEditArr(aEdit, r, c) }
    LOCAL bBlock3:={ |r,c| RetEditArr2(aEdit3, r, c) }
    LOCAL bBlock4:={ |r| SetFocusColumn( r ) }
 
-   LOCAL aRows3 := {;
-      { 'Image '         ,"" ,0 ,0,0,0 },;
-      { 'Multiple'       ,.F.,"Image","Every","Page","Default No" },;
-      { 'Lpp'            ,50 ,"Default 50","","","" },;
-      { 'Cpl'            ,80 ,"Valid        ","80 - 96","120 - 140","160"},;
-      { 'Left Margin'    ,3  ,"Default  0 ","","",""},;
-      { 'Top Margin'     ,3  ,"Default  1 ","","","" },;
-      { 'Papersize'      ,9  ,"Default     ","Letter","","" },;
-      { 'Dosmode'        ,.F.,"Default No","","","" },;
-      { 'Preview'        ,.T.,"Default Yes","","","" } ,;
-      { 'Select Printer' ,.F.,"Default No","","",""},;
-      { 'Grouped By'     ,1  ,"Default     ","NONE","","" },;
-      { 'Group Header'   ,"" ,"","","","" },;
-      { 'Orientation'    ,1  ,"Default     ","Portrait","","" },;
+   LOCAL aRows3 := { ;
+      { 'Image '         ,"" ,0 ,0,0,0 }, ;
+      { 'Multiple'       ,.F.,"Image","Every","Page","Default No" }, ;
+      { 'Lpp'            ,50 ,"Default 50","","","" }, ;
+      { 'Cpl'            ,80 ,"Valid        ","80 - 96","120 - 140","160"}, ;
+      { 'Left Margin'    ,3  ,"Default  0 ","","",""}, ;
+      { 'Top Margin'     ,3  ,"Default  1 ","","","" }, ;
+      { 'Papersize'      ,9  ,"Default     ","Letter","","" }, ;
+      { 'Dosmode'        ,.F.,"Default No","","","" }, ;
+      { 'Preview'        ,.T.,"Default Yes","","","" } , ;
+      { 'Select Printer' ,.F.,"Default No","","",""}, ;
+      { 'Grouped By'     ,1  ,"Default     ","NONE","","" }, ;
+      { 'Group Header'   ,"" ,"","","","" }, ;
+      { 'Orientation'    ,1  ,"Default     ","Portrait","","" }, ;
       { 'NoDateTimeStamp',.F.,"Default No","","","" } }
 
    REQUEST DBFCDX
@@ -320,9 +320,9 @@ FUNCTION ckfld2( )       // avoid use  of unused cells
       aRet := .F.
    ELSEIF nRow = 1 .and. Ncol = 2
       cImgFilName := Getfile( { {'All images','*.jpg; *.bmp; *.gif'},;    // acFilter
-         {'JPG Files', '*.jpg'},;
-         {'BMP Files', '*.bmp'},;
-         {'GIF Files', '*.gif'} },;
+         {'JPG Files', '*.jpg'}, ;
+         {'BMP Files', '*.bmp'}, ;
+         {'GIF Files', '*.gif'} }, ;
          'Open Image',.F.,.T. )
       IF ! EMPTY( cImgFilName ) .OR. FILE( cImgFilName )
          Form_2.Grid_3.cell(1,2):= cImgFilName
@@ -517,8 +517,8 @@ PROCEDURE Treport(act)   // Test the Report
          Form_2.Grid_3.Cell( 14, 2 ) )                                // NoDateTimeStamp
 
    CASE act = "IMPORT"
-      cFileimp := Getfile( { {'All report','*.rpt'},;
-         {'RPT Files', '*.rpt'} },;
+      cFileimp := Getfile( { {'All report','*.rpt'}, ;
+         {'RPT Files', '*.rpt'} }, ;
          'Open Report Template' ,GetcurrentFolder() ,.f., .t.)
 
       IF !EMPTY( cFileimp ) .OR. FILE( cFileimp )
@@ -1154,7 +1154,7 @@ FUNCTION WrExport (cSavefile,aheaders1,aheaders2,aFormats,a,awidths, atot ,inde_
       ENDIF
       aadd(aSrc, '   @ '+NTrim(Form_2.Grid_3.Cell( 1, 3 ))+','+NTrim(Form_2.Grid_3.Cell( 1, 4 )+2) ;
          +' PICTURE '+ Form_2.Grid_3.Cell( 1, 2 )+' SIZE ' ;
-         +NTrim(Form_2.Grid_3.Cell( 1, 5 )-Form_2.Grid_3.Cell( 1, 3 )-4 )+',';
+         +NTrim(Form_2.Grid_3.Cell( 1, 5 )-Form_2.Grid_3.Cell( 1, 3 )-4 )+',' ;
          +NTrim(Form_2.Grid_3.Cell( 1, 6 )-Form_2.Grid_3.Cell( 1, 4 )-3 ) )
       IF !Form_2.Grid_3.Cell( 2, 2 )
          aadd(aSrc, 'EndIF')

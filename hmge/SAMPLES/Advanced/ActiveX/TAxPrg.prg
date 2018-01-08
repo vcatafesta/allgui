@@ -1,10 +1,10 @@
 #include "hbclass.ch"
 
 #ifndef __XHARBOUR__
-#xcommand TRY                => bError := errorBlock( {|oError| break( oError ) } ) ;;
+#xcommand TRY                => bError := errorBlock( {|oError| break( oError ) } ) ; ;
    BEGIN SEQUENCE
-#xcommand CATCH [<!oError!>] => errorBlock( bError ) ;;
-   RECOVER [USING <oError>] <-oError-> ;;
+#xcommand CATCH [<!oError!>] => errorBlock( bError ) ; ;
+   RECOVER [USING <oError>] <-oError-> ; ;
       errorBlock( bError )
 #endif
 

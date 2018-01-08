@@ -60,9 +60,9 @@ MEMVAR _HMG_SYSDATA
 #define TVE_COLLAPSE   1      // ok
 #define TVE_EXPAND     2      // ok
 
-FUNCTION _DefineTree ( ControlName , ParentForm , row , col , width , height , change , tooltip ,;
-      FONTNAME , fontsize , gotfocus , lostfocus , dblclick , break , value  , HelpId ,;
-      aImgNode, aImgItem, noBot , bold, italic, underline, strikeout , itemids , rootbutton ,;
+FUNCTION _DefineTree ( ControlName , ParentForm , row , col , width , height , change , tooltip , ;
+      FONTNAME , fontsize , gotfocus , lostfocus , dblclick , break , value  , HelpId , ;
+      aImgNode, aImgItem, noBot , bold, italic, underline, strikeout , itemids , rootbutton , ;
       NoTrans , ON_EXPAND, ON_COLLAPSE, aBackColor, aFontColor, DynamicBackColor , DynamicForeColor , DynamicFont )
    LOCAL i , cParentForm , Controlhandle , mVar, ImgDefNode, ImgDefItem, aBitmaps := array(4)
    LOCAL FontHandle , k

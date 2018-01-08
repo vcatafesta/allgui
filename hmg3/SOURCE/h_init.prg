@@ -921,79 +921,79 @@ PROCEDURE InitMessages (cSetLang)
          // BROWSE MESAJLARI ( T√úRK√áE )
 
          _HMG_SYSDATA [ 136 ]  := { ;
-            "Pencere: ",;
-            " tan√Ωms√Ωz. Program sonland√Ωr√Ωld√Ω.",;
-            "HMG Hatas√Ω",;
-            "Kontrol: ",;
-            " / ",;
-            " √ñnceden tan√Ωml√Ω. Program sonland√Ωr√Ωld√Ω.",;
-            "Browse: Ge√ßersiz Tip. Program sonland√Ωr√Ωld√Ω.",;
-            "Browse: Browse √ßal√Ω√æma alan√Ωnda olmayan sahalar i√ßin " +;
-            "Append ibaresi kullan√Ωlamaz. Program sonland√Ωr√Ωld√Ω.",;
-            "Bu kayd√Ω √æu anda ba√æka biri editliyor.",;
-            "Uyar√Ω",;
+            "Pencere: ", ;
+            " tan√Ωms√Ωz. Program sonland√Ωr√Ωld√Ω.", ;
+            "HMG Hatas√Ω", ;
+            "Kontrol: ", ;
+            " / ", ;
+            " √ñnceden tan√Ωml√Ω. Program sonland√Ωr√Ωld√Ω.", ;
+            "Browse: Ge√ßersiz Tip. Program sonland√Ωr√Ωld√Ω.", ;
+            "Browse: Browse √ßal√Ω√æma alan√Ωnda olmayan sahalar i√ßin " + ;
+            "Append ibaresi kullan√Ωlamaz. Program sonland√Ωr√Ωld√Ω.", ;
+            "Bu kayd√Ω √æu anda ba√æka biri editliyor.", ;
+            "Uyar√Ω", ;
             "Ge√ßersiz giri√æ"}
 
          _HMG_SYSDATA [ 137 ] := { 'Emin misiniz ?' , 'Kay√Ωt silme' }
 
          // EDIT MESAJLARI ( T√úRK√áE )
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Kay√Ωt silme"+CHR(13)+"Emin misiniz ?"+CHR(13),;
-            CHR(13)+"Indeks dosyas√Ω yok"+CHR(13)+"Arama yap√Ωlam√Ωyor"+CHR(13),;
-            CHR(13)+"Indeks dosyas√Ω bulunamad√Ω"+CHR(13)+"Arama yap√Ωlam√Ωyor"+CHR(13),;
-            CHR(13)+"Memo ve mant√Ωksal sahalarda"+CHR(13)+"Arama yap√Ωlamaz"+CHR(13),;
-            CHR(13)+"Kay√Ωt bulunamad√Ω"+CHR(13),;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Kay√Ωt silme"+CHR(13)+"Emin misiniz ?"+CHR(13), ;
+            CHR(13)+"Indeks dosyas√Ω yok"+CHR(13)+"Arama yap√Ωlam√Ωyor"+CHR(13), ;
+            CHR(13)+"Indeks dosyas√Ω bulunamad√Ω"+CHR(13)+"Arama yap√Ωlam√Ωyor"+CHR(13), ;
+            CHR(13)+"Memo ve mant√Ωksal sahalarda"+CHR(13)+"Arama yap√Ωlamaz"+CHR(13), ;
+            CHR(13)+"Kay√Ωt bulunamad√Ω"+CHR(13), ;
             CHR(13)+"√áok fazla s√ºtun var"+CHR(13)+"Rapor sayfaya s√Ω√∞m√Ωyor"+CHR(13) }
 
          _HMG_SYSDATA [ 132 ]  := { ;
-            "Kay√Ωt",;
-            "Kay√Ωt say√Ωs√Ω",;
-            "       (Yeni)",;
-            "       (Edit)",;
-            " Kay√Ωt No.su :",;
-            "Ara",;
-            "Metin ara",;
-            "Tarih ara",;
-            "Say√Ω ara",;
-            "Rapor tan√Ωm√Ω",;
-            "Rapor s√ºtunlar√Ω",;
-            "M√ºsait s√ºtunlar",;
-            "√ùlk kay√Ωt",;
-            "Son kay√Ωt",;
-            "Rapor ad√Ω ",;
-            "Tarih:",;
-            "√ùlk kay√Ωt:",;
-            "Son kay√Ωt:",;
-            "S√Ωra d√ºzeni:",;
-            "Evet",;
-            "Hay√Ωr",;
-            "Sayfa ",;
+            "Kay√Ωt", ;
+            "Kay√Ωt say√Ωs√Ω", ;
+            "       (Yeni)", ;
+            "       (Edit)", ;
+            " Kay√Ωt No.su :", ;
+            "Ara", ;
+            "Metin ara", ;
+            "Tarih ara", ;
+            "Say√Ω ara", ;
+            "Rapor tan√Ωm√Ω", ;
+            "Rapor s√ºtunlar√Ω", ;
+            "M√ºsait s√ºtunlar", ;
+            "√ùlk kay√Ωt", ;
+            "Son kay√Ωt", ;
+            "Rapor ad√Ω ", ;
+            "Tarih:", ;
+            "√ùlk kay√Ωt:", ;
+            "Son kay√Ωt:", ;
+            "S√Ωra d√ºzeni:", ;
+            "Evet", ;
+            "Hay√Ωr", ;
+            "Sayfa ", ;
             " / "}
 
          _HMG_SYSDATA [ 133 ] := { ;
-            "Kapat",;
-            "Yeni",;
-            "Edit",;
-            "Sil",;
-            "Ara",;
-            "Git",;
-            "Rapor",;
-            "√ùlk",;
-            "√ñnceki",;
-            "Sonraki",;
-            "Son",;
-            "Kaydet",;
-            "√ùptal",;
-            "Ekle",;
-            "Kald√Ωr",;
-            "Print",;
+            "Kapat", ;
+            "Yeni", ;
+            "Edit", ;
+            "Sil", ;
+            "Ara", ;
+            "Git", ;
+            "Rapor", ;
+            "√ùlk", ;
+            "√ñnceki", ;
+            "Sonraki", ;
+            "Son", ;
+            "Kaydet", ;
+            "√ùptal", ;
+            "Ekle", ;
+            "Kald√Ωr", ;
+            "Print", ;
             "Kapat"}
 
          _HMG_SYSDATA [ 134 ]  := { ;
-            "EDIT, √ßal√Ω√æma alan√Ω ismi noksan",;
-            "EDIT, bu √ßal√Ω√æma alan√Ωnda 16'dan fazla saha var",;
-            "EDIT, Tazeleme mod'u s√Ωn√Ωr √∂tesinde ( l√ºtfen hatay√Ω bildirin )",;
-            "EDIT, Temel olay numaras√Ω s√Ωn√Ωr √∂tesinde ( l√ºtfen hatay√Ω bildirin )",;
+            "EDIT, √ßal√Ω√æma alan√Ω ismi noksan", ;
+            "EDIT, bu √ßal√Ω√æma alan√Ωnda 16'dan fazla saha var", ;
+            "EDIT, Tazeleme mod'u s√Ωn√Ωr √∂tesinde ( l√ºtfen hatay√Ω bildirin )", ;
+            "EDIT, Temel olay numaras√Ω s√Ωn√Ωr √∂tesinde ( l√ºtfen hatay√Ω bildirin )", ;
             "EDIT, Liste olay numaras√Ω s√Ωn√Ωr √∂tesinde ( l√ºtfen hatay√Ω bildirin )" }
 
          // EDIT EXTENDED MESAJLARI ( T√úRK√áE )
@@ -1110,73 +1110,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 136 ]  := { "Okno: "                                              ,;
-            " nen√≠ definov√°no. Program ukon√®en"                   ,;
-            "HMG Error"                                         ,;
-            "Prvek: "                                             ,;
-            " z "                                                  ,;
-            " u≈æ definov√°n. Program ukon√®en"                  ,;
-            "Browse: Typ nepovolen. Program ukon√®en"          ,;
-            "Browse: Append fr√°zi nelze pou≈æ√≠t s poli nepat√∏√≠c√≠mi do Browse pracovn√≠ oblasti. Program ukon√®en",;
-            "Z√°znam edituje jin√Ω u≈æivatel"                ,;
-            "Varov√°n√≠"                                              ,;
+         _HMG_SYSDATA [ 136 ]  := { "Okno: "                                              , ;
+            " nen√≠ definov√°no. Program ukon√®en"                   , ;
+            "HMG Error"                                         , ;
+            "Prvek: "                                             , ;
+            " z "                                                  , ;
+            " u≈æ definov√°n. Program ukon√®en"                  , ;
+            "Browse: Typ nepovolen. Program ukon√®en"          , ;
+            "Browse: Append fr√°zi nelze pou≈æ√≠t s poli nepat√∏√≠c√≠mi do Browse pracovn√≠ oblasti. Program ukon√®en", ;
+            "Z√°znam edituje jin√Ω u≈æivatel"                , ;
+            "Varov√°n√≠"                                              , ;
             "Chybn√Ω vstup"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Jste si jist(a)?' , 'Smazat z√°znam' }
 
          // EDIT MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Smazat z√°znam"+CHR(13)+"Jste si jist(a)?"+CHR(13)                  ,;
-            CHR(13)+"Chyb√≠ indexov√Ω soubor"+CHR(13)+"Nemohu hledat"+CHR(13)            ,;
-            CHR(13)+"Nemohu naj√≠t indexovan√© pole"+CHR(13)+"Nemohu hledat"+CHR(13)        ,;
-            CHR(13)+"Nemohu hledat podle"+CHR(13)+"pole memo nebo logick√©"+CHR(13)       ,;
-            CHR(13)+"Z√°znam nenalezen"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Smazat z√°znam"+CHR(13)+"Jste si jist(a)?"+CHR(13)                  , ;
+            CHR(13)+"Chyb√≠ indexov√Ω soubor"+CHR(13)+"Nemohu hledat"+CHR(13)            , ;
+            CHR(13)+"Nemohu naj√≠t indexovan√© pole"+CHR(13)+"Nemohu hledat"+CHR(13)        , ;
+            CHR(13)+"Nemohu hledat podle"+CHR(13)+"pole memo nebo logick√©"+CHR(13)       , ;
+            CHR(13)+"Z√°znam nenalezen"+CHR(13)                                        , ;
             CHR(13)+"P√∏√≠li≈° mnoho sloupc√π"+CHR(13)+"Sestava se nevejde na plochu"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Z√°znam"      ,;
-            "Po√®et z√°znam√π"         ,;
-            "      (Nov√Ω)"          ,;
-            "     (√öprava)"         ,;
-            "Zadejte √®√≠slo z√°znamu" ,;
-            "Hledej"                ,;
-            "Hledan√Ω text"          ,;
-            "Hledan√© datum"         ,;
-            "Hledan√© √®√≠slo"         ,;
-            "Definice sestavy"      ,;
-            "Sloupce sestavy"       ,;
-            "Dostupn√© sloupce"      ,;
-            "Prvn√≠ z√°znam"          ,;
-            "Posledn√≠ z√°znam"       ,;
-            "Sestava "              ,;
-            "Datum:"                ,;
-            "Prvn√≠ z√°znam:"         ,;
-            "Posledn√≠ z√°znam:"      ,;
-            "T√∏√≠d√¨no dle:"          ,;
-            "Ano"                   ,;
-            "Ne"                    ,;
-            "Strana "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Z√°znam"      , ;
+            "Po√®et z√°znam√π"         , ;
+            "      (Nov√Ω)"          , ;
+            "     (√öprava)"         , ;
+            "Zadejte √®√≠slo z√°znamu" , ;
+            "Hledej"                , ;
+            "Hledan√Ω text"          , ;
+            "Hledan√© datum"         , ;
+            "Hledan√© √®√≠slo"         , ;
+            "Definice sestavy"      , ;
+            "Sloupce sestavy"       , ;
+            "Dostupn√© sloupce"      , ;
+            "Prvn√≠ z√°znam"          , ;
+            "Posledn√≠ z√°znam"       , ;
+            "Sestava "              , ;
+            "Datum:"                , ;
+            "Prvn√≠ z√°znam:"         , ;
+            "Posledn√≠ z√°znam:"      , ;
+            "T√∏√≠d√¨no dle:"          , ;
+            "Ano"                   , ;
+            "Ne"                    , ;
+            "Strana "               , ;
             " z "                   }
 
-         _HMG_SYSDATA [ 133 ] := { "Zav√∏√≠t"    ,;
-            "Nov√Ω"      ,;
-            "√öprava"    ,;
-            "Sma≈æ"      ,;
-            "Najdi"     ,;
-            "Jdi"       ,;
-            "Sestava"   ,;
-            "Prvn√≠"     ,;
-            "P√∏edchoz√≠" ,;
-            "Dal≈°√≠"     ,;
-            "Posledn√≠"  ,;
-            "Ulo≈æ"      ,;
-            "Storno"    ,;
-            "P√∏idej"    ,;
-            "Odstra√≤"   ,;
-            "Tisk"      ,;
+         _HMG_SYSDATA [ 133 ] := { "Zav√∏√≠t"    , ;
+            "Nov√Ω"      , ;
+            "√öprava"    , ;
+            "Sma≈æ"      , ;
+            "Najdi"     , ;
+            "Jdi"       , ;
+            "Sestava"   , ;
+            "Prvn√≠"     , ;
+            "P√∏edchoz√≠" , ;
+            "Dal≈°√≠"     , ;
+            "Posledn√≠"  , ;
+            "Ulo≈æ"      , ;
+            "Storno"    , ;
+            "P√∏idej"    , ;
+            "Odstra√≤"   , ;
+            "Tisk"      , ;
             "Zav√∏i"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, chyb√≠ jm√©no pracovn√≠ oblasti"                              ,;
-            "EDIT, pracovn√≠ oblast m√° v√≠c jak 16 pol√≠"              ,;
-            "EDIT, refresh mode mimo rozsah (pros√≠m, nahlaste chybu)"      ,;
-            "EDIT, hlavn√≠ event √®√≠slo mimo rozsah (pros√≠m, nahlaste chybu)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, chyb√≠ jm√©no pracovn√≠ oblasti"                              , ;
+            "EDIT, pracovn√≠ oblast m√° v√≠c jak 16 pol√≠"              , ;
+            "EDIT, refresh mode mimo rozsah (pros√≠m, nahlaste chybu)"      , ;
+            "EDIT, hlavn√≠ event √®√≠slo mimo rozsah (pros√≠m, nahlaste chybu)" , ;
             "EDIT, list event √®√≠slomimo rozsah (pros√≠m, nahlaste chybu)"  }
 
          // EDIT EXTENDED (ENGLISH DEFAULT)
@@ -1287,73 +1287,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Are you sure ?' , 'Delete Record' }
 
          // EDIT MESSAGES
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  ,;
-            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            ,;
-            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        ,;
-            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       ,;
-            CHR(13)+"Record not found"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  , ;
+            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            , ;
+            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        , ;
+            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       , ;
+            CHR(13)+"Record not found"+CHR(13)                                        , ;
             CHR(13)+"To many cols"+CHR(13)+"The report can't fit in the sheet"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record count"        ,;
-            "       (New)"        ,;
-            "      (Edit)"        ,;
-            "Enter record number" ,;
-            "Find"                ,;
-            "Search text"         ,;
-            "Search date"         ,;
-            "Search number"       ,;
-            "Report definition"   ,;
-            "Report columns"      ,;
-            "Available columns"   ,;
-            "Initial record"      ,;
-            "Final record"        ,;
-            "Report of "          ,;
-            "Date:"               ,;
-            "Initial record:"     ,;
-            "Final record:"       ,;
-            "Ordered by:"         ,;
-            "Yes"                 ,;
-            "No"                  ,;
-            "Page "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record count"        , ;
+            "       (New)"        , ;
+            "      (Edit)"        , ;
+            "Enter record number" , ;
+            "Find"                , ;
+            "Search text"         , ;
+            "Search date"         , ;
+            "Search number"       , ;
+            "Report definition"   , ;
+            "Report columns"      , ;
+            "Available columns"   , ;
+            "Initial record"      , ;
+            "Final record"        , ;
+            "Report of "          , ;
+            "Date:"               , ;
+            "Initial record:"     , ;
+            "Final record:"       , ;
+            "Ordered by:"         , ;
+            "Yes"                 , ;
+            "No"                  , ;
+            "Page "               , ;
             " of "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Close"    ,;
-            "New"      ,;
-            "Edit"     ,;
-            "Delete"   ,;
-            "Find"     ,;
-            "Goto"     ,;
-            "Report"   ,;
-            "First"    ,;
-            "Previous" ,;
-            "Next"     ,;
-            "Last"     ,;
-            "Save"     ,;
-            "Cancel"   ,;
-            "Add"      ,;
-            "Remove"   ,;
-            "Print"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Close"    , ;
+            "New"      , ;
+            "Edit"     , ;
+            "Delete"   , ;
+            "Find"     , ;
+            "Goto"     , ;
+            "Report"   , ;
+            "First"    , ;
+            "Previous" , ;
+            "Next"     , ;
+            "Last"     , ;
+            "Save"     , ;
+            "Cancel"   , ;
+            "Add"      , ;
+            "Remove"   , ;
+            "Print"    , ;
             "Close"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED MESSAGES
@@ -1462,73 +1462,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Are you sure ?' , 'Delete Record' }
 
          // EDIT MESSAGES
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  ,;
-            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            ,;
-            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        ,;
-            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       ,;
-            CHR(13)+"Record not found"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  , ;
+            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            , ;
+            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        , ;
+            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       , ;
+            CHR(13)+"Record not found"+CHR(13)                                        , ;
             CHR(13)+"To many cols"+CHR(13)+"The report can't fit in the sheet"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record count"        ,;
-            "       (New)"        ,;
-            "      (Edit)"        ,;
-            "Enter record number" ,;
-            "Find"                ,;
-            "Search text"         ,;
-            "Search date"         ,;
-            "Search number"       ,;
-            "Report definition"   ,;
-            "Report columns"      ,;
-            "Available columns"   ,;
-            "Initial record"      ,;
-            "Final record"        ,;
-            "Report of "          ,;
-            "Date:"               ,;
-            "Initial record:"     ,;
-            "Final record:"       ,;
-            "Ordered by:"         ,;
-            "Yes"                 ,;
-            "No"                  ,;
-            "Page "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record count"        , ;
+            "       (New)"        , ;
+            "      (Edit)"        , ;
+            "Enter record number" , ;
+            "Find"                , ;
+            "Search text"         , ;
+            "Search date"         , ;
+            "Search number"       , ;
+            "Report definition"   , ;
+            "Report columns"      , ;
+            "Available columns"   , ;
+            "Initial record"      , ;
+            "Final record"        , ;
+            "Report of "          , ;
+            "Date:"               , ;
+            "Initial record:"     , ;
+            "Final record:"       , ;
+            "Ordered by:"         , ;
+            "Yes"                 , ;
+            "No"                  , ;
+            "Page "               , ;
             " of "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Close"    ,;
-            "New"      ,;
-            "Edit"     ,;
-            "Delete"   ,;
-            "Find"     ,;
-            "Goto"     ,;
-            "Report"   ,;
-            "First"    ,;
-            "Previous" ,;
-            "Next"     ,;
-            "Last"     ,;
-            "Save"     ,;
-            "Cancel"   ,;
-            "Add"      ,;
-            "Remove"   ,;
-            "Print"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Close"    , ;
+            "New"      , ;
+            "Edit"     , ;
+            "Delete"   , ;
+            "Find"     , ;
+            "Goto"     , ;
+            "Report"   , ;
+            "First"    , ;
+            "Previous" , ;
+            "Next"     , ;
+            "Last"     , ;
+            "Save"     , ;
+            "Cancel"   , ;
+            "Add"      , ;
+            "Remove"   , ;
+            "Print"    , ;
             "Close"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED
@@ -1637,73 +1637,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Are you sure ?' , 'Delete Record' }
 
          // EDIT MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  ,;
-            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            ,;
-            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        ,;
-            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       ,;
-            CHR(13)+"Record not found"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  , ;
+            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            , ;
+            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        , ;
+            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       , ;
+            CHR(13)+"Record not found"+CHR(13)                                        , ;
             CHR(13)+"To many cols"+CHR(13)+"The report can't fit in the sheet"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record count"        ,;
-            "       (New)"        ,;
-            "      (Edit)"        ,;
-            "Enter record number" ,;
-            "Find"                ,;
-            "Search text"         ,;
-            "Search date"         ,;
-            "Search number"       ,;
-            "Report definition"   ,;
-            "Report columns"      ,;
-            "Available columns"   ,;
-            "Initial record"      ,;
-            "Final record"        ,;
-            "Report of "          ,;
-            "Date:"               ,;
-            "Initial record:"     ,;
-            "Final record:"       ,;
-            "Ordered by:"         ,;
-            "Yes"                 ,;
-            "No"                  ,;
-            "Page "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record count"        , ;
+            "       (New)"        , ;
+            "      (Edit)"        , ;
+            "Enter record number" , ;
+            "Find"                , ;
+            "Search text"         , ;
+            "Search date"         , ;
+            "Search number"       , ;
+            "Report definition"   , ;
+            "Report columns"      , ;
+            "Available columns"   , ;
+            "Initial record"      , ;
+            "Final record"        , ;
+            "Report of "          , ;
+            "Date:"               , ;
+            "Initial record:"     , ;
+            "Final record:"       , ;
+            "Ordered by:"         , ;
+            "Yes"                 , ;
+            "No"                  , ;
+            "Page "               , ;
             " of "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Close"    ,;
-            "New"      ,;
-            "Edit"     ,;
-            "Delete"   ,;
-            "Find"     ,;
-            "Goto"     ,;
-            "Report"   ,;
-            "First"    ,;
-            "Previous" ,;
-            "Next"     ,;
-            "Last"     ,;
-            "Save"     ,;
-            "Cancel"   ,;
-            "Add"      ,;
-            "Remove"   ,;
-            "Print"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Close"    , ;
+            "New"      , ;
+            "Edit"     , ;
+            "Delete"   , ;
+            "Find"     , ;
+            "Goto"     , ;
+            "Report"   , ;
+            "First"    , ;
+            "Previous" , ;
+            "Next"     , ;
+            "Last"     , ;
+            "Save"     , ;
+            "Cancel"   , ;
+            "Add"      , ;
+            "Remove"   , ;
+            "Print"    , ;
             "Close"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED (ENGLISH DEFAULT)
@@ -1812,71 +1812,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Fen√™tre: "                                             ,;
-            " n'est pas d√©finie. Programme termin√©"                 ,;
-            "Erreur HMG"                                        ,;
-            "Contr√¥le: "                                            ,;
-            " De "                                                  ,;
-            " D√©j√† d√©fini. Programme termin√©"                       ,;
-            "Modification: Type non autoris√©. Programme termin√©"    ,;
-            "Modification: La clause Ajout ne peut √™tre utilis√©e avec des champs n'appartenant pas √† la zone de travail de Modification. Programme termin√©",;
-            "L'enregistrement est utilis√© par un autre utilisateur"  ,;
-            "Erreur"                                                ,;
+         _HMG_SYSDATA [ 136 ]  := { "Fen√™tre: "                                             , ;
+            " n'est pas d√©finie. Programme termin√©"                 , ;
+            "Erreur HMG"                                        , ;
+            "Contr√¥le: "                                            , ;
+            " De "                                                  , ;
+            " D√©j√† d√©fini. Programme termin√©"                       , ;
+            "Modification: Type non autoris√©. Programme termin√©"    , ;
+            "Modification: La clause Ajout ne peut √™tre utilis√©e avec des champs n'appartenant pas √† la zone de travail de Modification. Programme termin√©", ;
+            "L'enregistrement est utilis√© par un autre utilisateur"  , ;
+            "Erreur"                                                , ;
             "Entr√©e invalide"                                        }
          _HMG_SYSDATA [ 137 ] := { 'Etes-vous s√ªre ?' , 'Enregistrement d√©truit' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Suppression d'enregistrement"+CHR(13)+"Etes-vous s√ªre ?"+CHR(13)  ,;
-            CHR(13)+"Index manquant"+CHR(13)+"Recherche impossible"+CHR(13)            ,;
-            CHR(13)+"Champ Index introuvable"+CHR(13)+"Recherche impossible"+CHR(13)   ,;
-            CHR(13)+"Recherche impossible"+CHR(13)+"sur champs memo ou logique"+CHR(13),;
-            CHR(13)+"Enregistrement non trouv√©"+CHR(13)                                                     ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Suppression d'enregistrement"+CHR(13)+"Etes-vous s√ªre ?"+CHR(13)  , ;
+            CHR(13)+"Index manquant"+CHR(13)+"Recherche impossible"+CHR(13)            , ;
+            CHR(13)+"Champ Index introuvable"+CHR(13)+"Recherche impossible"+CHR(13)   , ;
+            CHR(13)+"Recherche impossible"+CHR(13)+"sur champs memo ou logique"+CHR(13), ;
+            CHR(13)+"Enregistrement non trouv√©"+CHR(13)                                                     , ;
             CHR(13)+"Trop de colonnes"+CHR(13)+"L'√©tat ne peut √™tre imprim√©"+CHR(13)      }
-         _HMG_SYSDATA [ 132 ]  := { "Enregistrement"                       ,;
-            "Nb. total enr."                       ,;
-            "   (Ajouter)"                        ,;
-            "  (Modifier)"                        ,;
-            "Entrez le num√©ro de l'enregistrement" ,;
-            "Trouver"                              ,;
-            "Chercher texte"                       ,;
-            "Chercher date"                        ,;
-            "Chercher num√©ro"                      ,;
-            "D√©finition de l'√©tat"                 ,;
-            "Colonnes de l'√©tat"                   ,;
-            "Colonnes disponibles"                 ,;
-            "Enregistrement de d√©but"              ,;
-            "Enregistrement de fin"                ,;
-            "Etat de "                             ,;
-            "Date:"                                ,;
-            "Enregistrement de d√©but:"             ,;
-            "Enregistrement de fin:"               ,;
-            "Tri√© par:"                            ,;
-            "Oui"                                  ,;
-            "Non"                                  ,;
-            " Page"                                ,;
+         _HMG_SYSDATA [ 132 ]  := { "Enregistrement"                       , ;
+            "Nb. total enr."                       , ;
+            "   (Ajouter)"                        , ;
+            "  (Modifier)"                        , ;
+            "Entrez le num√©ro de l'enregistrement" , ;
+            "Trouver"                              , ;
+            "Chercher texte"                       , ;
+            "Chercher date"                        , ;
+            "Chercher num√©ro"                      , ;
+            "D√©finition de l'√©tat"                 , ;
+            "Colonnes de l'√©tat"                   , ;
+            "Colonnes disponibles"                 , ;
+            "Enregistrement de d√©but"              , ;
+            "Enregistrement de fin"                , ;
+            "Etat de "                             , ;
+            "Date:"                                , ;
+            "Enregistrement de d√©but:"             , ;
+            "Enregistrement de fin:"               , ;
+            "Tri√© par:"                            , ;
+            "Oui"                                  , ;
+            "Non"                                  , ;
+            " Page"                                , ;
             " de "                                 }
-         _HMG_SYSDATA [ 133 ] := { "Fermer"      ,;
-            "Nouveau"     ,;
-            "Modifier"    ,;
-            "Supprimer"   ,;
-            "Trouver"     ,;
-            "Aller √†"     ,;
-            "Etat"   ,;
-            "Premier"     ,;
-            "Pr√©c√©dent"   ,;
-            "Suivant"     ,;
-            "Dernier"     ,;
-            "Enregistrer" ,;
-            "Annuler"     ,;
-            "Ajouter"     ,;
-            "Retirer"     ,;
-            "Imprimer"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Fermer"      , ;
+            "Nouveau"     , ;
+            "Modifier"    , ;
+            "Supprimer"   , ;
+            "Trouver"     , ;
+            "Aller √†"     , ;
+            "Etat"   , ;
+            "Premier"     , ;
+            "Pr√©c√©dent"   , ;
+            "Suivant"     , ;
+            "Dernier"     , ;
+            "Enregistrer" , ;
+            "Annuler"     , ;
+            "Ajouter"     , ;
+            "Retirer"     , ;
+            "Imprimer"    , ;
             "Fermer"      }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, nom de la table manquant"                                         ,;
-            "EDIT, la table a plus de 16 champs"                                     ,;
-            "EDIT, mode rafraichissement hors limite (Rapport d'erreur merci)"       ,;
-            "EDIT, √©v√©nement principal nombre hors limite (Rapport d'erreur merci)"  ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, nom de la table manquant"                                         , ;
+            "EDIT, la table a plus de 16 champs"                                     , ;
+            "EDIT, mode rafraichissement hors limite (Rapport d'erreur merci)"       , ;
+            "EDIT, √©v√©nement principal nombre hors limite (Rapport d'erreur merci)"  , ;
             "EDIT, liste d'√©v√©nements nombre hors limite (Rapport d'erreur merci)"   }
 
          // EDIT EXTENDED
@@ -1986,71 +1986,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Sind Sie sicher ?' , 'Datensatz l√∂schen' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Datensatz loeschen"+CHR(13)+"Sind Sie sicher ?"+CHR(13)                 ,;
-            CHR(13)+" Falscher Indexdatensatz"+CHR(13)+"Suche unmoeglich"+CHR(13)         ,;
-            CHR(13)+"Man kann nicht Indexdatenfeld finden"+CHR(13)+"Suche unmoeglich"+CHR(13) ,;
-            CHR(13)+"Suche unmoeglich nach"+CHR(13)+"Feld memo oder logisch"+CHR(13)         ,;
-            CHR(13)+"Datensatz nicht gefunden"+CHR(13)                                                     ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Datensatz loeschen"+CHR(13)+"Sind Sie sicher ?"+CHR(13)                 , ;
+            CHR(13)+" Falscher Indexdatensatz"+CHR(13)+"Suche unmoeglich"+CHR(13)         , ;
+            CHR(13)+"Man kann nicht Indexdatenfeld finden"+CHR(13)+"Suche unmoeglich"+CHR(13) , ;
+            CHR(13)+"Suche unmoeglich nach"+CHR(13)+"Feld memo oder logisch"+CHR(13)         , ;
+            CHR(13)+"Datensatz nicht gefunden"+CHR(13)                                                     , ;
             CHR(13)+" zu viele Spalten"+CHR(13)+"Zu wenig Platz  fuer die Meldung auf dem Blatt" + CHR(13) }
-         _HMG_SYSDATA [ 132 ]  := { "Datensatz"              ,;
-            "Menge der Dat."        ,;
-            "       (Neu)"        ,;
-            " (Editieren)"        ,;
-            "Datensatznummer eintragen" ,;
-            "Suche"                ,;
-            "Suche Text"         ,;
-            "Suche Datum"         ,;
-            "Suche Zahl"       ,;
-            "Definition der Meldung"   ,;
-            "Spalten der Meldung"      ,;
-            "Zugaengliche Spalten"     ,;
-            "Anfangsdatensatz"      ,;
-            "Endedatensatz"        ,;
-            "Datensatz vom "          ,;
-            "Datum:"               ,;
-            "Anfangsdatensatz:"     ,;
-            "Endedatensatz:"       ,;
-            "Sortieren nach:"         ,;
-            "Ja"                 ,;
-            "Nein"                  ,;
-            "Seite "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Datensatz"              , ;
+            "Menge der Dat."        , ;
+            "       (Neu)"        , ;
+            " (Editieren)"        , ;
+            "Datensatznummer eintragen" , ;
+            "Suche"                , ;
+            "Suche Text"         , ;
+            "Suche Datum"         , ;
+            "Suche Zahl"       , ;
+            "Definition der Meldung"   , ;
+            "Spalten der Meldung"      , ;
+            "Zugaengliche Spalten"     , ;
+            "Anfangsdatensatz"      , ;
+            "Endedatensatz"        , ;
+            "Datensatz vom "          , ;
+            "Datum:"               , ;
+            "Anfangsdatensatz:"     , ;
+            "Endedatensatz:"       , ;
+            "Sortieren nach:"         , ;
+            "Ja"                 , ;
+            "Nein"                  , ;
+            "Seite "               , ;
             " von "                 }
-         _HMG_SYSDATA [ 133 ] := { "Schliesse"    ,;
-            "Neu"      ,;
-            "Editiere"     ,;
-            "Loesche"   ,;
-            "Finde"     ,;
-            "Gehe zu"     ,;
-            "Meldung"   ,;
-            "Erster"    ,;
-            "Zurueck" ,;
-            "Naechst"     ,;
-            "Letzter"     ,;
-            "Speichern"     ,;
-            "Aufheben"   ,;
-            "Hinzufuegen"      ,;
-            "Loeschen"   ,;
-            "Drucken"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Schliesse"    , ;
+            "Neu"      , ;
+            "Editiere"     , ;
+            "Loesche"   , ;
+            "Finde"     , ;
+            "Gehe zu"     , ;
+            "Meldung"   , ;
+            "Erster"    , ;
+            "Zurueck" , ;
+            "Naechst"     , ;
+            "Letzter"     , ;
+            "Speichern"     , ;
+            "Aufheben"   , ;
+            "Hinzufuegen"      , ;
+            "Loeschen"   , ;
+            "Drucken"    , ;
             "Schliessen"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, falscher Name von Datenbank"                                  ,;
-            "EDIT, Datenbank hat mehr als 16 Felder"                   ,;
-            "EDIT, Auffrische-Modus ausser dem Bereich (siehe Fehlermeldungen)"      ,;
-            "EDIT, Menge der Basisereignisse ausser dem Bereich (siehe Fehlermeldungen)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, falscher Name von Datenbank"                                  , ;
+            "EDIT, Datenbank hat mehr als 16 Felder"                   , ;
+            "EDIT, Auffrische-Modus ausser dem Bereich (siehe Fehlermeldungen)"      , ;
+            "EDIT, Menge der Basisereignisse ausser dem Bereich (siehe Fehlermeldungen)" , ;
             "EDIT, Liste der Ereignisse ausser dem Bereich (siehe Fehlermeldungen)"  }
 
          // EDIT EXTENDED
@@ -2159,71 +2159,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: " ,;
-            " non ≈† definita. Programma terminato" ,;
-            "Errore HMG"  ,;
-            "Controllo: " ,;
-            " Di " ,;
-            " Gi‚Ä¶ definito. Programma Terminato" ,;
-            "Browse: Tipo non valido. Programma Terminato"  ,;
-            "Browse: Modifica non possibile: il campo non ≈† pertinente l'area di lavoro.Programma Terminato",;
-            "Record gi‚Ä¶ utilizzato da altro utente"                 ,;
-            "Attenzione!"                                           ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: " , ;
+            " non ≈† definita. Programma terminato" , ;
+            "Errore HMG"  , ;
+            "Controllo: " , ;
+            " Di " , ;
+            " Gi‚Ä¶ definito. Programma Terminato" , ;
+            "Browse: Tipo non valido. Programma Terminato"  , ;
+            "Browse: Modifica non possibile: il campo non ≈† pertinente l'area di lavoro.Programma Terminato", ;
+            "Record gi‚Ä¶ utilizzato da altro utente"                 , ;
+            "Attenzione!"                                           , ;
             "Dato non valido" }
          _HMG_SYSDATA [ 137 ] := { 'Sei sicuro ?' , 'Cancella Record' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Cancellare il record"+CHR(13)+"Sei sicuro ?"+CHR(13)                  ,;
-            CHR(13)+"File indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)            ,;
-            CHR(13)+"Campo indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)        ,;
-            CHR(13)+"Ricerca impossibile per"+CHR(13)+"campi memo o logici"+CHR(13)       ,;
-            CHR(13)+"Record non trovato"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Cancellare il record"+CHR(13)+"Sei sicuro ?"+CHR(13)                  , ;
+            CHR(13)+"File indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)            , ;
+            CHR(13)+"Campo indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)        , ;
+            CHR(13)+"Ricerca impossibile per"+CHR(13)+"campi memo o logici"+CHR(13)       , ;
+            CHR(13)+"Record non trovato"+CHR(13)                                        , ;
             CHR(13)+"Troppe colonne"+CHR(13)+"Il report non pu√≤ essere stampato"+CHR(13) }
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record totali"       ,;
-            "  (Aggiungi)"        ,;
-            "     (Nuovo)"        ,;
-            "Inserire il numero del record" ,;
-            "Ricerca"                ,;
-            "Testo da cercare"         ,;
-            "Data da cercare"         ,;
-            "Numero da cercare"       ,;
-            "Definizione del report"   ,;
-            "Colonne del report"      ,;
-            "Colonne totali"     ,;
-            "Record Iniziale"      ,;
-            "Record Finale"        ,;
-            "Report di "          ,;
-            "Data:"               ,;
-            "Primo Record:"     ,;
-            "Ultimo Record:"       ,;
-            "Ordinare per:"         ,;
-            "S√¨"                 ,;
-            "No"                  ,;
-            "Pagina "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record totali"       , ;
+            "  (Aggiungi)"        , ;
+            "     (Nuovo)"        , ;
+            "Inserire il numero del record" , ;
+            "Ricerca"                , ;
+            "Testo da cercare"         , ;
+            "Data da cercare"         , ;
+            "Numero da cercare"       , ;
+            "Definizione del report"   , ;
+            "Colonne del report"      , ;
+            "Colonne totali"     , ;
+            "Record Iniziale"      , ;
+            "Record Finale"        , ;
+            "Report di "          , ;
+            "Data:"               , ;
+            "Primo Record:"     , ;
+            "Ultimo Record:"       , ;
+            "Ordinare per:"         , ;
+            "S√¨"                 , ;
+            "No"                  , ;
+            "Pagina "               , ;
             " di "                 }
-         _HMG_SYSDATA [ 133 ] := { "Chiudi"    ,;
-            "Nuovo"      ,;
-            "Modifica"     ,;
-            "Cancella"   ,;
-            "Ricerca"     ,;
-            "Vai a"     ,;
-            "Report"   ,;
-            "Primo"    ,;
-            "Precedente" ,;
-            "Successivo"     ,;
-            "Ultimo"     ,;
-            "Salva"     ,;
-            "Annulla"   ,;
-            "Aggiungi"      ,;
-            "Rimuovi"   ,;
-            "Stampa"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Chiudi"    , ;
+            "Nuovo"      , ;
+            "Modifica"     , ;
+            "Cancella"   , ;
+            "Ricerca"     , ;
+            "Vai a"     , ;
+            "Report"   , ;
+            "Primo"    , ;
+            "Precedente" , ;
+            "Successivo"     , ;
+            "Ultimo"     , ;
+            "Salva"     , ;
+            "Annulla"   , ;
+            "Aggiungi"      , ;
+            "Rimuovi"   , ;
+            "Stampa"    , ;
             "Chiudi"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, il nome dell'area √® mancante"                              ,;
-            "EDIT, quest'area contiene pi√π di 16 campi"              ,;
-            "EDIT, modalit√† aggiornamento fuori dal limite (segnalare l'errore)"      ,;
-            "EDIT, evento pricipale fuori dal limite (segnalare l'errore)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, il nome dell'area √® mancante"                              , ;
+            "EDIT, quest'area contiene pi√π di 16 campi"              , ;
+            "EDIT, modalit√† aggiornamento fuori dal limite (segnalare l'errore)"      , ;
+            "EDIT, evento pricipale fuori dal limite (segnalare l'errore)" , ;
             "EDIT, lista eventi fuori dal limite (segnalare l'errore)"  }
 
          // EDIT EXTENDED
@@ -2333,71 +2333,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Okno: "                                              ,;
-            " nie zdefiniowane.Program zako√±czony"         ,;
-            "B¬≥¬πd HMG"                                         ,;
-            "Kontrolka: "                                             ,;
-            " z "                                                  ,;
-            " ju¬ø zdefiniowana. Program zako√±czony"                  ,;
-            "Browse: Niedozwolony typ danych. Program zako√±czony"          ,;
-            "Browse: Klauzula Append nie mo¬øe by√¶ stosowana do p√≥l nie nale¬ø¬πcych do aktualnego obszaru roboczego. Program zako√±czony",;
-            "Rekord edytowany przez innego u¬øytkownika"                ,;
-            "Ostrze¬øenie"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Okno: "                                              , ;
+            " nie zdefiniowane.Program zako√±czony"         , ;
+            "B¬≥¬πd HMG"                                         , ;
+            "Kontrolka: "                                             , ;
+            " z "                                                  , ;
+            " ju¬ø zdefiniowana. Program zako√±czony"                  , ;
+            "Browse: Niedozwolony typ danych. Program zako√±czony"          , ;
+            "Browse: Klauzula Append nie mo¬øe by√¶ stosowana do p√≥l nie nale¬ø¬πcych do aktualnego obszaru roboczego. Program zako√±czony", ;
+            "Rekord edytowany przez innego u¬øytkownika"                , ;
+            "Ostrze¬øenie"                                               , ;
             "Nieprawid¬≥owy wpis"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Czy jesteo pewny ?' , 'Skasuj rekord' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Usuni¬©cie rekordu"+CHR(13)+"JesteÀú pewny ?"+CHR(13)                 ,;
-            CHR(13)+"BÀÜ¬©dny zbi¬¢r Indeksowy"+CHR(13)+"Nie mo¬æna szuka‚Ä†"+CHR(13)         ,;
-            CHR(13)+"Nie mo¬æna znaleÀú‚Ä† pola indeksu"+CHR(13)+"Nie mo¬æna szuka‚Ä†"+CHR(13) ,;
-            CHR(13)+"Nie mo¬æna szuka√¶ wg"+CHR(13)+"pola memo lub logicznego"+CHR(13)         ,;
-            CHR(13)+"Rekordu nie znaleziono"+CHR(13)                                                     ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Usuni¬©cie rekordu"+CHR(13)+"JesteÀú pewny ?"+CHR(13)                 , ;
+            CHR(13)+"BÀÜ¬©dny zbi¬¢r Indeksowy"+CHR(13)+"Nie mo¬æna szuka‚Ä†"+CHR(13)         , ;
+            CHR(13)+"Nie mo¬æna znaleÀú‚Ä† pola indeksu"+CHR(13)+"Nie mo¬æna szuka‚Ä†"+CHR(13) , ;
+            CHR(13)+"Nie mo¬æna szuka√¶ wg"+CHR(13)+"pola memo lub logicznego"+CHR(13)         , ;
+            CHR(13)+"Rekordu nie znaleziono"+CHR(13)                                                     , ;
             CHR(13)+"Zbyt wiele kolumn"+CHR(13)+"Raport nie mo¬æe zmieÀúci‚Ä† si¬© na arkuszu"+CHR(13)      }
-         _HMG_SYSDATA [ 132 ]  := { "Rekord"              ,;
-            "Liczba rekord¬¢w"        ,;
-            "      (Nowy)"        ,;
-            "    (Edycja)"        ,;
-            "Wprowad¬´ numer rekordu" ,;
-            "Szukaj"                ,;
-            "Szukaj tekstu"         ,;
-            "Szukaj daty"         ,;
-            "Szukaj liczby"       ,;
-            "Definicja Raportu"   ,;
-            "Kolumny Raportu"      ,;
-            "Dost¬©pne kolumny"     ,;
-            "Pocz¬•tkowy rekord"      ,;
-            "Ko√§cowy rekord"        ,;
-            "Raport z "          ,;
-            "Data:"               ,;
-            "Pocz¬•tkowy rekord:"     ,;
-            "Ko√§cowy rekord:"       ,;
-            "Sortowanie wg:"         ,;
-            "Tak"                 ,;
-            "Nie"                  ,;
-            "Strona "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Rekord"              , ;
+            "Liczba rekord¬¢w"        , ;
+            "      (Nowy)"        , ;
+            "    (Edycja)"        , ;
+            "Wprowad¬´ numer rekordu" , ;
+            "Szukaj"                , ;
+            "Szukaj tekstu"         , ;
+            "Szukaj daty"         , ;
+            "Szukaj liczby"       , ;
+            "Definicja Raportu"   , ;
+            "Kolumny Raportu"      , ;
+            "Dost¬©pne kolumny"     , ;
+            "Pocz¬•tkowy rekord"      , ;
+            "Ko√§cowy rekord"        , ;
+            "Raport z "          , ;
+            "Data:"               , ;
+            "Pocz¬•tkowy rekord:"     , ;
+            "Ko√§cowy rekord:"       , ;
+            "Sortowanie wg:"         , ;
+            "Tak"                 , ;
+            "Nie"                  , ;
+            "Strona "               , ;
             " z "                 }
-         _HMG_SYSDATA [ 133 ] := { "Zamknij"    ,;
-            "Nowy"      ,;
-            "Edytuj"     ,;
-            "Usu√§"   ,;
-            "Znajd¬´"     ,;
-            "Id≈∏ do"     ,;
-            "Raport"   ,;
-            "Pierwszy"    ,;
-            "Poprzedni" ,;
-            "Nast¬©pny"     ,;
-            "Ostatni"     ,;
-            "Zapisz"     ,;
-            "Rezygnuj"   ,;
-            "Dodaj"      ,;
-            "Usu√§"   ,;
-            "Drukuj"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Zamknij"    , ;
+            "Nowy"      , ;
+            "Edytuj"     , ;
+            "Usu√§"   , ;
+            "Znajd¬´"     , ;
+            "Id≈∏ do"     , ;
+            "Raport"   , ;
+            "Pierwszy"    , ;
+            "Poprzedni" , ;
+            "Nast¬©pny"     , ;
+            "Ostatni"     , ;
+            "Zapisz"     , ;
+            "Rezygnuj"   , ;
+            "Dodaj"      , ;
+            "Usu√§"   , ;
+            "Drukuj"    , ;
             "Zamknij"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, bÀÜ¬©dna nazwa bazy"                                  ,;
-            "EDIT, baza ma wi¬©cej ni¬æ 16 p¬¢l"                   ,;
-            "EDIT, tryb odÀúwierzania poza zakresem (zobacz raport bÀÜ¬©d¬¢w)"      ,;
-            "EDIT, liczba zdarz√§ podstawowych poza zakresem (zobacz raport bÀÜ¬©d¬¢w)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, bÀÜ¬©dna nazwa bazy"                                  , ;
+            "EDIT, baza ma wi¬©cej ni¬æ 16 p¬¢l"                   , ;
+            "EDIT, tryb odÀúwierzania poza zakresem (zobacz raport bÀÜ¬©d¬¢w)"      , ;
+            "EDIT, liczba zdarz√§ podstawowych poza zakresem (zobacz raport bÀÜ¬©d¬¢w)" , ;
             "EDIT, lista zdarze√§ poza zakresem (zobacz raport bÀÜ¬©d¬¢w)"  }
 
          // EDIT EXTENDED
@@ -2684,71 +2684,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "√é√™√≠√Æ: "                                              ,;
-            " √≠√• √Æ√Ø√∞√•√§√•√´√•√≠√Æ. √è√∞√Æ√£√∞√†√¨√¨√† √Ø√∞√•√∞√¢√†√≠√†"                 ,;
-            "HMG √é√∏√®√°√™√†"                                     ,;
-            "√ù√´√•√¨√•√≠√≤ √≥√Ø√∞√†√¢√´√•√≠√®: "                               ,;
-            " √®√ß "                                               ,;
-            " √ì√¶√• √Æ√Ø√∞√•√§√•√´√•√≠. √è√∞√Æ√£√∞√†√¨√¨√† √Ø√∞√•√∞√¢√†√≠√†"                         ,;
-            "Browse: √í√†√™√Æ√© √≤√®√Ø √≠√• √Ø√Æ√§√§√•√∞√¶√®√¢√†√•√≤√±. √è√∞√Æ√£√∞√†√¨√¨√† √Ø√∞√•√∞√¢√†√≠√†"    ,;
-            "Browse: Append √™√´√†√±√± √≠√• √¨√Æ√¶√•√≤ √°√ª√≤√º √®√±√Ø√Æ√´√º√ß√Æ√¢√†√≠ √± √Ø√Æ√´√¨√® √®√ß √§√∞√≥√£√Æ√© √∞√†√°√Æ√∑√•√© √Æ√°√´√†√±√≤√®. √è√∞√Æ√£√∞√†√¨√¨√† √Ø√∞√•√∞√¢√†√≠√†",;
-            "√á√†√Ø√®√±√º √±√•√©√∑√†√± √∞√•√§√†√™√≤√®√∞√≥√•√≤√± √§√∞√≥√£√®√¨ √Ø√Æ√´√º√ß√Æ√¢√†√≤√•√´√•√¨"           ,;
-            "√è√∞√•√§√≥√Ø√∞√•√¶√§√•√≠√®√•"                                             ,;
+         _HMG_SYSDATA [ 136 ]  := { "√é√™√≠√Æ: "                                              , ;
+            " √≠√• √Æ√Ø√∞√•√§√•√´√•√≠√Æ. √è√∞√Æ√£√∞√†√¨√¨√† √Ø√∞√•√∞√¢√†√≠√†"                 , ;
+            "HMG √é√∏√®√°√™√†"                                     , ;
+            "√ù√´√•√¨√•√≠√≤ √≥√Ø√∞√†√¢√´√•√≠√®: "                               , ;
+            " √®√ß "                                               , ;
+            " √ì√¶√• √Æ√Ø√∞√•√§√•√´√•√≠. √è√∞√Æ√£√∞√†√¨√¨√† √Ø√∞√•√∞√¢√†√≠√†"                         , ;
+            "Browse: √í√†√™√Æ√© √≤√®√Ø √≠√• √Ø√Æ√§√§√•√∞√¶√®√¢√†√•√≤√±. √è√∞√Æ√£√∞√†√¨√¨√† √Ø√∞√•√∞√¢√†√≠√†"    , ;
+            "Browse: Append √™√´√†√±√± √≠√• √¨√Æ√¶√•√≤ √°√ª√≤√º √®√±√Ø√Æ√´√º√ß√Æ√¢√†√≠ √± √Ø√Æ√´√¨√® √®√ß √§√∞√≥√£√Æ√© √∞√†√°√Æ√∑√•√© √Æ√°√´√†√±√≤√®. √è√∞√Æ√£√∞√†√¨√¨√† √Ø√∞√•√∞√¢√†√≠√†", ;
+            "√á√†√Ø√®√±√º √±√•√©√∑√†√± √∞√•√§√†√™√≤√®√∞√≥√•√≤√± √§√∞√≥√£√®√¨ √Ø√Æ√´√º√ß√Æ√¢√†√≤√•√´√•√¨"           , ;
+            "√è√∞√•√§√≥√Ø√∞√•√¶√§√•√≠√®√•"                                             , ;
             "√Ç√¢√•√§√•√≠√ª √≠√•√Ø√∞√†√¢√®√´√º√≠√ª√• √§√†√≠√≠√ª√•"                                 }
          _HMG_SYSDATA [ 137 ] := { '√Ç√ª √≥√¢√•√∞√•√≠√ª ?' , '√ì√§√†√´√®√≤√º √ß√†√Ø√®√±√º' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"√ì√§√†√´√•√≠√®√• √ß√†√Ø√®√±√®."+CHR(13)+"√Ç√ª √≥√¢√•√∞√•√≠√ª ?"+CHR(13)                  ,;
-            CHR(13)+"√é√≤√±√≥√≤√±√≤√¢√≥√•√≤ √®√≠√§√•√™√±√≠√ª√© √¥√†√©√´"+CHR(13)+"√è√Æ√®√±√™ √≠√•√¢√Æ√ß√¨√Æ√¶√•√≠"+CHR(13)   ,;
-            CHR(13)+"√é√≤√±√≥√≤√±√≤√¢√≥√•√≤ √®√≠√§√•√™√±√≠√Æ√• √Ø√Æ√´√•"+CHR(13)+"√è√Æ√®√±√™ √≠√•√¢√Æ√ß√¨√Æ√¶√•√≠"+CHR(13)   ,;
-            CHR(13)+"√è√Æ√®√±√™ √≠√•√¢√Æ√ß√¨√Æ√¶√•√≠ √Ø√Æ"+CHR(13)+"√¨√•√¨√Æ √®√´√® √´√Æ√£√®√∑√•√±√™√®√¨ √Ø√Æ√´√ø√¨"+CHR(13) ,;
-            CHR(13)+"√á√†√Ø√®√±√º √≠√• √≠√†√©√§√•√≠√†"+CHR(13)                                       ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"√ì√§√†√´√•√≠√®√• √ß√†√Ø√®√±√®."+CHR(13)+"√Ç√ª √≥√¢√•√∞√•√≠√ª ?"+CHR(13)                  , ;
+            CHR(13)+"√é√≤√±√≥√≤√±√≤√¢√≥√•√≤ √®√≠√§√•√™√±√≠√ª√© √¥√†√©√´"+CHR(13)+"√è√Æ√®√±√™ √≠√•√¢√Æ√ß√¨√Æ√¶√•√≠"+CHR(13)   , ;
+            CHR(13)+"√é√≤√±√≥√≤√±√≤√¢√≥√•√≤ √®√≠√§√•√™√±√≠√Æ√• √Ø√Æ√´√•"+CHR(13)+"√è√Æ√®√±√™ √≠√•√¢√Æ√ß√¨√Æ√¶√•√≠"+CHR(13)   , ;
+            CHR(13)+"√è√Æ√®√±√™ √≠√•√¢√Æ√ß√¨√Æ√¶√•√≠ √Ø√Æ"+CHR(13)+"√¨√•√¨√Æ √®√´√® √´√Æ√£√®√∑√•√±√™√®√¨ √Ø√Æ√´√ø√¨"+CHR(13) , ;
+            CHR(13)+"√á√†√Ø√®√±√º √≠√• √≠√†√©√§√•√≠√†"+CHR(13)                                       , ;
             CHR(13)+"√ë√´√®√∏√™√Æ√¨ √¨√≠√Æ√£√Æ √™√Æ√´√Æ√≠√Æ√™"+CHR(13)+"√é√≤√∑√•√≤ √≠√• √Ø√Æ√¨√•√±√≤√®√≤√±√ø √≠√† √´√®√±√≤√•"+CHR(13) }
-         _HMG_SYSDATA [ 132 ]  := { "√á√†√Ø√®√±√º"              ,;
-            "√Ç√±√•√£√Æ √ß√†√Ø√®√±√•√©"       ,;
-            "     (√ç√Æ√¢√†√ø)"        ,;
-            "  (√à√ß√¨√•√≠√®√≤√º)"        ,;
-            "√Ç√¢√•√§√®√≤√• √≠√Æ√¨√•√∞ √ß√†√Ø√®√±√®",;
-            "√è√Æ√®√±√™"               ,;
-            "√ç√†√©√≤√® √≤√•√™√±√≤"         ,;
-            "√ç√†√©√≤√® √§√†√≤√≥"          ,;
-            "√ç√†√©√≤√® √∑√®√±√´√Æ"         ,;
-            "√ç√†√±√≤√∞√Æ√©√™√† √Æ√≤√∑√•√≤√†"    ,;
-            "√ä√Æ√´√Æ√≠√™√® √Æ√≤√∑√•√≤√†"      ,;
-            "√Ñ√Æ√±√≤√≥√Ø√≠√ª√• √™√Æ√´√Æ√≠√™√®"   ,;
-            "√ç√†√∑√†√´√º√≠√†√ø √ß√†√Ø√®√±√º"    ,;
-            "√ä√Æ√≠√•√∑√≠√†√ø √ß√†√Ø√®√±√º"     ,;
-            "√é√≤√∑√•√≤ √§√´√ø "          ,;
-            "√Ñ√†√≤√†:"               ,;
-            "√è√•√∞√¢√†√ø √ß√†√Ø√®√±√º:"      ,;
-            "√ä√Æ√≠√•√∑√≠√†√ø √ß√†√Ø√®√±√º:"    ,;
-            "√É√∞√≥√Ø√Ø√®√∞√Æ√¢√™√† √Ø√Æ:"     ,;
-            "√Ñ√†"                  ,;
-            "√ç√•√≤"                 ,;
-            "√ë√≤√∞√†√≠√®√∂√† "           ,;
+         _HMG_SYSDATA [ 132 ]  := { "√á√†√Ø√®√±√º"              , ;
+            "√Ç√±√•√£√Æ √ß√†√Ø√®√±√•√©"       , ;
+            "     (√ç√Æ√¢√†√ø)"        , ;
+            "  (√à√ß√¨√•√≠√®√≤√º)"        , ;
+            "√Ç√¢√•√§√®√≤√• √≠√Æ√¨√•√∞ √ß√†√Ø√®√±√®", ;
+            "√è√Æ√®√±√™"               , ;
+            "√ç√†√©√≤√® √≤√•√™√±√≤"         , ;
+            "√ç√†√©√≤√® √§√†√≤√≥"          , ;
+            "√ç√†√©√≤√® √∑√®√±√´√Æ"         , ;
+            "√ç√†√±√≤√∞√Æ√©√™√† √Æ√≤√∑√•√≤√†"    , ;
+            "√ä√Æ√´√Æ√≠√™√® √Æ√≤√∑√•√≤√†"      , ;
+            "√Ñ√Æ√±√≤√≥√Ø√≠√ª√• √™√Æ√´√Æ√≠√™√®"   , ;
+            "√ç√†√∑√†√´√º√≠√†√ø √ß√†√Ø√®√±√º"    , ;
+            "√ä√Æ√≠√•√∑√≠√†√ø √ß√†√Ø√®√±√º"     , ;
+            "√é√≤√∑√•√≤ √§√´√ø "          , ;
+            "√Ñ√†√≤√†:"               , ;
+            "√è√•√∞√¢√†√ø √ß√†√Ø√®√±√º:"      , ;
+            "√ä√Æ√≠√•√∑√≠√†√ø √ß√†√Ø√®√±√º:"    , ;
+            "√É√∞√≥√Ø√Ø√®√∞√Æ√¢√™√† √Ø√Æ:"     , ;
+            "√Ñ√†"                  , ;
+            "√ç√•√≤"                 , ;
+            "√ë√≤√∞√†√≠√®√∂√† "           , ;
             " √®√ß "                 }
-         _HMG_SYSDATA [ 133 ] := { "√á√†√™√∞√ª√≤√º"   ,;
-            "√ç√Æ√¢√†√ø"     ,;
-            "√à√ß√¨√•√≠√®√≤√º"  ,;
-            "√ì√§√†√´√®√≤√º"   ,;
-            "√è√Æ√®√±√™"     ,;
-            "√è√•√∞√•√©√≤√®"   ,;
-            "√é√≤√∑√•√≤"     ,;
-            "√è√•√∞√¢√†√ø"    ,;
-            "√ç√†√ß√†√§"     ,;
-            "√Ç√Ø√•√∞√•√§"    ,;
-            "√è√Æ√±√´√•√§√≠√ø√ø" ,;
-            "√ë√Æ√µ√∞√†√≠√®√≤√º" ,;
-            "√é√≤√¨√•√≠√†"    ,;
-            "√Ñ√Æ√°√†√¢√®√≤√º"  ,;
-            "√ì√§√†√´√®√≤√º"   ,;
-            "√è√•√∑√†√≤√º"    ,;
+         _HMG_SYSDATA [ 133 ] := { "√á√†√™√∞√ª√≤√º"   , ;
+            "√ç√Æ√¢√†√ø"     , ;
+            "√à√ß√¨√•√≠√®√≤√º"  , ;
+            "√ì√§√†√´√®√≤√º"   , ;
+            "√è√Æ√®√±√™"     , ;
+            "√è√•√∞√•√©√≤√®"   , ;
+            "√é√≤√∑√•√≤"     , ;
+            "√è√•√∞√¢√†√ø"    , ;
+            "√ç√†√ß√†√§"     , ;
+            "√Ç√Ø√•√∞√•√§"    , ;
+            "√è√Æ√±√´√•√§√≠√ø√ø" , ;
+            "√ë√Æ√µ√∞√†√≠√®√≤√º" , ;
+            "√é√≤√¨√•√≠√†"    , ;
+            "√Ñ√Æ√°√†√¢√®√≤√º"  , ;
+            "√ì√§√†√´√®√≤√º"   , ;
+            "√è√•√∑√†√≤√º"    , ;
             "√á√†√™√∞√ª√≤√º"    }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, √≠√• √≥√™√†√ß√†√≠√Æ √®√¨√ø √∞√†√°√Æ√∑√•√© √Æ√°√´√†√±√≤√®"                     ,;
-            "EDIT, √§√Æ√Ø√≥√±√™√†√•√≤√±√ø √≤√Æ√´√º√™√Æ √§√Æ 16 √Ø√Æ√´√•√©"                     ,;
-            "EDIT, √∞√•√¶√®√¨ √Æ√°√≠√Æ√¢√´√•√≠√®√ø √¢√≠√• √§√®√†√Ø√†√ß√Æ√≠√† (√±√Æ√Æ√°√π√®√≤√• √Æ√° √Æ√∏√®√°√™√•)",;
-            "EDIT, √≠√Æ√¨√•√∞ √±√Æ√°√ª√≤√®√ø √¢√≠√• √§√®√†√Ø√†√ß√Æ√≠√† (√±√Æ√Æ√°√π√®√≤√• √Æ√° √Æ√∏√®√°√™√•)"   ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, √≠√• √≥√™√†√ß√†√≠√Æ √®√¨√ø √∞√†√°√Æ√∑√•√© √Æ√°√´√†√±√≤√®"                     , ;
+            "EDIT, √§√Æ√Ø√≥√±√™√†√•√≤√±√ø √≤√Æ√´√º√™√Æ √§√Æ 16 √Ø√Æ√´√•√©"                     , ;
+            "EDIT, √∞√•√¶√®√¨ √Æ√°√≠√Æ√¢√´√•√≠√®√ø √¢√≠√• √§√®√†√Ø√†√ß√Æ√≠√† (√±√Æ√Æ√°√π√®√≤√• √Æ√° √Æ√∏√®√°√™√•)", ;
+            "EDIT, √≠√Æ√¨√•√∞ √±√Æ√°√ª√≤√®√ø √¢√≠√• √§√®√†√Ø√†√ß√Æ√≠√† (√±√Æ√Æ√°√π√®√≤√• √Æ√° √Æ√∏√®√°√™√•)"   , ;
             "EDIT, √≠√Æ√¨√•√∞ √±√Æ√°√ª√≤√®√ø √´√®√±√≤√®√≠√£√† √¢√≠√• √§√®√†√Ø√†√ß√Æ√≠√† (√±√Æ√Æ√°√π√®√≤√• √Æ√° √Æ√∏√®√°√™√•)" }
 
          // EDIT EXTENDED
@@ -2858,71 +2858,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " no est√° definida. Ejecuci√≥n terminada"                ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " De "                                                  ,;
-            " ya definido. Ejecuci√≥n terminada"                     ,;
-            "Browse: Tipo no permitido. Ejecuci√≥n terminada"        ,;
-            "Browse: La calusula APPEND no puede ser usada con campos no pertenecientes al area del BROWSE. Ejecuci√≥n terminada",;
-            "El registro est√° siendo editado por otro usuario"      ,;
-            "Peligro"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " no est√° definida. Ejecuci√≥n terminada"                , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " De "                                                  , ;
+            " ya definido. Ejecuci√≥n terminada"                     , ;
+            "Browse: Tipo no permitido. Ejecuci√≥n terminada"        , ;
+            "Browse: La calusula APPEND no puede ser usada con campos no pertenecientes al area del BROWSE. Ejecuci√≥n terminada", ;
+            "El registro est√° siendo editado por otro usuario"      , ;
+            "Peligro"                                               , ;
             "Entrada no v√°lida"                                      }
          _HMG_SYSDATA [ 137 ] := { 'Est√° Seguro ?' , 'Eliminar Registro' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Va a eliminar el registro actual"+CHR(13)+"¬ø Est√° seguro ?"+CHR(13)                 ,;
-            CHR(13)+"No hay un indice activo"+CHR(13)+"No se puede realizar la busqueda"+CHR(13)         ,;
-            CHR(13)+"No se encuentra el campo indice"+CHR(13)+"No se puede realizar la busqueda"+CHR(13) ,;
-            CHR(13)+"No se pueden realizar busquedas"+CHR(13)+"por campos memo o l√≥gico"+CHR(13)         ,;
-            CHR(13)+"Registro no encontrado"+CHR(13)                                                     ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Va a eliminar el registro actual"+CHR(13)+"¬ø Est√° seguro ?"+CHR(13)                 , ;
+            CHR(13)+"No hay un indice activo"+CHR(13)+"No se puede realizar la busqueda"+CHR(13)         , ;
+            CHR(13)+"No se encuentra el campo indice"+CHR(13)+"No se puede realizar la busqueda"+CHR(13) , ;
+            CHR(13)+"No se pueden realizar busquedas"+CHR(13)+"por campos memo o l√≥gico"+CHR(13)         , ;
+            CHR(13)+"Registro no encontrado"+CHR(13)                                                     , ;
             CHR(13)+"Ha inclido demasiadas columnas"+CHR(13)+"El listado no cabe en la hoja"+CHR(13)      }
-         _HMG_SYSDATA [ 132 ]  := { "Registro Actual"                  ,;
-            "Registros Totales"                ,;
-            "     (Nuevo)"                     ,;
-            "    (Editar)"                     ,;
-            "Introducca el n√∫mero de registro" ,;
-            "Buscar"                           ,;
-            "Texto a buscar"                   ,;
-            "Fecha a buscar"                   ,;
-            "N√∫mero a buscar"                  ,;
-            "Definici√≥n del listado"           ,;
-            "Columnas del listado"             ,;
-            "Columnas disponibles"             ,;
-            "Registro inicial"                 ,;
-            "Registro final"                   ,;
-            "Listado de "                      ,;
-            "Fecha:"                           ,;
-            "Primer registro:"                 ,;
-            "Ultimo registro:"                 ,;
-            "Ordenado por:"                    ,;
-            "Si"                               ,;
-            "No"                               ,;
-            "Pagina "                          ,;
+         _HMG_SYSDATA [ 132 ]  := { "Registro Actual"                  , ;
+            "Registros Totales"                , ;
+            "     (Nuevo)"                     , ;
+            "    (Editar)"                     , ;
+            "Introducca el n√∫mero de registro" , ;
+            "Buscar"                           , ;
+            "Texto a buscar"                   , ;
+            "Fecha a buscar"                   , ;
+            "N√∫mero a buscar"                  , ;
+            "Definici√≥n del listado"           , ;
+            "Columnas del listado"             , ;
+            "Columnas disponibles"             , ;
+            "Registro inicial"                 , ;
+            "Registro final"                   , ;
+            "Listado de "                      , ;
+            "Fecha:"                           , ;
+            "Primer registro:"                 , ;
+            "Ultimo registro:"                 , ;
+            "Ordenado por:"                    , ;
+            "Si"                               , ;
+            "No"                               , ;
+            "Pagina "                          , ;
             " de "                              }
-         _HMG_SYSDATA [ 133 ] := { "Cerrar"           ,;
-            "Nuevo"            ,;
-            "Modificar"        ,;
-            "Eliminar"         ,;
-            "Buscar"           ,;
-            "Ir al registro"   ,;
-            "Listado"          ,;
-            "Primero"          ,;
-            "Anterior"         ,;
-            "Siguiente"        ,;
-            "Ultimo"           ,;
-            "Guardar"          ,;
-            "Cancelar"         ,;
-            "A√±adir"           ,;
-            "Quitar"           ,;
-            "Imprimir"         ,;
+         _HMG_SYSDATA [ 133 ] := { "Cerrar"           , ;
+            "Nuevo"            , ;
+            "Modificar"        , ;
+            "Eliminar"         , ;
+            "Buscar"           , ;
+            "Ir al registro"   , ;
+            "Listado"          , ;
+            "Primero"          , ;
+            "Anterior"         , ;
+            "Siguiente"        , ;
+            "Ultimo"           , ;
+            "Guardar"          , ;
+            "Cancelar"         , ;
+            "A√±adir"           , ;
+            "Quitar"           , ;
+            "Imprimir"         , ;
             "Cerrar"            }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, No se ha especificado el area"                                  ,;
-            "EDIT, El area contiene m√°s de 16 campos"                              ,;
-            "EDIT, Refesco fuera de rango (por favor comunique el error)"          ,;
-            "EDIT, Evento principal fuera de rango (por favor comunique el error)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, No se ha especificado el area"                                  , ;
+            "EDIT, El area contiene m√°s de 16 campos"                              , ;
+            "EDIT, Refesco fuera de rango (por favor comunique el error)"          , ;
+            "EDIT, Evento principal fuera de rango (por favor comunique el error)" , ;
             "EDIT, Evento listado fuera de rango (por favor comunique el error)"    }
 
          // EDIT EXTENDED
@@ -3030,73 +3030,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Ikkuna: " ,;
-            " m√§√§rittelem√§t√∂n. Ohjelma lopetettu" ,;
-            "HMG Virhe",;
-            "Kontrolli: ",;
-            " / " ,;
-            " On jo m√§√§ritelty. Ohjelma lopetettu" ,;
-            "Browse: Virheellinen tyyppi. Ohjelma lopetettu" ,;
-            "Browse: Et voi lis√§t√§ kentti√§ jotka eiv√§t ole BROWSEN m√§√§rityksess√§. Ohjelma lopetettu",;
-            "Toinen k√§ytt√§j√§ korjaa juuri tietuetta" ,;
-            "Varoitus" ,;
+         _HMG_SYSDATA [ 136 ]  := { "Ikkuna: " , ;
+            " m√§√§rittelem√§t√∂n. Ohjelma lopetettu" , ;
+            "HMG Virhe", ;
+            "Kontrolli: ", ;
+            " / " , ;
+            " On jo m√§√§ritelty. Ohjelma lopetettu" , ;
+            "Browse: Virheellinen tyyppi. Ohjelma lopetettu" , ;
+            "Browse: Et voi lis√§t√§ kentti√§ jotka eiv√§t ole BROWSEN m√§√§rityksess√§. Ohjelma lopetettu", ;
+            "Toinen k√§ytt√§j√§ korjaa juuri tietuetta" , ;
+            "Varoitus" , ;
             "Virheellinen arvo" }
 
          _HMG_SYSDATA [ 137 ] := { 'Oletko varma ?' , 'Poista tietue' }
 
          // EDIT
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Poista tietue"+CHR(13)+"Oletko varma?"+CHR(13)                  ,;
-            CHR(13)+"Indeksi tiedosto puuttuu"+CHR(13)+"En voihakea"+CHR(13)            ,;
-            CHR(13)+"Indeksikentt√§ ei l√∂ydy"+CHR(13)+"En voihakea"+CHR(13)        ,;
-            CHR(13)+"En voi hakea memo"+CHR(13)+"tai loogisen kent√§n mukaan"+CHR(13)       ,;
-            CHR(13)+"Tietue ei l√∂ydy"+CHR(13),;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Poista tietue"+CHR(13)+"Oletko varma?"+CHR(13)                  , ;
+            CHR(13)+"Indeksi tiedosto puuttuu"+CHR(13)+"En voihakea"+CHR(13)            , ;
+            CHR(13)+"Indeksikentt√§ ei l√∂ydy"+CHR(13)+"En voihakea"+CHR(13)        , ;
+            CHR(13)+"En voi hakea memo"+CHR(13)+"tai loogisen kent√§n mukaan"+CHR(13)       , ;
+            CHR(13)+"Tietue ei l√∂ydy"+CHR(13), ;
             CHR(13)+"Liian monta saraketta"+CHR(13)+"raportti ei mahdu sivulle"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Tietue"              ,;
-            "Tietue lukum√§√§r√§"    ,;
-            "       (Uusi)"       ,;
-            "      (Korjaa)"      ,;
-            "Anna tietue numero"  ,;
-            "Hae"                 ,;
-            "Hae teksti"          ,;
-            "Hae p√§iv√§ys"         ,;
-            "Hae numero"          ,;
-            "Raportti m√§√§ritys"   ,;
-            "Raportti sarake"     ,;
-            "Sallitut sarakkeet"  ,;
-            "Alku tietue"         ,;
-            "Loppu tietue"        ,;
-            "Raportti "           ,;
-            "Pvm:"                ,;
-            "Alku tietue:"        ,;
-            "Loppu tietue:"       ,;
-            "Lajittelu:"         ,;
-            "Kyll√§"                 ,;
-            "Ei"                  ,;
-            "Sivu "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Tietue"              , ;
+            "Tietue lukum√§√§r√§"    , ;
+            "       (Uusi)"       , ;
+            "      (Korjaa)"      , ;
+            "Anna tietue numero"  , ;
+            "Hae"                 , ;
+            "Hae teksti"          , ;
+            "Hae p√§iv√§ys"         , ;
+            "Hae numero"          , ;
+            "Raportti m√§√§ritys"   , ;
+            "Raportti sarake"     , ;
+            "Sallitut sarakkeet"  , ;
+            "Alku tietue"         , ;
+            "Loppu tietue"        , ;
+            "Raportti "           , ;
+            "Pvm:"                , ;
+            "Alku tietue:"        , ;
+            "Loppu tietue:"       , ;
+            "Lajittelu:"         , ;
+            "Kyll√§"                 , ;
+            "Ei"                  , ;
+            "Sivu "               , ;
             " / "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Sulje"    ,;
-            "Uusi"     ,;
-            "Korjaa"   ,;
-            "Poista"   ,;
-            "Hae"      ,;
-            "Mene"     ,;
-            "Raportti" ,;
-            "Ensimm√§inen" ,;
-            "Edellinen"   ,;
-            "Seuraava"    ,;
-            "Viimeinen"   ,;
-            "Tallenna"    ,;
-            "Keskeyt√§"    ,;
-            "Lis√§√§"       ,;
-            "Poista"      ,;
-            "Tulosta"     ,;
+         _HMG_SYSDATA [ 133 ] := { "Sulje"    , ;
+            "Uusi"     , ;
+            "Korjaa"   , ;
+            "Poista"   , ;
+            "Hae"      , ;
+            "Mene"     , ;
+            "Raportti" , ;
+            "Ensimm√§inen" , ;
+            "Edellinen"   , ;
+            "Seuraava"    , ;
+            "Viimeinen"   , ;
+            "Tallenna"    , ;
+            "Keskeyt√§"    , ;
+            "Lis√§√§"       , ;
+            "Poista"      , ;
+            "Tulosta"     , ;
             "Sulje"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, ty√∂alue puuttuu"   ,;
-            "EDIT, ty√∂alueella yli 16 kentt√§√§",;
-            "EDIT, p√§ivitysalue ylitys (raportoi virhe)"      ,;
-            "EDIT, tapahtuma numero ylitys (raportoi virhe)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, ty√∂alue puuttuu"   , ;
+            "EDIT, ty√∂alueella yli 16 kentt√§√§", ;
+            "EDIT, p√§ivitysalue ylitys (raportoi virhe)"      , ;
+            "EDIT, tapahtuma numero ylitys (raportoi virhe)" , ;
             "EDIT, lista tapahtuma numero ylitys (raportoi virhe)"}
 
          // EDIT EXTENDED
@@ -3207,74 +3207,74 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Scherm: ",;
-            " is niet gedefinieerd. Programma be√´indigd"           ,;
-            "HMG fout",;
-            "Control: ",;
-            " Van ",;
-            " Is al gedefinieerd. Programma be√´indigd"                   ,;
-            "Browse: Type niet toegestaan. Programma be√´indigd"          ,;
-            "Browse: Toevoegen-methode kan niet worden gebruikt voor velden die niet bij het Browse werkgebied behoren. Programma be√´indigd",;
-            "Regel word al veranderd door een andere gebruiker"          ,;
-            "Waarschuwing"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Scherm: ", ;
+            " is niet gedefinieerd. Programma be√´indigd"           , ;
+            "HMG fout", ;
+            "Control: ", ;
+            " Van ", ;
+            " Is al gedefinieerd. Programma be√´indigd"                   , ;
+            "Browse: Type niet toegestaan. Programma be√´indigd"          , ;
+            "Browse: Toevoegen-methode kan niet worden gebruikt voor velden die niet bij het Browse werkgebied behoren. Programma be√´indigd", ;
+            "Regel word al veranderd door een andere gebruiker"          , ;
+            "Waarschuwing"                                               , ;
             "Onjuiste invoer"                                            }
 
          _HMG_SYSDATA [ 137 ] := { 'Weet u het zeker?' , 'Verwijder regel' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Verwijder regel"+CHR(13)+"Weet u het zeker ?"+CHR(13)    ,;
-            CHR(13)+"Index bestand is er niet"+CHR(13)+"Kan niet zoeken"+CHR(13)          ,;
-            CHR(13)+"Kan index veld niet vinden"+CHR(13)+"Kan niet zoeken"+CHR(13)        ,;
-            CHR(13)+"Kan niet zoeken op"+CHR(13)+"Memo of logische velden"+CHR(13)        ,;
-            CHR(13)+"Regel niet gevonden"+CHR(13) ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Verwijder regel"+CHR(13)+"Weet u het zeker ?"+CHR(13)    , ;
+            CHR(13)+"Index bestand is er niet"+CHR(13)+"Kan niet zoeken"+CHR(13)          , ;
+            CHR(13)+"Kan index veld niet vinden"+CHR(13)+"Kan niet zoeken"+CHR(13)        , ;
+            CHR(13)+"Kan niet zoeken op"+CHR(13)+"Memo of logische velden"+CHR(13)        , ;
+            CHR(13)+"Regel niet gevonden"+CHR(13) , ;
             CHR(13)+"Te veel rijen"+CHR(13)+"Het rapport past niet op het papier"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Regel"     ,;
-            "Regel aantal"          ,;
-            "       (Nieuw)"        ,;
-            "      (Bewerken)"      ,;
-            "Geef regel nummer"     ,;
-            "Vind"                  ,;
-            "Zoek tekst"            ,;
-            "Zoek datum"            ,;
-            "Zoek nummer"           ,;
-            "Rapport definitie"     ,;
-            "Rapport rijen"         ,;
-            "Beschikbare rijen"     ,;
-            "Eerste regel"          ,;
-            "Laatste regel"         ,;
-            "Rapport van "          ,;
-            "Datum:"                ,;
-            "Eerste regel:"         ,;
-            "Laatste tegel:"        ,;
-            "Gesorteerd op:"        ,;
-            "Ja"                    ,;
-            "Nee"                   ,;
-            "Pagina "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Regel"     , ;
+            "Regel aantal"          , ;
+            "       (Nieuw)"        , ;
+            "      (Bewerken)"      , ;
+            "Geef regel nummer"     , ;
+            "Vind"                  , ;
+            "Zoek tekst"            , ;
+            "Zoek datum"            , ;
+            "Zoek nummer"           , ;
+            "Rapport definitie"     , ;
+            "Rapport rijen"         , ;
+            "Beschikbare rijen"     , ;
+            "Eerste regel"          , ;
+            "Laatste regel"         , ;
+            "Rapport van "          , ;
+            "Datum:"                , ;
+            "Eerste regel:"         , ;
+            "Laatste tegel:"        , ;
+            "Gesorteerd op:"        , ;
+            "Ja"                    , ;
+            "Nee"                   , ;
+            "Pagina "               , ;
             " van "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Sluiten"   ,;
-            "Nieuw"                 ,;
-            "Bewerken"              ,;
-            "Verwijderen"           ,;
-            "Vind"                  ,;
-            "Ga naar"               ,;
-            "Rapport"               ,;
-            "Eerste"                ,;
-            "Vorige"                ,;
-            "Volgende"              ,;
-            "Laatste"               ,;
-            "Bewaar"                ,;
-            "Annuleren"             ,;
-            "Voeg toe"              ,;
-            "Verwijder"             ,;
-            "Print"                 ,;
+         _HMG_SYSDATA [ 133 ] := { "Sluiten"   , ;
+            "Nieuw"                 , ;
+            "Bewerken"              , ;
+            "Verwijderen"           , ;
+            "Vind"                  , ;
+            "Ga naar"               , ;
+            "Rapport"               , ;
+            "Eerste"                , ;
+            "Vorige"                , ;
+            "Volgende"              , ;
+            "Laatste"               , ;
+            "Bewaar"                , ;
+            "Annuleren"             , ;
+            "Voeg toe"              , ;
+            "Verwijder"             , ;
+            "Print"                 , ;
             "Sluiten"               }
-         _HMG_SYSDATA [ 134 ]  := { "BEWERKEN, werkgebied naam bestaat niet",;
-            "BEWERKEN, dit werkgebied heeft meer dan 16 velden",;
-            "BEWERKEN, ververs manier buiten bereik (a.u.b. fout melden)"           ,;
-            "BEWERKEN, hoofd gebeurtenis nummer buiten bereik (a.u.b. fout melden)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "BEWERKEN, werkgebied naam bestaat niet", ;
+            "BEWERKEN, dit werkgebied heeft meer dan 16 velden", ;
+            "BEWERKEN, ververs manier buiten bereik (a.u.b. fout melden)"           , ;
+            "BEWERKEN, hoofd gebeurtenis nummer buiten bereik (a.u.b. fout melden)" , ;
             "BEWERKEN, list gebeurtenis nummer buiten bereik (a.u.b. fout melden)"  }
 
          // EDIT EXTENDED
@@ -3383,74 +3383,74 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                        ,;
-            " not defined. Program terminated"     ,;
-            "HMG Error"                        ,;
-            "Control: "                            ,;
-            " Of "                                 ,;
-            " Already defined. Program Terminated" ,;
-            "Type Not Allowed. Program terminated" ,;
-            "False WorkArea. Program Terminated"   ,;
-            "Zapis ureja drug uporabnik"           ,;
-            "Opozorilo"                            ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                        , ;
+            " not defined. Program terminated"     , ;
+            "HMG Error"                        , ;
+            "Control: "                            , ;
+            " Of "                                 , ;
+            " Already defined. Program Terminated" , ;
+            "Type Not Allowed. Program terminated" , ;
+            "False WorkArea. Program Terminated"   , ;
+            "Zapis ureja drug uporabnik"           , ;
+            "Opozorilo"                            , ;
             "Narobe vnos" }
 
          _HMG_SYSDATA [ 137 ] := { 'Ste prepri√®ani ?' , 'Bri≈°i vrstico' }
 
          // EDIT MESSAGES
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Bri≈°i vrstico"+CHR(13)+"Ste prepri√®ani ?"+CHR(13)     ,;
-            CHR(13)+"Manjka indeksna datoteka"+CHR(13)+"Ne morem iskati"+CHR(13)       ,;
-            CHR(13)+"Ne najdem indeksnega polja"+CHR(13)+"Ne morem iskati"+CHR(13)     ,;
-            CHR(13)+"Ne morem iskati po"+CHR(13)+"memo ali logi√®nih poljih"+CHR(13)    ,;
-            CHR(13)+"Ne najdem vrstice"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Bri≈°i vrstico"+CHR(13)+"Ste prepri√®ani ?"+CHR(13)     , ;
+            CHR(13)+"Manjka indeksna datoteka"+CHR(13)+"Ne morem iskati"+CHR(13)       , ;
+            CHR(13)+"Ne najdem indeksnega polja"+CHR(13)+"Ne morem iskati"+CHR(13)     , ;
+            CHR(13)+"Ne morem iskati po"+CHR(13)+"memo ali logi√®nih poljih"+CHR(13)    , ;
+            CHR(13)+"Ne najdem vrstice"+CHR(13)                                        , ;
             CHR(13)+"Preve√® kolon"+CHR(13)+"Poro√®ilo ne gre na list"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Vrstica"    ,;
-            "≈†tevilo vrstic"         ,;
-            "       (Nova)"          ,;
-            "      (Popravi)"        ,;
-            "Vnesi ≈°tevilko vrstice" ,;
-            "Poi≈°√®i"                 ,;
-            "Besedilo za iskanje"    ,;
-            "Datum za iskanje"       ,;
-            "≈†tevilka za iskanje"    ,;
-            "Parametri poro√®ila"     ,;
-            "Kolon v poro√®ilu"       ,;
-            "Kolon na razpolago"     ,;
-            "Za√®etna vrstica"        ,;
-            "Kon√®na vrstica"         ,;
-            "Pporo√®ilo za "          ,;
-            "Datum:"                 ,;
-            "Za√®etna vrstica:"       ,;
-            "Kon√®na vrstica:"        ,;
-            "Urejeno po:"            ,;
-            "Ja"                     ,;
-            "Ne"                     ,;
-            "Stran "                 ,;
+         _HMG_SYSDATA [ 132 ]  := { "Vrstica"    , ;
+            "≈†tevilo vrstic"         , ;
+            "       (Nova)"          , ;
+            "      (Popravi)"        , ;
+            "Vnesi ≈°tevilko vrstice" , ;
+            "Poi≈°√®i"                 , ;
+            "Besedilo za iskanje"    , ;
+            "Datum za iskanje"       , ;
+            "≈†tevilka za iskanje"    , ;
+            "Parametri poro√®ila"     , ;
+            "Kolon v poro√®ilu"       , ;
+            "Kolon na razpolago"     , ;
+            "Za√®etna vrstica"        , ;
+            "Kon√®na vrstica"         , ;
+            "Pporo√®ilo za "          , ;
+            "Datum:"                 , ;
+            "Za√®etna vrstica:"       , ;
+            "Kon√®na vrstica:"        , ;
+            "Urejeno po:"            , ;
+            "Ja"                     , ;
+            "Ne"                     , ;
+            "Stran "                 , ;
             " od "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Zapri" ,;
-            "Nova"              ,;
-            "Uredi"             ,;
-            "Bri≈°i"             ,;
-            "Poi≈°√®i"            ,;
-            "Pojdi na"          ,;
-            "Poro√®ilo"          ,;
-            "Prva"              ,;
-            "Prej≈°nja"          ,;
-            "Naslednja"         ,;
-            "Zadnja"            ,;
-            "Shrani"            ,;
-            "Prekini"           ,;
-            "Dodaj"             ,;
-            "Odstrani"          ,;
-            "Natisni"           ,;
+         _HMG_SYSDATA [ 133 ] := { "Zapri" , ;
+            "Nova"              , ;
+            "Uredi"             , ;
+            "Bri≈°i"             , ;
+            "Poi≈°√®i"            , ;
+            "Pojdi na"          , ;
+            "Poro√®ilo"          , ;
+            "Prva"              , ;
+            "Prej≈°nja"          , ;
+            "Naslednja"         , ;
+            "Zadnja"            , ;
+            "Shrani"            , ;
+            "Prekini"           , ;
+            "Dodaj"             , ;
+            "Odstrani"          , ;
+            "Natisni"           , ;
             "Zapri"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                  ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                  , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED
@@ -3559,73 +3559,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Are you sure ?' , 'Delete Record' }
 
          // EDIT MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  ,;
-            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            ,;
-            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        ,;
-            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       ,;
-            CHR(13)+"Record not found"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  , ;
+            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            , ;
+            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        , ;
+            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       , ;
+            CHR(13)+"Record not found"+CHR(13)                                        , ;
             CHR(13)+"To many cols"+CHR(13)+"The report can't fit in the sheet"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record count"        ,;
-            "       (New)"        ,;
-            "      (Edit)"        ,;
-            "Enter record number" ,;
-            "Find"                ,;
-            "Search text"         ,;
-            "Search date"         ,;
-            "Search number"       ,;
-            "Report definition"   ,;
-            "Report columns"      ,;
-            "Available columns"   ,;
-            "Initial record"      ,;
-            "Final record"        ,;
-            "Report of "          ,;
-            "Date:"               ,;
-            "Initial record:"     ,;
-            "Final record:"       ,;
-            "Ordered by:"         ,;
-            "Yes"                 ,;
-            "No"                  ,;
-            "Page "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record count"        , ;
+            "       (New)"        , ;
+            "      (Edit)"        , ;
+            "Enter record number" , ;
+            "Find"                , ;
+            "Search text"         , ;
+            "Search date"         , ;
+            "Search number"       , ;
+            "Report definition"   , ;
+            "Report columns"      , ;
+            "Available columns"   , ;
+            "Initial record"      , ;
+            "Final record"        , ;
+            "Report of "          , ;
+            "Date:"               , ;
+            "Initial record:"     , ;
+            "Final record:"       , ;
+            "Ordered by:"         , ;
+            "Yes"                 , ;
+            "No"                  , ;
+            "Page "               , ;
             " of "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Close"    ,;
-            "New"      ,;
-            "Edit"     ,;
-            "Delete"   ,;
-            "Find"     ,;
-            "Goto"     ,;
-            "Report"   ,;
-            "First"    ,;
-            "Previous" ,;
-            "Next"     ,;
-            "Last"     ,;
-            "Save"     ,;
-            "Cancel"   ,;
-            "Add"      ,;
-            "Remove"   ,;
-            "Print"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Close"    , ;
+            "New"      , ;
+            "Edit"     , ;
+            "Delete"   , ;
+            "Find"     , ;
+            "Goto"     , ;
+            "Report"   , ;
+            "First"    , ;
+            "Previous" , ;
+            "Next"     , ;
+            "Last"     , ;
+            "Save"     , ;
+            "Cancel"   , ;
+            "Add"      , ;
+            "Remove"   , ;
+            "Print"    , ;
             "Close"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED (ENGLISH DEFAULT)
@@ -3743,79 +3743,79 @@ PROCEDURE InitMessages (cSetLang)
          // BROWSE MESAJLARI ( T‹RK«E )
 
          _HMG_SYSDATA [ 136 ]  := { ;
-            "Pencere: ",;
-            " tan˝ms˝z. Program sonland˝r˝ld˝.",;
-            "HMG Hatas˝",;
-            "Kontrol: ",;
-            " / ",;
-            " ÷nceden tan˝ml˝. Program sonland˝r˝ld˝.",;
-            "Browse: GeÁersiz Tip. Program sonland˝r˝ld˝.",;
-            "Browse: Browse Áal˝˛ma alan˝nda olmayan sahalar iÁin " +;
-            "Append ibaresi kullan˝lamaz. Program sonland˝r˝ld˝.",;
-            "Bu kayd˝ ˛u anda ba˛ka biri editliyor.",;
-            "Uyar˝",;
+            "Pencere: ", ;
+            " tan˝ms˝z. Program sonland˝r˝ld˝.", ;
+            "HMG Hatas˝", ;
+            "Kontrol: ", ;
+            " / ", ;
+            " ÷nceden tan˝ml˝. Program sonland˝r˝ld˝.", ;
+            "Browse: GeÁersiz Tip. Program sonland˝r˝ld˝.", ;
+            "Browse: Browse Áal˝˛ma alan˝nda olmayan sahalar iÁin " + ;
+            "Append ibaresi kullan˝lamaz. Program sonland˝r˝ld˝.", ;
+            "Bu kayd˝ ˛u anda ba˛ka biri editliyor.", ;
+            "Uyar˝", ;
             "GeÁersiz giri˛"}
 
          _HMG_SYSDATA [ 137 ] := { 'Emin misiniz ?' , 'Kay˝t silme' }
 
          // EDIT MESAJLARI ( T‹RK«E )
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Kay˝t silme"+CHR(13)+"Emin misiniz ?"+CHR(13),;
-            CHR(13)+"Indeks dosyas˝ yok"+CHR(13)+"Arama yap˝lam˝yor"+CHR(13),;
-            CHR(13)+"Indeks dosyas˝ bulunamad˝"+CHR(13)+"Arama yap˝lam˝yor"+CHR(13),;
-            CHR(13)+"Memo ve mant˝ksal sahalarda"+CHR(13)+"Arama yap˝lamaz"+CHR(13),;
-            CHR(13)+"Kay˝t bulunamad˝"+CHR(13),;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Kay˝t silme"+CHR(13)+"Emin misiniz ?"+CHR(13), ;
+            CHR(13)+"Indeks dosyas˝ yok"+CHR(13)+"Arama yap˝lam˝yor"+CHR(13), ;
+            CHR(13)+"Indeks dosyas˝ bulunamad˝"+CHR(13)+"Arama yap˝lam˝yor"+CHR(13), ;
+            CHR(13)+"Memo ve mant˝ksal sahalarda"+CHR(13)+"Arama yap˝lamaz"+CHR(13), ;
+            CHR(13)+"Kay˝t bulunamad˝"+CHR(13), ;
             CHR(13)+"«ok fazla s¸tun var"+CHR(13)+"Rapor sayfaya s˝m˝yor"+CHR(13) }
 
          _HMG_SYSDATA [ 132 ]  := { ;
-            "Kay˝t",;
-            "Kay˝t say˝s˝",;
-            "       (Yeni)",;
-            "       (Edit)",;
-            " Kay˝t No.su :",;
-            "Ara",;
-            "Metin ara",;
-            "Tarih ara",;
-            "Say˝ ara",;
-            "Rapor tan˝m˝",;
-            "Rapor s¸tunlar˝",;
-            "M¸sait s¸tunlar",;
-            "›lk kay˝t",;
-            "Son kay˝t",;
-            "Rapor ad˝ ",;
-            "Tarih:",;
-            "›lk kay˝t:",;
-            "Son kay˝t:",;
-            "S˝ra d¸zeni:",;
-            "Evet",;
-            "Hay˝r",;
-            "Sayfa ",;
+            "Kay˝t", ;
+            "Kay˝t say˝s˝", ;
+            "       (Yeni)", ;
+            "       (Edit)", ;
+            " Kay˝t No.su :", ;
+            "Ara", ;
+            "Metin ara", ;
+            "Tarih ara", ;
+            "Say˝ ara", ;
+            "Rapor tan˝m˝", ;
+            "Rapor s¸tunlar˝", ;
+            "M¸sait s¸tunlar", ;
+            "›lk kay˝t", ;
+            "Son kay˝t", ;
+            "Rapor ad˝ ", ;
+            "Tarih:", ;
+            "›lk kay˝t:", ;
+            "Son kay˝t:", ;
+            "S˝ra d¸zeni:", ;
+            "Evet", ;
+            "Hay˝r", ;
+            "Sayfa ", ;
             " / "}
 
          _HMG_SYSDATA [ 133 ] := { ;
-            "Kapat",;
-            "Yeni",;
-            "Edit",;
-            "Sil",;
-            "Ara",;
-            "Git",;
-            "Rapor",;
-            "›lk",;
-            "÷nceki",;
-            "Sonraki",;
-            "Son",;
-            "Kaydet",;
-            "›ptal",;
-            "Ekle",;
-            "Kald˝r",;
-            "Print",;
+            "Kapat", ;
+            "Yeni", ;
+            "Edit", ;
+            "Sil", ;
+            "Ara", ;
+            "Git", ;
+            "Rapor", ;
+            "›lk", ;
+            "÷nceki", ;
+            "Sonraki", ;
+            "Son", ;
+            "Kaydet", ;
+            "›ptal", ;
+            "Ekle", ;
+            "Kald˝r", ;
+            "Print", ;
             "Kapat"}
 
          _HMG_SYSDATA [ 134 ]  := { ;
-            "EDIT, Áal˝˛ma alan˝ ismi noksan",;
-            "EDIT, bu Áal˝˛ma alan˝nda 16'dan fazla saha var",;
-            "EDIT, Tazeleme mod'u s˝n˝r ˆtesinde ( l¸tfen hatay˝ bildirin )",;
-            "EDIT, Temel olay numaras˝ s˝n˝r ˆtesinde ( l¸tfen hatay˝ bildirin )",;
+            "EDIT, Áal˝˛ma alan˝ ismi noksan", ;
+            "EDIT, bu Áal˝˛ma alan˝nda 16'dan fazla saha var", ;
+            "EDIT, Tazeleme mod'u s˝n˝r ˆtesinde ( l¸tfen hatay˝ bildirin )", ;
+            "EDIT, Temel olay numaras˝ s˝n˝r ˆtesinde ( l¸tfen hatay˝ bildirin )", ;
             "EDIT, Liste olay numaras˝ s˝n˝r ˆtesinde ( l¸tfen hatay˝ bildirin )" }
 
          // EDIT EXTENDED MESAJLARI ( T‹RK«E )
@@ -3932,73 +3932,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 136 ]  := { "Okno: "                                              ,;
-            " nenÌ definov·no. Program ukonËen"                   ,;
-            "HMG Error"                                         ,;
-            "Prvek: "                                             ,;
-            " z "                                                  ,;
-            " uû definov·n. Program ukonËen"                  ,;
-            "Browse: Typ nepovolen. Program ukonËen"          ,;
-            "Browse: Append fr·zi nelze pouûÌt s poli nepat¯ÌcÌmi do Browse pracovnÌ oblasti. Program ukonËen",;
-            "Z·znam edituje jin˝ uûivatel"                ,;
-            "Varov·nÌ"                                              ,;
+         _HMG_SYSDATA [ 136 ]  := { "Okno: "                                              , ;
+            " nenÌ definov·no. Program ukonËen"                   , ;
+            "HMG Error"                                         , ;
+            "Prvek: "                                             , ;
+            " z "                                                  , ;
+            " uû definov·n. Program ukonËen"                  , ;
+            "Browse: Typ nepovolen. Program ukonËen"          , ;
+            "Browse: Append fr·zi nelze pouûÌt s poli nepat¯ÌcÌmi do Browse pracovnÌ oblasti. Program ukonËen", ;
+            "Z·znam edituje jin˝ uûivatel"                , ;
+            "Varov·nÌ"                                              , ;
             "Chybn˝ vstup"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Jste si jist(a)?' , 'Smazat z·znam' }
 
          // EDIT MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Smazat z·znam"+CHR(13)+"Jste si jist(a)?"+CHR(13)                  ,;
-            CHR(13)+"ChybÌ indexov˝ soubor"+CHR(13)+"Nemohu hledat"+CHR(13)            ,;
-            CHR(13)+"Nemohu najÌt indexovanÈ pole"+CHR(13)+"Nemohu hledat"+CHR(13)        ,;
-            CHR(13)+"Nemohu hledat podle"+CHR(13)+"pole memo nebo logickÈ"+CHR(13)       ,;
-            CHR(13)+"Z·znam nenalezen"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Smazat z·znam"+CHR(13)+"Jste si jist(a)?"+CHR(13)                  , ;
+            CHR(13)+"ChybÌ indexov˝ soubor"+CHR(13)+"Nemohu hledat"+CHR(13)            , ;
+            CHR(13)+"Nemohu najÌt indexovanÈ pole"+CHR(13)+"Nemohu hledat"+CHR(13)        , ;
+            CHR(13)+"Nemohu hledat podle"+CHR(13)+"pole memo nebo logickÈ"+CHR(13)       , ;
+            CHR(13)+"Z·znam nenalezen"+CHR(13)                                        , ;
             CHR(13)+"P¯Ìliö mnoho sloupc˘"+CHR(13)+"Sestava se nevejde na plochu"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Z·znam"      ,;
-            "PoËet z·znam˘"         ,;
-            "      (Nov˝)"          ,;
-            "     (⁄prava)"         ,;
-            "Zadejte ËÌslo z·znamu" ,;
-            "Hledej"                ,;
-            "Hledan˝ text"          ,;
-            "HledanÈ datum"         ,;
-            "HledanÈ ËÌslo"         ,;
-            "Definice sestavy"      ,;
-            "Sloupce sestavy"       ,;
-            "DostupnÈ sloupce"      ,;
-            "PrvnÌ z·znam"          ,;
-            "PoslednÌ z·znam"       ,;
-            "Sestava "              ,;
-            "Datum:"                ,;
-            "PrvnÌ z·znam:"         ,;
-            "PoslednÌ z·znam:"      ,;
-            "T¯ÌdÏno dle:"          ,;
-            "Ano"                   ,;
-            "Ne"                    ,;
-            "Strana "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Z·znam"      , ;
+            "PoËet z·znam˘"         , ;
+            "      (Nov˝)"          , ;
+            "     (⁄prava)"         , ;
+            "Zadejte ËÌslo z·znamu" , ;
+            "Hledej"                , ;
+            "Hledan˝ text"          , ;
+            "HledanÈ datum"         , ;
+            "HledanÈ ËÌslo"         , ;
+            "Definice sestavy"      , ;
+            "Sloupce sestavy"       , ;
+            "DostupnÈ sloupce"      , ;
+            "PrvnÌ z·znam"          , ;
+            "PoslednÌ z·znam"       , ;
+            "Sestava "              , ;
+            "Datum:"                , ;
+            "PrvnÌ z·znam:"         , ;
+            "PoslednÌ z·znam:"      , ;
+            "T¯ÌdÏno dle:"          , ;
+            "Ano"                   , ;
+            "Ne"                    , ;
+            "Strana "               , ;
             " z "                   }
 
-         _HMG_SYSDATA [ 133 ] := { "Zav¯Ìt"    ,;
-            "Nov˝"      ,;
-            "⁄prava"    ,;
-            "Smaû"      ,;
-            "Najdi"     ,;
-            "Jdi"       ,;
-            "Sestava"   ,;
-            "PrvnÌ"     ,;
-            "P¯edchozÌ" ,;
-            "DalöÌ"     ,;
-            "PoslednÌ"  ,;
-            "Uloû"      ,;
-            "Storno"    ,;
-            "P¯idej"    ,;
-            "OdstraÚ"   ,;
-            "Tisk"      ,;
+         _HMG_SYSDATA [ 133 ] := { "Zav¯Ìt"    , ;
+            "Nov˝"      , ;
+            "⁄prava"    , ;
+            "Smaû"      , ;
+            "Najdi"     , ;
+            "Jdi"       , ;
+            "Sestava"   , ;
+            "PrvnÌ"     , ;
+            "P¯edchozÌ" , ;
+            "DalöÌ"     , ;
+            "PoslednÌ"  , ;
+            "Uloû"      , ;
+            "Storno"    , ;
+            "P¯idej"    , ;
+            "OdstraÚ"   , ;
+            "Tisk"      , ;
             "Zav¯i"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, chybÌ jmÈno pracovnÌ oblasti"                              ,;
-            "EDIT, pracovnÌ oblast m· vÌc jak 16 polÌ"              ,;
-            "EDIT, refresh mode mimo rozsah (prosÌm, nahlaste chybu)"      ,;
-            "EDIT, hlavnÌ event ËÌslo mimo rozsah (prosÌm, nahlaste chybu)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, chybÌ jmÈno pracovnÌ oblasti"                              , ;
+            "EDIT, pracovnÌ oblast m· vÌc jak 16 polÌ"              , ;
+            "EDIT, refresh mode mimo rozsah (prosÌm, nahlaste chybu)"      , ;
+            "EDIT, hlavnÌ event ËÌslo mimo rozsah (prosÌm, nahlaste chybu)" , ;
             "EDIT, list event ËÌslomimo rozsah (prosÌm, nahlaste chybu)"  }
 
          // EDIT EXTENDED (ENGLISH DEFAULT)
@@ -4109,73 +4109,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Are you sure ?' , 'Delete Record' }
 
          // EDIT MESSAGES
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  ,;
-            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            ,;
-            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        ,;
-            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       ,;
-            CHR(13)+"Record not found"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  , ;
+            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            , ;
+            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        , ;
+            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       , ;
+            CHR(13)+"Record not found"+CHR(13)                                        , ;
             CHR(13)+"To many cols"+CHR(13)+"The report can't fit in the sheet"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record count"        ,;
-            "       (New)"        ,;
-            "      (Edit)"        ,;
-            "Enter record number" ,;
-            "Find"                ,;
-            "Search text"         ,;
-            "Search date"         ,;
-            "Search number"       ,;
-            "Report definition"   ,;
-            "Report columns"      ,;
-            "Available columns"   ,;
-            "Initial record"      ,;
-            "Final record"        ,;
-            "Report of "          ,;
-            "Date:"               ,;
-            "Initial record:"     ,;
-            "Final record:"       ,;
-            "Ordered by:"         ,;
-            "Yes"                 ,;
-            "No"                  ,;
-            "Page "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record count"        , ;
+            "       (New)"        , ;
+            "      (Edit)"        , ;
+            "Enter record number" , ;
+            "Find"                , ;
+            "Search text"         , ;
+            "Search date"         , ;
+            "Search number"       , ;
+            "Report definition"   , ;
+            "Report columns"      , ;
+            "Available columns"   , ;
+            "Initial record"      , ;
+            "Final record"        , ;
+            "Report of "          , ;
+            "Date:"               , ;
+            "Initial record:"     , ;
+            "Final record:"       , ;
+            "Ordered by:"         , ;
+            "Yes"                 , ;
+            "No"                  , ;
+            "Page "               , ;
             " of "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Close"    ,;
-            "New"      ,;
-            "Edit"     ,;
-            "Delete"   ,;
-            "Find"     ,;
-            "Goto"     ,;
-            "Report"   ,;
-            "First"    ,;
-            "Previous" ,;
-            "Next"     ,;
-            "Last"     ,;
-            "Save"     ,;
-            "Cancel"   ,;
-            "Add"      ,;
-            "Remove"   ,;
-            "Print"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Close"    , ;
+            "New"      , ;
+            "Edit"     , ;
+            "Delete"   , ;
+            "Find"     , ;
+            "Goto"     , ;
+            "Report"   , ;
+            "First"    , ;
+            "Previous" , ;
+            "Next"     , ;
+            "Last"     , ;
+            "Save"     , ;
+            "Cancel"   , ;
+            "Add"      , ;
+            "Remove"   , ;
+            "Print"    , ;
             "Close"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED MESSAGES
@@ -4284,73 +4284,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Are you sure ?' , 'Delete Record' }
 
          // EDIT MESSAGES
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  ,;
-            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            ,;
-            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        ,;
-            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       ,;
-            CHR(13)+"Record not found"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  , ;
+            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            , ;
+            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        , ;
+            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       , ;
+            CHR(13)+"Record not found"+CHR(13)                                        , ;
             CHR(13)+"To many cols"+CHR(13)+"The report can't fit in the sheet"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record count"        ,;
-            "       (New)"        ,;
-            "      (Edit)"        ,;
-            "Enter record number" ,;
-            "Find"                ,;
-            "Search text"         ,;
-            "Search date"         ,;
-            "Search number"       ,;
-            "Report definition"   ,;
-            "Report columns"      ,;
-            "Available columns"   ,;
-            "Initial record"      ,;
-            "Final record"        ,;
-            "Report of "          ,;
-            "Date:"               ,;
-            "Initial record:"     ,;
-            "Final record:"       ,;
-            "Ordered by:"         ,;
-            "Yes"                 ,;
-            "No"                  ,;
-            "Page "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record count"        , ;
+            "       (New)"        , ;
+            "      (Edit)"        , ;
+            "Enter record number" , ;
+            "Find"                , ;
+            "Search text"         , ;
+            "Search date"         , ;
+            "Search number"       , ;
+            "Report definition"   , ;
+            "Report columns"      , ;
+            "Available columns"   , ;
+            "Initial record"      , ;
+            "Final record"        , ;
+            "Report of "          , ;
+            "Date:"               , ;
+            "Initial record:"     , ;
+            "Final record:"       , ;
+            "Ordered by:"         , ;
+            "Yes"                 , ;
+            "No"                  , ;
+            "Page "               , ;
             " of "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Close"    ,;
-            "New"      ,;
-            "Edit"     ,;
-            "Delete"   ,;
-            "Find"     ,;
-            "Goto"     ,;
-            "Report"   ,;
-            "First"    ,;
-            "Previous" ,;
-            "Next"     ,;
-            "Last"     ,;
-            "Save"     ,;
-            "Cancel"   ,;
-            "Add"      ,;
-            "Remove"   ,;
-            "Print"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Close"    , ;
+            "New"      , ;
+            "Edit"     , ;
+            "Delete"   , ;
+            "Find"     , ;
+            "Goto"     , ;
+            "Report"   , ;
+            "First"    , ;
+            "Previous" , ;
+            "Next"     , ;
+            "Last"     , ;
+            "Save"     , ;
+            "Cancel"   , ;
+            "Add"      , ;
+            "Remove"   , ;
+            "Print"    , ;
             "Close"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED
@@ -4459,73 +4459,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Are you sure ?' , 'Delete Record' }
 
          // EDIT MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  ,;
-            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            ,;
-            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        ,;
-            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       ,;
-            CHR(13)+"Record not found"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  , ;
+            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            , ;
+            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        , ;
+            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       , ;
+            CHR(13)+"Record not found"+CHR(13)                                        , ;
             CHR(13)+"To many cols"+CHR(13)+"The report can't fit in the sheet"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record count"        ,;
-            "       (New)"        ,;
-            "      (Edit)"        ,;
-            "Enter record number" ,;
-            "Find"                ,;
-            "Search text"         ,;
-            "Search date"         ,;
-            "Search number"       ,;
-            "Report definition"   ,;
-            "Report columns"      ,;
-            "Available columns"   ,;
-            "Initial record"      ,;
-            "Final record"        ,;
-            "Report of "          ,;
-            "Date:"               ,;
-            "Initial record:"     ,;
-            "Final record:"       ,;
-            "Ordered by:"         ,;
-            "Yes"                 ,;
-            "No"                  ,;
-            "Page "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record count"        , ;
+            "       (New)"        , ;
+            "      (Edit)"        , ;
+            "Enter record number" , ;
+            "Find"                , ;
+            "Search text"         , ;
+            "Search date"         , ;
+            "Search number"       , ;
+            "Report definition"   , ;
+            "Report columns"      , ;
+            "Available columns"   , ;
+            "Initial record"      , ;
+            "Final record"        , ;
+            "Report of "          , ;
+            "Date:"               , ;
+            "Initial record:"     , ;
+            "Final record:"       , ;
+            "Ordered by:"         , ;
+            "Yes"                 , ;
+            "No"                  , ;
+            "Page "               , ;
             " of "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Close"    ,;
-            "New"      ,;
-            "Edit"     ,;
-            "Delete"   ,;
-            "Find"     ,;
-            "Goto"     ,;
-            "Report"   ,;
-            "First"    ,;
-            "Previous" ,;
-            "Next"     ,;
-            "Last"     ,;
-            "Save"     ,;
-            "Cancel"   ,;
-            "Add"      ,;
-            "Remove"   ,;
-            "Print"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Close"    , ;
+            "New"      , ;
+            "Edit"     , ;
+            "Delete"   , ;
+            "Find"     , ;
+            "Goto"     , ;
+            "Report"   , ;
+            "First"    , ;
+            "Previous" , ;
+            "Next"     , ;
+            "Last"     , ;
+            "Save"     , ;
+            "Cancel"   , ;
+            "Add"      , ;
+            "Remove"   , ;
+            "Print"    , ;
             "Close"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED (ENGLISH DEFAULT)
@@ -4634,71 +4634,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "FenÍtre: "                                             ,;
-            " n'est pas dÈfinie. Programme terminÈ"                 ,;
-            "Erreur HMG"                                        ,;
-            "ContrÙle: "                                            ,;
-            " De "                                                  ,;
-            " DÈj‡ dÈfini. Programme terminÈ"                       ,;
-            "Modification: Type non autorisÈ. Programme terminÈ"    ,;
-            "Modification: La clause Ajout ne peut Ítre utilisÈe avec des champs n'appartenant pas ‡ la zone de travail de Modification. Programme terminÈ",;
-            "L'enregistrement est utilisÈ par un autre utilisateur"  ,;
-            "Erreur"                                                ,;
+         _HMG_SYSDATA [ 136 ]  := { "FenÍtre: "                                             , ;
+            " n'est pas dÈfinie. Programme terminÈ"                 , ;
+            "Erreur HMG"                                        , ;
+            "ContrÙle: "                                            , ;
+            " De "                                                  , ;
+            " DÈj‡ dÈfini. Programme terminÈ"                       , ;
+            "Modification: Type non autorisÈ. Programme terminÈ"    , ;
+            "Modification: La clause Ajout ne peut Ítre utilisÈe avec des champs n'appartenant pas ‡ la zone de travail de Modification. Programme terminÈ", ;
+            "L'enregistrement est utilisÈ par un autre utilisateur"  , ;
+            "Erreur"                                                , ;
             "EntrÈe invalide"                                        }
          _HMG_SYSDATA [ 137 ] := { 'Etes-vous s˚re ?' , 'Enregistrement dÈtruit' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Suppression d'enregistrement"+CHR(13)+"Etes-vous s˚re ?"+CHR(13)  ,;
-            CHR(13)+"Index manquant"+CHR(13)+"Recherche impossible"+CHR(13)            ,;
-            CHR(13)+"Champ Index introuvable"+CHR(13)+"Recherche impossible"+CHR(13)   ,;
-            CHR(13)+"Recherche impossible"+CHR(13)+"sur champs memo ou logique"+CHR(13),;
-            CHR(13)+"Enregistrement non trouvÈ"+CHR(13)                                                     ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Suppression d'enregistrement"+CHR(13)+"Etes-vous s˚re ?"+CHR(13)  , ;
+            CHR(13)+"Index manquant"+CHR(13)+"Recherche impossible"+CHR(13)            , ;
+            CHR(13)+"Champ Index introuvable"+CHR(13)+"Recherche impossible"+CHR(13)   , ;
+            CHR(13)+"Recherche impossible"+CHR(13)+"sur champs memo ou logique"+CHR(13), ;
+            CHR(13)+"Enregistrement non trouvÈ"+CHR(13)                                                     , ;
             CHR(13)+"Trop de colonnes"+CHR(13)+"L'Ètat ne peut Ítre imprimÈ"+CHR(13)      }
-         _HMG_SYSDATA [ 132 ]  := { "Enregistrement"                       ,;
-            "Nb. total enr."                       ,;
-            "   (Ajouter)"                        ,;
-            "  (Modifier)"                        ,;
-            "Entrez le numÈro de l'enregistrement" ,;
-            "Trouver"                              ,;
-            "Chercher texte"                       ,;
-            "Chercher date"                        ,;
-            "Chercher numÈro"                      ,;
-            "DÈfinition de l'Ètat"                 ,;
-            "Colonnes de l'Ètat"                   ,;
-            "Colonnes disponibles"                 ,;
-            "Enregistrement de dÈbut"              ,;
-            "Enregistrement de fin"                ,;
-            "Etat de "                             ,;
-            "Date:"                                ,;
-            "Enregistrement de dÈbut:"             ,;
-            "Enregistrement de fin:"               ,;
-            "TriÈ par:"                            ,;
-            "Oui"                                  ,;
-            "Non"                                  ,;
-            " Page"                                ,;
+         _HMG_SYSDATA [ 132 ]  := { "Enregistrement"                       , ;
+            "Nb. total enr."                       , ;
+            "   (Ajouter)"                        , ;
+            "  (Modifier)"                        , ;
+            "Entrez le numÈro de l'enregistrement" , ;
+            "Trouver"                              , ;
+            "Chercher texte"                       , ;
+            "Chercher date"                        , ;
+            "Chercher numÈro"                      , ;
+            "DÈfinition de l'Ètat"                 , ;
+            "Colonnes de l'Ètat"                   , ;
+            "Colonnes disponibles"                 , ;
+            "Enregistrement de dÈbut"              , ;
+            "Enregistrement de fin"                , ;
+            "Etat de "                             , ;
+            "Date:"                                , ;
+            "Enregistrement de dÈbut:"             , ;
+            "Enregistrement de fin:"               , ;
+            "TriÈ par:"                            , ;
+            "Oui"                                  , ;
+            "Non"                                  , ;
+            " Page"                                , ;
             " de "                                 }
-         _HMG_SYSDATA [ 133 ] := { "Fermer"      ,;
-            "Nouveau"     ,;
-            "Modifier"    ,;
-            "Supprimer"   ,;
-            "Trouver"     ,;
-            "Aller ‡"     ,;
-            "Etat"   ,;
-            "Premier"     ,;
-            "PrÈcÈdent"   ,;
-            "Suivant"     ,;
-            "Dernier"     ,;
-            "Enregistrer" ,;
-            "Annuler"     ,;
-            "Ajouter"     ,;
-            "Retirer"     ,;
-            "Imprimer"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Fermer"      , ;
+            "Nouveau"     , ;
+            "Modifier"    , ;
+            "Supprimer"   , ;
+            "Trouver"     , ;
+            "Aller ‡"     , ;
+            "Etat"   , ;
+            "Premier"     , ;
+            "PrÈcÈdent"   , ;
+            "Suivant"     , ;
+            "Dernier"     , ;
+            "Enregistrer" , ;
+            "Annuler"     , ;
+            "Ajouter"     , ;
+            "Retirer"     , ;
+            "Imprimer"    , ;
             "Fermer"      }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, nom de la table manquant"                                         ,;
-            "EDIT, la table a plus de 16 champs"                                     ,;
-            "EDIT, mode rafraichissement hors limite (Rapport d'erreur merci)"       ,;
-            "EDIT, ÈvÈnement principal nombre hors limite (Rapport d'erreur merci)"  ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, nom de la table manquant"                                         , ;
+            "EDIT, la table a plus de 16 champs"                                     , ;
+            "EDIT, mode rafraichissement hors limite (Rapport d'erreur merci)"       , ;
+            "EDIT, ÈvÈnement principal nombre hors limite (Rapport d'erreur merci)"  , ;
             "EDIT, liste d'ÈvÈnements nombre hors limite (Rapport d'erreur merci)"   }
 
          // EDIT EXTENDED
@@ -4808,71 +4808,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Sind Sie sicher ?' , 'Datensatz lˆschen' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Datensatz loeschen"+CHR(13)+"Sind Sie sicher ?"+CHR(13)                 ,;
-            CHR(13)+" Falscher Indexdatensatz"+CHR(13)+"Suche unmoeglich"+CHR(13)         ,;
-            CHR(13)+"Man kann nicht Indexdatenfeld finden"+CHR(13)+"Suche unmoeglich"+CHR(13) ,;
-            CHR(13)+"Suche unmoeglich nach"+CHR(13)+"Feld memo oder logisch"+CHR(13)         ,;
-            CHR(13)+"Datensatz nicht gefunden"+CHR(13)                                                     ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Datensatz loeschen"+CHR(13)+"Sind Sie sicher ?"+CHR(13)                 , ;
+            CHR(13)+" Falscher Indexdatensatz"+CHR(13)+"Suche unmoeglich"+CHR(13)         , ;
+            CHR(13)+"Man kann nicht Indexdatenfeld finden"+CHR(13)+"Suche unmoeglich"+CHR(13) , ;
+            CHR(13)+"Suche unmoeglich nach"+CHR(13)+"Feld memo oder logisch"+CHR(13)         , ;
+            CHR(13)+"Datensatz nicht gefunden"+CHR(13)                                                     , ;
             CHR(13)+" zu viele Spalten"+CHR(13)+"Zu wenig Platz  fuer die Meldung auf dem Blatt" + CHR(13) }
-         _HMG_SYSDATA [ 132 ]  := { "Datensatz"              ,;
-            "Menge der Dat."        ,;
-            "       (Neu)"        ,;
-            " (Editieren)"        ,;
-            "Datensatznummer eintragen" ,;
-            "Suche"                ,;
-            "Suche Text"         ,;
-            "Suche Datum"         ,;
-            "Suche Zahl"       ,;
-            "Definition der Meldung"   ,;
-            "Spalten der Meldung"      ,;
-            "Zugaengliche Spalten"     ,;
-            "Anfangsdatensatz"      ,;
-            "Endedatensatz"        ,;
-            "Datensatz vom "          ,;
-            "Datum:"               ,;
-            "Anfangsdatensatz:"     ,;
-            "Endedatensatz:"       ,;
-            "Sortieren nach:"         ,;
-            "Ja"                 ,;
-            "Nein"                  ,;
-            "Seite "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Datensatz"              , ;
+            "Menge der Dat."        , ;
+            "       (Neu)"        , ;
+            " (Editieren)"        , ;
+            "Datensatznummer eintragen" , ;
+            "Suche"                , ;
+            "Suche Text"         , ;
+            "Suche Datum"         , ;
+            "Suche Zahl"       , ;
+            "Definition der Meldung"   , ;
+            "Spalten der Meldung"      , ;
+            "Zugaengliche Spalten"     , ;
+            "Anfangsdatensatz"      , ;
+            "Endedatensatz"        , ;
+            "Datensatz vom "          , ;
+            "Datum:"               , ;
+            "Anfangsdatensatz:"     , ;
+            "Endedatensatz:"       , ;
+            "Sortieren nach:"         , ;
+            "Ja"                 , ;
+            "Nein"                  , ;
+            "Seite "               , ;
             " von "                 }
-         _HMG_SYSDATA [ 133 ] := { "Schliesse"    ,;
-            "Neu"      ,;
-            "Editiere"     ,;
-            "Loesche"   ,;
-            "Finde"     ,;
-            "Gehe zu"     ,;
-            "Meldung"   ,;
-            "Erster"    ,;
-            "Zurueck" ,;
-            "Naechst"     ,;
-            "Letzter"     ,;
-            "Speichern"     ,;
-            "Aufheben"   ,;
-            "Hinzufuegen"      ,;
-            "Loeschen"   ,;
-            "Drucken"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Schliesse"    , ;
+            "Neu"      , ;
+            "Editiere"     , ;
+            "Loesche"   , ;
+            "Finde"     , ;
+            "Gehe zu"     , ;
+            "Meldung"   , ;
+            "Erster"    , ;
+            "Zurueck" , ;
+            "Naechst"     , ;
+            "Letzter"     , ;
+            "Speichern"     , ;
+            "Aufheben"   , ;
+            "Hinzufuegen"      , ;
+            "Loeschen"   , ;
+            "Drucken"    , ;
             "Schliessen"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, falscher Name von Datenbank"                                  ,;
-            "EDIT, Datenbank hat mehr als 16 Felder"                   ,;
-            "EDIT, Auffrische-Modus ausser dem Bereich (siehe Fehlermeldungen)"      ,;
-            "EDIT, Menge der Basisereignisse ausser dem Bereich (siehe Fehlermeldungen)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, falscher Name von Datenbank"                                  , ;
+            "EDIT, Datenbank hat mehr als 16 Felder"                   , ;
+            "EDIT, Auffrische-Modus ausser dem Bereich (siehe Fehlermeldungen)"      , ;
+            "EDIT, Menge der Basisereignisse ausser dem Bereich (siehe Fehlermeldungen)" , ;
             "EDIT, Liste der Ereignisse ausser dem Bereich (siehe Fehlermeldungen)"  }
 
          // EDIT EXTENDED
@@ -4981,71 +4981,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: " ,;
-            " non ä definita. Programma terminato" ,;
-            "Errore HMG"  ,;
-            "Controllo: " ,;
-            " Di " ,;
-            " GiÖ definito. Programma Terminato" ,;
-            "Browse: Tipo non valido. Programma Terminato"  ,;
-            "Browse: Modifica non possibile: il campo non ä pertinente l'area di lavoro.Programma Terminato",;
-            "Record giÖ utilizzato da altro utente"                 ,;
-            "Attenzione!"                                           ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: " , ;
+            " non ä definita. Programma terminato" , ;
+            "Errore HMG"  , ;
+            "Controllo: " , ;
+            " Di " , ;
+            " GiÖ definito. Programma Terminato" , ;
+            "Browse: Tipo non valido. Programma Terminato"  , ;
+            "Browse: Modifica non possibile: il campo non ä pertinente l'area di lavoro.Programma Terminato", ;
+            "Record giÖ utilizzato da altro utente"                 , ;
+            "Attenzione!"                                           , ;
             "Dato non valido" }
          _HMG_SYSDATA [ 137 ] := { 'Sei sicuro ?' , 'Cancella Record' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Cancellare il record"+CHR(13)+"Sei sicuro ?"+CHR(13)                  ,;
-            CHR(13)+"File indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)            ,;
-            CHR(13)+"Campo indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)        ,;
-            CHR(13)+"Ricerca impossibile per"+CHR(13)+"campi memo o logici"+CHR(13)       ,;
-            CHR(13)+"Record non trovato"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Cancellare il record"+CHR(13)+"Sei sicuro ?"+CHR(13)                  , ;
+            CHR(13)+"File indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)            , ;
+            CHR(13)+"Campo indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)        , ;
+            CHR(13)+"Ricerca impossibile per"+CHR(13)+"campi memo o logici"+CHR(13)       , ;
+            CHR(13)+"Record non trovato"+CHR(13)                                        , ;
             CHR(13)+"Troppe colonne"+CHR(13)+"Il report non puÚ essere stampato"+CHR(13) }
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record totali"       ,;
-            "  (Aggiungi)"        ,;
-            "     (Nuovo)"        ,;
-            "Inserire il numero del record" ,;
-            "Ricerca"                ,;
-            "Testo da cercare"         ,;
-            "Data da cercare"         ,;
-            "Numero da cercare"       ,;
-            "Definizione del report"   ,;
-            "Colonne del report"      ,;
-            "Colonne totali"     ,;
-            "Record Iniziale"      ,;
-            "Record Finale"        ,;
-            "Report di "          ,;
-            "Data:"               ,;
-            "Primo Record:"     ,;
-            "Ultimo Record:"       ,;
-            "Ordinare per:"         ,;
-            "SÏ"                 ,;
-            "No"                  ,;
-            "Pagina "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record totali"       , ;
+            "  (Aggiungi)"        , ;
+            "     (Nuovo)"        , ;
+            "Inserire il numero del record" , ;
+            "Ricerca"                , ;
+            "Testo da cercare"         , ;
+            "Data da cercare"         , ;
+            "Numero da cercare"       , ;
+            "Definizione del report"   , ;
+            "Colonne del report"      , ;
+            "Colonne totali"     , ;
+            "Record Iniziale"      , ;
+            "Record Finale"        , ;
+            "Report di "          , ;
+            "Data:"               , ;
+            "Primo Record:"     , ;
+            "Ultimo Record:"       , ;
+            "Ordinare per:"         , ;
+            "SÏ"                 , ;
+            "No"                  , ;
+            "Pagina "               , ;
             " di "                 }
-         _HMG_SYSDATA [ 133 ] := { "Chiudi"    ,;
-            "Nuovo"      ,;
-            "Modifica"     ,;
-            "Cancella"   ,;
-            "Ricerca"     ,;
-            "Vai a"     ,;
-            "Report"   ,;
-            "Primo"    ,;
-            "Precedente" ,;
-            "Successivo"     ,;
-            "Ultimo"     ,;
-            "Salva"     ,;
-            "Annulla"   ,;
-            "Aggiungi"      ,;
-            "Rimuovi"   ,;
-            "Stampa"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Chiudi"    , ;
+            "Nuovo"      , ;
+            "Modifica"     , ;
+            "Cancella"   , ;
+            "Ricerca"     , ;
+            "Vai a"     , ;
+            "Report"   , ;
+            "Primo"    , ;
+            "Precedente" , ;
+            "Successivo"     , ;
+            "Ultimo"     , ;
+            "Salva"     , ;
+            "Annulla"   , ;
+            "Aggiungi"      , ;
+            "Rimuovi"   , ;
+            "Stampa"    , ;
             "Chiudi"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, il nome dell'area Ë mancante"                              ,;
-            "EDIT, quest'area contiene pi˘ di 16 campi"              ,;
-            "EDIT, modalit‡ aggiornamento fuori dal limite (segnalare l'errore)"      ,;
-            "EDIT, evento pricipale fuori dal limite (segnalare l'errore)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, il nome dell'area Ë mancante"                              , ;
+            "EDIT, quest'area contiene pi˘ di 16 campi"              , ;
+            "EDIT, modalit‡ aggiornamento fuori dal limite (segnalare l'errore)"      , ;
+            "EDIT, evento pricipale fuori dal limite (segnalare l'errore)" , ;
             "EDIT, lista eventi fuori dal limite (segnalare l'errore)"  }
 
          // EDIT EXTENDED
@@ -5155,71 +5155,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Okno: "                                              ,;
-            " nie zdefiniowane.Program zakoÒczony"         ,;
-            "B≥πd HMG"                                         ,;
-            "Kontrolka: "                                             ,;
-            " z "                                                  ,;
-            " juø zdefiniowana. Program zakoÒczony"                  ,;
-            "Browse: Niedozwolony typ danych. Program zakoÒczony"          ,;
-            "Browse: Klauzula Append nie moøe byÊ stosowana do pÛl nie naleøπcych do aktualnego obszaru roboczego. Program zakoÒczony",;
-            "Rekord edytowany przez innego uøytkownika"                ,;
-            "Ostrzeøenie"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Okno: "                                              , ;
+            " nie zdefiniowane.Program zakoÒczony"         , ;
+            "B≥πd HMG"                                         , ;
+            "Kontrolka: "                                             , ;
+            " z "                                                  , ;
+            " juø zdefiniowana. Program zakoÒczony"                  , ;
+            "Browse: Niedozwolony typ danych. Program zakoÒczony"          , ;
+            "Browse: Klauzula Append nie moøe byÊ stosowana do pÛl nie naleøπcych do aktualnego obszaru roboczego. Program zakoÒczony", ;
+            "Rekord edytowany przez innego uøytkownika"                , ;
+            "Ostrzeøenie"                                               , ;
             "Nieprawid≥owy wpis"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Czy jesteo pewny ?' , 'Skasuj rekord' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Usuni©cie rekordu"+CHR(13)+"Jesteò pewny ?"+CHR(13)                 ,;
-            CHR(13)+"Bà©dny zbi¢r Indeksowy"+CHR(13)+"Nie moæna szukaÜ"+CHR(13)         ,;
-            CHR(13)+"Nie moæna znaleòÜ pola indeksu"+CHR(13)+"Nie moæna szukaÜ"+CHR(13) ,;
-            CHR(13)+"Nie moæna szukaÊ wg"+CHR(13)+"pola memo lub logicznego"+CHR(13)         ,;
-            CHR(13)+"Rekordu nie znaleziono"+CHR(13)                                                     ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Usuni©cie rekordu"+CHR(13)+"Jesteò pewny ?"+CHR(13)                 , ;
+            CHR(13)+"Bà©dny zbi¢r Indeksowy"+CHR(13)+"Nie moæna szukaÜ"+CHR(13)         , ;
+            CHR(13)+"Nie moæna znaleòÜ pola indeksu"+CHR(13)+"Nie moæna szukaÜ"+CHR(13) , ;
+            CHR(13)+"Nie moæna szukaÊ wg"+CHR(13)+"pola memo lub logicznego"+CHR(13)         , ;
+            CHR(13)+"Rekordu nie znaleziono"+CHR(13)                                                     , ;
             CHR(13)+"Zbyt wiele kolumn"+CHR(13)+"Raport nie moæe zmieòciÜ si© na arkuszu"+CHR(13)      }
-         _HMG_SYSDATA [ 132 ]  := { "Rekord"              ,;
-            "Liczba rekord¢w"        ,;
-            "      (Nowy)"        ,;
-            "    (Edycja)"        ,;
-            "Wprowad´ numer rekordu" ,;
-            "Szukaj"                ,;
-            "Szukaj tekstu"         ,;
-            "Szukaj daty"         ,;
-            "Szukaj liczby"       ,;
-            "Definicja Raportu"   ,;
-            "Kolumny Raportu"      ,;
-            "Dost©pne kolumny"     ,;
-            "Pocz•tkowy rekord"      ,;
-            "Ko‰cowy rekord"        ,;
-            "Raport z "          ,;
-            "Data:"               ,;
-            "Pocz•tkowy rekord:"     ,;
-            "Ko‰cowy rekord:"       ,;
-            "Sortowanie wg:"         ,;
-            "Tak"                 ,;
-            "Nie"                  ,;
-            "Strona "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Rekord"              , ;
+            "Liczba rekord¢w"        , ;
+            "      (Nowy)"        , ;
+            "    (Edycja)"        , ;
+            "Wprowad´ numer rekordu" , ;
+            "Szukaj"                , ;
+            "Szukaj tekstu"         , ;
+            "Szukaj daty"         , ;
+            "Szukaj liczby"       , ;
+            "Definicja Raportu"   , ;
+            "Kolumny Raportu"      , ;
+            "Dost©pne kolumny"     , ;
+            "Pocz•tkowy rekord"      , ;
+            "Ko‰cowy rekord"        , ;
+            "Raport z "          , ;
+            "Data:"               , ;
+            "Pocz•tkowy rekord:"     , ;
+            "Ko‰cowy rekord:"       , ;
+            "Sortowanie wg:"         , ;
+            "Tak"                 , ;
+            "Nie"                  , ;
+            "Strona "               , ;
             " z "                 }
-         _HMG_SYSDATA [ 133 ] := { "Zamknij"    ,;
-            "Nowy"      ,;
-            "Edytuj"     ,;
-            "Usu‰"   ,;
-            "Znajd´"     ,;
-            "Idü do"     ,;
-            "Raport"   ,;
-            "Pierwszy"    ,;
-            "Poprzedni" ,;
-            "Nast©pny"     ,;
-            "Ostatni"     ,;
-            "Zapisz"     ,;
-            "Rezygnuj"   ,;
-            "Dodaj"      ,;
-            "Usu‰"   ,;
-            "Drukuj"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Zamknij"    , ;
+            "Nowy"      , ;
+            "Edytuj"     , ;
+            "Usu‰"   , ;
+            "Znajd´"     , ;
+            "Idü do"     , ;
+            "Raport"   , ;
+            "Pierwszy"    , ;
+            "Poprzedni" , ;
+            "Nast©pny"     , ;
+            "Ostatni"     , ;
+            "Zapisz"     , ;
+            "Rezygnuj"   , ;
+            "Dodaj"      , ;
+            "Usu‰"   , ;
+            "Drukuj"    , ;
             "Zamknij"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, bà©dna nazwa bazy"                                  ,;
-            "EDIT, baza ma wi©cej niæ 16 p¢l"                   ,;
-            "EDIT, tryb odòwierzania poza zakresem (zobacz raport bà©d¢w)"      ,;
-            "EDIT, liczba zdarz‰ podstawowych poza zakresem (zobacz raport bà©d¢w)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, bà©dna nazwa bazy"                                  , ;
+            "EDIT, baza ma wi©cej niæ 16 p¢l"                   , ;
+            "EDIT, tryb odòwierzania poza zakresem (zobacz raport bà©d¢w)"      , ;
+            "EDIT, liczba zdarz‰ podstawowych poza zakresem (zobacz raport bà©d¢w)" , ;
             "EDIT, lista zdarze‰ poza zakresem (zobacz raport bà©d¢w)"  }
 
          // EDIT EXTENDED
@@ -5506,71 +5506,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "ŒÍÌÓ: "                                              ,;
-            " ÌÂ ÓÔÂ‰ÂÎÂÌÓ. œÓ„‡ÏÏ‡ ÔÂ‚‡Ì‡"                 ,;
-            "HMG Œ¯Ë·Í‡"                                     ,;
-            "›ÎÂÏÂÌÚ ÛÔ‡‚ÎÂÌË: "                               ,;
-            " ËÁ "                                               ,;
-            " ”ÊÂ ÓÔÂ‰ÂÎÂÌ. œÓ„‡ÏÏ‡ ÔÂ‚‡Ì‡"                         ,;
-            "Browse: “‡ÍÓÈ ÚËÔ ÌÂ ÔÓ‰‰ÂÊË‚‡ÂÚÒ. œÓ„‡ÏÏ‡ ÔÂ‚‡Ì‡"    ,;
-            "Browse: Append ÍÎ‡ÒÒ ÌÂ ÏÓÊÂÚ ·˚Ú¸ ËÒÔÓÎ¸ÁÓ‚‡Ì Ò ÔÓÎÏË ËÁ ‰Û„ÓÈ ‡·Ó˜ÂÈ Ó·Î‡ÒÚË. œÓ„‡ÏÏ‡ ÔÂ‚‡Ì‡",;
-            "«‡ÔËÒ¸ ÒÂÈ˜‡Ò Â‰‡ÍÚËÛÂÚÒ ‰Û„ËÏ ÔÓÎ¸ÁÓ‚‡ÚÂÎÂÏ"           ,;
-            "œÂ‰ÛÔÂÊ‰ÂÌËÂ"                                             ,;
+         _HMG_SYSDATA [ 136 ]  := { "ŒÍÌÓ: "                                              , ;
+            " ÌÂ ÓÔÂ‰ÂÎÂÌÓ. œÓ„‡ÏÏ‡ ÔÂ‚‡Ì‡"                 , ;
+            "HMG Œ¯Ë·Í‡"                                     , ;
+            "›ÎÂÏÂÌÚ ÛÔ‡‚ÎÂÌË: "                               , ;
+            " ËÁ "                                               , ;
+            " ”ÊÂ ÓÔÂ‰ÂÎÂÌ. œÓ„‡ÏÏ‡ ÔÂ‚‡Ì‡"                         , ;
+            "Browse: “‡ÍÓÈ ÚËÔ ÌÂ ÔÓ‰‰ÂÊË‚‡ÂÚÒ. œÓ„‡ÏÏ‡ ÔÂ‚‡Ì‡"    , ;
+            "Browse: Append ÍÎ‡ÒÒ ÌÂ ÏÓÊÂÚ ·˚Ú¸ ËÒÔÓÎ¸ÁÓ‚‡Ì Ò ÔÓÎÏË ËÁ ‰Û„ÓÈ ‡·Ó˜ÂÈ Ó·Î‡ÒÚË. œÓ„‡ÏÏ‡ ÔÂ‚‡Ì‡", ;
+            "«‡ÔËÒ¸ ÒÂÈ˜‡Ò Â‰‡ÍÚËÛÂÚÒ ‰Û„ËÏ ÔÓÎ¸ÁÓ‚‡ÚÂÎÂÏ"           , ;
+            "œÂ‰ÛÔÂÊ‰ÂÌËÂ"                                             , ;
             "¬‚Â‰ÂÌ˚ ÌÂÔ‡‚ËÎ¸Ì˚Â ‰‡ÌÌ˚Â"                                 }
          _HMG_SYSDATA [ 137 ] := { '¬˚ Û‚ÂÂÌ˚ ?' , '”‰‡ÎËÚ¸ Á‡ÔËÒ¸' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"”‰‡ÎÂÌËÂ Á‡ÔËÒË."+CHR(13)+"¬˚ Û‚ÂÂÌ˚ ?"+CHR(13)                  ,;
-            CHR(13)+"ŒÚÒÛÚÒÚ‚ÛÂÚ ËÌ‰ÂÍÒÌ˚È Ù‡ÈÎ"+CHR(13)+"œÓËÒÍ ÌÂ‚ÓÁÏÓÊÂÌ"+CHR(13)   ,;
-            CHR(13)+"ŒÚÒÛÚÒÚ‚ÛÂÚ ËÌ‰ÂÍÒÌÓÂ ÔÓÎÂ"+CHR(13)+"œÓËÒÍ ÌÂ‚ÓÁÏÓÊÂÌ"+CHR(13)   ,;
-            CHR(13)+"œÓËÒÍ ÌÂ‚ÓÁÏÓÊÂÌ ÔÓ"+CHR(13)+"ÏÂÏÓ ËÎË ÎÓ„Ë˜ÂÒÍËÏ ÔÓÎˇÏ"+CHR(13) ,;
-            CHR(13)+"«‡ÔËÒ¸ ÌÂ Ì‡È‰ÂÌ‡"+CHR(13)                                       ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"”‰‡ÎÂÌËÂ Á‡ÔËÒË."+CHR(13)+"¬˚ Û‚ÂÂÌ˚ ?"+CHR(13)                  , ;
+            CHR(13)+"ŒÚÒÛÚÒÚ‚ÛÂÚ ËÌ‰ÂÍÒÌ˚È Ù‡ÈÎ"+CHR(13)+"œÓËÒÍ ÌÂ‚ÓÁÏÓÊÂÌ"+CHR(13)   , ;
+            CHR(13)+"ŒÚÒÛÚÒÚ‚ÛÂÚ ËÌ‰ÂÍÒÌÓÂ ÔÓÎÂ"+CHR(13)+"œÓËÒÍ ÌÂ‚ÓÁÏÓÊÂÌ"+CHR(13)   , ;
+            CHR(13)+"œÓËÒÍ ÌÂ‚ÓÁÏÓÊÂÌ ÔÓ"+CHR(13)+"ÏÂÏÓ ËÎË ÎÓ„Ë˜ÂÒÍËÏ ÔÓÎˇÏ"+CHR(13) , ;
+            CHR(13)+"«‡ÔËÒ¸ ÌÂ Ì‡È‰ÂÌ‡"+CHR(13)                                       , ;
             CHR(13)+"—ÎË¯ÍÓÏ ÏÌÓ„Ó ÍÓÎÓÌÓÍ"+CHR(13)+"ŒÚ˜ÂÚ ÌÂ ÔÓÏÂÒÚËÚÒˇ Ì‡ ÎËÒÚÂ"+CHR(13) }
-         _HMG_SYSDATA [ 132 ]  := { "«‡ÔËÒ¸"              ,;
-            "¬ÒÂ„Ó Á‡ÔËÒÂÈ"       ,;
-            "     (ÕÓ‚‡ˇ)"        ,;
-            "  (»ÁÏÂÌËÚ¸)"        ,;
-            "¬‚Â‰ËÚÂ ÌÓÏÂ Á‡ÔËÒË",;
-            "œÓËÒÍ"               ,;
-            "Õ‡ÈÚË ÚÂÍÒÚ"         ,;
-            "Õ‡ÈÚË ‰‡ÚÛ"          ,;
-            "Õ‡ÈÚË ˜ËÒÎÓ"         ,;
-            "Õ‡ÒÚÓÈÍ‡ ÓÚ˜ÂÚ‡"    ,;
-            " ÓÎÓÌÍË ÓÚ˜ÂÚ‡"      ,;
-            "ƒÓÒÚÛÔÌ˚Â ÍÓÎÓÌÍË"   ,;
-            "Õ‡˜‡Î¸Ì‡ˇ Á‡ÔËÒ¸"    ,;
-            " ÓÌÂ˜Ì‡ˇ Á‡ÔËÒ¸"     ,;
-            "ŒÚ˜ÂÚ ‰Îˇ "          ,;
-            "ƒ‡Ú‡:"               ,;
-            "œÂ‚‡ˇ Á‡ÔËÒ¸:"      ,;
-            " ÓÌÂ˜Ì‡ˇ Á‡ÔËÒ¸:"    ,;
-            "√ÛÔÔËÓ‚Í‡ ÔÓ:"     ,;
-            "ƒ‡"                  ,;
-            "ÕÂÚ"                 ,;
-            "—Ú‡ÌËˆ‡ "           ,;
+         _HMG_SYSDATA [ 132 ]  := { "«‡ÔËÒ¸"              , ;
+            "¬ÒÂ„Ó Á‡ÔËÒÂÈ"       , ;
+            "     (ÕÓ‚‡ˇ)"        , ;
+            "  (»ÁÏÂÌËÚ¸)"        , ;
+            "¬‚Â‰ËÚÂ ÌÓÏÂ Á‡ÔËÒË", ;
+            "œÓËÒÍ"               , ;
+            "Õ‡ÈÚË ÚÂÍÒÚ"         , ;
+            "Õ‡ÈÚË ‰‡ÚÛ"          , ;
+            "Õ‡ÈÚË ˜ËÒÎÓ"         , ;
+            "Õ‡ÒÚÓÈÍ‡ ÓÚ˜ÂÚ‡"    , ;
+            " ÓÎÓÌÍË ÓÚ˜ÂÚ‡"      , ;
+            "ƒÓÒÚÛÔÌ˚Â ÍÓÎÓÌÍË"   , ;
+            "Õ‡˜‡Î¸Ì‡ˇ Á‡ÔËÒ¸"    , ;
+            " ÓÌÂ˜Ì‡ˇ Á‡ÔËÒ¸"     , ;
+            "ŒÚ˜ÂÚ ‰Îˇ "          , ;
+            "ƒ‡Ú‡:"               , ;
+            "œÂ‚‡ˇ Á‡ÔËÒ¸:"      , ;
+            " ÓÌÂ˜Ì‡ˇ Á‡ÔËÒ¸:"    , ;
+            "√ÛÔÔËÓ‚Í‡ ÔÓ:"     , ;
+            "ƒ‡"                  , ;
+            "ÕÂÚ"                 , ;
+            "—Ú‡ÌËˆ‡ "           , ;
             " ËÁ "                 }
-         _HMG_SYSDATA [ 133 ] := { "«‡Í˚Ú¸"   ,;
-            "ÕÓ‚‡ˇ"     ,;
-            "»ÁÏÂÌËÚ¸"  ,;
-            "”‰‡ÎËÚ¸"   ,;
-            "œÓËÒÍ"     ,;
-            "œÂÂÈÚË"   ,;
-            "ŒÚ˜ÂÚ"     ,;
-            "œÂ‚‡ˇ"    ,;
-            "Õ‡Á‡‰"     ,;
-            "¬ÔÂÂ‰"    ,;
-            "œÓÒÎÂ‰Ìˇˇ" ,;
-            "—Óı‡ÌËÚ¸" ,;
-            "ŒÚÏÂÌ‡"    ,;
-            "ƒÓ·‡‚ËÚ¸"  ,;
-            "”‰‡ÎËÚ¸"   ,;
-            "œÂ˜‡Ú¸"    ,;
+         _HMG_SYSDATA [ 133 ] := { "«‡Í˚Ú¸"   , ;
+            "ÕÓ‚‡ˇ"     , ;
+            "»ÁÏÂÌËÚ¸"  , ;
+            "”‰‡ÎËÚ¸"   , ;
+            "œÓËÒÍ"     , ;
+            "œÂÂÈÚË"   , ;
+            "ŒÚ˜ÂÚ"     , ;
+            "œÂ‚‡ˇ"    , ;
+            "Õ‡Á‡‰"     , ;
+            "¬ÔÂÂ‰"    , ;
+            "œÓÒÎÂ‰Ìˇˇ" , ;
+            "—Óı‡ÌËÚ¸" , ;
+            "ŒÚÏÂÌ‡"    , ;
+            "ƒÓ·‡‚ËÚ¸"  , ;
+            "”‰‡ÎËÚ¸"   , ;
+            "œÂ˜‡Ú¸"    , ;
             "«‡Í˚Ú¸"    }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, ÌÂ ÛÍ‡Á‡ÌÓ ËÏˇ ‡·Ó˜ÂÈ Ó·Î‡ÒÚË"                     ,;
-            "EDIT, ‰ÓÔÛÒÍ‡ÂÚÒˇ ÚÓÎ¸ÍÓ ‰Ó 16 ÔÓÎÂÈ"                     ,;
-            "EDIT, ÂÊËÏ Ó·ÌÓ‚ÎÂÌËˇ ‚ÌÂ ‰Ë‡Ô‡ÁÓÌ‡ (ÒÓÓ·˘ËÚÂ Ó· Ó¯Ë·ÍÂ)",;
-            "EDIT, ÌÓÏÂ ÒÓ·˚ÚËˇ ‚ÌÂ ‰Ë‡Ô‡ÁÓÌ‡ (ÒÓÓ·˘ËÚÂ Ó· Ó¯Ë·ÍÂ)"   ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, ÌÂ ÛÍ‡Á‡ÌÓ ËÏˇ ‡·Ó˜ÂÈ Ó·Î‡ÒÚË"                     , ;
+            "EDIT, ‰ÓÔÛÒÍ‡ÂÚÒˇ ÚÓÎ¸ÍÓ ‰Ó 16 ÔÓÎÂÈ"                     , ;
+            "EDIT, ÂÊËÏ Ó·ÌÓ‚ÎÂÌËˇ ‚ÌÂ ‰Ë‡Ô‡ÁÓÌ‡ (ÒÓÓ·˘ËÚÂ Ó· Ó¯Ë·ÍÂ)", ;
+            "EDIT, ÌÓÏÂ ÒÓ·˚ÚËˇ ‚ÌÂ ‰Ë‡Ô‡ÁÓÌ‡ (ÒÓÓ·˘ËÚÂ Ó· Ó¯Ë·ÍÂ)"   , ;
             "EDIT, ÌÓÏÂ ÒÓ·˚ÚËˇ ÎËÒÚËÌ„‡ ‚ÌÂ ‰Ë‡Ô‡ÁÓÌ‡ (ÒÓÓ·˘ËÚÂ Ó· Ó¯Ë·ÍÂ)" }
 
          // EDIT EXTENDED
@@ -5680,71 +5680,71 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " no est· definida. EjecuciÛn terminada"                ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " De "                                                  ,;
-            " ya definido. EjecuciÛn terminada"                     ,;
-            "Browse: Tipo no permitido. EjecuciÛn terminada"        ,;
-            "Browse: La calusula APPEND no puede ser usada con campos no pertenecientes al area del BROWSE. EjecuciÛn terminada",;
-            "El registro est· siendo editado por otro usuario"      ,;
-            "Peligro"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " no est· definida. EjecuciÛn terminada"                , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " De "                                                  , ;
+            " ya definido. EjecuciÛn terminada"                     , ;
+            "Browse: Tipo no permitido. EjecuciÛn terminada"        , ;
+            "Browse: La calusula APPEND no puede ser usada con campos no pertenecientes al area del BROWSE. EjecuciÛn terminada", ;
+            "El registro est· siendo editado por otro usuario"      , ;
+            "Peligro"                                               , ;
             "Entrada no v·lida"                                      }
          _HMG_SYSDATA [ 137 ] := { 'Est· Seguro ?' , 'Eliminar Registro' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Va a eliminar el registro actual"+CHR(13)+"ø Est· seguro ?"+CHR(13)                 ,;
-            CHR(13)+"No hay un indice activo"+CHR(13)+"No se puede realizar la busqueda"+CHR(13)         ,;
-            CHR(13)+"No se encuentra el campo indice"+CHR(13)+"No se puede realizar la busqueda"+CHR(13) ,;
-            CHR(13)+"No se pueden realizar busquedas"+CHR(13)+"por campos memo o lÛgico"+CHR(13)         ,;
-            CHR(13)+"Registro no encontrado"+CHR(13)                                                     ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Va a eliminar el registro actual"+CHR(13)+"ø Est· seguro ?"+CHR(13)                 , ;
+            CHR(13)+"No hay un indice activo"+CHR(13)+"No se puede realizar la busqueda"+CHR(13)         , ;
+            CHR(13)+"No se encuentra el campo indice"+CHR(13)+"No se puede realizar la busqueda"+CHR(13) , ;
+            CHR(13)+"No se pueden realizar busquedas"+CHR(13)+"por campos memo o lÛgico"+CHR(13)         , ;
+            CHR(13)+"Registro no encontrado"+CHR(13)                                                     , ;
             CHR(13)+"Ha inclido demasiadas columnas"+CHR(13)+"El listado no cabe en la hoja"+CHR(13)      }
-         _HMG_SYSDATA [ 132 ]  := { "Registro Actual"                  ,;
-            "Registros Totales"                ,;
-            "     (Nuevo)"                     ,;
-            "    (Editar)"                     ,;
-            "Introducca el n˙mero de registro" ,;
-            "Buscar"                           ,;
-            "Texto a buscar"                   ,;
-            "Fecha a buscar"                   ,;
-            "N˙mero a buscar"                  ,;
-            "DefiniciÛn del listado"           ,;
-            "Columnas del listado"             ,;
-            "Columnas disponibles"             ,;
-            "Registro inicial"                 ,;
-            "Registro final"                   ,;
-            "Listado de "                      ,;
-            "Fecha:"                           ,;
-            "Primer registro:"                 ,;
-            "Ultimo registro:"                 ,;
-            "Ordenado por:"                    ,;
-            "Si"                               ,;
-            "No"                               ,;
-            "Pagina "                          ,;
+         _HMG_SYSDATA [ 132 ]  := { "Registro Actual"                  , ;
+            "Registros Totales"                , ;
+            "     (Nuevo)"                     , ;
+            "    (Editar)"                     , ;
+            "Introducca el n˙mero de registro" , ;
+            "Buscar"                           , ;
+            "Texto a buscar"                   , ;
+            "Fecha a buscar"                   , ;
+            "N˙mero a buscar"                  , ;
+            "DefiniciÛn del listado"           , ;
+            "Columnas del listado"             , ;
+            "Columnas disponibles"             , ;
+            "Registro inicial"                 , ;
+            "Registro final"                   , ;
+            "Listado de "                      , ;
+            "Fecha:"                           , ;
+            "Primer registro:"                 , ;
+            "Ultimo registro:"                 , ;
+            "Ordenado por:"                    , ;
+            "Si"                               , ;
+            "No"                               , ;
+            "Pagina "                          , ;
             " de "                              }
-         _HMG_SYSDATA [ 133 ] := { "Cerrar"           ,;
-            "Nuevo"            ,;
-            "Modificar"        ,;
-            "Eliminar"         ,;
-            "Buscar"           ,;
-            "Ir al registro"   ,;
-            "Listado"          ,;
-            "Primero"          ,;
-            "Anterior"         ,;
-            "Siguiente"        ,;
-            "Ultimo"           ,;
-            "Guardar"          ,;
-            "Cancelar"         ,;
-            "AÒadir"           ,;
-            "Quitar"           ,;
-            "Imprimir"         ,;
+         _HMG_SYSDATA [ 133 ] := { "Cerrar"           , ;
+            "Nuevo"            , ;
+            "Modificar"        , ;
+            "Eliminar"         , ;
+            "Buscar"           , ;
+            "Ir al registro"   , ;
+            "Listado"          , ;
+            "Primero"          , ;
+            "Anterior"         , ;
+            "Siguiente"        , ;
+            "Ultimo"           , ;
+            "Guardar"          , ;
+            "Cancelar"         , ;
+            "AÒadir"           , ;
+            "Quitar"           , ;
+            "Imprimir"         , ;
             "Cerrar"            }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, No se ha especificado el area"                                  ,;
-            "EDIT, El area contiene m·s de 16 campos"                              ,;
-            "EDIT, Refesco fuera de rango (por favor comunique el error)"          ,;
-            "EDIT, Evento principal fuera de rango (por favor comunique el error)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, No se ha especificado el area"                                  , ;
+            "EDIT, El area contiene m·s de 16 campos"                              , ;
+            "EDIT, Refesco fuera de rango (por favor comunique el error)"          , ;
+            "EDIT, Evento principal fuera de rango (por favor comunique el error)" , ;
             "EDIT, Evento listado fuera de rango (por favor comunique el error)"    }
 
          // EDIT EXTENDED
@@ -5852,73 +5852,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Ikkuna: " ,;
-            " m‰‰rittelem‰tˆn. Ohjelma lopetettu" ,;
-            "HMG Virhe",;
-            "Kontrolli: ",;
-            " / " ,;
-            " On jo m‰‰ritelty. Ohjelma lopetettu" ,;
-            "Browse: Virheellinen tyyppi. Ohjelma lopetettu" ,;
-            "Browse: Et voi lis‰t‰ kentti‰ jotka eiv‰t ole BROWSEN m‰‰rityksess‰. Ohjelma lopetettu",;
-            "Toinen k‰ytt‰j‰ korjaa juuri tietuetta" ,;
-            "Varoitus" ,;
+         _HMG_SYSDATA [ 136 ]  := { "Ikkuna: " , ;
+            " m‰‰rittelem‰tˆn. Ohjelma lopetettu" , ;
+            "HMG Virhe", ;
+            "Kontrolli: ", ;
+            " / " , ;
+            " On jo m‰‰ritelty. Ohjelma lopetettu" , ;
+            "Browse: Virheellinen tyyppi. Ohjelma lopetettu" , ;
+            "Browse: Et voi lis‰t‰ kentti‰ jotka eiv‰t ole BROWSEN m‰‰rityksess‰. Ohjelma lopetettu", ;
+            "Toinen k‰ytt‰j‰ korjaa juuri tietuetta" , ;
+            "Varoitus" , ;
             "Virheellinen arvo" }
 
          _HMG_SYSDATA [ 137 ] := { 'Oletko varma ?' , 'Poista tietue' }
 
          // EDIT
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Poista tietue"+CHR(13)+"Oletko varma?"+CHR(13)                  ,;
-            CHR(13)+"Indeksi tiedosto puuttuu"+CHR(13)+"En voihakea"+CHR(13)            ,;
-            CHR(13)+"Indeksikentt‰ ei lˆydy"+CHR(13)+"En voihakea"+CHR(13)        ,;
-            CHR(13)+"En voi hakea memo"+CHR(13)+"tai loogisen kent‰n mukaan"+CHR(13)       ,;
-            CHR(13)+"Tietue ei lˆydy"+CHR(13),;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Poista tietue"+CHR(13)+"Oletko varma?"+CHR(13)                  , ;
+            CHR(13)+"Indeksi tiedosto puuttuu"+CHR(13)+"En voihakea"+CHR(13)            , ;
+            CHR(13)+"Indeksikentt‰ ei lˆydy"+CHR(13)+"En voihakea"+CHR(13)        , ;
+            CHR(13)+"En voi hakea memo"+CHR(13)+"tai loogisen kent‰n mukaan"+CHR(13)       , ;
+            CHR(13)+"Tietue ei lˆydy"+CHR(13), ;
             CHR(13)+"Liian monta saraketta"+CHR(13)+"raportti ei mahdu sivulle"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Tietue"              ,;
-            "Tietue lukum‰‰r‰"    ,;
-            "       (Uusi)"       ,;
-            "      (Korjaa)"      ,;
-            "Anna tietue numero"  ,;
-            "Hae"                 ,;
-            "Hae teksti"          ,;
-            "Hae p‰iv‰ys"         ,;
-            "Hae numero"          ,;
-            "Raportti m‰‰ritys"   ,;
-            "Raportti sarake"     ,;
-            "Sallitut sarakkeet"  ,;
-            "Alku tietue"         ,;
-            "Loppu tietue"        ,;
-            "Raportti "           ,;
-            "Pvm:"                ,;
-            "Alku tietue:"        ,;
-            "Loppu tietue:"       ,;
-            "Lajittelu:"         ,;
-            "Kyll‰"                 ,;
-            "Ei"                  ,;
-            "Sivu "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Tietue"              , ;
+            "Tietue lukum‰‰r‰"    , ;
+            "       (Uusi)"       , ;
+            "      (Korjaa)"      , ;
+            "Anna tietue numero"  , ;
+            "Hae"                 , ;
+            "Hae teksti"          , ;
+            "Hae p‰iv‰ys"         , ;
+            "Hae numero"          , ;
+            "Raportti m‰‰ritys"   , ;
+            "Raportti sarake"     , ;
+            "Sallitut sarakkeet"  , ;
+            "Alku tietue"         , ;
+            "Loppu tietue"        , ;
+            "Raportti "           , ;
+            "Pvm:"                , ;
+            "Alku tietue:"        , ;
+            "Loppu tietue:"       , ;
+            "Lajittelu:"         , ;
+            "Kyll‰"                 , ;
+            "Ei"                  , ;
+            "Sivu "               , ;
             " / "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Sulje"    ,;
-            "Uusi"     ,;
-            "Korjaa"   ,;
-            "Poista"   ,;
-            "Hae"      ,;
-            "Mene"     ,;
-            "Raportti" ,;
-            "Ensimm‰inen" ,;
-            "Edellinen"   ,;
-            "Seuraava"    ,;
-            "Viimeinen"   ,;
-            "Tallenna"    ,;
-            "Keskeyt‰"    ,;
-            "Lis‰‰"       ,;
-            "Poista"      ,;
-            "Tulosta"     ,;
+         _HMG_SYSDATA [ 133 ] := { "Sulje"    , ;
+            "Uusi"     , ;
+            "Korjaa"   , ;
+            "Poista"   , ;
+            "Hae"      , ;
+            "Mene"     , ;
+            "Raportti" , ;
+            "Ensimm‰inen" , ;
+            "Edellinen"   , ;
+            "Seuraava"    , ;
+            "Viimeinen"   , ;
+            "Tallenna"    , ;
+            "Keskeyt‰"    , ;
+            "Lis‰‰"       , ;
+            "Poista"      , ;
+            "Tulosta"     , ;
             "Sulje"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, tyˆalue puuttuu"   ,;
-            "EDIT, tyˆalueella yli 16 kentt‰‰",;
-            "EDIT, p‰ivitysalue ylitys (raportoi virhe)"      ,;
-            "EDIT, tapahtuma numero ylitys (raportoi virhe)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, tyˆalue puuttuu"   , ;
+            "EDIT, tyˆalueella yli 16 kentt‰‰", ;
+            "EDIT, p‰ivitysalue ylitys (raportoi virhe)"      , ;
+            "EDIT, tapahtuma numero ylitys (raportoi virhe)" , ;
             "EDIT, lista tapahtuma numero ylitys (raportoi virhe)"}
 
          // EDIT EXTENDED
@@ -6029,74 +6029,74 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE
 
-         _HMG_SYSDATA [ 136 ]  := { "Scherm: ",;
-            " is niet gedefinieerd. Programma beÎindigd"           ,;
-            "HMG fout",;
-            "Control: ",;
-            " Van ",;
-            " Is al gedefinieerd. Programma beÎindigd"                   ,;
-            "Browse: Type niet toegestaan. Programma beÎindigd"          ,;
-            "Browse: Toevoegen-methode kan niet worden gebruikt voor velden die niet bij het Browse werkgebied behoren. Programma beÎindigd",;
-            "Regel word al veranderd door een andere gebruiker"          ,;
-            "Waarschuwing"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Scherm: ", ;
+            " is niet gedefinieerd. Programma beÎindigd"           , ;
+            "HMG fout", ;
+            "Control: ", ;
+            " Van ", ;
+            " Is al gedefinieerd. Programma beÎindigd"                   , ;
+            "Browse: Type niet toegestaan. Programma beÎindigd"          , ;
+            "Browse: Toevoegen-methode kan niet worden gebruikt voor velden die niet bij het Browse werkgebied behoren. Programma beÎindigd", ;
+            "Regel word al veranderd door een andere gebruiker"          , ;
+            "Waarschuwing"                                               , ;
             "Onjuiste invoer"                                            }
 
          _HMG_SYSDATA [ 137 ] := { 'Weet u het zeker?' , 'Verwijder regel' }
 
          // EDIT
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Verwijder regel"+CHR(13)+"Weet u het zeker ?"+CHR(13)    ,;
-            CHR(13)+"Index bestand is er niet"+CHR(13)+"Kan niet zoeken"+CHR(13)          ,;
-            CHR(13)+"Kan index veld niet vinden"+CHR(13)+"Kan niet zoeken"+CHR(13)        ,;
-            CHR(13)+"Kan niet zoeken op"+CHR(13)+"Memo of logische velden"+CHR(13)        ,;
-            CHR(13)+"Regel niet gevonden"+CHR(13) ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Verwijder regel"+CHR(13)+"Weet u het zeker ?"+CHR(13)    , ;
+            CHR(13)+"Index bestand is er niet"+CHR(13)+"Kan niet zoeken"+CHR(13)          , ;
+            CHR(13)+"Kan index veld niet vinden"+CHR(13)+"Kan niet zoeken"+CHR(13)        , ;
+            CHR(13)+"Kan niet zoeken op"+CHR(13)+"Memo of logische velden"+CHR(13)        , ;
+            CHR(13)+"Regel niet gevonden"+CHR(13) , ;
             CHR(13)+"Te veel rijen"+CHR(13)+"Het rapport past niet op het papier"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Regel"     ,;
-            "Regel aantal"          ,;
-            "       (Nieuw)"        ,;
-            "      (Bewerken)"      ,;
-            "Geef regel nummer"     ,;
-            "Vind"                  ,;
-            "Zoek tekst"            ,;
-            "Zoek datum"            ,;
-            "Zoek nummer"           ,;
-            "Rapport definitie"     ,;
-            "Rapport rijen"         ,;
-            "Beschikbare rijen"     ,;
-            "Eerste regel"          ,;
-            "Laatste regel"         ,;
-            "Rapport van "          ,;
-            "Datum:"                ,;
-            "Eerste regel:"         ,;
-            "Laatste tegel:"        ,;
-            "Gesorteerd op:"        ,;
-            "Ja"                    ,;
-            "Nee"                   ,;
-            "Pagina "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Regel"     , ;
+            "Regel aantal"          , ;
+            "       (Nieuw)"        , ;
+            "      (Bewerken)"      , ;
+            "Geef regel nummer"     , ;
+            "Vind"                  , ;
+            "Zoek tekst"            , ;
+            "Zoek datum"            , ;
+            "Zoek nummer"           , ;
+            "Rapport definitie"     , ;
+            "Rapport rijen"         , ;
+            "Beschikbare rijen"     , ;
+            "Eerste regel"          , ;
+            "Laatste regel"         , ;
+            "Rapport van "          , ;
+            "Datum:"                , ;
+            "Eerste regel:"         , ;
+            "Laatste tegel:"        , ;
+            "Gesorteerd op:"        , ;
+            "Ja"                    , ;
+            "Nee"                   , ;
+            "Pagina "               , ;
             " van "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Sluiten"   ,;
-            "Nieuw"                 ,;
-            "Bewerken"              ,;
-            "Verwijderen"           ,;
-            "Vind"                  ,;
-            "Ga naar"               ,;
-            "Rapport"               ,;
-            "Eerste"                ,;
-            "Vorige"                ,;
-            "Volgende"              ,;
-            "Laatste"               ,;
-            "Bewaar"                ,;
-            "Annuleren"             ,;
-            "Voeg toe"              ,;
-            "Verwijder"             ,;
-            "Print"                 ,;
+         _HMG_SYSDATA [ 133 ] := { "Sluiten"   , ;
+            "Nieuw"                 , ;
+            "Bewerken"              , ;
+            "Verwijderen"           , ;
+            "Vind"                  , ;
+            "Ga naar"               , ;
+            "Rapport"               , ;
+            "Eerste"                , ;
+            "Vorige"                , ;
+            "Volgende"              , ;
+            "Laatste"               , ;
+            "Bewaar"                , ;
+            "Annuleren"             , ;
+            "Voeg toe"              , ;
+            "Verwijder"             , ;
+            "Print"                 , ;
             "Sluiten"               }
-         _HMG_SYSDATA [ 134 ]  := { "BEWERKEN, werkgebied naam bestaat niet",;
-            "BEWERKEN, dit werkgebied heeft meer dan 16 velden",;
-            "BEWERKEN, ververs manier buiten bereik (a.u.b. fout melden)"           ,;
-            "BEWERKEN, hoofd gebeurtenis nummer buiten bereik (a.u.b. fout melden)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "BEWERKEN, werkgebied naam bestaat niet", ;
+            "BEWERKEN, dit werkgebied heeft meer dan 16 velden", ;
+            "BEWERKEN, ververs manier buiten bereik (a.u.b. fout melden)"           , ;
+            "BEWERKEN, hoofd gebeurtenis nummer buiten bereik (a.u.b. fout melden)" , ;
             "BEWERKEN, list gebeurtenis nummer buiten bereik (a.u.b. fout melden)"  }
 
          // EDIT EXTENDED
@@ -6205,74 +6205,74 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                        ,;
-            " not defined. Program terminated"     ,;
-            "HMG Error"                        ,;
-            "Control: "                            ,;
-            " Of "                                 ,;
-            " Already defined. Program Terminated" ,;
-            "Type Not Allowed. Program terminated" ,;
-            "False WorkArea. Program Terminated"   ,;
-            "Zapis ureja drug uporabnik"           ,;
-            "Opozorilo"                            ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                        , ;
+            " not defined. Program terminated"     , ;
+            "HMG Error"                        , ;
+            "Control: "                            , ;
+            " Of "                                 , ;
+            " Already defined. Program Terminated" , ;
+            "Type Not Allowed. Program terminated" , ;
+            "False WorkArea. Program Terminated"   , ;
+            "Zapis ureja drug uporabnik"           , ;
+            "Opozorilo"                            , ;
             "Narobe vnos" }
 
          _HMG_SYSDATA [ 137 ] := { 'Ste prepriËani ?' , 'Briöi vrstico' }
 
          // EDIT MESSAGES
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Briöi vrstico"+CHR(13)+"Ste prepriËani ?"+CHR(13)     ,;
-            CHR(13)+"Manjka indeksna datoteka"+CHR(13)+"Ne morem iskati"+CHR(13)       ,;
-            CHR(13)+"Ne najdem indeksnega polja"+CHR(13)+"Ne morem iskati"+CHR(13)     ,;
-            CHR(13)+"Ne morem iskati po"+CHR(13)+"memo ali logiËnih poljih"+CHR(13)    ,;
-            CHR(13)+"Ne najdem vrstice"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Briöi vrstico"+CHR(13)+"Ste prepriËani ?"+CHR(13)     , ;
+            CHR(13)+"Manjka indeksna datoteka"+CHR(13)+"Ne morem iskati"+CHR(13)       , ;
+            CHR(13)+"Ne najdem indeksnega polja"+CHR(13)+"Ne morem iskati"+CHR(13)     , ;
+            CHR(13)+"Ne morem iskati po"+CHR(13)+"memo ali logiËnih poljih"+CHR(13)    , ;
+            CHR(13)+"Ne najdem vrstice"+CHR(13)                                        , ;
             CHR(13)+"PreveË kolon"+CHR(13)+"PoroËilo ne gre na list"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Vrstica"    ,;
-            "ätevilo vrstic"         ,;
-            "       (Nova)"          ,;
-            "      (Popravi)"        ,;
-            "Vnesi ötevilko vrstice" ,;
-            "PoiöËi"                 ,;
-            "Besedilo za iskanje"    ,;
-            "Datum za iskanje"       ,;
-            "ätevilka za iskanje"    ,;
-            "Parametri poroËila"     ,;
-            "Kolon v poroËilu"       ,;
-            "Kolon na razpolago"     ,;
-            "ZaËetna vrstica"        ,;
-            "KonËna vrstica"         ,;
-            "PporoËilo za "          ,;
-            "Datum:"                 ,;
-            "ZaËetna vrstica:"       ,;
-            "KonËna vrstica:"        ,;
-            "Urejeno po:"            ,;
-            "Ja"                     ,;
-            "Ne"                     ,;
-            "Stran "                 ,;
+         _HMG_SYSDATA [ 132 ]  := { "Vrstica"    , ;
+            "ätevilo vrstic"         , ;
+            "       (Nova)"          , ;
+            "      (Popravi)"        , ;
+            "Vnesi ötevilko vrstice" , ;
+            "PoiöËi"                 , ;
+            "Besedilo za iskanje"    , ;
+            "Datum za iskanje"       , ;
+            "ätevilka za iskanje"    , ;
+            "Parametri poroËila"     , ;
+            "Kolon v poroËilu"       , ;
+            "Kolon na razpolago"     , ;
+            "ZaËetna vrstica"        , ;
+            "KonËna vrstica"         , ;
+            "PporoËilo za "          , ;
+            "Datum:"                 , ;
+            "ZaËetna vrstica:"       , ;
+            "KonËna vrstica:"        , ;
+            "Urejeno po:"            , ;
+            "Ja"                     , ;
+            "Ne"                     , ;
+            "Stran "                 , ;
             " od "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Zapri" ,;
-            "Nova"              ,;
-            "Uredi"             ,;
-            "Briöi"             ,;
-            "PoiöËi"            ,;
-            "Pojdi na"          ,;
-            "PoroËilo"          ,;
-            "Prva"              ,;
-            "Prejönja"          ,;
-            "Naslednja"         ,;
-            "Zadnja"            ,;
-            "Shrani"            ,;
-            "Prekini"           ,;
-            "Dodaj"             ,;
-            "Odstrani"          ,;
-            "Natisni"           ,;
+         _HMG_SYSDATA [ 133 ] := { "Zapri" , ;
+            "Nova"              , ;
+            "Uredi"             , ;
+            "Briöi"             , ;
+            "PoiöËi"            , ;
+            "Pojdi na"          , ;
+            "PoroËilo"          , ;
+            "Prva"              , ;
+            "Prejönja"          , ;
+            "Naslednja"         , ;
+            "Zadnja"            , ;
+            "Shrani"            , ;
+            "Prekini"           , ;
+            "Dodaj"             , ;
+            "Odstrani"          , ;
+            "Natisni"           , ;
             "Zapri"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                  ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                  , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED
@@ -6381,73 +6381,73 @@ PROCEDURE InitMessages (cSetLang)
 
          // BROWSE MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
-            " is not defined. Program terminated"                   ,;
-            "HMG Error"                                         ,;
-            "Control: "                                             ,;
-            " Of "                                                  ,;
-            " Already defined. Program Terminated"                  ,;
-            "Browse: Type Not Allowed. Program terminated"          ,;
-            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated",;
-            "Record Is Being Edited By Another User"                ,;
-            "Warning"                                               ,;
+         _HMG_SYSDATA [ 136 ]  := { "Window: "                                              , ;
+            " is not defined. Program terminated"                   , ;
+            "HMG Error"                                         , ;
+            "Control: "                                             , ;
+            " Of "                                                  , ;
+            " Already defined. Program Terminated"                  , ;
+            "Browse: Type Not Allowed. Program terminated"          , ;
+            "Browse: Append Clause Can't Be Used With Fields Not Belonging To Browse WorkArea. Program Terminated", ;
+            "Record Is Being Edited By Another User"                , ;
+            "Warning"                                               , ;
             "Invalid Entry"                                          }
          _HMG_SYSDATA [ 137 ] := { 'Are you sure ?' , 'Delete Record' }
 
          // EDIT MESSAGES (ENGLISH DEFAULT)
 
-         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  ,;
-            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            ,;
-            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        ,;
-            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       ,;
-            CHR(13)+"Record not found"+CHR(13)                                        ,;
+         _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Delete record"+CHR(13)+"Are you sure ?"+CHR(13)                  , ;
+            CHR(13)+"Index file missing"+CHR(13)+"Can`t do search"+CHR(13)            , ;
+            CHR(13)+"Can`t find index field"+CHR(13)+"Can`t do search"+CHR(13)        , ;
+            CHR(13)+"Can't do search by"+CHR(13)+"fields memo or logic"+CHR(13)       , ;
+            CHR(13)+"Record not found"+CHR(13)                                        , ;
             CHR(13)+"To many cols"+CHR(13)+"The report can't fit in the sheet"+CHR(13) }
 
-         _HMG_SYSDATA [ 132 ]  := { "Record"              ,;
-            "Record count"        ,;
-            "       (New)"        ,;
-            "      (Edit)"        ,;
-            "Enter record number" ,;
-            "Find"                ,;
-            "Search text"         ,;
-            "Search date"         ,;
-            "Search number"       ,;
-            "Report definition"   ,;
-            "Report columns"      ,;
-            "Available columns"   ,;
-            "Initial record"      ,;
-            "Final record"        ,;
-            "Report of "          ,;
-            "Date:"               ,;
-            "Initial record:"     ,;
-            "Final record:"       ,;
-            "Ordered by:"         ,;
-            "Yes"                 ,;
-            "No"                  ,;
-            "Page "               ,;
+         _HMG_SYSDATA [ 132 ]  := { "Record"              , ;
+            "Record count"        , ;
+            "       (New)"        , ;
+            "      (Edit)"        , ;
+            "Enter record number" , ;
+            "Find"                , ;
+            "Search text"         , ;
+            "Search date"         , ;
+            "Search number"       , ;
+            "Report definition"   , ;
+            "Report columns"      , ;
+            "Available columns"   , ;
+            "Initial record"      , ;
+            "Final record"        , ;
+            "Report of "          , ;
+            "Date:"               , ;
+            "Initial record:"     , ;
+            "Final record:"       , ;
+            "Ordered by:"         , ;
+            "Yes"                 , ;
+            "No"                  , ;
+            "Page "               , ;
             " of "                 }
 
-         _HMG_SYSDATA [ 133 ] := { "Close"    ,;
-            "New"      ,;
-            "Edit"     ,;
-            "Delete"   ,;
-            "Find"     ,;
-            "Goto"     ,;
-            "Report"   ,;
-            "First"    ,;
-            "Previous" ,;
-            "Next"     ,;
-            "Last"     ,;
-            "Save"     ,;
-            "Cancel"   ,;
-            "Add"      ,;
-            "Remove"   ,;
-            "Print"    ,;
+         _HMG_SYSDATA [ 133 ] := { "Close"    , ;
+            "New"      , ;
+            "Edit"     , ;
+            "Delete"   , ;
+            "Find"     , ;
+            "Goto"     , ;
+            "Report"   , ;
+            "First"    , ;
+            "Previous" , ;
+            "Next"     , ;
+            "Last"     , ;
+            "Save"     , ;
+            "Cancel"   , ;
+            "Add"      , ;
+            "Remove"   , ;
+            "Print"    , ;
             "Close"     }
-         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              ,;
-            "EDIT, this workarea has more than 16 fields"              ,;
-            "EDIT, refresh mode out of range (please report bug)"      ,;
-            "EDIT, main event number out of range (please report bug)" ,;
+         _HMG_SYSDATA [ 134 ]  := { "EDIT, workarea name missing"                              , ;
+            "EDIT, this workarea has more than 16 fields"              , ;
+            "EDIT, refresh mode out of range (please report bug)"      , ;
+            "EDIT, main event number out of range (please report bug)" , ;
             "EDIT, list event number out of range (please report bug)"  }
 
          // EDIT EXTENDED (ENGLISH DEFAULT)

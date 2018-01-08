@@ -339,11 +339,11 @@ PROCEDURE Imprimir
    cArquivo := memoRead("REL.TMP")
    fErase("Rel.tmp")
 
-   DEFINE WINDOW Form_3;
+   DEFINE WINDOW Form_3 ;
          At 0,0   ;
          WIDTH 450   ;
          HEIGHT 500   ;
-         TITLE "Contactos por Apellido"+cLetra;
+         TITLE "Contactos por Apellido"+cLetra ;
          ICON "Tutor"   ;
          MODAL   ;
          NOSYSMENU   ;
@@ -360,19 +360,19 @@ PROCEDURE Imprimir
       @ 01,01  BUTTON Bt_Zoom_Mais  ;
          CAPTION '&Zoom(+)'             ;
          WIDTH 120 HEIGHT 17    ;
-         ACTION ZoomLabel(1);
+         ACTION ZoomLabel(1) ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 01,125 BUTTON Bt_Zoom_menos  ;
          CAPTION '&Zoom(-)'             ;
          WIDTH 120 HEIGHT 17    ;
-         ACTION ZoomLabel(-1);
+         ACTION ZoomLabel(-1) ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 01,321 BUTTON Sair_1  ;
          CAPTION '&Salir'             ;
          WIDTH 120 HEIGHT 17    ;
-         ACTION Form_3.Release;
+         ACTION Form_3.Release ;
          FONT "MS Sans Serif" SIZE 09 FLAT
    END WINDOW
    MODIFY CONTROL Edit_1 OF Form_3 FONTSIZE nFont

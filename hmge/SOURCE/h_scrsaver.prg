@@ -71,37 +71,37 @@ FUNCTION _BeginScrSaver( cSSaver, lNoShow, cInit, cRelease, cPaint, nTimer, aBac
 
    IF lNoShow
 
-      DEFINE WINDOW &cSSaver AT 0, 0;
-            WIDTH x HEIGHT y;
-            MAIN NOSHOW;
-            TOPMOST NOSIZE NOCAPTION;
-            ON GOTFOCUS SetCursorPos( x / 2, y / 2 );
+      DEFINE WINDOW &cSSaver AT 0, 0 ;
+            WIDTH x HEIGHT y ;
+            MAIN NOSHOW ;
+            TOPMOST NOSIZE NOCAPTION ;
+            ON GOTFOCUS SetCursorPos( x / 2, y / 2 ) ;
             ON INIT ( ShowCursor( .F. ), ;
-            SystemParametersInfo( SPI_SCREENSAVERRUNNING, 1, @Dummy, 0 ) );
-            ON RELEASE _ReleaseScrSaver( cRelease, cSSaver, cPaint );
-            ON MOUSECLICK iif( _lValidScrSaver(), DoMethod ( cSSaver, 'Release' ), );
-            ON MOUSEMOVE ( a := GetCursorPos(), iif( a[1] # y / 2 .AND. a[2] # x / 2,;
-            iif( _lValidScrSaver(), DoMethod( cSSaver, 'Release' ) , ), ) );
+            SystemParametersInfo( SPI_SCREENSAVERRUNNING, 1, @Dummy, 0 ) ) ;
+            ON RELEASE _ReleaseScrSaver( cRelease, cSSaver, cPaint ) ;
+            ON MOUSECLICK iif( _lValidScrSaver(), DoMethod ( cSSaver, 'Release' ), ) ;
+            ON MOUSEMOVE ( a := GetCursorPos(), iif( a[1] # y / 2 .AND. a[2] # x / 2, ;
+            iif( _lValidScrSaver(), DoMethod( cSSaver, 'Release' ) , ), ) ) ;
             BACKCOLOR aBackClr
       ELSE
 
-         DEFINE WINDOW &cSSaver AT 0, 0;
-               WIDTH x HEIGHT y;
-               MAIN;
-               TOPMOST NOSIZE NOCAPTION;
-               ON GOTFOCUS SetCursorPos( x / 2, y / 2 );
+         DEFINE WINDOW &cSSaver AT 0, 0 ;
+               WIDTH x HEIGHT y ;
+               MAIN ;
+               TOPMOST NOSIZE NOCAPTION ;
+               ON GOTFOCUS SetCursorPos( x / 2, y / 2 ) ;
                ON INIT ( ShowCursor( .F. ), ;
-               SystemParametersInfo( SPI_SCREENSAVERRUNNING, 1, @Dummy, 0 ) );
-               ON RELEASE _ReleaseScrSaver( cRelease, cSSaver, cPaint );
-               ON MOUSECLICK iif( _lValidScrSaver(), DoMethod ( cSSaver, 'Release' ), );
-               ON MOUSEMOVE ( a := GetCursorPos(), iif( a[1] # y / 2 .AND. a[2] # x / 2,;
-               iif( _lValidScrSaver(), DoMethod( cSSaver, 'Release' ) , ), ) );
+               SystemParametersInfo( SPI_SCREENSAVERRUNNING, 1, @Dummy, 0 ) ) ;
+               ON RELEASE _ReleaseScrSaver( cRelease, cSSaver, cPaint ) ;
+               ON MOUSECLICK iif( _lValidScrSaver(), DoMethod ( cSSaver, 'Release' ), ) ;
+               ON MOUSEMOVE ( a := GetCursorPos(), iif( a[1] # y / 2 .AND. a[2] # x / 2, ;
+               iif( _lValidScrSaver(), DoMethod( cSSaver, 'Release' ) , ), ) ) ;
                BACKCOLOR aBackClr
          ENDIF
 
          IF cPaint # NIL
-            DEFINE TIMER Timer_SSaver;
-               INTERVAL nTimer * 1000;
+            DEFINE TIMER Timer_SSaver ;
+               INTERVAL nTimer * 1000 ;
                ACTION Eval( cPaint )
          ENDIF
 
@@ -157,7 +157,7 @@ FUNCTION _ActivateScrSaver( aForm, cParam )
 
          IF _hmg_IsXp
 
-            EXECUTE FILE "Rundll32.exe";
+            EXECUTE FILE "Rundll32.exe" ;
                PARAMETERS "desk.cpl,InstallScreenSaver " + ;
                GetSystemFolder() + "\" + cFileNoExt( cFileScr ) + ".SCR"
 

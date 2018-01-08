@@ -50,12 +50,12 @@ FUNCTION Main()
 
       @ 290,10 BUTTON Button_1 ;
          CAPTION 'Save' ;
-         ACTION SaveTreeToINI(oTree1);
+         ACTION SaveTreeToINI(oTree1) ;
          WIDTH 140
 
       @ 290,210 BUTTON Button_2 ;
          CAPTION 'Load' ;
-         ACTION LoadTreeFromINI(oTree1);
+         ACTION LoadTreeFromINI(oTree1) ;
          WIDTH 140
 
       ON KEY ESCAPE ACTION Form_1.Release()

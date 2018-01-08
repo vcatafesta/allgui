@@ -16,14 +16,14 @@ FUNCTION unidades_medida()
    ordsetfocus('nome')
    unidade_medida->(dbgotop())
 
-   DEFINE WINDOW form_unidade_medida;
-         at 000,000;
-         WIDTH 800;
-         HEIGHT 605;
-         TITLE 'Unidades de Medida';
-         ICON path_imagens+'icone.ico';
-         modal;
-         nosize;
+   DEFINE WINDOW form_unidade_medida ;
+         at 000,000 ;
+         WIDTH 800 ;
+         HEIGHT 605 ;
+         TITLE 'Unidades de Medida' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
+         nosize ;
          ON INIT pesquisar()
 
       * botões (toolbar)
@@ -132,7 +132,7 @@ FUNCTION unidades_medida()
 
       DEFINE SPLITBOX
          DEFINE GRID grid_unidade_medida
-            parent form_unidade_medida
+            PARENT form_unidade_medida
             COL 000
             ROW 105
             WIDTH 795
@@ -149,7 +149,7 @@ FUNCTION unidades_medida()
       END SPLITBOX
 
       DEFINE LABEL rodape_001
-         parent form_unidade_medida
+         PARENT form_unidade_medida
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
@@ -160,19 +160,19 @@ FUNCTION unidades_medida()
          FONTCOLOR _cinza_001
          TRANSPARENT .T.
       END LABEL
-      @ 540,160 textbox tbox_pesquisa;
-         of form_unidade_medida;
-         HEIGHT 027;
-         WIDTH 300;
-         VALUE '';
-         MAXLENGTH 040;
-         FONT 'verdana' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase;
+      @ 540,160 textbox tbox_pesquisa ;
+         of form_unidade_medida ;
+         HEIGHT 027 ;
+         WIDTH 300 ;
+         VALUE '' ;
+         MAXLENGTH 040 ;
+         FONT 'verdana' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         uppercase ;
          ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
-         parent form_unidade_medida
+         PARENT form_unidade_medida
          COL form_unidade_medida.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
@@ -223,34 +223,34 @@ STATIC FUNCTION dados(parametro)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW form_dados;
-         at 000,000;
-         WIDTH 325;
-         HEIGHT 200;
-         TITLE (titulo);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_dados ;
+         at 000,000 ;
+         WIDTH 325 ;
+         HEIGHT 200 ;
+         TITLE (titulo) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 010,005 label lbl_001;
-         of form_dados;
-         VALUE 'Nome';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_dados ;
+         VALUE 'Nome' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,005 textbox tbox_001;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_nome;
-         MAXLENGTH 010;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
+      @ 030,005 textbox tbox_001 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_nome ;
+         MAXLENGTH 010 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
 
       * linha separadora
       DEFINE LABEL linha_rodape

@@ -210,9 +210,9 @@ METHOD Init( sBitmapFile /*, sCloseBitmapFile*/ ) CLASS TTaskbarNotifier //EXPOR
       MsgMiniGuiError ( "TaskbarNotifier: RegisterTaskbarNotifierWindow error." )
    ENDIF
 
-   ::WndHandle := InitWindow( NIL, 0, 0,;
-      ::BackgroundBitmapSize[1],;
-      ::BackgroundBitmapSize[2],;
+   ::WndHandle := InitWindow( NIL, 0, 0, ;
+      ::BackgroundBitmapSize[1], ;
+      ::BackgroundBitmapSize[2], ;
       TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, wcName, 0, FALSE, FALSE, FALSE, FALSE, FALSE )
 
    IF ! IsWindowHandle( ::WndHandle )
@@ -382,7 +382,7 @@ METHOD Hide( ) CLASS TTaskbarNotifier //EXPORTED
 
 METHOD DrawBackground( dc ) CLASS TTaskbarNotifier //PROTECTED
 
-   DrawGlyph( dc, 0, 0, ::BackgroundBitmapSize[BM_WIDTH], ::BackgroundBitmapSize[BM_HEIGHT],;
+   DrawGlyph( dc, 0, 0, ::BackgroundBitmapSize[BM_WIDTH], ::BackgroundBitmapSize[BM_HEIGHT], ;
       ::BackgroundBitmap, RGB( 255, 255, 0 ), FALSE, FALSE )
 
    RETURN NIL
@@ -393,13 +393,13 @@ METHOD DrawBackground( dc ) CLASS TTaskbarNotifier //PROTECTED
 METHOD DrawCloseButton( dc ) CLASS TTaskbarNotifier //PROTECTED
 
    IF ( ::lIsMouseOverClose .AND. ::lIsMouseDown )
-      DrawGlyph( dc, ::CloseBitmapLocation[1], ::CloseBitmapLocation[2], ::CloseBitmapSize[BM_WIDTH], ::CloseBitmapSize[BM_HEIGHT],;
+      DrawGlyph( dc, ::CloseBitmapLocation[1], ::CloseBitmapLocation[2], ::CloseBitmapSize[BM_WIDTH], ::CloseBitmapSize[BM_HEIGHT], ;
          ::CloseBitmap3, RGB( 255, 255, 0 ), FALSE, FALSE )
    ELSEIF ::lIsMouseOverClose
-      DrawGlyph( dc, ::CloseBitmapLocation[1], ::CloseBitmapLocation[2], ::CloseBitmapSize[BM_WIDTH], ::CloseBitmapSize[BM_HEIGHT],;
+      DrawGlyph( dc, ::CloseBitmapLocation[1], ::CloseBitmapLocation[2], ::CloseBitmapSize[BM_WIDTH], ::CloseBitmapSize[BM_HEIGHT], ;
          ::CloseBitmap2, RGB( 255, 255, 0 ), FALSE, FALSE )
    ELSE
-      DrawGlyph( dc, ::CloseBitmapLocation[1], ::CloseBitmapLocation[2], ::CloseBitmapSize[BM_WIDTH], ::CloseBitmapSize[BM_HEIGHT],;
+      DrawGlyph( dc, ::CloseBitmapLocation[1], ::CloseBitmapLocation[2], ::CloseBitmapSize[BM_WIDTH], ::CloseBitmapSize[BM_HEIGHT], ;
          ::CloseBitmap2, RGB( 255, 255, 0 ), FALSE, FALSE )
    ENDIF
 

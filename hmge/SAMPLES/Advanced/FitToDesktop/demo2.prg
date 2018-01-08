@@ -30,10 +30,10 @@ PROCEDURE Main()
          NOSIZE ;
          NOSYSMENU
 
-      ON KEY F2;
-         ACTION { || oMain.Row    := ((GetDesktopRealHeight()/2)-(nHeight/2)*nCorHeight),;
-         oMain.Col    := ((GetDesktopRealWidth()/2)-(nWidth/2)*nCorWidth),;
-         oMain.Width  := nWidth*nCorWidth,;
+      ON KEY F2 ;
+         ACTION { || oMain.Row    := ((GetDesktopRealHeight()/2)-(nHeight/2)*nCorHeight), ;
+         oMain.Col    := ((GetDesktopRealWidth()/2)-(nWidth/2)*nCorWidth), ;
+         oMain.Width  := nWidth*nCorWidth, ;
          oMain.Height := nHeight*nCorHeight }
 
       DEFINE BUTTONEX ButtonEX_Exit

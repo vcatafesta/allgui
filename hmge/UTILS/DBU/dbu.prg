@@ -736,7 +736,7 @@ FUNCTION DBUsetfilter
    FOR _DBUi := 1 to len(_DBUstructarr)
       aadd(_DBUfieldsarr,{_DBUstructarr[_DBUi,1]})
    NEXT _DBUi
-   _DBUdbffunctions := {{"RecNo()"},{"Deleted()"},{"Date()"},{"CToD()"},{"Day()"},{"Month()"},{"Year()"},;
+   _DBUdbffunctions := {{"RecNo()"},{"Deleted()"},{"Date()"},{"CToD()"},{"Day()"},{"Month()"},{"Year()"}, ;
       {"AllTrim()"},{"Upper()"},{"Lower()"},{"Val()"},{"Str()"},{"Int()"},{"Max()"},{"Min()"}}
    DEFINE WINDOW _DBUfilterbox at 0,0 width 650 height 420 title "Filter Condition" modal nosize nosysmenu
       DEFINE EDITBOX _DBUfiltercondition

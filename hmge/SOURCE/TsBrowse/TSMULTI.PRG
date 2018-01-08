@@ -15,7 +15,7 @@ CLASS TSMulti FROM TControl
    CLASSDATA lRegistered AS LOGICAL
    DATA  Atx, lAppend , lChanged
    DATA  nPos
-   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
+   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont, ;
       nClrFore, nClrBack, cControl, cWnd )
 
    METHOD Default( )
@@ -33,11 +33,11 @@ CLASS TSMulti FROM TControl
    * METHOD TSMulti:New() Version 7.0 Jul/15/2004
    * ============================================================================
 
-METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
+METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont, ;
       nClrFore, nClrBack,  cControl, cWnd ) CLASS TSMulti
 
-   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ),;
-      nClrBack  := GetSysColor( COLOR_WINDOW ),;
+   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ), ;
+      nClrBack  := GetSysColor( COLOR_WINDOW ), ;
       nHeight   := 12
 
    ::nTop         := nRow
@@ -54,7 +54,7 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
    ENDIF
 
    ::nId          := ::GetNewId()
-   ::nStyle       := nOR( ES_MULTILINE, ES_WANTRETURN , WS_CHILD, WS_BORDER,;
+   ::nStyle       := nOR( ES_MULTILINE, ES_WANTRETURN , WS_CHILD, WS_BORDER, ;
       WS_THICKFRAME ,WS_VSCROLL , WS_HSCROLL)
 
    ::cControlName := cControl

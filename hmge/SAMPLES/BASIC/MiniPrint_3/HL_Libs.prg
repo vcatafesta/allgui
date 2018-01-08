@@ -8,16 +8,16 @@ HL Library routines for PPTF Print
 #define CRLF HB_OsNewLine()
 
 FUNCTION HL_ShrinkString( ;                  // Shrink a string to given length
-      cString,;
+      cString, ;
       nLenght )
 
-   LOCAL cRVal := cString,;
+   LOCAL cRVal := cString, ;
       nSPos                      // Shrink Position
 
    IF ! EMPTY( cString )
       IF LEN( cString ) > nLenght
          nSPos := INT( nLenght / 2 ) - 3
-         cRVal := LEFT( cString, nSPos ) + "..." +;
+         cRVal := LEFT( cString, nSPos ) + "..." + ;
             RIGHT( cString, nSPos )
       ENDIF
    ENDIF !EMPTY( cString )
@@ -27,11 +27,11 @@ FUNCTION HL_ShrinkString( ;                  // Shrink a string to given length
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 FUNCTION HL_LineWordWrap( ;                  // Splite a line to given portions without split last word
-      cLine,;
+      cLine, ;
       nLeng ) // of resulting (splitted) lines; in char
 
-   LOCAL cRVal  := '',;
-      c1Line := '',;
+   LOCAL cRVal  := '', ;
+      c1Line := '', ;
       nTknPos := 0     // Last token position
 
    WHILE LEN( cLine ) > nLeng

@@ -17,7 +17,7 @@ All critics and suggestions are welcome.
 Developed under Harbour Compiler and
 HMG - Harbour Win32 GUI library
 
-Thanks to "Le Roy" Roberto Lopez;
+Thanks to "Le Roy" Roberto Lopez ;
 
 and Carlos RD, who requested and inspired this sample.
 
@@ -123,7 +123,7 @@ FUNCTION LoadArray(;                      // Load a 1d Char array from a file
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SaveArray(;                     // Save a 1d Char array to a file
-      cFilName,;
+      cFilName, ;
       aC1dArray )
 
    LOCAL cText := CRLF

@@ -72,7 +72,7 @@ FUNCTION DBUbrowse1()
    nWBrowseHeight := _DBUwindowheight - IF(IsXPThemeActive(), 70, 80)
 
    DEFINE WINDOW _DBUBrowse at 0,0 ;
-         WIDTH nWBrowseWidth height nWBrowseHeight title "DBU Browse " + _DBUfname;
+         WIDTH nWBrowseWidth height nWBrowseHeight title "DBU Browse " + _DBUfname ;
          CHILD NOMINIMIZE NOMAXIMIZE NOSIZE NOSYSMENU
 
       DEFINE SPLITBOX
@@ -92,7 +92,7 @@ FUNCTION DBUbrowse1()
       END SPLITBOX
 
       DEFINE BROWSE _DBUrecord
-         parent _DBUbrowse
+         PARENT _DBUbrowse
          ROW 60
          COL 3
          WIDTH nWBrowseWidth - 10

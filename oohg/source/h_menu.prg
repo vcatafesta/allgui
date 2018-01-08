@@ -194,7 +194,7 @@ METHOD Define( Button, Parent, Name ) CLASS TMenuDropDown
    LOCAL oContainer
 
    IF HB_IsObject( Button )
-      Parent := Button:Parent
+      PARENT := Button:Parent
       Button := Button:Name
    ENDIF
    ::Super:Define( Parent, Name )
@@ -260,7 +260,7 @@ METHOD DefinePopUp( Caption, Name, checked, disabled, Parent, hilited, Image, ;
    LOCAL nStyle
 
    IF Empty( Parent )
-      Parent := ATAIL( _OOHG_xMenuActive )
+      PARENT := ATAIL( _OOHG_xMenuActive )
    ENDIF
    ::SetForm( Name, Parent )
    ::Register( CreatePopupMenu(), Name )
@@ -288,7 +288,7 @@ METHOD InsertPopUp( Caption, Name, checked, disabled, Parent, hilited, Image, ;
    LOCAL nStyle
 
    IF Empty( Parent )
-      Parent := ATAIL( _OOHG_xMenuActive )
+      PARENT := ATAIL( _OOHG_xMenuActive )
    ENDIF
    ::SetForm( Name, Parent )
    ::Register( CreatePopupMenu(), Name )
@@ -317,7 +317,7 @@ METHOD DefineItem( caption, action, name, Image, checked, disabled, Parent, ;
    LOCAL nStyle, id
 
    IF Empty( Parent )
-      Parent := ATAIL( _OOHG_xMenuActive )
+      PARENT := ATAIL( _OOHG_xMenuActive )
    ENDIF
    ::SetForm( Name, Parent )
    Id := _GetId()
@@ -345,7 +345,7 @@ METHOD InsertItem( caption, action, name, Image, checked, disabled, Parent, ;
    LOCAL nStyle, id
 
    IF Empty( Parent )
-      Parent := ATAIL( _OOHG_xMenuActive )
+      PARENT := ATAIL( _OOHG_xMenuActive )
    ENDIF
    ::SetForm( Name, Parent )
    Id := _GetId()
@@ -373,7 +373,7 @@ METHOD DefineSeparator( name, Parent, lRight ) CLASS TMenuItem
    LOCAL nStyle, id
 
    IF Empty( Parent )
-      Parent := ATAIL( _OOHG_xMenuActive )
+      PARENT := ATAIL( _OOHG_xMenuActive )
    ENDIF
    ::SetForm( Name, Parent )
    Id := _GetId()
@@ -390,7 +390,7 @@ METHOD InsertSeparator( name, Parent, lRight, nPos ) CLASS TMenuItem
    LOCAL nStyle, id
 
    IF Empty( Parent )
-      Parent := ATAIL( _OOHG_xMenuActive )
+      PARENT := ATAIL( _OOHG_xMenuActive )
    ENDIF
    ::SetForm( Name, Parent )
    Id := _GetId()

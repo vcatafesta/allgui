@@ -5,13 +5,13 @@
 
 FUNCTION Main()
 
-   DEFINE WINDOW Form_1;
-         AT 0,0;
-         WIDTH 800;
-         HEIGHT 600;
-         NOSIZE;
-         NOMAXIMIZE;
-         ON GOTFOCUS Form_1.Tree_1.SetFocus;
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 600 ;
+         NOSIZE ;
+         NOMAXIMIZE ;
+         ON GOTFOCUS Form_1.Tree_1.SetFocus ;
          MAIN
 
       ON KEY F1  OF Form_1 ACTION OnKeyFx (  2 )
@@ -20,20 +20,20 @@ FUNCTION Main()
       ON KEY F4  OF Form_1 ACTION OnKeyFx ( 12 )
       ON KEY F5  OF Form_1 ACTION OnKeyFx ( 22 )
 
-      ON KEY F9  OF Form_1 ACTION ( Form_1.Tree_1.Value:= 1,;
-         IF ( Form_1.Tree_1.IsExpand (Form_1.Tree_1.Value) == .T.,;
+      ON KEY F9  OF Form_1 ACTION ( Form_1.Tree_1.Value:= 1, ;
+         IF ( Form_1.Tree_1.IsExpand (Form_1.Tree_1.Value) == .T., ;
             Form_1.Tree_1.Collapse (Form_1.Tree_1.Value, .T.),;   // Collapse All
             Form_1.Tree_1.Expand   (Form_1.Tree_1.Value, .T.)))   // Expand All
 
-         DEFINE TREE Tree_1;
-               AT 10,10;
-               WIDTH 250;
-               HEIGHT 550;
-               VALUE 1;
-               FONT "Calibri" SIZE 11;
-               ON CHANGE OnChangeTree (This.Value);
-               NODEIMAGES { "folder.gif", "folder_page.gif" };
-               ITEMIMAGES { "Page.gif",   "page_next.gif"   };
+         DEFINE TREE Tree_1 ;
+               AT 10,10 ;
+               WIDTH 250 ;
+               HEIGHT 550 ;
+               VALUE 1 ;
+               FONT "Calibri" SIZE 11 ;
+               ON CHANGE OnChangeTree (This.Value) ;
+               NODEIMAGES { "folder.gif", "folder_page.gif" } ;
+               ITEMIMAGES { "Page.gif",   "page_next.gif"   } ;
                NOROOTBUTTON
 
             NODE 'MY APP '

@@ -28,7 +28,7 @@ FUNCTION Main()
          AT 0,0                 ;
          WIDTH 510   ;
          HEIGHT 350   ;
-         TITLE "Simples Exemplo (3) - Pedidos X Itens X Clientes";
+         TITLE "Simples Exemplo (3) - Pedidos X Itens X Clientes" ;
          MAIN                 ;
          NOMAXIMIZE   ;
          NOSIZE
@@ -47,7 +47,7 @@ FUNCTION Main()
       @ 080,130 GRID Grid_Itens         ;
          WIDTH  365         ;
          HEIGHT 170         ;
-         HEADERS {"Produto","Quant","Unitário","Total"};
+         HEADERS {"Produto","Quant","Unitário","Total"} ;
          WIDTHS  {90,90,90,90}      ;
          FONT "Arial" SIZE 09             ;
          NOLINES
@@ -216,14 +216,14 @@ FUNCTION Imprimir_Pedido()
 
    cArquivo :=memoRead("REL.TMP")
 
-   DEFINE WINDOW Form_3;
+   DEFINE WINDOW Form_3 ;
          At 0,0              ;
          WIDTH 450        ;
          HEIGHT 500       ;
-         TITLE "Impressão do Pedido: "+cPedido;
-         ICON "AGENDA";
+         TITLE "Impressão do Pedido: "+cPedido ;
+         ICON "AGENDA" ;
          CHILD ;
-         NOSYSMENU;
+         NOSYSMENU ;
          NOSIZE      ;
          ON RELEASE  Form_1.Btn_Imprimir.Enabled := .T.  ;
          BACKCOLOR WHITE
@@ -238,19 +238,19 @@ FUNCTION Imprimir_Pedido()
       @ 01,01 BUTTON Bt_Zoom_Mais  ;
          CAPTION '&Zoom(+)'             ;
          WIDTH 120 HEIGHT 17    ;
-         ACTION ZoomLabel(1);
+         ACTION ZoomLabel(1) ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 01,125 BUTTON Bt_Zoom_menos  ;
          CAPTION '&Zoom(-)'             ;
          WIDTH 120 HEIGHT 17    ;
-         ACTION ZoomLabel(2);
+         ACTION ZoomLabel(2) ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 01,321 BUTTON Sair_1  ;
          CAPTION '&Sair'             ;
          WIDTH 120 HEIGHT 17    ;
-         ACTION Form_3.Release;
+         ACTION Form_3.Release ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
    END WINDOW

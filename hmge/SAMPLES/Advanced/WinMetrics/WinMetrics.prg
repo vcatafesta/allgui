@@ -202,7 +202,7 @@ STATIC FUNCTION About(cWhat)
    LOCAL cLineFeed := HB_OSNewLine()
 
    IF UPPER(cWhat) == "ABOUT"
-      MSGInfo(;
+      MSGInfo( ;
          "System Metrics ver. 00.01 * Spring 2010"  + REPL( cLineFeed , 2 ) + ;
          "Simple applet, showing many system metrics regarding hardware and/or OS." + cLineFeed + ;
          "Created to demonstrate the WAPI_GetSystemMetrics Harbour function " + cLineFeed + ;
@@ -221,7 +221,7 @@ STATIC FUNCTION About(cWhat)
          "(e-mail: pete_westg@yahoo.gr)", ;
          "About")
    ELSEIF UPPER(cWhat) == "HELP"
-      MSGInfo(;
+      MSGInfo( ;
          "- DoubleClick on a row to display informations in a more readable form." + REPL( cLineFeed , 2 ) + ;
          "- Click on column heads to sort respectively. (Click again for reverse sorting)" + REPL( cLineFeed , 2 ) + ;
          "- Hit Reload button (or select from menu) to refresh metrics.", ;

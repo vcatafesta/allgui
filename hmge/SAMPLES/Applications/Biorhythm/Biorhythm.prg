@@ -128,8 +128,8 @@ PROCEDURE Main()
    PRIVATE lgOctober     :='October'
    PRIVATE lgNovember    :='November'
    PRIVATE lgDecember    :='December'
-   PRIVATE aMonth  :=  { lgJanuary, lgFebruary, lgMarch, lgApril,;
-      lgMay, lgJune, lgJuly, lgAugust,;
+   PRIVATE aMonth  :=  { lgJanuary, lgFebruary, lgMarch, lgApril, ;
+      lgMay, lgJune, lgJuly, lgAugust, ;
       lgSeptember, lgOctober, lgNovember, lgDecember }
 
    PRIVATE xcDOB_day   :='1'
@@ -209,8 +209,8 @@ PROCEDURE SelectLanguage(xPath)
       END INI
 
       aMonth:={}
-      aMonth:={ lgJanuary, lgFebruary, lgMarch, lgApril,;
-         lgMay, lgJune, lgJuly, lgAugust,;
+      aMonth:={ lgJanuary, lgFebruary, lgMarch, lgApril, ;
+         lgMay, lgJune, lgJuly, lgAugust, ;
          lgSeptember, lgOctober, lgNovember, lgDecember }
 
       cSet:=UPPER(lgLanguage)
@@ -415,7 +415,7 @@ PROCEDURE ValidDate()
       ENDIF
    ENDIF
 
-   oBiorhythm.LabelCurrent.Value:=;
+   oBiorhythm.LabelCurrent.Value:= ;
       (  ALLTRIM(STR(oBiorhythm.SpinnerCurrent.Value,0)) ;
       +" "+ALLTRIM(oBiorhythm.ComboCurrent.DisplayValue) ;
       +" "+oBiorhythm.TextCurrent.Value )
@@ -425,9 +425,9 @@ PROCEDURE ValidDate()
          +"."+STR(oBiorhythm.ComboCurrent.Value,0) ;
          +"."+oBiorhythm.TextCurrent.Value+"'" )-10
 
-      oBiorhythm.LabelMinus.Value:=;
-         STR(DAY(dCurrentMinus));
-         +" "+aMonth[MONTH(dCurrentMinus)];
+      oBiorhythm.LabelMinus.Value:= ;
+         STR(DAY(dCurrentMinus)) ;
+         +" "+aMonth[MONTH(dCurrentMinus)] ;
          +STR(YEAR(dCurrentMinus))
    ELSE
       oBiorhythm.LabelMinus.Value:=''
@@ -437,9 +437,9 @@ PROCEDURE ValidDate()
       +"."+STR(oBiorhythm.ComboCurrent.Value,0) ;
       +"."+oBiorhythm.TextCurrent.Value+"'" )+10
 
-   oBiorhythm.LabelPlus.Value:=;
-      STR(DAY(dCurrentPlus));
-      +" "+aMonth[MONTH(dCurrentPlus)];
+   oBiorhythm.LabelPlus.Value:= ;
+      STR(DAY(dCurrentPlus)) ;
+      +" "+aMonth[MONTH(dCurrentPlus)] ;
       +STR(YEAR(dCurrentPlus))
 
    RETURN
@@ -540,20 +540,20 @@ PROCEDURE DateChanged()
       oBiorhythm.Button_Intu.ENABLED:=.F.
    ENDIF
 
-   IF (oBiorhythm.FocusedControl != 'SpinnerBorn');
-         .AND.;
-         (oBiorhythm.FocusedControl != 'SpinnerCurrent');
-         .AND.;
-         (oBiorhythm.FocusedControl != 'TextBorn');
-         .AND.;
-         (oBiorhythm.FocusedControl != 'TextCurrent');
-         .OR.;
-         (oBiorhythm.SpinnerCurrent.Value>10;
-         .AND.;
-         oBiorhythm.SpinnerBorn.Value>10);
-         .AND.;
-         (LEN(oBiorhythm.TextCurrent.Value)==4;
-         .AND.;
+   IF (oBiorhythm.FocusedControl != 'SpinnerBorn') ;
+         .AND. ;
+         (oBiorhythm.FocusedControl != 'SpinnerCurrent') ;
+         .AND. ;
+         (oBiorhythm.FocusedControl != 'TextBorn') ;
+         .AND. ;
+         (oBiorhythm.FocusedControl != 'TextCurrent') ;
+         .OR. ;
+         (oBiorhythm.SpinnerCurrent.Value>10 ;
+         .AND. ;
+         oBiorhythm.SpinnerBorn.Value>10) ;
+         .AND. ;
+         (LEN(oBiorhythm.TextCurrent.Value)==4 ;
+         .AND. ;
          LEN(oBiorhythm.TextBorn.Value)==4)
 
       oBiorhythm.Button_Calculate.SetFocus
@@ -591,9 +591,9 @@ PROCEDURE DrawBiorhythm()
    LOCAL nOffsetX:=80
    LOCAL nOffsetY:=((800-(nPixels*(nDaysPrev)*2))/2)
    LOCAL nPercent
-   LOCAL aValue:={ "+100","+080","+060","+040","+020",;
-      "+000",;
-      "-020","-040","-060","-080","-100";
+   LOCAL aValue:={ "+100","+080","+060","+040","+020", ;
+      "+000", ;
+      "-020","-040","-060","-080","-100" ;
       }
 
    ERASE WINDOW oBiorhythm
@@ -606,13 +606,13 @@ PROCEDURE DrawBiorhythm()
    nPercent:=0
    FOR I:=rr-120 TO rr+120 STEP (120*2)/10
       nPercent++
-      draw text in window oBiorhythm;
-         at (nOffsetX+i)-5,37;
-         VALUE aValue[nPercent] transparent;
+      draw text in window oBiorhythm ;
+         at (nOffsetX+i)-5,37 ;
+         VALUE aValue[nPercent] transparent ;
          FONT "arial" size 7
-      draw text in window oBiorhythm;
-         at (nOffsetX+i)-5,743;
-         VALUE aValue[nPercent] transparent;
+      draw text in window oBiorhythm ;
+         at (nOffsetX+i)-5,743 ;
+         VALUE aValue[nPercent] transparent ;
          FONT "arial" size 7
 
    NEXT I
@@ -621,30 +621,30 @@ PROCEDURE DrawBiorhythm()
 
    FOR I:=rr-120 TO rr+120 STEP (120*2)/10
       x0:=I
-      drawline("oBiorhythm",;
-         (nOffsetX+x0), (nOffsetY+y0),;
-         (nOffsetX+x0), (nOffsetY+nDaysPrev*nPixels*2),;
-         IIF(I==rr-120.OR.I==rr.OR.I==rr+120,;
-         {0,0,0},;
-         {128,128,128});
+      drawline("oBiorhythm", ;
+         (nOffsetX+x0), (nOffsetY+y0), ;
+         (nOffsetX+x0), (nOffsetY+nDaysPrev*nPixels*2), ;
+         IIF(I==rr-120.OR.I==rr.OR.I==rr+120, ;
+         {0,0,0}, ;
+         {128,128,128}) ;
          ,.5 )
    NEXT I
 
    FOR I := 0 TO (nDaysPrev*2) STEP 1
       x0:=rr-120
       y0:=i*nPixels
-      drawline(;
-         "oBiorhythm",;
-         IIF(i<>nDaysPrev,(nOffsetX+x0),(nOffsetX+x0)-20),;
-         (nOffsetY+y0),;
-         IIF(i<>nDaysPrev,(nOffsetX+x0+240),(nOffsetX+x0+240)+10),;
-         (nOffsetY+y0),;
-         IIF(i<>nDaysPrev,;
-         IIF(I=0.OR.I=(nDaysPrev*2),;
-         {0,0,0},;
-         {128,128,128});
-         ,{255,0,15});
-         ,.5;
+      drawline( ;
+         "oBiorhythm", ;
+         IIF(i<>nDaysPrev,(nOffsetX+x0),(nOffsetX+x0)-20), ;
+         (nOffsetY+y0), ;
+         IIF(i<>nDaysPrev,(nOffsetX+x0+240),(nOffsetX+x0+240)+10), ;
+         (nOffsetY+y0), ;
+         IIF(i<>nDaysPrev, ;
+         IIF(I=0.OR.I=(nDaysPrev*2), ;
+         {0,0,0}, ;
+         {128,128,128}) ;
+         ,{255,0,15}) ;
+         ,.5 ;
          )
    NEXT I
 
@@ -654,21 +654,21 @@ PROCEDURE DrawBiorhythm()
 
       IF nFirstOff<(nDaysPrev/2)+1
          IF I==nDaysPrev-(nDaysPrev/2)
-            drawline("oBiorhythm",;
-               (nOffsetX+x0-10),;
-               (nOffsetY+y0),;
-               (nOffsetX+x0+240+30),;
-               (nOffsetY+y0),;
+            drawline("oBiorhythm", ;
+               (nOffsetX+x0-10), ;
+               (nOffsetY+y0), ;
+               (nOffsetX+x0+240+30), ;
+               (nOffsetY+y0), ;
                BLUE ,.5 )
          ENDIF
       ENDIF
 
       IF I==nDaysPrev+(nDaysPrev/2)
-         drawline("oBiorhythm",;
-            (nOffsetX+x0-10),;
-            (nOffsetY+y0),;
-            (nOffsetX+x0+240+30),;
-            (nOffsetY+y0),;
+         drawline("oBiorhythm", ;
+            (nOffsetX+x0-10), ;
+            (nOffsetY+y0), ;
+            (nOffsetX+x0+240+30), ;
+            (nOffsetY+y0), ;
             BLUE ,.5 )
       ENDIF
    NEXT I
@@ -677,22 +677,22 @@ PROCEDURE DrawBiorhythm()
       x0:=rr-120
       y0:=nFirstOff*nPixels
 
-      drawline("oBiorhythm",;
-         (nOffsetX+x0),;
-         (nOffsetY+y0),;
-         (nOffsetX+x0+240),;
-         (nOffsetY+y0),;
+      drawline("oBiorhythm", ;
+         (nOffsetX+x0), ;
+         (nOffsetY+y0), ;
+         (nOffsetX+x0+240), ;
+         (nOffsetY+y0), ;
          YELLOW ,.5 )
 
    ENDIF
 
    draw polygon in window oBiorhythm ;
-      points  {{nOffsetX+rr+130,  (nDaysPrev*nPixels)+nOffsetY},;
-      {nOffsetX+rr+130-7,(nDaysPrev*nPixels)+nOffsetY-3},;
-      {nOffsetX+rr+130-7,(nDaysPrev*nPixels)+nOffsetY+3};
-      };
-      pencolor {255,0,15};
-      penwidth 1;
+      points  {{nOffsetX+rr+130,  (nDaysPrev*nPixels)+nOffsetY}, ;
+      {nOffsetX+rr+130-7,(nDaysPrev*nPixels)+nOffsetY-3}, ;
+      {nOffsetX+rr+130-7,(nDaysPrev*nPixels)+nOffsetY+3} ;
+      } ;
+      pencolor {255,0,15} ;
+      penwidth 1 ;
       fillcolor {255,0,15}
 
    FOR i := 0+nFirstOff TO nDaysPrev*2 STEP Step_fi
@@ -700,89 +700,89 @@ PROCEDURE DrawBiorhythm()
       y0 := i
 
       IF oBiorhythm.Button_Summary.Value
-         x0:=( -(sin( pi()*( mod(i-nDaysPrev+nDays,N_EMOT) )*(2/N_EMOT)));
-            + -(sin( pi()*( mod(i-nDaysPrev+nDays,N_INTE) )*(2/N_INTE)));
+         x0:=( -(sin( pi()*( mod(i-nDaysPrev+nDays,N_EMOT) )*(2/N_EMOT))) ;
+            + -(sin( pi()*( mod(i-nDaysPrev+nDays,N_INTE) )*(2/N_INTE))) ;
             + -(sin( pi()*( mod(i-nDaysPrev+nDays,N_PHYS) )*(2/N_PHYS))) )/3
-         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels),;
+         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), ;
             (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), BLACK ,3 )
 
          draw rectangle in window oBiorhythm at 530,45 ;
-            to 540,545;
-            pencolor BLACK;
-            penwidth 1;
+            to 540,545 ;
+            pencolor BLACK ;
+            penwidth 1 ;
             fillcolor BLACK
       ELSE
          draw rectangle in window oBiorhythm at 530,45 ;
-            to 540,545;
-            pencolor BLACK;
+            to 540,545 ;
+            pencolor BLACK ;
             penwidth 2
       ENDIF
 
       IF oBiorhythm.Button_Phys.Value
          x0:=-(sin( pi()*( mod(i-nDaysPrev+nDays,N_PHYS) )*(2/N_PHYS)))
-         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels),;
+         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), ;
             (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), {255,0,0} , 3 )
 
          draw rectangle in window oBiorhythm at 465,45 ;
-            to 485,185;
-            pencolor {255,0,0};
-            penwidth 1;
+            to 485,185 ;
+            pencolor {255,0,0} ;
+            penwidth 1 ;
             fillcolor {255,0,0}
       ELSE
          draw rectangle in window oBiorhythm at 465,45 ;
-            to 485,185;
-            pencolor {255,0,0};
+            to 485,185 ;
+            pencolor {255,0,0} ;
             penwidth 2
       ENDIF
 
       IF oBiorhythm.Button_Emot.Value
          x0:=-(sin( pi()*( mod(i-nDaysPrev+nDays,N_EMOT) )*(2/N_EMOT)))
-         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels),;
+         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), ;
             (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), {0,0,255} ,3 )
 
          draw rectangle in window oBiorhythm at 465,225 ;
-            to 485,365;
-            pencolor {0,0,255};
-            penwidth 1;
+            to 485,365 ;
+            pencolor {0,0,255} ;
+            penwidth 1 ;
             fillcolor {0,0,255}
       ELSE
          draw rectangle in window oBiorhythm at 465,225 ;
-            to 485,365;
-            pencolor {0,0,255};
+            to 485,365 ;
+            pencolor {0,0,255} ;
             penwidth 2
       ENDIF
 
       IF oBiorhythm.Button_Inte.Value
          x0:=-(sin( pi()*( mod(i-nDaysPrev+nDays,N_INTE) )*(2/N_INTE)))
-         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels),;
+         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), ;
             (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), {0,255,0} , 3 )
 
          draw rectangle in window oBiorhythm at 465,405 ;
-            to 485,545;
-            pencolor {0,255,0};
-            penwidth 1;
+            to 485,545 ;
+            pencolor {0,255,0} ;
+            penwidth 1 ;
             fillcolor {0,255,0}
       ELSE
          draw rectangle in window oBiorhythm at 465,405 ;
-            to 485,545;
-            pencolor {0,255,0};
+            to 485,545 ;
+            pencolor {0,255,0} ;
             penwidth 2
       ENDIF
 
       IF oBiorhythm.Button_Intu.Value
          x0:=-(sin( pi()*( mod(i-nDaysPrev+nDays,N_INTU) )*(2/N_INTU)))
-         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels),;
+         drawline("oBiorhythm", (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), ;
             (nOffsetX+rr+x0*120), (nOffsetY+y0*nPixels), {255,255,0} , 3 )
 
          draw rectangle in window oBiorhythm at 465,615 ;
-            to 485,755;
-            pencolor {255,255,0};
-            penwidth 1;
+            to 485,755 ;
+            pencolor {255,255,0} ;
+            penwidth 1 ;
             fillcolor {255,255,0}
       ELSE
          draw rectangle in window oBiorhythm at 465,615 ;
-            to 485,755;
-            pencolor {255,255,0};
+            to 485,755 ;
+            pencolor {255,255,0} ;
             penwidth 2
       ENDIF
 
@@ -824,20 +824,20 @@ PROCEDURE ReleaseBiorhytms()
    IF FILE('Biorhythm.ini')
       BEGIN INI FILE 'Biorhythm.ini'
 
-         SET SECTION [Date of birth];
-            ENTRY "cDOB_day";
+         SET SECTION [Date of birth] ;
+            ENTRY "cDOB_day" ;
             TO xcDOB_day
 
-         SET SECTION [Date of birth];
-            ENTRY "cDOB_month";
+         SET SECTION [Date of birth] ;
+            ENTRY "cDOB_month" ;
             TO xcDOB_month
 
-         SET SECTION [Date of birth];
-            ENTRY "cDOB_year";
+         SET SECTION [Date of birth] ;
+            ENTRY "cDOB_year" ;
             TO xcDOB_year
 
-         SET SECTION [Biorhythm];
-            ENTRY "language";
+         SET SECTION [Biorhythm] ;
+            ENTRY "language" ;
             TO ALLTRIM(oBiorhythm.Combo_Language.DisplayValue)
 
       END INI

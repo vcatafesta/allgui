@@ -1,15 +1,15 @@
 #include <minigui.ch>
 #include "DBA.ch"
 
-FUNC ExprValid(;
+FUNC ExprValid( ;
       xExpress,;    // Expression itself; strg or array or ';' delimited strg list
       cExcpType )   // Excepted type
 
-   LOCA cRVal    := '',;
-      lValid   := .F.,;
-      aExpress := {},;
-      c1Type   := '',;
-      c1Expres := '',;
+   LOCA cRVal    := '', ;
+      lValid   := .F., ;
+      aExpress := {}, ;
+      c1Type   := '', ;
+      c1Expres := '', ;
       nExpress := 0
 
    IF lPref0104 // Apply Validity Checking on user supplied expressions
@@ -43,31 +43,31 @@ FUNC ExprValid(;
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
    FUNC GFUComOpts( ;            // Get From User Command Options
-         aValues,;
+         aValues, ;
          cComName,;   // (Caller) Command Name
          aOptCodes )  // Options Codes
 
-      LOCA aRVal     := {},;
-         aControls := {},;
-         cCFTitl   := " Options for " + cComName,;
-         nItemCo   := LEN( aOptCodes ),;
-         nItemNo   := 0,;
-         x1Option  := NIL,;
-         c1PCode   := '',;
-         c1PName   := '',;
-         n1PCNum   :=  0,;
-         nLnSpace  := 27,;
-         n1itRow   :=  0,;
+      LOCA aRVal     := {}, ;
+         aControls := {}, ;
+         cCFTitl   := " Options for " + cComName, ;
+         nItemCo   := LEN( aOptCodes ), ;
+         nItemNo   := 0, ;
+         x1Option  := NIL, ;
+         c1PCode   := '', ;
+         c1PName   := '', ;
+         n1PCNum   :=  0, ;
+         nLnSpace  := 27, ;
+         n1itRow   :=  0, ;
          n1ILINo   :=  0     // InLine Item No
 
-      LOCA c1Label   := '',;
-         clblNam   := '',;
-         cTxBNam   := '',;
-         ctxhNam   := '',;
-         cBtnNam   := '',;
-         cChBNam   := '',;
-         cCmBNam   := '',;
-         x1Value   := NIL,;
+      LOCA c1Label   := '', ;
+         clblNam   := '', ;
+         cTxBNam   := '', ;
+         ctxhNam   := '', ;
+         cBtnNam   := '', ;
+         cChBNam   := '', ;
+         cCmBNam   := '', ;
+         x1Value   := NIL, ;
          c1Value
 
       LOCA aCPStru   := { { "OFN", ' File Name'  } ,;   //  1. Output File Name
@@ -487,15 +487,15 @@ FUNC ExprValid(;
       *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
       PROC CoOpAply( ;                          // Command Options, Apply
-            aValues,;
+            aValues, ;
             aControls )
 
-         LOCA nLineNo  :=  0,;
-            nItemNo  :=  0,;
-            cCtrNam  := '',;
-            cCOpTyp  := '',;
-            cCtrTyp  := '',;
-            lValid   := .T.,;
+         LOCA nLineNo  :=  0, ;
+            nItemNo  :=  0, ;
+            cCtrNam  := '', ;
+            cCOpTyp  := '', ;
+            cCtrTyp  := '', ;
+            lValid   := .T., ;
             cInvalid := ''
 
          FOR nLineNo := 1 TO LEN( aControls )
@@ -528,15 +528,15 @@ FUNC ExprValid(;
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          FUNC CoOpChk1Exp( ;                       // Command Options, Check 1 Expression
-               aControls,;
+               aControls, ;
                cCtrNam )
 
-            LOCA cCtrTyp   := LEFT( cCtrNam, 3 ),;
-               cCOpTyp   := SUBS( cCtrNam, 5, 3 ),;
-               cInvalid  := '',;
-               cExpType  := '',;
-               lRVal     := .T.,;
-               cErrorMes := '',;
+            LOCA cCtrTyp   := LEFT( cCtrNam, 3 ), ;
+               cCOpTyp   := SUBS( cCtrNam, 5, 3 ), ;
+               cInvalid  := '', ;
+               cExpType  := '', ;
+               lRVal     := .T., ;
+               cErrorMes := '', ;
                cAsCtrNam := '',;    // Associated Control Name
                nAsCtrVal := 0,;     // Associated Control Value  ( Always Numeric )
                x1Value
@@ -616,11 +616,11 @@ FUNC ExprValid(;
             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
             PROC CoOpRVal(;                           // Make Return Value for GFUComOpts()
-                  aValues,;
+                  aValues, ;
                   aControls )
 
-               LOCA nLineNo := 0,;
-                  nItemNo := 0,;
+               LOCA nLineNo := 0, ;
+                  nItemNo := 0, ;
                   cCtrNam := ''
 
                FOR nLineNo := 1 TO LEN( aControls )
@@ -643,23 +643,23 @@ FUNC ExprValid(;
                *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                PROC CoOpSetValue( ;
-                     cCtrNam,;
+                     cCtrNam, ;
                      aValues )
 
-                  LOCA c1PCode  := SUBS( cCtrNam, 5, 3 ),;
-                     nItemNo  := VAL( RIGHT( cCtrNam, 2 ) ),;
-                     nSubItNo :=  0,;
-                     ctxbNam  := '',;
-                     ctxhNam  := '',;
+                  LOCA c1PCode  := SUBS( cCtrNam, 5, 3 ), ;
+                     nItemNo  := VAL( RIGHT( cCtrNam, 2 ) ), ;
+                     nSubItNo :=  0, ;
+                     ctxbNam  := '', ;
+                     ctxhNam  := '', ;
                      x1Value
 
                   LOCA aSFTDpCs := { "cmb_CND03" ,;    // SFT Dependent controls ( paliative ! )
-                     "txb_CND03" ,;
-                     "cmb_SCP04" ,;
-                     "txb_SCP04" },;
-                     c1CtrNam := '',;
-                     cFFList  := '',;
-                     cFCList  := '',;
+                     "txb_CND03" , ;
+                     "cmb_SCP04" , ;
+                     "txb_SCP04" }, ;
+                     c1CtrNam := '', ;
+                     cFFList  := '', ;
+                     cFCList  := '', ;
                      nSFDCInd := 0                   // SFT Dependent controls's indice
 
                   DO CASE
@@ -782,10 +782,10 @@ FUNC ExprValid(;
                   PROC CoOp1Item( ;            // Make 1 Item ( Control ) for GFUComOpts()
                         cCntrType,;  // Control type
                         cCntrName,;  // Control name
-                        nRow     ,;
-                        nCol     ,;
-                        nWidth   ,;
-                        nHeigth  ,;
+                        nRow     , ;
+                        nCol     , ;
+                        nWidth   , ;
+                        nHeigth  , ;
                         xValue )
 
                      DO CASE
@@ -866,7 +866,7 @@ FUNC ExprValid(;
                      FUNC GFUFldLst(;               // Get From User Field List ( as String )
                            cDelimiter )
 
-                        LOCA cRVal   := '',;
+                        LOCA cRVal   := '', ;
                            aFldLst := FldNArry()
 
                         LOCA aSelect := GFUSList( aFldLst, "Select Field(s)", .T. )
@@ -885,15 +885,15 @@ FUNC ExprValid(;
                               aScopes,;    // Scopes
                               aCondits )   // Conditions
 
-                           LOCA aRVal     := {},;
-                              cForClaus := '',;
-                              cWhlClaus := '',;
-                              cContinue := '',;
-                              cApply    := '.T.',;
+                           LOCA aRVal     := {}, ;
+                              cForClaus := '', ;
+                              cWhlClaus := '', ;
+                              cContinue := '', ;
+                              cApply    := '.T.', ;
                               nScope    := aScopes[ 1 ]
 
-                           LOCA lRestRecs := ( nScope == 3 ),;
-                              nNextRecs := IF( nScope == 4, aScopes[ 2 ], 0 ),;
+                           LOCA lRestRecs := ( nScope == 3 ), ;
+                              nNextRecs := IF( nScope == 4, aScopes[ 2 ], 0 ), ;
                               nRecoNumb := IF( nScope == 5, aScopes[ 2 ], 0 )
 
                            IF nNextRecs > 0
@@ -933,8 +933,8 @@ FUNC ExprValid(;
                            FUNC FieldValid( ;
                                  cFieldList )
 
-                              LOCA cRVal  := '',;
-                                 c1FNam := '',;
+                              LOCA cRVal  := '', ;
+                                 c1FNam := '', ;
                                  aStruc := DBSTRUCT()
 
                               WHILE !EMPTY( cFieldList )
@@ -952,16 +952,16 @@ FUNC ExprValid(;
                               *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                               FUNC FNamValid( ;                          // Validity Check for Output or Input File Name
-                                    cOFName,;
-                                    aControls,;
-                                    cCtrNam,;
+                                    cOFName, ;
+                                    aControls, ;
+                                    cCtrNam, ;
                                     lOutput )
 
-                                 LOCA lRVal     := '',;
-                                    nCtrlNo   :=  0,;
-                                    a1Control := {},;
-                                    nTFCtrNo  :=  0,;
-                                    cTFCtrNam := '',;
+                                 LOCA lRVal     := '', ;
+                                    nCtrlNo   :=  0, ;
+                                    a1Control := {}, ;
+                                    nTFCtrNo  :=  0, ;
+                                    cTFCtrNam := '', ;
                                     nOFType   :=  0
 
                                  DEFAULT lOutput TO .T.
@@ -1018,9 +1018,9 @@ FUNC ExprValid(;
                                        cCFList,;  // Current Field List
                                        cFFList )  // Full Field List
 
-                                    LOCA cRVal     := '',;
-                                       aFFldList := Lst2Arr( cFFList, ',' ),;
-                                       aCFldList := Lst2Arr( cCFList, ',' ),;
+                                    LOCA cRVal     := '', ;
+                                       aFFldList := Lst2Arr( cFFList, ',' ), ;
+                                       aCFldList := Lst2Arr( cCFList, ',' ), ;
                                        aGrItems  := KFL2Arr( cCFList, aFFldList )
 
                                     DEFINE WINDOW frmKFList ;
@@ -1039,8 +1039,8 @@ FUNC ExprValid(;
                                           WIDTHS { 120, 90, 90 } ;
                                           ITEMS aGrItems ;
                                           EDIT ;
-                                          COLUMNCONTROLS { { 'COMBOBOX', aFFldList },;
-                                          { 'CHECKBOX', 'Ascending' , 'Descending' },;
+                                          COLUMNCONTROLS { { 'COMBOBOX', aFFldList }, ;
+                                          { 'CHECKBOX', 'Ascending' , 'Descending' }, ;
                                           { 'CHECKBOX', 'Sensitive' , 'Ignore' } }
 
                                        DEFINE BUTTON btnAdd
@@ -1049,7 +1049,7 @@ FUNC ExprValid(;
                                           WIDTH      48
                                           HEIGHT     20
                                           CAPTION    "Add"
-                                          ACTION     { || IF(frmKFList.grdKFList.Cell( frmKFList.grdKFList.ItemCount, 1 ) > 0,;
+                                          ACTION     { || IF(frmKFList.grdKFList.Cell( frmKFList.grdKFList.ItemCount, 1 ) > 0, ;
                                              frmKFList.grdKFList.AddItem( { 0, .T., .T. } ), ) }
                                           *         FONTNAME   "FixedSys"
                                           *         FONTSIZE   6
@@ -1061,7 +1061,7 @@ FUNC ExprValid(;
                                           WIDTH      48
                                           HEIGHT     20
                                           CAPTION    "Delete"
-                                          ACTION     { || IF(frmKFList.grdKFList.ItemCount > 1,;
+                                          ACTION     { || IF(frmKFList.grdKFList.ItemCount > 1, ;
                                              frmKFList.grdKFList.DeleteItem( frmKFList.grdKFList.Value ), ) }
                                           *         FONTNAME   "FixedSys"
                                           *         FONTSIZE   6
@@ -1089,15 +1089,15 @@ FUNC ExprValid(;
                                     *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                     FUNC KFL2Arr( ;                           // Key field list to array
-                                          cKFList,;
+                                          cKFList, ;
                                           aFFldList )
 
-                                       LOCA aRVal    := {},;
-                                          c1Field  := '',;
-                                          c1FldNam := '',;
-                                          n1FldNum :=  0,;
-                                          c1Switch := '',;
-                                          c2Switch := '',;
+                                       LOCA aRVal    := {}, ;
+                                          c1Field  := '', ;
+                                          c1FldNam := '', ;
+                                          n1FldNum :=  0, ;
+                                          c1Switch := '', ;
+                                          c2Switch := '', ;
                                           l1Order  := .T.,;  // .T. : Ascending, .F. : Descending
                                           l1Case   := .T.    // .T. : Ignore, .F. : Apply
 
@@ -1129,10 +1129,10 @@ FUNC ExprValid(;
                                           LOCA nCBItCo := frmKFList.grdKFList.ItemCount,;  // Grid\ComboBox\Item Count
                                              nCBIInd := 0,;                              // Grid\ComboBox\Item indice
                                              cKFList := '',;                             // Key fields list
-                                             nFldNum :=  0,;
-                                             cFldNam := '',;
-                                             lOrdAsc := .F.,;
-                                             lCasSen := .F.,;
+                                             nFldNum :=  0, ;
+                                             cFldNam := '', ;
+                                             lOrdAsc := .F., ;
+                                             lCasSen := .F., ;
                                              nCBRInd
 
                                           FOR nCBRInd := 1 TO nCBItCo
@@ -1152,10 +1152,10 @@ FUNC ExprValid(;
                                           FUNC KeysValid( ;
                                                 cKeysList )
 
-                                             LOCA cRVal := '',;
-                                                c1Key := '',;
-                                                c1Fld := '',;
-                                                c1Swt := '',;
+                                             LOCA cRVal := '', ;
+                                                c1Key := '', ;
+                                                c1Fld := '', ;
+                                                c1Swt := '', ;
                                                 c2Swt := ''
 
                                              WHILE !EMPTY( cKeysList )

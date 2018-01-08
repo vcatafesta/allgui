@@ -16,14 +16,14 @@ FUNCTION Main()
 
    SET FONT TO 'MS Shell Dlg', 8
 
-   DEFINE WINDOW Main;
-         MAIN;
-         ROW     100;
-         COL     100;
-         WIDTH   350;
-         HEIGHT  170;
-         TITLE   "Map Network Drive";
-         ICON "net.ico";
+   DEFINE WINDOW Main ;
+         MAIN ;
+         ROW     100 ;
+         COL     100 ;
+         WIDTH   350 ;
+         HEIGHT  170 ;
+         TITLE   "Map Network Drive" ;
+         ICON "net.ico" ;
          ON INIT MainUpdate(cDrive)
 
       DEFINE LABEL Drive

@@ -230,9 +230,9 @@ FUNCTION DBUaddstruct
          CASE _DBUstructarr[_DBUi,2] == "M"
             _DBUtype1 := "Memo"
          END CASE
-         _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1],;
-            _DBUtype1,;
-            str(_DBUstructarr[_DBUi,3],8,0),;
+         _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1], ;
+            _DBUtype1, ;
+            str(_DBUstructarr[_DBUi,3],8,0), ;
             str(_DBUstructarr[_DBUi,4],3,0)})
       NEXT _DBUi
       IF len(_DBUstructarr) > 0
@@ -301,9 +301,9 @@ FUNCTION DBUaddstruct
             CASE _DBUstructarr[_DBUi,2] == "M"
                _DBUtype1 := "Memo"
             END CASE
-            _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1],;
-               _DBUtype1,;
-               str(_DBUstructarr[_DBUi,3],8,0),;
+            _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1], ;
+               _DBUtype1, ;
+               str(_DBUstructarr[_DBUi,3],8,0), ;
                str(_DBUstructarr[_DBUi,4],3,0)})
          NEXT _DBUi
          IF len(_DBUstructarr) > 0
@@ -392,9 +392,9 @@ FUNCTION DBUinsstruct
       CASE _DBUstructarr[_DBUi,2] == "M"
          _DBUtype1 := "Memo"
       END CASE
-      _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1],;
-         _DBUtype1,;
-         str(_DBUstructarr[_DBUi,3],8,0),;
+      _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1], ;
+         _DBUtype1, ;
+         str(_DBUstructarr[_DBUi,3],8,0), ;
          str(_DBUstructarr[_DBUi,4],3,0)})
    NEXT _DBUi
    IF len(_DBUstructarr) > 0
@@ -428,9 +428,9 @@ FUNCTION DBUdelstruct
          CASE _DBUstructarr[_DBUi,2] == "M"
             _DBUtype1 := "Memo"
          END CASE
-         _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1],;
-            _DBUtype1,;
-            str(_DBUstructarr[_DBUi,3],8,0),;
+         _DBUcreadbf._DBUstruct.additem({_DBUstructarr[_DBUi,1], ;
+            _DBUtype1, ;
+            str(_DBUstructarr[_DBUi,3],8,0), ;
             str(_DBUstructarr[_DBUi,4],3,0)})
       NEXT _DBUi
       IF len(_DBUstructarr) > 1

@@ -123,7 +123,7 @@ PROCEDURE _HMG_PRINTER_ShowPreview()
 
    _HMG_PRINTER_SizeFactor := GetDesktopHeight() / _HMG_PRINTER_GETPAGEHEIGHT( _HMG_PRINTER_hDC_Bak ) * 0.63
 
-   DEFINE WINDOW _OOHG_AUXIL TITLE _HMG_PRINTER_UserMessages [02] + '. ' + _HMG_PRINTER_UserMessages [01] + ' [' + AllTrim( Str( _HMG_PRINTER_CurrentPageNumber)) + '/'+ AllTrim( Str(_HMG_PRINTER_PageCount ) ) + ']';
+   DEFINE WINDOW _OOHG_AUXIL TITLE _HMG_PRINTER_UserMessages [02] + '. ' + _HMG_PRINTER_UserMessages [01] + ' [' + AllTrim( Str( _HMG_PRINTER_CurrentPageNumber)) + '/'+ AllTrim( Str(_HMG_PRINTER_PageCount ) ) + ']' ;
          CHILD ;
          AT 0, 0 ;
          WIDTH GetDesktopWidth() - 123 ;
@@ -230,7 +230,7 @@ PROCEDURE _HMG_PRINTER_ShowPreview()
 
       _HMG_PRINTER_PPNAV:ClientAdjust := 1
 
-      DEFINE WINDOW _HMG_PRINTER_SHOWPREVIEW OBJ _HMG_PRINTER_SHOWPREVIEW;
+      DEFINE WINDOW _HMG_PRINTER_SHOWPREVIEW OBJ _HMG_PRINTER_SHOWPREVIEW ;
             AT 0, 0 ;
             WIDTH GetDesktopWidth() - 123 ;
             HEIGHT GetDesktopHeight() - 123 ;
@@ -1206,7 +1206,7 @@ PROCEDURE _HMG_PRINTER_H_Fill( nHdc, nRow, nCol, nToRow, nToCol, nColor1, nColor
    nToRow := Int( nToRow * 10000 / 254 )
    nToCol := Int( nToCol * 10000 / 254 )
 
-   // (LONG)((GetDeviceCaps( hdcPrint, LOGPIXELSX ) / 1000 ) - GetDeviceCaps( hdcPrint, PHYSICALOFFSETX ));
+   // (LONG)((GetDeviceCaps( hdcPrint, LOGPIXELSX ) / 1000 ) - GetDeviceCaps( hdcPrint, PHYSICALOFFSETX )) ;
 
    _HMG_PRINTER_C_FILL( nHdc, nRow, nCol, nToRow, nToCol, nColor1, nColor2, nColor3, lcolor )
 

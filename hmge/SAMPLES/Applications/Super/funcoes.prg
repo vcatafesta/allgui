@@ -81,11 +81,11 @@ FUNCTION Chk_Mes(parametro,tipo)
    LOCAL retorno
 
    IF tipo == 1
-      retorno := {'Jan','Fev','Mar','Abr','Mai','Jun',;
+      retorno := {'Jan','Fev','Mar','Abr','Mai','Jun', ;
          'Jul','Ago','Set','Out','Nov','Dez'} [Parametro]
    ELSEIF tipo == 2
-      retorno := {'Janeiro  ','Fevereiro','Marco    ','Abril    ','Maio     ','Junho    ',;
-         'Julho    ','Agosto   ','Setembro ','Outubro  ','Novembro ',;
+      retorno := {'Janeiro  ','Fevereiro','Marco    ','Abril    ','Maio     ','Junho    ', ;
+         'Julho    ','Agosto   ','Setembro ','Outubro  ','Novembro ', ;
          'Dezembro '} [Parametro]
    ENDIF
 
@@ -97,8 +97,8 @@ FUNCTION dia_da_semana(p_data,p_tipo)
    LOCAL cSem_ext,cSem_abv,cData
 
    IF p_tipo == 1
-      cSem_ext := {'Domingo','Segunda-Feira','Terça-Feira' ,;
-         'Quarta-Feira','Quinta-Feira','Sexta-Feira' ,;
+      cSem_ext := {'Domingo','Segunda-Feira','Terça-Feira' , ;
+         'Quarta-Feira','Quinta-Feira','Sexta-Feira' , ;
          'Sábado'}
       cData := cSem_ext[dow(p_data)]
 

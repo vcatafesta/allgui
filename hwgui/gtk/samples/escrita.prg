@@ -16,51 +16,51 @@ FUNCTION Main()
    @ 0, 0 toolbar oTool of oModDlg size 50, 100 ID 700
    TOOLBUTTON  otool ;
       ID 701 ;
-      BITMAP "../../image/new.bmp";
-      STYLE 0;
-      STATE 4;
+      BITMAP "../../image/new.bmp" ;
+      STYLE 0 ;
+      STATE 4 ;
       TEXT "teste1"  ;
       TOOLTIP "ola" ;
       ON CLICK { |x, y|hwg_Msginfo( "ola" ), hwg_Enablewindow( oTool:aItem[2,11], .T. ) , hwg_Enablewindow( oTool:aItem[1,11], .F. ) }
 
    TOOLBUTTON  otool ;
       ID 702 ;
-      BITMAP "../../image/book.bmp";
+      BITMAP "../../image/book.bmp" ;
       STYLE 0 ;
-      STATE 4;
+      STATE 4 ;
       TEXT "teste2"  ;
       TOOLTIP "ola2" ;
       ON CLICK { |x, y|hwg_Msginfo( "ola1" ), hwg_Enablewindow( oTool:aItem[1,11], .T. ), hwg_Enablewindow( oTool:aItem[2,11], .F. ) }
 
    TOOLBUTTON  otool ;
       ID 703 ;
-      BITMAP "../../image/ok.ico";
+      BITMAP "../../image/ok.ico" ;
       STYLE 0 ;
-      STATE 4;
+      STATE 4 ;
       TEXT "asdsa"  ;
       TOOLTIP "ola3" ;
       ON CLICK { |x, y|hwg_Msginfo( "ola2" ) }
    TOOLBUTTON  otool ;
       ID 702 ;
       STYLE 1 ;
-      STATE 4;
+      STATE 4 ;
       TEXT "teste2"  ;
       TOOLTIP "ola2" ;
       ON CLICK { |x, y|hwg_Msginfo( "ola3" ) }
    TOOLBUTTON  otool ;
       ID 702 ;
-      BITMAP "../../image/tools.bmp";
+      BITMAP "../../image/tools.bmp" ;
       STYLE 0 ;
-      STATE 4;
+      STATE 4 ;
       TEXT "teste2"  ;
       TOOLTIP "ola2" ;
       ON CLICK { |x, y|hwg_Msginfo( "ola4" ) }
 
    TOOLBUTTON  otool ;
       ID 702 ;
-      BITMAP "../../image/cancel.ico";
+      BITMAP "../../image/cancel.ico" ;
       STYLE 0 ;
-      STATE 4;
+      STATE 4 ;
       TEXT "teste2"  ;
       TOOLTIP "ola2" ;
       ON CLICK { |x, y|hwg_Msginfo( "ola5" ) }

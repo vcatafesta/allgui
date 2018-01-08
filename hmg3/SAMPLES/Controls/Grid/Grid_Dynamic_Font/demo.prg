@@ -21,10 +21,10 @@ FUNCTION Main
          WIDTH 550 ;
          HEIGHT 330 ;
          HEADERS {'Product','Stock','Supplier'} ;
-         WIDTHS {250,150,100};
-         ITEMS aItems;
-         EDIT;
-         CELLNAVIGATION;
+         WIDTHS {250,150,100} ;
+         ITEMS aItems ;
+         EDIT ;
+         CELLNAVIGATION ;
          COLUMNCONTROLS { NIL, {'TEXTBOX','NUMERIC'}, NIL }
 
       Form_1.Grid_1.ColumnJUSTIFY (2) := GRID_JTFY_RIGHT

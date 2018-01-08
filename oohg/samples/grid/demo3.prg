@@ -33,7 +33,7 @@ FUNCTION Main
       aRows[ 19 ] := { 'Pradon',    'Alejandra', '???-????' }
       aRows[ 20 ] := { 'Reyes',     'Monica',    '432-5836' }
 
-      @ 10,10 GRID Grid_2 OBJ oGrid;
+      @ 10,10 GRID Grid_2 OBJ oGrid ;
          WIDTH 350 ;
          HEIGHT 330 ;
          HEADERS { 'Last Name','First Name','Phone' } ;

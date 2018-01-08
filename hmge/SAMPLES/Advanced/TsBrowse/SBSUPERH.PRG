@@ -87,7 +87,7 @@ FUNCTION fSuperBit()
       DEFINE WINDOW Form_6 ;
             AT 250,200 ;
             WIDTH 500 HEIGHT 400 ;
-            TITLE "Super Headers ( BitMaps ) ";
+            TITLE "Super Headers ( BitMaps ) " ;
             ICON "Demo.ico" ;
             CHILD
 

@@ -12,14 +12,14 @@ FUNCTION MAIN
 
    PRIVATE hBitmap := 0
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  500;
-         HEIGHT 400;
-         TITLE "Demo11: Create Logo";
-         MAIN;
-         ON INIT     Proc_ON_INIT ();
-         ON RELEASE  Proc_ON_RELEASE ();
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  500 ;
+         HEIGHT 400 ;
+         TITLE "Demo11: Create Logo" ;
+         MAIN ;
+         ON INIT     Proc_ON_INIT () ;
+         ON RELEASE  Proc_ON_RELEASE () ;
          ON PAINT    Proc_ON_PAINT ()
 
       @  200, 190 LABEL Label1 Value "Save Image as ..." FONT "Times New Roman" SIZE 14 BOLD AUTOSIZE

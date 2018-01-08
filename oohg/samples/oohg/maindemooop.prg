@@ -190,7 +190,7 @@ FUNCTION Main()
    //   @  0,200 GRID grd obj ogrid1 width 150 height 100 headers { "UNO", "DOS", "TRES" } widths {45,45,45} edit ;
    //   items { {"1","2","3"},{"A","@","C"},{"x","y","z"} } ;
    //   JUSTIFY { GRID_JTFY_RIGHT, GRID_JTFY_CENTER, GRID_JTFY_LEFT } ;
-   //   FONTCOLOR ORANGE;
+   //   FONTCOLOR ORANGE ;
    //   DYNAMICBACKCOLOR { RGB(0,255,0), , RGB(255,0,0) } ;
    //   DYNAMICFORECOLOR { NIL, RGB(255,255,0), NIL } ;
    //  ON headclick { {|| ogrid1:toexcel } , {|| NIL}, {|| NIL}   }
@@ -400,8 +400,8 @@ FUNCTION Main()
 
 FUNCTION printform( )
 
-   PUBLIC aSer:={ {14280,20420,12870,25347, 7640},;
-      { 8350,10315,15870, 5347,12340},;
+   PUBLIC aSer:={ {14280,20420,12870,25347, 7640}, ;
+      { 8350,10315,15870, 5347,12340}, ;
       {12345, -8945,10560,15600,17610} }
 
    DEFINE WINDOW GraphTest obj graphtest ;

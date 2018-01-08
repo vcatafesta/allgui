@@ -124,8 +124,8 @@ FUNCTION Main
 PROCEDURE Brw_1()
 
    IF !_IsControlDefined ("oBrw1","Form_1")
-      @ 10,10 TBROWSE oBrw1 ITEMS aItems OF Form_1 WIDTH 90 HEIGHT 60 FONT "MS Sans Serif" SIZE 10 BOLD;
-         VALUE 1 AUTOCOLS;
+      @ 10,10 TBROWSE oBrw1 ITEMS aItems OF Form_1 WIDTH 90 HEIGHT 60 FONT "MS Sans Serif" SIZE 10 BOLD ;
+         VALUE 1 AUTOCOLS ;
          MESSAGE " Browse of type small ListBox "
    ENDIF
 
@@ -134,7 +134,7 @@ PROCEDURE Brw_1()
 PROCEDURE Brw_2()
 
    IF !_IsControlDefined ("oBrw2","Form_1")
-      @ 80,10 TBROWSE oBrw2  ITEMS bItems OF Form_1 WIDTH 90 HEIGHT 310 FONT "Tahoma" SIZE 9 BOLD;
+      @ 80,10 TBROWSE oBrw2  ITEMS bItems OF Form_1 WIDTH 90 HEIGHT 310 FONT "Tahoma" SIZE 9 BOLD ;
          MESSAGE " Browse of type Big ListBox "
    ENDIF
 
@@ -163,11 +163,11 @@ PROCEDURE Brw_3()
 
       oBrw3:nLineStyle := LINES_VERT
 
-      ADD COLUMN TO TBROWSE oBrw3 DATA ARRAY ELEMENT 1;
+      ADD COLUMN TO TBROWSE oBrw3 DATA ARRAY ELEMENT 1 ;
          TITLE "Edit 1" SIZE 100 EDITABLE          // this column is editable
-      ADD COLUMN TO TBROWSE oBrw3 DATA ARRAY ELEMENT 2;
+      ADD COLUMN TO TBROWSE oBrw3 DATA ARRAY ELEMENT 2 ;
          TITLE "Col 2" SIZE 70
-      ADD COLUMN TO TBROWSE oBrw3 DATA ARRAY ELEMENT 3;
+      ADD COLUMN TO TBROWSE oBrw3 DATA ARRAY ELEMENT 3 ;
          TITLE "Col 3" SIZE 80
 
    END TBROWSE
@@ -182,9 +182,9 @@ PROCEDURE Brw_4()
 
       Select("Test")
 
-      DEFINE TBROWSE oBrw4 AT 10,370 ALIAS "TEST";
-         OF Form_1 WIDTH 250 HEIGHT 380;
-         MESSAGE " Browse DataBase ";
+      DEFINE TBROWSE oBrw4 AT 10,370 ALIAS "TEST" ;
+         OF Form_1 WIDTH 250 HEIGHT 380 ;
+         MESSAGE " Browse DataBase " ;
          BACKCOLOR ORANGE ;
          TOOLTIP "TsBrowse - AutoLoadFields" ;
          AUTOCOLS

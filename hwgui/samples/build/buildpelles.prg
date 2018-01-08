@@ -66,13 +66,13 @@ FUNCTION Main
       @  20,194 SAY oLabel6 CAPTION "Main PRG" SIZE 80,22
       @ 136,194 GET oMainPrg VAR vGt6 ID ID_PRGMAIN  SIZE 206,24
       @ 347,194 OWNERBUTTON    SIZE 24,24   ;
-         ON CLICK {||searchFileName("xBase Files *.prg ", oMainPrg, "*.prg")};//       FLAT;
+         ON CLICK {||searchFileName("xBase Files *.prg ", oMainPrg, "*.prg")};//       FLAT ;
          TEXT "..." ;//BITMAP "SEARCH" FROM RESOURCE TRANSPARENT COORDINATES 0,0,0,0 ;
          TOOLTIP "Search main file"
 
    END PAGE of oTAB
    BEGIN PAGE "Prg (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")};
+      @ 21,29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")} ;
          STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
       hwg_CREATEARLIST(oBrowse1,aFiles1)
       obrowse1:acolumns[1]:heading := "File Names"
@@ -84,7 +84,7 @@ FUNCTION Main
 
    END PAGE of oTAB
    BEGIN PAGE "C (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")};
+      @ 21,29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")} ;
          STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
       hwg_CREATEARLIST(oBrowse2,aFiles2)
       obrowse2:acolumns[1]:heading := "File Names"
@@ -95,7 +95,7 @@ FUNCTION Main
       @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||Adel(oBrowse1:aArray, oBrowse2:nCurrent),oBrowse2:Refresh()}
    END PAGE of oTAB
    BEGIN PAGE "Lib (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")};
+      @ 21,29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")} ;
          STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
       hwg_CREATEARLIST(oBrowse3,aFiles3)
       obrowse3:acolumns[1]:heading := "File Names"
@@ -106,7 +106,7 @@ FUNCTION Main
       @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||Adel(oBrowse3:aArray, oBrowse3:nCurrent),oBrowse3:Refresh()}
    END PAGE of oTAB
    BEGIN PAGE "Resource (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
+      @ 21,29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")} ;
          STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
       hwg_CREATEARLIST(oBrowse4,aFiles4)
       obrowse4:acolumns[1]:heading := "File Names"
@@ -398,8 +398,8 @@ FUNCTION BuildBat()
 
    oName:=Substr(voPrgMain,1,Len(voPrgMain)-4)
 
-   fwrite(oArq,vHarbour+"\BIN\HARBOUR "+voPrgMain+;
-      " -o"+oName+;
+   fwrite(oArq,vHarbour+"\BIN\HARBOUR "+voPrgMain+ ;
+      " -o"+oName+ ;
       " -i"+vPelles+"\INCLUDE;"+vHarbour+"\INCLUDE;"+vHwGUI+"\INCLUDE"+iif(!empty(voIncFolder),";","")+voIncFolder+" "+voPrgFlag+" -n -q0 -es2 -gc0"+CRF)
 
    IF Len(voPrgFiles)>0
@@ -407,8 +407,8 @@ FUNCTION BuildBat()
          IF !empty( voPrgFiles[i] )
 
             oName:=Substr(voPrgFiles[i],1,Len(voPrgFiles[i])-4)
-            fwrite(oArq,vHarbour+"\BIN\HARBOUR "+voPrgFiles[i]+;
-               " -o"+oName+;
+            fwrite(oArq,vHarbour+"\BIN\HARBOUR "+voPrgFiles[i]+ ;
+               " -o"+oName+ ;
                " -i"+vPelles+"\INCLUDE;"+vHarbour+"\INCLUDE;"+vHwGUI+"\INCLUDE"+iif(!empty(voIncFolder),";","")+voIncFolder+" "+voPrgFlag+" -n -q0 -es2 -gc0"+CRF)
          ENDIF
       NEXT
@@ -513,7 +513,7 @@ FUNCTION BuildPoMake()
 
    fwrite(oArq,"HRB_DIR = "+vHarbour+CRF)
    fwrite(oArq,"POCCMAIN = "+vPelles+CRF)
-   fwrite(oArq,"INCLUDE_DIR = include;"+vHarbour+"\include"+;
+   fwrite(oArq,"INCLUDE_DIR = include;"+vHarbour+"\include"+ ;
       iif(!empty(voIncFolder),";"+voIncFolder,"")+CRF)
    fwrite(oArq,"OBJ_DIR = obj"+CRF)
    fwrite(oArq,"LIB_DIR = "+vHwGUI+"\lib"+CRF)

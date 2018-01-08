@@ -19,13 +19,13 @@ PROCEDURE start
    oConnection = todbc():new('DRIVER=Firebird/InterBase(r) driver;UID=SYSDBA;PWD=masterkey;DBNAME=EMPLOYEE.FDB;')
    oConnection:Open()
 
-   DEFINE WINDOW form1;
-         at 0,0 width 400 height 400 title 'Demo Odbc/Firebird';
-         Main;
-         ON INIT ( adjust(), load_data(1) );
-         on maximize ( adjust() );
-         on size ( adjust() );
-         ON RELEASE ( oConnection:Destroy() );
+   DEFINE WINDOW form1 ;
+         at 0,0 width 400 height 400 title 'Demo Odbc/Firebird' ;
+         Main ;
+         ON INIT ( adjust(), load_data(1) ) ;
+         on maximize ( adjust() ) ;
+         on size ( adjust() ) ;
+         ON RELEASE ( oConnection:Destroy() ) ;
          FONT 'ms sans serif' size 8
 
       @ 0,  0 button btn1 caption '&Add'    width 55 height 20 action events_(1)
@@ -44,7 +44,7 @@ PROCEDURE start
          WIDTHS { 50, 80,110,115 }
          JUSTIFY {BROWSE_JTFY_RIGHT,BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT}
          ON DBLCLICK    events_(2)
-         ON CHANGE    form1.statusbar.item(1) := "Register "+;
+         ON CHANGE    form1.statusbar.item(1) := "Register "+ ;
             ltrim(str(form1.grid1.value))+" of "+alltrim(str(form1.grid1.itemcount))
          COLUMNCONTROLS   { ;
             {'TEXTBOX','NUMERIC'} , ;
@@ -98,10 +98,10 @@ PROCEDURE events_(n)
          cL_Name := form1.grid1.cell( form1.grid1.value, 3 )
          cSalary := form1.grid1.cell( form1.grid1.value, 4 )
       END
-      DEFINE WINDOW form1a;
-            at 0,0 width 270 height 220;
-            TITLE iif(n = 2,'Edit','Add');
-            modal;
+      DEFINE WINDOW form1a ;
+            at 0,0 width 270 height 220 ;
+            TITLE iif(n = 2,'Edit','Add') ;
+            modal ;
             FONT 'ms sans serif' size 8
 
          @ 10, 10 label label1 width 60 height 20 value 'ID' RIGHTALIGN
@@ -130,7 +130,7 @@ PROCEDURE events_(n)
             n := form1.grid1.value
             form1.grid1.deleteitem( n )
             form1.grid1.value := iif(n > 1, n-1, 1)
-            form1.statusbar.item(1) := "Register "+;
+            form1.statusbar.item(1) := "Register "+ ;
                ltrim(str(form1.grid1.value))+" of "+alltrim(str(form1.grid1.itemcount))
          END
          oConnection:Close()
@@ -151,16 +151,16 @@ PROCEDURE save_data(n)
       ELSE
          cID := "'"+Alltrim(Str(form1a.text1.value))+"'"
       END
-      Str := "INSERT INTO Employee (EMP_NO,FIRST_NAME,LAST_NAME,SALARY) VALUES ("+cID+;
-         ",'"+form1a.text2.value+;
-         "','"+form1a.text3.value+;
-         "','"+Alltrim(Str(form1a.text4.value))+;
+      Str := "INSERT INTO Employee (EMP_NO,FIRST_NAME,LAST_NAME,SALARY) VALUES ("+cID+ ;
+         ",'"+form1a.text2.value+ ;
+         "','"+form1a.text3.value+ ;
+         "','"+Alltrim(Str(form1a.text4.value))+ ;
          "')"
       //msgstop( Str )
 
    ELSE
       cID := "'"+Alltrim(Str(form1a.text1.value))+"'"
-      Str := "UPDATE Employee SET FIRST_NAME='"+form1a.text2.value+"',"+;
+      Str := "UPDATE Employee SET FIRST_NAME='"+form1a.text2.value+"',"+ ;
          " LAST_NAME='"+form1a.text3.value + "'," + ;
          " SALARY='" + Str(form1a.text4.value) + "'" + ;
          " WHERE Emp_No=" + cID
@@ -179,7 +179,7 @@ PROCEDURE save_data(n)
       form1.grid1.cell( form1.grid1.value, 3 ) := form1a.text3.value
       form1.grid1.cell( form1.grid1.value, 4 ) := form1a.text4.value
    END
-   form1.statusbar.item(1) := "Register "+;
+   form1.statusbar.item(1) := "Register "+ ;
       ltrim(str(form1.grid1.value))+" de "+alltrim(str(form1.grid1.itemcount))
    form1a.release
 

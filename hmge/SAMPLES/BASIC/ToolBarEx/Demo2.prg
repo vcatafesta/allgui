@@ -57,16 +57,16 @@ FUNCTION Main
          OF Form_1 ;
          BUTTONSIZE 35 , 35  ;
          IMAGE {'dog.bmp'} ;
-         COLORMASK CLR_DEFAULT;
-         IMAGECOUNT 30;
+         COLORMASK CLR_DEFAULT ;
+         IMAGECOUNT 30 ;
          MASK
 
       DEFINE IMAGELIST imagelst_2 ;
          OF Form_1 ;
          BUTTONSIZE 35 , 35  ;
          IMAGE {'dogmask.bmp'} ;
-         COLORMASK CLR_DEFAULT;
-         IMAGECOUNT 30;
+         COLORMASK CLR_DEFAULT ;
+         IMAGECOUNT 30 ;
          MASK
 
       DEFINE MAIN MENU
@@ -95,19 +95,19 @@ FUNCTION Main
          BUTTON Button_1a ;
             CAPTION '&Open' ;
             PICTURE 'Btn01.bmp' ;
-            TOOLTIP 'Open New File';
+            TOOLTIP 'Open New File' ;
             ACTION MsgInfo('Click! 1')
 
          BUTTON Button_2a ;
             CAPTION '&Save' ;
             PICTURE 'Btn04.bmp' ;
-            TOOLTIP 'Save file';
+            TOOLTIP 'Save file' ;
             WHOLEDROPDOWN
 
          BUTTON Button_3a ;
             CAPTION '&Close' ;
             PICTURE 'Btn03.bmp' ;
-            TOOLTIP 'Close file without save';
+            TOOLTIP 'Close file without save' ;
             ACTION MsgInfo('Click! 3') DROPDOWN
 
       END TOOLBAR
@@ -117,12 +117,12 @@ FUNCTION Main
       BUTTON Button_1b ;
          CAPTION '&Printer' ;
          PICTURE 'Btn11.bmp' ;
-         ACTION MsgInfo('Click! 1');
+         ACTION MsgInfo('Click! 1') ;
 
       BUTTON Button_2b ;
          CAPTION 'Pre&view' ;
          PICTURE 'Btn12.bmp' ;
-         ACTION MsgInfo('Click! 2');
+         ACTION MsgInfo('Click! 2') ;
          SEPARATOR
 
       BUTTON Button_3b ;
@@ -147,20 +147,20 @@ FUNCTION Main
    BUTTON Button_1c ;
       TOOLTIP '&New' ;
       PICTURE 'Btn01.bmp' ;
-      ACTION Nothing();
+      ACTION Nothing() ;
       CHECK GROUP
 
    BUTTON Button_2c ;
       TOOLTIP '&Open' ;
       PICTURE 'Btn02.bmp' ;
-      ACTION Nothing();
+      ACTION Nothing() ;
       CHECK GROUP
 
    BUTTON Button_3c ;
       TOOLTIP '&Close' ;
       PICTURE 'Btn03.bmp' ;
       ACTION Nothing() ;
-      SEPARATOR;
+      SEPARATOR ;
       CHECK GROUP
 
    BUTTON Button_4c ;
@@ -176,18 +176,18 @@ DEFINE TOOLBAREX ToolBar_d BUTTONSIZE 25,25  CAPTION 'Mixed Buttons' FLAT RIGHTT
 BUTTON Button_1d ;
    CAPTION '&Undo' ;
    PICTURE 'Btn31.bmp' ;
-   TOOLTIP 'Undo last change';
+   TOOLTIP 'Undo last change' ;
    ACTION MsgInfo('Click! 1')
 
 BUTTON Button_2d ;
    PICTURE 'Btn33.bmp' ;
-   TOOLTIP 'Save file';
+   TOOLTIP 'Save file' ;
    ACTION MsgInfo('Click! 2')
 
 BUTTON Button_3d ;
    CAPTION '&Redo' ;
    PICTURE 'Btn32.bmp' ;
-   TOOLTIP 'Redo last change';
+   TOOLTIP 'Redo last change' ;
    ACTION MsgInfo('Click! 3')
 
 END TOOLBAR
@@ -196,34 +196,34 @@ DEFINE TOOLBAREX ToolBar_h BUTTONSIZE 25,25 IMAGELIST IDB_STD_SMALL_COLOR  CAPTI
 
 BUTTON Button_1h ;
    PICTUREINDEX STD_FILENEW ;
-   TOOLTIP 'New file';
+   TOOLTIP 'New file' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_2h ;
    PICTUREINDEX STD_FILEOPEN ;
-   TOOLTIP 'File open';
+   TOOLTIP 'File open' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_3h ;
    PICTUREINDEX STD_FILESAVE ;
-   TOOLTIP 'Save file';
-   ACTION MsgInfo('Click! ');
+   TOOLTIP 'Save file' ;
+   ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_4h ;
    PICTUREINDEX STD_PRINTPRE ;
-   TOOLTIP 'Print Preview';
+   TOOLTIP 'Print Preview' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_5h ;
    PICTUREINDEX STD_PRINT ;
-   TOOLTIP 'Print ';
-   ACTION MsgInfo('Click! ');
+   TOOLTIP 'Print ' ;
+   ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_6h ;
    PICTUREINDEX STD_PROPERTIES ;
-   TOOLTIP 'Properties';
+   TOOLTIP 'Properties' ;
    ACTION MsgInfo('Click! ')
 
 END TOOLBAR
@@ -232,50 +232,50 @@ DEFINE TOOLBAREX ToolBar_i BUTTONSIZE 25,25 IMAGELIST IDB_STD_LARGE_COLOR  CAPTI
 
 BUTTON Button_1i ;
    PICTUREINDEX STD_FILENEW ;
-   TOOLTIP 'New file';
+   TOOLTIP 'New file' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_2i ;
    PICTUREINDEX STD_FILEOPEN ;
-   TOOLTIP 'File open';
+   TOOLTIP 'File open' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_3i ;
    PICTUREINDEX STD_FILESAVE ;
-   TOOLTIP 'Save file';
-   ACTION MsgInfo('Click! ');
+   TOOLTIP 'Save file' ;
+   ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_4i ;
    PICTUREINDEX STD_PRINTPRE ;
-   TOOLTIP 'Print Preview';
+   TOOLTIP 'Print Preview' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_5i ;
    PICTUREINDEX STD_PRINT ;
-   TOOLTIP 'Print ';
-   ACTION MsgInfo('Click! ');
+   TOOLTIP 'Print ' ;
+   ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_6i ;
    PICTUREINDEX STD_PROPERTIES ;
-   TOOLTIP 'Properties';
+   TOOLTIP 'Properties' ;
    ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_7i ;
-   PICTUREINDEX STD_COPY;
-   TOOLTIP 'Copy';
+   PICTUREINDEX STD_COPY ;
+   TOOLTIP 'Copy' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_8i ;
    PICTUREINDEX STD_CUT ;
-   TOOLTIP 'Cut';
+   TOOLTIP 'Cut' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_9i ;
    PICTUREINDEX STD_PASTE ;
-   TOOLTIP 'Paste';
+   TOOLTIP 'Paste' ;
    ACTION MsgInfo('Click! ')
 
 END TOOLBAR
@@ -284,50 +284,50 @@ DEFINE TOOLBAREX ToolBar_j BUTTONSIZE 25,25 IMAGELIST 'imagelst_1'  CAPTION 'But
 
 BUTTON Button_1j ;
    PICTUREINDEX 1 ;
-   TOOLTIP 'New file';
+   TOOLTIP 'New file' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_2j ;
    PICTUREINDEX 2 ;
-   TOOLTIP 'File open';
+   TOOLTIP 'File open' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_3j ;
    PICTUREINDEX 3 ;
-   TOOLTIP 'Save file';
-   ACTION MsgInfo('Click! ');
+   TOOLTIP 'Save file' ;
+   ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_4j ;
    PICTUREINDEX 4 ;
-   TOOLTIP 'Print Preview';
+   TOOLTIP 'Print Preview' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_5j ;
    PICTUREINDEX 5 ;
-   TOOLTIP 'Print ';
-   ACTION MsgInfo('Click! ');
+   TOOLTIP 'Print ' ;
+   ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_6j ;
    PICTUREINDEX 6 ;
-   TOOLTIP 'Properties';
+   TOOLTIP 'Properties' ;
    ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_7j ;
-   PICTUREINDEX 7;
-   TOOLTIP 'Copy';
+   PICTUREINDEX 7 ;
+   TOOLTIP 'Copy' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_8j ;
    PICTUREINDEX 8 ;
-   TOOLTIP 'Cut';
+   TOOLTIP 'Cut' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_9j ;
    PICTUREINDEX 9 ;
-   TOOLTIP 'Paste';
+   TOOLTIP 'Paste' ;
    ACTION MsgInfo('Click! ')
 
 END TOOLBAR
@@ -339,50 +339,50 @@ DEFINE TOOLBAREX ToolBar_k BUTTONSIZE 25,25 ;
 
 BUTTON Button_1k ;
    PICTUREINDEX 1 ;
-   TOOLTIP 'New file';
+   TOOLTIP 'New file' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_2k ;
    PICTUREINDEX 2 ;
-   TOOLTIP 'File open';
+   TOOLTIP 'File open' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_3k ;
    PICTUREINDEX 3 ;
-   TOOLTIP 'Save file';
-   ACTION MsgInfo('Click! ');
+   TOOLTIP 'Save file' ;
+   ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_4k ;
    PICTUREINDEX 4 ;
-   TOOLTIP 'Print Preview';
+   TOOLTIP 'Print Preview' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_5k ;
    PICTUREINDEX 5 ;
-   TOOLTIP 'Print ';
-   ACTION MsgInfo('Click! ');
+   TOOLTIP 'Print ' ;
+   ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_6k ;
    PICTUREINDEX 6 ;
-   TOOLTIP 'Properties';
+   TOOLTIP 'Properties' ;
    ACTION MsgInfo('Click! ') ;
    SEPARATOR
 
 BUTTON Button_7k ;
-   PICTUREINDEX 7;
-   TOOLTIP 'Copy';
+   PICTUREINDEX 7 ;
+   TOOLTIP 'Copy' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_8k ;
    PICTUREINDEX 8 ;
-   TOOLTIP 'Cut';
+   TOOLTIP 'Cut' ;
    ACTION MsgInfo('Click! ')
 
 BUTTON Button_9k ;
    PICTUREINDEX 9 ;
-   TOOLTIP 'Paste';
+   TOOLTIP 'Paste' ;
    ACTION MsgInfo('Click! ')
 
 END TOOLBAR
@@ -392,12 +392,12 @@ DEFINE TOOLBAREX ToolBar_e BUTTONSIZE 25,25 SIZE 7  CAPTION 'Two Rows Button' RO
 BUTTON Button_1e ;
    TOOLTIP '&New' ;
    PICTURE 'Btn01.bmp' ;
-   ACTION Nothing();
+   ACTION Nothing() ;
 
 BUTTON Button_2e ;
    TOOLTIP '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   ACTION Nothing();
+   ACTION Nothing() ;
 
 BUTTON Button_3e ;
    TOOLTIP '&Close' ;
@@ -431,12 +431,12 @@ DEFINE TOOLBAREX ToolBar_f BUTTONSIZE 50,50 CAPTION 'Centered Bitmap'
 BUTTON Button_1f ;
    TOOLTIP '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   ACTION Nothing();
+   ACTION Nothing() ;
 
 BUTTON Button_2f ;
    TOOLTIP '&Save' ;
    PICTURE 'Btn04.bmp' ;
-   ACTION Nothing();
+   ACTION Nothing() ;
 
 END TOOLBAR
 
@@ -444,13 +444,13 @@ DEFINE TOOLBAREX ToolBar_g BUTTONSIZE 50,50 CAPTION 'Adjust Bitmap'
 BUTTON Button_1g ;
    TOOLTIP '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   ACTION Nothing();
+   ACTION Nothing() ;
    ADJUST
 
 BUTTON Button_2g ;
    TOOLTIP '&Save' ;
    PICTURE 'Btn04.bmp' ;
-   ACTION Nothing();
+   ACTION Nothing() ;
    ADJUST
 
 END TOOLBAR
@@ -460,12 +460,12 @@ DEFINE TOOLBAREX ToolBar_m BUTTONSIZE 35,40 FONT 'ARIAL' SIZE 7 FLAT CAPTION 'Hi
 BUTTON Button_1m ;
    CAPTION '&New' ;
    PICTURE 'Btn01.bmp' ;
-   ACTION MsgInfo('Click! 1');
+   ACTION MsgInfo('Click! 1') ;
 
 BUTTON Button_2m ;
    CAPTION '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   TOOLTIP 'Open file';
+   TOOLTIP 'Open file' ;
    ACTION MsgInfo('Click! 2')
 
 BUTTON Button_3m ;
@@ -476,18 +476,18 @@ BUTTON Button_3m ;
 BUTTON Button_4m ;
    CAPTION '&Save' ;
    PICTURE 'Btn04.bmp' ;
-   ACTION MsgInfo('Click! 4');
+   ACTION MsgInfo('Click! 4') ;
    SEPARATOR
 
 BUTTON Button_5m ;
    CAPTION '&Printer' ;
    PICTURE 'Btn11.bmp' ;
-   ACTION MsgInfo('Click! 5');
+   ACTION MsgInfo('Click! 5') ;
 
 BUTTON Button_6m ;
    CAPTION 'Pre&view' ;
    PICTURE 'Btn12.bmp' ;
-   ACTION MsgInfo('Click! 6');
+   ACTION MsgInfo('Click! 6') ;
 
 END TOOLBAR
 
@@ -496,12 +496,12 @@ DEFINE TOOLBAREX ToolBar_n BUTTONSIZE 35,40 FONT 'ARIAL' SIZE 7 FLAT CAPTION 'Hi
 BUTTON Button_1n ;
    CAPTION '&New' ;
    PICTURE 'Btn01.bmp' ;
-   ACTION MsgInfo('Click! 1');
+   ACTION MsgInfo('Click! 1') ;
 
 BUTTON Button_2n ;
    CAPTION '&Open' ;
    PICTURE 'Btn02.bmp' ;
-   TOOLTIP 'Open file';
+   TOOLTIP 'Open file' ;
    ACTION MsgInfo('Click! 2')
 
 BUTTON Button_3n ;
@@ -512,18 +512,18 @@ BUTTON Button_3n ;
 BUTTON Button_4n ;
    CAPTION '&Save' ;
    PICTURE 'Btn04.bmp' ;
-   ACTION MsgInfo('Click! 4');
+   ACTION MsgInfo('Click! 4') ;
    SEPARATOR
 
 BUTTON Button_5n ;
    CAPTION '&Printer' ;
    PICTURE 'Btn11.bmp' ;
-   ACTION MsgInfo('Click! 5');
+   ACTION MsgInfo('Click! 5') ;
 
 BUTTON Button_6n ;
    CAPTION 'Pre&view' ;
    PICTURE 'Btn12.bmp' ;
-   ACTION MsgInfo('Click! 6');
+   ACTION MsgInfo('Click! 6') ;
 
 END TOOLBAR
 
@@ -532,12 +532,12 @@ DEFINE TOOLBAR ToolBar_o BUTTONSIZE 35,30 FONT 'ARIAL' SIZE 7 FLAT CAPTION 'Bott
    BUTTON Button_1o ;
       CAPTION '&Printer' ;
       PICTURE 'Btn11.bmp' ;
-      ACTION MsgInfo('Click! 1');
+      ACTION MsgInfo('Click! 1') ;
 
    BUTTON Button_2o ;
       CAPTION 'Pre&view' ;
       PICTURE 'Btn12.bmp' ;
-      ACTION MsgInfo('Click! 2');
+      ACTION MsgInfo('Click! 2') ;
       SEPARATOR
 
    BUTTON Button_3o ;

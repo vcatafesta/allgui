@@ -84,12 +84,12 @@ CLASS TControl
    DATA   aControls  INIT {}                         // New
    DATA   oWndlAppendMode INIT .f.                   // New
 
-   CLASSDATA aProperties INIT { "cTitle", "cVarName", "nClrText",;
-      "nClrPane", "nAlign", "nTop", "nLeft",;
+   CLASSDATA aProperties INIT { "cTitle", "cVarName", "nClrText", ;
+      "nClrPane", "nAlign", "nTop", "nLeft", ;
       "nWidth", "nHeight", "Cargo" }
 
    METHOD AddControl( hControl ) INLINE ;
-      If( ::aControls == nil, ::aControls := {},),;
+      If( ::aControls == nil, ::aControls := {},), ;
       AAdd( ::aControls, hControl ), ::lValidating := .f.
 
    METHOD AddVars(hControl)
@@ -152,7 +152,7 @@ CLASS TControl
 
    METHOD KillFocus( hCtlFocus )
 
-   METHOD VarPut( uVal ) INLINE  If( ValType( ::bSetGet ) == "B",;
+   METHOD VarPut( uVal ) INLINE  If( ValType( ::bSetGet ) == "B", ;
       Eval( ::bSetGet, uVal ), )
 
    METHOD VarGet() INLINE If( ValType( ::bSetGet ) == "B", Eval( ::bSetGet ), )
@@ -171,7 +171,7 @@ CLASS TControl
 
    MESSAGE BeginPaint METHOD _BeginPaint()
 
-   METHOD EndPaint() INLINE ::nPaintCount--,;
+   METHOD EndPaint() INLINE ::nPaintCount--, ;
       EndPaint( ::hWnd, ::cPS ), ::cPS := nil, ::hDC := nil
 
 METHOD Register( nClsStyle )            //TWindow
@@ -183,10 +183,10 @@ METHOD RButtonUp( nRow, nCol, nKeyFlags )    //TWindow
 METHOD Capture() INLINE  SetCapture( ::hWnd ) //TWindow
 
 METHOD GetDC() INLINE ;
-      If( ::hDC == nil, ::hDC := GetDC( ::hWnd ),),;
+      If( ::hDC == nil, ::hDC := GetDC( ::hWnd ),), ;
       If( ::nPaintCount == nil, ::nPaintCount := 1, ::nPaintCount++ ), ::hDC
 
-METHOD ReleaseDC() INLINE  ::nPaintCount--, If( ::nPaintCount == 0,;
+METHOD ReleaseDC() INLINE  ::nPaintCount--, If( ::nPaintCount == 0, ;
       If( ReleaseDC( ::hWnd, ::hDC ), ::hDC := nil,), )
 
 METHOD PostMsg( nMsg, nWParam, nLParam ) INLINE ;
@@ -217,7 +217,7 @@ METHOD Command( nWParam, nLParam )
 
 METHOD Notify( nWParam, nLParam )
 
-METHOD Refresh( lErase ) INLINE InvalidateRect( ::hWnd,;
+METHOD Refresh( lErase ) INLINE InvalidateRect( ::hWnd, ;
       If( lErase == NIL .OR. !lErase, 0, 1 ) )
 
 METHOD nGetChrHeight() INLINE ::hDC := GetDC( ::hWnd ), ;
@@ -271,7 +271,7 @@ METHOD AddVars( hControl ) CLASS TControl
 
 METHOD DelVars( hControl ) CLASS TControl
 
-   LOCAL nAt := If( ! Empty( _TSB_aControlhWnd ),;
+   LOCAL nAt := If( ! Empty( _TSB_aControlhWnd ), ;
       AScan( _TSB_aControlhWnd, { | hCtrl | hCtrl == Self:hWnd } ), 0 )
 
    HB_SYMBOL_UNUSED( hControl )
@@ -304,8 +304,8 @@ METHOD _BeginPaint() CLASS TControl
 
 METHOD Colors( hDC ) CLASS TControl
 
-   DEFAULT ::nClrText := GetTextColor( hDC ),;
-      ::nClrPane := GetBkColor( hDC ),;
+   DEFAULT ::nClrText := GetTextColor( hDC ), ;
+      ::nClrPane := GetBkColor( hDC ), ;
       ::hBrush   := CreateSolidBrush( GetRed( ::nClrPane ), GetGreen( ::nClrPane ), GetBlue( ::nClrPane ) )
 
    SetTextColor( hDC, ::nClrText )
@@ -331,9 +331,9 @@ METHOD Create( cClsName )  CLASS TControl
 
    LOCAL xStyle := 0
 
-   DEFAULT cClsName := ::ClassName(), ::cCaption := "",;
-      ::nStyle := WS_OVERLAPPEDWINDOW,;
-      ::nTop   := 0, ::nLeft := 0, ::nBottom := 10, ::nRight := 10,;
+   DEFAULT cClsName := ::ClassName(), ::cCaption := "", ;
+      ::nStyle := WS_OVERLAPPEDWINDOW, ;
+      ::nTop   := 0, ::nLeft := 0, ::nBottom := 10, ::nRight := 10, ;
       ::nId    := 0
 
    IF ::hWnd != nil
@@ -356,13 +356,13 @@ METHOD Create( cClsName )  CLASS TControl
 
    IF ::nBottom != CW_USEDEFAULT
 
-      ::hWnd := _CreateWindowEx( xStyle, cClsName, ::cCaption, ::nStyle, ::nLeft, ::nTop,;
+      ::hWnd := _CreateWindowEx( xStyle, cClsName, ::cCaption, ::nStyle, ::nLeft, ::nTop, ;
          ::nRight - ::nLeft + 1, ::nBottom - ::nTop + 1, ;
          ::hWndParent, 0, GetInstance() , ::nId )
 
    ELSE
 
-      ::hWnd := _CreateWindowEx( xStyle, cClsName, ::cCaption, ::nStyle, ::nLeft, ::nTop,;
+      ::hWnd := _CreateWindowEx( xStyle, cClsName, ::cCaption, ::nStyle, ::nLeft, ::nTop, ;
          ::nRight , ::nBottom , ;
          ::hWndParent, 0, GetInstance() , ::nId )
    ENDIF
@@ -384,7 +384,7 @@ METHOD Default() CLASS TControl
 METHOD End() CLASS TControl
 
    LOCAL ix
-   LOCAL nAt := If( ! Empty( ::oWnd:aControls ),;
+   LOCAL nAt := If( ! Empty( ::oWnd:aControls ), ;
       AScan( ::oWnd:aControls, { | hCtrl | hCtrl == Self:hWnd } ), 0 )
 
    IF nAt != 0
@@ -673,8 +673,8 @@ METHOD Register( nClsStyle )  CLASS TControl
 
    ClassName := ::cControlName
 
-   DEFAULT nClsStyle  := nOr( CS_VREDRAW, CS_HREDRAW ),;
-      ::nClrPane := GetSysColor( COLOR_WINDOW ),;
+   DEFAULT nClsStyle  := nOr( CS_VREDRAW, CS_HREDRAW ), ;
+      ::nClrPane := GetSysColor( COLOR_WINDOW ), ;
       ::hBrush   := CreateSolidBrush( GetRed( ::nClrPane ), GetGreen( ::nClrPane ), GetBlue( ::nClrPane ) )
 
    nClsStyle := nOr( nClsStyle, CS_GLOBALCLASS, CS_DBLCLKS )
@@ -884,24 +884,24 @@ METHOD HandleEvent( nMsg, nWParam, nLParam ) CLASS TControl
 
    CASE nMsg == WM_LBUTTONDOWN
 
-      RETURN ::LButtonDown( HiWord( nLParam ), LoWord( nLParam ),;
+      RETURN ::LButtonDown( HiWord( nLParam ), LoWord( nLParam ), ;
          nWParam )
    CASE nMsg == WM_LBUTTONUP
 
-      RETURN ::LButtonUp( HiWord( nLParam ), LoWord( nLParam ),;
+      RETURN ::LButtonUp( HiWord( nLParam ), LoWord( nLParam ), ;
          nWParam )
    CASE nMsg == WM_MOUSEMOVE
 
-      RETURN ::MouseMove( HiWord( nLParam ), LoWord( nLParam ),;
+      RETURN ::MouseMove( HiWord( nLParam ), LoWord( nLParam ), ;
          nWParam )
 
    CASE nMsg == WM_RBUTTONDOWN
 
-      RETURN ::RButtonDown( HiWord( nLParam ), LoWord( nLParam ),;
+      RETURN ::RButtonDown( HiWord( nLParam ), LoWord( nLParam ), ;
          nWParam )
    CASE nMsg == WM_RBUTTONUP
 
-      RETURN ::RButtonUp( HiWord( nLParam ), LoWord( nLParam ),;
+      RETURN ::RButtonUp( HiWord( nLParam ), LoWord( nLParam ), ;
          nWParam )
    CASE nMsg == WM_SETFOCUS
 

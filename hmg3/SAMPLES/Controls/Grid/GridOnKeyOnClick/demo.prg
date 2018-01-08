@@ -35,31 +35,31 @@ FUNCTION Main
          AT 0,0 ;
          WIDTH 800 ;
          HEIGHT 650 ;
-         TITLE "CELLNAVIGATION (F9 - On/Off)";
+         TITLE "CELLNAVIGATION (F9 - On/Off)" ;
          MAIN
 
       @  10, 10 Label Label_1 ;
-         WIDTH 80;
-         HEIGHT 20;
-         VALUE "";
+         WIDTH 80 ;
+         HEIGHT 20 ;
+         VALUE "" ;
          AUTOSIZE
 
       @  30, 10 Label Label_2 ;
-         WIDTH 80;
-         HEIGHT 20;
-         VALUE "";
+         WIDTH 80 ;
+         HEIGHT 20 ;
+         VALUE "" ;
          AUTOSIZE
 
       @ 80,10 GRID Grid_1 ;
          WIDTH 540 ;
          HEIGHT 500 ;
          HEADERS {'Last Name','First Name','Phone',"Num"} ;
-         WIDTHS {140,140,140,50};
+         WIDTHS {140,140,140,50} ;
          ITEMS aRows ;
-         VALUE 1;
-         EDIT;
-         ON CLICK OnClick();
-         ON KEY OnKey();
+         VALUE 1 ;
+         EDIT ;
+         ON CLICK OnClick() ;
+         ON KEY OnKey() ;
          EDITOPTION GRID_EDIT_DEFAULT
 
       Form_1.Grid_1.ColumnCONTROL (4) := {"TEXTBOX", "NUMERIC",NIL,NIL}
@@ -67,10 +67,10 @@ FUNCTION Main
 
       aGridEditOptions := {GRID_EDIT_DEFAULT, GRID_EDIT_SELECTALL, GRID_EDIT_INSERTBLANK, GRID_EDIT_INSERTCHAR, GRID_EDIT_REPLACEALL}
 
-      @ 80, 570 RADIOGROUP RadioGroup_1;
-         OPTIONS {"GRID_EDIT_DEFAULT", "GRID_EDIT_SELECTALL", "GRID_EDIT_INSERTBLANK", "GRID_EDIT_INSERTCHAR", "GRID_EDIT_REPLACEALL"};
-         VALUE 1;
-         WIDTH 200;
+      @ 80, 570 RADIOGROUP RadioGroup_1 ;
+         OPTIONS {"GRID_EDIT_DEFAULT", "GRID_EDIT_SELECTALL", "GRID_EDIT_INSERTBLANK", "GRID_EDIT_INSERTCHAR", "GRID_EDIT_REPLACEALL"} ;
+         VALUE 1 ;
+         WIDTH 200 ;
          ON CHANGE Form_1.Grid_1.EditOption := aGridEditOptions [ Form_1.RadioGroup_1.VALUE ]
 
    END WINDOW

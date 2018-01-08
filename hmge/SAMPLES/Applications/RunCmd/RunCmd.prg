@@ -65,7 +65,7 @@ STATIC PROCEDURE OpenDialog( cCmd2Run )
 
    DEFINE WINDOW Form_2 ;
          AT 0,0 ;
-         WIDTH 360 HEIGHT 164 + IF(IsXPThemeActive(), 6, 0);
+         WIDTH 360 HEIGHT 164 + IF(IsXPThemeActive(), 6, 0) ;
          TITLE PROGRAM ;
          ICON 'MAIN' ;
          CHILD ;

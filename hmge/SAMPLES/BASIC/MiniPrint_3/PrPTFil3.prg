@@ -10,32 +10,32 @@ Print a plain text file (Comfortable way).
 */
 
 FUNCTION  PPTFComf(;                      // Print plain text file, Comfortable way
-      cPLTFName,;
-      cDefaPrinter,;
-      lSelPrnDialog,;
-      nPaprTypeNo,;
-      lWrapLoLins,;
-      cFontName,;
-      nFontSize,;
+      cPLTFName, ;
+      cDefaPrinter, ;
+      lSelPrnDialog, ;
+      nPaprTypeNo, ;
+      lWrapLoLins, ;
+      cFontName, ;
+      nFontSize, ;
       nVMargin,;      // Vertical margin
       nHMargin,;      // Horizontal margin
-      nChrsPerLin,;
-      nLineHeigth,;
-      aShPrgsOp,;
-      bUpdaSBar,;
+      nChrsPerLin, ;
+      nLineHeigth, ;
+      aShPrgsOp, ;
+      bUpdaSBar, ;
       bUpdaPBar )
 
-   LOCAL lSuccess,;
-      nBytesRead,;
-      c1Line,;
+   LOCAL lSuccess, ;
+      nBytesRead, ;
+      c1Line, ;
       nSubLinCo
 
-   LOCAL nPageWidth,;
+   LOCAL nPageWidth, ;
       nPageHeight
 
-   LOCAL nPrintRow := nVMargin,;
-      nPrintCol := nHMargin,;
-      nPageLimit,;
+   LOCAL nPrintRow := nVMargin, ;
+      nPrintCol := nHMargin, ;
+      nPageLimit, ;
       nEndOfLine
 
    LOCAL nPageCount := 1
@@ -44,9 +44,9 @@ FUNCTION  PPTFComf(;                      // Print plain text file, Comfortable 
 
    LOCAL xUSBarP1, xUSBarP2, xUSBarP3, xUSBarP4
 
-   LOCAL lUpdaPrgrsBar,;
-      lUpdaSttBarI1,;
-      lUpdaSttBarI3,;
+   LOCAL lUpdaPrgrsBar, ;
+      lUpdaSttBarI1, ;
+      lUpdaSttBarI3, ;
       lUpdaSttBarI4
 
    LOCAL nPBarIncr

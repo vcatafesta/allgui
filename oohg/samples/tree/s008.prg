@@ -16,13 +16,13 @@ PROCEDURE Main
          AT 0, 0 ;
          WIDTH 640 ;
          HEIGHT 480 ;
-         ON RELEASE Bye();
+         ON RELEASE Bye() ;
          MAIN ;
          TITLE "How to use checkboxes in a Tree control"
 
       ON KEY ESCAPE ACTION Form_1.Release
 
-      DEFINE TREE Tree_1 obj oTree;
+      DEFINE TREE Tree_1 obj oTree ;
             AT 10, 10 ;
             WIDTH 200 ;
             HEIGHT 400 ;

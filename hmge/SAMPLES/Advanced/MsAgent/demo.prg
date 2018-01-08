@@ -298,7 +298,7 @@ FUNCTION Porcentaje( oAgent, bAction, cMsg, cTitle )
 
    LOCAL lCancela := .f.
 
-   DEFAULT bAction := { || nil },;
+   DEFAULT bAction := { || nil }, ;
       cMsg := "Procesando...", cTitle := "Por favor espere"
 
    DEFINE WINDOW progress            ;

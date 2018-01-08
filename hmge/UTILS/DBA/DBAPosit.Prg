@@ -9,7 +9,7 @@ PROC T_GotoReco()                         // Table T_GotoReco
 
    LOCA nMaxRec  := LASTREC()
 
-   DEFINE WINDOW frmGoReco;
+   DEFINE WINDOW frmGoReco ;
          AT 0, 0 ;
          WIDTH  300 ;
          HEIGHT 100 ;
@@ -47,7 +47,7 @@ PROC T_GotoReco()                         // Table T_GotoReco
 
    PROC T_Locate()                           // Table Locate
 
-      DEFINE WINDOW frmLocate;
+      DEFINE WINDOW frmLocate ;
             AT 0, 0 ;
             WIDTH  500 ;
             HEIGHT 100 ;
@@ -82,7 +82,7 @@ PROC T_GotoReco()                         // Table T_GotoReco
 
       PROC TC_Locate( cExpress )                // Table Command : Locate
 
-         LOCA cExpErr := Exp1Chek( cExpress ),;
+         LOCA cExpErr := Exp1Chek( cExpress ), ;
             nCurRec := RECN()
 
          IF EMPTY( cExpress )
@@ -122,7 +122,7 @@ PROC T_GotoReco()                         // Table T_GotoReco
 
             PROC T_Skip()                             // Table Skip
 
-               DEFINE WINDOW frmSkip;
+               DEFINE WINDOW frmSkip ;
                      AT 0, 0 ;
                      WIDTH  200 ;
                      HEIGHT 100 ;
@@ -159,7 +159,7 @@ PROC T_GotoReco()                         // Table T_GotoReco
 
                PROC T_Seek()                             // Table Seek
 
-                  DEFINE WINDOW frmSeek;
+                  DEFINE WINDOW frmSeek ;
                         AT 0, 0 ;
                         WIDTH  500 ;
                         HEIGHT 100 ;

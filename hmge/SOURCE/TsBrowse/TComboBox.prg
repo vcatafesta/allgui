@@ -22,7 +22,7 @@ CLASS TComboBox FROM TControl
    DATA   aItems AS ARRAY                     // Combo array
    DATA   bCloseUp                            // Block to be evaluated on Close Combo
 
-   METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged,;
+   METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged, ;
       nClrFore, nClrBack, hFont, cMsg, cControl, cWnd )
    METHOD Default()
    METHOD GetDlgCode( nLastKey, nFlags )
@@ -38,7 +38,7 @@ CLASS TComboBox FROM TControl
    * METHOD TComboBox:New() Version 7.0
    * ============================================================================
 
-METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged,;
+METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged, ;
       nClrFore, nClrBack, hFont, cMsg, cControl, cWnd ) CLASS TComboBox
 
    LOCAL invisible := .F.
@@ -47,9 +47,9 @@ METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged,;
    LOCAL notabstop := .F.
    LOCAL ParentHandle
 
-   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ),;
-      nClrBack  := GetSysColor( COLOR_WINDOW ),;
-      nHeight   := 12   //If( oFont != nil, oFont:nHeight, 12 ),;
+   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ), ;
+      nClrBack  := GetSysColor( COLOR_WINDOW ), ;
+      nHeight   := 12   //If( oFont != nil, oFont:nHeight, 12 ), ;
 
    ::nTop     = nRow
    ::nLeft    = nCol
@@ -68,7 +68,7 @@ METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged,;
    ::nId          := ::GetNewId()
    ::cControlName := cControl
    ::cParentWnd   := cWnd
-   ::nStyle       := nOR( WS_CHILD, WS_VISIBLE,  WS_TABSTOP,;
+   ::nStyle       := nOR( WS_CHILD, WS_VISIBLE,  WS_TABSTOP, ;
       WS_VSCROLL, WS_BORDER , CBS_DROPDOWN, CBS_NOINTEGRALHEIGHT )
 
    ::bSetGet      := bSetGet
@@ -137,11 +137,11 @@ METHOD GetDlgCode( nLastKey, nFlags ) CLASS TComboBox
 METHOD HandleEvent( nMsg, nWParam, nLParam ) CLASS TComboBox
 
    // just used for some testings
-   /* fDebug( "nMsg="+AllTrim(cValTochar(nMsg))+" nWParam="+;
-   AllTrim(cValTochar(nWParam))+;
-   " nLoWord="+AllTrim(cValTochar(nLoWord(nLParam)))+;
-   " nHiWord="+AllTrim(cValTochar(nHiWord(nLParam)))+CRLF+;
-   " ProcName="+ProcName(2)+Space(1)+LTrim(Str(ProcLine(2)))+space(1)+;
+   /* fDebug( "nMsg="+AllTrim(cValTochar(nMsg))+" nWParam="+ ;
+   AllTrim(cValTochar(nWParam))+ ;
+   " nLoWord="+AllTrim(cValTochar(nLoWord(nLParam)))+ ;
+   " nHiWord="+AllTrim(cValTochar(nHiWord(nLParam)))+CRLF+ ;
+   " ProcName="+ProcName(2)+Space(1)+LTrim(Str(ProcLine(2)))+space(1)+ ;
    ProcName(3)+Space(1)+LTrim(Str(Procline(3))) ) */
 
    IF HIWORD(nWParam) == CBN_CLOSEUP

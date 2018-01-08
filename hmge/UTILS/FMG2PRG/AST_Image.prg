@@ -42,7 +42,7 @@ FUNCTION AST_Image(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -93,7 +93,7 @@ FUNCTION AST_Image(cReadString,cTerminator)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
    cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " IMAGE " + ;
-      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + " " +;
+      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + " " + ;
       aProperties_[4] + " " + aProperties_[5] + " STRETCH" + CRLF
 
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF

@@ -120,11 +120,11 @@ PROCEDURE Main
 #define XTOC(x)              CASE_AT(VALTYPE(x), "CNDLM", ;
       { NULL, ;
       x, ;
-      IF(IS_NUMERIC(x),;
+      IF(IS_NUMERIC(x), ;
       TRIM_NUMBER(x), ;
       NULL), ;
-      IF(IS_DATE(x),DTOC(x),NULL),;
-      IF(IS_LOGICAL(x),;
+      IF(IS_DATE(x),DTOC(x),NULL), ;
+      IF(IS_LOGICAL(x), ;
       IF(x,".T.",".F."), ;
       NULL), ;
       x })

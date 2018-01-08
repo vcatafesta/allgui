@@ -150,27 +150,27 @@ PROCEDURE main()
          ACTION Form_1.Tree_1.EnableUpdate ;
          WIDTH 150
 
-      @ 280,400 BUTTONEX Button_10 WIDTH 150 HEIGHT 28;
+      @ 280,400 BUTTONEX Button_10 WIDTH 150 HEIGHT 28 ;
          CAPTION 'Change colors 1' ;
-         BACKCOLOR WHITE;
-         FONTCOLOR BLACK;
-         NOXPSTYLE;
+         BACKCOLOR WHITE ;
+         FONTCOLOR BLACK ;
+         NOXPSTYLE ;
          ACTION {|| (Form_1.Tree_1.FontColor:=BLACK,Form_1.Tree_1.LineColor:=BLACK, Form_1.Tree_1.BackColor:=WHITE)}
 
       @ 310,400 BUTTONEX Button_11 ;
-         WIDTH 150 HEIGHT 28;
+         WIDTH 150 HEIGHT 28 ;
          CAPTION 'Change colors 2' ;
-         BACKCOLOR YELLOW;
-         FONTCOLOR RED;
-         NOXPSTYLE;
+         BACKCOLOR YELLOW ;
+         FONTCOLOR RED ;
+         NOXPSTYLE ;
          ACTION {|| (Form_1.Tree_1.FontColor:=RED,Form_1.Tree_1.LineColor:=RED, Form_1.Tree_1.BackColor:=YELLOW)}
 
       @ 340,400 BUTTONEX Button_12 ;
-         WIDTH 150 HEIGHT 28;
+         WIDTH 150 HEIGHT 28 ;
          CAPTION 'Change colors 3' ;
-         BACKCOLOR BLUE;
-         FONTCOLOR WHITE;
-         NOXPSTYLE;
+         BACKCOLOR BLUE ;
+         FONTCOLOR WHITE ;
+         NOXPSTYLE ;
          ACTION {|| (Form_1.Tree_1.FontColor:=WHITE,Form_1.Tree_1.LineColor:=WHITE, Form_1.Tree_1.BackColor:=BLUE)}
 
    END WINDOW

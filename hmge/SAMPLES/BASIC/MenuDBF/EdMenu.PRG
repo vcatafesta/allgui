@@ -1,6 +1,6 @@
 #include "minigui.ch"
 #define CrLf       chr(13)+chr(10)
-#define cAcercaDe     "Editor de Menus"+CrLf+"A partir do exemplo de Roberto Sánchez"+CrLf+;
+#define cAcercaDe     "Editor de Menus"+CrLf+"A partir do exemplo de Roberto Sánchez"+CrLf+ ;
    chr(174)+" Abril 2006, André Luiz Neto Cobas"+CrLf+CrLf+ ;
    "----------------------------------------------------------"+CrLf+CrLf+ ;
    "Ejemplo de definición de menú"+CrLf+"en tiempo de ejecución"+CrLf+CrLf+cVersion+CrLf+CrLf+chr(174)+" Abril 2006, Roberto Sánchez"+CrLf+CrLf+MiniGUIVersion()+CrLf+Version()
@@ -34,8 +34,8 @@ FUNCTION main()
       HEIGHT 610 ;
       TITLE "Editor de Menus " +chr(174)+" Abril 2006, André Luiz Neto Cobas" ;
       MAIN ;
-      NOMAXIMIZE;
-      NOSIZE;
+      NOMAXIMIZE ;
+      NOSIZE ;
       ON INIT formActivate() ;
       ON RELEASE NIL
 
@@ -57,65 +57,65 @@ FUNCTION main()
    @ 437,20 LABEL LbMsg_E WIDTH   70 HEIGHT  20 VALUE "Message Esp.:"   TRANSPARENT  FONTCOLOR {0,0,255} AUTOSIZE
    @ 467,20 LABEL LbMsg_I WIDTH   70 HEIGHT  20 VALUE "Message Ing.:"   TRANSPARENT  FONTCOLOR {0,0,255} AUTOSIZE
 
-   @ 50,20 BUTTONEX BtModifica  WIDTH  100  HEIGHT 30 CAPTION "Modificar Linha";
+   @ 50,20 BUTTONEX BtModifica  WIDTH  100  HEIGHT 30 CAPTION "Modificar Linha" ;
       ACTION   Bt_Inc_Click(3)  FLAT fontcolor {0,0,255}
 
-   @ 80,20 BUTTONex BtLoad WIDTH  100 HEIGHT 30 CAPTION "Carregar Menu";
+   @ 80,20 BUTTONex BtLoad WIDTH  100 HEIGHT 30 CAPTION "Carregar Menu" ;
       ACTION   BtLoad_Click()  FLAT fontcolor {0,0,255}
 
-   @ 110,20 BUTTONex BtSalvar  WIDTH  100 HEIGHT 30 CAPTION "Salvar Menu";
+   @ 110,20 BUTTONex BtSalvar  WIDTH  100 HEIGHT 30 CAPTION "Salvar Menu" ;
       ACTION   BtSalvar_Click()  FLAT fontcolor {0,0,255}
 
-   @ 140, 20 BUTTONex BtApagar  WIDTH  100 HEIGHT 30 CAPTION "Apagar Tudo";
+   @ 140, 20 BUTTONex BtApagar  WIDTH  100 HEIGHT 30 CAPTION "Apagar Tudo" ;
       ACTION   BtApagarTudo_Click(.t.)  FLAT fontcolor {255,0,0}
 
-   @ 170, 20 BUTTONEX BtRemover WIDTH  100 HEIGHT 30 CAPTION "Remover";
+   @ 170, 20 BUTTONEX BtRemover WIDTH  100 HEIGHT 30 CAPTION "Remover" ;
       ACTION   BtRemover_Click()  FLAT fontcolor {255,100,0}
 
-   @ 50 , 150 BUTTONEX BtPopUp WIDTH  100 HEIGHT 30 CAPTION "&POPUP";
+   @ 50 , 150 BUTTONEX BtPopUp WIDTH  100 HEIGHT 30 CAPTION "&POPUP" ;
       ACTION   Bt_Inc_Click(0) FLAT fontcolor {0,0,255}
 
-   @ 80, 150 BUTTONEX BtMenuItem  WIDTH  100 HEIGHT 30 CAPTION "MENU&ITEM";
+   @ 80, 150 BUTTONEX BtMenuItem  WIDTH  100 HEIGHT 30 CAPTION "MENU&ITEM" ;
       ACTION   Bt_Inc_Click(1) FLAT fontcolor {0,0,255}
 
-   @ 110 ,150 BUTTONEX BtSeparator WIDTH  99 HEIGHT 30 CAPTION "&SEPARATOR";
+   @ 110 ,150 BUTTONEX BtSeparator WIDTH  99 HEIGHT 30 CAPTION "&SEPARATOR" ;
       ACTION   Bt_Inc_Click(2) FLAT  fontcolor {0,0,255}
 
-   @ 170,150 BUTTONEX BtTestar WIDTH  99 HEIGHT 30 CAPTION "&Testar";
+   @ 170,150 BUTTONEX BtTestar WIDTH  99 HEIGHT 30 CAPTION "&Testar" ;
       ACTION   Bt_Testar_Click() FLAT  fontcolor {0,0,255}
 
-   @ 225,105 TEXTBOX TxtCaptionP WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}};
+   @ 225,105 TEXTBOX TxtCaptionP WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}} ;
       FONTCOLOR  {{  0,  0,  0},{  0,  0,  0},{250,  0,  0}} value  space(50)
 
-   @ 255,105 TEXTBOX TxtCaptionE WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}};
+   @ 255,105 TEXTBOX TxtCaptionE WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}} ;
       FONTCOLOR  {{  0,  0,  0},{  0,  0,  0},{250,  0,  0}} value  space(50)
-   @ 285,105 TEXTBOX TxtCaptionI WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}};
+   @ 285,105 TEXTBOX TxtCaptionI WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}} ;
       FONTCOLOR  {{  0,  0,  0},{  0,  0,  0},{250,  0,  0}} value  space(50)
 
-   @ 315,105 TEXTBOX TxtAction WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}};
+   @ 315,105 TEXTBOX TxtAction WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}} ;
       FONTCOLOR  {{  0,  0,  0},{  0,  0,  0},{250,  0,  0}} VALUE  space(200)
 
-   @ 345,105 TextBox TxtNome WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}};
+   @ 345,105 TextBox TxtNome WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}} ;
       FONTCOLOR  {{  0,  0,  0},{  0,  0,  0},{250,  0,  0}} VALUE  space(50) // VALID {|| ValidaNome(this.value)}
 
-   @ 375,105 TEXTBOX TxtImage WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}};
+   @ 375,105 TEXTBOX TxtImage WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}} ;
       FONTCOLOR  {{  0,  0,  0},{  0,  0,  0},{250,  0,  0}} VALUE space(100)
 
-   @ 405,105 TEXTBOX TxtMessageP WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}};
+   @ 405,105 TEXTBOX TxtMessageP WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}} ;
       FONTCOLOR  {{  0,  0,  0},{  0,  0,  0},{250,  0,  0}} VALUE  space(100)
 
-   @ 435,105 TEXTBOX TxtMessageE WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}};
+   @ 435,105 TEXTBOX TxtMessageE WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}} ;
       FONTCOLOR  {{  0,  0,  0},{  0,  0,  0},{250,  0,  0}} VALUE  space(100)
 
-   @ 465,105 TEXTBOX TxtMessageI WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}};
+   @ 465,105 TEXTBOX TxtMessageI WIDTH  150 HEIGHT 24 BACKCOLOR  {{255,255,255},{255,255,255},{  0,210,  0}} ;
       FONTCOLOR  {{  0,  0,  0},{  0,  0,  0},{250,  0,  0}} VALUE  space(100)
    @ 490,20 CHECKBOX Chk_Checked CAPTION "Checked:" WIDTH  100 HEIGHT 28  VALUE .F. FONTCOLOR {0,0,255} TRANSPARENT LEFTJUSTIFY
    @ 490,155 CHECKBOX Chk_Disabled CAPTION "Disabled" WIDTH  100 HEIGHT 28  VALUE .F. FONTCOLOR {0,0,255} TRANSPARENT LEFTJUSTIFY
 
-   @ 520,20 BUTTONEX BtOk WIDTH  110 HEIGHT 30 CAPTION "&Ok";
+   @ 520,20 BUTTONEX BtOk WIDTH  110 HEIGHT 30 CAPTION "&Ok" ;
       ACTION   BtOk_Click() FLAT  fontcolor {0,0,255}
 
-   @ 520,139 BUTTONEX BtCancel WIDTH  110 HEIGHT 30 CAPTION "&Cancelar";
+   @ 520,139 BUTTONEX BtCancel WIDTH  110 HEIGHT 30 CAPTION "&Cancelar" ;
       ACTION   Bt_Cancel_Click() FLAT  fontcolor {0,0,255}
 
    DEFINE GRID Grid1
@@ -125,20 +125,20 @@ FUNCTION main()
       HEIGHT 520
       VALUE  1
       ITEMS aListItens
-      HEADERS {"LINHA DO MENU",;
-         "ID",;
-         "MENU PAI",;
-         "TIPO",;
-         "CAPTION_P",;
-         "CAPTION_E",;
-         "CAPTION_I",;
-         "NOME",;
-         "ACTION",;
-         "IMAGE",;
-         "MESSAGE_P",;
-         "MESSAGE_E",;
-         "MESSAGE_I",;
-         "CHECKED",;
+      HEADERS {"LINHA DO MENU", ;
+         "ID", ;
+         "MENU PAI", ;
+         "TIPO", ;
+         "CAPTION_P", ;
+         "CAPTION_E", ;
+         "CAPTION_I", ;
+         "NOME", ;
+         "ACTION", ;
+         "IMAGE", ;
+         "MESSAGE_P", ;
+         "MESSAGE_E", ;
+         "MESSAGE_I", ;
+         "CHECKED", ;
          "DISABLED"}
       WIDTHS  { 449,30,30,50,50,50,50,50,50,50,50,50,50,30,30}
       ONCHANGE  (IIF(ATIVADO = .T.,(E_D_Frame3(.f.),ChecaList() ),NIL))
@@ -418,32 +418,32 @@ FUNCTION PegaPos(wpos)
 
       fPos   := form1.Grid1.value   // linha sendo modificada
       tipo := aListItens[fPos][4]
-      TXT := space(PegaTabulacao(fPos)) +LinhaMenu(form1.TxtCaptionP.value,;
-         form1.TxtCaptionE.value,;
-         form1.TxtCaptionI.value,;
-         form1.TxtAction.value,;
-         form1.TxtNome.value,;
-         form1.TxtImage.value,;
-         form1.TxtMessageP.value,;
-         form1.TxtMessageE.value,;
-         form1.TxtMessageI.value,;
-         form1.Chk_Checked.value,;
-         form1.Chk_Disabled.value,;
+      TXT := space(PegaTabulacao(fPos)) +LinhaMenu(form1.TxtCaptionP.value, ;
+         form1.TxtCaptionE.value, ;
+         form1.TxtCaptionI.value, ;
+         form1.TxtAction.value, ;
+         form1.TxtNome.value, ;
+         form1.TxtImage.value, ;
+         form1.TxtMessageP.value, ;
+         form1.TxtMessageE.value, ;
+         form1.TxtMessageI.value, ;
+         form1.Chk_Checked.value, ;
+         form1.Chk_Disabled.value, ;
          tipo)
-      aListItens[fpos]:={   TXT ,;
-         aListItens[fPos][2],;
-         aListItens[fPos][3],;
-         tipo,;
-         Form1.TxtCaptionP.value,;
-         Form1.TxtCaptionE.value,;
-         Form1.TxtCaptionI.value,;
-         form1.TxtNome.value,;
-         form1.TxtAction.value,;
-         form1.TxtImage.value,;
-         form1.TxtMessageP.value,;
-         form1.TxtMessageE.value,;
-         form1.TxtMessageI.value,;
-         form1.Chk_Checked.Value,;
+      aListItens[fpos]:={   TXT , ;
+         aListItens[fPos][2], ;
+         aListItens[fPos][3], ;
+         tipo, ;
+         Form1.TxtCaptionP.value, ;
+         Form1.TxtCaptionE.value, ;
+         Form1.TxtCaptionI.value, ;
+         form1.TxtNome.value, ;
+         form1.TxtAction.value, ;
+         form1.TxtImage.value, ;
+         form1.TxtMessageP.value, ;
+         form1.TxtMessageE.value, ;
+         form1.TxtMessageI.value, ;
+         form1.Chk_Checked.Value, ;
          form1.Chk_Disabled.Value}
       AtualList()
       form1.Grid1.value :=fpos
@@ -470,36 +470,36 @@ FUNCTION PegaPos(wpos)
             Tipo:="MENUITEM"
          END IF
 
-         TXT := space(PegaTabulacao(fPos)) +LinhaMenu(form1.TxtCaptionP.value,;
-            form1.TxtCaptionE.value,;
-            form1.TxtCaptionI.value,;
-            form1.TxtAction.value,;
-            form1.TxtNome.value,;
-            form1.TxtImage.value,;
-            form1.TxtMessageP.value,;
-            form1.TxtMessageE.value,;
-            form1.TxtMessageI.value,;
-            form1.Chk_Checked.value,;
-            form1.Chk_Disabled.value,;
+         TXT := space(PegaTabulacao(fPos)) +LinhaMenu(form1.TxtCaptionP.value, ;
+            form1.TxtCaptionE.value, ;
+            form1.TxtCaptionI.value, ;
+            form1.TxtAction.value, ;
+            form1.TxtNome.value, ;
+            form1.TxtImage.value, ;
+            form1.TxtMessageP.value, ;
+            form1.TxtMessageE.value, ;
+            form1.TxtMessageI.value, ;
+            form1.Chk_Checked.value, ;
+            form1.Chk_Disabled.value, ;
             tipo)
 
          AADD(aListItens,{"-","","","","","","","","","","","","",.F.,.F.})
          Ains(aListItens,fpos)
 
-         aListItens[fpos]:={   TXT,;
-            alltrim(MyMenu),;
-            alltrim(MenuPai),;
-            alltrim(Tipo),;
-            Form1.TxtCaptionP.value,;
-            Form1.TxtCaptionE.value,;
-            Form1.TxtCaptionI.value,;
-            form1.TxtNome.value,;
-            form1.TxtAction.value,;
-            form1.TxtImage.value,;
-            form1.TxtMessageP.value,;
-            form1.TxtMessageE.value,;
-            form1.TxtMessageI.value,;
-            form1.Chk_Checked.Value,;
+         aListItens[fpos]:={   TXT, ;
+            alltrim(MyMenu), ;
+            alltrim(MenuPai), ;
+            alltrim(Tipo), ;
+            Form1.TxtCaptionP.value, ;
+            Form1.TxtCaptionE.value, ;
+            Form1.TxtCaptionI.value, ;
+            form1.TxtNome.value, ;
+            form1.TxtAction.value, ;
+            form1.TxtImage.value, ;
+            form1.TxtMessageP.value, ;
+            form1.TxtMessageE.value, ;
+            form1.TxtMessageI.value, ;
+            form1.Chk_Checked.Value, ;
             form1.Chk_Disabled.Value}
          Mitem := Mitem + 1
          AtualList()
@@ -534,22 +534,22 @@ FUNCTION PegaPos(wpos)
             tx := Space(qesp) + "DEFINE POPUP " + Texto
             AADD(aListItens,{"-","","","","","","","","","","","","",.F.,.F.})
             Ains(aListItens,fpos)
-            aListItens[fpos]:={   tx,;
-               alltrim(MyMenu),;
-               alltrim(MenuPai),;
-               "DEFINE POPUP",;
-               Form1.TxtCaptionP.value,;
-               Form1.TxtCaptionE.value,;
-               Form1.TxtCaptionI.value,;
-               form1.TxtNome.value,;
+            aListItens[fpos]:={   tx, ;
+               alltrim(MyMenu), ;
+               alltrim(MenuPai), ;
+               "DEFINE POPUP", ;
+               Form1.TxtCaptionP.value, ;
+               Form1.TxtCaptionE.value, ;
+               Form1.TxtCaptionI.value, ;
+               form1.TxtNome.value, ;
                "","","","","",.F.,.F.}
 
             tx:=Space(qesp) + "END POPUP "
             AADD(aListItens,{"-","","","","","","","","","","","","",.F.,.F.})
             Ains(aListItens,fpos+1)
-            aListItens[fpos+1]:={tx,;
-               alltrim(MyMenu),;
-               alltrim(MenuPai),;
+            aListItens[fpos+1]:={tx, ;
+               alltrim(MyMenu), ;
+               alltrim(MenuPai), ;
                "END POPUP","","","","","","","","","",.F.,.F.}
 
             AtualList()
@@ -571,20 +571,20 @@ FUNCTION PegaPos(wpos)
                   Form1.Grid1.deleteAllItems()
 
                   FOR f:= 1 to len(aListItens)
-                     form1.Grid1.additem({aListItens[f][1],;
-                        aListItens[f][2],;
-                        aListItens[f][3],;
-                        aListItens[f][4],;
-                        aListItens[f][5],;
-                        aListItens[f][6],;
-                        aListItens[f][7],;
-                        aListItens[f][8],;
-                        aListItens[f][9],;
-                        aListItens[f][10],;
-                        aListItens[f][11],;
-                        aListItens[f][12],;
-                        aListItens[f][13],;
-                        aListItens[f][14],;
+                     form1.Grid1.additem({aListItens[f][1], ;
+                        aListItens[f][2], ;
+                        aListItens[f][3], ;
+                        aListItens[f][4], ;
+                        aListItens[f][5], ;
+                        aListItens[f][6], ;
+                        aListItens[f][7], ;
+                        aListItens[f][8], ;
+                        aListItens[f][9], ;
+                        aListItens[f][10], ;
+                        aListItens[f][11], ;
+                        aListItens[f][12], ;
+                        aListItens[f][13], ;
+                        aListItens[f][14], ;
                         aListItens[f][15]})
                   NEXT
 
@@ -729,33 +729,33 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
                      txt:=space(qesp)+txt
                   ENDIF
 
-                  TxT:=TxT +LinhaMenu((Alias())->CAPTIONP,;
-                     (Alias())->CAPTIONE,;
-                     (Alias())->CAPTIONI,;
-                     (Alias())->ACTION,;
-                     (Alias())->NOME,;
-                     (Alias())->IMAGE,;
-                     (Alias())->MESSAGEP,;
-                     (Alias())->MESSAGEE,;
-                     (Alias())->MESSAGEI,;
-                     (Alias())->CHECKED,;
-                     (Alias())->DISABLED,;
+                  TxT:=TxT +LinhaMenu((Alias())->CAPTIONP, ;
+                     (Alias())->CAPTIONE, ;
+                     (Alias())->CAPTIONI, ;
+                     (Alias())->ACTION, ;
+                     (Alias())->NOME, ;
+                     (Alias())->IMAGE, ;
+                     (Alias())->MESSAGEP, ;
+                     (Alias())->MESSAGEE, ;
+                     (Alias())->MESSAGEI, ;
+                     (Alias())->CHECKED, ;
+                     (Alias())->DISABLED, ;
                      (Alias())->TIPO)
 
-                  aListItens[fpos]:={   TXT,;
-                     alltrim(MyMenu),;
-                     alltrim(MenuPai),;
-                     (Alias())->TIPO,;
-                     (Alias())->CAPTIONP,;
-                     (Alias())->CAPTIONE,;
-                     (Alias())->CAPTIONI,;
-                     (Alias())->NOME,;
-                     (Alias())->ACTION,;
-                     (Alias())->IMAGE,;
-                     (Alias())->MESSAGEP,;
-                     (Alias())->MESSAGEE,;
-                     (Alias())->MESSAGEI,;
-                     (Alias())->CHECKED,;
+                  aListItens[fpos]:={   TXT, ;
+                     alltrim(MyMenu), ;
+                     alltrim(MenuPai), ;
+                     (Alias())->TIPO, ;
+                     (Alias())->CAPTIONP, ;
+                     (Alias())->CAPTIONE, ;
+                     (Alias())->CAPTIONI, ;
+                     (Alias())->NOME, ;
+                     (Alias())->ACTION, ;
+                     (Alias())->IMAGE, ;
+                     (Alias())->MESSAGEP, ;
+                     (Alias())->MESSAGEE, ;
+                     (Alias())->MESSAGEI, ;
+                     (Alias())->CHECKED, ;
                      (Alias())->DISABLED}
 
                   IF (Alias())->TIPO ="END POPUP"
@@ -778,7 +778,7 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
                LOCAL AaRQ    :={}
                LOCAL C_DBF:="" ,C_NTAB:=""
 
-               cFile := Putfile ( { {"Arquivos DBF","*.DBF"} } ,;
+               cFile := Putfile ( { {"Arquivos DBF","*.DBF"} } , ;
                   'Salvar Arquivo como...' , GetCurrentFolder() , .f., "MENU.DBF" )
 
                CFILE := UPPER(CFILE)
@@ -876,10 +876,10 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
                      LOCAL f
 
                      FOR f:=fpos+1 to len(aListItens)
-                        aListItens[f-1]:= {   aListItens[f][1],aListItens[f][2],aListItens[f][3],;
-                           aListItens[f][4],aListItens[f][5],aListItens[f][6],;
-                           aListItens[f][7],aListItens[f][8],aListItens[f][9],;
-                           aListItens[f][10],aListItens[f][11],aListItens[f][12],;
+                        aListItens[f-1]:= {   aListItens[f][1],aListItens[f][2],aListItens[f][3], ;
+                           aListItens[f][4],aListItens[f][5],aListItens[f][6], ;
+                           aListItens[f][7],aListItens[f][8],aListItens[f][9], ;
+                           aListItens[f][10],aListItens[f][11],aListItens[f][12], ;
                            aListItens[f][13],aListItens[f][14],aListItens[f][15]}
                      NEXT
                      Asize(aListItens,len(aListItens)-1)

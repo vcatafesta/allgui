@@ -16,14 +16,14 @@ FUNCTION materia_prima()
    ordsetfocus('nome')
    materia_prima->(dbgotop())
 
-   DEFINE WINDOW form_materia_prima;
-         at 000,000;
-         WIDTH 800;
-         HEIGHT 605;
-         TITLE 'Matéria Prima';
-         ICON path_imagens+'icone.ico';
-         modal;
-         nosize;
+   DEFINE WINDOW form_materia_prima ;
+         at 000,000 ;
+         WIDTH 800 ;
+         HEIGHT 605 ;
+         TITLE 'Matéria Prima' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
+         nosize ;
          ON INIT pesquisar()
 
       * botões (toolbar)
@@ -149,7 +149,7 @@ FUNCTION materia_prima()
 
       DEFINE SPLITBOX
          DEFINE GRID grid_materia_prima
-            parent form_materia_prima
+            PARENT form_materia_prima
             COL 000
             ROW 105
             WIDTH 795
@@ -166,7 +166,7 @@ FUNCTION materia_prima()
       END SPLITBOX
 
       DEFINE LABEL rodape_001
-         parent form_materia_prima
+         PARENT form_materia_prima
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
@@ -177,19 +177,19 @@ FUNCTION materia_prima()
          FONTCOLOR _cinza_001
          TRANSPARENT .T.
       END LABEL
-      @ 540,160 textbox tbox_pesquisa;
-         of form_materia_prima;
-         HEIGHT 027;
-         WIDTH 300;
-         VALUE '';
-         MAXLENGTH 040;
-         FONT 'verdana' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase;
+      @ 540,160 textbox tbox_pesquisa ;
+         of form_materia_prima ;
+         HEIGHT 027 ;
+         WIDTH 300 ;
+         VALUE '' ;
+         MAXLENGTH 040 ;
+         FONT 'verdana' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         uppercase ;
          ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
-         parent form_materia_prima
+         PARENT form_materia_prima
          COL form_materia_prima.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
@@ -246,93 +246,93 @@ STATIC FUNCTION dados(parametro)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW form_dados;
-         at 000,000;
-         WIDTH 325;
-         HEIGHT 300;
-         TITLE (titulo);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_dados ;
+         at 000,000 ;
+         WIDTH 325 ;
+         HEIGHT 300 ;
+         TITLE (titulo) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 010,005 label lbl_001;
-         of form_dados;
-         VALUE 'Nome';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_dados ;
+         VALUE 'Nome' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,005 textbox tbox_001;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_nome;
-         MAXLENGTH 020;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 060,005 label lbl_002;
-         of form_dados;
-         VALUE 'Unidade';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,005 textbox tbox_001 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_nome ;
+         MAXLENGTH 020 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 060,005 label lbl_002 ;
+         of form_dados ;
+         VALUE 'Unidade' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,005 textbox tbox_002;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_unidade;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 080,005 textbox tbox_002 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_unidade ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_unidade('form_dados','tbox_002')
-      @ 080,075 label lbl_nome_unidade;
-         of form_dados;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 080,075 label lbl_nome_unidade ;
+         of form_dados ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
-      @ 110,005 label lbl_003;
-         of form_dados;
-         VALUE 'Preço R$';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 110,005 label lbl_003 ;
+         of form_dados ;
+         VALUE 'Preço R$' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,005 getbox tbox_003;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_preco;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 130,005 getbox tbox_003 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_preco ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@E 999,999.99'
-      @ 110,135 label lbl_004;
-         of form_dados;
-         VALUE 'Quantidade';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 110,135 label lbl_004 ;
+         of form_dados ;
+         VALUE 'Quantidade' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,135 getbox tbox_004;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_qtd;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 130,135 getbox tbox_004 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_qtd ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          PICTURE '@R 99,999.999'
 
       * linha separadora
@@ -643,13 +643,13 @@ STATIC FUNCTION getcode_unidade(value)
    unidade_medida->(ordsetfocus('nome'))
    unidade_medida->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -669,7 +669,7 @@ STATIC FUNCTION getcode_unidade(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_unidade()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
@@ -730,13 +730,13 @@ STATIC FUNCTION fornecedores_mprima()
       RETURN NIL
    ENDIF
 
-   DEFINE WINDOW form_fornecedor_mprima;
-         at 000,000;
-         WIDTH 600;
-         HEIGHT 500;
-         TITLE 'Fornecedores de : '+alltrim(x_nome_mprima);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_fornecedor_mprima ;
+         at 000,000 ;
+         WIDTH 600 ;
+         HEIGHT 500 ;
+         TITLE 'Fornecedores de : '+alltrim(x_nome_mprima) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * botões (toolbar)
@@ -759,7 +759,7 @@ STATIC FUNCTION fornecedores_mprima()
       END BUTTONEX
 
       DEFINE GRID grid_fornecedor_mprima
-         parent form_fornecedor_mprima
+         PARENT form_fornecedor_mprima
          COL 005
          ROW 104
          WIDTH 585

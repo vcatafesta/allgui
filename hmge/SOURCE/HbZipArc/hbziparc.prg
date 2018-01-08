@@ -638,16 +638,16 @@ FUNCTION hb_ZipFileByPKSpan( ... )
    * $END$
    */
 
-FUNCTION hb_ZipFile( cFileName,;
-      acFiles,;
-      nLevel,;
-      bUpdate,;
-      lOverwrite,;
-      cPassword,;
-      lWithPath,;
-      lWithDrive,;
-      bProgress,;
-      lFullPath,;
+FUNCTION hb_ZipFile( cFileName, ;
+      acFiles, ;
+      nLevel, ;
+      bUpdate, ;
+      lOverwrite, ;
+      cPassword, ;
+      lWithPath, ;
+      lWithDrive, ;
+      bProgress, ;
+      lFullPath, ;
       acExclude )
 
    LOCAL lRetVal := .T.
@@ -744,7 +744,7 @@ FUNCTION hb_ZipFile( cFileName,;
             IF ! lWithDrive .AND. ! Empty( cDrive ) .AND. hb_LeftEq( cPath, cDrive + ":" )
                cPath := SubStr( cPath, Len( cDrive + ":" ) + 1 )
             ENDIF
-            hb_ZipFileCreate( hZip, hb_FNameMerge( iif( lWithPath, cPath, NIL ), cName, cExt, iif( lWithDrive, cDrive, NIL ) ),;
+            hb_ZipFileCreate( hZip, hb_FNameMerge( iif( lWithPath, cPath, NIL ), cName, cExt, iif( lWithDrive, cDrive, NIL ) ), ;
                tTime, NIL, nAttr, nAttr, NIL, nLevel, cPassword, iif( Empty( cPassword ), NIL, hb_ZipFileCRC32( cFileToZip ) ), NIL )
 
             DO WHILE ( nLen := FRead( hHandle, @cBuffer, hb_BLen( cBuffer ) ) ) > 0

@@ -96,25 +96,25 @@ PROCEDURE _DefineSplashWindow( name, row, col, width, height, cbitmap, nTime, Re
       @ 360,25 LABEL Label_1 ;
          VALUE "" ;
          WIDTH width - 55 ;
-         HEIGHT 22 TRANSPARENT;
+         HEIGHT 22 TRANSPARENT ;
          FONT "Arial" SIZE 10 BOLD FONTCOLOR RED
 
       @ 113,20 LABEL Label_2 ;
          VALUE "Free open source GUI: " + MiniGUIVersion()  ;
          WIDTH width - 30   ;
-         HEIGHT 22 CENTERALIGN TRANSPARENT;
+         HEIGHT 22 CENTERALIGN TRANSPARENT ;
          FONT "Arial" SIZE 12 BOLD FONTCOLOR YELLOW
 
       @ 245,20 LABEL Label_3 ;
          VALUE "Free open source: " + Version()    ;
          WIDTH width - 30   ;
-         HEIGHT 22 CENTERALIGN TRANSPARENT;
+         HEIGHT 22 CENTERALIGN TRANSPARENT ;
          FONT "Arial" SIZE 12 BOLD FONTCOLOR BLACK
 
       @ 275,220 LABEL Label_4 ;
          VALUE hb_compiler()    ;
          WIDTH width - 30   ;
-         HEIGHT 22 TRANSPARENT;
+         HEIGHT 22 TRANSPARENT ;
          FONT "Arial" SIZE 12 BOLD FONTCOLOR YELLOW
 
       DRAW LINE IN WINDOW &name ;

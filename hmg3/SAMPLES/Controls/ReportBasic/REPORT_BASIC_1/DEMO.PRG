@@ -6,7 +6,7 @@ PROCEDURE main()
 
    DEFINE WINDOW pr_form ;
          at 0,0 ;
-         WIDTH 100;
+         WIDTH 100 ;
          HEIGHT 100 ;
          TITLE 'DO REPORT Test' ;
          MAIN

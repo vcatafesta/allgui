@@ -22,33 +22,33 @@ add page footer and carryover.
 
 PROCEDURE PrintTest10()
 
-   LOCAL lSuccess := .F.,;
+   LOCAL lSuccess := .F., ;
       nVMargin := 20,;    // Vertical margin
       nHMargin := 20,;      // Horizontal margin
       nLine_Num :=  0
 
-   LOCAL nPageLength := 210 - nHMargin * 2,;
+   LOCAL nPageLength := 210 - nHMargin * 2, ;
       nPageHeigth := 297 - nVMargin * 5,;  // Margins + Header lines
       nChrsPerLin :=  80
 
    LOCAL cItem2Prnt
 
-   PRIVATE cFontName   := "Verdana",;
+   PRIVATE cFontName   := "Verdana", ;
       nFontSize := 10
 
-   PRIVATE nCharLength := 2.25,;
+   PRIVATE nCharLength := 2.25, ;
       nLineHeigth := 5
 
-   PRIVATE nPageNumb   := 0,;
+   PRIVATE nPageNumb   := 0, ;
       nPTLineCo   := 0,;    // Total line count
       nPTPageCo   := 0,;    // Total page count
-      nLinsPerPag := nPageHeigth / nLineHeigth,;
+      nLinsPerPag := nPageHeigth / nLineHeigth, ;
       nLineNo1Pag := 0
 
    PRIVATE nPrintRow :=  0,;   // Row ( line ) number in printed page
       nPrintCol :=  0     // Column  number in printed page
 
-   PRIVATE nDays_Tot  :=  0,;
+   PRIVATE nDays_Tot  :=  0, ;
       nSalaryTot :=  0
 
    USE .\DATA\EMPLOYE2
@@ -139,9 +139,9 @@ STATIC PROCEDURE PrintPageHeader()
 
    LOCAL cHeadLine := "Employee Salary List"
 
-   LOCAL cItem2Prnt := '',;
-      nColumnLen :=  0,;
-      nPrCol1st  := nPrintCol,;
+   LOCAL cItem2Prnt := '', ;
+      nColumnLen :=  0, ;
+      nPrCol1st  := nPrintCol, ;
       nPrRow1st  := nPrintRow
 
    ++nPageNumb
@@ -224,7 +224,7 @@ STATIC PROCEDURE PrintPageHeader()
 
 STATIC PROCEDURE PrintPageFooter()
 
-   LOCAL cItem2Prnt := '',;
+   LOCAL cItem2Prnt := '', ;
       nColumnLen :=  0
 
    nPrintRow += + nLineHeigth

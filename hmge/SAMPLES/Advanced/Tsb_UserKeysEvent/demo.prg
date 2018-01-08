@@ -563,9 +563,9 @@ FUNCTION TR0( c )
          FOR i := 50 TO 1 STEP -1
             APPEND BLANK
             REPLACE KODS WITH hb_ntos(i), ;
-               NAME WITH RandStr(15),;
+               NAME WITH RandStr(15), ;
                EDIZ WITH 'kg',       ;
-               KOLV WITH RecNo() * 1.5,;
+               KOLV WITH RecNo() * 1.5, ;
                CENA WITH RecNo() * 2.5
          NEXT
       ENDIF

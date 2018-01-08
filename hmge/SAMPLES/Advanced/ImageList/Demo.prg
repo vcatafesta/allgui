@@ -60,11 +60,11 @@ FUNCTION Main
          ICON 'DOG.ICO' ;
          MAIN ;
          FONT 'Arial' SIZE 10 ;
-         ON INIT initIL();
-         ON SIZE RePaintImage();
-         ON MOUSECLICK SetPlayImage( 0 );
-         ON MOUSEDRAG DragImage();
-         ON MOUSEMOVE StopDragImage();
+         ON INIT initIL() ;
+         ON SIZE RePaintImage() ;
+         ON MOUSECLICK SetPlayImage( 0 ) ;
+         ON MOUSEDRAG DragImage() ;
+         ON MOUSEMOVE StopDragImage() ;
          BACKCOLOR { 192, 192, 64 }
 
       DEFINE IMAGELIST imagelst_1 ;
@@ -108,31 +108,31 @@ FUNCTION Main
             BUTTON Button_1a ;
                CAPTION '&Run' ;
                PICTURE 'm5.bmp' ;
-               TOOLTIP 'Running Dog';
+               TOOLTIP 'Running Dog' ;
                ACTION ImageAnimat( 3 )
 
             BUTTON Button_2a ;
                CAPTION '&Sit' ;
                PICTURE 'm20.bmp' ;
-               TOOLTIP 'Sitdown Dog';
+               TOOLTIP 'Sitdown Dog' ;
                ACTION ImageAnimat( 5 )
 
             BUTTON Button_3a ;
                CAPTION '&Heappy' ;
                PICTURE 'm3.bmp' ;
-               TOOLTIP 'Heaping Dog';
+               TOOLTIP 'Heaping Dog' ;
                ACTION ImageAnimat( 4 )
 
             BUTTON Button_4a ;
                CAPTION '&Lie' ;
                PICTURE 'm22.bmp' ;
-               TOOLTIP 'Lying Dog';
+               TOOLTIP 'Lying Dog' ;
                ACTION ImageAnimat( 6 )
 
             BUTTON Button_5a ;
                CAPTION '&Sleep' ;
                PICTURE 'm29.bmp' ;
-               TOOLTIP 'Sleeping Dog';
+               TOOLTIP 'Sleeping Dog' ;
                ACTION ImageAnimat( 9 )
 
          END TOOLBAR
@@ -144,10 +144,10 @@ FUNCTION Main
          WIDTH 100 HEIGHT 100 ;
          STRETCH TRANSPARENT BACKGROUNDCOLOR { 192, 192, 64 }
 
-      @ 200, 40 LABEL label_1;
-         VALUE 'Click here!' + CRLF + 'or drag Dog.';
-         ACTION SetPlayImage( 0 );
-         HEIGHT 40;
+      @ 200, 40 LABEL label_1 ;
+         VALUE 'Click here!' + CRLF + 'or drag Dog.' ;
+         ACTION SetPlayImage( 0 ) ;
+         HEIGHT 40 ;
          TRANSPARENT
 
       DEFINE TIMER Timer_1 ;

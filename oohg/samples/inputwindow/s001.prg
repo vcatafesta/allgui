@@ -113,7 +113,7 @@ FUNCTION Capture()
    *    Numeric: array or string. If it's an array, a combobox control is used
    *       for capture and the array content is used as items in the combobox.
    *       If it's a string (or memo) a numeric textbox is used for capture.
-   *       If the string contains a decimal point, it's content is used as mask;
+   *       If the string contains a decimal point, it's content is used as mask ;
    *       if not, the string length is used as the maximum length to capture.
    *    String: numeric. If the value is less than or equal to 32 a textbox is
    *       used for the capture, if is greater an editbox control is used.

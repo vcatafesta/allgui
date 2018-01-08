@@ -27,7 +27,7 @@ FUNCTION Main
          MAXLENGTH 255 ;
          ON CHANGE ShowRowCol() ;
          DISABLEDBACKCOLOR { 0,0,255} ;
-         nohscroll;
+         nohscroll ;
          DISABLEDFONTCOLOR { 0,255,0 }
 
       DEFINE BUTTON B

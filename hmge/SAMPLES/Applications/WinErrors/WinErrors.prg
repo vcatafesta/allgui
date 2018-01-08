@@ -67,7 +67,7 @@ PROCEDURE Main
 
       @ 200,10 IMAGE Image_1 ;
          PICTURE 'LOGO' ;
-         ON CLICK Form_1.Text_1.SetFocus;
+         ON CLICK Form_1.Text_1.SetFocus ;
          WIDTH 317 HEIGHT 105
 
       @ 268,182 TEXTBOX Text_1 ;

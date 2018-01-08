@@ -52,7 +52,7 @@ Returns:
 
 Syntax:
 -------
-MCHOICE(aOptions,[nTop,nLeft],[nBottom,nRight],[cTitle],[lTrigger],;
+MCHOICE(aOptions,[nTop,nLeft],[nBottom,nRight],[cTitle],[lTrigger], ;
 [nStart],[@nRow],[aSelectable])
 
 Description:
@@ -167,18 +167,18 @@ FUNCTION mchoice(aOptions,nTop,nLeft,nBottom,nRight,cTitle,lAlpha,nStart,nRow,aS
    ENDIF
 
    IF _H_Modal
-      DEFINE WINDOW Mchoice;
+      DEFINE WINDOW Mchoice ;
             AT ntop,nLeft   ;
             WIDTH 500 HEIGHT 400 ;
-            TITLE cTitle;
+            TITLE cTitle ;
             MODAL NOSIZE NOSYSMENU
       ELSE
          DEFINE WINDOW Mchoice ;
                AT nTop, nLeft ;
                WIDTH 500 HEIGHT 400 ;
-               TITLE cTitle;
+               TITLE cTitle ;
                NOMINIMIZE ;
-               NOMAXIMIZE;
+               NOMAXIMIZE ;
                FONT "MS Sans Serif" SIZE 10 ;
                CHILD
          ENDIF
@@ -189,17 +189,17 @@ FUNCTION mchoice(aOptions,nTop,nLeft,nBottom,nRight,cTitle,lAlpha,nStart,nRow,aS
          ON KEY ESCAPE OF Mchoice  ACTION Mchoice.RELEASE
 
          DEFINE TBROWSE oLbx AT 10,15  ;
-            OF Mchoice WIDTH 470 HEIGHT 290 CELLED;
-            COLORS  {CLR_BLACK, CLR_NBLUE};
-            ON DBLCLICK If( aSelectable[oLbx:nAt],;
-            if(multi=.F.,(ritorna:=oLbx:nAt,Mchoice.release),ritorna := olbx:aSelected);
+            OF Mchoice WIDTH 470 HEIGHT 290 CELLED ;
+            COLORS  {CLR_BLACK, CLR_NBLUE} ;
+            ON DBLCLICK If( aSelectable[oLbx:nAt], ;
+            if(multi=.F.,(ritorna:=oLbx:nAt,Mchoice.release),ritorna := olbx:aSelected) ;
             ,MsgStop("Not Allowed!","Action Info") )
 
          oLbx:SetArray( aOptions ) // this is necessary to work with arrays
 
          bColor := { || If( aSelectable[oLbx:nAt], rgb(255,255,190) , rgb(215,215,190) ) }
 
-         ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 1;
+         ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 1 ;
             TITLE "" ;
             SIZE 435 ;                // this column is editable
             COLORS CLR_BLACK, bColor; // background color from a Code Block
@@ -214,7 +214,7 @@ FUNCTION mchoice(aOptions,nTop,nLeft,nBottom,nRight,cTitle,lAlpha,nStart,nRow,aS
                ALIGN DT_CENTER           // cells, title, footer
 
             oLbx:SetSelectMode( multi , { | oBrw, nI, lSel | ;
-               ( Tone( If( lSel, 500, 100 ) );
+               ( Tone( If( lSel, 500, 100 ) ) ;
                ,dSel += if(lsel,1,-1),oLbx:DrawFooters() ) }, ;
                aBmp[ 1 ], len(olbx: aColumns), DT_RIGHT )
          ENDIF
@@ -230,7 +230,7 @@ FUNCTION mchoice(aOptions,nTop,nLeft,nBottom,nRight,cTitle,lAlpha,nStart,nRow,aS
          WIDTH  100
          HEIGHT 35
          CAPTION "&Ok"
-         ACTION (If( aSelectable[oLbx:nAt],( if(multi=.F.,ritorna:=oLbx:nAt,ritorna := olbx:aSelected),Mchoice.release);
+         ACTION (If( aSelectable[oLbx:nAt],( if(multi=.F.,ritorna:=oLbx:nAt,ritorna := olbx:aSelected),Mchoice.release) ;
             ,MsgStop("Not Allowed!","Action Info") ) )
          FONTNAME "Arial"
          FONTSIZE 9
@@ -351,18 +351,18 @@ FUNCTION TagIt(aTagged, aFields, aFieldNames, cTitle, nFreeze, cell,nHw,nVw)
 
    IF !IsWIndowDefined ( "TAGIT" )
       IF _H_Modal
-         DEFINE WINDOW Tagit;
+         DEFINE WINDOW Tagit ;
                AT 100,100   ;
                WIDTH nHw HEIGHT nVw-50 ;
-               TITLE cTitle;
+               TITLE cTitle ;
                MODAL NOSIZE NOSYSMENU
          ELSE
             DEFINE WINDOW Tagit ;
                   AT 100, 100 ;
                   WIDTH nHw HEIGHT nVw-50 ;
-                  TITLE cTitle;
+                  TITLE cTitle ;
                   NOMINIMIZE ;
-                  NOMAXIMIZE;
+                  NOMAXIMIZE ;
                   FONT "MS Sans Serif" SIZE 10 ;
                   CHILD
             ENDIF
@@ -374,10 +374,10 @@ FUNCTION TagIt(aTagged, aFields, aFieldNames, cTitle, nFreeze, cell,nHw,nVw)
                ALIAS cAlias WIDTH nBrwWidth-20 HEIGHT nBrwHeight ;
                COLORS {CLR_BLACK, CLR_NBLUE}
 
-            ADD COLUMN TO TBROWSE oTag DATA " ";
+            ADD COLUMN TO TBROWSE oTag DATA " " ;
                TITLE "" ;
                SIZE 18  ;
-               COLORS CLR_BLACK, rgb(255,255,190);
+               COLORS CLR_BLACK, rgb(255,255,190) ;
                ALIGN DT_CENTER ;
 
             oTag:LoadFields( .F., aFields )

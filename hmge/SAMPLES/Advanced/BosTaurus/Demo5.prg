@@ -19,17 +19,17 @@ FUNCTION MAIN
 
    PRIVATE Flag_AlphaBlend_Effect := .T.
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  800;
-         HEIGHT 600;
-         VIRTUAL WIDTH  BT_DesktopWidth  () + 100;
-         VIRTUAL HEIGHT BT_DesktopHeight () + 150;
-         TITLE "Demo5: CaptureDesktop, AlphaBlend, Grayness and Brightness";
-         MAIN;
-         ON RELEASE Proc_ON_RELEASE ();
-         ON PAINT   Proc_ON_PAINT   ();
-         ON SIZE      BT_ClientAreaInvalidateAll ("Win1");
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  800 ;
+         HEIGHT 600 ;
+         VIRTUAL WIDTH  BT_DesktopWidth  () + 100 ;
+         VIRTUAL HEIGHT BT_DesktopHeight () + 150 ;
+         TITLE "Demo5: CaptureDesktop, AlphaBlend, Grayness and Brightness" ;
+         MAIN ;
+         ON RELEASE Proc_ON_RELEASE () ;
+         ON PAINT   Proc_ON_PAINT   () ;
+         ON SIZE      BT_ClientAreaInvalidateAll ("Win1") ;
          ON MAXIMIZE  BT_ClientAreaInvalidateAll ("Win1")
 
       DEFINE MAIN MENU

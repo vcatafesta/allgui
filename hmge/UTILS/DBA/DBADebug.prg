@@ -5,7 +5,7 @@
 PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
    MsgBox("Ýnþallah bir gün" + CRLF2 + ;
-      IF(cMesaj#NIL,cMesaj,PROCNAME(1)) + CRLF2 +;
+      IF(cMesaj#NIL,cMesaj,PROCNAME(1)) + CRLF2 + ;
       "Ýþi de olacak ..." )
    RETU // ToDo()
 
@@ -39,14 +39,14 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
    PROC DispAnyA( aArry, cTitle, lHex )                  // Display any (dim/elem/type) array
 
-      LOCA aDispArr  := {},;
-         cDispArr  := "",;
-         nCounter  :=  0,;
-         cMsgEmpt  := 'Arry is Empty',;
-         cWinTitle := PROCNAME(1) + "\" + NTrim( PROCLINE(1) ),;
-         cCmd1Head := 'Save',;
-         cCmd2Head := 'Print',;
-         cCmd3Head := 'Close',;
+      LOCA aDispArr  := {}, ;
+         cDispArr  := "", ;
+         nCounter  :=  0, ;
+         cMsgEmpt  := 'Arry is Empty', ;
+         cWinTitle := PROCNAME(1) + "\" + NTrim( PROCLINE(1) ), ;
+         cCmd1Head := 'Save', ;
+         cCmd2Head := 'Print', ;
+         cCmd3Head := 'Close', ;
          nMaxLengt := 0
 
       IF cTitle == NIL
@@ -159,8 +159,8 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
          */
          PROC USavKatr( cKatar, cTitle)
 
-            LOCA cFileNam := "",;
-               lKaydet  := .T.,;
+            LOCA cFileNam := "", ;
+               lKaydet  := .T., ;
                cAra1Rehbr := GetCurrentFolder()
 
             DEFAULT cTitle TO "Dosya Kaydet"
@@ -186,8 +186,8 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                LOCA nWinLen := 0 , n
 
-               LOCAL mPageNo := 0 ,;
-                  mLineNo := 0 ,;
+               LOCAL mPageNo := 0 , ;
+                  mLineNo := 0 , ;
                   mPrinter
 
                mPrinter := GetPrinter()
@@ -239,13 +239,13 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                FUNC SayBekle( xMesaj, cTitle )
 
-                  LOCA cMesaj  := "",;
-                     nWinLen := 0 ,;
-                     nWinHig := 0 ,;
+                  LOCA cMesaj  := "", ;
+                     nWinLen := 0 , ;
+                     nWinHig := 0 , ;
                      lRVal
 
-                  LOCA cCmd1Head := 'Save',;
-                     cCmd2Head := 'Print',;
+                  LOCA cCmd1Head := 'Save', ;
+                     cCmd2Head := 'Print', ;
                      cCmd3Head := 'Close'
 
                   DEFAULT cTitle TO PROCNAME(1) + "\" +   NTrim( PROCLINE(1) )
@@ -359,7 +359,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                      */
                      PROC WhereIsIt()
 
-                        LOCA nLevel   := 0,;
+                        LOCA nLevel   := 0, ;
                            cMessage := ''
 
                         WHILE !(PROCNAME(++nLevel) == "")
@@ -374,19 +374,19 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                         *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-                        FUNC DisKunye(;
-                              cDisKod,;
+                        FUNC DisKunye( ;
+                              cDisKod, ;
                               nInfTyp )  // 0/NIL : Volume Serial ( In Hex ), 1: Volum Label, 2: Serial + Label
 
-                           LOCA cLabel  := '',;
-                              cVolSer := '',;
-                              cRVal   := '',;
-                              cComand := '',;
-                              cFName1 := TempFile( ,'bat' ),;
-                              cFName2 := TempFile( ,'tmp' ),;
+                           LOCA cLabel  := '', ;
+                              cVolSer := '', ;
+                              cRVal   := '', ;
+                              cComand := '', ;
+                              cFName1 := TempFile( ,'bat' ), ;
+                              cFName2 := TempFile( ,'tmp' ), ;
                               cDisKun
 
-                           DEFAULT cDisKod TO "C",;
+                           DEFAULT cDisKod TO "C", ;
                               nInfTyp TO  0
 
                            cDisKod += IF( ":" $ cDisKod, '', ':' )
@@ -418,11 +418,11 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                            *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                            FUNC TempFile( ;
-                                 cDirName,;
+                                 cDirName, ;
                                  cExtentn )
 
-                              LOCA cSeconds := '',;
-                                 cRVal    := '',;
+                              LOCA cSeconds := '', ;
+                                 cRVal    := '', ;
                                  lLoop    := .T.
 
                               DEFAULT cDirName TO GetTempFolder()
@@ -453,7 +453,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                               PROC FileWipe( ;                          // Wipe out file(s)
                                     aFile )  // File(s) name
 
-                                 LOCA nFInd := 0,;
+                                 LOCA nFInd := 0, ;
                                     c1Fil := ''
 
                                  IF ISCHAR( aFile )
@@ -537,16 +537,16 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                                     FUNC Any2Strg( xAny )
 
-                                       LOCA cRVal  := '???',;
-                                          nType  :=  0,;
-                                          aCases := { { "A", { || "{...}" } },;
-                                          { "B", { || "{||}" } },;
-                                          { "C", { | x | x }},;
-                                          { "M", { | x | x   } },;
-                                          { "D", { | x | DTOC( x ) } },;
-                                          { "L", { | x | IF( x,".T.",".F.") } },;
-                                          { "N", { | x | NTrim( x )  } },;
-                                          { "O", { || ":Object:" } },;
+                                       LOCA cRVal  := '???', ;
+                                          nType  :=  0, ;
+                                          aCases := { { "A", { || "{...}" } }, ;
+                                          { "B", { || "{||}" } }, ;
+                                          { "C", { | x | x }}, ;
+                                          { "M", { | x | x   } }, ;
+                                          { "D", { | x | DTOC( x ) } }, ;
+                                          { "L", { | x | IF( x,".T.",".F.") } }, ;
+                                          { "N", { | x | NTrim( x )  } }, ;
+                                          { "O", { || ":Object:" } }, ;
                                           { "U", { || "<NIL>" } } }
 
                                        IF (nType := ASCAN( aCases, { | a1 | VALTYPE( xAny ) == a1[ 1 ] } ) ) > 0
@@ -559,7 +559,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                                        FUNC HL_MAXLINE( cString )
 
-                                          LOCA nRVal := 0,;
+                                          LOCA nRVal := 0, ;
                                              c1Lin := ''
 
                                           WHILE !EMPTY( cString )
@@ -573,7 +573,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                                           FUNC HL_NUMLINE( cString )
 
-                                             LOCA nRVal := 0,;
+                                             LOCA nRVal := 0, ;
                                                 c1Lin := ''
 
                                              WHILE !EMPTY( cString )
@@ -587,12 +587,12 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                                              FUNC IndxInfA( nWArea )
 
-                                                LOCA aRVal    := {},;
-                                                   nBagNo   :=  0,;
-                                                   nOrdNo   :=  0,;
-                                                   cBagName := '',;
-                                                   cOrdName := '',;
-                                                   cOrdKey  := '',;
+                                                LOCA aRVal    := {}, ;
+                                                   nBagNo   :=  0, ;
+                                                   nOrdNo   :=  0, ;
+                                                   cBagName := '', ;
+                                                   cOrdName := '', ;
+                                                   cOrdKey  := '', ;
                                                    nCurWA   := SELECT()
 
                                                 DEFAULT nWArea TO SELECT()
@@ -620,17 +620,17 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                                                 FUNC IndxInfC( nWArea )                   // Indeks info, Verbose
 
-                                                   LOCA aIndxs := IndxInfA( nWArea ),;
-                                                      cAlias := ALIAS( nWArea ),;
-                                                      cRVal  := 'Indexs :',;
-                                                      a1Bag  := {},;
-                                                      aOrds  := {},;
-                                                      a1Ord  := {},;
-                                                      nBag   :=  0,;
-                                                      nOrd   :=  0,;
-                                                      cBag   := '',;
-                                                      cOrd   := '',;
-                                                      cKey   := '',;
+                                                   LOCA aIndxs := IndxInfA( nWArea ), ;
+                                                      cAlias := ALIAS( nWArea ), ;
+                                                      cRVal  := 'Indexs :', ;
+                                                      a1Bag  := {}, ;
+                                                      aOrds  := {}, ;
+                                                      a1Ord  := {}, ;
+                                                      nBag   :=  0, ;
+                                                      nOrd   :=  0, ;
+                                                      cBag   := '', ;
+                                                      cOrd   := '', ;
+                                                      cKey   := '', ;
                                                       lCur   := .F.
 
                                                    FOR nBag := 1 TO LEN( aIndxs )
@@ -665,25 +665,25 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                                                    PROC DBStatus()
 
-                                                      LOCA nCurSel   := SELECT(),;
-                                                         cAlias    := '',;
-                                                         cDBFExtn  := '',;
-                                                         cDBFName  := '',;
-                                                         dLastUpt  := DATE(),;
-                                                         nHeadSiz  :=  0,;
-                                                         nFldCoun  :=  0,;
-                                                         nRecSize  :=  0,;
-                                                         nRecCoun  :=  0,;
-                                                         nCurRecN  :=  0,;
-                                                         cOrdBagEx := '',;
-                                                         cRDDName  := '',;
-                                                         aIndekss  := {},;
-                                                         nOrdCoun  :=  0,;
-                                                         aOrdBags  := {},;
+                                                      LOCA nCurSel   := SELECT(), ;
+                                                         cAlias    := '', ;
+                                                         cDBFExtn  := '', ;
+                                                         cDBFName  := '', ;
+                                                         dLastUpt  := DATE(), ;
+                                                         nHeadSiz  :=  0, ;
+                                                         nFldCoun  :=  0, ;
+                                                         nRecSize  :=  0, ;
+                                                         nRecCoun  :=  0, ;
+                                                         nCurRecN  :=  0, ;
+                                                         cOrdBagEx := '', ;
+                                                         cRDDName  := '', ;
+                                                         aIndekss  := {}, ;
+                                                         nOrdCoun  :=  0, ;
+                                                         aOrdBags  := {}, ;
                                                          nOrdBCou  :=  0
 
-                                                      LOCA nSInfoNo  := 0,;
-                                                         cStatus   := '',;
+                                                      LOCA nSInfoNo  := 0, ;
+                                                         cStatus   := '', ;
                                                          cHaTahdt  := REPL( ".-._", 13 ) + ".",;  // Hatt-ý tahdid
                                                          nWANo
 
@@ -691,21 +691,21 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                                                          SELECT( nWANo )
                                                          IF !EMPTY( ALIAS() )
 
-                                                            cStatus  +=  PADL( 'Work Area No : ',    19 ) + NTrim( SELE() )     +;
-                                                               IF( nWANo == nCurSel, " (*)", '')+ CRLF +;
-                                                               PADL( 'RDD Name : ',        19 ) + RDDNAME()           + CRLF+;
-                                                               PADL( 'Table Extention : ', 19 ) + DBINFO(  9 )        + CRLF+;
-                                                               PADL( 'Bag Extention : ',   19 ) + ORDBAGEXT()         + CRLF+;
-                                                               PADL( 'Table Name : ',      19 ) + ExOFNFFP( DBINFO( 10 ) ) + CRLF+;
-                                                               PADL( 'Table Full Name : ', 19 ) + DBINFO( 10 )        + CRLF+;
-                                                               PADL( 'Alias : ',           19 ) + ALIAS()             + CRLF+;
-                                                               PADL( 'Last Update : ',     19 ) + DTOC( LUPDATE())    + CRLF+;
-                                                               PADL( 'Header Size : ',     19 ) + NTrim( HEADER() )   + CRLF+;
-                                                               PADL( 'Field Count : ',     19 ) + NTrim( FCOUNT() )   + CRLF+;
-                                                               PADL( 'Record Size : ',     19 ) + NTrim( RECSIZE() )  + CRLF+;
-                                                               PADL( 'Record Count : ',    19 ) + NTrim( LASTREC() )  + CRLF+;
-                                                               PADL( 'Current RecNo : ',   19 ) + NTrim( RECNO() )    + CRLF+;
-                                                               PADL( 'Current Order : ',   19 ) + NTrim( INDEXORD() ) + CRLF+;
+                                                            cStatus  +=  PADL( 'Work Area No : ',    19 ) + NTrim( SELE() )     + ;
+                                                               IF( nWANo == nCurSel, " (*)", '')+ CRLF + ;
+                                                               PADL( 'RDD Name : ',        19 ) + RDDNAME()           + CRLF+ ;
+                                                               PADL( 'Table Extention : ', 19 ) + DBINFO(  9 )        + CRLF+ ;
+                                                               PADL( 'Bag Extention : ',   19 ) + ORDBAGEXT()         + CRLF+ ;
+                                                               PADL( 'Table Name : ',      19 ) + ExOFNFFP( DBINFO( 10 ) ) + CRLF+ ;
+                                                               PADL( 'Table Full Name : ', 19 ) + DBINFO( 10 )        + CRLF+ ;
+                                                               PADL( 'Alias : ',           19 ) + ALIAS()             + CRLF+ ;
+                                                               PADL( 'Last Update : ',     19 ) + DTOC( LUPDATE())    + CRLF+ ;
+                                                               PADL( 'Header Size : ',     19 ) + NTrim( HEADER() )   + CRLF+ ;
+                                                               PADL( 'Field Count : ',     19 ) + NTrim( FCOUNT() )   + CRLF+ ;
+                                                               PADL( 'Record Size : ',     19 ) + NTrim( RECSIZE() )  + CRLF+ ;
+                                                               PADL( 'Record Count : ',    19 ) + NTrim( LASTREC() )  + CRLF+ ;
+                                                               PADL( 'Current RecNo : ',   19 ) + NTrim( RECNO() )    + CRLF+ ;
+                                                               PADL( 'Current Order : ',   19 ) + NTrim( INDEXORD() ) + CRLF+ ;
                                                                IndxInfC( nWANo ) + cHaTahdt + CRLF2
 
                                                          ENDIF !EMPTY( ALIAS() )

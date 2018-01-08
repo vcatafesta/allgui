@@ -12,46 +12,46 @@ programador : marcelo neves
 
 FUNCTION posicao_estoque()
 
-   DEFINE WINDOW form_estoque_produtos;
-         at 000,000;
-         WIDTH 400;
-         HEIGHT 250;
-         TITLE 'Posição do estoque (produtos)';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_estoque_produtos ;
+         at 000,000 ;
+         WIDTH 400 ;
+         HEIGHT 250 ;
+         TITLE 'Posição do estoque (produtos)' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
-      @ 010,010 label lbl_001;
-         of form_estoque_produtos;
-         VALUE 'Este relatório irá listar todos os produtos em estoque';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,010 label lbl_001 ;
+         of form_estoque_produtos ;
+         VALUE 'Este relatório irá listar todos os produtos em estoque' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,010 label lbl_002;
-         of form_estoque_produtos;
-         VALUE 'mostrando a quantidade atual disponível de cada um.';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,010 label lbl_002 ;
+         of form_estoque_produtos ;
+         VALUE 'mostrando a quantidade atual disponível de cada um.' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 050,010 label lbl_003;
-         of form_estoque_produtos;
-         VALUE 'Somente produtos que não sejam - pizza -';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 050,010 label lbl_003 ;
+         of form_estoque_produtos ;
+         VALUE 'Somente produtos que não sejam - pizza -' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 070,010 label lbl_004;
-         of form_estoque_produtos;
-         VALUE 'aparecerão no relatório.';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 070,010 label lbl_004 ;
+         of form_estoque_produtos ;
+         VALUE 'aparecerão no relatório.' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
 
       * linha separadora

@@ -48,53 +48,53 @@ FUNCTION EditarDBF()
 
 STATIC FUNCTION CreaBR()
 
-   DEFINE WINDOW Win_2;
-         AT 0,0;
-         WIDTH 1024;
-         HEIGHT 768;
-         TITLE Upper( cArchivo );
-         MODAL;
+   DEFINE WINDOW Win_2 ;
+         AT 0,0 ;
+         WIDTH 1024 ;
+         HEIGHT 768 ;
+         TITLE Upper( cArchivo ) ;
+         MODAL ;
          ON RELEASE ( DBCLOSEALL(), Ferase ('Aux1.CDX') )
 
       DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 58,36 IMAGESIZE 20,20  FLAT BORDER
-         BUTTON PRIMERO;
+         BUTTON PRIMERO ;
             CAPTION '&Primero'   ;
-            PICTURE 'PRIMERO';
+            PICTURE 'PRIMERO' ;
             ACTION ( _BrowseHome('BR_1', 'Win_2') , Win_2.BR_1.Value := RecNo() )
 
-         BUTTON ANTERIOR;
-            CAPTION '&Anterior';
-            PICTURE 'ANTERIOR';
+         BUTTON ANTERIOR ;
+            CAPTION '&Anterior' ;
+            PICTURE 'ANTERIOR' ;
             ACTION ( _BrowseUp('BR_1', 'Win_2') , Win_2.BR_1.Value := RecNo() )
 
-         BUTTON SIGUIENTE;
-            CAPTION '&Siguiente';
-            PICTURE 'SIGUIENTE';
+         BUTTON SIGUIENTE ;
+            CAPTION '&Siguiente' ;
+            PICTURE 'SIGUIENTE' ;
             ACTION ( _BrowseDown('BR_1', 'Win_2') , Win_2.BR_1.Value := RecNo() )
 
-         BUTTON ULTIMO;
-            CAPTION '&Ultimo';
-            PICTURE 'ULTIMO';
+         BUTTON ULTIMO ;
+            CAPTION '&Ultimo' ;
+            PICTURE 'ULTIMO' ;
             ACTION ( _BrowseEnd('BR_1', 'Win_2') , Win_2.BR_1.Value := RecNo() ) SEPARATOR
 
-         BUTTON NUEVO;
-            CAPTION '&Nuevo';
-            PICTURE 'NUEVO1';
+         BUTTON NUEVO ;
+            CAPTION '&Nuevo' ;
+            PICTURE 'NUEVO1' ;
             ACTION ( Nuevo() )
 
-         BUTTON DELE;
-            CAPTION '&Borrar';
-            PICTURE 'BORRAR';
+         BUTTON DELE ;
+            CAPTION '&Borrar' ;
+            PICTURE 'BORRAR' ;
             ACTION ( Borrar() )
 
-         BUTTON ZAP;
-            CAPTION '&Pack';
-            PICTURE 'BORRAR';
+         BUTTON ZAP ;
+            CAPTION '&Pack' ;
+            PICTURE 'BORRAR' ;
             ACTION ( BorrarTodo() )
 
-         BUTTON CERRAR;
-            CAPTION '&Cerrar';
-            PICTURE 'CERRAR1';
+         BUTTON CERRAR ;
+            CAPTION '&Cerrar' ;
+            PICTURE 'CERRAR1' ;
             ACTION ( cArchivo := '', Win_2.release )
 
       END TOOLBAR
@@ -108,16 +108,16 @@ STATIC FUNCTION CreaBR()
       @ 60,880 LABEL LABEL_3 VALUE 'Filtrar:' AUTOSIZE
       @ 51,940 BUTTON FILTRAR CAPTION '' PICTURE 'FILTRAR' WIDTH 38 HEIGHT 38 TOP TOOLTIP 'Seleccionar registros' ACTION ( Filtrar() )
 
-      @ 90,10 BROWSE BR_1;
-         WIDTH ( Win_2.width-38 );
-         HEIGHT ( Win_2.height-135 );
-         WIDTHS aLong;
-         HEADERS aHdr;
-         WORKAREA &(cBase);
-         FIELDS aNomb;
-         JUSTIFY aJust;
-         INPLACE;
-         PAINTDOUBLEBUFFER;
+      @ 90,10 BROWSE BR_1 ;
+         WIDTH ( Win_2.width-38 ) ;
+         HEIGHT ( Win_2.height-135 ) ;
+         WIDTHS aLong ;
+         HEADERS aHdr ;
+         WORKAREA &(cBase) ;
+         FIELDS aNomb ;
+         JUSTIFY aJust ;
+         INPLACE ;
+         PAINTDOUBLEBUFFER ;
          ON DBLCLICK ( Win_2.BR_1.AllowEdit := .T. )
 
    END WINDOW

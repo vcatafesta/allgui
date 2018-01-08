@@ -38,7 +38,7 @@ PROCEDURE main()
       @ 080,030 TEXTBOX Text_1 VALUE "" WIDTH 30 NOTABSTOP
 
       @ 020,080 SLIDER Sld_1  ;
-         RANGE 1, 15;
+         RANGE 1, 15 ;
          VALUE 1 ;
          WIDTH 26  ;
          HEIGHT 155 ;

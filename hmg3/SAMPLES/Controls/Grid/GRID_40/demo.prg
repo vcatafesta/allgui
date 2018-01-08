@@ -60,17 +60,17 @@ FUNCTION Main
          @ 50,10 GRID Grid_1 ;
             WIDTH 750 ;
             HEIGHT 140 ;
-            HEADERS {'Last Name', 'First Name', '*--- Phone ----------------*', 'Row', 'Time'};
-            WIDTHS  {140, 140, 40, 140, 140};
-            ITEMS aRows;
-            BACKCOLOR BLACK;
-            FONTCOLOR WHITE;
-            BOLD;
-            COLUMNCONTROLS {NIL,NIL,NIL, { 'SPINNER', 0 , 50 }, { "TIMEPICKER", _TIMESHORT12H }};
-            VALUE 1 EDIT;
-            DYNAMICBACKCOLOR {bColor, bColor, bColor, bColor, bColor};
-            DYNAMICFORECOLOR {fColor, fColor, fColor, fColor, fColor};
-            TOOLTIP 'Editable Grid Control';
+            HEADERS {'Last Name', 'First Name', '*--- Phone ----------------*', 'Row', 'Time'} ;
+            WIDTHS  {140, 140, 40, 140, 140} ;
+            ITEMS aRows ;
+            BACKCOLOR BLACK ;
+            FONTCOLOR WHITE ;
+            BOLD ;
+            COLUMNCONTROLS {NIL,NIL,NIL, { 'SPINNER', 0 , 50 }, { "TIMEPICKER", _TIMESHORT12H }} ;
+            VALUE 1 EDIT ;
+            DYNAMICBACKCOLOR {bColor, bColor, bColor, bColor, bColor} ;
+            DYNAMICFORECOLOR {fColor, fColor, fColor, fColor, fColor} ;
+            TOOLTIP 'Editable Grid Control' ;
             CELLNAVIGATION
 
          Form_1.Grid_1.ColumnHEADER (1) :=  "--- Last Name ---"
@@ -102,10 +102,10 @@ FUNCTION Main
 
          @ 350, 275 LABEL Label_1 VALUE "" AUTOSIZE
 
-         @ 350, 100 TIMEPICKER TimePicker_1  VALUE "04:30:33 pm" FORMAT _TIMELONG24H SHOWNONE WIDTH 130 FONT "Times New Roman" SIZE 12 BOLD ITALIC UNDERLINE STRIKEOUT TOOLTIP "Clock...";
-            ON GOTFOCUS  {||Form_1.Label_1.Value := "TimePicker1 GotFocus"};
-            ON CHANGE    {||Form_1.Label_1.Value := "TimePicker1 Change"};
-            ON LOSTFOCUS {||Form_1.Label_1.Value := "TimePicker1 LostFocus"};
+         @ 350, 100 TIMEPICKER TimePicker_1  VALUE "04:30:33 pm" FORMAT _TIMELONG24H SHOWNONE WIDTH 130 FONT "Times New Roman" SIZE 12 BOLD ITALIC UNDERLINE STRIKEOUT TOOLTIP "Clock..." ;
+            ON GOTFOCUS  {||Form_1.Label_1.Value := "TimePicker1 GotFocus"} ;
+            ON CHANGE    {||Form_1.Label_1.Value := "TimePicker1 Change"} ;
+            ON LOSTFOCUS {||Form_1.Label_1.Value := "TimePicker1 LostFocus"} ;
             ON ENTER     {||Form_1.Label_1.Value := "TimePicker1 Enter"}
 
          @ 400,  50 BUTTON Button_5 CAPTION "GetTimePicker#1" ACTION MsgInfo({"Value: ",Form_1.TimePicker_1.Value, " Format: ", Form_1.TimePicker_1.Format})
@@ -190,7 +190,7 @@ FUNCTION Main
          WIDTH 400 ;
          HEIGHT 300 ;
          TITLE "Demo: Enable/Disable Window/Control Event" ;
-         ON GOTFOCUS Form_ONGOTFOCUS();
+         ON GOTFOCUS Form_ONGOTFOCUS() ;
          MAIN
 
       @ 50,  50 BUTTON Button_1 CAPTION "Click" ACTION MsgInfo ("Hello")

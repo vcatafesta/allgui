@@ -40,11 +40,11 @@ FUNCTION Main
             ITEM 'Exit'   ACTION Form_1.Release
          END POPUP
          POPUP 'Help'
-            ITEM 'About'   ACTION MsgInfo ("MINIGUI - Browse Demo"+CRLF+;
-               "Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>"+CRLF+;
-               "http://harbourminigui.googlepages.com/"+CRLF+CRLF+;
-            "Update 2002 Interativo Networks <xharbour@terra.com.br>"+CRLF+;
-               "Daniel Crocciari"+CRLF+;
+            ITEM 'About'   ACTION MsgInfo ("MINIGUI - Browse Demo"+CRLF+ ;
+               "Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>"+CRLF+ ;
+               "http://harbourminigui.googlepages.com/"+CRLF+CRLF+ ;
+            "Update 2002 Interativo Networks <xharbour@terra.com.br>"+CRLF+ ;
+               "Daniel Crocciari"+CRLF+ ;
                "http://www.ihpz.net", "About" )
          END POPUP
       END MENU
@@ -207,9 +207,9 @@ FUNCTION ButtonDeleteClick()
 
    GOTO vRecno
 
-   IF MsgYesNo( "Delete This Record?"+CRLF+CRLF+;
-         "Code: "+alltrim(str(Teste->Code))+CRLF+;
-         "First Name: "+alltrim(Teste->First)+CRLF+;
+   IF MsgYesNo( "Delete This Record?"+CRLF+CRLF+ ;
+         "Code: "+alltrim(str(Teste->Code))+CRLF+ ;
+         "First Name: "+alltrim(Teste->First)+CRLF+ ;
          "Last Name: "+alltrim(Teste->Last), "Confirmation" )
       DELETE
       SKIP -1

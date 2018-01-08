@@ -58,24 +58,24 @@ DECLARE  GetNumberofTableItems( cBuffer AS STRING ) AS NUMERIC
 DECLARE  FREADline( nH AS NUMERIC, @cB AS STRING, nMaxLine AS NUMERIC )
 //DECLARE  HBMAKE_FILEBASE() AS OBJECT
 DECLARE  HBMAKE_FILEBASE ;
-   New( cname AS STRING) AS CLASS HBMAKE_FILEBASE;
-   FOPEN()   AS OBJECT;
-   CLOSEfile() AS OBJECT;
-   fskip( OPTIONAL n  AS NUMERIC)  AS OBJECT;
-   FWRITE( c AS STRING) AS OBJECT;
-   retrieve() AS STRING;
-   fgoTop()      AS OBJECT;
-   fgoBottom()     AS OBJECT;
-   fgoto()    AS NUMERIC;
-   create() AS OBJECT;
-   fappendByte( cByte )    AS OBJECT;
-   BuffGet METHOD BufferGet( OPTIONAL lDirection AS LOGICAL ) AS NUMERIC;
-   SKIP( OPTIONAL nRecord AS NUMERIC )                  AS OBJECT;
-   WRITE( cChar AS STRING )                   AS OBJECT;
-   goTop()                          AS OBJECT;
-   goBottom()                       AS OBJECT;
-   GOTO( OPTIONAL nValue AS NUMERIC)                   AS NUMERIC;
-   OPEN()                           AS OBJECT;
+   New( cname AS STRING) AS CLASS HBMAKE_FILEBASE ;
+   FOPEN()   AS OBJECT ;
+   CLOSEfile() AS OBJECT ;
+   fskip( OPTIONAL n  AS NUMERIC)  AS OBJECT ;
+   FWRITE( c AS STRING) AS OBJECT ;
+   retrieve() AS STRING ;
+   fgoTop()      AS OBJECT ;
+   fgoBottom()     AS OBJECT ;
+   fgoto()    AS NUMERIC ;
+   create() AS OBJECT ;
+   fappendByte( cByte )    AS OBJECT ;
+   BuffGet METHOD BufferGet( OPTIONAL lDirection AS LOGICAL ) AS NUMERIC ;
+   SKIP( OPTIONAL nRecord AS NUMERIC )                  AS OBJECT ;
+   WRITE( cChar AS STRING )                   AS OBJECT ;
+   goTop()                          AS OBJECT ;
+   goBottom()                       AS OBJECT ;
+   GOTO( OPTIONAL nValue AS NUMERIC)                   AS NUMERIC ;
+   OPEN()                           AS OBJECT ;
    APPEND(OPTIONAL cline AS STRING) AS OBJECT
 
 STATIC TheHandle As Object

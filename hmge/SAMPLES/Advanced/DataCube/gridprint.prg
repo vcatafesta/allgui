@@ -731,16 +731,16 @@ FUNCTION printstart
    ENDCASE
 
    IF printgrid.pagesizes.value == 6 // custom
-      SELECT PRINTER printername TO psuccess ORIENTATION IIf(printgrid.paperorientation.value == 1,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT);
-         PAPERSIZE papersize;
-         PAPERLENGTH printgrid.height.value;
-         PAPERWIDTH printgrid.width.value;
-         COPIES 1;
+      SELECT PRINTER printername TO psuccess ORIENTATION IIf(printgrid.paperorientation.value == 1,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) ;
+         PAPERSIZE papersize ;
+         PAPERLENGTH printgrid.height.value ;
+         PAPERWIDTH printgrid.width.value ;
+         COPIES 1 ;
          PREVIEW
    ELSE
-      SELECT PRINTER printername TO psuccess ORIENTATION IIf(printgrid.paperorientation.value == 1,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT);
-         PAPERSIZE papersize;
-         COPIES 1;
+      SELECT PRINTER printername TO psuccess ORIENTATION IIf(printgrid.paperorientation.value == 1,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) ;
+         PAPERSIZE papersize ;
+         COPIES 1 ;
          PREVIEW
    ENDIF
    IF .not. psuccess

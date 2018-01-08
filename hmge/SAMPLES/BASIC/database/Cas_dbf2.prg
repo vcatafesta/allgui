@@ -88,7 +88,7 @@ FUNCTION Main
          ON DBLCLICK cas_del() ;
          BACKCOLOR {0,255,0}
       * msginfo( ;
-      * 'this.value = ' + str(this.value) +chr(13)+;
+      * 'this.value = ' + str(this.value) +chr(13)+ ;
       * 'this.item( this.value ) = ' + this.item(this.value) )
       @ 050,294 button btn_cima  caption 'Up'   width 44 height 55 action f_up_down(-1)
       @ 104,294 button btn_baixo caption 'Down' width 44 height 56 action f_up_down(+1)
@@ -122,7 +122,7 @@ FUNCTION Main
       nn := form_1.ListBox_2.value
       xx := form_1.ListBox_2.item( nn )
 
-      IF ( n_op = -1 .and. nn # 1      ) .or.;
+      IF ( n_op = -1 .and. nn # 1      ) .or. ;
             ( n_op =  1 .and. nn # n_item )
          form_1.listbox_2.item( nn   ) := form_1.listbox_2.item( nn + n_op )
          form_1.listbox_2.item( nn + n_op ) := xx
@@ -291,9 +291,9 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
    LOCAL x_indice  := "Indice: " +alltrim(str(m_pos))
 
    Form_1.StatusBar.Item(1) := ;
-      x_indice + "   Indexing..." +;
-      cComplete + "%" +;
-      "     Time:" + elaptime( t_time , time() ) +' - '+;
+      x_indice + "   Indexing..." + ;
+      cComplete + "%" + ;
+      "     Time:" + elaptime( t_time , time() ) +' - '+ ;
       "    Total:" + elaptime( t_inicio , time() )
 
    RETURN .T.
@@ -302,9 +302,9 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
 
    func f_change
       Form_1.StatusBar.Item(1) := ;
-         'Recno '+alltrim(str(recno())) +' / '+;
-         alltrim(str(lastrec())) + ' Lastrec      Itens filtrado(s) = ' + alltrim(str(f_filtros())) +;
-         '       OrdKeyNo() = ' + alltrim(str( OrdKeyNo() )) +;
+         'Recno '+alltrim(str(recno())) +' / '+ ;
+         alltrim(str(lastrec())) + ' Lastrec      Itens filtrado(s) = ' + alltrim(str(f_filtros())) + ;
+         '       OrdKeyNo() = ' + alltrim(str( OrdKeyNo() )) + ;
          '       Porc = ' + alltrim(str( OrdKeyNo() / m_filtrado * 100 ) ) + '%'
       retu nil
 
@@ -335,10 +335,10 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
                LOCAL varios := .t.   && selecionar varios arquivos
 
                LOCAL arq_mp3 := GetFile ( { ;
-                  {'Files DBF' ,;
-                  '*.DBF;*.DBF'} ,;
-                  {'All Files .DBF' , '*.dbf'} ,;
-                  {'All Files .DBF' , '*.DBF'}  } ,;
+                  {'Files DBF' , ;
+                  '*.DBF;*.DBF'} , ;
+                  {'All Files .DBF' , '*.dbf'} , ;
+                  {'All Files .DBF' , '*.DBF'}  } , ;
                   'Open File DBF' , '' , varios , .t. )
 
                IF len( arq_mp3 ) = 0
@@ -440,11 +440,11 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
                         POPUP 'Arquivo'
                            ITEM 'Abrir'   ACTION f_read()
                            SEPARATOR
-                           ITEM 'Ajuda'    ACTION msginfo(;
-                              '1) Escolha o campo a ser indexado, utilize o duplo click'+chr(13)+;
-                              '2) "Indexar por" para excluir os campos, utilize o duplo click'+chr(13)+;
-                              '3) Click em um campo qualquer do browse'+chr(13)+;
-                              '4) Ele procurara pelo campo escolhido no browse'+chr(13)+;
+                           ITEM 'Ajuda'    ACTION msginfo( ;
+                              '1) Escolha o campo a ser indexado, utilize o duplo click'+chr(13)+ ;
+                              '2) "Indexar por" para excluir os campos, utilize o duplo click'+chr(13)+ ;
+                              '3) Click em um campo qualquer do browse'+chr(13)+ ;
+                              '4) Ele procurara pelo campo escolhido no browse'+chr(13)+ ;
                               '5) e indexara pelos campos escolhidos no "indexar por"','Ajuda')
                            ITEM 'AutoFit'   ACTION f_autofit()
                            ITEM 'Sair'   ACTION Form_1.Release

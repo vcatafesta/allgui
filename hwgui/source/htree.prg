@@ -342,8 +342,8 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit,
 
    nStyle   := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), WS_TABSTOP  + TVS_FULLROWSELECT + ; //TVS_TRACKSELECT+; //TVS_HASLINES +  ;
       TVS_LINESATROOT + TVS_HASBUTTONS  + TVS_SHOWSELALWAYS + ;
-      IIf( lEditLabels == Nil.OR. ! lEditLabels, 0, TVS_EDITLABELS ) +;
-      IIf( lCheckBox == Nil.OR. ! lCheckBox, 0, TVS_CHECKBOXES ) +;
+      IIf( lEditLabels == Nil.OR. ! lEditLabels, 0, TVS_EDITLABELS ) + ;
+      IIf( lCheckBox == Nil.OR. ! lCheckBox, 0, TVS_CHECKBOXES ) + ;
       IIF( ! lDragDrop, TVS_DISABLEDRAGDROP, 0 ) )
 
    ::sTyle := nStyle

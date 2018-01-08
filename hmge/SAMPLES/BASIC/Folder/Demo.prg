@@ -107,7 +107,7 @@ FUNCTION FolderInMemory(nMet,lMod)
                WIDTH 600  ;
                HEIGHT 350 ;
                FONT "Font_1" ;
-               CAPTION "Folder InMemory (MODAL)" MODAL;
+               CAPTION "Folder InMemory (MODAL)" MODAL ;
                ON INIT SetInitfolder()
          CASE nMet == 1
             DEFINE FOLDER &cFld OF MainForm  ;
@@ -115,8 +115,8 @@ FUNCTION FolderInMemory(nMet,lMod)
                WIDTH 600  ;
                HEIGHT 350 ;
                FONT "Font_1" ;
-               CAPTION "Folder InMemory (MODAL)" MODAL;
-               ON FOLDERPROC   {||  ApplyFolderClick() };
+               CAPTION "Folder InMemory (MODAL)" MODAL ;
+               ON FOLDERPROC   {||  ApplyFolderClick() } ;
                ON INIT SetInitfolder()
          CASE nMet == 2
             DEFINE FOLDER &cFld OF MainForm  ;
@@ -124,9 +124,9 @@ FUNCTION FolderInMemory(nMet,lMod)
                WIDTH 600  ;
                HEIGHT 350 ;
                FONT "Font_1" ;
-               CAPTION "Folder InMemory (MODAL)" MODAL;
+               CAPTION "Folder InMemory (MODAL)" MODAL ;
                ON FOLDERPROC   {||  ApplyFolderClick() } ;
-               ON CANCEL  {|| MsgInfo("Cancel Button") };
+               ON CANCEL  {|| MsgInfo("Cancel Button") } ;
                ON INIT SetInitfolder()
          CASE nMet == 3
             DEFINE FOLDER &cFld OF MainForm  ;
@@ -134,9 +134,9 @@ FUNCTION FolderInMemory(nMet,lMod)
                WIDTH 600  ;
                HEIGHT 350 ;
                FONT "Font_1" ;
-               CAPTION "Folder InMemory (MODAL)" MODAL;
-               ON FOLDERPROC   {||  ApplyFolderClick() } APPLYBTN;
-               ON CANCEL  {|| MsgInfo("Cancel Button") };
+               CAPTION "Folder InMemory (MODAL)" MODAL ;
+               ON FOLDERPROC   {||  ApplyFolderClick() } APPLYBTN ;
+               ON CANCEL  {|| MsgInfo("Cancel Button") } ;
                ON INIT SetInitfolder()
          ENDCASE
       ELSE
@@ -156,7 +156,7 @@ FUNCTION FolderInMemory(nMet,lMod)
                HEIGHT 350 ;
                FONT "Font_1" ;
                CAPTION "Folder InMemory " ;
-               ON FOLDERPROC   {|| ApplyFolderClick() };
+               ON FOLDERPROC   {|| ApplyFolderClick() } ;
                ON INIT SetInitfolder()  BUTTONS
          CASE nMet == 2
             DEFINE FOLDER &cFld OF MainForm  ;
@@ -166,7 +166,7 @@ FUNCTION FolderInMemory(nMet,lMod)
                FONT "Font_1" ;
                CAPTION "Folder InMemory " ;
                ON FOLDERPROC   {|| ApplyFolderClick() } ;
-               ON CANCEL  {|| MsgInfo("Cancel Button") };
+               ON CANCEL  {|| MsgInfo("Cancel Button") } ;
                ON INIT SetInitfolder()  BUTTONS FLAT
          CASE nMet == 3
             DEFINE FOLDER &cFld OF MainForm  ;
@@ -175,8 +175,8 @@ FUNCTION FolderInMemory(nMet,lMod)
                HEIGHT 350 ;
                FONT "Font_1" ;
                CAPTION "Folder InMemory " ;
-               ON FOLDERPROC   {||  ApplyFolderClick() } APPLYBTN;
-               ON CANCEL  {|| MsgInfo("Cancel Button") };
+               ON FOLDERPROC   {||  ApplyFolderClick() } APPLYBTN ;
+               ON CANCEL  {|| MsgInfo("Cancel Button") } ;
                ON INIT SetInitfolder()  BUTTONS VERTICAL BOTTOM
          ENDCASE
       ENDIF
@@ -202,13 +202,13 @@ FUNCTION FolderInMemory(nMet,lMod)
          HEIGHT 70 ;
          TOOLTIP 'Defined ComboBox in Memory'
 
-      @ 20,240 FRAME frame_1a ID 306;
-         CAPTION 'Frame ';
+      @ 20,240 FRAME frame_1a ID 306 ;
+         CAPTION 'Frame ' ;
          WIDTH 200   ;
          HEIGHT 100
 
-      @ 35,250  CHECKBOX chkbox_1A ID 303;
-         CAPTION 'Active CheckBox';
+      @ 35,250  CHECKBOX chkbox_1A ID 303 ;
+         CAPTION 'Active CheckBox' ;
          WIDTH 160   ;
          HEIGHT 24  ;
          TOOLTIP 'Defined CheckBox in Memory'
@@ -222,7 +222,7 @@ FUNCTION FolderInMemory(nMet,lMod)
          SIZE 12   ;
          TOOLTIP 'Defined RadioGroup'
 
-      @ 140,240   LISTBOX lBox_1a ID 307;
+      @ 140,240   LISTBOX lBox_1a ID 307 ;
          WIDTH 200   ;
          HEIGHT 100 ;
          ITEMS {'Line 1','Line 2','Line 3'} ;
@@ -242,7 +242,7 @@ FUNCTION FolderInMemory(nMet,lMod)
 
       @ 250,120 BUTTON Btn_1x ID 391 ;
          CAPTION 'Set Text'  ;
-         ACTION setEdText(cPg1, lMod, 323);
+         ACTION setEdText(cPg1, lMod, 323) ;
          WIDTH 70   ;
          HEIGHT 24  ;
          TOOLTIP 'Set new value'
@@ -252,18 +252,18 @@ FUNCTION FolderInMemory(nMet,lMod)
    DEFINE FOLDERPAGE &cPg2 RESOURCE DLG_SECOND   TITLE "Control 2"  // IMAGE "Check.bmp"
 
    @ 30 ,20  DATEPICKER DatePicker_1  ID 324 ;
-      VALUE date();
-      WIDTH 150;
+      VALUE date() ;
+      WIDTH 150 ;
       TOOLTIP 'Defined DatePicker'
 
-   @ 130,40 BUTTON Btn_2a ID 318;
+   @ 130,40 BUTTON Btn_2a ID 318 ;
       PICTURE "PLAY.BMP" ;
-      ACTION {|| _PlayAnimateBox ( 'Ani_1a' , cPg2 )};
+      ACTION {|| _PlayAnimateBox ( 'Ani_1a' , cPg2 )} ;
       WIDTH 30   ;
       HEIGHT 30 ;
       TOOLTIP 'Defined Imagebutton'
 
-   @ 130, 70 CHECKBUTTON CheckBtn_1a ID 319;
+   @ 130, 70 CHECKBUTTON CheckBtn_1a ID 319 ;
       PICTURE 'info.bmp'  ;
       WIDTH 30   ;
       HEIGHT 30 ;
@@ -289,8 +289,8 @@ FUNCTION FolderInMemory(nMet,lMod)
       HEIGHT 30 ;
       TOOLTIP 'Defined ProgressBar in Memory'
 
-   @ 30 ,230 MONTHCALENDAR MonthCal_1 ID 125;
-      VALUE date();
+   @ 30 ,230 MONTHCALENDAR MonthCal_1 ID 125 ;
+      VALUE date() ;
       TOOLTIP 'Defined MonthCalendar in Memory'
 
    DEFINE TREE tree_1a ID 315 ;
@@ -464,27 +464,27 @@ FUNCTION FolderRC(nMet,lMod)
          CASE nMet == 0
             DEFINE FOLDER &cFld OF MainForm  RESOURCE ;
                FONT "Font_1" ;
-               CAPTION "Folder from RC Data  (MODAL)" MODAL;
+               CAPTION "Folder from RC Data  (MODAL)" MODAL ;
                ON INIT SetInitfolder() BOTTOM
          CASE nMet == 1
-            DEFINE FOLDER &cFld OF MainForm  RESOURCE;
+            DEFINE FOLDER &cFld OF MainForm  RESOURCE ;
                FONT "Font_1" ;
-               CAPTION "Folder from RC Data  (MODAL)" MODAL;
-               ON FOLDERPROC   {|| FolderFun() };
+               CAPTION "Folder from RC Data  (MODAL)" MODAL ;
+               ON FOLDERPROC   {|| FolderFun() } ;
                ON INIT SetInitfolder()   BUTTONS
          CASE nMet == 2
             DEFINE FOLDER &cFld OF MainForm RESOURCE ;
                FONT "Font_1" ;
-               CAPTION "Folder from RC Data  (MODAL)" MODAL;
+               CAPTION "Folder from RC Data  (MODAL)" MODAL ;
                ON FOLDERPROC   {|| FolderFun() } ;
-               ON CANCEL  {|| MsgInfo("Cancel Button") };
+               ON CANCEL  {|| MsgInfo("Cancel Button") } ;
                ON INIT SetInitfolder()     BUTTONS FLAT
          CASE nMet == 3
             DEFINE FOLDER &cFld OF MainForm RESOURCE ;
                FONT "Font_1" ;
-               CAPTION "Folder from RC Data  (MODAL)" MODAL;
-               ON FOLDERPROC   {|| FolderFun() } APPLYBTN;
-               ON CANCEL  {|| MsgInfo("Cancel Button") };
+               CAPTION "Folder from RC Data  (MODAL)" MODAL ;
+               ON FOLDERPROC   {|| FolderFun() } APPLYBTN ;
+               ON CANCEL  {|| MsgInfo("Cancel Button") } ;
                ON INIT SetInitfolder()
          ENDCASE
       ELSE
@@ -498,22 +498,22 @@ FUNCTION FolderRC(nMet,lMod)
             DEFINE FOLDER &cFld OF MainForm RESOURCE ;
                FONT "Font_1" ;
                CAPTION "Folder from RC Data" ;
-               ON FOLDERPROC   {|| FolderFun() };
+               ON FOLDERPROC   {|| FolderFun() } ;
                ON INIT SetInitfolder()
          CASE nMet == 2
             DEFINE FOLDER &cFld OF MainForm RESOURCE ;
                FONT "Font_1" ;
                CAPTION "Folder from RC Data" ;
                ON FOLDERPROC   {|| FolderFun() } ;
-               ON CANCEL  {|| MsgInfo("Cancel Button") };
+               ON CANCEL  {|| MsgInfo("Cancel Button") } ;
                ON INIT SetInitfolder()
          CASE nMet == 3
             DEFINE FOLDER &cFld OF MainForm RESOURCE ;
                FONT "Font_1" ;
                CAPTION "Folder from RC Data" ;
-               ON FOLDERPROC   {|| FolderFun() } APPLYBTN;
-               ON CANCEL  {|| MsgInfo("Cancel Button") };
-               ON HELP  {|| MsgInfo("Help Button") };
+               ON FOLDERPROC   {|| FolderFun() } APPLYBTN ;
+               ON CANCEL  {|| MsgInfo("Cancel Button") } ;
+               ON HELP  {|| MsgInfo("Help Button") } ;
                ON INIT SetInitfolder()
          ENDCASE
       ENDIF
@@ -564,13 +564,13 @@ FUNCTION  About()
       DEFINE WINDOW Form_About ;
             AT 0,0 ;
             WIDTH 250 HEIGHT 110 ;
-            TITLE '';
+            TITLE '' ;
             CHILD NOCAPTION
 
-         @ 5 ,5 FRAME Frame_1;
+         @ 5 ,5 FRAME Frame_1 ;
             WIDTH 235  HEIGHT 90
 
-         @ 15 ,15 IMAGE Icon_1;
+         @ 15 ,15 IMAGE Icon_1 ;
             PICTURE "Star.ico" ;
             WIDTH 32 HEIGHT 32
 

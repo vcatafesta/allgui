@@ -21,11 +21,11 @@ FUNCTION Main
          WIDTH 550 ;
          HEIGHT 330 ;
          HEADERS {'Product','Stock'} ;
-         WIDTHS {250,150};
-         ITEMS aItems;
-         ON CHANGE Test_Value();
-         EDIT;
-         CELLNAVIGATION;
+         WIDTHS {250,150} ;
+         ITEMS aItems ;
+         ON CHANGE Test_Value() ;
+         EDIT ;
+         CELLNAVIGATION ;
          COLUMNCONTROLS { NIL, {'TEXTBOX','NUMERIC'} }
 
    END WINDOW

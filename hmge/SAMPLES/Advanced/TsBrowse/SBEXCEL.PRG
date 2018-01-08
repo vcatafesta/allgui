@@ -26,9 +26,9 @@ FUNCTION SBExcel()
 
    DEFINE WINDOW Form_10 At 40,60 ;
          WIDTH 807 HEIGHT 542 ;
-         TITLE "Report / Excel conectivity";
-         ICON "Demo.ico";
-         CHILD;
+         TITLE "Report / Excel conectivity" ;
+         ICON "Demo.ico" ;
+         CHILD ;
 
       DEFINE SPLITBOX
          DEFINE TOOLBAREX Bar_1 BUTTONSIZE 28, 28
@@ -49,29 +49,29 @@ FUNCTION SBExcel()
       DEFINE TOOLBAREX Bar_2 CAPTION "Set Filter" BUTTONSIZE 28, 28
 
       BUTTON Btn_1a PICTURE "Tick" ;
-         ACTION {|| ChangeFiltr(oBrw)};
+         ACTION {|| ChangeFiltr(oBrw)} ;
          CHECK ;
          TOOLTIP "Activate Filter on TSBrowse"
 
    END TOOLBAR
 
    COMBOBOX Combo_1 ;
-      ITEMS aStates;
+      ITEMS aStates ;
       VALUE 1 ;
       HEIGHT 200 WIDTH 250 ;
       FONT 'Tahoma' SIZE 9 ;
-      TOOLTIP 'List of States';
+      TOOLTIP 'List of States' ;
       ON CHANGE ChangeFiltr(oBrw)
 
    DEFINE TOOLBAREX Bar_3 CAPTION "Hide/Show Column" BUTTONSIZE 28, 28
 
    BUTTON Btn_31 PICTURE "Tick" ;
-      ACTION {|| HideCol(oBrw, 3 ,1)};
+      ACTION {|| HideCol(oBrw, 3 ,1)} ;
       CHECK ;
       TOOLTIP "Hide/show  1 column in TSBrowse"
 
    BUTTON Btn_32 PICTURE "Tick" ;
-      ACTION {|| HideCol(oBrw, {3,4,5},2 )};
+      ACTION {|| HideCol(oBrw, {3,4,5},2 )} ;
       CHECK ;
       TOOLTIP "Hide/show  3 columns in TSBrowse"
 
@@ -183,45 +183,45 @@ FUNCTION fExcel( oBrw, cFile, cTitle )
          @ 54, 12 LABEL Lb2 VALUE "Title "   WIDTH 38
 
          @ 54 ,62 GETBOX Get_1 ;
-            HEIGHT 18;
-            WIDTH 282;
-            VALUE cTitle;
+            HEIGHT 18 ;
+            WIDTH 282 ;
+            VALUE cTitle ;
             ON LOSTFOCUS { || cTitle := Form_11.Get_1.Value }
 
-         @ 86 ,62 CHECKBOX Chk_1;
+         @ 86 ,62 CHECKBOX Chk_1 ;
             CAPTION "Open Excel"  ;
             WIDTH 100 HEIGHT 32 ;
             VALUE lActivate
 
          @ 78 ,164 RADIOGROUP Radio_1 ;
-            OPTIONS { "Excel 2", "Excel Ole"};
-            VALUE nVer;
+            OPTIONS { "Excel 2", "Excel Ole"} ;
+            VALUE nVer ;
             WIDTH 100 ;
             SPACING 22 ;
             ON CHANGE { || nVer := Form_11.Radio_1.Value }
 
-         @ 86 ,286 CHECKBOX Chk_2;
+         @ 86 ,286 CHECKBOX Chk_2 ;
             CAPTION "Save File"  ;
             WIDTH 100 HEIGHT 32 ;
             VALUE lSave
 
-         @ 132 ,72 BUTTON Btn_1;
+         @ 132 ,72 BUTTON Btn_1 ;
             CAPTION "&Accept" ;
             ACTION {|| lSave := Form_11.Chk_2.Value, lActivate := Form_11.Chk_1.Value, ;
             If( nVer == 2, ;
-            oBrw:ExcelOle( Form_11.BtnTxt1.Value, lActivate,GetControlHandle ( "Progress_1", "Form_11" ) , cTitle ,hFont , lSave ) ,;
-            oBrw:Excel2( Form_11.BtnTxt1.Value, lActivate,GetControlHandle ( "Progress_1", "Form_11" ) , cTitle , lSave )  ),;
-            Form_11.Release };
+            oBrw:ExcelOle( Form_11.BtnTxt1.Value, lActivate,GetControlHandle ( "Progress_1", "Form_11" ) , cTitle ,hFont , lSave ) , ;
+            oBrw:Excel2( Form_11.BtnTxt1.Value, lActivate,GetControlHandle ( "Progress_1", "Form_11" ) , cTitle , lSave )  ), ;
+            Form_11.Release } ;
             WIDTH 76 HEIGHT 24
 
-         @ 132 ,198 BUTTON Btn_2;
+         @ 132 ,198 BUTTON Btn_2 ;
             CAPTION"&Exit"  ;
             ACTION Form_11.Release ;
             WIDTH 76 HEIGHT 24
 
-         @ 172 ,12 PROGRESSBAR Progress_1;
-            RANGE 1 , 100;
-            VALUE 0;
+         @ 172 ,12 PROGRESSBAR Progress_1 ;
+            RANGE 1 , 100 ;
+            VALUE 0 ;
             WIDTH 336 HEIGHT 24
 
       END WINDOW

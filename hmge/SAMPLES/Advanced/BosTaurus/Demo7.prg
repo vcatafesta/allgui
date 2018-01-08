@@ -10,14 +10,14 @@
 
 FUNCTION MAIN
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  800;
-         HEIGHT 600;
-         TITLE  "Demo7: Draw Functions";
-         MAIN;
-         ON PAINT Proc_ON_PAINT ();
-         ON SIZE      {|| BT_ClientAreaInvalidateAll ("Win1"), Proc_LABEL() };
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  800 ;
+         HEIGHT 600 ;
+         TITLE  "Demo7: Draw Functions" ;
+         MAIN ;
+         ON PAINT Proc_ON_PAINT () ;
+         ON SIZE      {|| BT_ClientAreaInvalidateAll ("Win1"), Proc_LABEL() } ;
          ON MAXIMIZE  {|| BT_ClientAreaInvalidateAll ("Win1"), Proc_LABEL() }
 
       DEFINE MAIN MENU

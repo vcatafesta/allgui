@@ -556,9 +556,9 @@ FUNCTION DBUprintstruct
       CASE _DBUstructarr[_DBUi,2] == "M"
          _DBUtype1 := "Memo     "
       ENDCASE
-      DBUprintline(_DBUrow,_DBUcol,{_DBUStructarr[_DBUi,1]+space(10 - len(alltrim(_DBUstructarr[_DBUi,1])))+"  ",;
-         _DBUtype1+"  ",;
-         str(_DBUstructarr[_DBUi,3],5,0)+"  ",;
+      DBUprintline(_DBUrow,_DBUcol,{_DBUStructarr[_DBUi,1]+space(10 - len(alltrim(_DBUstructarr[_DBUi,1])))+"  ", ;
+         _DBUtype1+"  ", ;
+         str(_DBUstructarr[_DBUi,3],5,0)+"  ", ;
          str(_DBUstructarr[_DBUi,4],5,0)+"  "},_DBUjustifyarr,"f0")
       _DBUrow := _DBUrow + 1
       IF _DBUrow >= _DBUmaxrow1

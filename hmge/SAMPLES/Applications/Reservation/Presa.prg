@@ -57,8 +57,8 @@ FUNCTION Main(putlimit)
    CASE putlimit == "NEW"
       ofatt:importNew := .T.
    CASE "HELP" $ putlimit .OR. "/H" $ putlimit .OR. "?" $ putlimit
-      msgmulty({"ITA      Per la lingua italiana.","EN       For english language.";
-         ,"PACK To delete records marked for deletion.","NEW  To re-create the archive from a certain date.";
+      msgmulty({"ITA      Per la lingua italiana.","EN       For english language." ;
+         ,"PACK To delete records marked for deletion.","NEW  To re-create the archive from a certain date." ;
          ,"NOTE:","You cannot specify multiple options simultaneously!"},"OPTIONAL PARAMETERS:")
       ChiudiPrg(.T.,"")
    ENDCASE
@@ -160,10 +160,10 @@ FUNCTION DrawMeter(day)
    FOR n0 = 0 to 24
       drawline("Principale",rpos+11,20+(n0*20),rpos-11,20+(n0*20))
 
-      DRAW TEXT IN WINDOW Principale;
+      DRAW TEXT IN WINDOW Principale ;
          AT rpos-25, 15+(n0*20) ;
          VALUE zaps(n0) ;
-         FONT "MS Sans Serif" SIZE 9 BOLD;
+         FONT "MS Sans Serif" SIZE 9 BOLD ;
          FONTCOLOR BLACK ;
          TRANSPARENT
    NEXT
@@ -190,7 +190,7 @@ FUNCTION DrawMeter(day)
 
             avl := TIMETOSEC(alltrim(1->time_in)+":00:00")
             AADD( oFAtt:aFrecno,recno() )
-            wh  := 20*(TIMETOSEC(alltrim(1->time_out)+":00:00");
+            wh  := 20*(TIMETOSEC(alltrim(1->time_out)+":00:00") ;
                - TIMETOSEC(alltrim(1->time_in)+":00:00"))/3600
             ws := 20+( 20*(TIMETOSEC(alltrim(1->time_in)+":00:00")/3600 ))
 
@@ -238,25 +238,25 @@ FUNCTION Stampe()
    Principale.buttonex_1.hide
    Principale.image_1.row := 50
 
-   DRAW TEXT IN WINDOW Principale;
+   DRAW TEXT IN WINDOW Principale ;
       AT 140, 400 ;
       VALUE title ;
-      FONT "MS Sans Serif" SIZE 9 BOLD;
+      FONT "MS Sans Serif" SIZE 9 BOLD ;
       FONTCOLOR BLACK ;
       TRANSPARENT
 
-   DRAW TEXT IN WINDOW Principale;
+   DRAW TEXT IN WINDOW Principale ;
       AT 160, 415 ;
       VALUE dtoc(principale.MonthCal_1.value) ;
-      FONT "MS Sans Serif" SIZE 9 BOLD;
+      FONT "MS Sans Serif" SIZE 9 BOLD ;
       FONTCOLOR BLACK ;
       TRANSPARENT
 
    FOR n0 = 1 to 5
-      DRAW TEXT IN WINDOW Principale;
+      DRAW TEXT IN WINDOW Principale ;
          AT rPos+9+(n0*30), 20 ;
          VALUE left(arisorse[alng,n0],1)+". "+if(n0 <4,if(alng=2,right(arisorse[alng,n0],3 ),zaps(n0)),'') ;
-         FONT "MS Sans Serif" SIZE 9 BOLD;
+         FONT "MS Sans Serif" SIZE 9 BOLD ;
          FONTCOLOR BLACK ;
          TRANSPARENT
    NEXT
@@ -405,11 +405,11 @@ FUNCTION Statistic()
    LOCAL cnt := {} , ;
       noldorder   := Presa->(indexord()), ; // original file index order
       ntargetpos  := Presa->(recno())       // position of target file
-   LOCAL aLbl    := {{ 'From day:' ,'to day:'},{'Dal giorno:','Al giorno' }}[alng] ,;
-      aIniVal := { presa->data_in, date() },;
-      aFmt    := { '99/99/99' , '99/99/99' },;
-      a_msg   := {"The final date cannot be inferior to that initial!";
-      ,"La data finale NON può essere inferiore a quella iniziale !"},;
+   LOCAL aLbl    := {{ 'From day:' ,'to day:'},{'Dal giorno:','Al giorno' }}[alng] , ;
+      aIniVal := { presa->data_in, date() }, ;
+      aFmt    := { '99/99/99' , '99/99/99' }, ;
+      a_msg   := {"The final date cannot be inferior to that initial!" ;
+      ,"La data finale NON può essere inferiore a quella iniziale !"}, ;
       a_imsg  := {'Selection options:','Opzioni di selezione:' } [alng]
    PRIVATE a_res := {}
 
@@ -432,7 +432,7 @@ FUNCTION Statistic()
    Presa->(DbSeek (dtos(a_Res[1])) )
 
    cnt := { 0, 0, 0, 0, 0 }
-   DBEval( {|| cnt[val(_field->resource)]+= (timetosec(PRESA->TIME_out)-timetosec(PRESA->TIME_IN))/60 },;
+   DBEval( {|| cnt[val(_field->resource)]+= (timetosec(PRESA->TIME_out)-timetosec(PRESA->TIME_IN))/60 }, ;
       {|| !deleted()},,,, .F. )
 
    IF ordkeycount() > 0
@@ -440,7 +440,7 @@ FUNCTION Statistic()
          MainGraph(cnt)
       ENDIF
    ELSE
-      msginfo({"There am no booking among the gives suitable!";
+      msginfo({"There am no booking among the gives suitable!" ;
          ,"Non ci sono prenotazioni tra le date indicate!"}[alng] )
    ENDIF
    Presa->(OrdScope (0, NIL ))
@@ -512,19 +512,19 @@ METHOD New() CLASS TApplication
 
 METHOD IFDATA() CLASS TApplication
 
-   LOCAL aLbl    := {{ 'From day:' },{'Dal giorno:' }}[alng] ,;
-      aIniVal := {  presa->data_in },;
-      aFmt    := { '99/99/99' },;
-      status  := 0 ,;
+   LOCAL aLbl    := {{ 'From day:' },{'Dal giorno:' }}[alng] , ;
+      aIniVal := {  presa->data_in }, ;
+      aFmt    := { '99/99/99' }, ;
+      status  := 0 , ;
       a_imsg  := {'New archive with import:','Nuovo archivio con importazione:' } [alng]
-   LOCAL aEmsg   := {[Repeat the operation!]+CRLF+[as the only active user!];
+   LOCAL aEmsg   := {[Repeat the operation!]+CRLF+[as the only active user!] ;
       ,[Ripetere l'operazione]+CRLF+[come unico utente attivo!]} [alng]
    LOCAL localIp := GetLocalIp()[1],uTmp:=SubStr(LocalIP,Rat(".",LocalIP)+1)+"_"
    LOCAL archivio:= oFatt:DataPath+ uTmp+"PresaNew.DbF"
    LOCAL a_res   := {}
-   LOCAL aQmsg   := {"With this option will be untraceable" + CRLF +;
-      padc ("each deletion done." ,54) + CRLF + padc ("Continue?",64);
-      ,"Con questa opzione verranno perse le tracce"+CRLF+;
+   LOCAL aQmsg   := {"With this option will be untraceable" + CRLF + ;
+      padc ("each deletion done." ,54) + CRLF + padc ("Continue?",64) ;
+      ,"Con questa opzione verranno perse le tracce"+CRLF+ ;
       padc("di ogni cancellazione eseguita.",54)+CRLF+padc("Continuo?",64)}
 
    IF !msgyesno(aQmsg [alng] ,{"Warning","Avviso"}[alng],.t.)
@@ -638,9 +638,9 @@ FUNCTION MyGetIni( cSection, cEntry, cDefault, cFile )
 
 FUNCTION SetDelay()
 
-   LOCAL aLbl    := { {'Minutes:'},{'Minuti:'}},;
-      aIniVal := { ofatt:delay },;
-      aFmt    := { '999' } ,;
+   LOCAL aLbl    := { {'Minutes:'},{'Minuti:'}}, ;
+      aIniVal := { ofatt:delay }, ;
+      aFmt    := { '999' } , ;
       a_res    , ;
       a_msg   := {'Interval among the bookings :','Intervallo tra le prenotazioni:'}[alng]
 

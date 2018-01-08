@@ -22,10 +22,10 @@ FUNCTION main()
          ITEM 'About'            ACTION MsgInfo ("Free GUI Library For Harbour","HMG Tree Demo")
       END MENU
 
-      DEFINE TREE Tree_1 AT 10,10 WIDTH 400 HEIGHT 600 VALUE 15 FONT "ARIAL" SIZE 14;
-            ON DBLCLICK IF (Form_1.Tree_1.IsExpand (Form_1.Tree_1.Value) == .F. ,;
-            Form_1.Tree_1.Expand (Form_1.Tree_1.Value) ,;
-            Form_1.Tree_1.Collapse (Form_1.Tree_1.Value) );
+      DEFINE TREE Tree_1 AT 10,10 WIDTH 400 HEIGHT 600 VALUE 15 FONT "ARIAL" SIZE 14 ;
+            ON DBLCLICK IF (Form_1.Tree_1.IsExpand (Form_1.Tree_1.Value) == .F. , ;
+            Form_1.Tree_1.Expand (Form_1.Tree_1.Value) , ;
+            Form_1.Tree_1.Collapse (Form_1.Tree_1.Value) ) ;
 
          NODE 'Item 1'
             TREEITEM 'Item 1.1'
@@ -142,10 +142,10 @@ PROCEDURE SET_DYNAMIC (option)
    LOCAL aColors := { YELLOW, GREEN, BLUE, PINK, FUCHSIA, BROWN, ORANGE, PURPLE, SILVER, MAROON, OLIVE, LGREEN, AQUA, NAVY, TEAL }
    LOCAL nLen    := HMG_LEN (aColors)
    LOCAL cFontName := "Calibri"
-   LOCAL aFont   := { ARRAY FONT cFontName SIZE 12 BOLD     ,;
-      ARRAY FONT cFontName SIZE 12 ITALIC    ,;
-      ARRAY FONT cFontName SIZE 12 UNDERLINE ,;
-      ARRAY FONT cFontName SIZE 12 STRIKEOUT ,;
+   LOCAL aFont   := { ARRAY FONT cFontName SIZE 12 BOLD     , ;
+      ARRAY FONT cFontName SIZE 12 ITALIC    , ;
+      ARRAY FONT cFontName SIZE 12 UNDERLINE , ;
+      ARRAY FONT cFontName SIZE 12 STRIKEOUT , ;
       ARRAY FONT cFontName SIZE 12 }
 
    DO CASE

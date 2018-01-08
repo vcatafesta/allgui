@@ -69,7 +69,7 @@ FUNCTION Main()
 FUNCTION MainDoExit()
 
    IF MsgYesNo( ;
-         "Do you want to quit ?",;
+         "Do you want to quit ?", ;
          "Question" )
 
       RETURN(.T.) // Terminate current app.

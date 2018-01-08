@@ -411,7 +411,7 @@ FUNCTION updateoptions
    NEXT i
 
    DEFINE GRID options
-      parent xtract
+      PARENT xtract
       ROW 75
       COL 350
       HEIGHT 150
@@ -979,7 +979,7 @@ FUNCTION createreport(lAutoCalc)
          ENDIF
       NEXT i
 
-      bcolor := {||iif(this.cellrowindex <= len(aSelCols),;
+      bcolor := {||iif(this.cellrowindex <= len(aSelCols), ;
          iif(this.cellcolindex <= len(aSelRows),aColors[1],aColors[2]),iif(this.cellcolindex <= len(aSelRows),aColors[1],aColors[3]))}
 
       FOR i := 1 to len(aWidths)
@@ -991,7 +991,7 @@ FUNCTION createreport(lAutoCalc)
       ENDIF
 
       DEFINE GRID data
-         parent xtract
+         PARENT xtract
          ROW 335
          COL 10
          WIDTH 770
@@ -1102,7 +1102,7 @@ FUNCTION importfromdbf
          s.data.release
       ENDIF
       DEFINE GRID data
-         parent s
+         PARENT s
          ROW 10
          COL 10
          WIDTH 1000

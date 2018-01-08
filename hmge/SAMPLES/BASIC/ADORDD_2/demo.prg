@@ -26,41 +26,41 @@ FUNCTION Main()
          ON INIT OpenTable() ;
          ON RELEASE CloseTable()
 
-      @ 15 ,20 LABEL Lbl_1;
+      @ 15 ,20 LABEL Lbl_1 ;
          VALUE "States" ;
          WIDTH 350 HEIGHT 35 ;
          FONT "Arial" SIZE 18 BOLD ;
          FONTCOLOR BLUE ;
          CENTERALIGN
 
-      @ 50 ,20 GRID Grid_1;
-         WIDTH 350  HEIGHT 490;
-         WIDTHS {60,250};
-         HEADERS {'State','Name'};
-         ITEMS aStateTab;
+      @ 50 ,20 GRID Grid_1 ;
+         WIDTH 350  HEIGHT 490 ;
+         WIDTHS {60,250} ;
+         HEADERS {'State','Name'} ;
+         ITEMS aStateTab ;
          ON DBLCLICK {|| pos:= Form_1.Grid_1.Value, ViewState(aStateTab[pos,2],aStateTab[pos,1] ) }
 
       @ 50,430  FRAME Frame_1 CAPTION "Search for:" WIDTH 190 HEIGHT 200
 
-      @ 70 ,440 RADIOGROUP Radio_1;
-         OPTIONS { 'City','First Name','Last Name'};
+      @ 70 ,440 RADIOGROUP Radio_1 ;
+         OPTIONS { 'City','First Name','Last Name'} ;
          VALUE 1
 
       @ 160,460 GETBOX GBox_1 ;
-         HEIGHT 24 WIDTH 120;
+         HEIGHT 24 WIDTH 120 ;
          VALUE "                  " ;
          FONT "Arial" SIZE 9 ;
-         ON CHANGE FindChg();
+         ON CHANGE FindChg() ;
          PICTURE  '@XXXXXXXXXXXXXXXXXXXXXXX'
 
-      @ 190 ,470 BUTTONEX Btn_1;
+      @ 190 ,470 BUTTONEX Btn_1 ;
          CAPTION "Find" ;
          WIDTH 80 ;
          PICTURE "Find" ;
          ON CLICK FindPos(Form_1.Radio_1.Value,Form_1.GBox_1.Value) ;
          DEFAULT
 
-      @ 500 ,470 BUTTONEX Btn_2;
+      @ 500 ,470 BUTTONEX Btn_2 ;
          CAPTION "Exit" ;
          WIDTH 80 ;
          PICTURE "Exit2" ;
@@ -168,7 +168,7 @@ FUNCTION ViewState(title,cState,nRec)
       DEFINE WINDOW Form_Gr ;
             AT aPos[1]+50,aPos[2]+20 ;
             WIDTH 740 HEIGHT 580 ;
-            TITLE tyt;
+            TITLE tyt ;
             CHILD NOMAXIMIZE ;
             ON INIT Refresh_Win("Form_Gr") ;
             ON RELEASE DelFlt()
@@ -176,15 +176,15 @@ FUNCTION ViewState(title,cState,nRec)
          DEFINE IMAGELIST Im_edit ;
             BUTTONSIZE 26 , 26  ;
             IMAGE {'edit'} ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 5;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 5 ;
             MASK
 
          DEFINE IMAGELIST im_navi ;
             BUTTONSIZE 20 , 20  ;
             IMAGE {'navi2'} ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 6;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 6 ;
             MASK
 
          DEFINE SPLITBOX
@@ -239,13 +239,13 @@ IF nRec != 0
    ENDIF
 ENDIF
 
-@ 50,10 GRID Brw_1;
+@ 50,10 GRID Brw_1 ;
    WIDTH 710 ;
-   HEIGHT 390;
+   HEIGHT 390 ;
    HEADERS aHead ;
    WIDTHS aWidth ;
-   ITEMS aItemState;
-   VALUE nRec;
+   ITEMS aItemState ;
+   VALUE nRec ;
    ON CHANGE Refresh_Win("Form_Gr") ;
    ON HEADCLICK {{||SortCol(1,aItemState)},{||  SortCol(2,aItemState)},{|| SortCol(3,aItemState)},{|| SortCol(4,aItemState)},{|| SortCol(5,aItemState)},{|| SortCol(6,aItemState)},{|| SortCol(7,aItemState)},{|| SortCol(8,aItemState)}} ;
    ON DBLCLICK  {||EditDan(aHead,aFld,aWidth,aItemState), Refresh_Win("Form_Gr")} ;
@@ -360,7 +360,7 @@ FUNCTION EditDan(aHead,aFld,aWidth,aItemState)
 
          nPos := GetProperty("Form_Gr","Brw_1","Value")
 
-         DEFINE WINDOW Form_Ed;
+         DEFINE WINDOW Form_Ed ;
                AT aPos[1]+50,aPos[2]+20 ;
                WIDTH 600 HEIGHT 125+ 30*Len(aHead) ;
                TITLE 'Edit current record' ;
@@ -385,7 +385,7 @@ FUNCTION EditDan(aHead,aFld,aWidth,aItemState)
                AUTO
 
             @  50+n*30,160 GETBOX &cGBox ;
-               HEIGHT 24 WIDTH aWidth[n];
+               HEIGHT 24 WIDTH aWidth[n] ;
                VALUE &cValue ;
                FONT "Arial" SIZE 9
          NEXT
@@ -431,17 +431,17 @@ FUNCTION SaveDan(aFld,nPos,aItemState)
 
 PROCEDURE CreateTable
 
-   DbCreate( "Employee.mdb;table1", {{"FIRST",     "C",20, 0 },;
-      { "LAST",      "C",20, 0 },;
-      { "STREET",    "C",30, 0 },;
-      { "CITY",      "C",30, 0 },;
-      { "STATE",     "C", 2, 0 },;
-      { "ZIP",       "C",10, 0 },;
-      { "AGE",       "N", 2, 0 },;
-      { "SALARY",    "N", 6, 0 },;
+   DbCreate( "Employee.mdb;table1", {{"FIRST",     "C",20, 0 }, ;
+      { "LAST",      "C",20, 0 }, ;
+      { "STREET",    "C",30, 0 }, ;
+      { "CITY",      "C",30, 0 }, ;
+      { "STATE",     "C", 2, 0 }, ;
+      { "ZIP",       "C",10, 0 }, ;
+      { "AGE",       "N", 2, 0 }, ;
+      { "SALARY",    "N", 6, 0 }, ;
       { "NOTES",     "C",70, 0 }}, "ADORDD" )
 
-   DbCreate( "Employee.mdb;table2", {{"STATE",    "C", 2, 0 },;
+   DbCreate( "Employee.mdb;table2", {{"STATE",    "C", 2, 0 }, ;
       { "NAME",      "C",30, 0 }}, "ADORDD" )
 
    RETURN

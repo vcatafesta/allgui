@@ -12,13 +12,13 @@ FUNCTION MAIN
 
    SET CODEPAGE TO SPANISH
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  800;
-         HEIGHT 600;
-         TITLE  "Demo7: Draw Functions";
-         MAIN;
-         ON PAINT Proc_ON_PAINT ();
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  800 ;
+         HEIGHT 600 ;
+         TITLE  "Demo7: Draw Functions" ;
+         MAIN ;
+         ON PAINT Proc_ON_PAINT () ;
 
       DEFINE MAIN MENU
          DEFINE POPUP "File"

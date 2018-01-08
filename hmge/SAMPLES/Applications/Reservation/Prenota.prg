@@ -174,11 +174,11 @@ FUNCTION Listato()
    LOCAL cnt := 0 , oldDb := alias(), ;
       noldorder   := Presa->(indexord()), ; // original file index order
       ntargetpos  := Presa->(recno())       // position of target file
-   LOCAL aLbl    := {{ 'From day:' ,'to day:'},{'Dal giorno:','Al giorno' }}[alng] ,;
-      aIniVal := { presa->data_in, date() },;
-      aFmt    := { '99/99/99' , '99/99/99' },;
-      a_msg   := {"The final date cannot be inferior to that initial!";
-      ,"La data finale NON può essere inferiore a quella iniziale !"},;
+   LOCAL aLbl    := {{ 'From day:' ,'to day:'},{'Dal giorno:','Al giorno' }}[alng] , ;
+      aIniVal := { presa->data_in, date() }, ;
+      aFmt    := { '99/99/99' , '99/99/99' }, ;
+      a_msg   := {"The final date cannot be inferior to that initial!" ;
+      ,"La data finale NON può essere inferiore a quella iniziale !"}, ;
       a_imsg  := {'Print options:','Opzioni di stampa:' } [alng]
    PRIVATE a_res := {}
 
@@ -207,7 +207,7 @@ FUNCTION Listato()
          ofatt:ListDelete := .f.
       ENDIF
    ELSE
-      msginfo({"There am no booking among the gives suitable!";
+      msginfo({"There am no booking among the gives suitable!" ;
          ,"Non ci sono prenotazioni tra le date indicate!"}[alng] )
    ENDIF
    Presa->(OrdScope (0, NIL ))
@@ -236,7 +236,7 @@ FUNCTION Prenuova(nuova)
       + dtos(PRENOTA.DatePicker_1.value)+zaps(Prenota.ComboBoxEX_1.value) }
 
    DEFAULT NUOVA TO .F.
-   changed := left(prenota.timepicker_1.value,5)+left(prenota.timepicker_2.value,5);
+   changed := left(prenota.timepicker_1.value,5)+left(prenota.timepicker_2.value,5) ;
       +dtos(PRENOTA.DatePicker_1.value)+zaps(Prenota.ComboBoxEX_1.value) ;
       <> ;
       presa->time_in+presa->time_out+dtos(presa->data_in)+presa->resource
@@ -280,7 +280,7 @@ FUNCTION Prenuova(nuova)
    WHILE !eof() .and. (presa->data_in = prenota.datepicker_1.value .and. zaps(Prenota.ComboBoxEX_1.value) = presa->resource)
 
       Ok:= ( Tsto <= TIMETOSEC(alltrim(1->time_in )+":00:00") .and. Vsta < Vsto) ;
-         .or.;
+         .or. ;
          ( Tsta >= TIMETOSEC(alltrim(1->time_out)+":00:00") .and. Vsto > Vsta)
 
       IF eval(gstate) = eval(astate)
@@ -294,7 +294,7 @@ FUNCTION Prenuova(nuova)
    dbgoto(rcn)
 
    IF !tot_ok
-      MsgExclamation({"Values NOT admitted!","Valori NON ammessi!"}[alng] +CRLF+causa;
+      MsgExclamation({"Values NOT admitted!","Valori NON ammessi!"}[alng] +CRLF+causa ;
          ,{" Recheck !","Ricontrolla!" }[alng])
       oFatt:prenuova := .F.
       enableNew()
@@ -306,7 +306,7 @@ FUNCTION Prenuova(nuova)
 
 FUNCTION TestData()
 
-   LOCAL Vl1 := PRENOTA.DatePicker_1.value ,;
+   LOCAL Vl1 := PRENOTA.DatePicker_1.value , ;
       Vl2 := zaps(PRENOTA.comboBoxEx_1.value)
 
    Presa->(DbGoTop ())

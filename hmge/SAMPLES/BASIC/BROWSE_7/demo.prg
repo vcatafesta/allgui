@@ -16,13 +16,13 @@ FUNCTION Main
 
    SET EVENTS FUNCTION TO MYEVENTS
 
-   DEFINE WINDOW Form_1;
-         AT 0,0;
-         WIDTH 880;
-         HEIGHT 450;
-         TITLE 'MiniGUI Browse test';
-         MAIN NOMAXIMIZE NOSIZE;
-         ON INIT OpenTables();
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 880 ;
+         HEIGHT 450 ;
+         TITLE 'MiniGUI Browse test' ;
+         MAIN NOMAXIMIZE NOSIZE ;
+         ON INIT OpenTables() ;
          ON RELEASE dbcloseall()
 
       DEFINE STATUSBAR
@@ -30,24 +30,24 @@ FUNCTION Main
          STATUSITEM '<Delete> : Delete record(s)' WIDTH 200
       END STATUSBAR
 
-      @ 10,10 BROWSE Browse_1;
-         WIDTH 400;
-         HEIGHT 370;
-         HEADERS { 'Code', 'First Name', 'Last Name', 'Birth Date', "Balance" };
-         WIDTHS { 50 , 100 , 100 , 100 , 100 };
-         WORKAREA Test;
-         FIELDS rfi1;
-         DYNAMICFORECOLOR {acolor, acolor, acolor, acolor, acolor};
+      @ 10,10 BROWSE Browse_1 ;
+         WIDTH 400 ;
+         HEIGHT 370 ;
+         HEADERS { 'Code', 'First Name', 'Last Name', 'Birth Date', "Balance" } ;
+         WIDTHS { 50 , 100 , 100 , 100 , 100 } ;
+         WORKAREA Test ;
+         FIELDS rfi1 ;
+         DYNAMICFORECOLOR {acolor, acolor, acolor, acolor, acolor} ;
          DYNAMICBACKCOLOR inmet(rfi1)
 
-      @ 10,450 BROWSE Browse_2;
-         WIDTH 400;
-         HEIGHT 370;
-         HEADERS { 'Code' , 'Summa1' , 'Summa2', 'Summa3'};
-         WIDTHS { 50 , 100 , 100 , 100 };
-         WORKAREA Test1;
-         FIELDS rfi2;
-         DYNAMICFORECOLOR {acolor, acolor, acolor, acolor};
+      @ 10,450 BROWSE Browse_2 ;
+         WIDTH 400 ;
+         HEIGHT 370 ;
+         HEADERS { 'Code' , 'Summa1' , 'Summa2', 'Summa3'} ;
+         WIDTHS { 50 , 100 , 100 , 100 } ;
+         WORKAREA Test1 ;
+         FIELDS rfi2 ;
+         DYNAMICFORECOLOR {acolor, acolor, acolor, acolor} ;
          DYNAMICBACKCOLOR inmet(rfi2)
 
       ON KEY ESCAPE ACTION Form_1.Release

@@ -175,7 +175,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
 
          RETURN DLGC_WANTMESSAGE
       ELSEIF hwg_Getdlgmessage( lParam ) = WM_KEYDOWN .AND. wParam != VK_ESCAPE
-      ELSEIF hwg_Getdlgmessage( lParam ) = WM_CHAR .OR.wParam = VK_ESCAPE .OR.;
+      ELSEIF hwg_Getdlgmessage( lParam ) = WM_CHAR .OR.wParam = VK_ESCAPE .OR. ;
             hwg_Getdlgmessage( lParam ) = WM_SYSCHAR
 
          RETURN -1

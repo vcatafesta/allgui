@@ -33,25 +33,25 @@ PROC T_Pack()                             // Table Pack
 
       PROC T_AppeReco()                         // Table Append Record(s)
 
-         LOCA cWinTitl := "Append record(s) to " + ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ),;
-            aStruct  := DBSTRUCT(),;
-            nCurRec  := RECN(),;
-            aLabels  := {},;
-            aDTypes  := {},;
-            aWidths  := {},;
-            aDecims  := {},;
-            aValues  := {},;
-            aROnlys  := {},;
-            aValids  := {},;
-            aButtons := { { , "Apply", "Apply Appending",,,     { 3, 106, 4 }     },;
-            { , " New ", "Another New Record",,,  { 2, 1, 105 }     },;
-            { , "Exit",  "Cancel Appending",,,,                 .T. } },;
+         LOCA cWinTitl := "Append record(s) to " + ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ), ;
+            aStruct  := DBSTRUCT(), ;
+            nCurRec  := RECN(), ;
+            aLabels  := {}, ;
+            aDTypes  := {}, ;
+            aWidths  := {}, ;
+            aDecims  := {}, ;
+            aValues  := {}, ;
+            aROnlys  := {}, ;
+            aValids  := {}, ;
+            aButtons := { { , "Apply", "Apply Appending",,,     { 3, 106, 4 }     }, ;
+            { , " New ", "Another New Record",,,  { 2, 1, 105 }     }, ;
+            { , "Exit",  "Cancel Appending",,,,                 .T. } }, ;
             aCdBloks := { { || DBSKIP() },;                                            // 1
             { || DBGOBOTTOM() },;                                        // 2
             { || DBAPPEND() },;                                          // 3
             { || RefrBrow(), RefrStBar() },;                             // 4
             { | x1, i1 | x1 := FIELDGET( i1 ),;                          // 5
-            _SetValue( Num2Name( "cfc_", i1 ), "frmCombFrm", x1 )},;
+            _SetValue( Num2Name( "cfc_", i1 ), "frmCombFrm", x1 )}, ;
             { | x1, i1 | x1 := _GetValue( Num2Name( "cfc_", i1 ), "frmCombFrm" ),;  // 6
             FIELDPUT( i1, x1 ) } }
 
@@ -89,22 +89,22 @@ PROC T_Pack()                             // Table Pack
                nDeleReca,;   // 1: Delete,  2: Recall
                nHowRecor )   // 1: Current, 2: Selective, 3: All
 
-            LOCA nCurRec   := RECN(),;
-               cCPTitle  := " Records Criterias",;
-               aComPars  := {},;
-               aComOpts  := {},;
-               nRecoNum  :=  0,;
-               aCondits  := {},;
-               aScopes   := {},;
-               aCondExps := {},;
-               cContinue := '',;
-               cApply    := '.T.',;
-               lAllRecs  := .F.,;
+            LOCA nCurRec   := RECN(), ;
+               cCPTitle  := " Records Criterias", ;
+               aComPars  := {}, ;
+               aComOpts  := {}, ;
+               nRecoNum  :=  0, ;
+               aCondits  := {}, ;
+               aScopes   := {}, ;
+               aCondExps := {}, ;
+               cContinue := '', ;
+               cApply    := '.T.', ;
+               lAllRecs  := .F., ;
                cFORExpr  := ''
 
             PRIV nPasdRecs :=  0
 
-            DEFAULT nDeleReca TO IF( DELETED(), 2, 1 ),;
+            DEFAULT nDeleReca TO IF( DELETED(), 2, 1 ), ;
                nHowRecor TO 1
 
             IF nHowRecor < 2         // Only Current
@@ -195,27 +195,27 @@ PROC T_Pack()                             // Table Pack
 
       PROC T_Replace()                          // Table Replace
 
-         LOCA nCurRec   := RECN(),;
-            aStruct   := DBSTRUCT(),;
-            aFieldLst := {},;
-            nFieldNum :=  0,;
-            cFieldTyp := '',;
-            cCPTitle  := "Replace",;
-            aComPars  := {},;
-            aComOpts  := {},;
-            lAllRecs  := .F.,;
-            cFORExpr  := '',;
-            cWhlExpr  := '',;
-            cWitExpr  := '',;
-            xWitExpr  := '',;
-            aCondits  := {},;
-            aScopes   := {},;
-            aCondExps := {},;
-            cContinue := '',;
-            cApply    := '',;
-            nNextRecs :=  0,;
-            lRestRecs := .F.,;
-            cAlias    := ALIAS(),;
+         LOCA nCurRec   := RECN(), ;
+            aStruct   := DBSTRUCT(), ;
+            aFieldLst := {}, ;
+            nFieldNum :=  0, ;
+            cFieldTyp := '', ;
+            cCPTitle  := "Replace", ;
+            aComPars  := {}, ;
+            aComOpts  := {}, ;
+            lAllRecs  := .F., ;
+            cFORExpr  := '', ;
+            cWhlExpr  := '', ;
+            cWitExpr  := '', ;
+            xWitExpr  := '', ;
+            aCondits  := {}, ;
+            aScopes   := {}, ;
+            aCondExps := {}, ;
+            cContinue := '', ;
+            cApply    := '', ;
+            nNextRecs :=  0, ;
+            lRestRecs := .F., ;
+            cAlias    := ALIAS(), ;
             nRecords  := 0
 
          PRIV nPasdRecs :=  0
@@ -229,8 +229,8 @@ PROC T_Pack()                             // Table Pack
 
          aComOpts  := GFUComOpts( aComPars,;    // Values of options
             'REPLACE',;   // Command's name
-            { 'FLD',;
-            'WTH',;
+            { 'FLD', ;
+            'WTH', ;
             'CND',;    // Cond (FOR/WHILE)
             'SCP' } )  // Scope ( ALL/REST/NEXT n/RECORD n )
 
@@ -294,22 +294,22 @@ PROC T_Pack()                             // Table Pack
 
          PROC T_AppeFrom()
 
-            LOCA cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ),;
-               cTblName  := ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ),;
+            LOCA cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ), ;
+               cTblName  := ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ), ;
                cNewTNam  := ''
 
-            LOCA aComPars  := {},;
-               cCbFTitl  := "Appending from to " + cTblName + " ...",;
-               aComOpts  := {},;
+            LOCA aComPars  := {}, ;
+               cCbFTitl  := "Appending from to " + cTblName + " ...", ;
+               aComOpts  := {}, ;
                lSuccess  := .F.
 
-            LOCA nSFType   :=  0,;
-               cDelmtr   := '',;
-               cSFName   := '',;
-               nCondit   :=  0,;
-               cCondit   :=  0,;
-               nScopNo   :=  0,;
-               nNextRecs :=  0,;
+            LOCA nSFType   :=  0, ;
+               cDelmtr   := '', ;
+               cSFName   := '', ;
+               nCondit   :=  0, ;
+               cCondit   :=  0, ;
+               nScopNo   :=  0, ;
+               nNextRecs :=  0, ;
                nScpRecNo :=  0
 
             aComPars  := { {  1, ''  },;         // Source FILE Type : 1: Table
@@ -339,13 +339,13 @@ PROC T_Pack()                             // Table Pack
                   nScpRecNo := aComOpts[ 4, 2 ]
                ENDIF
                /*
-               MsgMulty( { "SFT : " + NTrim( nSFType ),;
-               "DLM : " + cDelmtr,;
-               "SFN : " + cSFName,;
-               "nCN : " + NTrim( nCondit ),;
-               "cCN : " + cCondit,;
-               "nSC : " + NTrim( nScopNo ),;
-               "nNR : " + NTrim( nNextRecs ),;
+               MsgMulty( { "SFT : " + NTrim( nSFType ), ;
+               "DLM : " + cDelmtr, ;
+               "SFN : " + cSFName, ;
+               "nCN : " + NTrim( nCondit ), ;
+               "cCN : " + cCondit, ;
+               "nSC : " + NTrim( nScopNo ), ;
+               "nNR : " + NTrim( nNextRecs ), ;
                "nRN : " + NTrim( nScpRecNo ) } )
                */
                IF nSFType > 1 // Non-table

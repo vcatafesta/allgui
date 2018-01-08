@@ -22,15 +22,15 @@ PROCEDURE Main()
          ON MOUSEMOVE DisplayCoords()
 
       @ 100,100 IMAGE I1 PICTURE "001.jpg" WIDTH xy HEIGHT xy ;
-         on mousehover pokaz('001.jpg');
+         on mousehover pokaz('001.jpg') ;
          on mouseleave hide_tem()
 
       @ 100,140 IMAGE I2 PICTURE "002.jpg" WIDTH xy HEIGHT xy ;
-         on mousehover pokaz('002.jpg');
+         on mousehover pokaz('002.jpg') ;
          on mouseleave hide_tem()
 
       @ 100,180 IMAGE I3 PICTURE "003.jpg" WIDTH xy HEIGHT xy ;
-         on mousehover pokaz('003.jpg');
+         on mousehover pokaz('003.jpg') ;
          on mouseleave hide_tem()
    END WINDOW
 

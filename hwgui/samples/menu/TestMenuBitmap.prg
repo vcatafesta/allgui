@@ -17,7 +17,7 @@ FUNCTION Main()
    PRIVATE oMenu
 
    INIT WINDOW oMain MAIN TITLE "Teste" ;
-      AT 0,0 ;//BACKGROUND BITMAP OBMP;
+      AT 0,0 ;//BACKGROUND BITMAP OBMP ;
       SIZE 1024, 768 // hwg_Getdesktopwidth(), hwg_Getdesktopheight() - 28
 
    MENU OF oMain

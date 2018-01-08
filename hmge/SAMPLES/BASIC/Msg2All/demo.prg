@@ -64,12 +64,12 @@ FUNCTION NewMsg2All()
 
    //Si no existe el archivo crearlo
    IF !File("Messages.Dbf")
-      DbCreate( "Messages.Dbf",;
-         { { "Date"     , "D",   8, 0 },;
-         { "Time"     , "C",   5, 0 },;
-         { "From"     , "C",  30, 0 },;
-         { "Message"  , "C", 250, 0 },;
-         { "ValidDays", "N",   2, 0 },;
+      DbCreate( "Messages.Dbf", ;
+         { { "Date"     , "D",   8, 0 }, ;
+         { "Time"     , "C",   5, 0 }, ;
+         { "From"     , "C",  30, 0 }, ;
+         { "Message"  , "C", 250, 0 }, ;
+         { "ValidDays", "N",   2, 0 }, ;
          { "IP"       , "C", 400, 0 } } , "DBFNTX" )
    ENDIF
 

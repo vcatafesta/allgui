@@ -7,11 +7,11 @@ HMG ListBox Demo
 
 FUNCTION Main
 
-   DEFINE WINDOW Win1;
-         at 10,10;
-         WIDTH 400;
-         HEIGHT 400;
-         TITLE "HMG ListBox Demo";
+   DEFINE WINDOW Win1 ;
+         at 10,10 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE "HMG ListBox Demo" ;
          WindowType MAIN ;
          ON INIT loadlist(3, .f., .f.)
 
@@ -115,7 +115,7 @@ FUNCTION loadlist(value,lmultiselect,lsort)
    DEFINE LISTBOX List1
       ROW 40
       COL 10
-      Parent Win1
+      PARENT Win1
       ITEMS {}
       ONCHANGE {|| Win1.Label1.Value := iif(isarray(win1.list1.value),"MultiSelect List","Current Value is "+hb_ntos(win1.list1.value))}
       ONDBLCLICK {|| MsgInfo("Double Click Action!")}

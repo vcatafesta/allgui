@@ -38,7 +38,7 @@ FUNCTION ADDPROPERTY( oObjectName, cPropertyName, eNewValue )
 
 FUNCTION REMOVEPROPERTY( oObjectName, cPropertyName )
 
-   IF VALTYPE( oObjectName ) = "O" .AND. ! EMPTY( cPropertyName ) .AND.;
+   IF VALTYPE( oObjectName ) = "O" .AND. ! EMPTY( cPropertyName ) .AND. ;
          __objHasData( oObjectName, cPropertyName )
 
       RETURN EMPTY( __objDelData( oObjectName, cPropertyName ) )

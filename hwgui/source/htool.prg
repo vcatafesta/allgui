@@ -109,7 +109,7 @@ METHOD Pressed( lPressed ) CLASS HToolButton
 
    IF lPressed != Nil
       nState := hwg_Sendmessage( ::oParent:handle, TB_GETSTATE, INT( ::id ), 0 )
-      hwg_Sendmessage( ::oParent:handle, TB_SETSTATE, INT( ::id ),;
+      hwg_Sendmessage( ::oParent:handle, TB_SETSTATE, INT( ::id ), ;
          hwg_Makelong( IIF( lPressed, HWG_BITOR( nState, TBSTATE_PRESSED ), nState - HWG_BITAND( nState, TBSTATE_PRESSED ) ), 0 ) )
       ::lPressed := lPressed
    ENDIF
@@ -122,7 +122,7 @@ METHOD Checked( lcheck ) CLASS HToolButton
 
    IF lCheck != Nil
       nState := hwg_Sendmessage( ::oParent:handle, TB_GETSTATE, INT( ::id ), 0 )
-      hwg_Sendmessage( ::oParent:handle, TB_SETSTATE, INT( ::id ),;
+      hwg_Sendmessage( ::oParent:handle, TB_SETSTATE, INT( ::id ), ;
          hwg_Makelong( IIF( lCheck, HWG_BITOR( nState, TBSTATE_CHECKED ), nState - HWG_BITAND( nState, TBSTATE_CHECKED ) ), 0 ) )
       ::lChecked := lCheck
    ENDIF
@@ -438,7 +438,7 @@ METHOD CREATETOOL() CLASS hToolBar
          nMax := 2
       ENDIF
       ::ndrop := nMax + IIF( ! ::WindowsManifest , 0, nDrop )
-      ::BtnHeight := MAX( hwg_Hiword( hwg_Sendmessage( ::handle, TB_GETBUTTONSIZE, 0, 0 ) ),;
+      ::BtnHeight := MAX( hwg_Hiword( hwg_Sendmessage( ::handle, TB_GETBUTTONSIZE, 0, 0 ) ), ;
          ::nHeight - ::nDrop - IIF( ! ::lnoThemes .AND. Hwg_BitAnd( ::Style,  TBSTYLE_FLAT ) > 0, 0, 2 ) )
       IF  ! ::lVertical
          hwg_Sendmessage( ::handle, TB_SETBUTTONSIZE, 0,  hwg_Makelparam( ::BtnWidth , ::BtnHeight ) )

@@ -42,7 +42,7 @@ FUNCTION AST_Spinner(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -85,7 +85,7 @@ FUNCTION AST_Spinner(cReadString,cTerminator)
    //      [ READONLY ]
    //      [ INCREMENT <nIncrement> ]
    // @ <nRow> ,<nCol> SPINNER <ControlName> OF <ParentWindowName> RANGE <nRangeMin> , <nRangeMax>
-   //    VALUE <nValue> WIDTH <nWidth> HEIGHT <nHeight>;
+   //    VALUE <nValue> WIDTH <nWidth> HEIGHT <nHeight> ;
    //      FONT <cFontName> SIZE <nFontSize> ON CHANGE <OnChangeProcedure> | <bBlock>
 
    aProperties_[ 1] := ALLTRIM(STRTRAN(aDefCommandList_[ 1],"DEFINE SPINNER",""))   // DEFINE SPINNER Spinner_1
@@ -121,8 +121,8 @@ FUNCTION AST_Spinner(cReadString,cTerminator)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
    cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " SPINNER " + ;
-      aProperties_[1] + " OF ~LDCS_Form RANGE " + aProperties_[6] + "," + aProperties_[7] + ";" + CRLF +;
-      LDCS_iLevel(3) + aProperties_[8] + " " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF +;
+      aProperties_[1] + " OF ~LDCS_Form RANGE " + aProperties_[6] + "," + aProperties_[7] + ";" + CRLF + ;
+      LDCS_iLevel(3) + aProperties_[8] + " " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF + ;
       LDCS_iLevel(3) + aProperties_[9] + " " + aProperties_[10] + " " + aProperties_[12] + CRLF
 
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF

@@ -75,17 +75,17 @@ FUNCTION Main()
 
    slFileRefresh := .T.
 
-   DEFINE WINDOW PdfView;
-         ROW    snPdfView_R;
-         COL    snPdfView_C;
-         WIDTH  snPdfView_W;
-         HEIGHT snPdfView_H;
-         TITLE  "PdfView";
-         MAIN;
-         ON INIT      ((lSessionOnInit := (SessionOpen(1) .or. SessionOpen(3))), FileListRefresh(scFileLast), (lSessionOnInit := .F.));
-         ON GOTFOCUS  ((lOnGotFocus := .T.), If(slFileRefresh, (FileListRefresh(PdfView.Files.Cell(PdfView.Files.VALUE, F_NAME)), TabCloseAllEmpty()), NIL ), (lOnGotFocus := .F.));
-         ON SIZE      PdfViewResize(.T.);
-         ON MAXIMIZE  PdfViewResize(.T.);
+   DEFINE WINDOW PdfView ;
+         ROW    snPdfView_R ;
+         COL    snPdfView_C ;
+         WIDTH  snPdfView_W ;
+         HEIGHT snPdfView_H ;
+         TITLE  "PdfView" ;
+         MAIN ;
+         ON INIT      ((lSessionOnInit := (SessionOpen(1) .or. SessionOpen(3))), FileListRefresh(scFileLast), (lSessionOnInit := .F.)) ;
+         ON GOTFOCUS  ((lOnGotFocus := .T.), If(slFileRefresh, (FileListRefresh(PdfView.Files.Cell(PdfView.Files.VALUE, F_NAME)), TabCloseAllEmpty()), NIL ), (lOnGotFocus := .F.)) ;
+         ON SIZE      PdfViewResize(.T.) ;
+         ON MAXIMIZE  PdfViewResize(.T.) ;
          ON RELEASE   (SettingsWrite(), DestroyMenu(snHMenuMain))
 
       DEFINE GRID Files
@@ -100,10 +100,10 @@ FUNCTION Main()
          ONHEADCLICK    { { || FileChooseDir()} }
       END GRID
 
-      DEFINE TAB Tabs;
-            ROW    0;
-            COL    0;
-            WIDTH  0;
+      DEFINE TAB Tabs ;
+            ROW    0 ;
+            COL    0 ;
+            WIDTH  0 ;
             HEIGHT 20
       END TAB
 
@@ -647,13 +647,13 @@ FUNCTION PanelNew()
       nPanel := Len(saPanel)
       cPanel := PanelName(nPanel)
 
-      DEFINE WINDOW &cPanel;
-            PARENT   PdfView;
-            ROW      0xFFFF;
-            COL      0xFFFF;
-            WIDTH    0;
-            HEIGHT   0;
-            PANEL;
+      DEFINE WINDOW &cPanel ;
+            PARENT   PdfView ;
+            ROW      0xFFFF ;
+            COL      0xFFFF ;
+            WIDTH    0 ;
+            HEIGHT   0 ;
+            PANEL ;
             ON PAINT Sumatra_FrameRedraw(cPanel)
       END WINDOW
       SetProperty(cPanel, "VISIBLE", .F.)
@@ -1324,11 +1324,11 @@ FUNCTION InputPageNum()
 
    LOCAL nPage
 
-   DEFINE WINDOW InputPage;
-         WIDTH  230 + GetSystemMetrics(7 /*SM_CXFIXEDFRAME*/) * 2;
-         HEIGHT  74 + GetSystemMetrics(4 /*SM_CYCAPTION*/) + GetSystemMetrics(8 /*SM_CYFIXEDFRAME*/) * 2;
-         TITLE  LangStr("OpenFilePage");
-         MODAL;
+   DEFINE WINDOW InputPage ;
+         WIDTH  230 + GetSystemMetrics(7 /*SM_CXFIXEDFRAME*/) * 2 ;
+         HEIGHT  74 + GetSystemMetrics(4 /*SM_CYCAPTION*/) + GetSystemMetrics(8 /*SM_CYFIXEDFRAME*/) * 2 ;
+         TITLE  LangStr("OpenFilePage") ;
+         MODAL ;
          NOSIZE
 
       DEFINE LABEL PageNumber
@@ -1391,11 +1391,11 @@ FUNCTION InputSumatraDir()
 
    LOCAL cDir
 
-   DEFINE WINDOW InputDir;
-         WIDTH  250 + GetSystemMetrics(7 /*SM_CXFIXEDFRAME*/) * 2;
-         HEIGHT  74 + GetSystemMetrics(4 /*SM_CYCAPTION*/) + GetSystemMetrics(8 /*SM_CYFIXEDFRAME*/) * 2;
-         TITLE  LangStr("SumatraDir", .T.);
-         MODAL;
+   DEFINE WINDOW InputDir ;
+         WIDTH  250 + GetSystemMetrics(7 /*SM_CXFIXEDFRAME*/) * 2 ;
+         HEIGHT  74 + GetSystemMetrics(4 /*SM_CYCAPTION*/) + GetSystemMetrics(8 /*SM_CYFIXEDFRAME*/) * 2 ;
+         TITLE  LangStr("SumatraDir", .T.) ;
+         MODAL ;
          NOSIZE
 
       DEFINE TEXTBOX Dir
@@ -1474,12 +1474,12 @@ FUNCTION AboutPdfView()
 
    LOCAL nCW, nW1, nW2
 
-   DEFINE WINDOW About;
-         WIDTH  270 + GetSystemMetrics(7 /*SM_CXFIXEDFRAME*/) * 2;
-         HEIGHT 188 + GetSystemMetrics(4 /*SM_CYCAPTION*/) + GetSystemMetrics(8 /*SM_CYFIXEDFRAME*/) * 2;
-         TITLE  LangStr("AboutPdfView");
-         MODAL;
-         NOSIZE;
+   DEFINE WINDOW About ;
+         WIDTH  270 + GetSystemMetrics(7 /*SM_CXFIXEDFRAME*/) * 2 ;
+         HEIGHT 188 + GetSystemMetrics(4 /*SM_CYCAPTION*/) + GetSystemMetrics(8 /*SM_CYFIXEDFRAME*/) * 2 ;
+         TITLE  LangStr("AboutPdfView") ;
+         MODAL ;
+         NOSIZE ;
          ON MOUSECLICK About.RELEASE
 
       DEFINE LABEL Label1
@@ -1581,14 +1581,14 @@ FUNCTION MsgWin(aMsg)
    ENDIF
 
    IF IsWindowVisible(App.Handle)
-      DEFINE WINDOW MsgWnd;
-            MODAL;
+      DEFINE WINDOW MsgWnd ;
+            MODAL ;
             NOSIZE
       ELSE
-         DEFINE WINDOW MsgWnd;
-               CHILD;
-               NOMINIMIZE;
-               NOMAXIMIZE;
+         DEFINE WINDOW MsgWnd ;
+               CHILD ;
+               NOMINIMIZE ;
+               NOMAXIMIZE ;
                NOSIZE
          ENDIF
 
@@ -1646,15 +1646,15 @@ FUNCTION RecentFiles()
    LOCAL lFileFocus := (GetFocus() == PdfView.Files.HANDLE)
    LOCAL aFile
 
-   DEFINE WINDOW Recent;
-         ROW    0;
-         COL    0;
-         WIDTH  snRecent_W;
-         HEIGHT snRecent_H;
-         TITLE  LangStr("RecentFiles", .T.);
-         MODAL;
-         ON PAINT   PaintSizeGrip(Recent.HANDLE);
-         ON SIZE    RecentResize();
+   DEFINE WINDOW Recent ;
+         ROW    0 ;
+         COL    0 ;
+         WIDTH  snRecent_W ;
+         HEIGHT snRecent_H ;
+         TITLE  LangStr("RecentFiles", .T.) ;
+         MODAL ;
+         ON PAINT   PaintSizeGrip(Recent.HANDLE) ;
+         ON SIZE    RecentResize() ;
          ON RELEASE ((snRecent_W := Recent.WIDTH), (snRecent_H := Recent.HEIGHT), RecentAmount(.F.))
 
       DEFINE GRID Files

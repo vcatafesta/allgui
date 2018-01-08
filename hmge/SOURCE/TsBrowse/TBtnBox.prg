@@ -19,7 +19,7 @@ CLASS TBtnBox FROM TControl
    DATA hWndChild
 
    METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
-      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid,;
+      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid, ;
       cResName, bAction, lSpinner, bUp, bDown, bMin, bMax, nBmpWidth, nCell )
    METHOD Default()
    METHOD HandleEvent( nMsg, nWParam, nLParam )
@@ -39,7 +39,7 @@ CLASS TBtnBox FROM TControl
    * ============================================================================
 
 METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
-      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid,;
+      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid, ;
       cResName, bAction, lSpinner, bUp, bDown, bMin, bMax, nBmpWidth, nCell ) CLASS TBtnBox
 
    LOCAL invisible := .F.
@@ -52,10 +52,10 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
    HB_SYMBOL_UNUSED( bChanged )
    HB_SYMBOL_UNUSED( bDown )
 
-   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ),;
-      nClrBack  := GetSysColor( COLOR_WINDOW ),;
-      nHeight   := 12,;
-      bMin      := {|| 0 },;
+   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ), ;
+      nClrBack  := GetSysColor( COLOR_WINDOW ), ;
+      nHeight   := 12, ;
+      bMin      := {|| 0 }, ;
       bMax      := {|| 32000 }
 
    ::nTop         := nRow

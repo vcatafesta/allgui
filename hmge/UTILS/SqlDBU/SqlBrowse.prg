@@ -7,43 +7,43 @@ FUNCTION BrowStru(DBUstruct,aSqlStru,cTable,lNewTab, aSeq)
    DEFAULT lNewTab := FALSE , aSeq := {}
 
    IF (.Not. IsWIndowActive (FrameStru) )
-      DEFINE WINDOW FrameStru;
-            AT 0,0 width 900;
+      DEFINE WINDOW FrameStru ;
+            AT 0,0 width 900 ;
             HEIGHT 430 ;
             TITLE "VIEW Table Structure" ;
             NOSIZE
 
          @ 15,40 LABEL Lbl_TabNam ;
-            VALUE "Table Name";
+            VALUE "Table Name" ;
             WIDTH 80 ;
 
          @ 15,140 TEXTBOX Table_Name ;
             WIDTH 150 ;
             UPPERCASE ;
-            VALUE cTable;
+            VALUE cTable ;
             ON CHANGE {|| FrameStru.Btn_AddTab.Enabled:= !empty(FrameStru.Table_Name.Value) .and. oGrid_1:nLen > 0 .and. !oGrid_1:lPhantArrRow  }
 
          FrameStru.Table_Name.Readonly := !lNewTab
          IF lNewTab
             DBUstruct := {}
             FrameStru.Table_Name.BackColor := DBUgreen
-            @ 15,310 BUTTON Btn_AddTab;
+            @ 15,310 BUTTON Btn_AddTab ;
                CAPTION "Add Table" ;
                ACTION { || if(CreateNewTable(oGrid_1,FrameStru.Table_Name.Value),FrameStru.release,Nil) }
             FrameStru.Btn_AddTab.Enabled := FALSE
          ENDIF
 
-         @ 50,10 FRAME Frame_2;
-            CAPTION "Structure of SQLITE";
-            WIDTH 600;
+         @ 50,10 FRAME Frame_2 ;
+            CAPTION "Structure of SQLITE" ;
+            WIDTH 600 ;
             HEIGHT 280
 
          DEFINE TBROWSE oGrid_1 AT 70,20 ARRAY DBUstruct ;
             WIDTH 580 HEIGHT 250 ;
-            HEADERS "Lp","Name","Type","Init Type","Size",""+CRLF+"Dec."+CRLF+"(Max)",""+CRLF+"Not"+CRLF+"Null",""+CRLF+"Prim."+CRLF+"Key","Incr",""+CRLF+"Incr."+CRLF+"Value";
+            HEADERS "Lp","Name","Type","Init Type","Size",""+CRLF+"Dec."+CRLF+"(Max)",""+CRLF+"Not"+CRLF+"Null",""+CRLF+"Prim."+CRLF+"Key","Incr",""+CRLF+"Incr."+CRLF+"Value" ;
             WIDTHS 20,130,110,75,40,40,30,35,30,50 ;
             SELECTOR 18 ;
-            ON CHANGE onChangeRec(oGrid_1,aSqlStru);
+            ON CHANGE onChangeRec(oGrid_1,aSqlStru) ;
             ON DBLCLICK EditRecStru( oGrid_1 )
 
          oGrid_1:nLineStyle :=  LINES_VERT
@@ -63,7 +63,7 @@ FUNCTION BrowStru(DBUstruct,aSqlStru,cTable,lNewTab, aSeq)
             { CLR_HGREEN, CLR_BLACK } ,;  // degraded order column background color
             { CLR_WHITE, CLR_BLACK }  } ) // degraded superheaders backgroud color
          oGrid_1:SetData( 3, ComboWBlock( oGrid_1, 3, 3 , aType ) )
-         oGrid_1:SetColor( { 1, 2 }, {  CLR_BLACK, { || if( !oGrid_1:lPhantArrRow .and. (rtrim(Eval( oGrid_1:aColumns[ 5 ]:bData ))== 'FLOAT'.or. Eval( oGrid_1:aColumns[ 7 ]:bData ) == 0 ),{ CLR_WHITE,CLR_HGRAY },;
+         oGrid_1:SetColor( { 1, 2 }, {  CLR_BLACK, { || if( !oGrid_1:lPhantArrRow .and. (rtrim(Eval( oGrid_1:aColumns[ 5 ]:bData ))== 'FLOAT'.or. Eval( oGrid_1:aColumns[ 7 ]:bData ) == 0 ),{ CLR_WHITE,CLR_HGRAY }, ;
             { CLR_WHITE, CLR_HRED } ) } }, 6 )
 
          FOR n := 7 TO 9
@@ -73,7 +73,7 @@ FUNCTION BrowStru(DBUstruct,aSqlStru,cTable,lNewTab, aSeq)
          oGrid_1:aColumns[ 10 ]:nAlign     :=  DT_CENTER
       END TBROWSE
 
-      @ 20,620 FRAME Frame_1;
+      @ 20,620 FRAME Frame_1 ;
          WIDTH 260 ;
          HEIGHT 310  ;
          CAPTION "Info Fields" ;
@@ -85,7 +85,7 @@ FUNCTION BrowStru(DBUstruct,aSqlStru,cTable,lNewTab, aSeq)
       @ 170,630 LABEL Lbl_size      WIDTH 60 BACKCOLOR DBUblue VALUE "Size"
       @ 195,630 LABEL Lbl_decimal   WIDTH 60 BACKCOLOR DBUblue VALUE "Decimals"
 
-      @ 50,700 TEXTBOX Text_Name;
+      @ 50,700 TEXTBOX Text_Name ;
          WIDTH 100 ;
          UPPERCASE ;
          VALUE "" ;
@@ -98,7 +98,7 @@ FUNCTION BrowStru(DBUstruct,aSqlStru,cTable,lNewTab, aSeq)
          VALUE 0 ;
          ON CHANGE OnChangeType(FrameStru.Text_Type.Value, oGrid_1,Mod)
 
-      @ 110,700 TEXTBOX Text_IniType;
+      @ 110,700 TEXTBOX Text_IniType ;
          VALUE ''  ;
          WIDTH 120 ;
          READONLY
@@ -108,16 +108,16 @@ FUNCTION BrowStru(DBUstruct,aSqlStru,cTable,lNewTab, aSeq)
          VALUE 0 ;
          WIDTH 59 ;
          SPACING 0 ;
-         FONT 'Arial' SIZE 8;
+         FONT 'Arial' SIZE 8 ;
          HORIZONTAL ;
          ON CHANGE OnChangeType(FrameStru.Text_Type.Value, oGrid_1, Mod)
 
-      @ 165,700 TEXTBOX Text_Size;
+      @ 165,700 TEXTBOX Text_Size ;
          VALUE 0  ;
-         NUMERIC;
+         NUMERIC ;
          WIDTH 90 ;
-         RIGHTALIGN;
-         READONLY;
+         RIGHTALIGN ;
+         READONLY ;
          ON CHANGE OnChangeType(FrameStru.Text_Type.Value, oGrid_1, Mod)
 
       @ 195,700 TEXTBOX Text_Decimals ;
@@ -128,24 +128,24 @@ FUNCTION BrowStru(DBUstruct,aSqlStru,cTable,lNewTab, aSeq)
          READONLY ;
          ON CHANGE OnChangeType(FrameStru.Text_Type.Value, oGrid_1, Mod)
 
-      @ 225 ,630 CHECKBOX Chk_Null;
-         CAPTION 'Not Null';
-         WIDTH 70;
+      @ 225 ,630 CHECKBOX Chk_Null ;
+         CAPTION 'Not Null' ;
+         WIDTH 70 ;
          VALUE FALSE
 
-      @ 225 ,710 CHECKBOX Chk_Key;
-         CAPTION 'Prim.Key';
-         WIDTH 70;
+      @ 225 ,710 CHECKBOX Chk_Key ;
+         CAPTION 'Prim.Key' ;
+         WIDTH 70 ;
          VALUE FALSE ;
          ON CHANGE OnChangeType(FrameStru.Text_Type.Value, oGrid_1, Mod)
 
-      @ 225 ,790 CHECKBOX Chk_Incr;
-         CAPTION 'Incr.';
-         WIDTH 50;
+      @ 225 ,790 CHECKBOX Chk_Incr ;
+         CAPTION 'Incr.' ;
+         WIDTH 50 ;
          VALUE FALSE
 
       @ 255,630 BUTTON Btn_Add ;
-         CAPTION "Add";
+         CAPTION "Add" ;
          WIDTH 90 ;
          ACTION Mod := OnModRecStru(oGrid_1,cTable,2, lNewTab)
 
@@ -584,7 +584,7 @@ FUNCTION AlterRec(oGrid,cTable,cKol,cType,Mod,aDbStru)
       cQuery += QueryCrea(cTable,2,cTable2,aDbStru)+CRLF
       cQuery += QueryCrea(cTable,3,cTable2,aDbStru)+CRLF
       cQuery += "DROP TABLE "+cTable+" ;" +CRLF
-      cQuery += QueryNewTbl(oGrid,cTable) +CRLF//"CREATE TABLE t1(a,b);
+      cQuery += QueryNewTbl(oGrid,cTable) +CRLF//"CREATE TABLE t1(a,b) ;
       adBStru :={}
       AEval( oGrid:aArray, {|x| aAdd(adBStru,{x[2],x[3],x[4],x[5]})})
       cQuery += QueryCrea(cTable2,3,cTable,aDbStru)+CRLF
@@ -630,14 +630,14 @@ FUNCTION AlterRec(oGrid,cTable,cKol,cType,Mod,aDbStru)
    RETURN lRet
 
    /*
-   BEGIN TRANSACTION;
-   CREATE TEMPORARY TABLE t1_backup(a,b);
-   INSERT INTO t1_backup SELECT a,b FROM t1;
-   DROP TABLE t1;
-   CREATE TABLE t1(a,b);
-   INSERT INTO t1 SELECT a,b FROM t1_backup;
-   DROP TABLE t1_backup;
-   COMMIT;
+   BEGIN TRANSACTION ;
+   CREATE TEMPORARY TABLE t1_backup(a,b) ;
+   INSERT INTO t1_backup SELECT a,b FROM t1 ;
+   DROP TABLE t1 ;
+   CREATE TABLE t1(a,b) ;
+   INSERT INTO t1 SELECT a,b FROM t1_backup ;
+   DROP TABLE t1_backup ;
+   COMMIT ;
 
    */
 

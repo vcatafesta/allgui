@@ -17,7 +17,7 @@ FUNCTION  _addGridToolBar( cGrid, cWindow )
    LOCAL cName := cWindow
 
    DEFINE BUTTON &cpdf
-      parent &cWindow
+      PARENT &cWindow
       ROW nToolBarRow
       COL nToolBarCol
       WIDTH nButtonSize
@@ -27,7 +27,7 @@ FUNCTION  _addGridToolBar( cGrid, cWindow )
       ACTION _grid2pdf( cGrid, cWindow )
    END BUTTON
    DEFINE BUTTON &cCsv
-      parent &cWindow
+      PARENT &cWindow
       ROW nToolBarRow
       COL nToolBarCol + nButtonSize + nInterval
       WIDTH nButtonSize
@@ -37,7 +37,7 @@ FUNCTION  _addGridToolBar( cGrid, cWindow )
       ACTION _grid2csv( cGrid, cWindow )
    END BUTTON
    DEFINE BUTTON &cPrint
-      parent &cWindow
+      PARENT &cWindow
       ROW nToolBarRow
       COL nToolBarCol + nButtonSize + nInterval + nButtonSize + nInterval
       WIDTH nButtonSize

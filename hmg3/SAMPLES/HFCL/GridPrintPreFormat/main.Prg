@@ -116,7 +116,7 @@ FUNCTION Main
          HEIGHT 330 ;
          HEADERS {'Column 1','Column 2','Column 3','Column 4','Column 5'} ;
          WIDTHS {140,140,140,140,140} ;
-         JUSTIFY {0,0,1,1,0};
+         JUSTIFY {0,0,1,1,0} ;
          ITEMS aRows ;
          VALUE 1 ;
          EDIT ;
@@ -142,11 +142,11 @@ FUNCTION Main
 
 FUNCTION doprint
 
-   PRINT GRID grid_1;
-      OF form_1;
-      FONT "Arial";
-      SIZE 12;
-      ORIENTATION "P";
+   PRINT GRID grid_1 ;
+      OF form_1 ;
+      FONT "Arial" ;
+      SIZE 12 ;
+      ORIENTATION "P" ;
       SHOWWINDOW ;
       HEADERS {"Header1","Header2"} ;
       MERGEHEADERS mergedheaders ;
@@ -154,12 +154,12 @@ FUNCTION doprint
       WIDTHS {0,20,20,20,40} ;
       PAPERSIZE PRINTER_PAPER_USER ;
       PAPERWIDTH 200 ;
-      PAPERHEIGHT 200;
-      VERTICALLINES;
-      HORIZONTALLINES;
-      LEFT 15;
-      TOP 15;
-      RIGHT 15;
+      PAPERHEIGHT 200 ;
+      VERTICALLINES ;
+      HORIZONTALLINES ;
+      LEFT 15 ;
+      TOP 15 ;
+      RIGHT 15 ;
       BOTTOM 15
 
    RETURN NIL
@@ -219,16 +219,16 @@ PROCEDURE SETITEM()
 
          FUNC Any2Strg( xAny )
 
-            LOCA cRVal  := '???',;
-               nType  :=  0,;
-               aCases := { { "A", { | x | "{...}" } },;
-               { "B", { | x | "{||}" } },;
-               { "C", { | x | x }},;
-               { "M", { | x | x   } },;
-               { "D", { | x | DTOC( x ) } },;
-               { "L", { | x | IF( x,"On","Off") } },;
-               { "N", { | x | NTrim( x )  } },;
-               { "O", { | x | ":Object:" } },;
+            LOCA cRVal  := '???', ;
+               nType  :=  0, ;
+               aCases := { { "A", { | x | "{...}" } }, ;
+               { "B", { | x | "{||}" } }, ;
+               { "C", { | x | x }}, ;
+               { "M", { | x | x   } }, ;
+               { "D", { | x | DTOC( x ) } }, ;
+               { "L", { | x | IF( x,"On","Off") } }, ;
+               { "N", { | x | NTrim( x )  } }, ;
+               { "O", { | x | ":Object:" } }, ;
                { "U", { | x | "<NIL>" } } }
 
             IF (nType := ASCAN( aCases, { | a1 | VALTYPE( xAny ) == a1[ 1 ] } ) ) > 0

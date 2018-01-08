@@ -247,10 +247,10 @@ PROCEDURE test(nTest)
 
    CASE nTest = 10
       aDisa := { 2 , 4 , 8 , 15 , 24 ,37 , 66 , 77 }
-      aBtns := {'btn-&1','btn-&2','btn-&3','btn-&4','btn-&5','btn-&6','btn-&7','btn-&8','btn-&9','btn-10','btn-11','btn-12','btn-13','btn-14','btn-15','btn-16' ,;
-         'btn-17','btn-18','btn-19','btn-20','btn-21','btn-22','btn-23','btn-24','btn-25','btn-26','btn-27','btn-28','btn-29','btn-30','btn-31','btn-32' ,;
-         'btn-33','btn-34','btn-35','btn-36','btn-37','btn-38','btn-39','btn-40','btn-41','btn-42','btn-43','btn-44','btn-45','btn-46','btn-47','btn-48' ,;
-         'btn-49','btn-50','btn-51','btn-52','btn-53','btn-54','btn-55','btn-56','btn-57','btn-58','btn-59','btn-60','btn-61','btn-62','btn-63','btn-64' ,;
+      aBtns := {'btn-&1','btn-&2','btn-&3','btn-&4','btn-&5','btn-&6','btn-&7','btn-&8','btn-&9','btn-10','btn-11','btn-12','btn-13','btn-14','btn-15','btn-16' , ;
+         'btn-17','btn-18','btn-19','btn-20','btn-21','btn-22','btn-23','btn-24','btn-25','btn-26','btn-27','btn-28','btn-29','btn-30','btn-31','btn-32' , ;
+         'btn-33','btn-34','btn-35','btn-36','btn-37','btn-38','btn-39','btn-40','btn-41','btn-42','btn-43','btn-44','btn-45','btn-46','btn-47','btn-48' , ;
+         'btn-49','btn-50','btn-51','btn-52','btn-53','btn-54','btn-55','btn-56','btn-57','btn-58','btn-59','btn-60','btn-61','btn-62','btn-63','btn-64' , ;
          'btn-65','btn-66','btn-67','btn-68','btn-69','btn-70','btn-71','btn-72','btn-73','btn-74','btn-75','btn-76','btn-77','btn-78','btn-79','btn-&n' }
       aBmp := {}
       FOR xz := 1 TO 80
@@ -276,7 +276,7 @@ PROCEDURE test(nTest)
          2,0))
 
    CASE nTest = 11
-      aPic := {'.\res\print.bmp','.\res\fax.bmp','.\res\book.bmp','.\res\CDrom.bmp','.\res\mail.bmp' ,;
+      aPic := {'.\res\print.bmp','.\res\fax.bmp','.\res\book.bmp','.\res\CDrom.bmp','.\res\mail.bmp' , ;
          '.\res\new.bmp','.\res\copy.bmp','.\res\paste.bmp','.\res\cut.bmp','.\res\close.bmp'}
 
       msginfo( 'return value ' + str( ;

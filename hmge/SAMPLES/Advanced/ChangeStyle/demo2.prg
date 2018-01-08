@@ -55,7 +55,7 @@ FUNCTION MAIN()
    DEFINE WINDOW Form_1 AT 97,62 WIDTH 597 HEIGHT 337 MAIN TITLE "Extend Disable/Enable control DEMO 2"
 
       @ 21,19 BTNTEXTBOX TextBox_1 ;
-         BACKCOLOR {255,255,0};
+         BACKCOLOR {255,255,0} ;
          FONTCOLOR {255,0,0} ;
          VALUE "BtnTextBox_1" ;
          ACTION MsgInfo('Click!') ;
@@ -68,7 +68,7 @@ FUNCTION MAIN()
 
       @ 22,158 BROWSE Browse_1 WIDTH 240 HEIGHT 256 ;
          HEADERS {'Last Name','First Name','Phone'} ;
-         WIDTHS {100,100,70};
+         WIDTHS {100,100,70} ;
          FIELDS {'f1','f2','f3'} ;
          WORKAREA TEST ;
          TOOLTIP 'Editable Grid Control' ;

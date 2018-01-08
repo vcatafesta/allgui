@@ -42,7 +42,7 @@ FUNCTION AST_Label(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -81,7 +81,7 @@ FUNCTION AST_Label(cReadString,cTerminator)
    //      [ RIGHTALIGN | CENTERALIGN ]
    //      [ HELPID <nHelpId> ]
    //      [ INVISIBLE ]
-   // @ <nRow> ,<nCol> LABEL <ControlName> OF <ParentWindowName> VALUE <cValue>;
+   // @ <nRow> ,<nCol> LABEL <ControlName> OF <ParentWindowName> VALUE <cValue> ;
    //    ACTION <ActionProcedure> | <bBlock> WIDTH <nWidth> HEIGHT <nHeight> FONT <cFontName> SIZE <nFontSize>
 
    aProperties_[ 1] := ALLTRIM(STRTRAN(aDefCommandList_[ 1],"DEFINE LABEL",""))   // DEFINE LABEL lblHMGTxtManual
@@ -110,9 +110,9 @@ FUNCTION AST_Label(cReadString,cTerminator)
    aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " LABEL " +;
-      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + "; " + CRLF +;
-      LDCS_iLevel(3) + aProperties_[17] + " " + aProperties_[4] + " " +;
+   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " LABEL " + ;
+      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + "; " + CRLF + ;
+      LDCS_iLevel(3) + aProperties_[17] + " " + aProperties_[4] + " " + ;
       aProperties_[5] + " " + aProperties_[7] + " " + aProperties_[8] + CRLF
 
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF

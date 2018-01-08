@@ -266,7 +266,7 @@ FUNCTION do_backup(aSource)
       IF FILE( DirPrg() + "\SKINS\" + cSkin )
          @ -2,-2 IMAGE Image_1 ;
             PICTURE DirPrg()+"\SKINS\"+cSkin ;
-            WIDTH myBackUp.Width - 2;
+            WIDTH myBackUp.Width - 2 ;
             HEIGHT myBackUp.Height - IF(IsXPThemeActive(), 27, 20)
       ENDIF
 
@@ -412,7 +412,7 @@ FUNCTION ZipFiles(aFiles)
 
    COMPRESS aFiles ;
       TO cZip ;
-      BLOCK {|cFile, nPos| ProgressUpdate(nPos, cFile) };
+      BLOCK {|cFile, nPos| ProgressUpdate(nPos, cFile) } ;
       LEVEL nCompress ;
       OVERWRITE STOREPATH
 

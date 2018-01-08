@@ -420,7 +420,7 @@ FUNCTION dcp_split_code(aReturn,cNewFileName)
                nJump:=aTemp[2]
                i:=nJump
             OTHERWISE
-               Msginfo("PCODE : "+alltrim(str(aCode[i]))+CRLF+;
+               Msginfo("PCODE : "+alltrim(str(aCode[i]))+CRLF+ ;
                   "Not yet coded","Trace Message")
             ENDCASE
          ELSE
@@ -438,7 +438,7 @@ FUNCTION dcp_split_code(aReturn,cNewFileName)
    DECLARE WINDOW DECOMPILER
    decompiler.RichEdit_2.value:=memoread(cNewFilename) //all was ok
 ELSE
-   MsgInfo("Error occurs writing file "+cNewFilename+CRLF+;
+   MsgInfo("Error occurs writing file "+cNewFilename+CRLF+ ;
       "NEED CAREFULLY DEBUGGING !" ,"Trace Message decode_c2prg")
 ENDIF
 
@@ -464,7 +464,7 @@ FUNCTION dcp_Write_Code(aGlobalRowCode,cFilename)
       fseek(nHandle,0,FS_END)
       nError:=fwrite(nHandle,cStringa)
       IF nError==0
-         MsgInfo("String cannot be written in file "+cFilename + " !"+CRLF+;
+         MsgInfo("String cannot be written in file "+cFilename + " !"+CRLF+ ;
             "Error # : "+alltrim(str((nError))),"Trace Message")
          lMode:=.f.
       ENDIF
@@ -591,15 +591,15 @@ STATIC FUNCTION dcp_f4(aCode,nIndex,aStack)
 STATIC FUNCTION dcp_f101(aCode,nIndex,aStack)
 
    LOCAL aReturn:={},nNumero:=0
-   nNumero:=RECOVER_DOUBLE(aCode[nIndex+1],+;
-      aCode[nIndex+2],+;
-      aCode[nIndex+3],+;
-      aCode[nIndex+4],+;
-      aCode[nIndex+5],+;
-      aCode[nIndex+6],+;
-      aCode[nIndex+7],+;
-      aCode[nIndex+8],+;
-      aCode[nIndex+9],+;
+   nNumero:=RECOVER_DOUBLE(aCode[nIndex+1],+ ;
+      aCode[nIndex+2],+ ;
+      aCode[nIndex+3],+ ;
+      aCode[nIndex+4],+ ;
+      aCode[nIndex+5],+ ;
+      aCode[nIndex+6],+ ;
+      aCode[nIndex+7],+ ;
+      aCode[nIndex+8],+ ;
+      aCode[nIndex+9],+ ;
       aCode[nIndex+10])
    aStack:=dcp_push_stack(aStack,nNumero)
    aadd(aReturn,aStack)
@@ -906,9 +906,9 @@ STATIC FUNCTION dcp_f92(aCode,nIndex,aStack)
 STATIC FUNCTION dcp_f97(aCode,nIndex,aStack)
 
    LOCAL aReturn:={},nNumero:=0
-   nNumero:=HB_MAKELONG (aCode[nIndex+1],+;
-      aCode[nIndex+2],+;
-      aCode[nIndex+3],+;
+   nNumero:=HB_MAKELONG (aCode[nIndex+1],+ ;
+      aCode[nIndex+2],+ ;
+      aCode[nIndex+3],+ ;
       aCode[nIndex+4])
    aStack:=dcp_push_stack(aStack,nNumero)
    aadd(aReturn,nIndex+4)

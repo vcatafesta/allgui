@@ -136,8 +136,8 @@ METHOD browse()
          MDICHILD ;
          ON INIT ( WinChildMaximize(), ResizeEdit() ) ;
          ON RELEASE ::end() ;
-         ON SIZE ResizeEdit();
-         ON MAXIMIZE ResizeEdit();
+         ON SIZE ResizeEdit() ;
+         ON MAXIMIZE ResizeEdit() ;
          ON MINIMIZE ResizeEdit()
 
       DEFINE IMAGELIST ImageList_1 ;
@@ -198,9 +198,9 @@ METHOD edit()
    LOCAL mNumLine:= 0
 
    iif( ::lAdd, ,::load())
-   DEFINE WINDOW Edit AT 0,0 WIDTH 360 HEIGHT 240;
-         TITLE iif(::lAdd,"Untitled",::company);
-         MODAL;
+   DEFINE WINDOW Edit AT 0,0 WIDTH 360 HEIGHT 240 ;
+         TITLE iif(::lAdd,"Untitled",::company) ;
+         MODAL ;
          FONT 'Tahoma' SIZE 9
 
       @ mNumLine+=  15,  10 LABEL    LABEL_1    VALUE 'Custno'  WIDTH 80  HEIGHT 20  RIGHTALIGN

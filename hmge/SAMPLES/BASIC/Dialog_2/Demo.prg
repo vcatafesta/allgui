@@ -35,7 +35,7 @@ FUNCTION main()
 
       ON KEY ALT+X ACTION THISWINDOW.RELEASE
 
-      @ 10, 10 FRAME Frame_1;
+      @ 10, 10 FRAME Frame_1 ;
          CAPTION 'Test Modalless Dialog' ;
          WIDTH 300 ;
          HEIGHT 55
@@ -50,7 +50,7 @@ FUNCTION main()
          FONT 'Arial' SIZE 15 ;
          BOLD  FONTCOLOR BLUE
 
-      @ 70, 10 FRAME Frame_2;
+      @ 70, 10 FRAME Frame_2 ;
          CAPTION 'Dialog from memory' ;
          WIDTH 140 ;
          HEIGHT 60
@@ -59,7 +59,7 @@ FUNCTION main()
          ACTION ( fExternal( MainForm.Lbl_2.Value ) ) ;
          DEFAULT
 
-      @ 70, 160 FRAME Frame_3;
+      @ 70, 160 FRAME Frame_3 ;
          CAPTION 'Dialog from RC' ;
          WIDTH 140 ;
          HEIGHT 60

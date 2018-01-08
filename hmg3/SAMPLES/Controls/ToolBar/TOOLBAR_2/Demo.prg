@@ -76,12 +76,12 @@ FUNCTION Main
             BUTTON Button_1b ;
                CAPTION 'More ToolBars...' ;
                PICTURE 'button7.bmp' ;
-               ACTION MsgInfo('Click! 2');
+               ACTION MsgInfo('Click! 2') ;
 
             BUTTON Button_2b ;
                CAPTION 'Button 2' ;
                PICTURE 'button7.bmp' ;
-               ACTION MsgInfo('Click! 2');
+               ACTION MsgInfo('Click! 2') ;
                SEPARATOR
 
             BUTTON Button_3b ;
@@ -96,7 +96,7 @@ FUNCTION Main
             BUTTON Button_1c ;
                CAPTION 'Check 1' ;
                PICTURE 'button4.bmp' ;
-               ACTION MsgInfo('Hey!');
+               ACTION MsgInfo('Hey!') ;
                CHECK GROUP
 
             BUTTON Button_2c ;
@@ -109,7 +109,7 @@ FUNCTION Main
                CAPTION 'Check 3' ;
                PICTURE 'button6.bmp' ;
                ACTION MsgInfo('Hey!') ;
-               SEPARATOR;
+               SEPARATOR ;
                CHECK GROUP
 
             BUTTON Button_4c ;

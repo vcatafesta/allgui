@@ -355,21 +355,21 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
       IF lMdi
          INIT WINDOW ::oDlg MDI TITLE cTitle    ;
             AT nLeft, nTop SIZE nWidth, nHeight ;
-            STYLE IF( nStyle > 0 , nStyle, NIL );
-            FONT oFont;
+            STYLE IF( nStyle > 0 , nStyle, NIL ) ;
+            FONT oFont ;
             BACKGROUND BITMAP oBmp
       ELSEIF lMdiChild
          INIT WINDOW ::oDlg  MDICHILD TITLE cTitle    ;
             AT nLeft, nTop SIZE nWidth, nHeight ;
-            STYLE IF( nStyle > 0 , nStyle, NIL );
+            STYLE IF( nStyle > 0 , nStyle, NIL ) ;
             FONT oFont ;
             BACKGROUND BITMAP oBmp
       ELSE
 #endif
          INIT WINDOW ::oDlg MAIN TITLE cTitle    ;
             AT nLeft, nTop SIZE nWidth, nHeight ;
-            FONT oFont;
-            BACKGROUND BITMAP oBmp;
+            FONT oFont ;
+            BACKGROUND BITMAP oBmp ;
             STYLE IF( nStyle > 0 , nStyle, NIL )
 #ifndef __LINUX__
       ENDIF

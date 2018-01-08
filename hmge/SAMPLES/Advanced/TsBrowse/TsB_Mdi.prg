@@ -74,39 +74,39 @@ FUNCTION Main
          DEFINE TOOLBAREX oBar  BUTTONSIZE 55,35 FONT "Arial" SIZE 7
 
          BUTTON Btn_1  PICTURE "Super16" ;
-            CAPTION "Sample 1";
+            CAPTION "Sample 1" ;
             TOOLTIP "Sample 1" ACTION fWindow( 1 )
 
          BUTTON Btn_2 PICTURE "Super16"  ;
-            CAPTION "Sample 2";
+            CAPTION "Sample 2" ;
             TOOLTIP "Sample 2" ACTION fWindow( 2 )
 
          BUTTON Btn_3 PICTURE "Super16" ;
-            CAPTION "Sample 3";
+            CAPTION "Sample 3" ;
             TOOLTIP "Sample 3" ACTION fWindow( 3 )
 
          BUTTON Btn_4 PICTURE "Super16"  ;
-            CAPTION "Sample 4";
+            CAPTION "Sample 4" ;
             TOOLTIP "Sample 4" ACTION fWindow( 4 )
 
          BUTTON Btn_5 PICTURE "Super16"  ;
-            CAPTION "Sample 5";
+            CAPTION "Sample 5" ;
             TOOLTIP "Sample 5" ACTION fWindow( 5 )
 
          BUTTON Btn_6 PICTURE "Super16"  ;
-            CAPTION "Sample 6";
+            CAPTION "Sample 6" ;
             TOOLTIP "Sample 6" ACTION fWindow( 6 )
 
          BUTTON Btn_7 PICTURE "Super16"  ;
-            CAPTION "Sample 7";
+            CAPTION "Sample 7" ;
             TOOLTIP "Sample 7" ACTION fWindow( 7 )
 
          BUTTON Btn_8 PICTURE "Super16"  ;
-            CAPTION "Sample 8";
+            CAPTION "Sample 8" ;
             TOOLTIP "Sample 8" ACTION fWindow( 8 )
 
          BUTTON Btn_9 PICTURE "ExitB16"  ;
-            CAPTION "Exit";
+            CAPTION "Exit" ;
             ACTION Form_1.Release ;
             TOOLTIP "Exit"
       END TOOLBAR
@@ -189,7 +189,7 @@ PROCEDURE CloseTables()
 
 FUNCTION fWindow(nSample)
 
-   LOCAL cWnd, cBrw, cTitle, nBrwWidth, nEle, nBrwHeight, nFrm, n, actpos,;
+   LOCAL cWnd, cBrw, cTitle, nBrwWidth, nEle, nBrwHeight, nFrm, n, actpos, ;
       nMarried, nSingle, nTotSal, nAgeTot, nOldAge, nOldSal, aStates, ;
       bBlock, aRect, ix, cSelState,lNew:=.T., ChildHandle, ChildName, cTit
    LOCAL Brw_1, Brw_2, Brw_3, Brw_4, Brw_5, Brw_6, Brw_7, Brw_8
@@ -231,12 +231,12 @@ FUNCTION fWindow(nSample)
 
       DEFINE WINDOW ChildMdi ;
             WIDTH  nBrwWidth HEIGHT  nBrwHeight ;
-            TITLE cTitle;
-            MDICHILD;
-            ON INIT ResizeEdit();
-            ON SIZE ResizeEdit();
-            ON MAXIMIZE ResizeEdit();
-            ON MINIMIZE ResizeEdit();
+            TITLE cTitle ;
+            MDICHILD ;
+            ON INIT ResizeEdit() ;
+            ON SIZE ResizeEdit() ;
+            ON MAXIMIZE ResizeEdit() ;
+            ON MINIMIZE ResizeEdit() ;
             ON MOUSECLICK SetEditFocus()
 
          actpos := _GetClientRect(GetActiveMdiHandle())
@@ -249,7 +249,7 @@ FUNCTION fWindow(nSample)
             DEFINE TBROWSE Brw_1 AT 0, 0 ALIAS "Employee" ;
                COLORS {CLR_BLACK, CLR_NBLUE} ;
                WIDTH nBrwWidth HEIGHT nBrwHeight  ;
-               MESSAGE "Cell height idependent of the font size using oBrw:nHeightCell. " +;
+               MESSAGE "Cell height idependent of the font size using oBrw:nHeightCell. " + ;
                "Also try multi-select feature by double clicking."
 
             Brw_1:LoadFields( .F. )
@@ -367,7 +367,7 @@ FUNCTION fWindow(nSample)
 
          // activating BtnGet to column  7    - not implement yet
          //                  Brw_2:SetBtnGet( 7, "Calen16", { | oGet, dVar | aRect := GetCoors( oGet:hWnd ), ;
-         //                      dVar := FwCalendar( oGet:Value(), aRect[ 1 ], aRect[ 2 ], oGet:oWnd ),;
+         //                      dVar := FwCalendar( oGet:Value(), aRect[ 1 ], aRect[ 2 ], oGet:oWnd ), ;
          //                      oGet:cText( dVar ), oGet:Refresh(), oGet:KeyDown( VK_RETURN, 0 ) }, 16 )
 
          // this is very important when working with the same database
@@ -434,7 +434,7 @@ CASE nSample = 4
       COLORS {CLR_BLACK, CLR_PINK} ;
       MESSAGE "Fonts, colors and bitmaps different for cells, headers and footers"
 
-   ADD COLUMN TO Brw_4;
+   ADD COLUMN TO Brw_4 ;
       HEADER "F i r s t" ;
       SIZE 130 ;
       DATA FieldWBlock( "First", Select() ) ;
@@ -447,7 +447,7 @@ CASE nSample = 4
    // new V.7.0 merging bitmaps and text in cells, headers and footers
    Brw_4:aColumns[ 1 ]:uBmpHead := aBmp[ 1 ]
 
-   ADD COLUMN TO Brw_4;
+   ADD COLUMN TO Brw_4 ;
       HEADER "Last" + CRLF + "Name" ;  // multi-line feature on headers
       DATA FieldWblock( "Last", Select() ) ;
       VALID { | uVar | ! Empty( uVar ) } ;  // don't want empty names
@@ -459,11 +459,11 @@ CASE nSample = 4
 
    // new V.7.0 showing a cake in aniversaries
    Brw_4:aColumns[ 2 ]:uBmpCell := ;
-      {||If(Month(Employee->HireDate)==Month(Date()).and.;
+      {||If(Month(Employee->HireDate)==Month(Date()).and. ;
       Day(Employee->HireDate)==Day(Date()),aBmp[5],Nil)}
 
    // next column shows the Vertical Header and Check Box editing control
-   ADD COLUMN TO Brw_4;
+   ADD COLUMN TO Brw_4 ;
       HEADER "Married" ;
       SIZE 25 PIXELS ;
       DATA FieldWblock( "Married", Select("Employee") ) ;
@@ -475,7 +475,7 @@ CASE nSample = 4
    ADD COLUMN TO Brw_4 ;
       HEADER "Age" ;
       SIZE 37 PIXELS ;
-      3DLOOK TRUE;
+      3DLOOK TRUE ;
       DATA FieldWBlock( "Age", Select("Employee") ) ;
       COLORS CLR_BLACK, CLR_PINK ;
       FOOTER { || Ltrim( Str( Round( nAgeTot / Max(Brw_4:nLen+1,1), 0 ) ) ) + CRLF + ;
@@ -492,7 +492,7 @@ CASE nSample = 4
    ADD COLUMN TO Brw_4 ;
       HEADER "Salary" ;
       SIZE 80 PIXELS ;
-      3DLOOK TRUE;
+      3DLOOK TRUE ;
       DATA FieldWBlock( "Salary", Select("Employee") ) ;
       COLORS {||If(Employee->Salary>100000,CLR_WHITE,CLR_BLACK)}, CLR_NBLUE ;
       ALIGN DT_RIGHT ;  // defaults right alignment at 3 levels
@@ -505,7 +505,7 @@ CASE nSample = 4
    ADD COLUMN TO Brw_4 ;
       HEADER "Hire" + CRLF + "Date" ;   // multi-line feature on headers
       SIZE 85 PIXELS ;
-      3DLOOK TRUE;
+      3DLOOK TRUE ;
       DATA FieldWBlock( "Hiredate", Select("Employee") ) ;
       ALIGN DT_LEFT, DT_CENTER, DT_CENTER ;
       COLORS CLR_BLACK,CLR_PINK ;
@@ -541,11 +541,11 @@ CASE nSample = 4
 
    // activating BtnGet to column 5
    //       Brw_4:SetBtnGet( 6, "Date", { | oGet, dVar | aRect := {0,0,0,0} , ;
-   //             GetWindowRect(oGet:hWnd,aRect),;
+   //             GetWindowRect(oGet:hWnd,aRect), ;
    //           oGet:cText( dVar ), oGet:Refresh(), oGet:KeyDown( VK_RETURN, 0 ) }, 16 )
 
    //                  Brw_4:SetBtnGet( 6, "Calen16", { | oGet, dVar | aRect := GetCoors( oGet:hWnd ), ;
-   //                          dVar := FwCalendar( oGet:Value(), aRect[ 1 ], aRect[ 2 ], oGet:oWnd ),;
+   //                          dVar := FwCalendar( oGet:Value(), aRect[ 1 ], aRect[ 2 ], oGet:oWnd ), ;
    //                          oGet:cText( dVar ), oGet:Refresh(), oGet:KeyDown( VK_RETURN, 0 ) }, 16 )
 
    // managing var value for footing of column 3
@@ -644,7 +644,7 @@ Brw_6:SetData( 4, ComboWBlock( Brw_6, "State", 4, aStates ) )
 
 // activating BtnGet to column  7   - not impement yet
 //                  Brw_6:SetBtnGet( 7, "Calen16", { | oGet, dVar | aRect := GetCoors( oGet:hWnd ), ;
-//                      dVar := FwCalendar( oGet:Value(), aRect[ 1 ], aRect[ 2 ], oGet:oWnd ),;
+//                      dVar := FwCalendar( oGet:Value(), aRect[ 1 ], aRect[ 2 ], oGet:oWnd ), ;
 //                          oGet:cText( dVar ), oGet:Refresh(), oGet:KeyDown( VK_RETURN, 0 ) }, 16 )
 
 Brw_6:nLineStyle := LINES_VERT
@@ -811,7 +811,7 @@ cSelState := "NY"
 DEFINE TBROWSE Brw_8 AT 0, 0 ALIAS "Employee" ;
    ;//                    SELECTFILTER "State+Last" FOR cSelState ;
    WIDTH nBrwWidth HEIGHT nBrwHeight  ;
-   MESSAGE "Incremental search uses a instance variable ::cPrefix to be used with " +;
+   MESSAGE "Incremental search uses a instance variable ::cPrefix to be used with " + ;
    "compound indexes, specially usefull with filtered databases "
 
 Brw_8:LoadFields( .F. , { "First","Last","State","City","Street" })
@@ -942,7 +942,7 @@ FUNCTION fExternal( nAge, oBrw )
 
    LOCAL oDlg, oFont, oSay, oGet, ;
       nNewAge := Space( 2 ), ;
-      lOk     := .F.,;
+      lOk     := .F., ;
       cClientMdi
 
    cClientMdi := _GetWindowProperty ( GetActiveMdiHandle(), "PROP_FORMNAME" )
@@ -950,7 +950,7 @@ FUNCTION fExternal( nAge, oBrw )
    DEFINE FONT Font_7 FONTNAME "Arial" SIZE 9
 
    DEFINE DIALOG Dlg_1 OF &cClientMdi  AT 20, 20 WIDTH 300 HEIGHT 200 FONT "Font_7" ;
-      CAPTION "TSBrowse External Data Edition Sample" MODAL;
+      CAPTION "TSBrowse External Data Edition Sample" MODAL ;
       DIALOGPROC  nNewAge := DialogFun(@lOk, @nNewAge, oBrw) ;
       ON INIT SetInitItem()
 
@@ -1014,7 +1014,7 @@ STATIC FUNCTION SetInitItem()
 
 STATIC FUNCTION ComboBrowse( cState, nRow, nCol, oWnd, lCustom )
 
-   LOCAL oDlg, oBrw, oFont, nEle, ix,;
+   LOCAL oDlg, oBrw, oFont, nEle, ix, ;
       nArea := Select(), ;
       lOk   := .F.
 

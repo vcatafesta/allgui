@@ -9,13 +9,13 @@
 #xcommand DRAW PANEL IN WINDOW <parent> ;
    AT <frow>,<fcol> ;
    TO <trow>,<tcol> ;
-   =>;
+   => ;
    DrawWindowBoxRaised( <"parent">, <frow>, <fcol>, <trow>, <tcol> )
 
 #xcommand DRAW BOX IN WINDOW <parent> ;
    AT <frow>,<fcol> ;
    TO <trow>,<tcol> ;
-   =>;
+   => ;
    DrawWindowBoxIn( <"parent">, <frow>, <fcol>, <trow>, <tcol> )
 
 FUNCTION main

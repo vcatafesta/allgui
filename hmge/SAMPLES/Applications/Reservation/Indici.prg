@@ -97,7 +97,7 @@ FUNCTION Apridb(warea,dbfile,modo,tries,interattivo,msg,indice,ordine,error,cl_M
 
 FUNCTION ErrTipo( dove ,label)
 
-   LOCAL aMsg:={ dove+CRLF+[Repeat the rebuilding indexes]+CRLF+[as the only active user!];
+   LOCAL aMsg:={ dove+CRLF+[Repeat the rebuilding indexes]+CRLF+[as the only active user!] ;
       ,dove+CRLF+[Ripetere la ricostruzione indici]+CRLF+[come unico utente attivo!]} [alng]
    DEFAULT label to  ''
    msgExclamation( aMsg,label)

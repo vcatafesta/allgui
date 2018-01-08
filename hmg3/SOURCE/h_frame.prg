@@ -159,12 +159,12 @@ FUNCTION _BeginFrame( name , parent , row , col , w , h , caption , fontname , f
       IF _HMG_SYSDATA [ 240 ] == .F.
          COL    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
          ROW    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
-         Parent   := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
+         PARENT   := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
       ENDIF
    ENDIF
 
    IF valtype (parent) == 'U'
-      parent := _HMG_SYSDATA [ 223 ]
+      PARENT := _HMG_SYSDATA [ 223 ]
    ENDIF
 
    IF valtype (caption) == 'U'

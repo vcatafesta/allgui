@@ -62,7 +62,7 @@ MEMVAR _HMG_SYSDATA
 #include "common.ch"
 
 FUNCTION _DefineCheckBox ( ControlName, ParentForm, x, y, Caption, Value, ;
-      fontname, fontsize, tooltip, changeprocedure, w, h,;
+      fontname, fontsize, tooltip, changeprocedure, w, h, ;
       lostfocus, gotfocus, HelpId, invisible, notabstop , bold, italic, underline, strikeout , field  , backcolor , fontcolor , transparent, OnEnter )
    LOCAL cParentForm , mVar , k := 0
    LOCAL ControlHandle
@@ -317,7 +317,7 @@ FUNCTION _DefineCheckButton ( ControlName, ParentForm, x, y, Caption, Value, ;
 
 FUNCTION _DefineImageCheckButton ( ControlName, ParentForm, x, y, Picture, ;
       Value, fontname, fontsize, tooltip, ;
-      changeprocedure, w, h, lostfocus, gotfocus,;
+      changeprocedure, w, h, lostfocus, gotfocus, ;
       HelpId, invisible, notabstop, notrans, OnEnter )
    LOCAL cParentForm , mVar , k := 0
    LOCAL ControlHandle

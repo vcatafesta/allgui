@@ -41,7 +41,7 @@ FUNCTION AST_DatePicker(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
 
    LOCAL sReadLine := ""
@@ -117,11 +117,11 @@ FUNCTION AST_DatePicker(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      // @ <nRow> ,<nCol> DATEPICKER <ControlName> OF <ParentWindowName> VALUE <cValue>;
+      // @ <nRow> ,<nCol> DATEPICKER <ControlName> OF <ParentWindowName> VALUE <cValue> ;
       //    WIDTH <nWidth> HEIGHT <nHeight> FONT <cFontName> SIZE <nFontSize>
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " DATEPICKER " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " DATEPICKER " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " + ;
          aProperties_[7] + " " + aProperties_[8] + CRLF
 
    CASE cSyntax == "DBF"
@@ -154,11 +154,11 @@ FUNCTION AST_DatePicker(cReadString,cTerminator)
       aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
       aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-      //  @ <nRow> ,<nCol> DATEPICKER <ControlName> OF <ParentWindowName> VALUE <cValue> FIELD <FieldName>;
+      //  @ <nRow> ,<nCol> DATEPICKER <ControlName> OF <ParentWindowName> VALUE <cValue> FIELD <FieldName> ;
       //    WIDTH <nWidth> HEIGHT <nHeight> FONT <cFontName> SIZE <nFontSize> ON LOSTFOCUS <Procedure> | <bBlock>
-      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " DATEPICKER " +;
-         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + " " + aProperties_[24] + ";" + CRLF +;
-         LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " +;
+      cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " DATEPICKER " + ;
+         aProperties_[1] + " OF ~LDCS_Form " + aProperties_[6] + " " + aProperties_[24] + ";" + CRLF + ;
+         LDCS_iLevel(3) + aProperties_[4] + " " + aProperties_[5] + " " + ;
          aProperties_[7] + " " + aProperties_[8] + " " + aProperties_[12] + CRLF
 
    ENDCASE

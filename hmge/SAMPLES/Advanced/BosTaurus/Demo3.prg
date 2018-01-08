@@ -16,16 +16,16 @@ FUNCTION MAIN
    PRIVATE hBitmap1 := 0
    PRIVATE hBitmap2 := 0
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  800;
-         HEIGHT 600;
-         TITLE "Demo3: BITMAP Manipulation";
-         MAIN;
-         ON INIT     Proc_ON_INIT ();
-         ON RELEASE  Proc_ON_RELEASE ();
-         ON PAINT    Proc_ON_PAINT ();
-         ON SIZE      {|| BT_ClientAreaInvalidateAll ("Win1"), Proc_LABEL() };
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  800 ;
+         HEIGHT 600 ;
+         TITLE "Demo3: BITMAP Manipulation" ;
+         MAIN ;
+         ON INIT     Proc_ON_INIT () ;
+         ON RELEASE  Proc_ON_RELEASE () ;
+         ON PAINT    Proc_ON_PAINT () ;
+         ON SIZE      {|| BT_ClientAreaInvalidateAll ("Win1"), Proc_LABEL() } ;
          ON MAXIMIZE  {|| BT_ClientAreaInvalidateAll ("Win1"), Proc_LABEL() }
 
       @   30, 333 LABEL  Label_1  VALUE " " AUTOSIZE

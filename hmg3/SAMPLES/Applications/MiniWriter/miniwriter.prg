@@ -275,13 +275,13 @@ FUNCTION MAIN
       @ 150,10 RICHEDITBOX miniwrite_1 ;
          WIDTH 775 ;
          HEIGHT 430 ;
-         VALUE '';
-         FONT "Calibri" SIZE 12;
-         MAXLENGTH -1;
-         NOHSCROLL;
+         VALUE '' ;
+         FONT "Calibri" SIZE 12 ;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
          ON CHANGE ( marvin() ) ;
-         ON SELECT OnSelectProc ();
-         ON LINK   OnLinkProc ();
+         ON SELECT OnSelectProc () ;
+         ON LINK   OnLinkProc () ;
          ON VSCROLL ( Form_1.miniwrite_1.Refresh )
 
       @ 150,10 RICHEDITBOX Auxiliary_0 ;
@@ -293,61 +293,61 @@ FUNCTION MAIN
       @ 150,10 RICHEDITBOX Auxiliary_1 ;
          WIDTH 775 ;
          HEIGHT 430 ;
-         VALUE 'x';
-         FONT "Calibri" SIZE 12;
-         MAXLENGTH -1;
-         NOHSCROLL;
+         VALUE 'x' ;
+         FONT "Calibri" SIZE 12 ;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
          ON CHANGE ( nil ) ;
-         ON SELECT ( nil );
-         ON LINK   ( nil );
+         ON SELECT ( nil ) ;
+         ON LINK   ( nil ) ;
          ON VSCROLL ( nil )
 
       @ 150,10 RICHEDITBOX Auxiliary_2 ;
          WIDTH 775 ;
          HEIGHT 430 ;
-         VALUE 'x';
-         FONT "Calibri" SIZE 12;
-         MAXLENGTH -1;
-         NOHSCROLL;
+         VALUE 'x' ;
+         FONT "Calibri" SIZE 12 ;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
          ON CHANGE ( nil ) ;
-         ON SELECT ( nil );
-         ON LINK   ( nil );
+         ON SELECT ( nil ) ;
+         ON LINK   ( nil ) ;
          ON VSCROLL ( nil )
 
       @ 150,10 RICHEDITBOX Auxiliary_3 ;
          WIDTH 775 ;
          HEIGHT 430 ;
-         VALUE '';
-         FONT "Calibri" SIZE 12;
-         MAXLENGTH -1;
-         NOHSCROLL;
+         VALUE '' ;
+         FONT "Calibri" SIZE 12 ;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
          ON CHANGE ( nil ) ;
-         ON SELECT ( nil );
-         ON LINK   ( nil );
+         ON SELECT ( nil ) ;
+         ON LINK   ( nil ) ;
          ON VSCROLL ( NIL )
 
       @ 150,10 RICHEDITBOX Auxiliary_4 ;
          WIDTH 775 ;
          HEIGHT 430 ;
-         VALUE '';
-         FONT "Calibri" SIZE 12;
-         MAXLENGTH -1;
-         NOHSCROLL;
+         VALUE '' ;
+         FONT "Calibri" SIZE 12 ;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
          ON CHANGE ( nil ) ;
-         ON SELECT ( nil );
-         ON LINK   ( nil );
+         ON SELECT ( nil ) ;
+         ON LINK   ( nil ) ;
          ON VSCROLL ( nil )
 
       @ 150,10 RICHEDITBOX Auxiliary_5 ;
          WIDTH 775 ;
          HEIGHT 430 ;
-         VALUE '';
-         FONT "Calibri" SIZE 12;
-         MAXLENGTH -1;
-         NOHSCROLL;
+         VALUE '' ;
+         FONT "Calibri" SIZE 12 ;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
          ON CHANGE ( nil ) ;
-         ON SELECT ( nil );
-         ON LINK   ( nil );
+         ON SELECT ( nil ) ;
+         ON LINK   ( nil ) ;
          ON VSCROLL ( nil )
 
       Form_1.Auxiliary_0.HIDE
@@ -534,34 +534,34 @@ FUNCTION MAIN
          FONT "Calibri" SIZE 9 ;
          BOLD ;
          TOOLTIP ('Zoom Ratio') ;
-         ON CHANGE ( Form_1.miniwrite_1.Zoom := aZoomPercentage [ Form_1.Combo_3.VALUE ] ,;
+         ON CHANGE ( Form_1.miniwrite_1.Zoom := aZoomPercentage [ Form_1.Combo_3.VALUE ] , ;
          Form_1.miniwrite_1.SetFocus )
 
       GetFontList ( NIL, NIL, DEFAULT_CHARSET, NIL, NIL, NIL, @aFontList )
 
       @ 68, 123 COMBOBOX Combo_1 ;
-         ITEMS aFontList;
+         ITEMS aFontList ;
          VALUE 20 ;
-         WIDTH 110;
-         HEIGHT 100;
+         WIDTH 110 ;
+         HEIGHT 100 ;
          FONT 'Calibri' SIZE 9 ;
          BOLD ;
          DROPPEDWIDTH 200 ;
          TOOLTIP ('Font Name') ;
          ON GOTFOCUS  ( nFontNameValue := Form_1.Combo_1.VALUE ) ;
-         ON CHANGE    ( Form_1.miniwrite_1.FontName := Form_1.Combo_1.ITEM (Form_1.Combo_1.VALUE) );
+         ON CHANGE    ( Form_1.miniwrite_1.FontName := Form_1.Combo_1.ITEM (Form_1.Combo_1.VALUE) ) ;
          ON CANCEL IF ( HMG_GetLastVirtualKeyDown() == VK_ESCAPE, ( HMG_CleanLastVirtualKeyDown(), Form_1.Combo_1.VALUE := nFontNameValue ), NIL ) ;
 
       @ 68, 236 COMBOBOX Combo_2 ;
          ITEMS aFontSize ;
          VALUE 3 ;
-         WIDTH 40;
-         HEIGHT 100;
+         WIDTH 40 ;
+         HEIGHT 100 ;
          FONT 'CALIBRI' SIZE 9 ;
          BOLD ;
          TOOLTIP 'Font Size' ;
          ON GOTFOCUS  ( nFontSizeValue := Form_1.Combo_2.VALUE ) ;
-         ON CHANGE    ( Form_1.miniwrite_1.FontSize := VAL (Form_1.Combo_2.ITEM (Form_1.Combo_2.VALUE)) );
+         ON CHANGE    ( Form_1.miniwrite_1.FontSize := VAL (Form_1.Combo_2.ITEM (Form_1.Combo_2.VALUE)) ) ;
          ON CANCEL IF ( HMG_GetLastVirtualKeyDown() == VK_ESCAPE, ( HMG_CleanLastVirtualKeyDown(), Form_1.Combo_2.VALUE := nFontSizeValue ), NIL ) ;
 
       @ 43,54 LABEL TAB_0 ;
@@ -679,9 +679,9 @@ FUNCTION MAIN
       @ 9,102 LABEL BOT_MINI3 ;
          WIDTH 16 HEIGHT 16 ;
          VALUE '' ;
-         ACTION ( cAuxFileName := GetFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder() ),;
-         IF ( EMPTY(cAuxFileName),;
-            NIL,;
+         ACTION ( cAuxFileName := GetFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder() ), ;
+         IF ( EMPTY(cAuxFileName), ;
+            NIL, ;
             ( cFileName := cAuxFileName, Form_1.miniwrite_1.RTFLoadFile ( cFileName, 4, .F.), MAGISTER() , AGAPITO_RTF() ) )  ) ;
             TOOLTIP 'Open RTF Document File' ;
             TRANSPARENT
@@ -766,28 +766,28 @@ FUNCTION MAIN
          @ 94,231 LABEL BOT_RIBF5 ;
             WIDTH 19 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( cheka_sub() );
+            ACTION ( cheka_sub() ) ;
             TOOLTIP 'SubScript' ;
             TRANSPARENT
 
          @ 94,256 LABEL BOT_RIBF6 ;
             WIDTH 19 HEIGHT 19 ;
             VALUE '' ;
-            ACTION  ( cheka_sup() );
+            ACTION  ( cheka_sup() ) ;
             TOOLTIP 'SuperScript' ;
             TRANSPARENT
 
          @ 119,270 LABEL BOT_RIBF6X ;
             WIDTH 7 HEIGHT 7 ;
             VALUE '' ;
-            ACTION  ( Fontformat() );
+            ACTION  ( Fontformat() ) ;
             TOOLTIP 'Fonts / Types Options' ;
             TRANSPARENT
 
          @ 69,291 LABEL BOT_RIBP1 ;
             WIDTH 21 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( bull_set() );
+            ACTION ( bull_set() ) ;
             TOOLTIP 'Apply bullet type to Paragraph active' + chr(10) + chr(10) + 'Type active: Bullets' + chr(10) + 'Style active: None'  ;
             TRANSPARENT
 
@@ -836,35 +836,35 @@ FUNCTION MAIN
          @ 94,290 LABEL BOT_RIBP5 ;
             WIDTH 24 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( Form_1.miniwrite_1.ParaAlignment := RTF_LEFT , OnSelectProc() );
+            ACTION ( Form_1.miniwrite_1.ParaAlignment := RTF_LEFT , OnSelectProc() ) ;
             TOOLTIP 'Apply paragraph alignment to Left' ;
             TRANSPARENT
 
          @ 94,319 LABEL BOT_RIBP6 ;
             WIDTH 24 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( Form_1.miniwrite_1.ParaAlignment := RTF_CENTER , OnSelectProc() );
+            ACTION ( Form_1.miniwrite_1.ParaAlignment := RTF_CENTER , OnSelectProc() ) ;
             TOOLTIP 'Apply paragraph alignment to Center' ;
             TRANSPARENT
 
          @ 94,348 LABEL BOT_RIBP7 ;
             WIDTH 24 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( Form_1.miniwrite_1.ParaAlignment := RTF_RIGHT , OnSelectProc() );
+            ACTION ( Form_1.miniwrite_1.ParaAlignment := RTF_RIGHT , OnSelectProc() ) ;
             TOOLTIP 'Apply paragraph alignment to Right' ;
             TRANSPARENT
 
          @ 94,378 LABEL BOT_RIBP8 ;
             WIDTH 24 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( Form_1.miniwrite_1.ParaAlignment := RTF_JUSTIFY , form_1.miniwrite_1.paraindent := 0 , form_1.miniwrite_1.paraoffset := 0 , OnSelectProc() );
+            ACTION ( Form_1.miniwrite_1.ParaAlignment := RTF_JUSTIFY , form_1.miniwrite_1.paraindent := 0 , form_1.miniwrite_1.paraoffset := 0 , OnSelectProc() ) ;
             TOOLTIP 'Apply paragraph alignment to Justify' ;
             TRANSPARENT
 
          @ 94,407 LABEL BOT_RIBPF ;
             WIDTH 24 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( IF(form_1.miniwrite_1.ParaAlignment <> 4 , nil , ( form_1.miniwrite_1.paraindent := fsngi , form_1.miniwrite_1.paraoffset := FSNGO )) , OnSelectProc() );
+            ACTION ( IF(form_1.miniwrite_1.ParaAlignment <> 4 , nil , ( form_1.miniwrite_1.paraindent := fsngi , form_1.miniwrite_1.paraoffset := FSNGO )) , OnSelectProc() ) ;
             TOOLTIP 'Apply paragraph alignment to Justify' + chr(10) + 'with First Line programable indented' ;
             TRANSPARENT
 
@@ -892,7 +892,7 @@ FUNCTION MAIN
          @ 69,547 LABEL BOT_RIBX04 ;
             WIDTH 24 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( Form_1.miniwrite_1.CaretPos := 1 , cFind := Form_1.miniwrite_1.GetSelectText,;
+            ACTION ( Form_1.miniwrite_1.CaretPos := 1 , cFind := Form_1.miniwrite_1.GetSelectText, ;
             FINDTEXTDIALOG ON ACTION FindReplaceOnClickProc() FIND cFind CHECKDOWN lDown CHECKMATCHCASE lMatchCase CHECKWHOLEWORD lWholeWord ) ;
             TOOLTIP 'Find' ;
             TRANSPARENT
@@ -900,7 +900,7 @@ FUNCTION MAIN
          @ 69,580 LABEL BOT_RIBX05 ;
             WIDTH 24 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( Form_1.miniwrite_1.CaretPos := 1 , cFind := Form_1.miniwrite_1.GetSelectText,;
+            ACTION ( Form_1.miniwrite_1.CaretPos := 1 , cFind := Form_1.miniwrite_1.GetSelectText, ;
             REPLACETEXTDIALOG ON ACTION FindReplaceOnClickProc() FIND cFind REPLACE cReplace CHECKMATCHCASE lMatchCase CHECKWHOLEWORD lWholeWord ) ;
             TOOLTIP 'Find & Replace' ;
             TRANSPARENT
@@ -915,7 +915,7 @@ FUNCTION MAIN
          @ 94,469 LABEL BOT_RIBE6 ;
             WIDTH 9 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( aFontBackColor := GetColor ( Form_1.miniwrite_1.FontBackColor, NIL, .T.), IF (ValType (aFontBackColor [1]) == "N",( Form_1.miniwrite_1.FontBackColor := aFontBackColor  ) , NIL) );
+            ACTION ( aFontBackColor := GetColor ( Form_1.miniwrite_1.FontBackColor, NIL, .T.), IF (ValType (aFontBackColor [1]) == "N",( Form_1.miniwrite_1.FontBackColor := aFontBackColor  ) , NIL) ) ;
             TOOLTIP 'Select and apply new Font Background Color' ;
             TRANSPARENT
 
@@ -929,7 +929,7 @@ FUNCTION MAIN
          @ 94,508 LABEL BOT_RIBE8 ;
             WIDTH 9 HEIGHT 19 ;
             VALUE '' ;
-            ACTION ( aFontColor := GetColor(Form_1.miniwrite_1.FontColor, NIL, .T.), IF (ValType (aFontColor [1]) == "N",( Form_1.miniwrite_1.FontColor := aFontColor ) , NIL) );
+            ACTION ( aFontColor := GetColor(Form_1.miniwrite_1.FontColor, NIL, .T.), IF (ValType (aFontColor [1]) == "N",( Form_1.miniwrite_1.FontColor := aFontColor ) , NIL) ) ;
             TOOLTIP 'Select and apply new Font Color' ;
             TRANSPARENT
 
@@ -977,15 +977,15 @@ FUNCTION MAIN
             Aux_FileN0 := cFilename
             magister()
          ELSE
-            Form_1.miniwrite_1.VALUE := "Microsoft said:" + HB_OSNEWLINE() + HB_OSNEWLINE() +;
-               "Unicode is a worldwide character encoding standard that provides a unique number to represent " +;
-               "each character used in modern computing, including technical symbols and special characters used in publishing. " +;
-               "Unicode is required by modern standards, such as XML and ECMAScript (JavaScript), and is the official mechanism " +;
-               "for implementing ISO/IEC 10646 (UCS: Universal Character Set). " + HB_OSNEWLINE() +;
-               "It is supported by many operating systems, all modern browsers, and many other products. " +;
-               "New Windows applications should use Unicode to avoid the inconsistencies of varied code pages and " +;
-               "to aid in simplifying localization." + HB_OSNEWLINE() + HB_OSNEWLINE() +;
-               "Thereby HMG-Unicode is the future in the xBase programming for Windows ..." + HB_OSNEWLINE() +;
+            Form_1.miniwrite_1.VALUE := "Microsoft said:" + HB_OSNEWLINE() + HB_OSNEWLINE() + ;
+               "Unicode is a worldwide character encoding standard that provides a unique number to represent " + ;
+               "each character used in modern computing, including technical symbols and special characters used in publishing. " + ;
+               "Unicode is required by modern standards, such as XML and ECMAScript (JavaScript), and is the official mechanism " + ;
+               "for implementing ISO/IEC 10646 (UCS: Universal Character Set). " + HB_OSNEWLINE() + ;
+               "It is supported by many operating systems, all modern browsers, and many other products. " + ;
+               "New Windows applications should use Unicode to avoid the inconsistencies of varied code pages and " + ;
+               "to aid in simplifying localization." + HB_OSNEWLINE() + HB_OSNEWLINE() + ;
+               "Thereby HMG-Unicode is the future in the xBase programming for Windows ..." + HB_OSNEWLINE() + ;
                "www.hmgforum.com" + HB_OSNEWLINE()
          ENDIF
 
@@ -1028,9 +1028,9 @@ PROCEDURE QUICK_MENU
       @ 74, 14 LABEL Q_2 ;
          WIDTH 41 HEIGHT 34 ;
          VALUE '' ;
-         ACTION ( COMANDOFF() , cAuxFileName := GetFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder() ),;
-         IF ( EMPTY(cAuxFileName),;
-            NIL,;
+         ACTION ( COMANDOFF() , cAuxFileName := GetFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder() ), ;
+         IF ( EMPTY(cAuxFileName), ;
+            NIL, ;
             ( cFileName := cAuxFileName, Form_1.miniwrite_1.RTFLoadFile ( cFileName, 4, .F.), MAGISTER() , AGAPITO_RTF() ) ) , CALEN_F1.RELEASE ) ;
             TOOLTIP 'Load a Document' ;
             TRANSPARENT
@@ -1288,8 +1288,8 @@ PROCEDURE HelpProc
          NOSYSMENU ;
          NOCAPTION ;
          BACKCOLOR { 218,229,243 } ;
-         ON INIT     ( Form_2.RichEditBox_2.RTFLoadFile ("Help.RTF", .F., 4) );
-         ON RELEASE  ( Form_1.BOT_MINI5.ENABLED := .T. );
+         ON INIT     ( Form_2.RichEditBox_2.RTFLoadFile ("Help.RTF", .F., 4) ) ;
+         ON RELEASE  ( Form_1.BOT_MINI5.ENABLED := .T. ) ;
 
       DEFINE IMAGE RIB_1
          ROW   0
@@ -1330,9 +1330,9 @@ PROCEDURE HelpProc
       @ 30,10 RICHEDITBOX RichEditBox_2 ;
          WIDTH 610 ;
          HEIGHT 458 ;
-         MAXLENGTH -1;
-         NOHSCROLL;
-         READONLY;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
+         READONLY ;
          BACKCOLOR {255,255,255}
 
       @ 500, 442 LABEL RESPDEL_YES ;
@@ -1365,17 +1365,17 @@ PROCEDURE InfoProc
    DEFINE WINDOW Form_3 ;
          AT 0,0 ;
          WIDTH 400 HEIGHT 300 ;
-         MODAL;
-         NOCAPTION;
+         MODAL ;
+         NOCAPTION ;
          NOSIZE
 
       @ 10,10 RICHEDITBOX RichEditBox_3 ;
          WIDTH  Form_3.ClientAreaWidth  - 20 ;
          HEIGHT Form_3.ClientAreaHeight - 20 ;
-         MAXLENGTH -1;
-         NOHSCROLL;
-         READONLY;
-         BACKCOLOR NAVY;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
+         READONLY ;
+         BACKCOLOR NAVY ;
          ON LINK IF ( HMG_UPPER( ALLTRIM (ThisRichEditBox.GetClickLinkText) ) == HMG_UPPER ("Click Here"), Form_3.Release, OnLinkProc ( ThisRichEditBox.GetClickLinkText ) )
 
       ON KEY  ESCAPE  ACTION Form_3.Release
@@ -2283,10 +2283,10 @@ PROCEDURE CLAPTON()
 
    cCurrentForm := "BIG_S"
 
-   DEFINE WINDOW BIG_S;
+   DEFINE WINDOW BIG_S ;
          AT ctr + 60, ctc + 208 ;
-         WIDTH 275;
-         HEIGHT 423;
+         WIDTH 275 ;
+         HEIGHT 423 ;
          TITLE '' ;
          MODAL ;
          BACKCOLOR { 255 , 255, 255 } ;
@@ -2344,7 +2344,7 @@ PROCEDURE CLAPTON()
          HEIGHT 219    ;
          HEADERS {'A','                               RECENT FILES'} ;
          WIDTHS { 25 , 225 }     ;
-         BACKCOLOR {255,255,255};
+         BACKCOLOR {255,255,255} ;
          FONT "CALIBRI" SIZE 9 ;
          VALUE { 1 , 1 } ;
          ROWSOURCE "RECENTS" ;
@@ -2648,10 +2648,10 @@ PROCEDURE RECENTEMPTY
 
    cCurrentForm := "NOTIEMPTY"
 
-   DEFINE WINDOW NOTIEMPTY;
+   DEFINE WINDOW NOTIEMPTY ;
          AT ctr + 85, ctc + 208 ;
-         WIDTH 211;
-         HEIGHT 170;
+         WIDTH 211 ;
+         HEIGHT 170 ;
          TITLE '' ;
          MODAL ;
          BACKCOLOR { 255 , 255, 255 } ;
@@ -3091,8 +3091,8 @@ PROCEDURE NEWDOC2
 
    DEFINE WINDOW INFO_NEW ;
          AT ctr + 60, ctc + 208 ;
-         WIDTH 211;
-         HEIGHT 170;
+         WIDTH 211 ;
+         HEIGHT 170 ;
          TITLE '' ;
          MODAL ;
          BACKCOLOR { 255 , 255, 255 } ;
@@ -3144,10 +3144,10 @@ PROCEDURE SET_PRIN
 
    cCurrentForm := "PRIN_SET"
 
-   DEFINE WINDOW PRIN_SET;
+   DEFINE WINDOW PRIN_SET ;
          AT ctr + 60, ctc + 208 ;
-         WIDTH 275;
-         HEIGHT 413;
+         WIDTH 275 ;
+         HEIGHT 413 ;
          TITLE '' ;
          MODAL ;
          BACKCOLOR { 255 , 255, 255 } ;
@@ -3703,9 +3703,9 @@ PROCEDURE CLIPP_VIEW
       @ 30,10 RICHEDITBOX CLIPFULL ;
          WIDTH 384 ;
          HEIGHT 458 ;
-         MAXLENGTH -1;
-         NOHSCROLL;
-         READONLY;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
+         READONLY ;
          BACKCOLOR {255,255,255}
 
       @ 500, 318 LABEL RESPDEL_NO ;

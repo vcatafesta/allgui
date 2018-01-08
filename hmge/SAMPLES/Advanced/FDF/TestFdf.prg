@@ -48,10 +48,10 @@ Mail: harbourminigui@gmail.com
 
 #ifndef __XHARBOUR__
 #include "hbusrrdd.ch"
-#xcommand TRY              => bError := errorBlock( {|oErr| break( oErr ) } ) ;;
+#xcommand TRY              => bError := errorBlock( {|oErr| break( oErr ) } ) ; ;
    BEGIN SEQUENCE
-#xcommand CATCH [<!oErr!>] => errorBlock( bError ) ;;
-   RECOVER [USING <oErr>] <-oErr-> ;;
+#xcommand CATCH [<!oErr!>] => errorBlock( bError ) ; ;
+   RECOVER [USING <oErr>] <-oErr-> ; ;
       errorBlock( bError )
 #else
 #include "usrrdd.ch"
@@ -204,7 +204,7 @@ METHOD Crea_file(Filename,chk) CLASS FdF
    pdc := len(Filename)+34
    IF chk
       IF File(Filename)
-         IF msgYesNo("The file "+ Filename+" already exist!"+CRLF;
+         IF msgYesNo("The file "+ Filename+" already exist!"+CRLF ;
                +padc("Do you want overwrite It?",pdc),"Question...")
             IF Ferase(::DirSpool+::Nomefile) < 0
                msgstop("The file "+ ::Nomefile +" can not be erased!","Error")
@@ -256,8 +256,8 @@ METHOD SetFld(arg1) CLASS FdF
       IF file(::DirData+::DataSource)
          SELE 1
          USE &(::DirData+::DataSource) shared alias USEIT
-         aEval( ::aEnact, {|x,y| if(! empty(trim(x[2])),;
-            aadd(::aPdf,"<</T("+ alltrim(x[1]) +")/V("+ (macrocompile(x[2])) +")>>" );
+         aEval( ::aEnact, {|x,y| if(! empty(trim(x[2])), ;
+            aadd(::aPdf,"<</T("+ alltrim(x[1]) +")/V("+ (macrocompile(x[2])) +")>>" ) ;
             ,'') } )
          dbcloseall()
       ENDIF
@@ -633,7 +633,7 @@ STATIC FUNCTION MyGetFileName(rsFileName)
                TPDF.TextBox_2.Value := Opendb
                FdF:Datasource := Proper(dbName)
             ELSE
-               msgstop( "This File is used by this application!";
+               msgstop( "This File is used by this application!" ;
                   + CRLF +"       Please select an other DBF!" )
             ENDIF
          ENDIF
@@ -724,12 +724,12 @@ FUNCTION edita()
       oBrw1:SetArray( FdF:aEnact,,.f. )
 
       ADD COLUMN TO TBROWSE oBrw1 ;
-         DATA ARRAY ELEMENT 1;
+         DATA ARRAY ELEMENT 1 ;
          PICTURE "@!" ;
          TITLE "Pdf Field" SIZE 150 EDITABLE
 
       ADD COLUMN TO TBROWSE oBrw1 ;
-         DATA ARRAY ELEMENT 2;
+         DATA ARRAY ELEMENT 2 ;
          PICTURE "@X" ;
          TITLE "Espression" SIZE 350 EDITABLE
 
@@ -767,7 +767,7 @@ FUNCTION DbView()
       DEFINE WINDOW DbView ;
             AT 50,22 ;
             WIDTH 530 HEIGHT 275 ;
-            TITLE "DbView";
+            TITLE "DbView" ;
             CHILD NOSIZE
 
          DEFINE STATUSBAR
@@ -776,8 +776,8 @@ FUNCTION DbView()
 
          DEFINE TBROWSE Brw_Db AT 0,0 ALIAS "USEIT" ;
             WIDTH 523 HEIGHT 220 ;
-            MESSAGE 'Double Click on headers to copy FieldName '+;
-            'in Espression List';
+            MESSAGE 'Double Click on headers to copy FieldName '+ ;
+            'in Espression List' ;
             ON HEADCLICK Hact
 
          Brw_Db:LoadFields()
@@ -825,9 +825,9 @@ FUNCTION InsertSpace(st,spaces)
 STATIC FUNCTION NUMTOLET(nume)  // Italian Version
 
    LOCAL unita   :="uno    due    tre    quattrocinque sei    sette  otto   nove   "
-   LOCAL decina1 := "dieci      undici     dodici     tredici    quattordici"+;
+   LOCAL decina1 := "dieci      undici     dodici     tredici    quattordici"+ ;
       "quindici   sedici     diciassettediciotto   diciannove "
-   LOCAL decine  := "dieci    venti    trenta   quaranta cinquantasessanta "+;
+   LOCAL decine  := "dieci    venti    trenta   quaranta cinquantasessanta "+ ;
       "settanta ottanta  novanta  "
    LOCAL attributi := "miliardimilioni mila    "
    LOCAL parole,cifre,gruppo,stringa,tre_cifre, DecTrue:=.t., valdec:="00"
@@ -1029,11 +1029,11 @@ STATIC FUNCTION MACROCOMPILE(cStr, lMesg,cmdline,section)
          //msgBox(alltrim(cStr),"Error in evaluation of:")
          errorblock (bOld)
          IF control
-            MsgMiniGuiError("Program FdF Manager"+CRLF+"Section "+section+CRLF+"I have found error on line "+;
+            MsgMiniGuiError("Program FdF Manager"+CRLF+"Section "+section+CRLF+"I have found error on line "+ ;
                zaps(cmdline)+CRLF+"Error is in: "+alltrim(cStr)+CRLF+"Please revise it!","MiniGUI Error")
             Break
          ELSE
-            MsgStop("I have found error on line "+;
+            MsgStop("I have found error on line "+ ;
                zaps(cmdline)+CRLF+"Error is in: "+alltrim(cStr)+CRLF+"Please revise it!","Program FdF Manager Error")
          ENDIF
       ENDIF
@@ -1050,9 +1050,9 @@ FUNCTION Test()
    IF file(FdF:DirData+FDF:DataSource)
       SELE 1
       USE &(FdF:DirData+FDF:DataSource) shared alias USEIT
-      aeval(FdF:aEnact,{|x,y| if(! empty(trim(x[2]));
-         ,MsgBox(macrocompile( x[2],.F. ),ltrim(str(y)));
-         ,MsgExclamation("Definition of field "+trim(x[1])+;
+      aeval(FdF:aEnact,{|x,y| if(! empty(trim(x[2])) ;
+         ,MsgBox(macrocompile( x[2],.F. ),ltrim(str(y))) ;
+         ,MsgExclamation("Definition of field "+trim(x[1])+ ;
          ' is empty!'+CRLF+'Please revise It.', ltrim(str(y))) ) } )
    ELSE
       MsgStop("No data available in this folder.")

@@ -65,7 +65,7 @@ FUNCTION Main
          WIDTH 770 ;
          HEIGHT 400 ;
          HEADERS {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6'} ;
-         WIDTHS {140,140,140,100,100,100};
+         WIDTHS {140,140,140,100,100,100} ;
          VALUE { 1 , 1 } ;
          ROWSOURCE "Test" ;
          COLUMNFIELDS { 'Code' ,  'First' , 'Last' ,  'Birth' , 'Married' , 'Bio' }

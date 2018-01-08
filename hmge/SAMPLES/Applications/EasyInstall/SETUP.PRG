@@ -254,7 +254,7 @@ PROCEDURE Main
             NOTABSTOP
 
          @ 8, 173 RICHEDITBOX Edit_Success VALUE "" ;
-            WIDTH Form_2.Width - 188 HEIGHT Form_2.Height - IIF( lNeedReboot, 145, 160 );
+            WIDTH Form_2.Width - 188 HEIGHT Form_2.Height - IIF( lNeedReboot, 145, 160 ) ;
             FONT 'MS Sans Serif' SIZE 10 ;
             MAXLENGTH 32768 ;
             ; // ON GOTFOCUS ( Form_2.Btn_Install.SetFocus ) ;

@@ -69,16 +69,16 @@ FUNCTION Main()
 
       bColor := { || if( oBrw:nAt % 2 == 0, RGB( nR1, nG1, nB1 ), RGB( nR2, nG2, nB2 ) ) }
 
-      ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 1;
-         HEADER "Column 1";
-         SIZE 100;
-         COLORS CLR_BLACK, bColor;
+      ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 1 ;
+         HEADER "Column 1" ;
+         SIZE 100 ;
+         COLORS CLR_BLACK, bColor ;
          ALIGN DT_LEFT
 
-      ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 2;
-         HEADER "Column 2";
-         SIZE 200;
-         COLORS CLR_BLACK, bColor;
+      ADD COLUMN TO TBROWSE oBrw DATA ARRAY ELEMENT 2 ;
+         HEADER "Column 2" ;
+         SIZE 200 ;
+         COLORS CLR_BLACK, bColor ;
          ALIGN DT_LEFT
 
       oBrw:lNoHScroll  := .t.

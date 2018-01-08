@@ -28,7 +28,7 @@ PROCEDURE Main()
          WIDTH 620 ;
          HEIGHT 400 ;
          HEADERS { 'Hung', 'Prc.ID', 'Name', 'Full Name' } ;
-         WIDTHS { 30, 50, 118, 400 };
+         WIDTHS { 30, 50, 118, 400 } ;
          ITEMS {} ;
          JUSTIFY { 0, 1, 0, 0 } ;
          ON DBLCLICK PROC_Terminate_Process() ;

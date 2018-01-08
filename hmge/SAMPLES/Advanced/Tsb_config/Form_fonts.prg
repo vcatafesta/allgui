@@ -76,7 +76,7 @@ FUNCTION Form_fonts(aFonts)
          cObj := "Label_"+HB_NTOS(nI)
          @ aObjFrm[nI,2]+23, aObjFrm[nI,3]+10 LABEL &cObj ;
             WIDTH 290 HEIGHT 20 ;
-            VALUE aFonts[nI,1] + " " + HB_NtoS(aFonts[nI,2]);
+            VALUE aFonts[nI,1] + " " + HB_NtoS(aFonts[nI,2]) ;
             BACKCOLOR aBackCol2  FONTCOLOR BLUE SIZE nSize
       NEXT
 

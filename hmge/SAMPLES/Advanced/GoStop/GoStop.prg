@@ -50,18 +50,18 @@ PROCEDURE Main
 
 PROCEDURE OpenFile(lProcess, nProcess)
 
-   LOCAL hProcErr := {;
-      2 => 'File not found' ,;
-      3 => 'Path not found' ,;
-      5 => 'Access denied' ,;
-      8 => 'Out of memory' ,;
-      11 => 'Corrupt EXE file' ,;
-      26 => 'Sharing violation' ,;
-      27 => 'Invalid file association',;
-      28 => 'DDE timeout' ,;
-      29 => 'DDE transaction failed' ,;
-      30 => 'DDE busy' ,;
-      31 => 'No file association' ,;
+   LOCAL hProcErr := { ;
+      2 => 'File not found' , ;
+      3 => 'Path not found' , ;
+      5 => 'Access denied' , ;
+      8 => 'Out of memory' , ;
+      11 => 'Corrupt EXE file' , ;
+      26 => 'Sharing violation' , ;
+      27 => 'Invalid file association', ;
+      28 => 'DDE timeout' , ;
+      29 => 'DDE transaction failed' , ;
+      30 => 'DDE busy' , ;
+      31 => 'No file association' , ;
       32 => 'DLL not found' }
    LOCAL cFile, cExt, cOpen
 
@@ -85,7 +85,7 @@ PROCEDURE OpenFile(lProcess, nProcess)
             lProcess := .Y.
          ELSE
             IF nProcess $ hProcErr
-               MsgStop('Run error ' + LTRIM(STR(nProcess)) + ': ' +;
+               MsgStop('Run error ' + LTRIM(STR(nProcess)) + ': ' + ;
                   hProcErr[nProcess], 'Error')
             ELSE
                MsgStop('Unknown run error ' + LTRIM(STR(nProcess)), 'Error')
@@ -182,7 +182,7 @@ FUNCTION AddQuote(cInPath)
    LOCAL cQuote := '"'
    LOCAL cSpace := SPACE(1)
 
-   IF cSpace $ cOutPath .AND.;
+   IF cSpace $ cOutPath .AND. ;
          !(LEFT(cOutPath, 1) == cQuote) .AND. !(RIGHT(cOutPath, 1) == cQuote)
       cOutPath := cQuote + cOutPath + cQuote
    ENDIF

@@ -148,17 +148,17 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
 #define MIN_WIDTH  650
 #define MIN_HEIGHT 550
 
-      DEFINE WINDOW _HMG_FormDebugger;
-            AT 0,0;
-            WIDTH 0;
-            HEIGHT 0;
-            TITLE "HMG Debugger   ( Ctrl+H - Help )";
-            ON RELEASE DeleteDbgForm( "_HMG_FormDebugger" );
-            ON INTERACTIVECLOSE .F.;
-            ON INIT AjustControlSize();
-            ON MAXIMIZE AjustControlSize();
-            ON SIZE ( iif( ThisWindow.WIDTH < MIN_WIDTH,   ThisWindow.WIDTH  := MIN_WIDTH,  NIL ),;
-            iif( ThisWindow.HEIGHT < MIN_HEIGHT, ThisWindow.HEIGHT := MIN_HEIGHT, NIL ),;
+      DEFINE WINDOW _HMG_FormDebugger ;
+            AT 0,0 ;
+            WIDTH 0 ;
+            HEIGHT 0 ;
+            TITLE "HMG Debugger   ( Ctrl+H - Help )" ;
+            ON RELEASE DeleteDbgForm( "_HMG_FormDebugger" ) ;
+            ON INTERACTIVECLOSE .F. ;
+            ON INIT AjustControlSize() ;
+            ON MAXIMIZE AjustControlSize() ;
+            ON SIZE ( iif( ThisWindow.WIDTH < MIN_WIDTH,   ThisWindow.WIDTH  := MIN_WIDTH,  NIL ), ;
+            iif( ThisWindow.HEIGHT < MIN_HEIGHT, ThisWindow.HEIGHT := MIN_HEIGHT, NIL ), ;
             AjustControlSize() )
 
          ON KEY RETURN ACTION OnKeyPress( VK_RETURN )
@@ -228,10 +228,10 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
             DEFINE TOOLBAR ToolBar_2 BUTTONSIZE 101,95 IMAGESIZE 64,64 STRICTWIDTH FLAT
                BUTTON Button_8  CAPTION "&BreakPoint"      PICTURE '_breakpoint'      ACTION MenuOption( ID_breakpoint )      TOOLTIP 'Toggle BreakPoint'
                BUTTON Button_9  CAPTION "&TracePoint"      PICTURE '_tracepoint'      ACTION MenuOption( ID_tracepoint )      TOOLTIP 'Add TracePoint'
-               BUTTON Button_10 CAPTION "&WatchPoint"      PICTURE '_watchpoint'      ACTION MenuOption( ID_watchpoint )      TOOLTIP 'Add WatchPoint';
+               BUTTON Button_10 CAPTION "&WatchPoint"      PICTURE '_watchpoint'      ACTION MenuOption( ID_watchpoint )      TOOLTIP 'Add WatchPoint' ;
                   SEPARATOR
-               BUTTON Button_11 CAPTION "S&etting"         PICTURE '_configuration'   ACTION MenuOption( ID_configuration )   TOOLTIP 'Enable/Disable Setting';
-                  CHECK;
+               BUTTON Button_11 CAPTION "S&etting"         PICTURE '_configuration'   ACTION MenuOption( ID_configuration )   TOOLTIP 'Enable/Disable Setting' ;
+                  CHECK ;
                   SEPARATOR
                BUTTON Button_12 CAPTION "&Quit"            PICTURE '_quit'            ACTION MenuOption( ID_quit )            TOOLTIP 'Exit the debugger and closing the application'
             END TOOLBAR
@@ -241,18 +241,18 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
          @ 0,nWIDTH() LABEL Label_1 VALUE "" AUTOSIZE
          @ 0,0 BUTTON Button_Refresh CAPTION "Refresh" PICTURE "_refresh" LEFT ACTION UpdateGrids() TOOLTIP "Refresh Grid Data" WIDTH 100 HEIGHT 30 FONT "Calibri" SIZE 10 BOLD ITALIC
 
-         DEFINE TAB Tab_1;
-               AT 0,0;
-               WIDTH 0;
-               HEIGHT 0;
-               BOLD ITALIC;
-               ON CHANGE UpdateGrids();
+         DEFINE TAB Tab_1 ;
+               AT 0,0 ;
+               WIDTH 0 ;
+               HEIGHT 0 ;
+               BOLD ITALIC ;
+               ON CHANGE UpdateGrids() ;
                FONT "Calibri" SIZE 11
 
             DEFINE PAGE "Source"
 
                @ 0,0 COMBOBOX ComboBox_SourceCode ITEMS HMG_Debugger():GetSourceFiles() FONT "Arial" SIZE 10 ;
-                  VALUE 1;
+                  VALUE 1 ;
                   ON CHANGE UpdateGrids() ;
                   ON GOTFOCUS ( nComboBoxValue := _HMG_FormDebugger.ComboBox_SourceCode.VALUE )
 
@@ -264,16 +264,16 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
                   cGrid_SourceCode := "Grid_SourceCode_" + hb_ntos( i )
                   AAdd( aGrid_SourceCode, { cGrid_SourceCode, .F., aFiles[ i ] } )
 
-                  @ 0,0 GRID &cGrid_SourceCode;
-                     WIDTH 0;
-                     HEIGHT 0;
-                     HEADERS {'Line','Source Code'};
-                     WIDTHS  { 0, 0 };
-                     FONT "Arial" SIZE 10 BOLD;
-                     BACKCOLOR COLOR_Gainsboro;
-                     DYNAMICBACKCOLOR { bBackColor, bBackColor };
-                     DYNAMICFORECOLOR { {|x, CellRowIndex| GetForeColorSourceCode(CellRowIndex) }, {|x, CellRowIndex| GetForeColorSourceCode(CellRowIndex) } };
-                     PaintDoubleBuffer;
+                  @ 0,0 GRID &cGrid_SourceCode ;
+                     WIDTH 0 ;
+                     HEIGHT 0 ;
+                     HEADERS {'Line','Source Code'} ;
+                     WIDTHS  { 0, 0 } ;
+                     FONT "Arial" SIZE 10 BOLD ;
+                     BACKCOLOR COLOR_Gainsboro ;
+                     DYNAMICBACKCOLOR { bBackColor, bBackColor } ;
+                     DYNAMICFORECOLOR { {|x, CellRowIndex| GetForeColorSourceCode(CellRowIndex) }, {|x, CellRowIndex| GetForeColorSourceCode(CellRowIndex) } } ;
+                     PaintDoubleBuffer ;
                      NOLINES
 
                   LoadPrg( aGrid_SourceCode[i][1], aFiles[i] )
@@ -286,17 +286,17 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
                bBackColor := {|| COLOR_Gainsboro }
                bForeColor := {|x, CellRowIndex| IIF ( Empty(_HMG_FormDebugger.Grid_CallStack.CELL(CellRowIndex, 2)), COLOR_DarkGreen, COLOR_NavyBlue ) }
 
-               @ 0,0 GRID Grid_CallStack;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS { "Level", "File", "Function", "Line" };
-                  WIDTHS  { 80, 150, 300, 100 };
-                  FONT "Arial" SIZE 10 BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  DYNAMICBACKCOLOR { bBackColor, bBackColor, bBackColor, bBackColor };
-                  DYNAMICFORECOLOR { bForeColor, bForeColor, bForeColor, bForeColor };
-                  NOLINES;
-                  PaintDoubleBuffer;
+               @ 0,0 GRID Grid_CallStack ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS { "Level", "File", "Function", "Line" } ;
+                  WIDTHS  { 80, 150, 300, 100 } ;
+                  FONT "Arial" SIZE 10 BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  DYNAMICBACKCOLOR { bBackColor, bBackColor, bBackColor, bBackColor } ;
+                  DYNAMICFORECOLOR { bForeColor, bForeColor, bForeColor, bForeColor } ;
+                  NOLINES ;
+                  PaintDoubleBuffer ;
                   TOOLTIP "Press ENTER to see the source code"
 
             END PAGE
@@ -305,27 +305,27 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
 
                bBackColor := {|| COLOR_Gainsboro }
 
-               @ 0,0 GRID Grid_Watch;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS { "Number", "Type", "Expression", "ValType", "Value", "ValidExpr" };
-                  WIDTHS  { 0, 0, 0, 100, 100, 100 };
-                  FONT "Arial" SIZE 10 BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  DYNAMICBACKCOLOR { bBackColor, bBackColor, bBackColor, bBackColor, bBackColor, bBackColor };
-                  DYNAMICFORECOLOR { {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)} };
-                  NOLINES;
-                  PaintDoubleBuffer;
+               @ 0,0 GRID Grid_Watch ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS { "Number", "Type", "Expression", "ValType", "Value", "ValidExpr" } ;
+                  WIDTHS  { 0, 0, 0, 100, 100, 100 } ;
+                  FONT "Arial" SIZE 10 BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  DYNAMICBACKCOLOR { bBackColor, bBackColor, bBackColor, bBackColor, bBackColor, bBackColor } ;
+                  DYNAMICFORECOLOR { {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)}, {|x, CellRowIndex|GetForeColorWatch(CellRowIndex)} } ;
+                  NOLINES ;
+                  PaintDoubleBuffer ;
                   TOOLTIP "Press ENTER to edit the expression and press DELETE to delete item"
 
-               @ 0,0 LABEL Label_WatchNro VALUE "" FONT "Arial"  SIZE 10 BACKCOLOR COLOR_Gainsboro FONTCOLOR COLOR_Chocolate4 BOLD ITALIC;
+               @ 0,0 LABEL Label_WatchNro VALUE "" FONT "Arial"  SIZE 10 BACKCOLOR COLOR_Gainsboro FONTCOLOR COLOR_Chocolate4 BOLD ITALIC ;
                   TOOLTIP "Watch number" CLIENTEDGE
                _HMG_FormDebugger.Label_WatchNro.WIDTH := _HMG_FormDebugger.Label_WatchNro.WIDTH / 2
 
-               @ 0,0 LABEL Label_WatchType VALUE "" FONT "Arial" SIZE 10 BACKCOLOR COLOR_Gainsboro FONTCOLOR COLOR_Chocolate4 BOLD ITALIC;
+               @ 0,0 LABEL Label_WatchType VALUE "" FONT "Arial" SIZE 10 BACKCOLOR COLOR_Gainsboro FONTCOLOR COLOR_Chocolate4 BOLD ITALIC ;
                   TOOLTIP "Watch type" CLIENTEDGE
 
-               @ 0,0 TEXTBOX TextBox_Watch  VALUE "" BOLD BACKCOLOR COLOR_Wheat1 FONT "Arial" SIZE 10 FONTCOLOR COLOR_Chocolate4;
+               @ 0,0 TEXTBOX TextBox_Watch  VALUE "" BOLD BACKCOLOR COLOR_Wheat1 FONT "Arial" SIZE 10 FONTCOLOR COLOR_Chocolate4 ;
                   TOOLTIP "Watch expression"
                _HMG_FormDebugger.TextBox_Watch.Enabled := .F.
 
@@ -337,24 +337,24 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
 
             DEFINE PAGE "Evaluate"
 
-               @ 0,0 GRID Grid_Calc;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS { "Expression", "Value" };
-                  WIDTHS  { MIN_WIDTH / 2, MIN_WIDTH / 3 };
-                  FONT "Arial" SIZE 10 BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_NavyBlue;
-                  NOLINES;
-                  PaintDoubleBuffer;
+               @ 0,0 GRID Grid_Calc ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS { "Expression", "Value" } ;
+                  WIDTHS  { MIN_WIDTH / 2, MIN_WIDTH / 3 } ;
+                  FONT "Arial" SIZE 10 BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_NavyBlue ;
+                  NOLINES ;
+                  PaintDoubleBuffer ;
                   TOOLTIP "Press ENTER to copy expression for evaluate and press DELETE to delete item"
 
 #define TOOLTIP_CALC   "e.g. VarName, FuncName( param1, ... ), VarName := Value, Arr[i,1] := Value, etc."
 
-               @ 0,0 LABEL Label_Calc VALUE "Enter the expression to evaluate:" AUTOSIZE FONT "Arial" SIZE 10 FONTCOLOR COLOR_Chocolate4 BOLD ITALIC;
+               @ 0,0 LABEL Label_Calc VALUE "Enter the expression to evaluate:" AUTOSIZE FONT "Arial" SIZE 10 FONTCOLOR COLOR_Chocolate4 BOLD ITALIC ;
                   TOOLTIP TOOLTIP_CALC
 
-               @ 0,0 TEXTBOX TextBox_Calc  VALUE "" BOLD BACKCOLOR COLOR_Wheat1 FONT "Arial" SIZE 10 FONTCOLOR COLOR_Chocolate4;
+               @ 0,0 TEXTBOX TextBox_Calc  VALUE "" BOLD BACKCOLOR COLOR_Wheat1 FONT "Arial" SIZE 10 FONTCOLOR COLOR_Chocolate4 ;
                   TOOLTIP TOOLTIP_CALC
 
             END PAGE
@@ -363,47 +363,47 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
 
                bBackColor := {|| COLOR_Gainsboro }
 
-               @ 0,0 GRID Grid_Vars;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS { "Level", "Scope", "Name", "Type", "Value" };
-                  WIDTHS  { 80, 100, 300, 100, 100 };
-                  FONT "Arial"  SIZE 10  BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_NavyBlue;
-                  DYNAMICBACKCOLOR { bBackColor, bBackColor, bBackColor, bBackColor, bBackColor };
-                  DYNAMICFORECOLOR { {|x, CellRowIndex|GetForeColorVars(CellRowIndex)}, {|x, CellRowIndex|GetForeColorVars(CellRowIndex)}, {|x, CellRowIndex|GetForeColorVars(CellRowIndex)}, {|x, CellRowIndex|GetForeColorVars(CellRowIndex)}, {|x, CellRowIndex|GetForeColorVars(CellRowIndex)} };
-                  NOLINES;
-                  PaintDoubleBuffer;
+               @ 0,0 GRID Grid_Vars ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS { "Level", "Scope", "Name", "Type", "Value" } ;
+                  WIDTHS  { 80, 100, 300, 100, 100 } ;
+                  FONT "Arial"  SIZE 10  BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_NavyBlue ;
+                  DYNAMICBACKCOLOR { bBackColor, bBackColor, bBackColor, bBackColor, bBackColor } ;
+                  DYNAMICFORECOLOR { {|x, CellRowIndex|GetForeColorVars(CellRowIndex)}, {|x, CellRowIndex|GetForeColorVars(CellRowIndex)}, {|x, CellRowIndex|GetForeColorVars(CellRowIndex)}, {|x, CellRowIndex|GetForeColorVars(CellRowIndex)}, {|x, CellRowIndex|GetForeColorVars(CellRowIndex)} } ;
+                  NOLINES ;
+                  PaintDoubleBuffer ;
                   TOOLTIP "Press ENTER for inspect the value of variables"
 
             END PAGE
 
             DEFINE PAGE "Areas"
 
-               @ 0,0 GRID Grid_Areas;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS {'Alias','Area','RDD Name','Reccount','Recno','Bof','Eof','Found','Deleted','dbFilter', 'ordName', 'ordKey'};
-                  WIDTHS  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                  FONT "Arial"  SIZE 10  BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_NavyBlue;
-                  NOLINES;
-                  TOOLTIP "Available work areas";
-                  PaintDoubleBuffer;
+               @ 0,0 GRID Grid_Areas ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS {'Alias','Area','RDD Name','Reccount','Recno','Bof','Eof','Found','Deleted','dbFilter', 'ordName', 'ordKey'} ;
+                  WIDTHS  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ;
+                  FONT "Arial"  SIZE 10  BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_NavyBlue ;
+                  NOLINES ;
+                  TOOLTIP "Available work areas" ;
+                  PaintDoubleBuffer ;
                   ON CHANGE ( UpdateGridRec() , _HMG_FormDebugger.Grid_Areas.SETFOCUS )
 
-               @ 0,0 GRID Grid_Rec;
-                  WIDTH 0;
-                  HEIGHT 0;
-                  HEADERS {'Name', 'Type', 'Length', 'Value'};
-                  WIDTHS  { 0, 0, 0, 0 };
-                  FONT "Arial"  SIZE 10  BOLD;
-                  BACKCOLOR COLOR_Gainsboro;
-                  FONTCOLOR COLOR_DarkGreen;
-                  NOLINES;
-                  PaintDoubleBuffer;
+               @ 0,0 GRID Grid_Rec ;
+                  WIDTH 0 ;
+                  HEIGHT 0 ;
+                  HEADERS {'Name', 'Type', 'Length', 'Value'} ;
+                  WIDTHS  { 0, 0, 0, 0 } ;
+                  FONT "Arial"  SIZE 10  BOLD ;
+                  BACKCOLOR COLOR_Gainsboro ;
+                  FONTCOLOR COLOR_DarkGreen ;
+                  NOLINES ;
+                  PaintDoubleBuffer ;
                   TOOLTIP "Value of current RECORD in the selected work area"
 
             END PAGE
@@ -635,28 +635,28 @@ PROCEDURE DisplayVars ( cVarName, xVarValue, aColor )
 
    lOldMainFirst := HMG_ActivateMainWindowFirst( .F. )
 
-   DEFINE WINDOW &cFormName;
-         AT 0,0;
-         WIDTH  MIN_WIDTH;
-         HEIGHT MIN_HEIGHT;
-         TITLE cTitle;
-         ON INIT     Ajust( cFormName, cGridName );
-         ON MAXIMIZE Ajust( cFormName, cGridName );
-         ON SIZE     Ajust( cFormName, cGridName );
+   DEFINE WINDOW &cFormName ;
+         AT 0,0 ;
+         WIDTH  MIN_WIDTH ;
+         HEIGHT MIN_HEIGHT ;
+         TITLE cTitle ;
+         ON INIT     Ajust( cFormName, cGridName ) ;
+         ON MAXIMIZE Ajust( cFormName, cGridName ) ;
+         ON SIZE     Ajust( cFormName, cGridName ) ;
          ON RELEASE  DeleteDbgForm( cFormName )
 
-      @ nHEIGHT() , nWIDTH() GRID &cGridName;
-         WIDTH 0;
-         HEIGHT 0;
-         HEADERS { "Name", "Type", "Value" };
-         WIDTHS  { 300, 100, 100 };
-         ITEMS aItems;
-         FONT "Arial" SIZE 10 BOLD;
-         BACKCOLOR COLOR_Gainsboro;
-         DYNAMICBACKCOLOR { {|| COLOR_Gainsboro }, {|| COLOR_Gainsboro }, {|| COLOR_Gainsboro } };
-         DYNAMICFORECOLOR { {|| aColor }, {|| aColor }, {|| aColor } };
-         NOLINES;
-         PaintDoubleBuffer;
+      @ nHEIGHT() , nWIDTH() GRID &cGridName ;
+         WIDTH 0 ;
+         HEIGHT 0 ;
+         HEADERS { "Name", "Type", "Value" } ;
+         WIDTHS  { 300, 100, 100 } ;
+         ITEMS aItems ;
+         FONT "Arial" SIZE 10 BOLD ;
+         BACKCOLOR COLOR_Gainsboro ;
+         DYNAMICBACKCOLOR { {|| COLOR_Gainsboro }, {|| COLOR_Gainsboro }, {|| COLOR_Gainsboro } } ;
+         DYNAMICFORECOLOR { {|| aColor }, {|| aColor }, {|| aColor } } ;
+         NOLINES ;
+         PaintDoubleBuffer ;
          TOOLTIP "Press ENTER for inspect the value of variables"
 
       ON KEY ALT+ADD ACTION OnKeyPress_Transparency( VK_ADD )

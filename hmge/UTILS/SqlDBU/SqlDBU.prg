@@ -208,7 +208,7 @@ FUNCTION OpenDataBase(cFileName,lCreate)
    lCreateIfNotExist := lCreate
 
    IF empty(cFileName)
-      cFileName := GetFile ( {{ "SQLITE3 Files", "*.s3db"},{ "Database Files", "*.db"},{ "All Files", "*.*"} } ,;
+      cFileName := GetFile ( {{ "SQLITE3 Files", "*.s3db"},{ "Database Files", "*.db"},{ "All Files", "*.*"} } , ;
          "Open Database" , cLastDDir, FALSE , TRUE )
    ENDIF
    IF !empty(cFileName)
@@ -323,34 +323,34 @@ FUNCTION CreateDatabase()
          TITLE "Create a new SQLITE Database" NOSIZE //nosysmenu
 
       @ 10,10 FRAME Frame_1 ;
-         WIDTH 550;
-         HEIGHT 200;
+         WIDTH 550 ;
+         HEIGHT 200 ;
          CAPTION "Info"
 
       @ 40,40 LABEL Lbl_Path ;
-         VALUE "Path";
+         VALUE "Path" ;
          WIDTH 60 ;
          BACKCOLOR DBUblue
 
-      @ 40,110 BTNTEXTBOX Text_Path;
+      @ 40,110 BTNTEXTBOX Text_Path ;
          WIDTH 350 ;
          VALUE ""   ;
          BACKCOLOR DBUgreen ;
          ACTION  {|| FrameNewBase.Text_Path.value := GetFolder (,FrameNewBase.Text_Path.value),cFileName:= FileNameCreta() }
 
-      @ 80,40 LABEL Lbl_Name;
+      @ 80,40 LABEL Lbl_Name ;
          VALUE "Name" ;
-         WIDTH 60;
+         WIDTH 60 ;
          BACKCOLOR DBUblue
 
       @ 80,110 TEXTBOX Text_Name ;
          WIDTH 150 ;
          UPPERCASE ;
-         BACKCOLOR DBUgreen;
-         VALUE "";
+         BACKCOLOR DBUgreen ;
+         VALUE "" ;
          ON CHANGE {|| cFileName:= FileNameCreta(),FrameNewBase.Btn_Create.Enabled := !empty(FrameNewBase.Text_Name.Value) }
 
-      @ 120,110 LABEL Lbl_File;
+      @ 120,110 LABEL Lbl_File ;
          VALUE cFileName ;
          AUTOSIZE BOLD
 
@@ -421,7 +421,7 @@ FUNCTION CreatefromDBF( cDBase, db, cSbase )
    LOCAL lCreateIfNotExist := FALSE, cOldRdd, aDbStru
 
    IF empty( cDBase )
-      cDBase := GetFile ( {{ "DBASE Files", "*.dbf"},{ "All Files", "*.*"} }, "Open Database" ,;
+      cDBase := GetFile ( {{ "DBASE Files", "*.dbf"},{ "All Files", "*.*"} }, "Open Database" , ;
          cLastDDir, FALSE , FALSE )
    ENDIF
    IF FILE( cDBase )
@@ -667,8 +667,8 @@ FUNCTION SQLITE_TABLEEXISTS( cTable,db )
    LOCAL cStatement, lRet := FALSE
    LOCAL lCreateIfNotExist := FALSE
 
-   cStatement := "SELECT name FROM sqlite_master "    +;
-      "WHERE type ='table' AND tbl_name='" +;
+   cStatement := "SELECT name FROM sqlite_master "    + ;
+      "WHERE type ='table' AND tbl_name='" + ;
       cTable + "'"
 
    IF DB_IS_OPEN( db )
@@ -783,12 +783,12 @@ FUNCTION SQLITE_TABLES(db)
    * Returns an array with names of tables inside of the database
    LOCAL aTables, cStatement
 
-   cStatement := "SELECT name FROM sqlite_master "      +;
-      "WHERE type IN ('table','view') "      +;
-      "AND name NOT LIKE 'sqlite_%' "        +;
-      "UNION ALL "                           +;
-      "SELECT name FROM sqlite_temp_master " +;
-      "WHERE type IN ('table','view') "      +;
+   cStatement := "SELECT name FROM sqlite_master "      + ;
+      "WHERE type IN ('table','view') "      + ;
+      "AND name NOT LIKE 'sqlite_%' "        + ;
+      "UNION ALL "                           + ;
+      "SELECT name FROM sqlite_temp_master " + ;
+      "WHERE type IN ('table','view') "      + ;
       "ORDER BY 1;"
 
    IF DB_IS_OPEN( db )

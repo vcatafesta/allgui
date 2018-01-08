@@ -40,25 +40,25 @@ Notes :
 #define FFFDELIMITER ","   // Flat File Field Delimiter
 #define c1Tab CHR(9)
 
-MEMVAR aData     ,;
-   aList     ,;
-   aColOrder ,;
-   nCurFRN   ,;
-   cDefInFN  ,;
-   cBegFoldr ,;
+MEMVAR aData     , ;
+   aList     , ;
+   aColOrder , ;
+   nCurFRN   , ;
+   cDefInFN  , ;
+   cBegFoldr , ;
    cDataFNam
 
 PROCEDURE Main()
 
-   LOCAL   aHeaders  := {'Last Name','First Name','Phone'},;
+   LOCAL   aHeaders  := {'Last Name','First Name','Phone'}, ;
       aImages   := { 'AscImg', 'DscImg' }
 
-   PRIVATE aData     := {{'','','',1}},;
-      aList     := {},;
-      aColOrder := ARRAY( 4 ),;
+   PRIVATE aData     := {{'','','',1}}, ;
+      aList     := {}, ;
+      aColOrder := ARRAY( 4 ), ;
       nCurFRN   := 0,;               // Current Physical Row Number
       cDefInFN  := "MAgenda.ini",;   // Default .ini File Name
-      cBegFoldr := GetCurrentFolder(),;
+      cBegFoldr := GetCurrentFolder(), ;
       cDataFNam := ''
 
    AFILL( aColOrder, 0 )
@@ -188,16 +188,16 @@ PROCEDURE MA_FillGrid()
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-PROCEDURE MA_SortColumn(;
-      nColumnNo,;
+PROCEDURE MA_SortColumn( ;
+      nColumnNo, ;
       nOrder )
 
    LOCAL aCurVal := frmMiniAgenda.grdMAgenda.Value
 
-   LOCAL nCurRow /*:= aCurVal[ 1 ]*/,;
+   LOCAL nCurRow /*:= aCurVal[ 1 ]*/, ;
       nCurCol := aCurVal[ 2 ]
 
-   LOCAL aImages := ARRAY(3),;
+   LOCAL aImages := ARRAY(3), ;
       lAscend
 
    DEFAULT nOrder := aColOrder[ nColumnNo ]  // 0: Natural, 1: Ascend, 2: Descend
@@ -236,7 +236,7 @@ PROCEDURE MA_SortColumn(;
 
 PROCEDURE MA_Grd2Data()
 
-   LOCAL nRowNo :=  0,;
+   LOCAL nRowNo :=  0, ;
       a1Row
 
    MA_SetFRN()
@@ -257,7 +257,7 @@ PROCEDURE MA_SetFRN()
 
    LOCAL aGrdValue := frmMiniAgenda.grdMAgenda.Value
 
-   LOCAL nGrdRowNo := aGrdValue[ 1 ] /*,;
+   LOCAL nGrdRowNo := aGrdValue[ 1 ] /*, ;
       nGrdColNo := aGrdValue[ 2 ] */
 
    nCurFRN := aData[ nGrdRowNo, 4 ]
@@ -271,8 +271,8 @@ PROCEDURE MA_RowOpers(;                        // Mini Agenda Row Operations
 
    LOCAL aGrdValue := frmMiniAgenda.grdMAgenda.Value
 
-   LOCAL nGrdRowNo := aGrdValue[ 1 ],;
-      nGrdColNo := aGrdValue[ 2 ],;
+   LOCAL nGrdRowNo := aGrdValue[ 1 ], ;
+      nGrdColNo := aGrdValue[ 2 ], ;
       nRowCount := LEN( aData )
 
    MA_Grd2Data()
@@ -306,7 +306,7 @@ PROCEDURE MA_RowOpers(;                        // Mini Agenda Row Operations
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE MA_Search( ;
-      nColumNo,;
+      nColumNo, ;
       cSStr )
 
    LOCAL nFound
@@ -327,9 +327,9 @@ PROCEDURE MA_Search( ;
 
 PROCEDURE MA_LoadItems()
 
-   LOCAL a1Row  := {},;
-      c1Line      ,;
-      n1Line :=  0,;
+   LOCAL a1Row  := {}, ;
+      c1Line      , ;
+      n1Line :=  0, ;
       oFile
 
    IF !EMPTY( cDataFNam ) .AND. FILE( cDataFNam )
@@ -417,9 +417,9 @@ PROCEDURE MA_FileOpen()
    LOCAL cNDName             // New Data File Name
 
    IF !(EMPTY( cNDName := GetFile( { { "List Files", "*.lst" },;     // File Select Filters
-         { "Text Files", "*.txt" },;
-         { "Data Files", "*.dta" },;
-         { "All Files",   "*.*"  } } ,;
+         { "Text Files", "*.txt" }, ;
+         { "Data Files", "*.dta" }, ;
+         { "All Files",   "*.*"  } } , ;
          "Open Agenda File" ,;             // Get_File Window Title
          cBegFoldr ,;                      // Beginning folder
          .F. ,;                            // Multiple Select
@@ -434,16 +434,16 @@ PROCEDURE MA_FileOpen()
 
 PROCEDURE MA_SaveData()
 
-   LOCAL c1Line := '',;
-      a1Row       ,;
-      nDInds      ,;
+   LOCAL c1Line := '', ;
+      a1Row       , ;
+      nDInds      , ;
       nFOfst := 0
 
    IF EMPTY( cDataFNam )
       cDataFNam := PutFile( { { "List Files", "*.lst" },;     // File Select Filters
-         { "Text Files", "*.txt" },;
-         { "Data Files", "*.dta" },;
-         { "All Files",   "*.*"  } } ,;
+         { "Text Files", "*.txt" }, ;
+         { "Data Files", "*.dta" }, ;
+         { "All Files",   "*.*"  } } , ;
          "Save Agenda File :" ,;             // Get_File Window Title
          cBegFoldr ,;                        // Beginning folder
          .F. )                               // Change Folder right

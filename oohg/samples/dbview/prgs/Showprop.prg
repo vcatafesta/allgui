@@ -31,8 +31,8 @@ PROCEDURE ShowProperties()
             ICON 'MAIN1' ;
             MODAL ;
             ON INIT Form_Prop.Grid_1.Setfocus ;
-            NOMAXIMIZE;
-            NOSIZE;
+            NOMAXIMIZE ;
+            NOSIZE ;
             FONT "MS Sans Serif" ;
             SIZE 8
 

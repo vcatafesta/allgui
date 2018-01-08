@@ -288,10 +288,10 @@ STATIC FUNCTION PrazdToArray( cYear )
    LOCAL lW := .F.
 
    IF !File( 'holidays.txt' )
-      aPrRF := { { '01.01', [ New Year's Day]},;
+      aPrRF := { { '01.01', [ New Year's Day]}, ;
          { '20.01', 'Inauguration Day' }, ;
          { '3-1-01', 'Birthday of Martin Luther King' }, ; //the third Monday in January
-         { '14.02', [ Valentine's Day]},;
+         { '14.02', [ Valentine's Day]}, ;
          { '3-1-02', [ Washington's Birthday]},; //the third Monday in February
          { '0-1-05', 'Memorial Day' }, ;         //the last Monday in May
          { '04.07', 'Independence Day' }, ;
@@ -543,8 +543,8 @@ FUNCTION ShowList( cTime )
       DEFINE WINDOW WinMess ;
             ROW 65 ;
             COL 25 ;
-            WIDTH 270;
-            HEIGHT 140;
+            WIDTH 270 ;
+            HEIGHT 140 ;
             NOCAPTION ;
             WINDOWTYPE PANEL ;
             BACKCOLOR aClr[ 2 ]
@@ -583,9 +583,9 @@ FUNCTION ShowList( cTime )
       @ 209, 15   LABEL LblLine3  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
       @ 210, 15   LABEL LblLine4  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
 
-      @ 215, 80  BUTTONEX btnOk WIDTH 140 HEIGHT 18 CAPTION 'Thank you';
+      @ 215, 80  BUTTONEX btnOk WIDTH 140 HEIGHT 18 CAPTION 'Thank you' ;
          FONT "Arial" SIZE 9  ;
-         BACKCOLOR { 255, 164, 44 } NOXPSTYLE  FLAT;
+         BACKCOLOR { 255, 164, 44 } NOXPSTYLE  FLAT ;
          ACTION {|| iif( lTmrM, NIL, ( WinList .tmrM. Enabled := .F., ThisWindow.Release() ) )    }
 
       @ 0, 0 PLAYER PlaySound WIDTH 1 HEIGHT 1 FILE cFileSound

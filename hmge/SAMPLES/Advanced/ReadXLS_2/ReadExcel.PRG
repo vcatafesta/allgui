@@ -22,10 +22,10 @@ ANNOUNCE RDDSYS
 #define pNON_EXPRESSION "UE"
 
 #ifndef __XHARBOUR__
-#xcommand TRY              => bError := ErrorBlock( {|oErr| break( oErr ) } ) ;;
+#xcommand TRY              => bError := ErrorBlock( {|oErr| break( oErr ) } ) ; ;
    BEGIN SEQUENCE
-#xcommand CATCH [<!oErr!>] => ErrorBlock( bError ) ;;
-   RECOVER [USING <oErr> ] <-oErr->;;
+#xcommand CATCH [<!oErr!>] => ErrorBlock( bError ) ; ;
+   RECOVER [USING <oErr> ] <-oErr->; ;
       ErrorBlock( bError )
 #endif
 
@@ -119,7 +119,7 @@ FUNCTION MAIN()
          FONT 'Arial' SIZE 09 ;
          BACKCOLOR SILVER
 
-      @ 130,220 CHECKBOX CHDR;
+      @ 130,220 CHECKBOX CHDR ;
          CAPTION '' ;
          WIDTH 140 ;
          VALUE .T.     ;
@@ -133,7 +133,7 @@ FUNCTION MAIN()
          FONT 'Arial' SIZE 09 ;
          BACKCOLOR SILVER
 
-      @ 160,220 CHECKBOX CALL;
+      @ 160,220 CHECKBOX CALL ;
          CAPTION '' ;
          WIDTH 140 ;
          VALUE .T.     ;
@@ -147,7 +147,7 @@ FUNCTION MAIN()
          FONT 'Arial' SIZE 09 ;
          BACKCOLOR SILVER
 
-      @ 190,220 CHECKBOX CSTP;
+      @ 190,220 CHECKBOX CSTP ;
          CAPTION '' ;
          WIDTH 140 ;
          VALUE .F.     ;

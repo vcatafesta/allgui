@@ -17,12 +17,12 @@ FUNCTION Main()
    ordSetFocus( 1 )
    dbGoTop()
 
-   DEFINE WINDOW wndMain;
-         AT 0, 0;
-         WIDTH 675;
-         HEIGHT 403;
-         TITLE "Selection of records Demo";
-         ON RELEASE dbCloseArea();
+   DEFINE WINDOW wndMain ;
+         AT 0, 0 ;
+         WIDTH 675 ;
+         HEIGHT 403 ;
+         TITLE "Selection of records Demo" ;
+         ON RELEASE dbCloseArea() ;
          MAIN
 
       DEFINE MAIN MENU
@@ -42,15 +42,15 @@ FUNCTION Main()
 
    END WINDOW
 
-   @ 5, 5 BROWSE brsDemo;
-      OF wndMain;
-      WIDTH 645;
-      HEIGHT 315;
+   @ 5, 5 BROWSE brsDemo ;
+      OF wndMain ;
+      WIDTH 645 ;
+      HEIGHT 315 ;
       HEADERS { "M", "Nummer", "Trk", "Artiest", "Titel" } ;
-      WIDTHS { 23, 65, 35, 248, 249 };
+      WIDTHS { 23, 65, 35, 248, 249 } ;
       IMAGE { "bmpUnChecked", "bmpChecked" } ;
-      WORKAREA MUSIC;
-      FIELDS { "ChkSelectStatus()", "MUSIC->NR", "MUSIC->DTR", "MUSIC->ARTIEST", "MUSIC->TITEL" };
+      WORKAREA MUSIC ;
+      FIELDS { "ChkSelectStatus()", "MUSIC->NR", "MUSIC->DTR", "MUSIC->ARTIEST", "MUSIC->TITEL" } ;
       JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT } ;
       ON DBLCLICK DblClickBrowseScreen()
 

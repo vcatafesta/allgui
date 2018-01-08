@@ -15,8 +15,8 @@ CLASS TCursor
 
    METHOD New( cResName, cPredef ) CONSTRUCTOR
 
-   METHOD End() INLINE If( ::hCursor != 0,;
-      If( ! ::lPredef, DestroyCursor( ::hCursor ),),),;
+   METHOD End() INLINE If( ::hCursor != 0, ;
+      If( ! ::lPredef, DestroyCursor( ::hCursor ),),), ;
       ::hCursor := 0
 
    ENDCLASS
@@ -31,14 +31,14 @@ METHOD New( cResName, cPredef ) CLASS TCursor
 
    IF ! Empty( cPredef )
       cPredef := Upper( cPredef )
-      IF ( nAt := AScan( { "ARROW", "IBEAM", "WAIT",;
+      IF ( nAt := AScan( { "ARROW", "IBEAM", "WAIT", ;
             "CROSS", "UPARROW", ;
-            "SIZENWSE", "SIZENESW",;
+            "SIZENWSE", "SIZENESW", ;
             "SIZEWE", "SIZENS" }, cPredef ) ) != 0
 
-         aTypes = { IDC_ARROW, IDC_IBEAM, IDC_WAIT,;
-            IDC_CROSS, IDC_UPARROW,;
-            IDC_SIZENWSE, IDC_SIZENESW,;
+         aTypes = { IDC_ARROW, IDC_IBEAM, IDC_WAIT, ;
+            IDC_CROSS, IDC_UPARROW, ;
+            IDC_SIZENWSE, IDC_SIZENESW, ;
             IDC_SIZEWE, IDC_SIZENS }
 
          ::hCursor = LoadCursor( 0, aTypes[ nAt ] )

@@ -5,7 +5,7 @@ FUNCTION Main()
 
    LOCAL oMain
 
-   INIT WINDOW oMain MAIN TITLE "Help Demo" HELP "helpdemo.hlp";
+   INIT WINDOW oMain MAIN TITLE "Help Demo" HELP "helpdemo.hlp" ;
       AT 0,0 ;
       SIZE hwg_Getdesktopwidth(), hwg_Getdesktopheight() - 28
 

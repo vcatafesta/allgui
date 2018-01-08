@@ -15,12 +15,12 @@ FUNCTION backup()
 
    PRIVATE destino_backup
 
-   DEFINE WINDOW form_backup;
-         at 000,000;
-         WIDTH 400;
-         HEIGHT 225;
-         TITLE 'Backup do Banco de Dados';
-         ICON path_imagens+'icone.ico';
+   DEFINE WINDOW form_backup ;
+         at 000,000 ;
+         WIDTH 400 ;
+         HEIGHT 225 ;
+         TITLE 'Backup do Banco de Dados' ;
+         ICON path_imagens+'icone.ico' ;
          modal ;
          NOSIZE
 

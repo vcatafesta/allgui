@@ -73,7 +73,7 @@ FUNCTION Main
          WIDTH 770 ;
          HEIGHT 440 ;
          HEADERS {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6'} ;
-         WIDTHS {140,140,140,100,100,110};
+         WIDTHS {140,140,140,100,100,110} ;
          EDIT ;
          VALUE { 1 , 1 } ;
          COLUMNCONTROLS { aCtrl_1 , aCtrl_2 , aCtrl_3 , aCtrl_4 , aCtrl_5 , aCtrl_6 } ;

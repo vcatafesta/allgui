@@ -62,25 +62,25 @@ FUNCTION Sample1()
          FONT "Verdana" ;
          SIZE 10 ;
          ON GOTFOCUS fModelo_Hab(1) ;
-         ON DBLCLICK CopyRec();
+         ON DBLCLICK CopyRec() ;
          GRID
 
       oBrw1:SetArray( aDatos_origen )
 
       ADD COLUMN TO TBROWSE oBrw1 ;
-         DATA ARRAY ELEMENT 1;
+         DATA ARRAY ELEMENT 1 ;
          TITLE "Rubro" SIZE 120
 
       ADD COLUMN TO TBROWSE oBrw1 ;
-         DATA ARRAY ELEMENT 2;
+         DATA ARRAY ELEMENT 2 ;
          TITLE "Articulo" SIZE 80
 
       ADD COLUMN TO TBROWSE oBrw1 ;
-         DATA ARRAY ELEMENT 3;
+         DATA ARRAY ELEMENT 3 ;
          TITLE "Marca" SIZE 80
 
       ADD COLUMN TO TBROWSE oBrw1 ;
-         DATA ARRAY ELEMENT 4;
+         DATA ARRAY ELEMENT 4 ;
          TITLE "M" SIZE 30
 
       oBrw1:SetColor({5,6},{CLR_WHITE,CLR_MAGENTA})
@@ -100,19 +100,19 @@ FUNCTION Sample1()
    AIns( ASize( oBrw2:aDefValue, Len( oBrw2:aDefValue ) + 1 ), 1 )
 
    ADD COLUMN TO TBROWSE oBrw2 ;
-      DATA ARRAY ELEMENT 1;
+      DATA ARRAY ELEMENT 1 ;
       TITLE "Rubro" SIZE 120
 
    ADD COLUMN TO TBROWSE oBrw2 ;
-      DATA ARRAY ELEMENT 2;
+      DATA ARRAY ELEMENT 2 ;
       TITLE "Articulo" SIZE 80
 
    ADD COLUMN TO TBROWSE oBrw2 ;
-      DATA ARRAY ELEMENT 3;
+      DATA ARRAY ELEMENT 3 ;
       TITLE "Marca" SIZE 80
 
    ADD COLUMN TO TBROWSE oBrw2 ;
-      DATA ARRAY ELEMENT 4;
+      DATA ARRAY ELEMENT 4 ;
       TITLE "C" SIZE 30
 
    oBrw2:SetColor( { 5, 6 }, {CLR_WHITE, CLR_MAGENTA } )
@@ -122,17 +122,17 @@ FUNCTION Sample1()
 
 END TBROWSE
 
-@ 110,355 BUTTON Button_1 OF Form1;
-   CAPTION "Add";
+@ 110,355 BUTTON Button_1 OF Form1 ;
+   CAPTION "Add" ;
    ACTION CopyRec() ;
-   WIDTH  80;
+   WIDTH  80 ;
    HEIGHT 28 ;
    FONT "Arial" SIZE 9
 
-@ 150,355 BUTTON Button_2 OF Form1;
-   CAPTION "Del";
+@ 150,355 BUTTON Button_2 OF Form1 ;
+   CAPTION "Del" ;
    ACTION DelRec() ;
-   WIDTH  80;
+   WIDTH  80 ;
    HEIGHT 28 ;
    FONT "Arial" SIZE 9
 

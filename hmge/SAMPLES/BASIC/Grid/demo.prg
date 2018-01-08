@@ -51,7 +51,7 @@ FUNCTION Main()
          WIDTH 200 ;
          HEIGHT 330 ;
          HEADERS {'Last Name','First Name','Phone'} ;
-         WIDTHS {140,140,140};
+         WIDTHS {140,140,140} ;
          ITEMS aRows ;
          VALUE 1 ;
          TOOLTIP 'Editable Grid Control' ;
@@ -62,7 +62,7 @@ FUNCTION Main()
          WIDTH 200 ;
          HEIGHT 330 ;
          HEADERS {'Last Name','First Name','Phone'} ;
-         WIDTHS {140,140,140};
+         WIDTHS {140,140,140} ;
          ITEMS aRows ;
          VALUE 1 ;
          TOOLTIP 'Editable Grid Control' ;

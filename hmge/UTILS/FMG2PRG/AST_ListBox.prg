@@ -42,7 +42,7 @@ FUNCTION AST_ListBox(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -85,7 +85,7 @@ FUNCTION AST_ListBox(cReadString,cTerminator)
    //      [ INVISIBLE ]
    //      [ NOTABSTOP ]
    //      [ SORT ]
-   // @ <nRow> ,<nCol> LISTBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight>;
+   // @ <nRow> ,<nCol> LISTBOX <ControlName> OF <ParentWindowName> WIDTH <nWidth> HEIGHT <nHeight> ;
    //    ITEMS <acItems> VALUE <nValue> FONT <cFontName> SIZE <nFontSize> ON DBLCLICK <OnDblClickProcedure>
 
    aProperties_[ 1] := ALLTRIM(STRTRAN(aDefCommandList_[ 1],"DEFINE LISTBOX",""))         // DEFINE LISTBOX List_2
@@ -119,9 +119,9 @@ FUNCTION AST_ListBox(cReadString,cTerminator)
    aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " LISTBOX " +;
-      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF +;
-      LDCS_iLevel(3) + aProperties_[6] + " " + aProperties_[7] + " " + aProperties_[8] + " " +;
+   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " LISTBOX " + ;
+      aProperties_[1] + " OF ~LDCS_Form " + aProperties_[4] + " " + aProperties_[5] + ";" + CRLF + ;
+      LDCS_iLevel(3) + aProperties_[6] + " " + aProperties_[7] + " " + aProperties_[8] + " " + ;
       aProperties_[9] + " " + aProperties_[20] + CRLF
 
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF

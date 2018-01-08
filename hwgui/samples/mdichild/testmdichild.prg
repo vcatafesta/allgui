@@ -69,7 +69,7 @@ FUNCTION CreateMdiChild(  )
       BACKSTYLE 2
    oContainer5:Anchor := 164
    @ 0,0 CONTAINER oContainer6 SIZE 1020,51 ;
-      STYLE 0;
+      STYLE 0 ;
       BACKCOLOR 8421504 ;
       BACKSTYLE 2
    oContainer6:Anchor := 11
@@ -114,7 +114,7 @@ FUNCTION CreateMdiChild(  )
       STYLE BS_LEFT
    oGroup2:Anchor := 240
    @ 501,429 SAY oLabel13 CAPTION "R$ 11,94"  SIZE 287,57 ;
-      STYLE SS_RIGHT +DT_VCENTER+DT_SINGLELINE;
+      STYLE SS_RIGHT +DT_VCENTER+DT_SINGLELINE ;
       COLOR 3280604   ;
       FONT HFont():Add( 'Arial',0,-56,400,,,)
    oLabel13:Anchor := 164

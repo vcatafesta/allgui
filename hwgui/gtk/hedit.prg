@@ -76,7 +76,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       tcolor,bcolor,cPicture,lNoBorder, lMaxLength, lPassword ) CLASS HEdit
 
    nStyle := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), ;
-      WS_TABSTOP+Iif(lNoBorder==Nil.OR.!lNoBorder,WS_BORDER,0)+;
+      WS_TABSTOP+Iif(lNoBorder==Nil.OR.!lNoBorder,WS_BORDER,0)+ ;
       Iif(lPassword==Nil .or. !lPassword, 0, ES_PASSWORD)  )
 
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;

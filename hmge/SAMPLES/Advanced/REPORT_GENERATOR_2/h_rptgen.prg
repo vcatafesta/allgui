@@ -1067,7 +1067,7 @@ PROCEDURE _PrintText( aObject , nOffset )
       IF drv = "H"
 
          hbprn:modifyfont("F0", cFontName ,nFontSize, ,0,lFontBold,!lFontBold , ;
-            lFontitalic,!lFontitalic ,lFontUnderline ,!lFontUnderline,;
+            lFontitalic,!lFontitalic ,lFontUnderline ,!lFontUnderline, ;
             lFontStrikeout,!lFontStrikeout)
 
          hbPrn:SetTextColor( { aFontColor[1] , aFontColor[2] , aFontColor[3] } )

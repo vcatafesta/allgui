@@ -14,17 +14,17 @@ FUNCTION MAIN
 
    PRIVATE cont := 1
 
-   DEFINE WINDOW Win1;
-         AT 0,0;
-         WIDTH  600;
-         HEIGHT 600;
-         TITLE "Demo2: DrawGradientFill and DrawText";
-         MAIN;
-         ON PAINT     Proc_ON_PAINT ();
-         ON SIZE      BT_ClientAreaInvalidateAll ("Win1");
-         ON MAXIMIZE  BT_ClientAreaInvalidateAll ("Win1");
-         VIRTUAL WIDTH  700;
-         VIRTUAL HEIGHT 700;
+   DEFINE WINDOW Win1 ;
+         AT 0,0 ;
+         WIDTH  600 ;
+         HEIGHT 600 ;
+         TITLE "Demo2: DrawGradientFill and DrawText" ;
+         MAIN ;
+         ON PAINT     Proc_ON_PAINT () ;
+         ON SIZE      BT_ClientAreaInvalidateAll ("Win1") ;
+         ON MAXIMIZE  BT_ClientAreaInvalidateAll ("Win1") ;
+         VIRTUAL WIDTH  700 ;
+         VIRTUAL HEIGHT 700 ;
 
       DEFINE MAIN MENU
          DEFINE POPUP "File"

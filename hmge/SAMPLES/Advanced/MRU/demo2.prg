@@ -29,7 +29,7 @@ FUNCTION Main
 
          POPUP "Test"
             MENUITEM "&Manage this under MRU list" ;
-               ACTION ( cPrompt := InputBox( "Write something", "Whatever..." ),;
+               ACTION ( cPrompt := InputBox( "Write something", "Whatever..." ), ;
                AddMenuElement(cPrompt, "MsgInfo(cPrompt)") )
 
             POPUP "&MRU"

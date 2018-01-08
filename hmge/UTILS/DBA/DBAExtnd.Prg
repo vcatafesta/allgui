@@ -6,8 +6,8 @@ DECLARE WINDOW frmDBAMain
 
 FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
 
-   LOCA lRVal  := .F.       ,;
-      nWArNo := 0         ,;
+   LOCA lRVal  := .F.       , ;
+      nWArNo := 0         , ;
       nCurWA := SELE()
 
    FOR nWArNo := 1 TO 15
@@ -25,7 +25,7 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
 
    PROC DispStru()                               // Display Structure ( Current File Only )
 
-      LOCA aStruct :=  DBSTRUCT(),;
+      LOCA aStruct :=  DBSTRUCT(), ;
          aDBFInf := { aOpnDatas[ nCurDatNo, 4 ],;                   // 1. file name
          LUPDATE(),;                                   // 2. Last Modification Date
          LASTREC(),;                                   // 3. Record Count
@@ -35,20 +35,20 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
       DBStructOps( aStruct, 1, aDBFInf )
 
       /*
-      cStruct := " Database File Name : " + aOpnDatas[ nCurDatNo, 4 ] + CRLF +;
-      "  # of data records : " + NTrim( LASTREC() ) + CRLF +;
-      "Date of last update : " + DTOC(  LUPDATE() ) + CRLF +;
-      "No:  Fied Name  Type Width Dec" + CRLF +;
+      cStruct := " Database File Name : " + aOpnDatas[ nCurDatNo, 4 ] + CRLF + ;
+      "  # of data records : " + NTrim( LASTREC() ) + CRLF + ;
+      "Date of last update : " + DTOC(  LUPDATE() ) + CRLF + ;
+      "No:  Fied Name  Type Width Dec" + CRLF + ;
       "---  ---------  ---- ----- ---" + CRLF
 
       AEVAL( aStruct, { | a1, i1 | cStruct += PADL( i1, 3) + '  ' + ;
       PADR( a1[ 1 ], 11 ) + ;
       PADC( a1[ 2 ],  6 ) + ;
       PADL( a1[ 3 ],  4 ) + ;
-      PADL( a1[ 4 ],  4 ) + CRLF,;
+      PADL( a1[ 4 ],  4 ) + CRLF, ;
       nTotal += a1[ 3 ] } )
 
-      cStruct += "---  ---------  ---- ----- ---" + CRLF +;
+      cStruct += "---  ---------  ---- ----- ---" + CRLF + ;
       "** Total ** " + PADL( nTotal, 14 )
 
       SayBekle( cStruct, "Display Structure" )
@@ -101,7 +101,7 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
 
       */
 
-      FUNC DBValidate(;
+      FUNC DBValidate( ;
             cDBF2Vald ) // Full file (.dbf) name to test validity
 
          LOCA nRVal := 0
@@ -150,8 +150,8 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
                   nFilSzR := FSEEK(nFilHNo,0,2)           // Recorded File Size
                   nFilSzC := nHedLen + nRecLen * nRecCou  // Computed File Size
 
-                  IF nLUMont < 13 .AND.;
-                        nLUDay  < 32 .AND.;
+                  IF nLUMont < 13 .AND. ;
+                        nLUDay  < 32 .AND. ;
                         ABS( nFilSzC-nFilSzR ) < 2
 
                      nSStrLn := nHedLen - 34            // Structure String Length
@@ -210,12 +210,12 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
                cStruct,;  // db file struct in string ( readed low level )
                aStruct )  // db file struct array
 
-            LOCA nFldCou := LEN( cStruct ) / 32,;
-               c1Field := '',;
-               cFldNam := '',;
-               cFldTyp := '',;
-               nFldWdt :=  0,;
-               nFldDec :=  0,;
+            LOCA nFldCou := LEN( cStruct ) / 32, ;
+               c1Field := '', ;
+               cFldNam := '', ;
+               cFldTyp := '', ;
+               nFldWdt :=  0, ;
+               nFldDec :=  0, ;
                nFldNum :=  0
 
             FOR nFldNum := 1 TO nFldCou
@@ -243,13 +243,13 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
             */
 
             FUNC DispLeng( ;                          // Bir saha'nýn gösterim boyu
-                  a1Field,;
-                  x1Value,;
+                  a1Field, ;
+                  x1Value, ;
                   lMFValu,;   // Memo for value ( .F. : memo len is 10; .T. : memo len is 64
                   lDFValu )   // Date for value ( .F. : date len is 10; .T. : memo len is 20
                LOCA nRVal := 0
 
-               DEFAULT lMFValu TO .F.,;
+               DEFAULT lMFValu TO .F., ;
                   lDFValu TO .F.
 
                DO CASE
@@ -298,11 +298,11 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
                * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
                FUNC SameStru(;                           // Does two .dbf's structs idendical ?
-                     aStru1,;
+                     aStru1, ;
                      aStru2 )
 
-                  LOCA lRVal := .T.,;
-                     nFlds := 0,;
+                  LOCA lRVal := .T., ;
+                     nFlds := 0, ;
                      nProp := 0
 
                   IF LEN( aStru1 ) == LEN( aStru2 )
@@ -326,11 +326,11 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
                   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                   FUNC DBStMMFld( ;                         // Is there any type mismatched field in two structs ?
-                        aStruct1,;
+                        aStruct1, ;
                         aStruct2 )
-                     LOCA cRVal  := '',;
-                        nFInd  :=  0,;
-                        c1Fld  := '',;
+                     LOCA cRVal  := '', ;
+                        nFInd  :=  0, ;
+                        c1Fld  := '', ;
                         nMatch :=  0
 
                      FOR nFInd := 1 TO LEN( aStruct1 )

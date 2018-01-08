@@ -21,10 +21,10 @@
 ANNOUNCE HB_GTSYS
 REQUEST HB_GT_GUI_DEFAULT
 
-#xcommand TRY              => s_bError := errorBlock( {|oErr| break( oErr ) } ) ;;
+#xcommand TRY              => s_bError := errorBlock( {|oErr| break( oErr ) } ) ; ;
    BEGIN SEQUENCE
-#xcommand CATCH [<!oErr!>] => errorBlock( s_bError ) ;;
-   RECOVER [USING <oErr>] <-oErr-> ;;
+#xcommand CATCH [<!oErr!>] => errorBlock( s_bError ) ; ;
+   RECOVER [USING <oErr>] <-oErr-> ; ;
       errorBlock( s_bError )
 #command FINALLY           => ALWAYS
 
@@ -112,13 +112,13 @@ FUNCTION Main
       @  20,194 SAY oLabel6 CAPTION "Main PRG" TRANSPARENT SIZE 80,22
       @ 136,194 GET oMainPrg VAR vGt6 ID ID_PRGMAIN  SIZE 206,24
       @ 347,194 OWNERBUTTON    SIZE 24,24   ;
-         ON CLICK {||searchFileName("xBase Files *.prg ", oMainPrg, "*.prg")};//       FLAT;
+         ON CLICK {||searchFileName("xBase Files *.prg ", oMainPrg, "*.prg")};//       FLAT ;
          TEXT "..." ;//BITMAP "SEARCH" FROM RESOURCE TRANSPARENT COORDINATES 0,0,0,0 ;
          TOOLTIP "Search main file"
 
    END PAGE of oTAB
    BEGIN PAGE "Prg (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")};
+      @ 21,29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")} ;
          STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
       hwg_CREATEARLIST(oBrowse1,aFiles1)
       obrowse1:acolumns[1]:heading := "File Names"
@@ -130,7 +130,7 @@ FUNCTION Main
 
    END PAGE of oTAB
    BEGIN PAGE "C (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")};
+      @ 21,29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")} ;
          STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
       hwg_CREATEARLIST(oBrowse2,aFiles2)
       obrowse2:acolumns[1]:heading := "File Names"
@@ -141,7 +141,7 @@ FUNCTION Main
       @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse2)}
    END PAGE of oTAB
    BEGIN PAGE "Lib (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")};
+      @ 21,29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")} ;
          STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
       hwg_CREATEARLIST(oBrowse3,aFiles3)
       obrowse3:acolumns[1]:heading := "File Names"
@@ -152,7 +152,7 @@ FUNCTION Main
       @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse3)}
    END PAGE of oTAB
    BEGIN PAGE "Resource (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
+      @ 21,29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")} ;
          STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
       hwg_CREATEARLIST(oBrowse4,aFiles4)
       obrowse4:acolumns[1]:heading := "File Names"

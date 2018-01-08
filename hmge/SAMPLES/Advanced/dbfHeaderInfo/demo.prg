@@ -22,7 +22,7 @@ PROCEDURE Main()
       DEFINE MAIN MENU
 
          DEFINE POPUP "Test"
-            MENUITEM 'Get Header Info' ACTION ( aResult := GetHeaderInfo('test.dbf'),;
+            MENUITEM 'Get Header Info' ACTION ( aResult := GetHeaderInfo('test.dbf'), ;
                aChoice( ,,,, aResult, "Header Info of TEST.DBF" ) )
             SEPARATOR
             ITEM 'Exit' ACTION Form_1.Release()

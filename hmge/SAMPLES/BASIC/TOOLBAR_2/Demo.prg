@@ -46,13 +46,13 @@ FUNCTION Main
             BUTTON Button_1a ;
                CAPTION 'Undo' ;
                PICTURE 'button4.bmp' ;
-               TOOLTIP 'Undo button';
+               TOOLTIP 'Undo button' ;
                ACTION MsgInfo('Click! 1')
 
             BUTTON Button_2a ;
                CAPTION 'Save' ;
                PICTURE 'button5.bmp' ;
-               TOOLTIP 'Save button';
+               TOOLTIP 'Save button' ;
                WHOLEDROPDOWN
 
             DEFINE DROPDOWN MENU BUTTON Button_2a
@@ -63,7 +63,7 @@ FUNCTION Main
             BUTTON Button_3a ;
                CAPTION 'Close' ;
                PICTURE 'button6.bmp' ;
-               TOOLTIP 'Close button';
+               TOOLTIP 'Close button' ;
                ACTION MsgInfo('Click! 3') ;
                DROPDOWN
 
@@ -79,20 +79,20 @@ FUNCTION Main
             BUTTON Button_1b ;
                CAPTION 'More ToolBars...' ;
                PICTURE 'button7.bmp' ;
-               TOOLTIP 'More ToolBars button';
-               ACTION MsgInfo('Click! 2');
+               TOOLTIP 'More ToolBars button' ;
+               ACTION MsgInfo('Click! 2') ;
 
             BUTTON Button_2b ;
                CAPTION 'Button 2' ;
                PICTURE 'button8.bmp' ;
-               TOOLTIP 'This is button 2';
-               ACTION MsgInfo('Click! 2');
+               TOOLTIP 'This is button 2' ;
+               ACTION MsgInfo('Click! 2') ;
                SEPARATOR
 
             BUTTON Button_3b ;
                CAPTION 'Button 3' ;
                PICTURE 'button7.bmp' ;
-               TOOLTIP 'This is button 3';
+               TOOLTIP 'This is button 3' ;
                ACTION MsgInfo('Click! 3')
 
          END TOOLBAR
@@ -101,24 +101,24 @@ FUNCTION Main
 
             BUTTON Button_1c ;
                CAPTION 'Check 1' ;
-               TOOLTIP 'This is button Check 1';
+               TOOLTIP 'This is button Check 1' ;
                PICTURE 'button4.bmp' ;
-               ACTION _dummy();
+               ACTION _dummy() ;
                CHECK GROUP
 
             BUTTON Button_2c ;
                CAPTION 'Check 2' ;
                PICTURE 'button5.bmp' ;
-               TOOLTIP 'This is button Check 2';
-               ACTION _dummy();
+               TOOLTIP 'This is button Check 2' ;
+               ACTION _dummy() ;
                CHECK GROUP
 
             BUTTON Button_3c ;
                CAPTION 'Check 3' ;
                PICTURE 'button6.bmp' ;
-               TOOLTIP 'This is button Check 3';
+               TOOLTIP 'This is button Check 3' ;
                ACTION _dummy() ;
-               SEPARATOR;
+               SEPARATOR ;
                CHECK GROUP
 
             BUTTON Button_4c ;

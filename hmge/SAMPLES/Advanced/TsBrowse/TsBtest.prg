@@ -81,11 +81,11 @@ FUNCTION TsBTest(nSample)
       DEFINE WINDOW &cWnd ;
             AT 30+20*nSample,2+20*nSample ;
             WIDTH nBrwWidth+2*GetBorderWidth() HEIGHT nWinHeight ;
-            TITLE cTitle;
-            ICON "Demo.ico";
-            CHILD;
-            ON SIZE ResizeEdit(cBrw);
-            ON MAXIMIZE ResizeEdit(cBrw);
+            TITLE cTitle ;
+            ICON "Demo.ico" ;
+            CHILD ;
+            ON SIZE ResizeEdit(cBrw) ;
+            ON MAXIMIZE ResizeEdit(cBrw) ;
             ON MINIMIZE ResizeEdit(cBrw)
 
          DEFINE STATUSBAR
@@ -98,7 +98,7 @@ FUNCTION TsBTest(nSample)
             DEFINE TBROWSE Brw_1 AT 0, 0 ALIAS "Employee" ;
                COLORS {CLR_BLACK, CLR_NBLUE} ;
                WIDTH nBrwWidth HEIGHT nBrwHeight ;
-               MESSAGE "Cell height idependent of the font size using oBrw:nHeightCell. " +;
+               MESSAGE "Cell height idependent of the font size using oBrw:nHeightCell. " + ;
                "Also try multi-select feature by double clicking."
 
             :LoadFields( .F. )
@@ -296,7 +296,7 @@ CASE nSample = 4
       COLORS {CLR_BLACK, CLR_PINK} ;
       MESSAGE "Fonts, colors and bitmaps different for cells, headers and footers"
 
-   ADD COLUMN TO Brw_4;
+   ADD COLUMN TO Brw_4 ;
       HEADER "F i r s t" ;
       SIZE 130 ;
       DATA FieldWBlock( "First", Select() ) ;
@@ -309,7 +309,7 @@ CASE nSample = 4
    // new V.7.0 merging bitmaps and text in cells, headers and footers
    Brw_4:aColumns[ 1 ]:uBmpHead := aBmp[ 1 ]
 
-   ADD COLUMN TO Brw_4;
+   ADD COLUMN TO Brw_4 ;
       HEADER "Last" + CRLF + "Name" ;  // multi-line feature on headers
       DATA FieldWblock( "Last", Select() ) ;
       VALID { | uVar | ! Empty( uVar ) } ;  // don't want empty names
@@ -321,11 +321,11 @@ CASE nSample = 4
 
    // new V.7.0 showing a cake in aniversaries
    Brw_4:aColumns[ 2 ]:uBmpCell := ;
-      {||If(Month(Employee->HireDate)==Month(Date()).and.;
+      {||If(Month(Employee->HireDate)==Month(Date()).and. ;
       Day(Employee->HireDate)==Day(Date()),aBmp[5],Nil)}
 
    // next column shows the Vertical Header and Check Box editing control
-   ADD COLUMN TO Brw_4;
+   ADD COLUMN TO Brw_4 ;
       HEADER "Married" ;
       SIZE 25 PIXELS ;
       DATA FieldWblock( "Married", Select("Employee") ) ;
@@ -337,7 +337,7 @@ CASE nSample = 4
    ADD COLUMN TO Brw_4 ;
       HEADER "Age" ;
       SIZE 37 PIXELS ;
-      3DLOOK TRUE;
+      3DLOOK TRUE ;
       DATA FieldWBlock( "Age", Select("Employee") ) ;
       COLORS CLR_BLACK, CLR_PINK ;
       FOOTER { || Ltrim( Str( Round( nAgeTot / Max(Brw_4:nLen+1,1), 0 ) ) ) + CRLF + ;
@@ -354,7 +354,7 @@ CASE nSample = 4
    ADD COLUMN TO Brw_4 ;
       HEADER "Salary" ;
       SIZE 80 PIXELS ;
-      3DLOOK TRUE;
+      3DLOOK TRUE ;
       DATA FieldWBlock( "Salary", Select("Employee") ) ;
       COLORS {||If(Employee->Salary>100000,CLR_WHITE,CLR_BLACK)}, CLR_NBLUE ;
       ALIGN DT_RIGHT ;  // defaults right alignment at 3 levels
@@ -367,7 +367,7 @@ CASE nSample = 4
    ADD COLUMN TO Brw_4 ;
       HEADER "Hire" + CRLF + "Date" ;   // multi-line feature on headers
       SIZE 85 PIXELS ;
-      3DLOOK TRUE;
+      3DLOOK TRUE ;
       DATA FieldWBlock( "Hiredate", Select("Employee") ) ;
       ALIGN DT_LEFT, DT_CENTER, DT_CENTER ;
       COLORS CLR_BLACK,CLR_PINK ;
@@ -403,7 +403,7 @@ CASE nSample = 4
 
    // activating BtnGet to column
 
-   Brw_4:SetBtnGet( 5, "", { | oEdit, dVar | dVar := fBtnGet( dVar, oEdit:oWnd ),;
+   Brw_4:SetBtnGet( 5, "", { | oEdit, dVar | dVar := fBtnGet( dVar, oEdit:oWnd ), ;
       oEdit:VarPut( dVar ), oEdit:Refresh() }, 16 )
 
    // managing var value for footing of column 3
@@ -658,7 +658,7 @@ cSelState := "NY"
 
 DEFINE TBROWSE Brw_8 AT 0, 0 ALIAS "Employee" ;
    WIDTH nBrwWidth HEIGHT nBrwHeight  ;
-   MESSAGE "Incremental search uses instance variable ::cPrefix to be used with " +;
+   MESSAGE "Incremental search uses instance variable ::cPrefix to be used with " + ;
    "compound indexes, specially useful with filtered databases "
 
 LoadFields( cBrw, cWnd, .F. , { "First","Last","State","City","Street" } )
@@ -757,7 +757,7 @@ FUNCTION fExternal( nAge, oBrw )
    DEFINE FONT Font_7 FONTNAME "Arial" SIZE 9
 
    DEFINE DIALOG Dlg_1 OF Sample_4  AT 20, 20 WIDTH 300 HEIGHT 200 FONT "Font_7" ;
-      CAPTION "TSBrowse External Data Edition Sample" MODAL;
+      CAPTION "TSBrowse External Data Edition Sample" MODAL ;
       DIALOGPROC  nNewAge := DialogFun(@lOk, @nNewAge, oBrw) ;
       ON INIT SetInitItem()
 
@@ -821,7 +821,7 @@ STATIC FUNCTION SetInitItem()
 
 STATIC FUNCTION ComboBrowse( cState, nRow, nCol, oWnd, lCustom )
 
-   LOCAL oBrw, nEle, ix,;
+   LOCAL oBrw, nEle, ix, ;
       nArea := Select(), ;
       lOk   := .F.
 
@@ -907,7 +907,7 @@ FUNCTION fBtnGet( nValue, oBrw )
    DEFINE FONT Font_8 FONTNAME "Arial" SIZE 9
 
    DEFINE DIALOG Dlg_2 OF Sample_4  AT 20, 20 WIDTH 300 HEIGHT 200 FONT "Font_8" ;
-      CAPTION "TSBrowse BtnGet Data Edition Sample" MODAL;
+      CAPTION "TSBrowse BtnGet Data Edition Sample" MODAL ;
       DIALOGPROC  DialogFun2(@lOk, @nNewVal, oBrw) ;
       ON INIT SetInitItem()
 

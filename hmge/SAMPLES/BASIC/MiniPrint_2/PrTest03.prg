@@ -16,10 +16,10 @@ multi line, combined data value.
 
 PROCEDURE  PrintTest3()
 
-   LOCAL lSuccess := .F.,;
+   LOCAL lSuccess := .F., ;
       nPrintRow := 10,;   // Top margin
       nPrintCol := 10,;   // Left margin
-      nFontSize := 10,;
+      nFontSize := 10, ;
       nLine_Num :=  0
 
    SELECT PRINTER DEFAULT TO lSuccess PREVIEW

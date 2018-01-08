@@ -8,9 +8,9 @@ FUNCTION MakeFDirShortCut(;                  // Make a file or folder shortcut (
       cIcon,;                   // Icon for the shortcut
       cShortCutWrkdir )         // Working Directory
 
-   LOCAL WshShell  := CreateObject("WScript.Shell"),;
+   LOCAL WshShell  := CreateObject("WScript.Shell"), ;
       cLnkFFNam := cShortCutTitle + ".lnk",;            // Shorcut ( .lnk file ) Full Name
-      lSuccess  := .F.,;
+      lSuccess  := .F., ;
       FileShortcut
 
    HB_Default( @cShortCutTTip, "" )
@@ -50,9 +50,9 @@ FUNCTION MakeInternetShortCut(;                  // Make a Internet shortcut (.u
       cShortCutTitle,;          // Short-cut (.url File) Name
       cShortCutFolder )         // Folder Name for short-cut (.lnk file ) Default is Desktop.
 
-   LOCAL WshShell  := CreateObject("WScript.Shell"),;
+   LOCAL WshShell  := CreateObject("WScript.Shell"), ;
       cUrlFFNam := cShortCutTitle + ".url",;     // Shorcut ( .url file ) Full Name
-      lSuccess := .F.,;
+      lSuccess := .F., ;
       UrlShortcut
 
    HB_Default( @cShortCutFolder, GetDeskTopFolder() )

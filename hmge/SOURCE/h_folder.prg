@@ -95,7 +95,7 @@ FUNCTION _BeginFolder( name , parent , lRes , x , y , w , h, caption , fontname 
    ENDIF
 
    IF ValType ( parent ) == 'U'
-      parent := _HMG_ActiveFormName
+      PARENT := _HMG_ActiveFormName
    ENDIF
 
    _DefineFolder ( name , parent , lRes , x , y , w , h, caption , fontname , fontsize , folderproc, cancelproc , initproc , helpproc, modal, apply, bold, italic, underline, strikeout, buttons , flat , hottrack , vertical , bottom, multiline )

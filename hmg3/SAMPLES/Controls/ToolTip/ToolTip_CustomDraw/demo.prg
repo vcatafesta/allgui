@@ -16,8 +16,8 @@ FUNCTION Main
       @ 200,250 LABEL Label_1 ;
          AUTOSIZE ;
          VALUE 'Click me On/Off TOOLTIP Custom Draw!' ;
-         ACTION SetOnOff();
-         FONT 'Arial' SIZE 24;
+         ACTION SetOnOff() ;
+         FONT 'Arial' SIZE 24 ;
          TOOLTIP "ToolTip Label 1"
 
       @ 50,50 LABEL Label_2 ;

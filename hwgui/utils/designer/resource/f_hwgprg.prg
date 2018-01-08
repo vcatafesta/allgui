@@ -298,8 +298,8 @@ FUNCTION Browse2Prg
             ENDIF
             m -> nDec := &cTmpAlias -> ( FIELDDEC( AScan(j,temp ) ) )
             cCampo := "{|| " + cCampo + " }"
-            //cBrowser := SPACE(4)+cname+":AddColumn( HColumn():New("+cHeader+",{|| "+cCampo+" },"+ "'"+aTypes[i]+"',"+;
-            //      iif((temp:=oCtrl1:GetProp("Length"))!= Nil,LTRIM(STR(VAL(temp))),"10")+", "+;
+            //cBrowser := SPACE(4)+cname+":AddColumn( HColumn():New("+cHeader+",{|| "+cCampo+" },"+ "'"+aTypes[i]+"',"+ ;
+            //      iif((temp:=oCtrl1:GetProp("Length"))!= Nil,LTRIM(STR(VAL(temp))),"10")+", "+ ;
             //      Ltrim(Str(aDecimals[i]))+" "
          ELSE
             cCampo := iif( cCampo = Nil, ".T.", cCampo )

@@ -447,7 +447,7 @@ STATIC PROCEDURE MainForm()
                   WIDTH 36 ;
                   HEIGHT 21 ;
                   ON CHANGE ( nHours := Form_2.Spinner_3.Value, ;
-                  SaveParameter("Schedule", "EveryHours", nHours),;
+                  SaveParameter("Schedule", "EveryHours", nHours), ;
                   IF(lAutoScan .AND. nEvery=2, SetNextScan(), ) )
 
                @ 182,123 LABEL Label_42 ;

@@ -14,7 +14,7 @@ PROCEDURE Main()
    LOCAL nClr2 := RGB ( 0,   0, 0 )
 
    DEFINE WINDOW Form_1 ;
-         TITLE 'Demo for Gradient Background';
+         TITLE 'Demo for Gradient Background' ;
          ICON 'setup.ico' ;
          MAIN ;
          NOMAXIMIZE NOSIZE ;

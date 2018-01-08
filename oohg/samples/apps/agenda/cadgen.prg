@@ -29,7 +29,7 @@ PROCEDURE CadastroGenerico( oArea , oTitulo )
 
    (cArea)->(DBSetOrder(2))
 
-   DEFINE WINDOW Grid_Padrao;
+   DEFINE WINDOW Grid_Padrao ;
          AT 05,05              ;
          WIDTH   425            ;
          HEIGHT 460            ;
@@ -37,13 +37,13 @@ PROCEDURE CadastroGenerico( oArea , oTitulo )
          MODAL                 ;
          NOSIZE
 
-      @ 010,010 GRID Grid_1P;
+      @ 010,010 GRID Grid_1P ;
          WIDTH  400          ;
          HEIGHT 329          ;
-         HEADERS {"Código","Descrição"};
+         HEADERS {"Código","Descrição"} ;
          WIDTHS  {60,333}    ;
          VALUE 1             ;
-         FONT "Arial" SIZE 09;
+         FONT "Arial" SIZE 09 ;
          ON DBLCLICK { || Bt_Novo_Generic(2) }
 
       @ 357,011 LABEL  Label_Pesq_Generic    ;
@@ -60,22 +60,22 @@ PROCEDURE CadastroGenerico( oArea , oTitulo )
 
       @ 397,011 BUTTON Generic_Novo       ;
          CAPTION '&Novo'                ;
-         ACTION { || Bt_Novo_Generic(1)};
+         ACTION { || Bt_Novo_Generic(1)} ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 397,111 BUTTON Generic_Editar     ;
          CAPTION '&Editar'           ;
-         ACTION { || Bt_Novo_Generic(2)};
+         ACTION { || Bt_Novo_Generic(2)} ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 397,211 BUTTON Generic_Excluir    ;
          CAPTION 'E&xcluir'          ;
-         ACTION { || Bt_Excluir_Generic()};
+         ACTION { || Bt_Excluir_Generic()} ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
       @ 397,311 BUTTON Generic_Sair       ;
          CAPTION '&Sair'                ;
-         ACTION { || Bt_Generic_Sair() };
+         ACTION { || Bt_Generic_Sair() } ;
          FONT "MS Sans Serif" SIZE 09 FLAT
 
    END WINDOW
@@ -113,7 +113,7 @@ FUNCTION Bt_Novo_Generic(nTipo)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW Novo_Generic;
+   DEFINE WINDOW Novo_Generic ;
          AT 10,10             ;
          WIDTH  590             ;
          HEIGHT 129             ;
@@ -137,22 +137,22 @@ FUNCTION Bt_Novo_Generic(nTipo)
       @010,100 TEXTBOX  Generic_Codigo  ;
          WIDTH 50       ;
          FONT "Arial" Size 9      ;
-         TOOLTIP "Digite o C¢digo";
+         TOOLTIP "Digite o C¢digo" ;
          MAXLENGTH 04 UPPERCASE    ;
          ON LOSTFOCUS { || ChangeGenericCodigo() }
 
       *----------------------------------------------- Campo Descricao
-      @044,020 LABEL  Label_Gen_Descricao;
+      @044,020 LABEL  Label_Gen_Descricao ;
          VALUE "Descrição"        ;
          WIDTH  80       ;
          HEIGHT 19       ;
          FONT "MS Sans Serif" SIZE 8 BOLD
 
-      @040,100 TEXTBOX  Generic_Descricao;
+      @040,100 TEXTBOX  Generic_Descricao ;
          WIDTH 250        ;
          FONT "Arial" Size 9       ;
-         TOOLTIP "Digite a Descrição";
-         MAXLENGTH 30 UPPERCASE;
+         TOOLTIP "Digite a Descrição" ;
+         MAXLENGTH 30 UPPERCASE ;
          ON ENTER Novo_Generic.Generic_Salvar.SetFocus
 
       @003,380 FRAME Group_Generic_6 WIDTH 200 HEIGHT 75
@@ -279,13 +279,13 @@ FUNCTION ChangeGenericCodigo()
    (cArea)->(DBSetOrder(1))
    IF (cArea)->(DBSeek(Nc))
       IF lNovo
-         MsgInfo(PadC('Código já Existe para Descrição',70)+QUEBRA+;
+         MsgInfo(PadC('Código já Existe para Descrição',70)+QUEBRA+ ;
             PadC(AllTrim( (cArea)->Descricao ),70)+QUEBRA,SISTEMA)
          Novo_Generic.Generic_Codigo.Value :=  ""
          Novo_Generic.Generic_Codigo.SetFocus
       ELSE
          IF Nc != CodigoAlt
-            MsgInfo(PadC('Código já Existe para Descrição',70)+QUEBRA+;
+            MsgInfo(PadC('Código já Existe para Descrição',70)+QUEBRA+ ;
                PadC(AllTrim( (cArea)->Descricao),70)+QUEBRA,SISTEMA)
             Novo_Generic.Generic_Codigo.Value := ""
             Novo_Generic.Generic_Codigo.SetFocus

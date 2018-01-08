@@ -124,7 +124,7 @@ FUNCTION Testfunc(Idd)
             AT 12, 36 ;
             WIDTH 790 ;
             HEIGHT 600  ;
-            TITLE 'Standard Window with Controls ';
+            TITLE 'Standard Window with Controls ' ;
             CHILD
 
          @ 10,20 LABEL Lbl_1  ;
@@ -147,12 +147,12 @@ FUNCTION Testfunc(Idd)
             TOOLTIP 'Defined ComboBox '
 
          @ 190,20 FRAME frame_1a ;
-            CAPTION 'Frame ';
+            CAPTION 'Frame ' ;
             WIDTH 200   ;
             HEIGHT 100
 
          @ 205,30  CHECKBOX chkbox_1A ;
-            CAPTION 'Active CheckBox';
+            CAPTION 'Active CheckBox' ;
             WIDTH 160   ;
             HEIGHT 24  ;
             TOOLTIP 'Defined CheckBox '
@@ -219,7 +219,7 @@ FUNCTION Testfunc(Idd)
 
          @ 180,240 BUTTON Btn_2a ;
             PICTURE "PLAY.BMP" ;
-            ACTION {|| _PlayAnimateBox ( 'Ani_1a' , 'f_FrameTest' )};
+            ACTION {|| _PlayAnimateBox ( 'Ani_1a' , 'f_FrameTest' )} ;
             WIDTH 30   ;
             HEIGHT 30 ;
             TOOLTIP 'Defined Imagebutton'
@@ -266,12 +266,12 @@ FUNCTION Testfunc(Idd)
             TOOLTIP 'End Demo Dialog'
 
          @ 30 ,560  DATEPICKER DatePicker_1   ;
-            VALUE date();
-            WIDTH 180;
+            VALUE date() ;
+            WIDTH 180 ;
             TOOLTIP 'Defined DatePicker'
 
          @ 60 ,560 MONTHCALENDAR MonthCal_1 ;
-            VALUE date();
+            VALUE date() ;
             TOOLTIP 'Defined MonthCalendar '
 
          DEFINE TREE tree_1a  ;
@@ -326,9 +326,9 @@ FUNCTION Testfunc(Idd)
 
       DEFINE DIALOG f_dialogTest2 ;
          OF MainForm ;
-         RESOURCE DLG_0400;
-         CAPTION 'Available REDEFINE for Controls';
-         DIALOGPROC { |x,y,z| DialogFun(x,y,z) };
+         RESOURCE DLG_0400 ;
+         CAPTION 'Available REDEFINE for Controls' ;
+         DIALOGPROC { |x,y,z| DialogFun(x,y,z) } ;
          ON INIT InitProc()
 
       REDEFINE LABEL Lbl_1 ID 100 ;
@@ -344,11 +344,11 @@ FUNCTION Testfunc(Idd)
          VALUE 1 ;
          TOOLTIP 'Redefined ComboBox'
 
-      REDEFINE FRAME frame_1 ID 106;
+      REDEFINE FRAME frame_1 ID 106 ;
          CAPTION 'Redefined Frame'
 
-      REDEFINE CHECKBOX chkbox_1 ID 103;
-         CAPTION 'Active CheckBox';
+      REDEFINE CHECKBOX chkbox_1 ID 103 ;
+         CAPTION 'Active CheckBox' ;
          TOOLTIP 'Redefined CheckBox'
 
       REDEFINE RADIOGROUP RadioGrp_1 ID  {104,105} ;
@@ -358,7 +358,7 @@ FUNCTION Testfunc(Idd)
          SIZE 12   ;
          TOOLTIP 'Redefined RadioGroup'
 
-      REDEFINE LISTBOX lBox_1 ID 107;
+      REDEFINE LISTBOX lBox_1 ID 107 ;
          ITEMS {'Line 1','Line 2','Line 3'} ;
          VALUE 2 ;
          TOOLTIP 'Redefined ListBox'
@@ -369,9 +369,9 @@ FUNCTION Testfunc(Idd)
       REDEFINE ANIMATEBOX Ani_1 ID 117 ;
          FILE 'Sample.Avi'
 
-      REDEFINE BUTTON Btn_2 ID 118;
+      REDEFINE BUTTON Btn_2 ID 118 ;
          PICTURE "PLAY.BMP" ;
-         ACTION {|| _PlayAnimateBox ( 'Ani_1' , 'f_DialogTest2' )};
+         ACTION {|| _PlayAnimateBox ( 'Ani_1' , 'f_DialogTest2' )} ;
          TOOLTIP 'Redefined Imagebutton'
 
       REDEFINE BUTTON Btn_1 ID 101 ;
@@ -379,7 +379,7 @@ FUNCTION Testfunc(Idd)
          ACTION thiswindow.release ;
          TOOLTIP 'End Demo Dialog'
 
-      REDEFINE CHECKBUTTON CheckBtn ID 119;
+      REDEFINE CHECKBUTTON CheckBtn ID 119 ;
          PICTURE 'info.bmp'  ;
          VALUE .F. ;
          TOOLTIP 'Graphical CheckButton'
@@ -441,12 +441,12 @@ FUNCTION Testfunc(Idd)
 
    END TREE
 
-   REDEFINE DATEPICKER DatePicker_1 ID 124;
-      VALUE date();
+   REDEFINE DATEPICKER DatePicker_1 ID 124 ;
+      VALUE date() ;
       TOOLTIP 'Redefined DatePicker'
 
-   REDEFINE MONTHCALENDAR MonthCal_1 ID 125;
-      VALUE date();
+   REDEFINE MONTHCALENDAR MonthCal_1 ID 125 ;
+      VALUE date() ;
       TOOLTIP 'Redefined MonthCalendar'
 
    REDEFINE TAB Tab_1 ID 116 ;
@@ -483,8 +483,8 @@ DEFINE DIALOG f_DialogTest3 ;
    AT 10, 10 ;
    WIDTH 790  ;
    HEIGHT 600 ;
-   CAPTION 'Dialog in Memory';
-   DIALOGPROC { |x,y,z| DialogFun(x,y,z) };
+   CAPTION 'Dialog in Memory' ;
+   DIALOGPROC { |x,y,z| DialogFun(x,y,z) } ;
    ON INIT InitProc()
 
 @ 10,20 LABEL Lbl_1 ID 402 ;
@@ -506,13 +506,13 @@ DEFINE DIALOG f_DialogTest3 ;
    HEIGHT 70 ;
    TOOLTIP 'Defined ComboBox in Memory'
 
-@ 190,20 FRAME frame_1a ID 306;
-   CAPTION 'Frame ';
+@ 190,20 FRAME frame_1a ID 306 ;
+   CAPTION 'Frame ' ;
    WIDTH 200   ;
    HEIGHT 100
 
-@ 205,30  CHECKBOX chkbox_1A ID 303;
-   CAPTION 'Active CheckBox';
+@ 205,30  CHECKBOX chkbox_1A ID 303 ;
+   CAPTION 'Active CheckBox' ;
    WIDTH 160   ;
    HEIGHT 24  ;
    TOOLTIP 'Defined CheckBox in Memory'
@@ -526,7 +526,7 @@ DEFINE DIALOG f_DialogTest3 ;
    SIZE 12   ;
    TOOLTIP 'Defined RadioGroup'
 
-@ 310,20   LISTBOX lBox_1a ID 307;
+@ 310,20   LISTBOX lBox_1a ID 307 ;
    WIDTH 200   ;
    HEIGHT 100 ;
    ITEMS {'Line 1','Line 2','Line 3'} ;
@@ -577,14 +577,14 @@ DEFINE TAB Tab_1a ID 316 ;
 
 END TAB
 
-@ 180,240 BUTTON Btn_2a ID 318;
+@ 180,240 BUTTON Btn_2a ID 318 ;
    PICTURE "PLAY.BMP" ;
-   ACTION {|| _PlayAnimateBox ( 'Ani_1a' , 'f_DialogTest3' )};
+   ACTION {|| _PlayAnimateBox ( 'Ani_1a' , 'f_DialogTest3' )} ;
    WIDTH 30   ;
    HEIGHT 30 ;
    TOOLTIP 'Defined Imagebutton'
 
-@ 180, 270 CHECKBUTTON CheckBtn_1a ID 319;
+@ 180, 270 CHECKBUTTON CheckBtn_1a ID 319 ;
    PICTURE 'info.bmp'  ;
    WIDTH 30   ;
    HEIGHT 30 ;
@@ -626,12 +626,12 @@ TOOLTIP 'Defined Grid in Memory'
    TOOLTIP 'End Demo Dialog'
 
 @ 30 ,560  DATEPICKER DatePicker_1  ID 324 ;
-   VALUE date();
-   WIDTH 180;
+   VALUE date() ;
+   WIDTH 180 ;
    TOOLTIP 'Defined DatePicker'
 
-@ 60 ,560 MONTHCALENDAR MonthCal_1 ID 125;
-   VALUE date();
+@ 60 ,560 MONTHCALENDAR MonthCal_1 ID 125 ;
+   VALUE date() ;
    TOOLTIP 'Defined MonthCalendar in Memory'
 
 DEFINE TREE tree_1a ID 315 ;
@@ -682,7 +682,7 @@ DEFINE WINDOW f_FrameTest ;
       AT 12, 36 ;
       WIDTH 640 ;
       HEIGHT 500  ;
-      TITLE 'Standard Window with Browse ';
+      TITLE 'Standard Window with Browse ' ;
       CHILD ;
       ON INIT OpenTables() ;
       ON RELEASE CloseTables()
@@ -694,14 +694,14 @@ DEFINE WINDOW f_FrameTest ;
       WIDTHS { 100 , 150 , 150 , 100 , 50 , 150 } ;
       WORKAREA Test ;
       FIELDS { 'Test->Code' , 'Test->Code' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
-      VALUE 1;
+      VALUE 1 ;
       ON CHANGE ChangeTest1()
 
    @ 350, 300 BUTTON Btn_1a  ;
       CAPTION 'Exit'  ;
       ACTION thiswindow.release ;
-      WIDTH 80;
-      HEIGHT 28;
+      WIDTH 80 ;
+      HEIGHT 28 ;
       TOOLTIP 'End Browse Dialog'
 END WINDOW
 
@@ -712,8 +712,8 @@ f_FrameTest.Activate
 CASE Idd ==  DLG_BRW2
 DEFINE DIALOG f_dialog1 ;
    OF MainForm ;
-   RESOURCE DLG_0300;
-   CAPTION 'Dialog from RC with Browse';
+   RESOURCE DLG_0300 ;
+   CAPTION 'Dialog from RC with Browse' ;
    ON INIT OpenTables() ;
    ON RELEASE CloseTables()
 
@@ -723,7 +723,7 @@ REDEFINE BROWSE Browse_1       ;
    WIDTHS { 100 , 150 , 150 , 100 , 50 , 150 } ;
    WORKAREA Test ;
    FIELDS { 'Test->Code' , 'Test->Code' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
-   VALUE 1;
+   VALUE 1 ;
    ON CHANGE ChangeTest()
 
 REDEFINE COMBOBOX cBox_0 ID DLG_COMBO ;
@@ -746,7 +746,7 @@ DEFINE DIALOG f_dialog1a ;
    AT 12, 36 ;
    WIDTH 640   ;
    HEIGHT 380  ;
-   CAPTION 'Dialog in Memory with Browse';
+   CAPTION 'Dialog in Memory with Browse' ;
    ON INIT OpenTables() ;
    ON RELEASE CloseTables()
 
@@ -758,14 +758,14 @@ DEFINE DIALOG f_dialog1a ;
    WIDTHS { 100 , 150 , 150 , 100 , 50 , 150 } ;
    WORKAREA Test ;
    FIELDS { 'Test->Code' , 'Test->Code' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
-   VALUE 1;
+   VALUE 1 ;
    ON CHANGE ChangeTest1()
 
 @ 350, 300 BUTTON Btn_1a ID DLG_OK ;
    CAPTION 'Exit'  ;
    ACTION thiswindow.release ;
-   WIDTH 80;
-   HEIGHT 28;
+   WIDTH 80 ;
+   HEIGHT 28 ;
    TOOLTIP 'End Browse Dialog'
 
 END DIALOG
@@ -779,9 +779,9 @@ FUNCTION RC_WS_test()
 
    DEFINE DIALOG f_dialogTest2 ;
       OF MainForm ;
-      RESOURCE DIALOG_1WS;
-      CAPTION 'Test Dialogs from Resource Workshop';
-      DIALOGPROC { |x,y,z| DialogFun(x,y,z) };
+      RESOURCE DIALOG_1WS ;
+      CAPTION 'Test Dialogs from Resource Workshop' ;
+      DIALOGPROC { |x,y,z| DialogFun(x,y,z) } ;
 
 END DIALOG
 

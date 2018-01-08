@@ -16,7 +16,7 @@ FUNCTION Main
          TITLE 'Test bColor2(...) Demo' ;
          MAIN
 
-      a := {;
+      a := { ;
          /*  1 */   "YL Соломенный", ;
          /*  2 */   "Y  Желтый", ;
          /*  3 */   "H  Коричневый", ;

@@ -11,8 +11,8 @@ MEMV nPasdRecs
 
 PROC T_SetIndex()
 
-   LOCA cTablDir := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ),;
-      cNtxFNam := '',;
+   LOCA cTablDir := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ), ;
+      cNtxFNam := '', ;
       nNtxFNum := 0
 
    LOCA aNtxFils := GetFile ( {{ "Index Files", "*.ntx" }} ,;   // File Select Filter
@@ -48,7 +48,7 @@ PROC T_SetIndex()
 
    PROC T_SetOrder()                         // Table - Set Index Order
 
-      LOCA aNtxKeys := { "Natural" },;
+      LOCA aNtxKeys := { "Natural" }, ;
          nNtxNum  := 0
 
       AEVAL( aOpnDatas[ nCurDatNo, 6 ], { | c1, i1 | AADD( aNtxKeys, INDEXKEY( i1 ) ), HB_SYMBOL_UNUSED( c1 ) } )
@@ -67,7 +67,7 @@ PROC T_SetIndex()
 
       PROC T_ReleIndex()                        // Table Release Indexs
 
-         IF MsgYesNo( "All open indexs will be closed;" + CRLF2 +;
+         IF MsgYesNo( "All open indexs will be closed;" + CRLF2 + ;
                "          Are you sure ? " )
             SET INDEX TO
             ADEL( aOpnDatas[ nCurDatNo ], 6 )
@@ -82,19 +82,19 @@ PROC T_SetIndex()
 
          PROC T_Re_Index()                         // Re_Index current table
 
-            LOCA cTablDir := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ),;
-               cTblName := ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ),;
-               aIndxFNs := aOpnDatas[ nCurDatNo, 6 ] ,;
-               aNtxKeys := {} ,;
-               cNtx1Key := '' ,;
-               cNtxFNam := '' ,;
-               nNtxFNum := 0  ,;
-               aSelects := {} ,;
-               aSelectd := {} ,;
-               nNtxInd  :=  0 ,;
+            LOCA cTablDir := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ), ;
+               cTblName := ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ), ;
+               aIndxFNs := aOpnDatas[ nCurDatNo, 6 ] , ;
+               aNtxKeys := {} , ;
+               cNtx1Key := '' , ;
+               cNtxFNam := '' , ;
+               nNtxFNum := 0  , ;
+               aSelects := {} , ;
+               aSelectd := {} , ;
+               nNtxInd  :=  0 , ;
                nCurOrd  := INDEXORD()
 
-            AEVAL( aIndxFNs, { | c1, i1 | AADD( aNtxKeys, INDEXKEY( i1 ) ) ,;
+            AEVAL( aIndxFNs, { | c1, i1 | AADD( aNtxKeys, INDEXKEY( i1 ) ) , ;
                AADD( aSelects, " ON " + INDEXKEY( i1 )+ ;
                " TO " + ExOFNFFP( c1 ) ) } )
             IF LEN( aSelects ) > 1
@@ -128,10 +128,10 @@ PROC T_SetIndex()
 
             *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-            FUNC ChekOWrt( cFileName,;
+            FUNC ChekOWrt( cFileName, ;
                   cFileExtn )
 
-               LOCA lRVal    := .T.,;
+               LOCA lRVal    := .T., ;
                   cFileDir := IF( nCurDatNo > 0, ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ), cLastDDir )
 
                LOCA cFFName  := IF( "\" $ cFileName, cFileName, cFileDir  + "\" + cFileName )
@@ -142,7 +142,7 @@ PROC T_SetIndex()
 
                IF lPref0102     // Request user confirmation for file overwriting
                   IF FILE( cFFName )
-                     lRVal := MsgYesNo( cFileName + " File exist;" + CRLF2 +;
+                     lRVal := MsgYesNo( cFileName + " File exist;" + CRLF2 + ;
                         "Overwrite them ?" )
                   ENDIF
                ENDIF lPref0102
@@ -153,28 +153,28 @@ PROC T_SetIndex()
 
                PROC T_NewIndex()                         // Build ( and set ) a NEW index for current table
 
-                  LOCA cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ),;
-                     cTblName  := ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ),;
+                  LOCA cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ), ;
+                     cTblName  := ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ), ;
                      aIndxFNs  := IF( LEN(aOpnDatas[ nCurDatNo] ) > 5, aOpnDatas[ nCurDatNo, 6 ], {} )
 
-                  LOCA aComPars  := {},;
+                  LOCA aComPars  := {}, ;
                      aComOpts  := {}
 
-                  LOCA nFNPInd   := 0,;
-                     a1CPPar   := {},;
+                  LOCA nFNPInd   := 0, ;
+                     a1CPPar   := {}, ;
                      aValues   := {}
 
-                  LOCA cCbFTitl  := "Building a NEW index for " + cTblName,;
+                  LOCA cCbFTitl  := "Building a NEW index for " + cTblName, ;
                      cDfXFName := LEFT( cTblName, RAT( ".", cTblName  ) ) + "NTX"
 
-                  LOCA aNtxKeys  := {} ,;
-                     cNtxFNam  := '',;
-                     cNtxKey   := '',;
-                     lUnique   := .F.,;
-                     cFORExpr  := '',;
-                     lDesCend  := .F.,;
-                     nControl  := '',;
-                     cInvalid  := '',;
+                  LOCA aNtxKeys  := {} , ;
+                     cNtxFNam  := '', ;
+                     cNtxKey   := '', ;
+                     lUnique   := .F., ;
+                     cFORExpr  := '', ;
+                     lDesCend  := .F., ;
+                     nControl  := '', ;
+                     cInvalid  := '', ;
                      cMessage
 
                   aComPars  := { { cDfXFName, "Index", "*.ntx", .T. },;  // Target ( INDEX )FILE
@@ -212,8 +212,8 @@ PROC T_SetIndex()
 
                            SET INDE TO
 
-                           nControl  := CTON( IF( lUnique,           "1", "0" ) +;
-                              IF( EMPTY( cFORExpr ), "0", "1" ) +;
+                           nControl  := CTON( IF( lUnique,           "1", "0" ) + ;
+                              IF( EMPTY( cFORExpr ), "0", "1" ) + ;
                               IF( lDesCend,          "1", "0" ), 2 )
 
                            DO CASE
@@ -269,9 +269,9 @@ PROC T_SetIndex()
                            RefrBrow()
                            RefrMenu()
 
-                           cMessage := cTblName + " table indexed"    + CRLF2 +;
-                              "ON "    + cNtxKey             + CRLF2 +;
-                              "TO "    + ExOFNFFP(cNtxFNam ) + CRLF2 +;
+                           cMessage := cTblName + " table indexed"    + CRLF2 + ;
+                              "ON "    + cNtxKey             + CRLF2 + ;
+                              "TO "    + ExOFNFFP(cNtxFNam ) + CRLF2 + ;
                               "and this index activated."
 
                            MsgInfo( cMessage )
@@ -286,24 +286,24 @@ PROC T_SetIndex()
 
                   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-                  PROC T_Copy_To(;
+                  PROC T_Copy_To( ;
                         nOption ) // 1: Recs, Exact, 2: Recs, Selective, 3: Struct Only, 4: Struct Extend
 
-                     LOCA cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ),;
-                        cTblName  := ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ),;
+                     LOCA cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ), ;
+                        cTblName  := ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ), ;
                         cNewTNam  := ''
 
-                     LOCA aComPars  := {},;
-                        cCbFTitl  := "Copying " + cTblName + " TO ...",;
-                        aComOpts  := {},;
-                        cExpLst   := '',;
-                        lAskOpen  := .F.,;
+                     LOCA aComPars  := {}, ;
+                        cCbFTitl  := "Copying " + cTblName + " TO ...", ;
+                        aComOpts  := {}, ;
+                        cExpLst   := '', ;
+                        lAskOpen  := .F., ;
                         lSuccess  := .F.
 
                      IF nOption # 2  // Recs, exact
 
-                        aComOpts  := GFUComOpts( { { SPAC( 256 ), "Table", "*.dbf", .F. } },;
-                           cCbFTitl,;
+                        aComOpts  := GFUComOpts( { { SPAC( 256 ), "Table", "*.dbf", .F. } }, ;
+                           cCbFTitl, ;
                            { { 'OFN',"Target " } } )
                      ELSE   // Recs, Selective
                         AEVAL( DBSTRUCT(), { | a1, i1 | cExpLst += a1[ 1 ] + IF( i1 < FCOUNT(), ", ", '') } )
@@ -370,27 +370,27 @@ PROC T_SetIndex()
 
                      FUNC CopyToBe( aOptions )                 // to be or not to be !..
 
-                        LOCA cExpLst  := aOptions[ 1 ],;
+                        LOCA cExpLst  := aOptions[ 1 ], ;
                            aCondits := aOptions[ 2 ],;  // 1: Condition No :  1: None, 2: FOR, 3: WHILE; 2:Condition String ( IF nCondit > 1 )
-                           aScopes  := aOptions[ 3 ],;  // 1: Scope No : 1: No (ALL), 1: ALL, 2: REST, 3: NEXT, 4: RECORD (NO); Scope Count ( or No ) ( IF nScope > 2 );
+                           aScopes  := aOptions[ 3 ],;  // 1: Scope No : 1: No (ALL), 1: ALL, 2: REST, 3: NEXT, 4: RECORD (NO); Scope Count ( or No ) ( IF nScope > 2 ) ;
                            nTFType  := aOptions[ 4, 1 ],;  // Target File Type : 1: Table, 2: SDF, 3: DELI, 4: DELI WITH
                            cDlmWith := aOptions[ 4, 2 ],;  // Delimiter ( IF cDlmWith > 3 )
-                           cNewTNam := aOptions[ 5 ],;
+                           cNewTNam := aOptions[ 5 ], ;
                            cTmpFNam := ''
 
-                        LOCA lTextOut := ( nTFType > 1 ),;
-                           cTextOut := '',;
+                        LOCA lTextOut := ( nTFType > 1 ), ;
+                           cTextOut := '', ;
                            nCurResN := RECN()
 
-                        LOCA lRVal    := .F.,;
-                           aNewStru := Lst2Arr( cExpLst, ',' ),;
-                           aOldStru := DBSTRUCT(),;
+                        LOCA lRVal    := .F., ;
+                           aNewStru := Lst2Arr( cExpLst, ',' ), ;
+                           aOldStru := DBSTRUCT(), ;
                            cCurTNam := aOpnDatas[ nCurDatNo, 3 ]  // Current Table Name
 
                         LOCA aCondExps := Cond2Exps( aScopes, aCondits )
 
-                        LOCA cContinue := aCondExps[ 1 ],;
-                           cApply    := aCondExps[ 2 ],;
+                        LOCA cContinue := aCondExps[ 1 ], ;
+                           cApply    := aCondExps[ 2 ], ;
                            cCAlias   := ALIAS(),;            // Current Alias
                            nFInd     := 0,;  // Field indice
                            cFldNam       ,;  // Field Name
@@ -469,43 +469,43 @@ PROC T_SetIndex()
                         */
                         PROC T_Sort()                             // Table SORT
 
-                           LOCA aComPars  := {},;
-                              cCbFTitl  := 'SORT current table',;
-                              aComOpts  := {},;
-                              cKExpLst  := '',;
-                              cFldList  := '',;
-                              cKeyExprs := '',;
-                              nCurWArea := SELECT(),;
-                              nCurRec   := RECN(),;
-                              cNewTNam  := '',;
-                              aCondits  := {},;
-                              aScopes   := {},;
-                              aCondExps := {},;
-                              cContinue := '',;
-                              cApply    := '',;
-                              nFInd     :=  0,;
-                              c1FldNam  := '',;
-                              n1FldNum  := 0,;
-                              aStruct   := DBSTRUCT(),;
-                              aFldsSum  := {},;
-                              aSums     := {},;
-                              cResult   := '',;
-                              nCount    :=  0,;
-                              lContinue := .T.,;
+                           LOCA aComPars  := {}, ;
+                              cCbFTitl  := 'SORT current table', ;
+                              aComOpts  := {}, ;
+                              cKExpLst  := '', ;
+                              cFldList  := '', ;
+                              cKeyExprs := '', ;
+                              nCurWArea := SELECT(), ;
+                              nCurRec   := RECN(), ;
+                              cNewTNam  := '', ;
+                              aCondits  := {}, ;
+                              aScopes   := {}, ;
+                              aCondExps := {}, ;
+                              cContinue := '', ;
+                              cApply    := '', ;
+                              nFInd     :=  0, ;
+                              c1FldNam  := '', ;
+                              n1FldNum  := 0, ;
+                              aStruct   := DBSTRUCT(), ;
+                              aFldsSum  := {}, ;
+                              aSums     := {}, ;
+                              cResult   := '', ;
+                              nCount    :=  0, ;
+                              lContinue := .T., ;
                               aCopOptns := {}
 
-                           LOCA c1Key ,;
-                              c1Fld ,;
-                              c1Swt ,;
-                              c2Swt ,;
-                              lDescend ,;
-                              lUpper ,;
-                              nFldNum ,;
-                              cFldType ,;
-                              nFldLen ,;
-                              nFldDec ,;
-                              cFldExp ,;
-                              cTmpFNam ,;
+                           LOCA c1Key , ;
+                              c1Fld , ;
+                              c1Swt , ;
+                              c2Swt , ;
+                              lDescend , ;
+                              lUpper , ;
+                              nFldNum , ;
+                              cFldType , ;
+                              nFldLen , ;
+                              nFldDec , ;
+                              cFldExp , ;
+                              cTmpFNam , ;
                               cTmpXNam
 
                            PRIV nPasdRecs :=  0
@@ -618,35 +618,35 @@ PROC T_SetIndex()
                            */
 
                            PROC T_Total()                            // Table TOTAL
-                              LOCA aComPars  := {},;
-                                 cCbFTitl  := 'TOTAL current table',;
-                                 aComOpts  := {},;
-                                 cNExpLst  := '',;
-                                 cFldList  := '',;
-                                 cKeyExprs := '',;
-                                 nCurWArea := SELECT(),;
-                                 nCurRec   := RECN(),;
-                                 cNewTNam  := '',;
-                                 aCondits  := {},;
-                                 aScopes   := {},;
-                                 aCondExps := {},;
-                                 cContinue := '',;
-                                 cApply    := '',;
-                                 cCAlias   := '',;
-                                 nFInd     :=  0,;
-                                 c1FldNam  := '',;
-                                 n1FldNum  := 0,;
-                                 aStruct   := DBSTRUCT(),;
+                              LOCA aComPars  := {}, ;
+                                 cCbFTitl  := 'TOTAL current table', ;
+                                 aComOpts  := {}, ;
+                                 cNExpLst  := '', ;
+                                 cFldList  := '', ;
+                                 cKeyExprs := '', ;
+                                 nCurWArea := SELECT(), ;
+                                 nCurRec   := RECN(), ;
+                                 cNewTNam  := '', ;
+                                 aCondits  := {}, ;
+                                 aScopes   := {}, ;
+                                 aCondExps := {}, ;
+                                 cContinue := '', ;
+                                 cApply    := '', ;
+                                 cCAlias   := '', ;
+                                 nFInd     :=  0, ;
+                                 c1FldNam  := '', ;
+                                 n1FldNum  := 0, ;
+                                 aStruct   := DBSTRUCT(), ;
                                  aFldLst1  := {},;   // User supplied
                                  aFldLst2  := {},;   // Checked all Numeric
-                                 aTotals   := {},;
-                                 cResult   := '',;
-                                 nCount    :=  0,;
-                                 lContinue := .T.,;
-                                 aCopOptns := {},;
-                                 nKExprLen :=  0,;
-                                 aNewStruc := {},;
-                                 cKeyCur   := '',;
+                                 aTotals   := {}, ;
+                                 cResult   := '', ;
+                                 nCount    :=  0, ;
+                                 lContinue := .T., ;
+                                 aCopOptns := {}, ;
+                                 nKExprLen :=  0, ;
+                                 aNewStruc := {}, ;
+                                 cKeyCur   := '', ;
                                  cKeyOld   := ''
 
                               PRIV nPasdRecs :=  0
@@ -707,9 +707,9 @@ PROC T_SetIndex()
 
                                     FOR nFInd := 1 TO LEN( aFldLst2 )
                                        n1FldNum := aFldLst2[ nFInd ]
-                                       AADD( aNewStruc, { FIELDNAME( n1FldNum ),;
-                                          FIELDTYPE( n1FldNum ),;
-                                          FIELDLEN(  n1FldNum ),;
+                                       AADD( aNewStruc, { FIELDNAME( n1FldNum ), ;
+                                          FIELDTYPE( n1FldNum ), ;
+                                          FIELDLEN(  n1FldNum ), ;
                                           FIELDDEC( n1FldNum ) } )
                                     NEXT nFInd
 
@@ -768,26 +768,26 @@ PROC T_SetIndex()
 
                               PROC T_Copy_Spec()                        // Copy (Current Table) to Special
 
-                                 LOCA cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ),;
+                                 LOCA cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ), ;
                                     cTblName  := ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] )
 
-                                 LOCA cfrmTitle := "Options for COPY SPECIAL " +  cTblName + " TO ...",;
+                                 LOCA cfrmTitle := "Options for COPY SPECIAL " +  cTblName + " TO ...", ;
                                     cTFName   := IF( "." $ cTblName, STRTRAN( UPPER( cTblName ), "DBF", "TXT" ), cTblName + ".TXT" )
 
-                                 LOCA aStruct   := DBSTRUCT(),;
+                                 LOCA aStruct   := DBSTRUCT(), ;
                                     cFldList  := ''
 
                                  AEVAL( aStruct, { | a1, i1 | cFldList += a1[ 1 ] + IF( i1 < FCOUNT(), ", ", '') } )
 
-                                 DEFINE WINDOW frmCopySpec;
-                                       AT     154, 284;
-                                       WIDTH  550;
-                                       HEIGHT 466;
-                                       TITLE cfrmTitle;
+                                 DEFINE WINDOW frmCopySpec ;
+                                       AT     154, 284 ;
+                                       WIDTH  550 ;
+                                       HEIGHT 466 ;
+                                       TITLE cfrmTitle ;
                                        MODAL ;
-                                       CURSOR NIL;
-                                       ON INIT InitCopSel();
-                                       ON RELEASE Nil;
+                                       CURSOR NIL ;
+                                       ON INIT InitCopSel() ;
+                                       ON RELEASE Nil ;
                                        ON SIZE Nil
 
                                     ON KEY ESCAPE ACTION frmCopySpec.Release
@@ -1431,31 +1431,31 @@ PROC T_SetIndex()
 
                                     PROC T_CopSpcApply()
 
-                                       LOCA cFieldLst := frmCopySpec.txbFields.Value,;
-                                          cTFileNam := frmCopySpec.txbTFN.Value,;
-                                          nRecDelim := frmCopySpec.combRecDelim.Value,;
-                                          nFldDelim := frmCopySpec.combFielDelim.Value,;
-                                          nStrTrim  := frmCopySpec.combStrTrim.Value,;
-                                          cRecDelim := '',;
-                                          cFldDelim := '',;
-                                          nCopied   :=  0,;
-                                          nFldNum   :=  0,;
+                                       LOCA cFieldLst := frmCopySpec.txbFields.Value, ;
+                                          cTFileNam := frmCopySpec.txbTFN.Value, ;
+                                          nRecDelim := frmCopySpec.combRecDelim.Value, ;
+                                          nFldDelim := frmCopySpec.combFielDelim.Value, ;
+                                          nStrTrim  := frmCopySpec.combStrTrim.Value, ;
+                                          cRecDelim := '', ;
+                                          cFldDelim := '', ;
+                                          nCopied   :=  0, ;
+                                          nFldNum   :=  0, ;
                                           xFldValue := NIL
 
-                                       LOCA aRecDelims := { CRLF, CHR(13), CHR(10), "","?"},;
+                                       LOCA aRecDelims := { CRLF, CHR(13), CHR(10), "","?"}, ;
                                           aFldDelims := { "",",",";"," ", CHR(13), CHR(10), CRLF }
 
                                        /*
-                                       MsgMulty( { frmCopySpec.txbFields.Value,;
-                                       frmCopySpec.txbTFN.Value,;
-                                       frmCopySpec.combRecDelim.Value,;
-                                       frmCopySpec.combFielDelim.Value,;
+                                       MsgMulty( { frmCopySpec.txbFields.Value, ;
+                                       frmCopySpec.txbTFN.Value, ;
+                                       frmCopySpec.combRecDelim.Value, ;
+                                       frmCopySpec.combFielDelim.Value, ;
                                        frmCopySpec.combStrTrim.Value } )
 
-                                       MsgMulty( { cFieldLst,;
-                                       cTFileNam,;
-                                       nRecDelim,;
-                                       nFldDelim,;
+                                       MsgMulty( { cFieldLst, ;
+                                       cTFileNam, ;
+                                       nRecDelim, ;
+                                       nFldDelim, ;
                                        nStrTrim  } )
                                        */
 
@@ -1492,7 +1492,7 @@ PROC T_SetIndex()
                                              SET ALTE TO
                                              SET ALTE OFF
 
-                                             *         MsgMulty( { NTrim( nCopied ) + " record" + IF( nCopied > 1, "s "," " ) + "copied",;
+                                             *         MsgMulty( { NTrim( nCopied ) + " record" + IF( nCopied > 1, "s "," " ) + "copied", ;
                                              *                     "to " + cTFileNam } )
 
                                              frmCopySpec.release

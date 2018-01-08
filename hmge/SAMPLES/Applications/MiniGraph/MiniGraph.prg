@@ -107,7 +107,7 @@ FUNCTION MAIN
       FOR i = 1 TO 6
          cBut := 'butF_' + AllTrim( Str( i ) )
          @ 100, nColBut BUTTONEX &cBut  CAPTION aFun[i]  WIDTH nWBut HEIGHT 20 ;
-            ACTION InsertStr( This.Caption, 1 );
+            ACTION InsertStr( This.Caption, 1 ) ;
             FONT 'Arial' SIZE 9 BACKCOLOR WHITE NOXPSTYLE FLAT
          nColbut += nWBut
       NEXT
@@ -116,7 +116,7 @@ FUNCTION MAIN
       FOR i = 7 TO 12
          cBut := 'butF_' + AllTrim( Str( i ) )
          @ 120, nColBut BUTTONEX &cBut  CAPTION aFun[i]  WIDTH nWBut HEIGHT 20 ;
-            ACTION InsertStr( This.Caption, 1 );
+            ACTION InsertStr( This.Caption, 1 ) ;
             FONT 'Arial' SIZE 9 BACKCOLOR WHITE NOXPSTYLE FLAT
          nColbut += nWBut
       NEXT
@@ -885,14 +885,14 @@ FUNCTION Msg2( cTitle, cMess, aButCap, nMod )
 
       IF Len( aButCap ) = 2
          @ nRowBut, nWinW/2 - 125 BUTTONEx But1  CAPTION aButCap[1] ;
-            WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE;
+            WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE ;
             ACTION ( nRet := 1 , WinMsg.Release  )
-         @ nRowBut, nWinW/2 + 5 BUTTONEx But2  CAPTION aButCap[2];
-            WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE;
+         @ nRowBut, nWinW/2 + 5 BUTTONEx But2  CAPTION aButCap[2] ;
+            WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE ;
             ACTION ( nRet := 2 , WinMsg.Release  )
       ELSE
-         @ nRowBut, nWinW/2 - 60 BUTTONEX But1  CAPTION aButCap[1];
-            WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE;
+         @ nRowBut, nWinW/2 - 60 BUTTONEX But1  CAPTION aButCap[1] ;
+            WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE ;
             ACTION WinMsg.Release
       ENDIF
       IF nMod <> 0

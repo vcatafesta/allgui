@@ -35,8 +35,8 @@ FUNCTION Main
          WIDTH nWidth ;
          HEIGHT nHeight ;
          TITLE 'MDI demo ' ;
-         MAIN;
-         MDI;
+         MAIN ;
+         MDI ;
          FONT 'System' SIZE 12
 
       DEFINE MAIN MENU
@@ -184,17 +184,17 @@ FUNCTION CreateMDIClient(Buffer,title)
    DEFINE WINDOW ChildMdi ;
          TITLE title ;
          MDICHILD ;
-         ON INIT ResizeEdit();
+         ON INIT ResizeEdit() ;
          ON RELEASE ReleaseMdiChild() ;
-         ON SIZE ResizeEdit();
-         ON MAXIMIZE ResizeEdit();
-         ON MINIMIZE ResizeEdit();
+         ON SIZE ResizeEdit() ;
+         ON MAXIMIZE ResizeEdit() ;
+         ON MINIMIZE ResizeEdit() ;
          ON MOUSECLICK SetEditFocus()
 
       @ 0 ,0 EDITBOX EditMdi ;
          WIDTH 200 ;
          HEIGHT 200 ;
-         VALUE Buffer;
+         VALUE Buffer ;
          ON CHANGE SetChange()
 
    END WINDOW

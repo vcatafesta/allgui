@@ -41,38 +41,38 @@ FUNCTION Main
          BUTTON Button_1b ;
             CAPTION 'More Pager...' ;
             PICTURE 'button7.bmp' ;
-            TOOLTIP 'More PagerBox button';
+            TOOLTIP 'More PagerBox button' ;
             ACTION Vert_CLick()
 
          BUTTON Button_2b ;
             CAPTION 'Button 2' ;
             PICTURE 'button8.bmp' ;
-            TOOLTIP 'This is button 2';
-            ACTION MsgInfo('Click! 2');
+            TOOLTIP 'This is button 2' ;
+            ACTION MsgInfo('Click! 2') ;
 
          BUTTON Button_3b ;
             CAPTION 'Button 3' ;
             PICTURE 'button6.bmp' ;
-            TOOLTIP 'This is button 3';
-            ACTION MsgInfo('Click! 3');
+            TOOLTIP 'This is button 3' ;
+            ACTION MsgInfo('Click! 3') ;
             SEPARATOR
 
          BUTTON Button_1a ;
             CAPTION 'Undo' ;
             PICTURE 'button4.bmp' ;
-            TOOLTIP 'Undo button';
+            TOOLTIP 'Undo button' ;
             ACTION MsgInfo('Click! 4')
 
          BUTTON Button_2a ;
             CAPTION 'Save' ;
             PICTURE 'button5.bmp' ;
-            TOOLTIP 'Save button';
+            TOOLTIP 'Save button' ;
             ACTION MsgInfo('Click! 5')
 
          BUTTON Button_3a ;
             CAPTION 'Close' ;
             PICTURE 'button6.bmp' ;
-            TOOLTIP 'Close button';
+            TOOLTIP 'Close button' ;
             ACTION MsgInfo('Click! 6') ;
 
       END TOOLBAR
@@ -104,7 +104,7 @@ PROCEDURE Vert_CLick
 
             BUTTON Button_1c ;
                CAPTION 'Check 1' ;
-               TOOLTIP 'This is button Check 1';
+               TOOLTIP 'This is button Check 1' ;
                PICTURE 'button4.bmp' ;
                ACTION _dummy() ;
                CHECK GROUP
@@ -112,14 +112,14 @@ PROCEDURE Vert_CLick
             BUTTON Button_2c ;
                CAPTION 'Check 2' ;
                PICTURE 'button5.bmp' ;
-               TOOLTIP 'This is button Check 2';
-               ACTION _dummy();
+               TOOLTIP 'This is button Check 2' ;
+               ACTION _dummy() ;
                CHECK GROUP
 
             BUTTON Button_3c ;
                CAPTION 'Check 3' ;
                PICTURE 'button6.bmp' ;
-               TOOLTIP 'This is button Check 3';
+               TOOLTIP 'This is button Check 3' ;
                ACTION _dummy() ;
                CHECK GROUP
 

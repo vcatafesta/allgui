@@ -35,7 +35,7 @@ PROCEDURE Main()
       END MENU
 
       @ 10,10 COMBOBOX Combo_1 ;
-         ITEMS aWords;
+         ITEMS aWords ;
          VALUE 1
 
       @ 40,10 TEXTBOX Text_1 VALUE If( IsVistaOrLater(), '', 'tw' ) ;

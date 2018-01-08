@@ -48,7 +48,7 @@ FUNCTION Main()
 
       @ 250,10 BUTTON Button_1 ;
          CAPTION 'Process' ;
-         ACTION ToArray(oTree1);
+         ACTION ToArray(oTree1) ;
          WIDTH 140
 
       ON KEY ESCAPE OF Form_1 ACTION Form_1.Release()

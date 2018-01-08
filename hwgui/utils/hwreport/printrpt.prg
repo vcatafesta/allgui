@@ -44,7 +44,7 @@ FUNCTION PrintRpt
    FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_TEXT
          oFont := aPaintRep[FORM_ITEMS,i,ITEM_FONT]
-         aPaintRep[FORM_ITEMS,i,ITEM_STATE] := HFont():Add( oFont:name,;
+         aPaintRep[FORM_ITEMS,i,ITEM_STATE] := HFont():Add( oFont:name, ;
             oFont:width,Round(oFont:height*fontKoef,0),oFont:weight, ;
             oFont:charset,oFont:italic )
       ENDIF

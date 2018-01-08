@@ -28,7 +28,7 @@ FUNCTION Main
          WIDTH 500 HEIGHT 380 ;
          MINWIDTH 500 MINHEIGHT 380 ;
          TITLE "Browse: new record's default values" ;
-         MAIN;
+         MAIN ;
          ON INIT OpenTables( oBrowse ) ;
          ON RELEASE CleanUp()
 

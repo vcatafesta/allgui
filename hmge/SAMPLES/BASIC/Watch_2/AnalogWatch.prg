@@ -95,10 +95,10 @@ PROCEDURE drawtime(lInit)
    drawline( "Form_1", (a/2), (a/2), (a/2+x0), (a/2+y0) )
 
    // minutes
-   x0 := INT( (rr-30) * SIN(;
+   x0 := INT( (rr-30) * SIN( ;
       ( (VAL(SUBSTR(TIME(), 7, 2))/60) + (VAL(SUBSTR(TIME(), 4,2)) -15) ) * step_fi) )
 
-   y0 := INT( (rr-30) * COS(;
+   y0 := INT( (rr-30) * COS( ;
       ( (VAL(SUBSTR(TIME(), 7, 2))/60) + (VAL(SUBSTR(TIME(), 4,2)) -15) ) * step_fi) )
 
    drawline( "Form_1", (a/2), (a/2), (a/2+x0), (a/2+y0), , 3 )
@@ -107,9 +107,9 @@ PROCEDURE drawtime(lInit)
 
    step_fi := PI() / 360
 
-   x1 := INT( (rr-60) * SIN(;
+   x1 := INT( (rr-60) * SIN( ;
       ( VAL(SUBSTR(TIME(), 4, 2)) + ((VAL(SUBSTR(TIME(), 1, 2))-3)*60) ) * step_fi) )
-   y1 := INT( (rr-60) * COS(;
+   y1 := INT( (rr-60) * COS( ;
       ( VAL(SUBSTR(TIME(), 4, 2)) + ((VAL(SUBSTR(TIME(), 1, 2))-3)*60) ) * step_fi) )
 
    drawline( "Form_1", (a/2), (a/2), (a/2+x1), (a/2+y1), , 3 )

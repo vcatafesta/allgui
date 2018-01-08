@@ -245,8 +245,8 @@ PROCEDURE Imprimir()
 
    DO REPORT                        ;
       TITLE 'Contactos'                  ;
-      HEADERS  {'','','','',''} , {'Apellido','Nombres','Calle','Numero','Tipo'};
-      FIELDS   {'Contactos->Apellido','Contactos->Nombres','Contactos->Calle','Contactos->Numero','Tipos->Desc'};
+      HEADERS  {'','','','',''} , {'Apellido','Nombres','Calle','Numero','Tipo'} ;
+      FIELDS   {'Contactos->Apellido','Contactos->Nombres','Contactos->Calle','Contactos->Numero','Tipos->Desc'} ;
       WIDTHS   {10,15,20,7,15}                   ;
       TOTALS   {.F.,.F.,.F.,.F.,.F.}               ;
       WORKAREA Contactos                  ;

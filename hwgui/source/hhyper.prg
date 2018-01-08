@@ -255,7 +255,7 @@ METHOD GoToLinkUrl( csLink ) CLASS HStaticLink
 
    LOCAL hInstance := hwg_Shellexecute( csLink, "open", NIL, NIL, 2 )
 
-   //hwg_Shellexecute(NULL              , _T("open")                             , csLink.operator LPCTSTR(), NULL                                 , NULL                                   , 2);
+   //hwg_Shellexecute(NULL              , _T("open")                             , csLink.operator LPCTSTR(), NULL                                 , NULL                                   , 2) ;
 
    IF hInstance < 33
 

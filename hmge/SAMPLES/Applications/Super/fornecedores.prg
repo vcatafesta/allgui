@@ -16,14 +16,14 @@ FUNCTION fornecedores()
    ordsetfocus('nome')
    fornecedores->(dbgotop())
 
-   DEFINE WINDOW form_fornecedores;
-         at 000,000;
-         WIDTH 800;
-         HEIGHT 605;
-         TITLE 'Fornecedores';
-         ICON path_imagens+'icone.ico';
-         modal;
-         nosize;
+   DEFINE WINDOW form_fornecedores ;
+         at 000,000 ;
+         WIDTH 800 ;
+         HEIGHT 605 ;
+         TITLE 'Fornecedores' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
+         nosize ;
          ON INIT pesquisar()
 
       * botões (toolbar)
@@ -132,7 +132,7 @@ FUNCTION fornecedores()
 
       DEFINE SPLITBOX
          DEFINE GRID grid_fornecedores
-            parent form_fornecedores
+            PARENT form_fornecedores
             COL 000
             ROW 105
             WIDTH 795
@@ -149,7 +149,7 @@ FUNCTION fornecedores()
       END SPLITBOX
 
       DEFINE LABEL rodape_001
-         parent form_fornecedores
+         PARENT form_fornecedores
          COL 005
          ROW 545
          VALUE 'Digite sua pesquisa'
@@ -160,19 +160,19 @@ FUNCTION fornecedores()
          FONTCOLOR _cinza_001
          TRANSPARENT .T.
       END LABEL
-      @ 540,160 textbox tbox_pesquisa;
-         of form_fornecedores;
-         HEIGHT 027;
-         WIDTH 300;
-         VALUE '';
-         MAXLENGTH 040;
-         FONT 'verdana' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase;
+      @ 540,160 textbox tbox_pesquisa ;
+         of form_fornecedores ;
+         HEIGHT 027 ;
+         WIDTH 300 ;
+         VALUE '' ;
+         MAXLENGTH 040 ;
+         FONT 'verdana' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         uppercase ;
          ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
-         parent form_fornecedores
+         PARENT form_fornecedores
          COL form_fornecedores.width - 270
          ROW 545
          VALUE 'DUPLO CLIQUE : Alterar informação'
@@ -245,239 +245,239 @@ STATIC FUNCTION dados(parametro)
       ENDIF
    ENDIF
 
-   DEFINE WINDOW form_dados;
-         at 000,000;
-         WIDTH 585;
-         HEIGHT 360;
-         TITLE (titulo);
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_dados ;
+         at 000,000 ;
+         WIDTH 585 ;
+         HEIGHT 360 ;
+         TITLE (titulo) ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       * entrada de dados
-      @ 010,005 label lbl_001;
-         of form_dados;
-         VALUE 'Nome';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 010,005 label lbl_001 ;
+         of form_dados ;
+         VALUE 'Nome' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,005 textbox tbox_001;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_nome;
-         MAXLENGTH 040;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 010,325 label lbl_002;
-         of form_dados;
-         VALUE 'Telefone fixo';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,005 textbox tbox_001 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_nome ;
+         MAXLENGTH 040 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 010,325 label lbl_002 ;
+         of form_dados ;
+         VALUE 'Telefone fixo' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,325 textbox tbox_002;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_fixo;
-         MAXLENGTH 010;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 010,455 label lbl_003;
-         of form_dados;
-         VALUE 'Telefone celular';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,325 textbox tbox_002 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_fixo ;
+         MAXLENGTH 010 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 010,455 label lbl_003 ;
+         of form_dados ;
+         VALUE 'Telefone celular' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 030,455 textbox tbox_003;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 120;
-         VALUE x_celular;
-         MAXLENGTH 010;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 060,005 label lbl_004;
-         of form_dados;
-         VALUE 'Endereço';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 030,455 textbox tbox_003 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 120 ;
+         VALUE x_celular ;
+         MAXLENGTH 010 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 060,005 label lbl_004 ;
+         of form_dados ;
+         VALUE 'Endereço' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,005 textbox tbox_004;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 310;
-         VALUE x_endereco;
-         MAXLENGTH 040;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 060,325 label lbl_005;
-         of form_dados;
-         VALUE 'Número';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 080,005 textbox tbox_004 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 310 ;
+         VALUE x_endereco ;
+         MAXLENGTH 040 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 060,325 label lbl_005 ;
+         of form_dados ;
+         VALUE 'Número' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,325 textbox tbox_005;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_numero;
-         MAXLENGTH 006;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 060,395 label lbl_006;
-         of form_dados;
-         VALUE 'Complemento';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 080,325 textbox tbox_005 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_numero ;
+         MAXLENGTH 006 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 060,395 label lbl_006 ;
+         of form_dados ;
+         VALUE 'Complemento' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 080,395 textbox tbox_006;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 180;
-         VALUE x_complem;
-         MAXLENGTH 020;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 110,005 label lbl_007;
-         of form_dados;
-         VALUE 'Bairro';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 080,395 textbox tbox_006 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 180 ;
+         VALUE x_complem ;
+         MAXLENGTH 020 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 110,005 label lbl_007 ;
+         of form_dados ;
+         VALUE 'Bairro' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,005 textbox tbox_007;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 180;
-         VALUE x_bairro;
-         MAXLENGTH 020;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 110,195 label lbl_008;
-         of form_dados;
-         VALUE 'Cidade';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 130,005 textbox tbox_007 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 180 ;
+         VALUE x_bairro ;
+         MAXLENGTH 020 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 110,195 label lbl_008 ;
+         of form_dados ;
+         VALUE 'Cidade' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,195 textbox tbox_008;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 180;
-         VALUE x_cidade;
-         MAXLENGTH 020;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 110,385 label lbl_009;
-         of form_dados;
-         VALUE 'UF';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 130,195 textbox tbox_008 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 180 ;
+         VALUE x_cidade ;
+         MAXLENGTH 020 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 110,385 label lbl_009 ;
+         of form_dados ;
+         VALUE 'UF' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,385 textbox tbox_009;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 040;
-         VALUE x_uf;
-         MAXLENGTH 002;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 110,435 label lbl_010;
-         of form_dados;
-         VALUE 'CEP';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 130,385 textbox tbox_009 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 040 ;
+         VALUE x_uf ;
+         MAXLENGTH 002 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 110,435 label lbl_010 ;
+         of form_dados ;
+         VALUE 'CEP' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 130,435 textbox tbox_010;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 080;
-         VALUE x_cep;
-         MAXLENGTH 008;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         uppercase
-      @ 160,005 label lbl_011;
-         of form_dados;
-         VALUE 'e-mail';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 130,435 textbox tbox_010 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 080 ;
+         VALUE x_cep ;
+         MAXLENGTH 008 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         UPPERCASE
+      @ 160,005 label lbl_011 ;
+         of form_dados ;
+         VALUE 'e-mail' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 180,005 textbox tbox_011;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 450;
-         VALUE x_email;
-         MAXLENGTH 050;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
+      @ 180,005 textbox tbox_011 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 450 ;
+         VALUE x_email ;
+         MAXLENGTH 050 ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
          lowercase
-      @ 210,005 label lbl_012;
-         of form_dados;
-         VALUE 'Grupo';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _preto_001;
+      @ 210,005 label lbl_012 ;
+         of form_dados ;
+         VALUE 'Grupo' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _preto_001 ;
          TRANSPARENT
-      @ 230,005 textbox tbox_012;
-         of form_dados;
-         HEIGHT 027;
-         WIDTH 060;
-         VALUE x_grupo;
-         FONT 'tahoma' size 010;
-         BACKCOLOR _fundo_get;
-         FONTCOLOR _letra_get_1;
-         numeric;
+      @ 230,005 textbox tbox_012 ;
+         of form_dados ;
+         HEIGHT 027 ;
+         WIDTH 060 ;
+         VALUE x_grupo ;
+         FONT 'tahoma' size 010 ;
+         BACKCOLOR _fundo_get ;
+         FONTCOLOR _letra_get_1 ;
+         numeric ;
          ON ENTER procura_grupo_fornecedores('form_dados','tbox_012')
-      @ 230,075 label lbl_nome_grupo_fornecedores;
-         of form_dados;
-         VALUE '';
-         autosize;
-         FONT 'tahoma' size 010;
-         bold;
-         FONTCOLOR _azul_001;
+      @ 230,075 label lbl_nome_grupo_fornecedores ;
+         of form_dados ;
+         VALUE '' ;
+         autosize ;
+         FONT 'tahoma' size 010 ;
+         bold ;
+         FONTCOLOR _azul_001 ;
          TRANSPARENT
 
       * linha separadora
@@ -801,13 +801,13 @@ STATIC FUNCTION getcode_grupo_fornecedores(value)
    grupo_fornecedores->(ordsetfocus('nome'))
    grupo_fornecedores->(dbgotop())
 
-   DEFINE WINDOW form_pesquisa;
-         at 000,000;
-         WIDTH 490;
-         HEIGHT 500;
-         TITLE 'Pesquisa por nome';
-         ICON path_imagens+'icone.ico';
-         modal;
+   DEFINE WINDOW form_pesquisa ;
+         at 000,000 ;
+         WIDTH 490 ;
+         HEIGHT 500 ;
+         TITLE 'Pesquisa por nome' ;
+         ICON path_imagens+'icone.ico' ;
+         modal ;
          NOSIZE
 
       DEFINE LABEL label_pesquisa
@@ -827,7 +827,7 @@ STATIC FUNCTION getcode_grupo_fornecedores(value)
          WIDTH 400
          MAXLENGTH 040
          ONCHANGE find_grupo_fornecedores()
-         uppercase .T.
+         UPPERCASE .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa

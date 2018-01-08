@@ -9,39 +9,39 @@ MEMV nPasdRecs
 
 PROC T_ListRecs()                             // Table List Records
 
-   LOCA aExpress  := {},;
-      cExpress  := '',;
-      lIncRecN  := .F.,;
-      lIncDelM  := .F.,;
+   LOCA aExpress  := {}, ;
+      cExpress  := '', ;
+      lIncRecN  := .F., ;
+      lIncDelM  := .F., ;
       lHeading  := .F.,;  // SET( "HEADING" ) ???
-      aFldNums  := {},;
+      aFldNums  := {}, ;
       nCurResN  := RECN()
 
-   LOCA aColumns  := {},;
-      nColumnNo :=  0,;
-      c1ColExpr := '',;
-      c1ColValT := '',;
-      x1ColValu := '',;
-      n1CFldNum :=  0,;
-      n1CFldLen :=  0,;
-      n1CFldDec :=  0,;
-      b1CWritBl := { || NIL },;
-      cLstStrng := '',;
-      nRecNoLen := MAX( LEN( LTRIM( STR( LASTREC() ) ) ), 4 ),;
-      cHeadLine := '',;
+   LOCA aColumns  := {}, ;
+      nColumnNo :=  0, ;
+      c1ColExpr := '', ;
+      c1ColValT := '', ;
+      x1ColValu := '', ;
+      n1CFldNum :=  0, ;
+      n1CFldLen :=  0, ;
+      n1CFldDec :=  0, ;
+      b1CWritBl := { || NIL }, ;
+      cLstStrng := '', ;
+      nRecNoLen := MAX( LEN( LTRIM( STR( LASTREC() ) ) ), 4 ), ;
+      cHeadLine := '', ;
       x1CValue
 
-   LOCA cCPTitle  := "List records of " + ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ),;
-      aStruct   := DBSTRUCT(),;
+   LOCA cCPTitle  := "List records of " + ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ), ;
+      aStruct   := DBSTRUCT(), ;
       cExpLst   := ''
 
-   LOCA aComOpts  := {},;
-      aComPars  := {},;
-      aCondits  := {},;
-      aScopes   := {},;
+   LOCA aComOpts  := {}, ;
+      aComPars  := {}, ;
+      aCondits  := {}, ;
+      aScopes   := {}, ;
       aCondExps := {}
 
-   LOCA cContinue := '',;
+   LOCA cContinue := '', ;
       cApply    := '.T.'
 
    PRIV nPasdRecs :=  0
@@ -139,7 +139,7 @@ PROC T_ListRecs()                             // Table List Records
          ENDIF
 
          FOR nColumnNo := 1 TO LEN( aExpress )
-            aColumns[ nColumnNo, 3 ] := MAX( aColumns[ nColumnNo, 3 ],;
+            aColumns[ nColumnNo, 3 ] := MAX( aColumns[ nColumnNo, 3 ], ;
                LEN( aExpress[ nColumnNo ] ) )
             cHeadLine += PADC( aExpress[ nColumnNo ], aColumns[ nColumnNo, 3 ] ) + " "
          NEXT nColumnNo
@@ -209,34 +209,34 @@ PROC T_ListRecs()                             // Table List Records
    PROC T_DispEdit( ;                        // Table Display or Edit Record(s)
          nOperat )   // 1: Display, 2: Edit
 
-      LOCA lDispOnly := nOperat < 2,;
+      LOCA lDispOnly := nOperat < 2, ;
          aOperates := { 'Display', 'Edit' }
 
-      LOCA cCPTitle  := aOperates[ nOperat ] + " records criterieas" ,;
-         cDETitle  := aOperates[ nOperat ] + " records of " + ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ),;
-         aStruct   := DBSTRUCT(),;
-         cFldLst   := '',;
-         aFldLst   := {},;
-         nFldNum   :=  0,;
-         nFInd     :=  0,;
-         cForClaus := '',;
+      LOCA cCPTitle  := aOperates[ nOperat ] + " records criterieas" , ;
+         cDETitle  := aOperates[ nOperat ] + " records of " + ExOFNFFP( aOpnDatas[ nCurDatNo, 3 ] ), ;
+         aStruct   := DBSTRUCT(), ;
+         cFldLst   := '', ;
+         aFldLst   := {}, ;
+         nFldNum   :=  0, ;
+         nFInd     :=  0, ;
+         cForClaus := '', ;
          nCurRec
 
-      LOCA aComPars  := {},;
+      LOCA aComPars  := {}, ;
          aComOpts  := {}
 
-      LOCA aLabels   := {},;
-         aDTypes   := {},;
-         aWidths   := {},;
-         aDecims   := {},;
-         aValues   := {},;
-         aROnlys   := {},;
-         aValids   := {},;
-         aButtons  := {},;
-         aCdBloks  := {},;
-         aRDBloks  := {},;
-         aWDBloks  := {},;
-         cExpLst   := '',;
+      LOCA aLabels   := {}, ;
+         aDTypes   := {}, ;
+         aWidths   := {}, ;
+         aDecims   := {}, ;
+         aValues   := {}, ;
+         aROnlys   := {}, ;
+         aValids   := {}, ;
+         aButtons  := {}, ;
+         aCdBloks  := {}, ;
+         aRDBloks  := {}, ;
+         aWDBloks  := {}, ;
+         cExpLst   := '', ;
          cBlock, bBlock
 
       AEVAL( DBSTRUCT(), { | a1, i1 | cExpLst += a1[ 1 ] + IF( i1 < FCOUNT(), "; ", '') } )
@@ -275,8 +275,8 @@ PROC T_ListRecs()                             // Table List Records
                AADD( aDecims, aStruct[ nFldNum, 4 ] )         // Field Decimal
                AADD( aROnlys, lDispOnly )                     // Is this Data readonly ?
 
-               cBlock  := '{||' + IF( lDispOnly, 'AnyToStr(', '')   +;
-                  'FIELDGET(' + NTrim( nFldNum ) +;
+               cBlock  := '{||' + IF( lDispOnly, 'AnyToStr(', '')   + ;
+                  'FIELDGET(' + NTrim( nFldNum ) + ;
                   IF( lDispOnly, ')','') + ')}'
                bBlock  := &cBlock
                AADD( aRDBloks, bBlock )
@@ -289,20 +289,20 @@ PROC T_ListRecs()                             // Table List Records
 
             NEXT nFInd
             /*
-            aButtons := { { 20, "GO_TOP",  "Go to first record",,,    { 108, 1, 6, 107 }    },;
-            { 20, "GO_PREV", "Go to previous record",,, { 108, 3, 6, 107 }    },;
-            { 20, "GO_NEXT", "Go to next record",,,     { 108, 2, 5, 6, 107 } },;
-            { 20, "GO_BOTT", "Go to last record",,,     { 108, 4, 6, 107 }    },;
+            aButtons := { { 20, "GO_TOP",  "Go to first record",,,    { 108, 1, 6, 107 }    }, ;
+            { 20, "GO_PREV", "Go to previous record",,, { 108, 3, 6, 107 }    }, ;
+            { 20, "GO_NEXT", "Go to next record",,,     { 108, 2, 5, 6, 107 } }, ;
+            { 20, "GO_BOTT", "Go to last record",,,     { 108, 4, 6, 107 }    }, ;
             { 20, "EXIT",    "Exit",,,,                              .T. }    }
             */
-            aButtons := { { , " « ", "Go to first record",,,    { 108, 1, 6, 107 }    },;
-               { , " < ", "Go to previous record",,, { 108, 3, 6, 107 }    },;
-               { , " > ", "Go to next record",,,     { 108, 2, 5, 6, 107 } },;
-               { , " » ", "Go to last record",,,     { 108, 4, 6, 107 }    },;
+            aButtons := { { , " « ", "Go to first record",,,    { 108, 1, 6, 107 }    }, ;
+               { , " < ", "Go to previous record",,, { 108, 3, 6, 107 }    }, ;
+               { , " > ", "Go to next record",,,     { 108, 2, 5, 6, 107 } }, ;
+               { , " » ", "Go to last record",,,     { 108, 4, 6, 107 }    }, ;
                { , " x ", "Exit",,,,                              .T. }    }
 
             IF lDispOnly
-               AEVAL( aButtons, { | a1, i1 | IF( i1 < LEN( aButtons ),;
+               AEVAL( aButtons, { | a1, i1 | IF( i1 < LEN( aButtons ), ;
                   ( ADEL( a1[6], 1 ), ASIZE( a1[6], LEN( a1[6] ) - 1) ), ) } )
             ENDIF lDispOnly
 
@@ -357,25 +357,25 @@ PROC T_ListRecs()                             // Table List Records
       PROC T_Arithm( ;                          // Table arithmetics
             nAriType ) // 1: Sum, 2: Average, 3: Count
 
-         LOCA aComPars  := {},;
-            cCbFTitl  := '',;
-            aComOpts  := {},;
-            cExpLst   := '',;
-            nCurRec   := RECN(),;
-            aCondits  := {},;
-            aScopes   := {},;
-            aCondExps := {},;
-            cContinue := '',;
-            cApply    := '',;
-            nFInd     :=  0,;
-            c1FldNam  := '',;
-            n1FldNum  := 0,;
-            aStruct   := DBSTRUCT(),;
-            aFldsSum  := {},;
-            aSums     := {},;
-            cResult   := '',;
-            nCount    :=  0,;
-            lContinue := .T.,;
+         LOCA aComPars  := {}, ;
+            cCbFTitl  := '', ;
+            aComOpts  := {}, ;
+            cExpLst   := '', ;
+            nCurRec   := RECN(), ;
+            aCondits  := {}, ;
+            aScopes   := {}, ;
+            aCondExps := {}, ;
+            cContinue := '', ;
+            cApply    := '', ;
+            nFInd     :=  0, ;
+            c1FldNam  := '', ;
+            n1FldNum  := 0, ;
+            aStruct   := DBSTRUCT(), ;
+            aFldsSum  := {}, ;
+            aSums     := {}, ;
+            cResult   := '', ;
+            nCount    :=  0, ;
+            lContinue := .T., ;
             cFldList, aFldList
 
          PRIV nPasdRecs :=  0
@@ -469,22 +469,22 @@ PROC T_ListRecs()                             // Table List Records
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          PROC DispAriths( ;                        // Display arithmetic ( sum, average, count (?) ) results
-               nAriType,;
-               aFldNums,;
+               nAriType, ;
+               aFldNums, ;
                aResults )
 
-            LOCA aDisplay := {},;
-               cTitle   := IF( nAriType < 2, "SUM","Average" ) + " results ",;
-               nFInd    := 0,;
-               nFldNum  := 0,;
-               cFldNam  := 0,;
-               nFldLen  := 0,;
-               nFldDec  := 0,;
-               nMaxLen  := 0,;
-               nMaxDec  := 0,;
-               nFrmHig  := LEN( aFldNums ) * 20 + 40,;
-               nFrmLen  := 0,;
-               cNumPict     ,;
+            LOCA aDisplay := {}, ;
+               cTitle   := IF( nAriType < 2, "SUM","Average" ) + " results ", ;
+               nFInd    := 0, ;
+               nFldNum  := 0, ;
+               cFldNam  := 0, ;
+               nFldLen  := 0, ;
+               nFldDec  := 0, ;
+               nMaxLen  := 0, ;
+               nMaxDec  := 0, ;
+               nFrmHig  := LEN( aFldNums ) * 20 + 40, ;
+               nFrmLen  := 0, ;
+               cNumPict     , ;
                nRestLen
 
             FOR nFInd := 1 TO LEN( aFldNums )
@@ -505,8 +505,8 @@ PROC T_ListRecs()                             // Table List Records
 
             DEFINE WINDOW frmDispArt ;
                   AT     0,0 ;
-                  WIDTH  nFrmLen + 4;
-                  HEIGHT nFrmHig + 4;
+                  WIDTH  nFrmLen + 4 ;
+                  HEIGHT nFrmHig + 4 ;
                   TITLE  cTitle ; // VIRTUAL HEIGHT 800 ;
                   MODAL
 
@@ -524,7 +524,7 @@ PROC T_ListRecs()                             // Table List Records
                   FONTSIZE   10
                   ALLOWEDIT  .F.
 
-                  COLUMNCONTROLS { { 'TEXTBOX',  'CHARACTER' }  ,;
+                  COLUMNCONTROLS { { 'TEXTBOX',  'CHARACTER' }  , ;
                      { 'TEXTBOX',  'NUMERIC', cNumPict } }
                   NOLINES .T.
                END GRID // grdStruct

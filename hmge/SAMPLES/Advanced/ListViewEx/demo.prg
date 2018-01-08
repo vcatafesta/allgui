@@ -153,7 +153,7 @@ FUNCTION Main
 PROCEDURE OnChange()
 
    form_1.statusbar.item(1) := ;
-      'Selected: ' + iif( ValType( this.value ) == 'N', hb_ntos( this.value ), hb_ValToExp( this.value ) ) +'/'+;
+      'Selected: ' + iif( ValType( this.value ) == 'N', hb_ntos( this.value ), hb_ValToExp( this.value ) ) +'/'+ ;
       hb_ntos( form_1.grid_1.ItemCount )
 
    RETURN

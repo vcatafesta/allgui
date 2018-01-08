@@ -54,20 +54,20 @@ FUNCTION GeraCodigo( oArea , ordem , Tamanho )
    (oArea)->(DBGoBottom())
    cdg := StrZero( Val ( (oArea)->CODIGO ) + 1 , Tamanho )
    IF Val(cdg) == 0
-      MSGExclamation(PadC("ATENCAO",70)+QUEBRA+;
-         PadC("*** Erro ao Gerar Codigo em "+oArea+" ***",70)+QUEBRA+;
-         PadC("*** Codigo Gerado EM BRANCO ***",70)+QUEBRA+;
-         PadC("Provavelmente existem indices ou Base de Dado Corrompida!!",70)+QUEBRA+;
-         PadC("Efetue a Manutencao do Sistema Antes de qualquer outra Operacao!!",70)+QUEBRA+;
+      MSGExclamation(PadC("ATENCAO",70)+QUEBRA+ ;
+         PadC("*** Erro ao Gerar Codigo em "+oArea+" ***",70)+QUEBRA+ ;
+         PadC("*** Codigo Gerado EM BRANCO ***",70)+QUEBRA+ ;
+         PadC("Provavelmente existem indices ou Base de Dado Corrompida!!",70)+QUEBRA+ ;
+         PadC("Efetue a Manutencao do Sistema Antes de qualquer outra Operacao!!",70)+QUEBRA+ ;
          PadC("*** Sistema Sera Finalizado!! ***",70),SISTEMA)
       RELEASE WINDOW ALL
    ENDIF
    IF (oArea)->(LastRec()) > 1 .And. Val(cdg) == 1
-      MSGExclamation(PadC("ATENCAO",70)+QUEBRA+;
-         PadC("*** Erro Detectado ao Gravar em "+oArea+" ***",70)+QUEBRA+;
-         PadC("*** Codigo Gerado Invalido!! ***",70)+QUEBRA+;
-         PadC("Provavelmente existem indices ou Base de Dado Corrompida!!",70)+QUEBRA+;
-         PadC("Efetue a Manutencao do Sistema Antes de qualquer outra Operacao!!",70)+QUEBRA+;
+      MSGExclamation(PadC("ATENCAO",70)+QUEBRA+ ;
+         PadC("*** Erro Detectado ao Gravar em "+oArea+" ***",70)+QUEBRA+ ;
+         PadC("*** Codigo Gerado Invalido!! ***",70)+QUEBRA+ ;
+         PadC("Provavelmente existem indices ou Base de Dado Corrompida!!",70)+QUEBRA+ ;
+         PadC("Efetue a Manutencao do Sistema Antes de qualquer outra Operacao!!",70)+QUEBRA+ ;
          PadC("*** Sistema Sera Finalizado!! ***",70),SISTEMA)
       RELEASE WINDOW ALL
    ENDIF
@@ -84,10 +84,10 @@ FUNCTION GravouCodigoCorretamente( cArea , mCODIGO , nIndex )
 
    (cArea)->(DBSetOrder(nIndex))
    IF ! (cArea)->(DBSeek(mCODIGO))
-      MSGExclamation(PadC("ATENCAO",70)+QUEBRA+;
-         PadC("*** Registro n∆o incluido em "+cArea+" ***",70)+QUEBRA+;
-         PadC("Provavelmente existem indices ou Base de Dado Corrompida!!",70)+QUEBRA+;
-         PadC("Efetue a Manutencao do Sistema Antes de qualquer outra Operacao!!",70)+QUEBRA+;
+      MSGExclamation(PadC("ATENCAO",70)+QUEBRA+ ;
+         PadC("*** Registro n∆o incluido em "+cArea+" ***",70)+QUEBRA+ ;
+         PadC("Provavelmente existem indices ou Base de Dado Corrompida!!",70)+QUEBRA+ ;
+         PadC("Efetue a Manutencao do Sistema Antes de qualquer outra Operacao!!",70)+QUEBRA+ ;
          PadC("*** Sistema Sera Finalizado!! ***",70),SISTEMA)
       RELEASE WINDO ALL
    ENDIF
@@ -133,7 +133,7 @@ FUNCTION GetIni( cSecao, cVariavel, cDefault, cArquivo )
    ENDIF
 
    IF FError() != 0
-      Alert( "Erro na leitura de arquivo INI. DOS ERRO: " +;
+      Alert( "Erro na leitura de arquivo INI. DOS ERRO: " + ;
          Str( FError(), 2, 0 ) )
       RETURN ""
    ENDIF
@@ -156,7 +156,7 @@ FUNCTION GetIni( cSecao, cVariavel, cDefault, cArquivo )
       IF linha == procura .AND. ! achousecao
          procura := Upper( AllTrim( cVariavel ) )
          achousecao := .T.
-      ELSEIF   ( procura + "=" ) == SubStr( linha, 1, Len( procura ) + 1 );
+      ELSEIF   ( procura + "=" ) == SubStr( linha, 1, Len( procura ) + 1 ) ;
             .AND. achousecao .AND. ! achouvar
          achouvar   := .T.
          EXIT
@@ -181,7 +181,7 @@ FUNCTION WriteIni( cSecao, cVariavel, cValor, cArquivo )
    LOCAL cArq
    LOCAL nLinhas
    LOCAL nContador  := 0
-   LOCAL vargrav     :=  Lower( AllTrim( cVariavel ) ) + "=" +;
+   LOCAL vargrav     :=  Lower( AllTrim( cVariavel ) ) + "=" + ;
       AllTrim( cValor ) + Chr( 13 ) + Chr( 10 )
    LOCAL ponteiro
    LOCAL pontvar
@@ -199,7 +199,7 @@ FUNCTION WriteIni( cSecao, cVariavel, cValor, cArquivo )
    ENDIF
 
    IF FError() # 0
-      Alert( "Erro na leitura de arquivo INI. DOS ERRO: " +;
+      Alert( "Erro na leitura de arquivo INI. DOS ERRO: " + ;
          Str( FError(), 2, 0 ) )
       RETURN ""
    ENDIF
@@ -213,10 +213,10 @@ FUNCTION WriteIni( cSecao, cVariavel, cValor, cArquivo )
    ponteiro := At( procura, Upper( conteudo ) )
 
    IF ponteiro == 0
-      conteudo := conteudo + Chr( 13 ) + Chr( 10 ) + procura + Chr( 13 ) +;
+      conteudo := conteudo + Chr( 13 ) + Chr( 10 ) + procura + Chr( 13 ) + ;
          Chr( 10 ) + vargrav
    ELSEIF ( pontvar := At(Upper(AllTrim(cVariavel)), Upper(conteudo)) ) == 0
-      conteudo := Left( conteudo, ponteiro + Len( lcSecao ) + 1 ) + vargrav +;
+      conteudo := Left( conteudo, ponteiro + Len( lcSecao ) + 1 ) + vargrav + ;
          Right( conteudo, Len(conteudo) - (1+ponteiro+Len(lcSecao)))
    ELSE
       FOR i := pontvar To Len( conteudo )
@@ -232,7 +232,7 @@ FUNCTION WriteIni( cSecao, cVariavel, cValor, cArquivo )
          ENDIF
       NEXT
       pontfim  := Iif( ! disparou, Len( conteudo ), pontfim )
-      letra    := SubStr( conteudo, pontvar,;
+      letra    := SubStr( conteudo, pontvar, ;
          ( pontfim - pontvar ) + 1 )
       conteudo := SubStr( conteudo, 1, pontvar - 1 ) + ;
          vargrav + SubStr( conteudo, pontfim + 1, Len( conteudo ) )

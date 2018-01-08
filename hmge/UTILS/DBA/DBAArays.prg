@@ -26,15 +26,15 @@ Revision : 23:360  28/07/1998
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 PROC MakSHArr(aShAr,;               // Make an arry for display
-      aArry,;
-      nLvl,;
-      lNumbered,;
+      aArry, ;
+      nLvl, ;
+      lNumbered, ;
       lRForm )
 
-   LOCA nInds := 0,;
+   LOCA nInds := 0, ;
       xElem := ''
 
-   DEFAULT lNumbered TO .T. ,;
+   DEFAULT lNumbered TO .T. , ;
       lRForm    TO .F.
 
    FOR  nInds := 1 TO LEN(aArry)
@@ -68,8 +68,8 @@ PROC MakSHArr(aShAr,;               // Make an arry for display
    FUNC Strg2Any( ;                          // String To Any Type
          cStrg )
 
-      LOCA xRVal := cStrg,;
-         cStr2 := '',;
+      LOCA xRVal := cStrg, ;
+         cStr2 := '', ;
          xAraV := ''      // Ara Value
 
       IF cStrg # NIL
@@ -103,7 +103,7 @@ PROC MakSHArr(aShAr,;               // Make an arry for display
 
       */
       FUNC ArMaxLen(;                             // Len of largest string in an array
-            aArry ,;
+            aArry , ;
             nIndc )
 
          LOCA nRVal := 0
@@ -112,7 +112,7 @@ PROC MakSHArr(aShAr,;               // Make an arry for display
             AEVAL( aArry, { | x1 | nRVal := MAX( LEN( AnyToStr( x1 ) ), nRVal ) } )
          ELSE
             AEVAL( aArry, { | x1 | nRVal := MAX( ;
-               IF( ISARRY( x1 ), LEN( AnyToStr( x1[ nIndc ] ) ),;
+               IF( ISARRY( x1 ), LEN( AnyToStr( x1[ nIndc ] ) ), ;
                LEN( AnyToStr( x1 ) ) ), nRVal ) } )
          ENDIF
 

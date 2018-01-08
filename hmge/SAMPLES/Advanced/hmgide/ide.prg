@@ -574,7 +574,7 @@ FUNCTION Main
          WIDTH   278
          ITEMS   {'Form'}
          VALUE   1
-         ONCHANGE iif( Inspector.ObjectList.value > 1,;
+         ONCHANGE iif( Inspector.ObjectList.value > 1, ;
             ( cControl := Inspector.ObjectList.Item( Inspector.ObjectList.value ), ;
             DrawFocusRect( cControl ), ;
             UpdateProperties( cControl, GetControlType( cControl, 'oEdit' ) ) ), ;
@@ -762,7 +762,7 @@ PROCEDURE AddControl( cType )
       cVar := 'Button_' + alltrim(str(nButtonCounter))
 
       DEFINE BUTTON &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          CAPTION      cVar
@@ -775,7 +775,7 @@ PROCEDURE AddControl( cType )
       cVar := 'CheckBox_' + alltrim(str(nCheckBoxCounter))
 
       DEFINE CHECKBOX &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          CAPTION      cVar
@@ -790,7 +790,7 @@ PROCEDURE AddControl( cType )
       cVar := 'ListBox_' + alltrim(str(nListBoxCounter))
 
       DEFINE LISTBOX &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          WIDTH      100
@@ -804,7 +804,7 @@ PROCEDURE AddControl( cType )
       cVar := 'ComboBox_' + alltrim(str(nComboBoxCounter))
 
       DEFINE COMBOBOX &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          WIDTH      100
@@ -819,7 +819,7 @@ PROCEDURE AddControl( cType )
       cVar := 'CheckButton_' + alltrim(str(nCheckButtonCounter))
 
       DEFINE CHECKBUTTON &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          CAPTION      cVar
@@ -834,7 +834,7 @@ PROCEDURE AddControl( cType )
       cVar := 'Grid_' + alltrim(str(nGridCounter))
 
       DEFINE GRID &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          HEADERS      { '', '' }
@@ -847,7 +847,7 @@ PROCEDURE AddControl( cType )
       cVar := 'Slider_' + alltrim(str(nSliderCounter))
 
       DEFINE SLIDER &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          RANGEMIN   1
@@ -868,7 +868,7 @@ PROCEDURE AddControl( cType )
       cVar := 'Spinner_' + alltrim(str(nSpinnerCounter))
 
       DEFINE SPINNER &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          RANGEMIN   1
@@ -882,7 +882,7 @@ PROCEDURE AddControl( cType )
       cVar := 'Image_' + alltrim(str(nImageCounter))
 
       DEFINE BUTTON &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          WIDTH      30
@@ -914,7 +914,7 @@ PROCEDURE AddControl( cType )
       cVar := 'DatePicker_' + alltrim(str(nDatePickerCounter))
 
       DEFINE DATEPICKER &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          VALUE      date()
@@ -926,7 +926,7 @@ PROCEDURE AddControl( cType )
       cVar := 'TextBox_' + alltrim(str(nTextBoxCounter))
 
       DEFINE TEXTBOX &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          VALUE      cVar
@@ -940,7 +940,7 @@ PROCEDURE AddControl( cType )
       cVar := 'EditBox_' + alltrim(str(nEditBoxCounter))
 
       DEFINE EDITBOX &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          WIDTH      120
@@ -954,7 +954,7 @@ PROCEDURE AddControl( cType )
       cVar := 'Label_' + alltrim(str(nLabelCounter))
 
       DEFINE LABEL &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          VALUE      cVar
@@ -966,7 +966,7 @@ PROCEDURE AddControl( cType )
       cVar := 'Timer_' + alltrim(str(nTimerCounter))
 
       DEFINE BUTTON &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          WIDTH      30
@@ -980,7 +980,7 @@ PROCEDURE AddControl( cType )
       cVar := 'RadioGroup_' + alltrim(str(nRadioGroupCounter))
 
       DEFINE RADIOGROUP &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          WIDTH      100
@@ -998,7 +998,7 @@ PROCEDURE AddControl( cType )
       cVar := 'Frame_' + alltrim(str(nFrameCounter))
 
       DEFINE FRAME &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          WIDTH      200
@@ -1031,7 +1031,7 @@ PROCEDURE AddControl( cType )
       cVar := 'AnimateBox_' + alltrim(str(nAnimateBoxCounter))
 
       DEFINE BUTTON &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          WIDTH      30
@@ -1045,7 +1045,7 @@ PROCEDURE AddControl( cType )
       cVar := 'Hyperlink_' + alltrim(str(nHyperlinkCounter))
 
       DEFINE HYPERLINK &cVar
-         Parent      oEdit
+         PARENT      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
          VALUE      cVar
@@ -1060,7 +1060,7 @@ PROCEDURE AddControl( cType )
       cVar := 'MonthCalendar_' + alltrim(str(nMonthCalendarCounter))
 
       DEFINE MONTHCALENDAR &cVar
-      Parent      oEdit
+      PARENT      oEdit
       ROW      nCurrentRow
       COL      nCurrentCol
       WIDTH      227
@@ -1074,7 +1074,7 @@ ELSEIF cType == 'PROGRESSBAR'
    cVar := 'ProgressBar_' + alltrim(str(nProgressBarCounter))
 
    DEFINE PROGRESSBAR &cVar
-      Parent      oEdit
+      PARENT      oEdit
       ROW      nCurrentRow
       COL      nCurrentCol
       WIDTH      200
@@ -1090,7 +1090,7 @@ ELSEIF cType == 'IPADDRESS'
    cVar := 'IpAddress_' + alltrim(str(nIpAddressCounter))
 
    DEFINE IPADDRESS &cVar
-      Parent      oEdit
+      PARENT      oEdit
       ROW      nCurrentRow
       COL      nCurrentCol
       WIDTH      210
@@ -1105,7 +1105,7 @@ ELSEIF cType == 'BROWSE'
    cVar := 'Browse_' + alltrim(str(nBrowseCounter))
 
    DEFINE BROWSE &cVar
-      Parent      oEdit
+      PARENT      oEdit
       ROW      nCurrentRow
       COL      nCurrentCol
       WIDTH      200
@@ -2330,12 +2330,12 @@ FUNCTION PropertyInputBox ( cInputPrompt , cDialogCaption , cDefaultValue , nTyp
 
    DEFAULT cInputPrompt TO "", cDialogCaption TO "Property Edit", cDefaultValue TO ""
 
-   DEFINE WINDOW _PropertyInputBox;
-         AT 0,0;
-         WIDTH 310 + nBordW;
-         HEIGHT 115 + nTitleH;
-         TITLE cDialogCaption;
-         ICON "ZZZ_A_WINDOW";
+   DEFINE WINDOW _PropertyInputBox ;
+         AT 0,0 ;
+         WIDTH 310 + nBordW ;
+         HEIGHT 115 + nTitleH ;
+         TITLE cDialogCaption ;
+         ICON "ZZZ_A_WINDOW" ;
          MODAL NOSIZE
 
       ON KEY ESCAPE ACTION Eval( bCancel )
@@ -2358,14 +2358,14 @@ FUNCTION PropertyInputBox ( cInputPrompt , cDialogCaption , cDefaultValue , nTyp
             ON ENTER _PropertyInputBox._Ok.Action
       ENDIF
 
-      @ 67, 80 BUTTON _Ok;
-         CAPTION _HMG_MESSAGE [6];
-         ACTION ( _HMG_DialogCancelled := .F., RetVal := IIf( nType == 1,;
-         _PropertyInputBox._Input.Value, aArray[_PropertyInputBox._Input.Value] ),;
+      @ 67, 80 BUTTON _Ok ;
+         CAPTION _HMG_MESSAGE [6] ;
+         ACTION ( _HMG_DialogCancelled := .F., RetVal := IIf( nType == 1, ;
+         _PropertyInputBox._Input.Value, aArray[_PropertyInputBox._Input.Value] ), ;
          _PropertyInputBox.Release )
 
-      @ 67, 190 BUTTON _Cancel;
-         CAPTION _HMG_MESSAGE [7];
+      @ 67, 190 BUTTON _Cancel ;
+         CAPTION _HMG_MESSAGE [7] ;
          ACTION Eval( bCancel )
 
    END WINDOW

@@ -147,13 +147,13 @@ PROCEDURE Main( Silent, cLog, Compress)
    IF valtype(Silent) == "C" .and. !empty(Silent)
       silent := Lower(Silent)
       IF "?" $ silent
-         MsgInfo( [Syntax: ] + "Sendmail [Silent] [clear log] [Zipname] "+CRLF+CRLF+;
-            [ ] + "where Silent are Y [.T. or 1 or silent] or N [.F. or 0]" +CRLF+;
-            [ ] + "where clearlog are Y [.T. or 1 or clog] or N [.F. or 0] "+CRLF+;
-            [ ] + "Zipname no need name extension '.zip'"+CRLF+CRLF+;
-            "Ie: SendMail 0 .T. (or SendMail N 1)"+CRLF+;
-            " Will take action clear log and open main window."+CRLF+CRLF+;
-            "Ie: SendMail Y .T. (or SendMail clog silent)"+CRLF+;
+         MsgInfo( [Syntax: ] + "Sendmail [Silent] [clear log] [Zipname] "+CRLF+CRLF+ ;
+            [ ] + "where Silent are Y [.T. or 1 or silent] or N [.F. or 0]" +CRLF+ ;
+            [ ] + "where clearlog are Y [.T. or 1 or clog] or N [.F. or 0] "+CRLF+ ;
+            [ ] + "Zipname no need name extension '.zip'"+CRLF+CRLF+ ;
+            "Ie: SendMail 0 .T. (or SendMail N 1)"+CRLF+ ;
+            " Will take action clear log and open main window."+CRLF+CRLF+ ;
+            "Ie: SendMail Y .T. (or SendMail clog silent)"+CRLF+ ;
             " Will take action clear log and send mail without GUI.", "Syntax Help" )
 
          RETURN
@@ -242,7 +242,7 @@ PROCEDURE Main( Silent, cLog, Compress)
       @ 180,155 TEXTBOX Text_6 HEIGHT 22 WIDTH 480 ON CHANGE ( aget[6] := Form_1.Text_6.Value , ChangeInfo() )
       Form_1.Text_6.Value := aget[6]
 
-      @ 205,155 COMBOBOXEX Combo_7 ITEMS aget[7] HEIGHT 200 WIDTH 450 Tooltip "Attached File List";
+      @ 205,155 COMBOBOXEX Combo_7 ITEMS aget[7] HEIGHT 200 WIDTH 450 Tooltip "Attached File List" ;
          ON GOTFOCUS MCONTEXT() ON CHANGE SetFcompress()
 
       Form_1.Combo_7.Value := IF(Len(aget[7]) == 0, 0, 1)
@@ -351,7 +351,7 @@ FUNCTION Readlog( nogui )
    * Check if the desired log
    IF date() > artv[1,3]
       IF !nogui
-         msgstop("Report non ancora elaborato !";
+         msgstop("Report non ancora elaborato !" ;
             ,if (" PROPERLY "$ Form_1.Label_11.VALUE,"LOG FOLDER PATH NOT SET !!! ","Data esecuzione superiore a quella di log!" ) )
       ENDIF
       aget[ 8] := "Report non ancora elaborato !"+Hb_eol()+"Trovato il file: "+artv[1,1]

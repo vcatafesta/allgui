@@ -38,7 +38,7 @@ CLASS VAR winclass INIT "RichEdit20A"
    DATA bChange
 
    METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
-      oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip,;
+      oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, ;
       tcolor, bcolor, bOther, lAllowTabs, bChange, lnoBorder )
 
    METHOD Activate()

@@ -158,12 +158,12 @@ FUNCTION _DefineChkLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
 
          if ( hb_parl (12) )
          {
-         ExStyle = ExStyle | WS_EX_CLIENTEDGE;
+         ExStyle = ExStyle | WS_EX_CLIENTEDGE ;
          }
 
          if ( hb_parl (15) )
          {
-         ExStyle = ExStyle | WS_EX_TRANSPARENT;
+         ExStyle = ExStyle | WS_EX_TRANSPARENT ;
          }
          */
       ENDIF

@@ -24,8 +24,8 @@ FUNCTION Main
 
    PUBLIC cFileIni     := "RichEdit.ini"
 
-   PUBLIC aListFont := { 'Arial','Courier','Ms Sans Serif','Ms Serif',;
-      'Symbol','Times New Roman','WingDings','System',;
+   PUBLIC aListFont := { 'Arial','Courier','Ms Sans Serif','Ms Serif', ;
+      'Symbol','Times New Roman','WingDings','System', ;
       'Impact','Comic Sans MS','Verdana'}
 
    PUBLIC aSizeFont    := {'8','9','10','11','12','14','16','18','20','22','24','26','28','36','48','72'}
@@ -80,11 +80,11 @@ FUNCTION Main
    PUBLIC PosIns   := 5
    PUBLIC PosCaps  := 4
 
-   PUBLIC emumUndo :={'Action is unknown',;
-      'Typing operation',;
-      'Delete operation',;
-      'Drag and drop operation',;
-      'Cut operation',;
+   PUBLIC emumUndo :={'Action is unknown', ;
+      'Typing operation', ;
+      'Delete operation', ;
+      'Drag and drop operation', ;
+      'Cut operation', ;
       'Paste operation'}
 
    PUBLIC ActiveEdit  :='Edit_1'
@@ -215,7 +215,7 @@ FUNCTION Main
          BUTTON Btn_SaveAll ;
             TOOLTIP 'Save all Files' ;
             PICTURE 'SAVEALL' ;
-            ACTION Save_AllFile();
+            ACTION Save_AllFile() ;
             SEPARATOR
 
          BUTTON Btn_Print ;
@@ -230,13 +230,13 @@ FUNCTION Main
       END TOOLBAR
 
       COMBOBOX Combo_3 ;
-         ITEMS aRatioZoom;
+         ITEMS aRatioZoom ;
          VALUE 4 ;
-         HEIGHT 200;
+         HEIGHT 200 ;
          FONT 'Tahoma' SIZE 9 ;
-         WIDTH 80;
-         TOOLTIP 'Zoom Ratio';
-         ON CHANGE SetZoom_Click();
+         WIDTH 80 ;
+         TOOLTIP 'Zoom Ratio' ;
+         ON CHANGE SetZoom_Click() ;
 
       DEFINE TOOLBAREX ToolBar_2 BUTTONSIZE 23,23 FONT 'ARIAL' SIZE 8  FLAT //RIGHTTEXT MIXEDBUTTONS
 
@@ -253,18 +253,18 @@ FUNCTION Main
       BUTTON Btn_Cut ;
          TOOLTIP 'Cut' ;
          PICTURE 'cut' ;
-         ACTION Cut_Click();
+         ACTION Cut_Click() ;
 
       BUTTON Btn_Clear ;
          TOOLTIP 'Clear' ;
          PICTURE 'Clear' ;
-         ACTION Clear_Click();
+         ACTION Clear_Click() ;
          SEPARATOR
 
       BUTTON Btn_Undo ;
          TOOLTIP 'Undo' ;
          PICTURE 'undo' ;
-         ACTION Undo_Click();
+         ACTION Undo_Click() ;
          DROPDOWN
 
       DEFINE DROPDOWN MENU BUTTON Btn_Undo
@@ -276,7 +276,7 @@ FUNCTION Main
       BUTTON Btn_Redo ;
          TOOLTIP 'Redo' ;
          PICTURE 'redo' ;
-         ACTION Redo_Click();
+         ACTION Redo_Click() ;
          SEPARATOR
 
       BUTTON Btn_Find ;
@@ -292,20 +292,20 @@ FUNCTION Main
    END TOOLBAR
 
    COMBOBOX Combo_1 ;
-      ITEMS aListFont;
+      ITEMS aListFont ;
       VALUE 2 ;
-      WIDTH 170;
-      HEIGHT 200;
+      WIDTH 170 ;
+      HEIGHT 200 ;
       FONT 'Tahoma' SIZE 9 ;
-      TOOLTIP 'Font Name';
-      ON CHANGE SetName_Click();
-      SORT;
+      TOOLTIP 'Font Name' ;
+      ON CHANGE SetName_Click() ;
+      SORT ;
       BREAK
 
    COMBOBOX Combo_2 ;
       ITEMS aSizeFont ;
       VALUE 3 ;
-      WIDTH 40;
+      WIDTH 40 ;
       TOOLTIP 'Font Size' ;
       ON CHANGE SetSize_Click()
 
@@ -314,37 +314,37 @@ FUNCTION Main
    BUTTON Btn_Bold ;
       TOOLTIP 'Bold' ;
       PICTURE 'bold' ;
-      ACTION SetBold_click();
+      ACTION SetBold_click() ;
       CHECK
 
    BUTTON Btn_Italic ;
       TOOLTIP 'Italic' ;
       PICTURE 'Italic' ;
-      ACTION SetItalic_Click();
+      ACTION SetItalic_Click() ;
       CHECK
 
    BUTTON Btn_Under ;
       TOOLTIP 'Underline' ;
       PICTURE 'under' ;
-      ACTION SetUnderLine_Click();
+      ACTION SetUnderLine_Click() ;
       CHECK
 
    BUTTON Btn_Strike ;
       TOOLTIP 'StrikeOut' ;
       PICTURE 'strike' ;
-      ACTION SetStrikeOut_Click();
+      ACTION SetStrikeOut_Click() ;
       CHECK  SEPARATOR
 
    BUTTON Btn_Left ;
       TOOLTIP 'Left Tekst' ;
       PICTURE 'left' ;
-      ACTION  SetLeft_Click();
+      ACTION  SetLeft_Click() ;
       CHECK GROUP
 
    BUTTON Btn_Center ;
       TOOLTIP 'Center Tekst' ;
       PICTURE 'center' ;
-      ACTION  SetCenter_Click();
+      ACTION  SetCenter_Click() ;
       CHECK GROUP
 
    BUTTON Btn_Right ;
@@ -389,8 +389,8 @@ DEFINE TAB Tab_1 ;
       AT 35,0 ;
       WIDTH nWidth HEIGHT nHeight-40 ;
       VALUE 1 ;
-      TOOLTIP 'Tab Control';
-      HOTTRACK;
+      TOOLTIP 'Tab Control' ;
+      HOTTRACK ;
       ON CHANGE TabChange()
 
    PAGE '&No File'
@@ -599,35 +599,35 @@ FUNCTION  NewEdit(cFile,typ)
    GetCtrlSize()
 
    @ rEdit+rTab,3+wDev RICHEDITBOX &ActiveEdit ;
-      OF Form_1;
-      WIDTH wEdit;
+      OF Form_1 ;
+      WIDTH wEdit ;
       HEIGHT hEdit ;
       VALUE '' ;
-      MAXLENGTH 510000;
-      ON CHANGE UpdateText();
-      ON SELECT SelectText();
+      MAXLENGTH 510000 ;
+      ON CHANGE UpdateText() ;
+      ON SELECT SelectText() ;
       NOHSCROLL
 
    _AddTabControl ( 'Tab_1' , ActiveEdit , MainForm , ActivePage , 48 , 2+wDev )
 
    IF lLin
-      @ rTab+rEdit-hLin+2 ,0+wDev SLIDER &ActiveSlider;
-         OF Form_1;
-         RANGE 0 , (nEditWidth * nDevCaps -(lmPage+rmPage))/nRtfRatio;
-         VALUE 1;
+      @ rTab+rEdit-hLin+2 ,0+wDev SLIDER &ActiveSlider ;
+         OF Form_1 ;
+         RANGE 0 , (nEditWidth * nDevCaps -(lmPage+rmPage))/nRtfRatio ;
+         VALUE 1 ;
          WIDTH nEditWidth * nDevCaps -(lmPage+rmPage)+6 ;
          HEIGHT hLin-2 ;
-         ON CHANGE GetLin(1);
+         ON CHANGE GetLin(1) ;
          NOTABSTOP
 
       _AddTabControl ( 'Tab_1' , ActiveSlider , MainForm , ActivePage , 22 , lmPage-3+wDev )
       ModifySlider(MainForm, ActiveSlider , nEditWidth * nDevCaps -(lmPage+rmPage))
 
-      @ rTab+rEdit-hLin+2 ,0  BUTTON &ActiveChkBtn;
-         OF Form_1;
-         PICTURE 'TAB0';
-         ACTION  SetTypTab();
-         WIDTH 14  HEIGHT 16;
+      @ rTab+rEdit-hLin+2 ,0  BUTTON &ActiveChkBtn ;
+         OF Form_1 ;
+         PICTURE 'TAB0' ;
+         ACTION  SetTypTab() ;
+         WIDTH 14  HEIGHT 16 ;
          NOTABSTOP
 
       _AddTabControl ( 'Tab_1' , ActiveChkBtn , MainForm , ActivePage , 26 , 3 )
@@ -1104,22 +1104,22 @@ FUNCTION Search_click(repl)
             WIDTH 370 + ww ;
             HEIGHT 150 +wr ;
             TITLE cTitle ;
-            TOPMOST;
-            NOMINIMIZE;
-            NOMAXIMIZE;
-            NOSIZE;
+            TOPMOST ;
+            NOMINIMIZE ;
+            NOMAXIMIZE ;
+            NOSIZE ;
             ON INIT Init_Find(repl)
 
          @ 8,100 TEXTBOX text_1 ;
             HEIGHT 23 ;
             WIDTH 250 ;
             FONT 'Arial' ;
-            size   9;
+            size   9 ;
             MAXLENGTH  230 ;
             ON CHANGE Chng_btn(repl)
 
          @ 10,10 LABEL lab_1 ;
-            VALUE 'Find What:';
+            VALUE 'Find What:' ;
             WIDTH 80 ;
             HEIGHT 23 ;
             FONT 'Arial' ;
@@ -1130,12 +1130,12 @@ FUNCTION Search_click(repl)
                HEIGHT 23 ;
                WIDTH 250 ;
                FONT 'Arial' ;
-               size   9;
+               size   9 ;
                MAXLENGTH  230 ;
                ON CHANGE Chng_btn(repl)
 
             @ 40,10 LABEL lab_2 ;
-               VALUE 'Replace With:';
+               VALUE 'Replace With:' ;
                WIDTH 80 ;
                HEIGHT 23 ;
                FONT 'Arial' ;
@@ -1145,7 +1145,7 @@ FUNCTION Search_click(repl)
          @ 35+wr,10 CHECKBOX checkbox_1 ;
             CAPTION 'Match Case' ;
             WIDTH 130 ;
-            HEIGHT 23;
+            HEIGHT 23 ;
             VALUE .F. ;
             FONT 'Arial' ;
             SIZE 9
@@ -1153,7 +1153,7 @@ FUNCTION Search_click(repl)
          @ 55+wr,10 CHECKBOX checkbox_2 ;
             CAPTION 'Whole word' ;
             WIDTH 130 ;
-            HEIGHT 23;
+            HEIGHT 23 ;
             VALUE .F. ;
             FONT 'Arial' ;
             SIZE 9
@@ -1161,7 +1161,7 @@ FUNCTION Search_click(repl)
          @ 75+wr,10 CHECKBOX checkbox_3 ;
             CAPTION 'Select matching text' ;
             WIDTH 130 ;
-            HEIGHT 23;
+            HEIGHT 23 ;
             VALUE .T. ;
             FONT 'Arial' ;
             SIZE 9
@@ -1179,30 +1179,30 @@ FUNCTION Search_click(repl)
                SPACING 22
          ENDIF
 
-         @ 40 ,270+ww BUTTON Btn_Find;
-            CAPTION 'Find Next';
+         @ 40 ,270+ww BUTTON Btn_Find ;
+            CAPTION 'Find Next' ;
             ACTION FindNext_Click(0) ;
-            WIDTH 80 HEIGHT 25;
+            WIDTH 80 HEIGHT 25 ;
             FONT 'Arial' SIZE 9
 
          IF repl==1
-            @ 10 ,270+ww BUTTON Btn_Repl;
-               CAPTION '&Replace';
+            @ 10 ,270+ww BUTTON Btn_Repl ;
+               CAPTION '&Replace' ;
                ACTION FindNext_Click(1) ;
-               WIDTH 80 HEIGHT 25;
+               WIDTH 80 HEIGHT 25 ;
                FONT 'Arial' SIZE 9
 
-            @ 70 ,270+ww BUTTON Btn_ReplAll;
-               CAPTION 'Replace &All';
+            @ 70 ,270+ww BUTTON Btn_ReplAll ;
+               CAPTION 'Replace &All' ;
                ACTION FindNext_Click(2) ;
-               WIDTH 80 HEIGHT 25;
+               WIDTH 80 HEIGHT 25 ;
                FONT 'Arial' SIZE 9
          ENDIF
 
-         @ 70+wr ,270+ww BUTTON Btn_Cancel;
-            CAPTION 'Cancel';
+         @ 70+wr ,270+ww BUTTON Btn_Cancel ;
+            CAPTION 'Cancel' ;
             ACTION Release_Find_Click(repl) ;
-            WIDTH 80 HEIGHT 25;
+            WIDTH 80 HEIGHT 25 ;
             FONT 'Arial' SIZE 9
 
       END WINDOW
@@ -1387,17 +1387,17 @@ FUNCTION Paragraph_click()
             WIDTH 370 ;
             HEIGHT 150 ;
             TITLE 'Paragraph formatting ' ;
-            TOPMOST;
-            NOMINIMIZE;
-            NOMAXIMIZE;
-            NOSIZE;
+            TOPMOST ;
+            NOMINIMIZE ;
+            NOMAXIMIZE ;
+            NOSIZE ;
             ON INIT Init_Parag()
 
          @ 5, 10 FRAME Panel_Parag_1 CAPTION 'Aligment' WIDTH 70 HEIGHT 100
 
          @ 25,15 RADIOGROUP radioParag_1 ;
-            OPTIONS {'Left','Center','Right'};
-            VALUE 1;
+            OPTIONS {'Left','Center','Right'} ;
+            VALUE 1 ;
             WIDTH  60 ;
             FONT 'Arial' ;
             SIZE 9 ;
@@ -1406,72 +1406,72 @@ FUNCTION Paragraph_click()
          @ 5, 85 FRAME Panel_Parag_2 CAPTION 'Indentation' WIDTH 150 HEIGHT 100
 
          @ 25,95 LABEL lab_parag_1 ;
-            VALUE 'Start Indent';
+            VALUE 'Start Indent' ;
             WIDTH 80 ;
             HEIGHT 23 ;
             FONT 'Arial' ;
             SIZE  9
 
-         @ 25 ,170 SPINNER Spin_Parag_1;
+         @ 25 ,170 SPINNER Spin_Parag_1 ;
             RANGE 0 , 1200 ;
             VALUE 0 ;
-            WIDTH 60;
-            HEIGHT 20;
+            WIDTH 60 ;
+            HEIGHT 20 ;
             INCREMENT 4
 
          @ 50,95 LABEL lab_parag_3 ;
-            VALUE 'Offset';
+            VALUE 'Offset' ;
             WIDTH 80 ;
             HEIGHT 23 ;
             FONT 'Arial' ;
             SIZE  9
 
-         @ 50 ,170 SPINNER Spin_Parag_3;
+         @ 50 ,170 SPINNER Spin_Parag_3 ;
             RANGE -1200 , 1200 ;
             VALUE 0 ;
-            WIDTH 60;
-            HEIGHT 20;
-            ON CHANGE RangeOffset();
+            WIDTH 60 ;
+            HEIGHT 20 ;
+            ON CHANGE RangeOffset() ;
             INCREMENT 4
 
          @ 75,95 LABEL lab_parag_2 ;
-            VALUE 'Right Indent';
+            VALUE 'Right Indent' ;
             WIDTH 80 ;
             HEIGHT 23 ;
             FONT 'Arial' ;
             SIZE  9
 
-         @ 75 ,170 SPINNER Spin_Parag_2;
+         @ 75 ,170 SPINNER Spin_Parag_2 ;
             RANGE 0 , 1200 ;
             VALUE 0 ;
-            WIDTH 60;
-            HEIGHT 20;
+            WIDTH 60 ;
+            HEIGHT 20 ;
             INCREMENT 4
 
          //      @ 5, 240 FRAME Panel_Parag_3 CAPTION 'Tab' WIDTH 120 HEIGHT 50
 
          @ 20,245 LABEL lab_parag_4 ;
-            VALUE 'Numbering';
+            VALUE 'Numbering' ;
             WIDTH 70 ;
             HEIGHT 23 ;
             FONT 'Arial' ;
             SIZE  9
 
-         @ 15 ,325  CHECKBUTTON ChkBtn;
-            PICTURE 'Number';
-            WIDTH 23;
-            HEIGHT 23;
+         @ 15 ,325  CHECKBUTTON ChkBtn ;
+            PICTURE 'Number' ;
+            WIDTH 23 ;
+            HEIGHT 23 ;
 
-         @ 60 ,270 BUTTON Btn_ParagOK;
-            CAPTION 'OK';
+         @ 60 ,270 BUTTON Btn_ParagOK ;
+            CAPTION 'OK' ;
             ACTION SetParag_Click() ;
-            WIDTH 80 HEIGHT 25;
+            WIDTH 80 HEIGHT 25 ;
             FONT 'Arial' SIZE 9
 
-         @ 90 ,270 BUTTON Btn_ParagCancel;
-            CAPTION 'Cancel';
+         @ 90 ,270 BUTTON Btn_ParagCancel ;
+            CAPTION 'Cancel' ;
             ACTION Release_Parag_Click() ;
-            WIDTH 80 HEIGHT 25;
+            WIDTH 80 HEIGHT 25 ;
             FONT 'Arial' SIZE 9
 
       END WINDOW
@@ -1785,15 +1785,15 @@ FUNCTION  DefSplash(met)
          AT 0,0 ;
          WIDTH 250 + if(IsVista().or.IsSeven(),GetBorderWidth(),0) ;
          HEIGHT 114 - if(IsVista().or.IsSeven(),0,8) ;
-         TITLE '';
+         TITLE '' ;
          TOPMOST NOCAPTION ;
          ON INIT SplashDelay(met)
 
-      @ 10 ,10 IMAGE Icon_1;
+      @ 10 ,10 IMAGE Icon_1 ;
          PICTURE "RICHED" ;
          WIDTH 50 HEIGHT 50
 
-      @ 5 ,5 FRAME Frame_1;
+      @ 5 ,5 FRAME Frame_1 ;
          WIDTH 235  HEIGHT 90
 
       @ 10,70 LABEL Label_1 ;
@@ -1814,7 +1814,7 @@ FUNCTION  DefSplash(met)
       IF met == 1
          @ 65,15  BUTTON Btn_splash ;
             CAPTION 'OK' ;
-            ACTION  {|| Form_Splash.Release };
+            ACTION  {|| Form_Splash.Release } ;
             WIDTH 40 HEIGHT 20 ;
             FONT 'Arial' SIZE 9 BOLD DEFAULT
 

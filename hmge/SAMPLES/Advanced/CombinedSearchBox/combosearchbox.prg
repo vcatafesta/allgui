@@ -15,31 +15,31 @@ Revised by Grigory Filatov <gfilatov@inbox.ru>
 
 #include "minigui.ch"
 
-PROC _DefineComboSearchBox( cCSBoxName,;
-      cCSBoxParent,;
-      cCSBoxCol,;
-      cCSBoxRow,;
-      cCSBoxWidth,;
-      cCSBoxHeight,;
-      cCSBoxValue,;
-      cFontName,;
-      nFontSize,;
-      cToolTip,;
-      nMaxLenght,;
-      lUpper,;
-      lLower,;
-      lNumeric,;
-      bLostFocus,;
-      bGotFocus,;
-      bEnter,;
-      lRightAlign,;
-      nHelpId,;
-      lBold,;
-      lItalic,;
-      lUnderline,;
-      aBackColor,;
-      aFontColor,;
-      lNoTabStop,;
+PROC _DefineComboSearchBox( cCSBoxName, ;
+      cCSBoxParent, ;
+      cCSBoxCol, ;
+      cCSBoxRow, ;
+      cCSBoxWidth, ;
+      cCSBoxHeight, ;
+      cCSBoxValue, ;
+      cFontName, ;
+      nFontSize, ;
+      cToolTip, ;
+      nMaxLenght, ;
+      lUpper, ;
+      lLower, ;
+      lNumeric, ;
+      bLostFocus, ;
+      bGotFocus, ;
+      bEnter, ;
+      lRightAlign, ;
+      nHelpId, ;
+      lBold, ;
+      lItalic, ;
+      lUnderline, ;
+      aBackColor, ;
+      aFontColor, ;
+      lNoTabStop, ;
       aArray )
 
    LOCAL cParentName := ''

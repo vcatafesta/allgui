@@ -95,12 +95,12 @@ FUNCTION create_populate()
 
    FOR i := 1 to 100
 
-      cQStr := "insert into new (text,floating,date1,logic,text2) values ("+;
-         c2sql("Giri"+alltrim(str(i)))+","+;
-         c2sql(123.45)+","+;
-         iif(i <= 50,c2sql(date()),c2sql(ctod("18-09-2010")))+","+;
-         c2sql(.t.)+","+;
-         c2sql("India")+;
+      cQStr := "insert into new (text,floating,date1,logic,text2) values ("+ ;
+         c2sql("Giri"+alltrim(str(i)))+","+ ;
+         c2sql(123.45)+","+ ;
+         iif(i <= 50,c2sql(date()),c2sql(ctod("18-09-2010")))+","+ ;
+         c2sql(.t.)+","+ ;
+         c2sql("India")+ ;
          ")"
       IF .not. miscsql(oDB,cQstr)
 

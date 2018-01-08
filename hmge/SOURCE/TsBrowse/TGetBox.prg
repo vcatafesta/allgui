@@ -10,9 +10,9 @@ CLASS TGetBox FROM TControl
 
    DATA Atx, lAppend, oGet
 
-   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
-      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg,;
-      lUpdate, bWhen, lCenter, lRight, bChanged,;
+   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid, ;
+      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, ;
+      lUpdate, bWhen, lCenter, lRight, bChanged, ;
       lNoBorder, nHelpId, lSpinner, bUp, bDown, bMin, bMax )
    METHOD HandleEvent( nMsg, nWParam, nLParam )
    METHOD KeyChar( nKey, nFlags )
@@ -27,9 +27,9 @@ CLASS TGetBox FROM TControl
    * METHOD TGetBox:New() Version 7.0
    * ============================================================================
 
-METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
-      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg,;
-      lUpdate, bWhen, lCenter, lRight, bChanged,;
+METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid, ;
+      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, ;
+      lUpdate, bWhen, lCenter, lRight, bChanged, ;
       lNoBorder, nHelpId, lSpinner, bUp, bDown, bMin, bMax, lNoMinus ) CLASS TGetBox
 
    LOCAL cText := Space( 50 ), uValue, ix
@@ -43,12 +43,12 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
    LOCAL aFontColor, aBackColor
    LOCAL ReadOnly := .f., lPassword := .F.
 
-   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ),;
-      nClrBack  := GetSysColor( COLOR_WINDOW ),;
-      lUpdate   := .f.,;
-      lCenter   := .f., lRight := .f.,;
-      lSpinner  := .f.,;
-      lNoBorder := .f.,;
+   DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ), ;
+      nClrBack  := GetSysColor( COLOR_WINDOW ), ;
+      lUpdate   := .f., ;
+      lCenter   := .f., lRight := .f., ;
+      lSpinner  := .f., ;
+      lNoBorder := .f., ;
       bSetGet   := bSETGET( cText )
 
    HB_SYMBOL_UNUSED( bUp )
@@ -125,11 +125,11 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
 METHOD HandleEvent( nMsg, nWParam, nLParam ) CLASS TGetBox
 
    // just used for some testings
-   /* fDebug( "nMsg="+AllTrim(cValTochar(nMsg))+" nWParam="+;
-   AllTrim(cValTochar(nWParam))+;
-   " nLoWord="+AllTrim(cValTochar(nLoWord(nLParam)))+;
-   " nHiWord="+AllTrim(cValTochar(nHiWord(nLParam)))+CRLF+;
-   " ProcName="+ProcName(2)+Space(1)+LTrim(Str(ProcLine(2)))+space(1)+;
+   /* fDebug( "nMsg="+AllTrim(cValTochar(nMsg))+" nWParam="+ ;
+   AllTrim(cValTochar(nWParam))+ ;
+   " nLoWord="+AllTrim(cValTochar(nLoWord(nLParam)))+ ;
+   " nHiWord="+AllTrim(cValTochar(nHiWord(nLParam)))+CRLF+ ;
+   " ProcName="+ProcName(2)+Space(1)+LTrim(Str(ProcLine(2)))+space(1)+ ;
    ProcName(3)+Space(1)+LTrim(Str(Procline(3))) ) */
 
    RETURN ::Super:HandleEvent( nMsg, nWParam, nLParam )

@@ -2449,7 +2449,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                   CASE GetGridvKey(lParam) == 65 // A
 
                      IF   GetAltState() == -127 ;
-                           .or.;
+                           .or. ;
                            GetAltState() == -128   // ALT
 
                         IF _HMG_SYSDATA [ 39 ] [i] [2] == .T.
@@ -4603,9 +4603,9 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent ,nosize ,nos
    ENDIF
 
    IF _HMG_SYSDATA [ 109 ] <> 0
-      Parent := _HMG_SYSDATA [ 109 ]
+      PARENT := _HMG_SYSDATA [ 109 ]
    ELSE
-      Parent = _HMG_SYSDATA [ 181 ]
+      PARENT = _HMG_SYSDATA [ 181 ]
    ENDIF
 
    _HMG_SYSDATA [ 223 ] := FormName

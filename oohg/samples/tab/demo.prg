@@ -4,7 +4,7 @@
 
 FUNCTION Main
 
-   DEFINE WINDOW Form_1 obj form_1;
+   DEFINE WINDOW Form_1 obj form_1 ;
          AT 0,0 WIDTH 480 HEIGHT 300 ;
          TITLE 'TAB / Page    -    DEMO' ;
          MAIN
@@ -101,7 +101,7 @@ FUNCTION Main
             ENDIF
 
             Form_1.StatusBar.Item(1) := ;
-               'Form_1.Tab_1.Caption(' + alltrim(str(n_value)) + ') = '+;
+               'Form_1.Tab_1.Caption(' + alltrim(str(n_value)) + ') = '+ ;
                form_1.tab_1.caption( form_1.tab_1.value )
 
             RETURN NIL

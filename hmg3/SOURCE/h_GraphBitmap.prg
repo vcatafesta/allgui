@@ -76,29 +76,29 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
    LOCAL nPenWidth := 1
 
    CHECK TYPE SOFT ;
-      nWidth         AS NUMERIC     ,;
-      nHeight        AS NUMERIC     ,;
-      aSerieValues   AS ARRAY       ,;
-      cTitle         AS CHARACTER   ,;
-      aSerieYNames   AS ARRAY       ,;
-      nBarDepth      AS NUMERIC     ,;
-      nBarWidth      AS NUMERIC     ,;
-      nSeparation    AS NUMERIC     ,;
-      aTitleColor    AS ARRAY       ,;
-      nHValues       AS NUMERIC     ,;
-      l3DView        AS LOGICAL     ,;
-      lShowGrid      AS LOGICAL     ,;
-      lShowXGrid     AS LOGICAL     ,;
-      lShowYGrid     AS LOGICAL     ,;
-      lShowXValues   AS LOGICAL     ,;
-      lShowYValues   AS LOGICAL     ,;
-      lShowLegends   AS LOGICAL     ,;
-      aSerieNames    AS ARRAY       ,;
-      aSerieColors   AS ARRAY       ,;
-      nGraphType     AS NUMERIC     ,;
-      lShowValues    AS LOGICAL     ,;
-      cPicture       AS CHARACTER   ,;
-      nLegendWindth  AS NUMERIC     ,;
+      nWidth         AS NUMERIC     , ;
+      nHeight        AS NUMERIC     , ;
+      aSerieValues   AS ARRAY       , ;
+      cTitle         AS CHARACTER   , ;
+      aSerieYNames   AS ARRAY       , ;
+      nBarDepth      AS NUMERIC     , ;
+      nBarWidth      AS NUMERIC     , ;
+      nSeparation    AS NUMERIC     , ;
+      aTitleColor    AS ARRAY       , ;
+      nHValues       AS NUMERIC     , ;
+      l3DView        AS LOGICAL     , ;
+      lShowGrid      AS LOGICAL     , ;
+      lShowXGrid     AS LOGICAL     , ;
+      lShowYGrid     AS LOGICAL     , ;
+      lShowXValues   AS LOGICAL     , ;
+      lShowYValues   AS LOGICAL     , ;
+      lShowLegends   AS LOGICAL     , ;
+      aSerieNames    AS ARRAY       , ;
+      aSerieColors   AS ARRAY       , ;
+      nGraphType     AS NUMERIC     , ;
+      lShowValues    AS LOGICAL     , ;
+      cPicture       AS CHARACTER   , ;
+      nLegendWindth  AS NUMERIC     , ;
       lNoBorder      AS LOGICAL
 
    DEFAULT cTitle   := ""
@@ -445,18 +445,18 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
    LOCAL hDC, hBitmap, BTStruct
    LOCAL nPenWidth := 1
 
-   CHECK TYPE SOFT;
-      nWidth         AS NUMERIC   ,;
-      nHeight        AS NUMERIC   ,;
-      aSerieValues   AS ARRAY     ,;
-      aSerieNames    AS ARRAY     ,;
-      aSerieColors   AS ARRAY     ,;
-      cTitle         AS CHARACTER ,;
-      aTitleColor    AS ARRAY     ,;
-      nDepth         AS NUMERIC   ,;
-      l3DView        AS LOGICAL   ,;
-      lShowXValues   AS LOGICAL   ,;
-      lShowLegends   AS LOGICAL   ,;
+   CHECK TYPE SOFT ;
+      nWidth         AS NUMERIC   , ;
+      nHeight        AS NUMERIC   , ;
+      aSerieValues   AS ARRAY     , ;
+      aSerieNames    AS ARRAY     , ;
+      aSerieColors   AS ARRAY     , ;
+      cTitle         AS CHARACTER , ;
+      aTitleColor    AS ARRAY     , ;
+      nDepth         AS NUMERIC   , ;
+      l3DView        AS LOGICAL   , ;
+      lShowXValues   AS LOGICAL   , ;
+      lShowLegends   AS LOGICAL   , ;
       lNoBorder      AS LOGICAL
 
    hBitmap := BT_BitmapCreateNew ( nWidth, nHeight, WHITE )
@@ -703,13 +703,13 @@ PROCEDURE DrawBarInBitmap( hDC, nY, nX, nHigh, nWidth, l3DView, nDeep, aColor )
    BT_DrawGradientFillVertical( hDC, nX+nDeep-nHigh, nY, nWidth+1, nHigh-nDeep, aColor, nShadow2 )   // Barra Front con Gradiente
    IF l3DView
       // Lateral
-      DrawPolygonInBitmap( hDC,{{nX-1,nY+nWidth+1},{nX+nDeep-nHigh,nY+nWidth+1},;
-         {nX-nHigh+1,nY+nWidth+nDeep},{nX-nDeep,nY+nWidth+nDeep},;
+      DrawPolygonInBitmap( hDC,{{nX-1,nY+nWidth+1},{nX+nDeep-nHigh,nY+nWidth+1}, ;
+         {nX-nHigh+1,nY+nWidth+nDeep},{nX-nDeep,nY+nWidth+nDeep}, ;
          {nX-1,nY+nWidth+1}},nShadow,,nShadow )
       // Superior
       nHigh   := Max( nHigh, nDeep )
-      DrawPolygonInBitmap( hDC,{{nX-nHigh+nDeep,nY+1},{nX-nHigh+nDeep,nY+nWidth+1},;
-         {nX-nHigh+1,nY+nWidth+nDeep},{nX-nHigh+1,nY+nDeep},;
+      DrawPolygonInBitmap( hDC,{{nX-nHigh+nDeep,nY+1},{nX-nHigh+nDeep,nY+nWidth+1}, ;
+         {nX-nHigh+1,nY+nWidth+nDeep},{nX-nHigh+1,nY+nDeep}, ;
          {nX-nHigh+nDeep,nY+1}},nColTop,,nColTop )
       // Border
       DrawBoxInBitmap( hDC, nY, nX, nH, nWidth, l3DView, nDeep )

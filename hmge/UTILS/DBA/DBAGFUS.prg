@@ -9,22 +9,22 @@ REQUEST DESCEND
 *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNC GFUSList( ;                          // Get From User a Selection List
-      aSelect,;
-      cTitle,;
+      aSelect, ;
+      cTitle, ;
       lAllAble )   // Add an "All" option button
 
-   LOCA nItemNum :=  0,;
-      nItemCou :=  LEN( aSelect ),;
-      cChkBNam := '',;
-      cChkBCap := '',;
-      nCaptLen :=  0,;
-      nButtRow :=  0,;
-      nBut1Col :=  0,;
+   LOCA nItemNum :=  0, ;
+      nItemCou :=  LEN( aSelect ), ;
+      cChkBNam := '', ;
+      cChkBCap := '', ;
+      nCaptLen :=  0, ;
+      nButtRow :=  0, ;
+      nBut1Col :=  0, ;
       cString  := ''
 
    LOCA aGSLRVal := ARRAY( nItemCou )
 
-   LOCA nWinWidt ,;
+   LOCA nWinWidt , ;
       nWinHigh
 
    AFILL( aGSLRVal, .F. )
@@ -35,7 +35,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
    nWinHigh := ( LEN( aSelect ) + 6 ) * 20
 
    IF LEN( aSelect ) > 15
-      DEFINE WINDOW frmGFUSL;
+      DEFINE WINDOW frmGFUSL ;
             AT 0, 0 ;
             WIDTH  nWinWidt ;
             HEIGHT 378 ;             // (15 + 2.6) * 20
@@ -44,7 +44,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
             MODAL
       END WINDOW // frmGFUSL
    ELSE
-      DEFINE WINDOW frmGFUSL;
+      DEFINE WINDOW frmGFUSL ;
             AT 0, 0 ;
             WIDTH  nWinWidt ;
             HEIGHT nWinHigh ;
@@ -104,7 +104,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
    PROC AplySLst(;                            // Make Return Value for GFUSList()
          aResArray )
 
-      LOCA cC1Name := '',;
+      LOCA cC1Name := '', ;
          nChBxNo := 0
 
       FOR nChBxNo := 1 TO LEN( aResArray )
@@ -121,7 +121,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
       PROC SetASLst(;                           // Set All button of GFUSList()
             aResArray )
 
-         LOCA cC1Name := '',;
+         LOCA cC1Name := '', ;
             nChBxNo := 0
 
          FOR nChBxNo := 1 TO LEN( aResArray )
@@ -137,9 +137,9 @@ FUNC GFUSList( ;                          // Get From User a Selection List
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          PROC GoNxCntrl( ;                         // Go ( Set Focus ) Next Control ( ON ENTER )
-               cFrmName ,;
-               cCntName ,;
-               nItemCo  ,;
+               cFrmName , ;
+               cCntName , ;
+               nItemCo  , ;
                cLastItm )
 
             LOCA nItemNum := VAL( RIGHT( cCntName, 3 ) )
@@ -156,23 +156,23 @@ FUNC GFUSList( ;                          // Get From User a Selection List
             *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
             FUNC GFU1Sele( ;                          // Get From User 1 ( single ) selection from a list
-                  aSelect ,;
+                  aSelect , ;
                   cTitle  )
 
-               LOCA nRVal    := 0,;
-                  nItemCo  := LEN( aSelect ),;
-                  nItemNum :=  0,;
-                  cbtn1Nam := '',;
-                  cbtn1Val := '',;
+               LOCA nRVal    := 0, ;
+                  nItemCo  := LEN( aSelect ), ;
+                  nItemNum :=  0, ;
+                  cbtn1Nam := '', ;
+                  cbtn1Val := '', ;
                   nStrgLen := ArMaxLen( aSelect )
 
                LOCA nBtnLeng := nStrgLen * 8.5
 
-               LOCA nWinWidt := nBtnLeng + 40,;
+               LOCA nWinWidt := nBtnLeng + 40, ;
                   nWinHigh := ( nItemCo + 4 ) * 20
 
                IF LEN( aSelect ) > 15
-                  DEFINE WINDOW frmGFU1S;
+                  DEFINE WINDOW frmGFU1S ;
                         AT 0, 0 ;
                         WIDTH  nWinWidt ;
                         HEIGHT 378 ;
@@ -181,7 +181,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                         MODAL
                   END WINDOW // frmGFU1S
                ELSE
-                  DEFINE WINDOW frmGFU1S;
+                  DEFINE WINDOW frmGFU1S ;
                         AT 0, 0 ;
                         WIDTH  nWinWidt ;
                         HEIGHT nWinHigh ;
@@ -234,12 +234,12 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                         aDecims,;  // Decimals
                         aValues )  // Values
 
-                     LOCA nRVal :=  0,;
-                        c1Prm := '',;
-                        nInds :=  0,;
-                        n1Len :=  0,;
-                        n1Dec :=  0,;
-                        c1Typ := '',;
+                     LOCA nRVal :=  0, ;
+                        c1Prm := '', ;
+                        nInds :=  0, ;
+                        n1Len :=  0, ;
+                        n1Dec :=  0, ;
+                        c1Typ := '', ;
                         x1Val
 
                      DEFAULT aPrompt TO ARRAY( LEN( aValues ) )
@@ -285,12 +285,12 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                               aCBsSeq := a1Button[ 6 ],;    // Code Blocks List to execute
                               lRelAft := a1Button[ 7 ]      // Release After
 
-                           LOCA nCBSeqNo :=   0,;
-                              nCBlokNo :=   0,;
-                              lAcceptd := .T.,;
+                           LOCA nCBSeqNo :=   0, ;
+                              nCBlokNo :=   0, ;
+                              lAcceptd := .T., ;
                               b1CBlock
 
-                           LOCA nVInd    := 0,;
+                           LOCA nVInd    := 0, ;
                               cCntrNam := ''
 
                            IF lApAcce
@@ -325,16 +325,16 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                            *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                            FUNC CFCAccept( ;                         // Combo Form Chek Acceptence ( validities )
-                                 aValues,;
+                                 aValues, ;
                                  aValids )
 
-                              LOCA lRVal   := .T.,;
-                                 nVInd   :=  0,;
-                                 nAInd   :=  0,;
-                                 aBlocks := {},;
-                                 aMesags := {},;
-                                 c1Mesag := '',;
-                                 a1Valid ,;
+                              LOCA lRVal   := .T., ;
+                                 nVInd   :=  0, ;
+                                 nAInd   :=  0, ;
+                                 aBlocks := {}, ;
+                                 aMesags := {}, ;
+                                 c1Mesag := '', ;
+                                 a1Valid , ;
                                  b1CBlok
 
                               MEMV x1Value
@@ -377,7 +377,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                     aRDBloks )     // CoFo Data Get (Read) Code Blocks
 
                                  LOCA cCFVCName := '',;          // Combo Box Value Control Name
-                                    nItemNum :=  0,;
+                                    nItemNum :=  0, ;
                                     b1RDBlock := NIL
 
                                  FOR nItemNum := 1 TO LEN ( aValues )
@@ -401,8 +401,8 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                        aWDBloks )     // CoFo Data Get (Read) Code Blocks
 
                                     LOCA cCFVCName := '',;          // Combo Box Value Control Name
-                                       nItemNum  :=  0,;
-                                       b1WDBlock := NIL,;
+                                       nItemNum  :=  0, ;
+                                       b1WDBlock := NIL, ;
                                        x1Value   := NIL
 
                                     FOR nItemNum := 1 TO LEN ( aValues )
@@ -454,7 +454,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
 
                                     This seven arrays combine together the dataset and all must be equal size.
 
-                                    <aButtons> : Buttons array, one elem for each button;
+                                    <aButtons> : Buttons array, one elem for each button ;
                                     each button defined as an array with seven elems :
 
                                     1° : Button size : IF( NIL/0 : Text Caption, Picture width )
@@ -470,7 +470,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                     NIL / .F. : Continue, .T. Release Combo Form
                                     8° : Associated with : item number to associate this button
 
-                                    <aCdBloks> : Code blocks array for buttons, one elem for each action;
+                                    <aCdBloks> : Code blocks array for buttons, one elem for each action ;
                                     each button may have own action sequence, numbers of code block
                                     in this array.
 
@@ -490,25 +490,25 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                           aRDBloks,;  // 11. Read Data Blocks ( from sources to controls )
                                           aWDBloks )  // 12. Write Data Blocks ( from controls to tagrgets )
 
-                                       LOCA nRVal   := 0,;
+                                       LOCA nRVal   := 0, ;
                                           aParams := {}
 
-                                       LOCA nLblMaxLen :=  0,;
-                                          nValMaxLen :=  0,;
-                                          nFrmMaxWid := GetDesktopWidth()  * 0.8,;
-                                          nFrmMaxHig := GetDesktopHeight() * 0.8,;
-                                          nItemCo    :=  0,;
-                                          nLnSpace   := 27,;
-                                          nFrmLinCo  :=  0,;
-                                          nFrmWidth  :=  0,;
-                                          nFrmHight  :=  0,;
-                                          nItemNum   :=  0,;
+                                       LOCA nLblMaxLen :=  0, ;
+                                          nValMaxLen :=  0, ;
+                                          nFrmMaxWid := GetDesktopWidth()  * 0.8, ;
+                                          nFrmMaxHig := GetDesktopHeight() * 0.8, ;
+                                          nItemCo    :=  0, ;
+                                          nLnSpace   := 27, ;
+                                          nFrmLinCo  :=  0, ;
+                                          nFrmWidth  :=  0, ;
+                                          nFrmHight  :=  0, ;
+                                          nItemNum   :=  0, ;
                                           n1itRow    :=  0,;  // Combo Form 1 item Row No
-                                          nLblCol    := 10,;
-                                          nValueCol  :=  0,;
-                                          nValueRow  :=  0,;
-                                          nLblWidth  :=  0,;
-                                          nMaxValWd  :=  0,;
+                                          nLblCol    := 10, ;
+                                          nValueCol  :=  0, ;
+                                          nValueRow  :=  0, ;
+                                          nLblWidth  :=  0, ;
+                                          nMaxValWd  :=  0, ;
                                           cCFVCName  := '',;   // Combo Form Value Control Name
                                           x1iValue   := NIL,;  // 1 item Value
                                           c1iVNType  := '',;   // 1 item Value Nominal Type
@@ -516,29 +516,29 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                           n1iVDecim  :=  0,;   // 1 item Value Decimal ( in char )
                                           n1iVRLeng  :=  0,;   // 1 item Value Length ( in char, Resulting )
                                           n1iVPLeng  :=  0,;   // 1 item Value Length ( in Pixels )
-                                          l1iReOnly  := .F.,;
-                                          lMultLine  := .F.,;
+                                          l1iReOnly  := .F., ;
+                                          lMultLine  := .F., ;
                                           lFocuSetd  := .F.
 
-                                       LOCA nButtonNo  :=  0,;
-                                          a1Button   := {},;
-                                          nButnSize  :=  0,;
-                                          nButnHigh  := 21,;
-                                          cButnName  := '',;
-                                          cButnCapt  := '',;
-                                          cButnTTip  := '',;
-                                          nButnsRow  :=  0,;
-                                          nButn1Col  :=  0,;
+                                       LOCA nButtonNo  :=  0, ;
+                                          a1Button   := {}, ;
+                                          nButnSize  :=  0, ;
+                                          nButnHigh  := 21, ;
+                                          cButnName  := '', ;
+                                          cButnCapt  := '', ;
+                                          cButnTTip  := '', ;
+                                          nButnsRow  :=  0, ;
+                                          nButn1Col  :=  0, ;
                                           nButnAsso  :=  0,;  // Button associated control numb
                                           nButnAsCo  :=  0,;  // Control associated button count
-                                          nButnARow  :=  0,;
-                                          nButnACol  :=  0,;
+                                          nButnARow  :=  0, ;
+                                          nButnACol  :=  0, ;
                                           cBAsCName  := '',;  // Button associated control name
                                           nBAsCWidt  :=  0,;  // Button associated control width
-                                          nBtnTotSz  :=  0,;
-                                          nBtnSpace  :=  0,;
-                                          lBtnPictr  := .F.,;
-                                          lVirtHeig  := .F.,;
+                                          nBtnTotSz  :=  0, ;
+                                          nBtnSpace  :=  0, ;
+                                          lBtnPictr  := .F., ;
+                                          lVirtHeig  := .F., ;
                                           clblNam
 
                                        IF PCOUNT() == 1
@@ -557,16 +557,16 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                           aWDBloks := IF( LEN( aParams ) < 12, , aParams[ 12 ] ) // Data Put ( Write ) Blocks
                                        ENDIF
 
-                                       DEFAULT cCFTitl  TO '',;
-                                          aValues  TO {},;
-                                          aDTypes  TO {},;
-                                          aROnlys  TO {},;
-                                          aButtons TO {},;
-                                          aCdBloks TO {},;
-                                          aValids  TO {},;
-                                          aWidths  TO {},;
-                                          aDecims  TO {},;
-                                          aRDBloks TO {},;
+                                       DEFAULT cCFTitl  TO '', ;
+                                          aValues  TO {}, ;
+                                          aDTypes  TO {}, ;
+                                          aROnlys  TO {}, ;
+                                          aButtons TO {}, ;
+                                          aCdBloks TO {}, ;
+                                          aValids  TO {}, ;
+                                          aWidths  TO {}, ;
+                                          aDecims  TO {}, ;
+                                          aRDBloks TO {}, ;
                                           aWDBloks TO {}
 
                                        IF EMPTY( aValues ) .AND. !EMPTY( aRDBloks )
@@ -614,7 +614,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                        lVirtHeig  := nFrmHight > nFrmMaxHig
 
                                        IF lVirtHeig
-                                          DEFINE WINDOW frmCombFrm;
+                                          DEFINE WINDOW frmCombFrm ;
                                                 AT 0, 0 ;
                                                 WIDTH  nFrmWidth ;
                                                 HEIGHT 378 ;             // (15 + 2.6) * 20
@@ -625,7 +625,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                                 ON RELEASE NIL // EVAL( bOnRelas )
                                           END WINDOW // frmCombFrm
                                        ELSE
-                                          DEFINE WINDOW frmCombFrm;
+                                          DEFINE WINDOW frmCombFrm ;
                                                 AT 0, 0 ;
                                                 WIDTH  nFrmWidth ;
                                                 HEIGHT nFrmHight ;
@@ -780,7 +780,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                           nButnsRow := n1itRow += nLnSpace
 
                                           AEVAL( aButtons, { | a1 | nBtnTotSz += ;
-                                             IF( a1[ 8 ] > 0, 0,;
+                                             IF( a1[ 8 ] > 0, 0, ;
                                              IF( a1[ 1 ] == NIL, LEN( a1[ 2 ] ) * 8 + 4, a1[ 1 ] + 4 )) } )
 
                                           nBtnSpace := ( nFrmWidth - nBtnTotSz - IF( lVirtHeig, 20, 0 ) ) / ((LEN(aButtons)-nButnAsCo)+ 1 )
@@ -869,8 +869,8 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                              *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                              PROC CoFoSAsVal(;                        // ComboForm; Set Button associated control's value
-                                                   aValues ,;
-                                                   aButtons,;
+                                                   aValues , ;
+                                                   aButtons, ;
                                                    xValue  ,;       // Value
                                                    cBtnNam )        // Name of Button associated to control
 
@@ -887,11 +887,11 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                                 *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                                 FUNC GFUNewTNam(;                         // Get From User New Table Name
-                                                      cFilKind,;
-                                                      cExtention,;
+                                                      cFilKind, ;
+                                                      cExtention, ;
                                                       lNoChngDir )
 
-                                                   LOCA cNewTNam := '',;
+                                                   LOCA cNewTNam := '', ;
                                                       lDone := .F.
 
                                                    WHILE !lDone
@@ -906,7 +906,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                                       ELSE
                                                          IF FILE( cNewTNam )
                                                             IF ASCAN( aOpnDatas, { | a1 | cNewTNam == a1[ 3 ] } ) > 0
-                                                               MsgStop( "This table is already in use;" + CRLF2 +;
+                                                               MsgStop( "This table is already in use;" + CRLF2 + ;
                                                                   "Try Another" )
                                                             ELSE
                                                                lDone := .T.  // ChekOWrt( cNewTNam ) bu kontrol "CoOpAply" da
@@ -922,11 +922,11 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                                    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                                    FUNC GFUSrcTNam(;                         // Get From User Source Table Name
-                                                         cFilKind,;
-                                                         cExtention,;
+                                                         cFilKind, ;
+                                                         cExtention, ;
                                                          lNoChngDir )
 
-                                                      LOCA cSrcTNam := '',;
+                                                      LOCA cSrcTNam := '', ;
                                                          lDone := .F.
 
                                                       WHILE !lDone
@@ -941,7 +941,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                                          ELSE
                                                             IF FILE( cSrcTNam )
                                                                IF ASCAN( aOpnDatas, { | a1 | cSrcTNam == a1[ 3 ] } ) > 0
-                                                                  MsgStop( "This table is already in use;" + CRLF2 +;
+                                                                  MsgStop( "This table is already in use;" + CRLF2 + ;
                                                                      "Try Another" )
                                                                ELSE
                                                                   lDone := .T.  // ChekOWrt( cNewTNam ) bu kontrol "CoOpAply" da

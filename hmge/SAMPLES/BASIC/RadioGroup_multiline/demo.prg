@@ -13,16 +13,16 @@ FUNCTION Main()
 
    SET FONT TO 'MS Shell Dlg', 8
 
-   DEFINE WINDOW MainWA;
-         MAIN;
-         ROW    100;
-         COL    100;
-         WIDTH  190;
-         HEIGHT 200;
-         TITLE  "RadioGroup multiline";
-         NOSIZE;
-         NOMAXIMIZE;
-         NOMINIMIZE;
+   DEFINE WINDOW MainWA ;
+         MAIN ;
+         ROW    100 ;
+         COL    100 ;
+         WIDTH  190 ;
+         HEIGHT 200 ;
+         TITLE  "RadioGroup multiline" ;
+         NOSIZE ;
+         NOMAXIMIZE ;
+         NOMINIMIZE ;
          ON INIT ChangeHeightRG()
 
       DEFINE FRAME RadioFR

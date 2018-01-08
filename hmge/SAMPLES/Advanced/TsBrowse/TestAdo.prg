@@ -45,9 +45,9 @@ FUNCTION TestAdo(met)
 
       DEFINE WINDOW Child1 At 0,0 ;
             WIDTH nWinWidth HEIGHT nWinHeight ;
-            TITLE   "ADO With TSBrowse - All Fields";
-            ICON "Demo.ico";
-            CHILD;
+            TITLE   "ADO With TSBrowse - All Fields" ;
+            ICON "Demo.ico" ;
+            CHILD ;
             ON INIT  oBrw:SetFocus()
 
          DO CASE
@@ -77,9 +77,9 @@ FUNCTION TestAdo(met)
       ELSE
          DEFINE WINDOW Child1 At 0,0 ;
                WIDTH nWinWidth+8 HEIGHT nWinHeight ;
-               TITLE   "ADO With TSBrowse - Selected Fields";
-               ICON "Demo.ico";
-               CHILD;
+               TITLE   "ADO With TSBrowse - Selected Fields" ;
+               ICON "Demo.ico" ;
+               CHILD ;
                ON INIT  oBrw:SetFocus()
 
             @  10,  10 TBROWSE oBrw RECORDSET oRSet EDITABLE AUTOCOLS FONT Font_1 SELECTOR .T. ;
@@ -87,7 +87,7 @@ FUNCTION TestAdo(met)
                COLUMNS "First", "City", "State", "Married", "HireDate", "Age", "Salary" ;
                HEADERS "Apellido", "Ciudad", "Estado", "Casado", "Ingreso", "Edad", "Salario" ;
                SIZES 100, 120, 20, 25, 74, 25, 80 ;
-               COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HBLUE;
+               COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HBLUE ;
 
             oBrw:nClrLine := COLOR_GRID
 

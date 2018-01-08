@@ -42,12 +42,12 @@ FUNCTION Test ()
 
    @ 20, 20 GET COMBOBOX oCombo1 VAR nCombo ITEMS aItems SIZE 100, 23
    @ 20, 50 GET COMBOBOX oCombo2 VAR cCombo ITEMS aItems SIZE 100, 23 TEXT
-   @ 20, 80 GET COMBOBOX oCombo3 VAR xCombo ITEMS aItems SIZE 100, 23 EDIT TOOLTIP "Type any thing here";
+   @ 20, 80 GET COMBOBOX oCombo3 VAR xCombo ITEMS aItems SIZE 100, 23 EDIT TOOLTIP "Type any thing here" ;
       ON INTERACTIVECHANGE {|value,This| oCombo3_onInteractiveChange( value,This ) }
 
    @ 20,110 COMBOBOX oCombo4 ITEMS aItems SIZE 100, 23
    @ 20,140 COMBOBOX oCombo5 ITEMS aItems SIZE 100, 23 TEXT
-   @ 20,170 COMBOBOX oCombo6 ITEMS aItems SIZE 100, 23 EDIT;
+   @ 20,170 COMBOBOX oCombo6 ITEMS aItems SIZE 100, 23 EDIT ;
       ON INTERACTIVECHANGE {|value,This| oCombo3_onInteractiveChange( value,This ) }
 
    @ 20,200 GET cEdit SIZE 150, 23
@@ -80,7 +80,7 @@ FUNCTION BoundTest ()
 
    @ 20, 20 GET COMBOBOX oCombo1 VAR nCombo ITEMS aItems SIZE 100, 23
    @ 20, 50 GET COMBOBOX oCombo2 VAR cCombo ITEMS aItems SIZE 100, 23 TEXT
-   @ 20, 80 GET COMBOBOX oCombo3 VAR xCombo ITEMS aItems SIZE 100, 23 EDIT TOOLTIP "Type any thing here";
+   @ 20, 80 GET COMBOBOX oCombo3 VAR xCombo ITEMS aItems SIZE 100, 23 EDIT TOOLTIP "Type any thing here" ;
       ON INTERACTIVECHANGE {|value,This| oCombo3_onInteractiveChange( value,This ) }
 
    // @ 20,200 GET cEdit SIZE 150, 23

@@ -118,44 +118,44 @@ FUNCTION Main()
       RETURN NIL
    ENDIF
 
-   DEFINE WINDOW frmGregCivil;
-         AT 0,0;
-         WIDTH 360 HEIGHT 228;
-         TITLE "Gregorian Calendar";
-         MAIN ICON "main.ico";
-         NOMAXIMIZE NOMINIMIZE;
+   DEFINE WINDOW frmGregCivil ;
+         AT 0,0 ;
+         WIDTH 360 HEIGHT 228 ;
+         TITLE "Gregorian Calendar" ;
+         MAIN ICON "main.ico" ;
+         NOMAXIMIZE NOMINIMIZE ;
          FONT "Arial" SIZE 9
 
       ON KEY RETURN ACTION ButtonOk()
 
-      @  70, 10 FRAME Frame_1 OF frmGregCivil CAPTION "Please select calendar settings";
+      @  70, 10 FRAME Frame_1 OF frmGregCivil CAPTION "Please select calendar settings" ;
          WIDTH  330 HEIGHT 80 FONT "Arial" SIZE 9 BACKCOLOR NIL FONTCOLOR NIL OPAQUE
 
-      @  10, 10 FRAME Frame_2 OF frmGregCivil CAPTION "Year to be entered must be after 1582";
+      @  10, 10 FRAME Frame_2 OF frmGregCivil CAPTION "Year to be entered must be after 1582" ;
          WIDTH  330 HEIGHT 50 FONT "Arial" SIZE 9 BACKCOLOR NIL FONTCOLOR NIL OPAQUE
 
-      @  30, 20 LABEL lblYear OF frmGregCivil VALUE "Please enter year in full century format :";
+      @  30, 20 LABEL lblYear OF frmGregCivil VALUE "Please enter year in full century format :" ;
          ACTION Nil WIDTH  215 HEIGHT 20 FONT "Arial" SIZE 9
 
-      @  26,240 TEXTBOX txbYear OF frmGregCivil HEIGHT 24;
+      @  26,240 TEXTBOX txbYear OF frmGregCivil HEIGHT 24 ;
          VALUE Year(Date()) WIDTH  92 NUMERIC INPUTMASK "9999"
 
       @  90, 20 CHECKBOX chkCivilNormal OF frmGregCivil ;
-         CAPTION "Civil Calendar (includes Regular Holidays)";
+         CAPTION "Civil Calendar (includes Regular Holidays)" ;
          WIDTH  270 HEIGHT 24 VALUE .T.
 
       @ 115, 20 CHECKBOX chkCivilVatican2 OF frmGregCivil ;
-         CAPTION "Include Lists of Pre-Vatican II Feast Related to Easter";
+         CAPTION "Include Lists of Pre-Vatican II Feast Related to Easter" ;
          WIDTH  310 HEIGHT 24 VALUE .T.
 
       @ 160,170 BUTTON btnOk OF frmGregCivil CAPTION "&Ok" ACTION ButtonOk() WIDTH 80 HEIGHT 24 FONT "Arial" SIZE 9
 
-      @ 160,260 BUTTON btnCancel OF frmGregCivil CAPTION "&Cancel" ACTION frmGregCivil.Release();
+      @ 160,260 BUTTON btnCancel OF frmGregCivil CAPTION "&Cancel" ACTION frmGregCivil.Release() ;
          WIDTH 80 HEIGHT 24 FONT "Arial" SIZE 9
 
       @ 158, 10 PROGRESSBAR pBarCalendar OF frmGregCivil RANGE 1,366 WIDTH  150 HEIGHT 18 SMOOTH
 
-      @ 177, 11 LABEL lblFormat OF frmGregCivil VALUE "Formatting calendar, please wait....";
+      @ 177, 11 LABEL lblFormat OF frmGregCivil VALUE "Formatting calendar, please wait...." ;
          ACTION Nil WIDTH  149 HEIGHT 18 FONT "Arial" SIZE 7
 
    END WINDOW
@@ -171,16 +171,16 @@ FUNCTION ChkYear1582(nYear)
    LOCAL lRetVal
 
    IF nYear <= 1582
-      lRetVal := MSGOKCANCEL("Easter Sunday cannot be calculated accurately beyond 1582 because " + CRLF +;
-         "Pope Gregory XIII has just revised the Julian Calendar that year  " + CRLF +;
-         "to properly align the sun and moon with the seasons. During that  " + CRLF +;
-         "time Julian Calendar is out of syncronization with the solar year." + CRLF +;
-         "On the otherhand Gregorian calendar is accurate with a plus or    " + CRLF +;
-         "minus one day error with the solar year. It will be accurate until" + CRLF +;
-         "the Year 3300.                                                    " + CRLF +;
-         " " + CRLF +;
-         "For curiosity reason you can click OK and go ahead otherwise click" + CRLF +;
-         "the cancel button.                                                " + CRLF,;
+      lRetVal := MSGOKCANCEL("Easter Sunday cannot be calculated accurately beyond 1582 because " + CRLF + ;
+         "Pope Gregory XIII has just revised the Julian Calendar that year  " + CRLF + ;
+         "to properly align the sun and moon with the seasons. During that  " + CRLF + ;
+         "time Julian Calendar is out of syncronization with the solar year." + CRLF + ;
+         "On the otherhand Gregorian calendar is accurate with a plus or    " + CRLF + ;
+         "minus one day error with the solar year. It will be accurate until" + CRLF + ;
+         "the Year 3300.                                                    " + CRLF + ;
+         " " + CRLF + ;
+         "For curiosity reason you can click OK and go ahead otherwise click" + CRLF + ;
+         "the cancel button.                                                " + CRLF, ;
          "Do you know that...")
    ENDIF
 
@@ -195,7 +195,7 @@ STATIC FUNCTION ButtonOk()
    LOCAL BeginOfYear := CTOD("")
    LOCAL EndOfYear := CTOD("")
 
-   LOCAL CurrentMonth := 0,;
+   LOCAL CurrentMonth := 0, ;
       EndDate := CTOD("")
 
    LOCAL NbrOfWeek := 0
@@ -206,26 +206,26 @@ STATIC FUNCTION ButtonOk()
    //   Microsoft Excel thru HMG OLE.                           //
    LOCAL oExcel, oSheet, nSheets, oSelection, oWindow
 
-   LOCAL xCounter    := 0,;
+   LOCAL xCounter    := 0, ;
       nArrayIndex := 0
 
    LOCAL nRow := 1, nColumn := 1
 
-   LOCAL acMonths_    := {"J A N U A R Y","F E B R U A R Y","M A R C H","A P R I L","M A Y","J U N E",;
-      "J U L Y","A U G U S T","S E P T E M B E R","O C T O B E R","N O V E M B E R",;
-      "D E C E M B E R"},;
-      cYear        := "",;
-      ColSwitch    := 0,;
-      BorderSwitch := 0,;
-      BorderTop    := 0,;
-      BorderBottom := 0,;
-      RowReset     := .T.,;
-      ForLoopStart := 1,;
-      ForLoopEnd   := 0,;
+   LOCAL acMonths_    := {"J A N U A R Y","F E B R U A R Y","M A R C H","A P R I L","M A Y","J U N E", ;
+      "J U L Y","A U G U S T","S E P T E M B E R","O C T O B E R","N O V E M B E R", ;
+      "D E C E M B E R"}, ;
+      cYear        := "", ;
+      ColSwitch    := 0, ;
+      BorderSwitch := 0, ;
+      BorderTop    := 0, ;
+      BorderBottom := 0, ;
+      RowReset     := .T., ;
+      ForLoopStart := 1, ;
+      ForLoopEnd   := 0, ;
       cRange       := ""
 
-   LOCAL lHolidayBaIto := .F.,;
-      acHolidayDesc_ := {},;
+   LOCAL lHolidayBaIto := .F., ;
+      acHolidayDesc_ := {}, ;
       acShortMonthNm_ := {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"}
 
    // Variable decalarations used to determine Pre-Vatican II Feast Related to Easter //
@@ -234,10 +234,10 @@ STATIC FUNCTION ButtonOk()
    LOCAL LoopStart, LoopEnd
 
    *- variables to format Liturgical Feast Days in Excel
-   LOCAL dEaster      := CTOD(""),;
-      dGFriday     := CTOD(""),;
-      dMThursday   := CTOD(""),;
-      adFeastDays_ := {},;
+   LOCAL dEaster      := CTOD(""), ;
+      dGFriday     := CTOD(""), ;
+      dMThursday   := CTOD(""), ;
+      adFeastDays_ := {}, ;
       xx
 
    LOCAL pBarCounter := 0        // variable to update progress bar
@@ -277,9 +277,9 @@ STATIC FUNCTION ButtonOk()
       BaseDate := BeginOfYear
 
       *- make a character year to be used as calendar title
-      cYear := SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),1,1) + " " +;
-         SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),2,1) + " " +;
-         SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),3,1) + " " +;
+      cYear := SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),1,1) + " " + ;
+         SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),2,1) + " " + ;
+         SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),3,1) + " " + ;
          SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),4,1)
 
       *- calculate Easter Sunday
@@ -304,18 +304,18 @@ STATIC FUNCTION ButtonOk()
             }
 
          *--> define holiday descriptions
-         acHolidayDesc_ := { "New Year's Day",;
-            "Bataan Day",;
-            "Labor Day",;
-            "Araw ng Kagitingan",;
-            "Independence Day",;
-            "National Heroes Day",;
-            "All Saints Day",;
-            "Bonifacio Day",;
-            "Christmas Day",;
-            "Rizal Day",;
-            "Easter Sunday",;
-            "Good Friday",;
+         acHolidayDesc_ := { "New Year's Day", ;
+            "Bataan Day", ;
+            "Labor Day", ;
+            "Araw ng Kagitingan", ;
+            "Independence Day", ;
+            "National Heroes Day", ;
+            "All Saints Day", ;
+            "Bonifacio Day", ;
+            "Christmas Day", ;
+            "Rizal Day", ;
+            "Easter Sunday", ;
+            "Good Friday", ;
             "Mundy Thursday"}
 
       ELSE
@@ -333,19 +333,19 @@ STATIC FUNCTION ButtonOk()
             }
 
          *--> define holiday descriptions
-         acHolidayDesc_ := { "New Year's Day",;
-            "Edsa Revolution",;
-            "Bataan Day",;
-            "Labor Day",;
-            "Araw ng Kagitingan",;
-            "Independence Day",;
-            "National Heroes Day",;
-            "All Saints Day",;
-            "Bonifacio Day",;
-            "Christmas Day",;
-            "Rizal Day",;
-            "Easter Sunday",;
-            "Good Friday",;
+         acHolidayDesc_ := { "New Year's Day", ;
+            "Edsa Revolution", ;
+            "Bataan Day", ;
+            "Labor Day", ;
+            "Araw ng Kagitingan", ;
+            "Independence Day", ;
+            "National Heroes Day", ;
+            "All Saints Day", ;
+            "Bonifacio Day", ;
+            "Christmas Day", ;
+            "Rizal Day", ;
+            "Easter Sunday", ;
+            "Good Friday", ;
             "Mundy Thursday"}
       ENDIF
 
@@ -355,7 +355,7 @@ STATIC FUNCTION ButtonOk()
 
       // Calculate Pre-Vatican II Feast Days Related to Easter assembled into  //
       // code blocks confined in an array.                                     //
-      adFeastDays_ := {;
+      adFeastDays_ := { ;
          {| SolemnityofMary | CTOD( "1/1/"   + ALLTRIM( STR( nYear ) ) ) },;          // January 1
          {| Septuagesima  | dEaster - 63 },;                                          // 3rd Sunday before Lent  or 9th Sunday
          {| Quinquagesima | dEaster - 49 },;                                          // The Sunday before Ash Wednesday beginning of Lent
@@ -365,16 +365,16 @@ STATIC FUNCTION ButtonOk()
          ;                                                                            // and the day of fasting and repentance.
          {| TheAnnunciation        | CTOD( "3/25/"  + ALLTRIM( STR( nYear ) ) ) },;   // 25 March
          {| PalmSunday | dEaster - 7 },;                                              // Sunday before Easter
-         {| dMThursday | dEaster - 3 },;
-         {| dGFriday   | dEaster -2  },;
-         {||  dEaster  },;
+         {| dMThursday | dEaster - 3 }, ;
+         {| dGFriday   | dEaster -2  }, ;
+         {||  dEaster  }, ;
          {| RogationSunday | dEaster + 35 },;                                         // Solemn supplication ceremony prescribed by Church
          {| Ascension  | dEaster + 39 },;                                             // Ascencion of Christ into heaven, observed on the
          ;                                                                            // 40th day after Easter.
          {| Pentecost | dEaster + 49 },;                                              // 7th Sunday after Easter; commemorates the
-         ;                                                                            // emanation of the Holy Spirit to the Apostles;
+         ;                                                                            // emanation of the Holy Spirit to the Apostles ;
          ;                                                                            // Jewish: 6th of Sivan to celebrate Moses receiving
-         ;                                                                            // the Ten Commandments;
+         ;                                                                            // the Ten Commandments ;
          ;                                                                            // Scotland: Quarter day
          {| TrinitySunday |  dEaster + 56 },;                                         // 8th Sunday after Easter
          {| CorpusChristi |  dEaster + 60 },;                                         // Thursday after Trinity Sunday; first celebrated
@@ -399,36 +399,36 @@ STATIC FUNCTION ButtonOk()
          {| Epiphany1 | ChristmasDay + 12 },;                                         // 12 days after Christmas - Traditional Ephiphany Three Kings
          {|| EpiphanySunday(ChristmasDay) } }                                         // 2nd Sunday after Christmas
 
-      acFeastDays_ := { "Solemnity of Mary",;
-         "Septuagesima",;
-         "Quinquagesima",;
-         "Presentation of the Lord",;
-         "Ash Wednesday",;
-         "The Annunciation",;
-         "Palm Sunday",;
-         "Mundy Thursday",;
-         "Good Friday",;
-         "Easter Sunday",;
-         "Rogation Sunday",;
-         "Ascension",;
-         "Pentecost",;
-         "Trinity Sunday",;
-         "Corpus Christi",;
-         "Transfiguration of Jesus",;
-         "The Assumption of Mary",;
-         "Birth of Virgin Mary",;
-         "Santacruzan",;
-         "Celebration of Holy Cross",;
-         "The Mass of the Archangels",;
-         "All Saints Day",;
-         "All Souls Day",;
-         "Christ The King",;
-         "First Sunday of Advent",;
-         "Second Sunday of Advent",;
-         "Third Sunday of Advent",;
-         "Fourth Sunday of Advent",;
-         "Christmas Day",;
-         "Epiphany (Traditional - Three Kings)",;
+      acFeastDays_ := { "Solemnity of Mary", ;
+         "Septuagesima", ;
+         "Quinquagesima", ;
+         "Presentation of the Lord", ;
+         "Ash Wednesday", ;
+         "The Annunciation", ;
+         "Palm Sunday", ;
+         "Mundy Thursday", ;
+         "Good Friday", ;
+         "Easter Sunday", ;
+         "Rogation Sunday", ;
+         "Ascension", ;
+         "Pentecost", ;
+         "Trinity Sunday", ;
+         "Corpus Christi", ;
+         "Transfiguration of Jesus", ;
+         "The Assumption of Mary", ;
+         "Birth of Virgin Mary", ;
+         "Santacruzan", ;
+         "Celebration of Holy Cross", ;
+         "The Mass of the Archangels", ;
+         "All Saints Day", ;
+         "All Souls Day", ;
+         "Christ The King", ;
+         "First Sunday of Advent", ;
+         "Second Sunday of Advent", ;
+         "Third Sunday of Advent", ;
+         "Fourth Sunday of Advent", ;
+         "Christmas Day", ;
+         "Epiphany (Traditional - Three Kings)", ;
          "Epiphany - 2nd Sunday after Christmas" }
 
       oExcel := CreateObject("Excel.Application")   // Open Microsoft Excel
@@ -624,14 +624,14 @@ STATIC FUNCTION ButtonOk()
          FOR LoopStart = 1 TO LoopEnd
             xx := EVAL(adFeastDays_[LoopStart])
             IF YEAR( xx ) # YEAR( EndOfYear )
-               oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH( xx ) ] +;
-                  ". " + ALLTRIM( STR( DAY( xx ) ) ) +;
-                  ", " + ALLTRIM( STR( YEAR( xx ) ) ) +;
+               oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH( xx ) ] + ;
+                  ". " + ALLTRIM( STR( DAY( xx ) ) ) + ;
+                  ", " + ALLTRIM( STR( YEAR( xx ) ) ) + ;
                   " - " + acFeastDays_[ LoopStart ]
 
             ELSE
-               oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH( xx ) ] +;
-                  " " + ALLTRIM( STR( DAY( xx ) ) ) +;
+               oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH( xx ) ] + ;
+                  " " + ALLTRIM( STR( DAY( xx ) ) ) + ;
                   " - " + acFeastDays_[ LoopStart ]
             ENDIF
             oSheet:Cells(nRow, nColumn):HorizontalAlignment := xlLeft

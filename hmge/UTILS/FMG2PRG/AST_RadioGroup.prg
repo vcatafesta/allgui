@@ -42,7 +42,7 @@ FUNCTION AST_RadioGroup(cReadString,cTerminator)
 
    LOCAL cRetVal := ""
 
-   LOCAL aDefCommandList_ := {},;
+   LOCAL aDefCommandList_ := {}, ;
       aProperties_     := {}
    LOCAL sReadLine := ""
 
@@ -82,7 +82,7 @@ FUNCTION AST_RadioGroup(cReadString,cTerminator)
    //      [ NOTABSTOP ]
    //      [ READONLY <alReadOnly> ]
    //      [ HORIZONTAL ]
-   // @ <nRow> ,<nCol> RADIOGROUP <ControlName> OF <ParentWindowName>;
+   // @ <nRow> ,<nCol> RADIOGROUP <ControlName> OF <ParentWindowName> ;
    //    OPTIONS <acOptions> ;
    //      VALUE <nValue> WIDTH <nWidth> FONT <cFontName> SIZE <nFontSize> ON CHANGE <OnChangeProcedure | <bBlock>
 
@@ -116,9 +116,9 @@ FUNCTION AST_RadioGroup(cReadString,cTerminator)
    aProperties_[2] := RIGHT(SPACE(3) + aProperties_[2],3)
    aProperties_[3] := RIGHT(SPACE(3) + aProperties_[3],3)
 
-   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " " + " RADIOGROUP " +;
-      aProperties_[1] + " " + " OF ~LDCS_Form;" + CRLF +;
-      LDCS_iLevel(3) + aProperties_[6] + ";" + CRLF +;
+   cRetVal += LDCS_iLevel(2) + "@ " + aProperties_[2] + "," + aProperties_[3] + " " + " RADIOGROUP " + ;
+      aProperties_[1] + " " + " OF ~LDCS_Form;" + CRLF + ;
+      LDCS_iLevel(3) + aProperties_[6] + ";" + CRLF + ;
       LDCS_iLevel(3) + aProperties_[7] + " " + aProperties_[4] + " " + ;
       aProperties_[8] + " " + aProperties_[9] + " " + aProperties_[11] + CRLF
 

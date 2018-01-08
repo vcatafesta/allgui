@@ -52,28 +52,28 @@ FUNCTION Main()
       cResIco  := NIL  ; cResPict := "bMail"
       bAction  := 'MsgInfo("PRESS OButton_1x1 BUTTONEX")'
       cTooltip := "OButton_1x1 BUTTONEX with icon"
-      METRO_BUTTON("OButton_1x1",nStRow1,50,247,120,"Mail",cResPict,cResIco,;
+      METRO_BUTTON("OButton_1x1",nStRow1,50,247,120,"Mail",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_DARK_BLUE,bAction,cTooltip)
 
       cResIco  := NIL
       cResPict := "bWeather"
       bAction  := 'MsgInfo("PRESS OButton_1x2 BUTTONEX")'
       cTooltip := "OButton_1x2 BUTTONEX with icon"
-      METRO_BUTTON("OButton_1x2",nStRow1,300+5,247,120,"Weather",cResPict,cResIco,;
+      METRO_BUTTON("OButton_1x2",nStRow1,300+5,247,120,"Weather",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_BLUE,bAction,cTooltip)
 
       cResIco  := NIL
       cResPict := "bMaps"
       bAction  := 'MsgInfo("PRESS OButton_1x3 BUTTONEX")'
       cTooltip := "OButton_1x3 BUTTONEX with icon"
-      METRO_BUTTON("OButton_1x3",nStRow1,554+5,121,120,"Maps",cResPict,cResIco,;
+      METRO_BUTTON("OButton_1x3",nStRow1,554+5,121,120,"Maps",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_BRIGHT_PURPLE,bAction,cTooltip)
 
       cResIco  := NIL
       cResPict := "bSkyDrive"
       bAction  := 'MsgInfo("PRESS OButton_1x4 BUTTONEX")'
       cTooltip := "OButton_1x4 BUTTONEX with icon"
-      METRO_BUTTON("OButton_1x4",nStRow1,683+5,121,120,"SkyDrive",cResPict,cResIco,;
+      METRO_BUTTON("OButton_1x4",nStRow1,683+5,121,120,"SkyDrive",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_BLUE_BLUE,bAction,cTooltip)
 
       // the second row of tiles
@@ -81,19 +81,19 @@ FUNCTION Main()
       cResPict := NIL
       bAction  := 'MsgInfo("PRESS OButton_2x1 BUTTONEX")'
       cTooltip := "OButton_2x1 BUTTONEX with icon"
-      METRO_BUTTON("OButton_2x1",nStRow2,50,247,120,"People",cResPict,cResIco,;
+      METRO_BUTTON("OButton_2x1",nStRow2,50,247,120,"People",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_PURPLE,bAction,cTooltip)
 
       cResPict := "Desktop"
       bAction  := 'MsgInfo("PRESS OImage_2x2 IMAGE")'
-      METRO_IMAGE("OImage_2x2",nStRow2,300+5,247,120,"Desktop",cResPict,;
+      METRO_IMAGE("OImage_2x2",nStRow2,300+5,247,120,"Desktop",cResPict, ;
          aFontColor,bAction)
 
       cResIco  := NIL
       cResPict := "bNews"
       bAction  := 'MsgInfo("PRESS OButton_2x3 BUTTONEX")'
       cTooltip := "OButton_2x3 BUTTONEX with icon"
-      METRO_BUTTON("OButton_2x3",nStRow2,555+5,247,120,"News",cResPict,cResIco,;
+      METRO_BUTTON("OButton_2x3",nStRow2,555+5,247,120,"News",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_RED,bAction,cTooltip)
 
       // third row of tiles
@@ -101,27 +101,27 @@ FUNCTION Main()
       cResPict := NIL
       bAction  := 'MsgInfo("PRESS OButton_3x1 BUTTONEX")'
       cTooltip := "OButton_3x1 BUTTONEX with icon"
-      METRO_BUTTON("OButton_3x1",nStRow3,50,247,120,"Music",cResPict,cResIco,;
+      METRO_BUTTON("OButton_3x1",nStRow3,50,247,120,"Music",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_ORANGE,bAction,cTooltip)
 
       cResIco  := NIL
       cResPict := "bIE"
       bAction  := 'MsgInfo("PRESS OButton_3x2 BUTTONEX")'
       cTooltip := "OButton_3x2 BUTTONEX with icon"
-      METRO_BUTTON("OButton_3x2",nStRow3,300+5,121,120,"Internet Explorer",;
+      METRO_BUTTON("OButton_3x2",nStRow3,300+5,121,120,"Internet Explorer", ;
          cResPict,cResIco,aFontColor,COLOR_BUTTONE_DARK_PURPLE,bAction,cTooltip)
 
       cResIco  := NIL
       cResPict := "bShop"
       bAction  := 'MsgInfo("PRESS OButton_1x4 BUTTONEX")'
       cTooltip := "OButton_3x3 BUTTONEX with icon"
-      METRO_BUTTON("OButton_3x3",nStRow3,427+5,121,120,"Shop",cResPict,cResIco,;
+      METRO_BUTTON("OButton_3x3",nStRow3,427+5,121,120,"Shop",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_GREEN,bAction,cTooltip)
 
       cResIco  := NIL
       cResPict := "MyFoto"
       bAction  := 'MsgInfo("PRESS OImage_3x4 IMAGE")'
-      METRO_IMAGE("OImage_3x4",nStRow3,555+5,247,120,"My Foto",cResPict,;
+      METRO_IMAGE("OImage_3x4",nStRow3,555+5,247,120,"My Foto",cResPict, ;
          aFontColor,bAction)
 
       // fourth row of tiles
@@ -129,13 +129,13 @@ FUNCTION Main()
       cResPict := NIL
       bAction  := 'MsgInfo("PRESS OButton_4x1 BUTTONEX")'
       cTooltip := "OButton_4x1 BUTTONEX with icon"
-      METRO_BUTTON("OButton_4x1",nStRow4,50,247,120,"Message",cResPict,cResIco,;
+      METRO_BUTTON("OButton_4x1",nStRow4,50,247,120,"Message",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_BRIGHT_PURPLE,bAction,cTooltip)
 
       cResIco  := NIL
       cResPict := "Bing"
       bAction  := 'MsgInfo("PRESS OImage_4x2 IMAGE")'
-      METRO_IMAGE("OImage_4x2",nStRow4,300+5,247,120,"Bing",cResPict,;
+      METRO_IMAGE("OImage_4x2",nStRow4,300+5,247,120,"Bing",cResPict, ;
          aFontColor,bAction)
 
       // Exit from the program
@@ -143,7 +143,7 @@ FUNCTION Main()
       cResPict := NIL
       bAction  := 'MyExit()'  //'EXIT'
       cTooltip := "OButton_4x3 - Exit programm !"
-      METRO_BUTTON("OButton_4x3",nStRow4,555+5,247,120,"Exit",cResPict,cResIco,;
+      METRO_BUTTON("OButton_4x3",nStRow4,555+5,247,120,"Exit",cResPict,cResIco, ;
          aFontColor,COLOR_BUTTONE_BRIGHT_RED,bAction,cTooltip)
 
       @ nHeight-30,10 LABEL Label_StatusBar VALUE COPYRIGHT ;
@@ -217,7 +217,7 @@ FUNCTION  MySizesWinExit()  // management - right up windows
 
    RETURN NIL
 
-FUNCTION METRO_BUTTON( cObject,nRow,nCol,nWidth,nHeight,cCaption,cResPicture,cResIco,;
+FUNCTION METRO_BUTTON( cObject,nRow,nCol,nWidth,nHeight,cCaption,cResPicture,cResIco, ;
       aFontColor,aBACKCOLOR,bAction,cTooltip)
 
    AADD( aObjButton , { cObject,nRow,nCol } )  // add the item to refresh
@@ -246,7 +246,7 @@ FUNCTION METRO_BUTTON( cObject,nRow,nCol,nWidth,nHeight,cCaption,cResPicture,cRe
 
    RETURN NIL
 
-FUNCTION METRO_IMAGE( cObject,nRow,nCol,nWidth,nHeight,cCaption,cResPicture,;
+FUNCTION METRO_IMAGE( cObject,nRow,nCol,nWidth,nHeight,cCaption,cResPicture, ;
       aFontColor,bAction)
    LOCAL aBackgroundColor := Form_1.BackColor
 

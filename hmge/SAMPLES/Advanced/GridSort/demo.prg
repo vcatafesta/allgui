@@ -12,22 +12,22 @@ FUNCTION Main()
 
    OpenDB()
 
-   DEFINE WINDOW MainWA;
-         MAIN;
-         WIDTH  380;
-         HEIGHT 290;
-         TITLE  'Grid - Sort Header';
-         NOMAXIMIZE;
+   DEFINE WINDOW MainWA ;
+         MAIN ;
+         WIDTH  380 ;
+         HEIGHT 290 ;
+         TITLE  'Grid - Sort Header' ;
+         NOMAXIMIZE ;
          NOSIZE
 
-      @ 10, 10 GRID CompGR;
-         WIDTH          350;
-         HEIGHT         180;
-         HEADERS        {'RecNo', 'Name', 'Code', 'Price'};
-         WIDTHS         {75, 110, 70, 70};
-         ON HEADCLICK   {{ || SetOrder(1) }, { || SetOrder(2) }, { || SetOrder(3) }, { || SetOrder(4) }};
-         ROWSOURCE      'Comp';
-         COLUMNFIELDS   {'RecNo()', 'Name', 'Code', 'Price'};
+      @ 10, 10 GRID CompGR ;
+         WIDTH          350 ;
+         HEIGHT         180 ;
+         HEADERS        {'RecNo', 'Name', 'Code', 'Price'} ;
+         WIDTHS         {75, 110, 70, 70} ;
+         ON HEADCLICK   {{ || SetOrder(1) }, { || SetOrder(2) }, { || SetOrder(3) }, { || SetOrder(4) }} ;
+         ROWSOURCE      'Comp' ;
+         COLUMNFIELDS   {'RecNo()', 'Name', 'Code', 'Price'} ;
          JUSTIFY        {GRID_JTFY_RIGHT, GRID_JTFY_LEFT, GRID_JTFY_CENTER, GRID_JTFY_RIGHT}
 
       DEFINE BUTTON ExitBU

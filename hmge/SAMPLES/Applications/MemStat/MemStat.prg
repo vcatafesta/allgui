@@ -66,7 +66,7 @@ STATIC PROCEDURE ShowStat()
             NOSIZE            ;
             TOPMOST            ;
             ON INIT ( RefreshStat(), Form_1.Btn_OK.Setfocus ) ;
-            ON MOUSECLICK MoveActiveWindow();
+            ON MOUSECLICK MoveActiveWindow() ;
             FONT 'MS Sans Serif' SIZE 9
 
          DRAW PANEL IN WINDOW Form_1 ;

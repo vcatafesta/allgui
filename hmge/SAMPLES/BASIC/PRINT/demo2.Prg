@@ -13,26 +13,26 @@ http://harbourminigui.googlepages.com/
 FUNCTION Main()
 
    LOCAL myPrinters:=aPrinters(), lPreview:=.F.
-   LOCAL aPapers:={ PRINTER_PAPER_LETTER ,;
-      PRINTER_PAPER_LEGAL,;
-      PRINTER_PAPER_A4,;
-      PRINTER_PAPER_CSHEET,;
-      PRINTER_PAPER_DSHEET,;
-      PRINTER_PAPER_ESHEET,;
-      PRINTER_PAPER_LETTERSMALL,;
-      PRINTER_PAPER_TABLOID,;
-      PRINTER_PAPER_LEDGER,;
+   LOCAL aPapers:={ PRINTER_PAPER_LETTER , ;
+      PRINTER_PAPER_LEGAL, ;
+      PRINTER_PAPER_A4, ;
+      PRINTER_PAPER_CSHEET, ;
+      PRINTER_PAPER_DSHEET, ;
+      PRINTER_PAPER_ESHEET, ;
+      PRINTER_PAPER_LETTERSMALL, ;
+      PRINTER_PAPER_TABLOID, ;
+      PRINTER_PAPER_LEDGER, ;
       PRINTER_PAPER_EXECUTIVE }
 
-   LOCAL papers_to_select:={ "Letter, 8 1/2- by 11-inches",;
-      "Legal, 8 1/2- by 14-inches",;
-      "A4 Sheet, 210- by 297-millimeters",;
-      "C Sheet, 17- by 22-inches",;
-      "D Sheet, 22- by 34-inches",;
-      "E Sheet, 34- by 44-inches",;
-      "Letter Small, 8 1/2- by 11-inches",;
-      "Tabloid, 11- by 17-inches",;
-      "Ledger, 17- by 11-inches",;
+   LOCAL papers_to_select:={ "Letter, 8 1/2- by 11-inches", ;
+      "Legal, 8 1/2- by 14-inches", ;
+      "A4 Sheet, 210- by 297-millimeters", ;
+      "C Sheet, 17- by 22-inches", ;
+      "D Sheet, 22- by 34-inches", ;
+      "E Sheet, 34- by 44-inches", ;
+      "Letter Small, 8 1/2- by 11-inches", ;
+      "Tabloid, 11- by 17-inches", ;
+      "Ledger, 17- by 11-inches", ;
       "Executive, 7 1/4- by 10 1/2-inches" }
 
    LOAD WINDOW demo2 As Main
@@ -110,15 +110,15 @@ FUNCTION _Print_My_Job(xPaper)
    ENDIF
 
    IF Main.preview_not_yes.Value == .F.
-      SELECT PRINTER wPrinter TO lSuccess;
-         ORIENTATION Main.RadioGroup_1.Value;
-         PAPERSIZE xPaper[Main.Combo_Papers.Value];
+      SELECT PRINTER wPrinter TO lSuccess ;
+         ORIENTATION Main.RadioGroup_1.Value ;
+         PAPERSIZE xPaper[Main.Combo_Papers.Value] ;
          DEFAULTSOURCE PRINTER_BIN_AUTO;               // Select your own Paper Source
          QUALITY PRINTER_RES_MEDIUM                  // Select your own print quality
    ELSE
-      SELECT PRINTER wPrinter TO lSuccess PREVIEW;
-         ORIENTATION Main.RadioGroup_1.Value;
-         PAPERSIZE xPaper[Main.Combo_Papers.Value];
+      SELECT PRINTER wPrinter TO lSuccess PREVIEW ;
+         ORIENTATION Main.RadioGroup_1.Value ;
+         PAPERSIZE xPaper[Main.Combo_Papers.Value] ;
          DEFAULTSOURCE PRINTER_BIN_AUTO;               // Select your own Paper Source
          QUALITY PRINTER_RES_MEDIUM                  // Select your own print quality
    ENDIF

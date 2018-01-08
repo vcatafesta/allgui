@@ -19,12 +19,12 @@ FUNCTION Main
             ACTION ( DbGoTop() , Refresh() )
 
          BUTTON PREVIOUS ;
-            CAPTION '&Previous';
+            CAPTION '&Previous' ;
             PICTURE 'anterior.bmp' ;
             ACTION ( DbSkip(-1) , Refresh() )
 
          BUTTON NEXT ;
-            CAPTION '&Next';
+            CAPTION '&Next' ;
             PICTURE 'siguiente.bmp' ;
             ACTION ( DbSkip(1) , if ( eof() , DbGoBottom() , Nil ) , Refresh() )
 
@@ -52,17 +52,17 @@ FUNCTION Main
       @ 170,10 LABEL LABEL_5 VALUE 'Married:'
       @ 200,10 LABEL LABEL_6 VALUE 'Bio:'
 
-      @ 50,200 TEXTBOX TEXT_1;
+      @ 50,200 TEXTBOX TEXT_1 ;
          FIELD TEST->CODE ;
          NUMERIC ;
          MAXLENGTH 10
 
-      @ 80,200 TEXTBOX TEXT_2;
+      @ 80,200 TEXTBOX TEXT_2 ;
          WIDTH 150 ;
          FIELD TEST->FIRST ;
          MAXLENGTH 30
 
-      @ 110,200 TEXTBOX TEXT_3;
+      @ 110,200 TEXTBOX TEXT_3 ;
          WIDTH 150 ;
          FIELD TEST->LAST ;
          MAXLENGTH 30

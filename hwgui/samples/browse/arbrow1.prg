@@ -14,7 +14,7 @@ FUNCTION Main()
    SET(_SET_EPOCH, 1950)
 
    INIT WINDOW oWinMain MAIN  ;
-      TITLE "Teste" AT 0, 0 SIZE 600,400;
+      TITLE "Teste" AT 0, 0 SIZE 600,400 ;
       FONT HFont():Add( 'Arial',0,-13,400,,,) ;
       STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER
 
