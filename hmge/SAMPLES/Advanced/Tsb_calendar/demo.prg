@@ -67,7 +67,7 @@ FUNCTION Main( nBoW )
       WRAP .T.
    END SPINNER
 
-   DEFINE TBrowse oBrw ;
+   DEFINE TBROWSE oBrw ;
       AT     GetProperty( "Win_1", 'Row' ) + GetTitleHeight() + iif( _HMG_IsXP, -2, 2 ), GetProperty( "Win_1", 'Col' ) + 2 ;
       OF     Win_1 ;
       WIDTH  GetProperty( "Win_1", 'Width' ) - 10  ;

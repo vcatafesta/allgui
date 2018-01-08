@@ -1367,7 +1367,7 @@ STATIC FUNCTION getcode_categoria_produtos(value)
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=categoria_produtos->codigo,thiswindow.release)
-      END browse
+      END BROWSE
 
       ON KEY ESCAPE ACTION thiswindow.release
 
@@ -1486,7 +1486,7 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=subcategoria_produtos->codigo,thiswindow.release)
-      END browse
+      END BROWSE
 
       ON KEY ESCAPE ACTION thiswindow.release
 
@@ -1605,7 +1605,7 @@ STATIC FUNCTION getcode_impostos(value)
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=impostos->codigo,thiswindow.release)
-      END browse
+      END BROWSE
 
       ON KEY ESCAPE ACTION thiswindow.release
 
@@ -1724,7 +1724,7 @@ STATIC FUNCTION getcode_materia_prima(value)
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=materia_prima->codigo,thiswindow.release)
-      END browse
+      END BROWSE
 
       ON KEY ESCAPE ACTION thiswindow.release
 

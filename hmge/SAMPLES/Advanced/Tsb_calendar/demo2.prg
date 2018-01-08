@@ -43,7 +43,7 @@ FUNCTION Main()
 
    END WINDOW
 
-   DEFINE TBrowse oBrw ;
+   DEFINE TBROWSE oBrw ;
       AT     GetProperty( "Win_1", 'Row' ) + 20, GetProperty( "Win_1", 'Col' ) + 15 ;
       OF     Win_1 ;
       WIDTH  GetProperty( "Win_1", 'Width' ) - 38 ;

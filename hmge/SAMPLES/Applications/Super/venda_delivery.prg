@@ -564,7 +564,7 @@ STATIC FUNCTION getcode_clientes(value)
          readonly {.T.,.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (iif(empty(clientes->fixo),creg:=clientes->celular,creg:=clientes->fixo),thiswindow.release)
-      END browse
+      END BROWSE
 
       ON KEY ESCAPE ACTION thiswindow.release
 
@@ -1353,7 +1353,7 @@ STATIC FUNCTION fecha_pizza()
          HEADERS {'id','Pizza',_tamanho_001,_tamanho_002,_tamanho_003,_tamanho_004,_tamanho_005,_tamanho_006}
          WIDTHS {001,250,120,120,120,120,120,120}
          VALUE 1
-         celled .T.
+         CELLED .T.
          FONTNAME 'verdana'
          FONTSIZE 010
          FONTBOLD .T.

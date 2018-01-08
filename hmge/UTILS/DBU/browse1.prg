@@ -112,7 +112,7 @@ FUNCTION DBUbrowse1()
          lock .t.
          INPLACEEDIT .t.
          ON CHANGE DBUbrowsechanged()
-      END browse
+      END BROWSE
 
       DEFINE BUTTON _DBUbrowsegotobutton
          ROW nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)

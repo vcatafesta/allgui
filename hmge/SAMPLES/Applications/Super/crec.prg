@@ -602,7 +602,7 @@ STATIC FUNCTION getcode_clientes(value)
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=clientes->codigo,thiswindow.release)
-      END browse
+      END BROWSE
 
       ON KEY ESCAPE ACTION thiswindow.release
 
@@ -721,7 +721,7 @@ STATIC FUNCTION getcode_formas_recebimento(value)
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=formas_recebimento->codigo,thiswindow.release)
-      END browse
+      END BROWSE
 
       ON KEY ESCAPE ACTION thiswindow.release
 

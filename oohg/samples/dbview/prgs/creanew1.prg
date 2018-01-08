@@ -130,7 +130,7 @@ FUNCTION DBUcreanew(cBase)
          HEADERS {"Name","Type","Size","Decimals"}
          JUSTIFY {0,0,1,1}
          ITEMS _DBUstructarr
-         on dblclick DBUlineselected()
+         ON DBLCLICK DBUlineselected()
       END GRID
 
       DEFINE BUTTON _DBUsavestruct

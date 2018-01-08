@@ -326,13 +326,13 @@ PROCEDURE Main( cFile )
 
       // Table of existing fields
 
-      Define TBrowse oEditStru                  ;
+      DEFINE TBROWSE oEditStru                  ;
          At 40 + If(IsXPThemeActive(), 5, 0), 5  ;
          WIDTH 200                               ;
          HEIGHT 200                              ;
          ON CHANGE ShowValues()                  ;
          ON DBLCLICK EditField( MODE_EDITFIELD ) ;
-         Celled
+         CELLED
 
       oEditStru : SetArray( aStru )
 

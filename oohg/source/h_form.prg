@@ -3266,7 +3266,7 @@ FUNCTION inspector( oWind )
          HEIGHT 240 width 394 ;
          HEADERS {"DATA","Values"};
          WIDTHS {150,180};
-         on dblclick (selecciona(aControls[oCombo:value],aControlsNames[oCombo:value],oooBj_Data[this.cellrowindex]),carga(aControls[oCombo:value],oGrd,@ooobj_data))
+         ON DBLCLICK (selecciona(aControls[oCombo:value],aControlsNames[oCombo:value],oooBj_Data[this.cellrowindex]),carga(aControls[oCombo:value],oGrd,@ooobj_data))
 
       aData := {}
       n:=''

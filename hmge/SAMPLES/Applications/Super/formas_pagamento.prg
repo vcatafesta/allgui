@@ -638,7 +638,7 @@ STATIC FUNCTION getcode_banco(value)
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=bancos->codigo,thiswindow.release)
-      END browse
+      END BROWSE
 
       ON KEY ESCAPE ACTION thiswindow.release
 
