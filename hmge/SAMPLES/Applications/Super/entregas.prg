@@ -13,16 +13,16 @@ FUNCTION mostra_entregas()
 
    DEFINE WINDOW form_entrega;
          at 000,000;
-         width getdesktopwidth();
-         height getdesktopheight();
-         title 'Acompanhamento dos pedidos feitos em : venda delivery e : venda balcão';
-         icon path_imagens+'icone.ico';
+         WIDTH getdesktopwidth();
+         HEIGHT getdesktopheight();
+         TITLE 'Acompanhamento dos pedidos feitos em : venda delivery e : venda balcão';
+         ICON path_imagens+'icone.ico';
          modal
 
       @ 005,005 browse grid_entrega;
          parent form_entrega;
-         width getdesktopwidth()-015;
-         height getdesktopheight()-125;
+         WIDTH getdesktopwidth()-015;
+         HEIGHT getdesktopheight()-125;
          headers {'Situação','Telefone','Cliente','Endereço','Hora','Origem','Motoboy','Taxa R$'};
          widths {120,080,220,220,080,080,100,080};
          workarea entrega;
@@ -30,39 +30,39 @@ FUNCTION mostra_entregas()
          value 1;
          font 'tahoma' size 010;
          bold;
-         backcolor _acompanhamento;
+         BACKCOLOR _acompanhamento;
          fontcolor BLUE
 
       * botões
       @ getdesktopheight()-110,005 buttonex botao_f5;
          parent form_entrega;
          caption 'F5 - Escolher motoboy/entregador';
-         width 280 height 040;
-         picture path_imagens+'img_motent.bmp';
+         WIDTH 280 height 040;
+         PICTURE path_imagens+'img_motent.bmp';
          font 'tahoma' size 010;
          bold;
          action escolher_motoboy()
       @ getdesktopheight()-110,295 buttonex botao_f6;
          parent form_entrega;
          caption 'F6 - Mudar situação do pedido';
-         width 260 height 040;
-         picture path_imagens+'img_situacao.bmp';
+         WIDTH 260 height 040;
+         PICTURE path_imagens+'img_situacao.bmp';
          font 'tahoma' size 010;
          bold;
          action mudar_situacao()
       @ getdesktopheight()-110,565 buttonex botao_f9;
          parent form_entrega;
          caption 'F9 - Atualizar pedidos';
-         width 210 height 040;
-         picture path_imagens+'img_atualiza.bmp';
+         WIDTH 210 height 040;
+         PICTURE path_imagens+'img_atualiza.bmp';
          font 'tahoma' size 010;
          bold;
          action atualizar_pedidos()
       @ getdesktopheight()-110,785 buttonex botao_esc;
          parent form_entrega;
          caption 'ESC - Sair desta tela';
-         width 200 height 040;
-         picture path_imagens+'img_sair.bmp';
+         WIDTH 200 height 040;
+         PICTURE path_imagens+'img_sair.bmp';
          font 'tahoma' size 010;
          bold;
          action form_entrega.release
@@ -86,17 +86,17 @@ STATIC FUNCTION escolher_motoboy()
 
    DEFINE WINDOW form_escolhe;
          at 000,000;
-         width 400;
-         height 400;
-         title 'Escolher Motoboy/Entregador';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 400;
+         TITLE 'Escolher Motoboy/Entregador';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL info_001
          parent form_escolhe
-         col 010
-         row 005
+         COL 010
+         ROW 005
          value 'Duplo clique ou ENTER escolhe motoboy'
          autosize .T.
          fontname 'tahoma'
@@ -107,8 +107,8 @@ STATIC FUNCTION escolher_motoboy()
       END LABEL
       DEFINE LABEL info_002
          parent form_escolhe
-         col 010
-         row 025
+         COL 010
+         ROW 025
          value 'ESC fecha esta janela'
          autosize .T.
          fontname 'tahoma'
@@ -121,13 +121,13 @@ STATIC FUNCTION escolher_motoboy()
          parent form_escolhe;
          caption 'Sair';
          action form_escolhe.release;
-         width 100;
-         height 030
+         WIDTH 100;
+         HEIGHT 030
 
       @ 045,010 browse browse_escolhe;
          of form_escolhe;
-         width 375;
-         height 310;
+         WIDTH 375;
+         HEIGHT 310;
          headers {'ID','Motoboy/Entregador'};
          widths {1,320};
          workarea motoboys;
@@ -135,7 +135,7 @@ STATIC FUNCTION escolher_motoboy()
          value 1;
          font 'verdana';
          size 010;
-         backcolor _branco_001;
+         BACKCOLOR _branco_001;
          fontcolor BLUE;
          on dblclick grava_motoboy(motoboys->codigo,alltrim(motoboys->nome))
 
@@ -170,17 +170,17 @@ STATIC FUNCTION mudar_situacao()
 
    DEFINE WINDOW form_situacao;
          at 000,000;
-         width 400;
-         height 400;
-         title 'Mudar situação do pedido';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 400;
+         TITLE 'Mudar situação do pedido';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL info_001
          parent form_situacao
-         col 010
-         row 005
+         COL 010
+         ROW 005
          value 'Duplo clique ou ENTER escolhe situação'
          autosize .T.
          fontname 'tahoma'
@@ -191,8 +191,8 @@ STATIC FUNCTION mudar_situacao()
       END LABEL
       DEFINE LABEL info_002
          parent form_situacao
-         col 010
-         row 025
+         COL 010
+         ROW 025
          value 'ESC fecha esta janela'
          autosize .T.
          fontname 'tahoma'
@@ -205,15 +205,15 @@ STATIC FUNCTION mudar_situacao()
          parent form_situacao;
          caption 'Sair';
          action form_situacao.release;
-         width 100;
-         height 030
+         WIDTH 100;
+         HEIGHT 030
 
       ON KEY ESCAPE ACTION form_situacao.release
 
       @ 45,10 grid grid_situacao;
          of form_situacao;
-         width 375;
-         height 310;
+         WIDTH 375;
+         HEIGHT 310;
          headers {'Situações'};
          widths {320};
          fontcolor BLUE;

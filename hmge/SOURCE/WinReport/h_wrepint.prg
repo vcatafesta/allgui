@@ -808,7 +808,7 @@ FUNCTION Msgt (nTimeout, Message, Title, Flags)
 
    IF ValType (nTimeout) != 'U' .and. ValType (nTimeout) == 'C'
       Flags    := Title
-      Title    := Message
+      TITLE    := Message
       Message  := nTimeout
       nTimeout := 0
    ENDIF

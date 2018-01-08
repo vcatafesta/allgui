@@ -50,14 +50,14 @@ FUNCTION GetRegPosWindow( FormName, cProgName )
    cKey := "Software\MiniGUI\" + cProgName + "\" + FormName
 
    IF IsRegistryKey( hKey, cKey )
-      col    := GetRegistryValue( hKey, cKey, "col", 'N' )
-      row    := GetRegistryValue( hKey, cKey, "row", 'N' )
-      width  := GetRegistryValue( hKey, cKey, "width", 'N' )
-      height := GetRegistryValue( hKey, cKey, "height", 'N' )
-      col    := IFNIL( col, actpos[1], col )
-      row    := IFNIL( row, actpos[2], row )
-      width  := IFNIL( width, actpos[3] - actpos[1], width )
-      height := IFNIL( height, actpos[4] - actpos[2], height )
+      COL    := GetRegistryValue( hKey, cKey, "col", 'N' )
+      ROW    := GetRegistryValue( hKey, cKey, "row", 'N' )
+      WIDTH  := GetRegistryValue( hKey, cKey, "width", 'N' )
+      HEIGHT := GetRegistryValue( hKey, cKey, "height", 'N' )
+      COL    := IFNIL( col, actpos[1], col )
+      ROW    := IFNIL( row, actpos[2], row )
+      WIDTH  := IFNIL( width, actpos[3] - actpos[1], width )
+      HEIGHT := IFNIL( height, actpos[4] - actpos[2], height )
 
       MoveWindow( GetFormHandle( FormName ) , col , row , width , height , .t. )
    ENDIF
@@ -85,10 +85,10 @@ FUNCTION SetRegPosWindow( FormName, cProgName )
       ENDIF
    ENDIF
    IF IsRegistryKey( hKey, cKey )
-      col    := actpos[1]
-      row    := actpos[2]
-      width  := actpos[3] - actpos[1]
-      height := actpos[4] - actpos[2]
+      COL    := actpos[1]
+      ROW    := actpos[2]
+      WIDTH  := actpos[3] - actpos[1]
+      HEIGHT := actpos[4] - actpos[2]
       SetRegistryValue( hKey, cKey, "col", col )
       SetRegistryValue( hKey, cKey, "row", row )
       SetRegistryValue( hKey, cKey, "width", width )

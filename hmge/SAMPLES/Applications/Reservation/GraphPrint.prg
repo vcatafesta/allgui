@@ -24,13 +24,13 @@ FUNCTION MainGraph(cnt)
 
    DEFINE WINDOW GraphTest ;
          At 0,0 ;
-         Width 640 ;
-         Height 500 ;
-         Title {"Use of statistical graphics resources.", "Grafici di statistica d'uso risorse."}[alng] ;
-         Icon "Main" ;
+         WIDTH 640 ;
+         HEIGHT 500 ;
+         TITLE {"Use of statistical graphics resources.", "Grafici di statistica d'uso risorse."}[alng] ;
+         ICON "Main" ;
          MODAL ;
-         Nosize ;
-         Backcolor {255,255,255} on init DrawBarGraph(aser)
+         NOSIZE ;
+         BACKCOLOR {255,255,255} on init DrawBarGraph(aser)
 
       DEFINE BUTTONEX Button_1
          ROW    430

@@ -29,7 +29,7 @@ PROCEDURE main()
 
    DEFINE WINDOW Form_Main ;
          clientarea w, h + GetMenuBarHeight() ;
-         title 'Icons Demo' ;
+         TITLE 'Icons Demo' ;
          main ;
          nomaximize nosize ;
          on release ;

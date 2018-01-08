@@ -7,10 +7,10 @@ PROCEDURE Main
    DEFINE WINDOW m at 0,0 width 600 height 400 title 'Grid Demo' main
 
       DEFINE GRID g
-         row 10
-         col 10
-         width 472
-         height 200
+         ROW 10
+         COL 10
+         WIDTH 472
+         HEIGHT 200
          headers {"Name","City","Amount"}
          widths {200,150,100}
          allowedit .t.
@@ -20,17 +20,17 @@ PROCEDURE Main
       END GRID
 
       DEFINE BUTTON b1
-         row 230
-         col 10
-         width 240
+         ROW 230
+         COL 10
+         WIDTH 240
          caption "Add a new item in inplaced combobox"
          action AddGridEditComboItem( "g", "m", 2, Upper( InputBox("Enter a new city", "Add city", "MUMBAI") ) )
       END BUTTON
 
       DEFINE BUTTON b2
-         row 260
-         col 10
-         width 240
+         ROW 260
+         COL 10
+         WIDTH 240
          caption "Add a new item in grid"
          action ( nId := m.g.ItemCount, m.g.AddItem( {"Person "+hb_ntos(++nId), Random(3), nId*1000} ) )
       END BUTTON

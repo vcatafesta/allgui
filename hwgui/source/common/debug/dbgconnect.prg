@@ -497,13 +497,13 @@ STATIC FUNCTION Hex2Str( stroka )
 
    RETURN cRes
 
-   EXIT PROCEDURE hwg_dbg_exit
+EXIT PROCEDURE hwg_dbg_exit
 
-   hwg_dbg_Send( "quit" )
-   FClose( handl1 )
-   FClose( handl2 )
+hwg_dbg_Send( "quit" )
+FClose( handl1 )
+FClose( handl2 )
 
-   RETURN
+RETURN
 
 #ifdef __XHARBOUR__
 #ifndef __PLATFORM__Windows

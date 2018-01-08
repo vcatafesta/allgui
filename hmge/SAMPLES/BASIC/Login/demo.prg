@@ -19,7 +19,7 @@ FUNCTION main
    DEFINE WINDOW sample ;
          At 0, 0 width 600 height 400 ;
          main ;
-         title "Want to login?" ;
+         TITLE "Want to login?" ;
          ON INIT loginattempt( 2 )
 
       DEFINE MAIN MENU
@@ -62,44 +62,44 @@ FUNCTION loginattempt( level )
    DEFINE WINDOW login At 0, 0 width 220 height 155 title "User Login" modal
 
       DEFINE LABEL usernamelabel
-         Row 10
-         Col 10
-         width 80
+         ROW 10
+         COL 10
+         WIDTH 80
          Value "Username"
       END LABEL
       DEFINE TEXTBOX username
-         Row 10
-         Col 90
-         width 100
+         ROW 10
+         COL 90
+         WIDTH 100
          value username
          uppercase .T.
       END TEXTBOX
       DEFINE LABEL passwordlabel
-         Row 40
-         Col 10
-         width 80
+         ROW 40
+         COL 10
+         WIDTH 80
          Value "Password"
       END LABEL
       DEFINE TEXTBOX password
-         Row 40
-         Col 90
-         width 100
+         ROW 40
+         COL 90
+         WIDTH 100
          password .T.
          value ""
          uppercase .T.
       END TEXTBOX
       DEFINE BUTTON login
-         Row 80
-         Col 45
-         width 50
+         ROW 80
+         COL 45
+         WIDTH 50
          caption "Login"
          action ( attempts++, ok := ( login.username.value == username .AND. login.password.value == password ), ;
             iif( ok, Loginok( username ), iif( attempts < maxattempt, ( MsgStop( "Not Authorized!" ), login.username.setfocus ), logincancelled( .T. ) ) ) )
       END BUTTON
       DEFINE BUTTON cancel
-         Row 80
-         Col 115
-         width 50
+         ROW 80
+         COL 115
+         WIDTH 50
          caption "Cancel"
          action logincancelled( .F. )
       END BUTTON
@@ -177,15 +177,15 @@ FUNCTION ShowUserList()
 
    DEFINE WINDOW LIST ;
          At 0, 0 width 400 - if( isvista() .OR. isseven(), 0, 8 ) height 300 - if( isvista() .OR. isseven(), 0, 10 ) ;
-         title "User List" ;
+         TITLE "User List" ;
          modal ;
          ON RELEASE if( rank < 10, savelist(), nil )
 
       DEFINE GRID userlist
-         Row     0
-         Col     0
-         width   384
-         height  262
+         ROW     0
+         COL     0
+         WIDTH   384
+         HEIGHT  262
          headers { 'User', 'Password', 'Max attempt', 'Rank' }
          widths  { 110, 110, 90, 50 }
          items   list

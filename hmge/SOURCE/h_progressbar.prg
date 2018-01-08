@@ -217,7 +217,7 @@ FUNCTION InitDialogProgressBar( ParentName, ControlHandle, k )
 
    LOCAL BackColor, BarColor
 
-   BackColor := _HMG_aControlBkColor [k]
+   BACKCOLOR := _HMG_aControlBkColor [k]
    BarColor  := _HMG_aControlFontColor [k]
 
    IF ValType( ParentName ) <> 'U'

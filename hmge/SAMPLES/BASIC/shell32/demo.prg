@@ -34,24 +34,24 @@ PROCEDURE Main( nOper, cFile, cCopy )
          NOSIZE NOMAXIMIZE
 
       DEFINE BUTTON x
-         row 10
-         col 10
+         ROW 10
+         COL 10
          caption "Test 1"
          DEFAULT .t.
          action test( aFile, aCopy, nOper, cCopy )
       END BUTTON
 
       DEFINE BUTTON x2
-         row 40
-         col 10
+         ROW 40
+         COL 10
          caption "Test 2"
          DEFAULT .t.
          action test2( aFile, aCopy, nOper )
       END BUTTON
 
       DEFINE BUTTON y
-         row 70
-         col 10
+         ROW 70
+         COL 10
          caption "Exit"
          action ThisWindow.Release
       END BUTTON

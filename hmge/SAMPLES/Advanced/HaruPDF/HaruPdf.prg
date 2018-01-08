@@ -150,8 +150,8 @@ FUNCTION DesignHaruPDF( cFileToSave )
    page := HPDF_AddPage(pdf)
       aadd(cpos ,page)
       HPDF_Page_SetSize(HPDF_PAGE_SIZE_A4, HPDF_PAGE_PORTRAIT )
-      height := HPDF_Page_GetHeight(page)
-      width  := HPDF_Page_GetWidth(page)
+      HEIGHT := HPDF_Page_GetHeight(page)
+      WIDTH  := HPDF_Page_GetWidth(page)
 
       /* Print the lines of the page. */
 
@@ -1567,8 +1567,8 @@ STATIC FUNCTION print_grid( pdf, page )
 
    LOCAL  height,width,font,x,y
 
-   height = HPDF_Page_GetHeight (page)
-   width = HPDF_Page_GetWidth (page)
+   HEIGHT = HPDF_Page_GetHeight (page)
+   WIDTH = HPDF_Page_GetWidth (page)
    font = HPDF_GetFont (pdf, "Helvetica", Nil)
 
    HPDF_Page_SetFontAndSize (page, font, 5)

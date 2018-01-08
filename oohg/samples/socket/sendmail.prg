@@ -3,81 +3,67 @@
 ///Bruno Luciani
 ///bruno.luciani@gmail.com
 
-
 #include "oohg.ch"
 
-procedure main
+PROCEDURE main
 
+   LOAD WINDOW mailing
+   mailing.smtp.value:="mail.servidor.com"
 
-load window mailing
-mailing.smtp.value:="mail.servidor.com"
+   CENTER WINDOW mailing
+   ACTIVATE WINDOW mailing
 
+   RETURN
 
+FUNCTION enviomail
 
-center window mailing
-activate window mailing
+   sendmail(mailing.send.value,mailing.rname.value,mailing.smtp.value)
 
-return
+   RETURN
 
+   RETURN
 
+FUNCTION sendmail(email,nombre,cServer)
 
-function enviomail
-sendmail(mailing.send.value,mailing.rname.value,mailing.smtp.value)
-return
+   LOCAL oSock, cRet
 
+   ///local cServer := "mail.tuservidor.com"   / puedes poner la IP tambien
 
+   oSock := TSmtp():New()
 
-return
+   Mailing.statusbar.value:= "Conectando a " +cServer
 
+   IF oSock:Connect( cServer )
+      Mailing.statusbar.value:= "Conectado...."
 
+      IF !Empty(alltrim(email))
 
+         Mailing.confirmacion_lbl.Value:= ""
 
+         oSock:ClearData()
+         oSock:SetFrom( "Mail Sample", "<oohg@oohg.org>" )
+         oSock:SetSubject( Mailing.asunto_txb.Value )
+         oSock:AddTo( alltrim(nombre),"<"+alltrim(email)+">" )
+         oSock:SetData( Mailing.texto_edt.value, .t. )
+         IF !oSock:Send( .T. )
+            Mailing.confirmacion_lbl.Value:= "Error: "+oSock:getLastError()
+         ELSE
+            Mailing.confirmacion_lbl.Value:= 'Envio correcto'
+         ENDIF
+      ENDIF
 
+      Mailing.statusbar.Value:= "Cerrando la conexion"
+      IF oSock:Close()
+         Mailing.statusbar.Value:= "Cerrada la conexion"
+         Mailing.release
+      ELSE
+         Mailing.statusbar.Value:= "Error al cerrar la conexion"
+      ENDIF
+   ELSE
+      Mailing.statusbar.Value:= "Fallo conexion " + oSock:getLastError()
+   ENDIF
 
-
-//-----------------------------------------------------------------------------*
-function sendmail(email,nombre,cServer)
-//-----------------------------------------------------------------------------*
-local oSock, cRet
-///local cServer := "mail.tuservidor.com"   / puedes poner la IP tambien
-
-
-oSock := TSmtp():New()
-
-Mailing.statusbar.value:= "Conectando a " +cServer
-
-if oSock:Connect( cServer )
-Mailing.statusbar.value:= "Conectado...."
-
-
-if !Empty(alltrim(email))
-
-Mailing.confirmacion_lbl.Value:= ""
-
-oSock:ClearData()
-oSock:SetFrom( "Mail Sample", "<oohg@oohg.org>" )
-oSock:SetSubject( Mailing.asunto_txb.Value )
-oSock:AddTo( alltrim(nombre),"<"+alltrim(email)+">" )
-oSock:SetData( Mailing.texto_edt.value, .t. )
-if !oSock:Send( .T. )
-Mailing.confirmacion_lbl.Value:= "Error: "+oSock:getLastError()
-else
-Mailing.confirmacion_lbl.Value:= 'Envio correcto'
-endif
-endif
-
-Mailing.statusbar.Value:= "Cerrando la conexion"
-if oSock:Close()
-Mailing.statusbar.Value:= "Cerrada la conexion"
-Mailing.release
-else
-Mailing.statusbar.Value:= "Error al cerrar la conexion"
-endif
-else
-Mailing.statusbar.Value:= "Fallo conexion " + oSock:getLastError()
-endif
-
-RETURN
+   RETURN
 
 #define NO_SAMPLE
 #include "TSmtpClient.prg"

@@ -23,10 +23,10 @@ PROCEDURE inicio
       @ 0,240 button btn4 caption '&Salir'    width 80 height 20 action form1.release
 
       DEFINE GRID grid1
-         row 22
-         col 5
-         width 300
-         height 300
+         ROW 22
+         COL 5
+         WIDTH 300
+         HEIGHT 300
          headers {'Id','Descripcion'}
          widths { 60, 300 }
          on dblclick    eventos(2)
@@ -81,7 +81,7 @@ PROCEDURE eventos(n)
       END
       DEFINE WINDOW form1a;
             at 0,0 width 350 height 120;
-            title iif(n = 2,'Edicion','Agregar');
+            TITLE iif(n = 2,'Edicion','Agregar');
             modal;
             font 'ms sans serif' size 8
 

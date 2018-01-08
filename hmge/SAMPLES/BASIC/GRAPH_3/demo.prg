@@ -24,39 +24,39 @@ FUNCTION Main
 
    DEFINE WINDOW GraphTest ;
          At 0,0 ;
-         Width 640 ;
-         Height 480 ;
-         Title "Graph" ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Graph" ;
          Main ;
-         Icon "Graph.ico" ;
+         ICON "Graph.ico" ;
          nomaximize nosize ;
          On Init DrawBarGraph ( aSer )
 
       DEFINE BUTTON Button_1
-         Row   405
-         Col   40
+         ROW   405
+         COL   40
          Caption   'Bars'
          Action DrawBarGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_2
-         Row   405
-         Col   180
+         ROW   405
+         COL   180
          Caption   'Lines'
          Action DrawLinesGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_3
-         Row   405
-         Col   320
+         ROW   405
+         COL   320
          Caption   'Points'
          Action DrawPointsGraph ( aSer )
       END BUTTON
 
       Define CheckButton Button_4
-         Row   405
-         Col   460
-         Width   120
+         ROW   405
+         COL   460
+         WIDTH   120
          Caption   'Show Data Values'
          OnChange ( lShowData := !lShowData, ;
             if(nGraph = 1, DrawBarGraph ( aSer ), ;

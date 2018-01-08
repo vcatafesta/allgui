@@ -73,8 +73,8 @@ FUNCTION _DefineTree ( ControlName, ParentFormName, row, col, width, height, cha
       __defaultNIL( @FontSize, _HMG_ActiveFontSize )
    ENDIF
    IF _HMG_FrameLevel > 0 .AND. !_HMG_ParentWindowActive
-      col := col + _HMG_ActiveFrameCol [_HMG_FrameLevel]
-      row := row + _HMG_ActiveFrameRow [_HMG_FrameLevel]
+      COL := col + _HMG_ActiveFrameCol [_HMG_FrameLevel]
+      ROW := row + _HMG_ActiveFrameRow [_HMG_FrameLevel]
       ParentFormName := _HMG_ActiveFrameParentFormName [_HMG_FrameLevel]
    ENDIF
    lDialogInMemory := _HMG_DialogInMemory
@@ -121,10 +121,10 @@ FUNCTION _DefineTree ( ControlName, ParentFormName, row, col, width, height, cha
 
          SetWindowStyle ( ControlHandle, Style, .T. )
 
-         col := GetWindowCol ( Controlhandle )
-         row := GetWindowRow ( Controlhandle )
-         Width := GetWindowWidth  ( Controlhandle )
-         Height := GetWindowHeight ( Controlhandle )
+         COL := GetWindowCol ( Controlhandle )
+         ROW := GetWindowRow ( Controlhandle )
+         WIDTH := GetWindowWidth  ( Controlhandle )
+         HEIGHT := GetWindowHeight ( Controlhandle )
 
          ImgDefNode := iif( ValType( aImgNode ) == "A" , Len( aImgNode ), 0 )  //Tree+
          ImgDefItem := iif( ValType( aImgItem ) == "A" , Len( aImgItem ), 0 )  //Tree+

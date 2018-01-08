@@ -246,7 +246,7 @@ FUNCTION mchoice(aOptions,nTop,nLeft,nBottom,nRight,cTitle,lAlpha,nStart,nRow,aS
          TABSTOP .T.
          VISIBLE .T.
          TRANSPARENT .F.
-         Picture "Minigui_EDIT_OK"
+         PICTURE "Minigui_EDIT_OK"
       END BUTTONEX
 
       DEFINE BUTTONEX Button_2
@@ -424,7 +424,7 @@ FUNCTION TagIt(aTagged, aFields, aFieldNames, cTitle, nFreeze, cell,nHw,nVw)
             TABSTOP .T.
             VISIBLE .T.
             TRANSPARENT .F.
-            Picture "Minigui_EDIT_ADD"
+            PICTURE "Minigui_EDIT_ADD"
          END BUTTONEX
 
          DEFINE BUTTONEX Button_2
@@ -441,7 +441,7 @@ FUNCTION TagIt(aTagged, aFields, aFieldNames, cTitle, nFreeze, cell,nHw,nVw)
             TABSTOP .T.
             VISIBLE .T.
             TRANSPARENT .F.
-            Picture "Minigui_EDIT_OK"
+            PICTURE "Minigui_EDIT_OK"
          END BUTTONEX
 
          DEFINE BUTTONEX Button_3

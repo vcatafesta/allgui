@@ -23,20 +23,20 @@ FUNCTION movimento_bancario()
 
    DEFINE WINDOW form_movban;
          at 000,000;
-         width 800;
-         height 605;
-         title 'Movimentação Bancária';
-         icon path_imagens+'icone.ico';
+         WIDTH 800;
+         HEIGHT 605;
+         TITLE 'Movimentação Bancária';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
-         picture path_imagens+'incluir.bmp'
-         col 005
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'incluir.bmp'
+         COL 005
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F5 Incluir'
          action dados(1)
          fontname 'verdana'
@@ -46,14 +46,14 @@ FUNCTION movimento_bancario()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_alterar
-         picture path_imagens+'alterar.bmp'
-         col 107
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'alterar.bmp'
+         COL 107
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F6 Alterar'
          action dados(2)
          fontname 'verdana'
@@ -63,14 +63,14 @@ FUNCTION movimento_bancario()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_excluir
-         picture path_imagens+'excluir.bmp'
-         col 209
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'excluir.bmp'
+         COL 209
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F7 Excluir'
          action excluir()
          fontname 'verdana'
@@ -80,14 +80,14 @@ FUNCTION movimento_bancario()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_atualizar
-         picture path_imagens+'atualizar.bmp'
-         col 311
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'atualizar.bmp'
+         COL 311
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Atualizar'
          action atualizar()
          fontname 'verdana'
@@ -97,14 +97,14 @@ FUNCTION movimento_bancario()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
-         picture path_imagens+'sair.bmp'
-         col 413
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'sair.bmp'
+         COL 413
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'ESC Voltar'
          action form_movban.release
          fontname 'verdana'
@@ -114,22 +114,22 @@ FUNCTION movimento_bancario()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_movban
             parent form_movban
-            col 000
-            row 105
-            width 795
-            height 380
+            COL 000
+            ROW 105
+            WIDTH 795
+            HEIGHT 380
             headers {'id','Data','Histórico','Entradas','Saídas'}
             widths {001,120,400,120,120}
             fontname 'verdana'
             fontsize 010
             fontbold .T.
-            backcolor _amarelo_001
+            BACKCOLOR _amarelo_001
             fontcolor _preto_001
             ondblclick dados(2)
          END GRID
@@ -137,8 +137,8 @@ FUNCTION movimento_bancario()
 
       DEFINE LABEL rodape_000
          parent form_movban
-         col 005
-         row 500
+         COL 005
+         ROW 500
          value 'Escolha o banco'
          autosize .T.
          fontname 'verdana'
@@ -148,18 +148,18 @@ FUNCTION movimento_bancario()
          transparent .T.
       END LABEL
       define comboboxex cbo_001
-      row   500
-      col   140
-      width 300
-      height 200
+      ROW   500
+      COL   140
+      WIDTH 300
+      HEIGHT 200
       items a_001
       value 1
    END comboboxex
 
    DEFINE LABEL rodape_001
       parent form_movban
-      col 005
-      row 545
+      COL 005
+      ROW 545
       value 'Escolha o período'
       autosize .T.
       fontname 'verdana'
@@ -170,8 +170,8 @@ FUNCTION movimento_bancario()
    END LABEL
    DEFINE LABEL rodape_002
       parent form_movban
-      col 250
-      row 545
+      COL 250
+      ROW 545
       value 'até'
       autosize .T.
       fontname 'verdana'
@@ -183,25 +183,25 @@ FUNCTION movimento_bancario()
    @ 540,140 datepicker dp_inicio;
       parent form_movban;
       value date();
-      width 100;
+      WIDTH 100;
       font 'verdana' size 010
    @ 540,280 datepicker dp_final;
       parent form_movban;
       value date();
-      width 100;
+      WIDTH 100;
       font 'verdana' size 010
    @ 540,390 buttonex botao_filtrar;
       parent form_movban;
       caption 'Filtrar';
-      width 100 height 030;
+      WIDTH 100 height 030;
       action atualizar();
       bold;
       tooltip 'Clique aqui para mostrar as informações com base no período selecionado'
 
    DEFINE LABEL rodape_003
       parent form_movban
-      col form_movban.width - 270
-      row 545
+      COL form_movban.width - 270
+      ROW 545
       value 'DUPLO CLIQUE : Alterar informação'
       autosize .T.
       fontname 'verdana'
@@ -259,12 +259,12 @@ STATIC FUNCTION dados(parametro)
 
    DEFINE WINDOW form_dados;
          at 000,000;
-         width 325;
-         height 320;
-         title (titulo);
-         icon path_imagens+'icone.ico';
+         WIDTH 325;
+         HEIGHT 320;
+         TITLE (titulo);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * entrada de dados
       @ 010,005 label lbl_000;
@@ -277,11 +277,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 030,005 textbox tbox_000;
          of form_dados;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_banco;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_banco_2('form_dados','tbox_000')
@@ -303,11 +303,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 080,005 textbox tbox_001;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_data;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          date
       @ 110,005 label lbl_002;
@@ -320,12 +320,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 130,005 textbox tbox_002;
          of form_dados;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_historico;
          maxlength 030;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 160,005 label lbl_003;
@@ -338,13 +338,13 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 180,005 getbox tbox_003;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_entrada;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       @ 160,140 label lbl_004;
          of form_dados;
          value 'Saída';
@@ -355,32 +355,32 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 180,140 getbox tbox_004;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_saida;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_dados.height-090
+         COL 000
+         ROW form_dados.height-090
          value ''
-         width form_dados.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_dados.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_dados.width-225
-         row form_dados.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_dados.width-225
+         ROW form_dados.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar(parametro)
          fontbold .T.
@@ -389,11 +389,11 @@ STATIC FUNCTION dados(parametro)
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_dados.width-100
-         row form_dados.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_dados.width-100
+         ROW form_dados.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_dados.release
          fontbold .T.
@@ -571,16 +571,16 @@ STATIC FUNCTION getcode_banco_2(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -590,19 +590,19 @@ STATIC FUNCTION getcode_banco_2(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_banco_2()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea bancos
@@ -611,7 +611,7 @@ STATIC FUNCTION getcode_banco_2(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}

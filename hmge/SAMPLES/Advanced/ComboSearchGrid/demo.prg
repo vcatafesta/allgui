@@ -7,16 +7,16 @@ FUNCTION Main
 
    DEFINE WINDOW csg at 0, 0 width 600 height 500 main title 'ComboSearchGrid - Sample'
       DEFINE LABEL namelabel
-         row 10
-         col 10
-         width 60
+         ROW 10
+         COL 10
+         WIDTH 60
          value 'Name'
          vcenteralign .t.
       END LABEL
       DEFINE COMBOSEARCHGRID name
-         row 10
-         col 80
-         width 480
+         ROW 10
+         COL 80
+         WIDTH 480
          items aItems
          headers { 'First Name', 'Last Name', 'Code' }
          widths { 200, 150, 100 }
@@ -25,22 +25,22 @@ FUNCTION Main
          showheaders .t.
       END COMBOSEARCHGRID
       DEFINE LABEL label2
-         row 40
-         col 10
-         width 60
+         ROW 40
+         COL 10
+         WIDTH 60
          value 'Label 2'
          vcenteralign .t.
       END LABEL
       DEFINE TEXTBOX textbox2
-         row 40
-         col 80
-         width 200
+         ROW 40
+         COL 80
+         WIDTH 200
       END TEXTBOX
       DEFINE BUTTON selected
-         row 40
-         col 300
+         ROW 40
+         COL 300
          caption 'Click after selecting an item'
-         width 200
+         WIDTH 200
          action findselecteditem()
       END BUTTON
    END WINDOW

@@ -158,54 +158,54 @@ PROCEDURE WinExit
 
    RETURN
 
-   EXIT PROCEDURE _AccelerateExit
-   LOCAL b, r
+EXIT PROCEDURE _AccelerateExit
+LOCAL b, r
 
-   IF ! lShutDown
-      lAsk2Save := .t.
-      lTrayTasks := .t.
+IF ! lShutDown
+   lAsk2Save := .t.
+   lTrayTasks := .t.
 
-      SET INTERACTIVECLOSE OFF
+   SET INTERACTIVECLOSE OFF
 
-      DEFINE WINDOW Splash ;
-            AT 0,0 ;
-            WIDTH 350 HEIGHT 100 ;
-            CHILD NOCAPTION   ;
-            TOPMOST   ;
-            MINWIDTH 350 ;
-            MINHEIGHT 100 ;
-            MAXWIDTH 350 ;
-            MAXHEIGHT 100 ;
-            ON INIT ( DrawIcon( This.Handle, 18, 18, hIcon ), CloseApps( Application.Handle ) ) ;
-            FONT 'MS Sans Serif' ;
-            SIZE 9
+   DEFINE WINDOW Splash ;
+         AT 0,0 ;
+         WIDTH 350 HEIGHT 100 ;
+         CHILD NOCAPTION   ;
+         TOPMOST   ;
+         MINWIDTH 350 ;
+         MINHEIGHT 100 ;
+         MAXWIDTH 350 ;
+         MAXHEIGHT 100 ;
+         ON INIT ( DrawIcon( This.Handle, 18, 18, hIcon ), CloseApps( Application.Handle ) ) ;
+         FONT 'MS Sans Serif' ;
+         SIZE 9
 
-         b := Splash.Height-2*GetBorderHeight()
-         r := Splash.Width-2*GetBorderWidth()
+      b := Splash.Height-2*GetBorderHeight()
+      r := Splash.Width-2*GetBorderWidth()
 
-         DRAW PANEL IN WINDOW Splash ;
-            AT 0, 0 ;
-            TO b, r
+      DRAW PANEL IN WINDOW Splash ;
+         AT 0, 0 ;
+         TO b, r
 
-         DRAW PANEL IN WINDOW Splash ;
-            AT 1, 1 ;
-            TO b-1, r-1
+      DRAW PANEL IN WINDOW Splash ;
+         AT 1, 1 ;
+         TO b-1, r-1
 
-         @ 32,85 LABEL Label_1 VALUE "Accelerating, please wait..." AUTOSIZE ;
-            FONT 'Tahoma' ;
-            SIZE 12
+      @ 32,85 LABEL Label_1 VALUE "Accelerating, please wait..." AUTOSIZE ;
+         FONT 'Tahoma' ;
+         SIZE 12
 
-         @ 70,85 LABEL Label_2 VALUE PROGRAM + VERSION + '  ' + Chr(169) + COPYRIGHT AUTOSIZE
+      @ 70,85 LABEL Label_2 VALUE PROGRAM + VERSION + '  ' + Chr(169) + COPYRIGHT AUTOSIZE
 
-      END WINDOW
+   END WINDOW
 
-      CENTER WINDOW Splash
+   CENTER WINDOW Splash
 
-      ACTIVATE WINDOW Splash NOWAIT
-      InkeyGUI(2000)
-   ENDIF
+   ACTIVATE WINDOW Splash NOWAIT
+   InkeyGUI(2000)
+ENDIF
 
-   RETURN
+RETURN
 
 #pragma BEGINDUMP
 

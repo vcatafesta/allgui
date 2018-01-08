@@ -55,14 +55,14 @@ PROCEDURE Main
 
    DEFINE WINDOW wMain                 ;
          At 0, 0                      ;
-         Width 810                    ;
-         Height 525                   ;
-         Title 'FreeImage Demo'       ;
+         WIDTH 810                    ;
+         HEIGHT 525                   ;
+         TITLE 'FreeImage Demo'       ;
          NoMaximize                   ;
-         NoSize                       ;
-         Icon 'MAINICON'              ;
+         NOSIZE                       ;
+         ICON 'MAINICON'              ;
          Main                         ;
-         BackColor WHITE              ;
+         BACKCOLOR WHITE              ;
          On Init ( OpenImgFile( GetStartupFolder() + "\Res\Bird.png" ), OpenImgRes( PNG_BIRD, 'PNG' ) ) ;
          On Release FI_DeInitialise() ;
          On Paint { || ShowFile(), ShowRes() }
@@ -88,15 +88,15 @@ PROCEDURE Main
 
       @ ( FI_TOP - 25 ), ( FI_LEFT - 25 ) Frame frmFile             ;
          Caption 'File'            ;
-         Width ( FI_WIDTH   + 45 ) ;
-         Height ( FI_HEIGHT + 45 ) ;
-         BackColor WHITE
+         WIDTH ( FI_WIDTH   + 45 ) ;
+         HEIGHT ( FI_HEIGHT + 45 ) ;
+         BACKCOLOR WHITE
 
       @ ( RES_TOP - 25 ), ( RES_LEFT - 25 ) Frame frmResource          ;
          Caption 'Resource'         ;
-         Width ( RES_WIDTH   + 45 ) ;
-         Height ( RES_HEIGHT + 45 ) ;
-         BackColor WHITE
+         WIDTH ( RES_WIDTH   + 45 ) ;
+         HEIGHT ( RES_HEIGHT + 45 ) ;
+         BACKCOLOR WHITE
 
    END WINDOW
 

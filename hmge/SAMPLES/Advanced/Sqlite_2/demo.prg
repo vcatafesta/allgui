@@ -315,27 +315,27 @@ FUNCTION BrowseData()
          @ 397-IF(IsThemed(),7,0),11 BUTTON Bt_New ;
             CAPTION '&New' ;
             ACTION Get_Fields(db, 1);
-            width 80
+            WIDTH 80
 
          @ 397-IF(IsThemed(),7,0),91 BUTTON Bt_Edit ;
             CAPTION '&Edit' ;
             ACTION Get_Fields(db, 2);
-            width 80
+            WIDTH 80
 
          @ 397-IF(IsThemed(),7,0),171 BUTTON Bt_Delete ;
             CAPTION '&Delete' ;
             ACTION Delete_Record(db);
-            width 80
+            WIDTH 80
 
          @ 397-IF(IsThemed(),7,0),251 BUTTON Bt_Print ;
             CAPTION '&Print' ;
             ACTION ReportData(db) ;
-            width 80
+            WIDTH 80
 
          @ 397-IF(IsThemed(),7,0),331 BUTTON Bt_exit ;
             CAPTION '&Exit' ;
             ACTION ThisWindow.Release;
-            width 80
+            WIDTH 80
 
       END WINDOW
 

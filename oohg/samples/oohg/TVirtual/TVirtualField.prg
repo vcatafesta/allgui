@@ -1,13 +1,14 @@
 /*
- * $Id: TVirtualField.prg $
- *
- * Sample posted by Fernando Yurisich at 2015/05/02.
- */
+* $Id: TVirtualField.prg $
+* Sample posted by Fernando Yurisich at 2015/05/02.
+*/
 
 #include "oohg.ch"
 
 PROCEDURE MAIN
-PRIVATE oVirtual1, oVirtual2
+
+   PRIVATE oVirtual1, oVirtual2
+
    DBCREATE( "TEST", { { "CODE", "N", 3, 0 }, { "NAME", "C", 30, 0 } } )
    USE TEST
    DO WHILE RECCOUNT() < 30
@@ -21,18 +22,21 @@ PRIVATE oVirtual1, oVirtual2
 
    DEFINE WINDOW Main WIDTH 300 HEIGHT 300 CLIENTAREA TITLE "TVirtualField Class"
       @ 10,10 BROWSE Browse WIDTH 280 HEIGHT 280 ;
-              HEADERS { "Code", "Name", "Select", "Count" } ;
-              WIDTHS { 50, 100, 50, 50 } ;
-              FIELDS { "TEST->CODE", "TEST->NAME", ;
-                       "oVirtual1:Value", "oVirtual2:Value" } ;
-              ON DBLCLICK ChangeValues()
+         HEADERS { "Code", "Name", "Select", "Count" } ;
+         WIDTHS { 50, 100, 50, 50 } ;
+         FIELDS { "TEST->CODE", "TEST->NAME", ;
+         "oVirtual1:Value", "oVirtual2:Value" } ;
+         ON DBLCLICK ChangeValues()
    END WINDOW
    ACTIVATE WINDOW Main
-RETURN
+
+   RETURN
 
 PROCEDURE ChangeValues()
+
    TEST->( DBGOTO( Main.Browse.Value ) )
    oVirtual1:Value := ! oVirtual1:Value
    oVirtual2:Value ++
    Main.Browse.Refresh()
-RETURN
+
+   RETURN

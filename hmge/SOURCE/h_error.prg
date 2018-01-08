@@ -63,24 +63,24 @@ INIT PROCEDURE ClipInit()
 
    RETURN
 
-   EXIT PROCEDURE ClipExit()
-   GdiplusShutdown()
-   ExitProcess()
+EXIT PROCEDURE ClipExit()
+GdiplusShutdown()
+ExitProcess()
 
-   RETURN
+RETURN
 
 #ifndef __XHARBOUR__
 
 //PROCEDURE hb_GTSYS
 
-   //REQUEST HB_GT_GUI_DEFAULT
+//REQUEST HB_GT_GUI_DEFAULT
 
-   //RETURN
+//RETURN
 
 #endif
-   *-Date Created: 01-01-2003
-   *-Author: Antonio Novo <antonionovo@gmail.com>
-   *-Modified by Grigory Filatov at 24-08-2014
+*-Date Created: 01-01-2003
+*-Author: Antonio Novo <antonionovo@gmail.com>
+*-Modified by Grigory Filatov at 24-08-2014
 
 FUNCTION MsgMiniGuiError( cMessage, lAddText )
 

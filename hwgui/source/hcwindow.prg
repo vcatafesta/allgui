@@ -212,8 +212,8 @@ METHOD Move( x1, y1, width, height, nRePaint )  CLASS HCustomWindow
 
    x1     := IIF( x1     = NIL, ::nLeft, x1 )
    y1     := IIF( y1     = NIL, ::nTop, y1 )
-   width  := IIF( width  = NIL, ::nWidth, width )
-   height := IIF( height = NIL, ::nHeight, height )
+   WIDTH  := IIF( width  = NIL, ::nWidth, width )
+   HEIGHT := IIF( height = NIL, ::nHeight, height )
    IF  Hwg_BitAnd( ::style,WS_CHILD ) = 0
       rect := hwg_Getwindowrect( ::Handle )
       nHx := rect[ 4 ] - rect[ 2 ]  - hwg_Getclientrect( ::Handle )[ 4 ] - ;

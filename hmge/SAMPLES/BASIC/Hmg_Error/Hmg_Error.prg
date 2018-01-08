@@ -427,8 +427,8 @@ FUNCTION ExpErrorPDF( logfile )
    ENDIF
    HPDF_SetCompressionMode( oPdfError, HPDF_COMP_ALL )
    page := HPDF_AddPage( oPdfError )
-      height := HPDF_Page_GetHeight( page )
-      width  := HPDF_Page_GetWidth( page )
+      HEIGHT := HPDF_Page_GetHeight( page )
+      WIDTH  := HPDF_Page_GetWidth( page )
       font := HPDF_GetFont( oPdfError, "Courier", NIL )
       fontsize := 12
 

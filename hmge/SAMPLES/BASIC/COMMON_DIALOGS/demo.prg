@@ -8,11 +8,11 @@ HMG DEMO
 FUNCTION Main
 
    DEFINE WINDOW Win1   ;
-         Row 10      ;
-         Col 10      ;
-         Width 400      ;
-         Height 400      ;
-         Title 'HMG common dialogs'   ;
+         ROW 10      ;
+         COL 10      ;
+         WIDTH 400      ;
+         HEIGHT 400      ;
+         TITLE 'HMG common dialogs'   ;
          WindowType  MAIN
 
       DEFINE MAIN MENU
@@ -61,8 +61,8 @@ FUNCTION Main
       END MENU
 
       @ 10 , 10 EditBox Edit1 ;
-         Width 365 ;
-         Height 320 ;
+         WIDTH 365 ;
+         HEIGHT 320 ;
          Value  '' NoHScroll
 
    END WINDOW

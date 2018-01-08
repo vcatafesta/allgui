@@ -31,7 +31,7 @@ FUNCTION main_modify_action
       nAge      := Val( Main.Grid_1.Cell(I,10) )
       nSalary      := Val( Main.Grid_1.Cell(I,11) )
 
-      Title       := 'Modify Record'
+      TITLE       := 'Modify Record'
 
       aLabels    := { 'First:'   , 'Last:'   ,'Street:'      ,'City:'   ,'State:'   ,'Zip:' , 'Hire Date'   , 'Married'   , 'Age'   , 'Salary'   }
       aInitValues    := { cFirst   , cLast      , cStreet      , cCity    , cState   , cZip    , dHireDate   , lMarried   , nAge   , nSalary   }

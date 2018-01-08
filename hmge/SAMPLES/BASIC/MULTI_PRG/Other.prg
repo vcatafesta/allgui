@@ -8,11 +8,11 @@ PROCEDURE InOtherPrg()
 
    RETURN
 
-   EXIT PROCEDURE _OtherProcedure
+EXIT PROCEDURE _OtherProcedure
 
-   WaitWindow('OTHER EXIT PROCEDURE')
+WaitWindow('OTHER EXIT PROCEDURE')
 
-   RETURN
+RETURN
 
 #ifndef __XHARBOUR__
 

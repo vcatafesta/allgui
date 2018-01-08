@@ -81,7 +81,7 @@ FUNCTION _DefineTBrowse ( ControlName, ParentFormName, nCol, nRow, nWidth, nHeig
       aHeaders, aWidths, bFields, value, fontname,fontsize, tooltip, change,;
       bDblclick , aHeadClick , gotfocus , lostfocus , uAlias , Delete, lNogrid,;
       aImages, aJust , HelpId , bold , italic , underline , strikeout , break ,;
-      backcolor , fontcolor , lock , cell , nStyle , appendable , readonly ,;
+      BACKCOLOR , fontcolor , lock , cell , nStyle , appendable , readonly ,;
       valid , validmessages , aColors , uWhen , nId , aFlds, cMsg, lRePaint,;
       lEnum, lAutoSearch, uUserSearch, lAutoFilter, uUserFilter, aPicture,;
       lTransparent, uSelector, lEditable, lAutoCol, aColSel )

@@ -1,20 +1,16 @@
 /*
- * $Id: TStreamSSL.prg $
- */
+* $Id: TStreamSSL.prg $
+*/
 /*
- * Data stream from (((compress/)))uncompress management class.
- *
- * TStreamSSL. Reads/writes data over a SSL connection.
- *             It requires OpenSSL library.
- *
- * Posted by Vicente Guerra on 2011/07/09.
- *
- * Some info about openssl DLL:
- * Embarcadero: http://docwiki.embarcadero.com/RADStudio/Tokyo/en/OpenSSL
- * ZIP files: http://indy.fulgan.com/SSL/
- *
- * Version 0.9.8zh worked OK
- * Version 1.0.2k generates GPF
+* Data stream from (((compress/)))uncompress management class.
+* TStreamSSL. Reads/writes data over a SSL connection.
+*             It requires OpenSSL library.
+* Posted by Vicente Guerra on 2011/07/09.
+* Some info about openssl DLL:
+* Embarcadero: http://docwiki.embarcadero.com/RADStudio/Tokyo/en/OpenSSL
+* ZIP files: http://indy.fulgan.com/SSL/
+* Version 0.9.8zh worked OK
+* Version 1.0.2k generates GPF
 */
 
 #include "hbclass.ch"
@@ -138,21 +134,22 @@ HB_FUNC( SSL_CTX_FREE )   // ( pCtx )
 #pragma ENDDUMP
 
 CLASS TStreamSSL FROM TStreamSocket
+
    DATA pCtx    INIT nil
    DATA pSsl    INIT nil
    DATA pBio    INIT nil
 
    METHOD New
    METHOD IsConnected
-   //
    METHOD RealFill
    METHOD Disconnect
-   //
    METHOD Write
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cHost, nPort, nSocket ) CLASS TStreamSSL
-LOCAL pCtx
+
+   LOCAL pCtx
+
    ::Close()
    pCtx := SSL_CTX_NEW()
    IF ! EMPTY( pCtx )
@@ -171,15 +168,19 @@ LOCAL pCtx
    IF ! ::IsActive()
       ::Close()
    ENDIF
-RETURN Self
+
+   RETURN SELF
 
 METHOD IsConnected() CLASS TStreamSSL
-RETURN ( ::nSocket > 0 .AND. ! EMPTY( ::pSsl ) )
+
+   RETURN ( ::nSocket > 0 .AND. ! EMPTY( ::pSsl ) )
 
 METHOD RealFill( pBuffer, nPos, nCount ) CLASS TStreamSSL
-RETURN StreamSSL_Read( pBuffer, ::pSsl, nPos, nCount )
+
+   RETURN StreamSSL_Read( pBuffer, ::pSsl, nPos, nCount )
 
 METHOD Disconnect() CLASS TStreamSSL
+
    IF ! EMPTY( ::pSsl )
       SSL_shutdown( ::pSsl )
       // SSL_free( ::pSsl )
@@ -193,10 +194,13 @@ METHOD Disconnect() CLASS TStreamSSL
       SSL_CTX_free( ::pCtx )
       ::pCtx := NIL
    ENDIF
-RETURN ::Super:Disconnect()
+
+   RETURN ::Super:Disconnect()
 
 METHOD Write( cBuffer ) CLASS TStreamSSL
-LOCAL nWrite := 0
+
+   LOCAL nWrite := 0
+
    IF ::IsConnected()
       IF VALTYPE( cBuffer ) $ "CM" .AND. LEN( cBuffer ) > 0
          nWrite := StreamSSL_Write( ::pSsl, cBuffer )
@@ -205,7 +209,8 @@ LOCAL nWrite := 0
          ENDIF
       ENDIF
    ENDIF
-RETURN nWrite
+
+   RETURN nWrite
 
 #pragma BEGINDUMP
 

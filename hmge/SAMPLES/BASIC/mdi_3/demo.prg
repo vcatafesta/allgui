@@ -138,7 +138,7 @@ FUNCTION CreateMDIClient(Buffer,title)
       Buffer := ""
    ENDIF
    IF Valtype(Title) == 'U'
-      Title := "No Title "+ltrim(str(nchild+1)) // add By Pier 2006/07/01
+      TITLE := "No Title "+ltrim(str(nchild+1)) // add By Pier 2006/07/01
    ENDIF
 
    DEFINE WINDOW ChildMdi ;
@@ -158,7 +158,7 @@ FUNCTION CreateMDIClient(Buffer,title)
          CAPTION "OK" ;
          ACTION MsgInfo("You pressed Button OK") ;
          WIDTH 50 ;
-         Height 50 ;
+         HEIGHT 50 ;
          ToolTip "OK Button"
 
       ON KEY F3 ACTION MsgInfo("F3 pressed in CHILD MDI")

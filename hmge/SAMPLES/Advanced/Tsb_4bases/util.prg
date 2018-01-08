@@ -26,7 +26,7 @@ FUNCTION TBrw_Create( ControlName, ParentForm, nRow, nCol, nWidth, nHeight, uAli
       nWidth     := 0,                    ;
       nHeight    := 0,                    ;
       lCell      := .T.,                  ;
-      backcolor  := NIL,                  ;
+      BACKCOLOR  := NIL,                  ;
       ParentForm := _HMG_ThisFormName,    ;
       FontName   := _HMG_DefaultFontName, ;
       FontSize   := _HMG_DefaultFontSize

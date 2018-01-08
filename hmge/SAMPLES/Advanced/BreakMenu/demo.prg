@@ -13,9 +13,9 @@ PROCEDURE Main
 
    DEFINE WINDOW Form_1 ;
          At 0, 0 ;
-         Width 400 ;
-         Height 200 ;
-         Title 'Menu Break Test' ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'Menu Break Test' ;
          Main ;
          NotifyIcon 'demo.ico'
 

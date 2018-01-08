@@ -585,7 +585,7 @@ PROCEDURE InputWindow_Click
 
    LOCAL Title , aLabels , aInitValues , aFormats , aResults
 
-   Title       := 'InputWindow Test'
+   TITLE       := 'InputWindow Test'
 
    aLabels    := { 'Field 1:'   , 'Field 2:'   ,'Field 3:'      ,'Field 4:'   ,'Field 5:'   ,'Field 6:' }
    aInitValues    := { 'Init Text', .t.       ,2         , Date()    , 12.34    ,'Init text' }

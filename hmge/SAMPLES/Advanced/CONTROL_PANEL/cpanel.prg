@@ -140,8 +140,8 @@ FUNCTION showabout()
          HEIGHT 73
 
       @ 80, 6 EditBox readText;
-         Width 334       ;
-         Height 140      ;
+         WIDTH 334       ;
+         HEIGHT 140      ;
          Value cAbout   ;
          NoHScroll
 

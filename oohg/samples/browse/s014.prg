@@ -1,17 +1,15 @@
 /*
- * Browse Sample n° 14
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to delete a "half added" record.
- * To try it: add a new record, enter data in the first
- * column and press ESC key in the second column. The just
- * added record should disappear.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Browse Sample n° 14
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to delete a "half added" record.
+* To try it: add a new record, enter data in the first
+* column and press ESC key in the second column. The just
+* added record should disappear.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -19,6 +17,7 @@
 STATIC nLastAppended := 0
 
 FUNCTION Main
+
    LOCAL oForm1, oBrw1
 
    REQUEST DBFCDX
@@ -29,13 +28,13 @@ FUNCTION Main
    OpenTables()
 
    DEFINE WINDOW Form_1 ;
-      OBJ oForm1 ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 640 HEIGHT 480 ;
-      TITLE 'How to delete a "half added" record' ;
-      MAIN ;
-      ON RELEASE CloseTables()
+         OBJ oForm1 ;
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'How to delete a "half added" record' ;
+         MAIN ;
+         ON RELEASE CloseTables()
 
       @ 10, 10 BROWSE Browse_1 OBJ oBrw1 ;
          WIDTH 620 ;
@@ -56,9 +55,8 @@ FUNCTION Main
    oForm1:Center()
    oForm1:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION OpenTables
 
    LOCAL aDbf1[ 4 ][ 4 ]
@@ -142,25 +140,22 @@ FUNCTION OpenTables
 
    GO TOP
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION CloseTables
 
-  DBCLOSEALL()
+   DBCLOSEALL()
 
-  ERASE Data.dbf
+   ERASE Data.dbf
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION JustAppended( oBrw1 )
 
    nLastAppended := data->(RECNO())
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION EditAborted( oBrw1 )
 
    IF data->(RECNO()) == nLastAppended
@@ -169,8 +164,8 @@ FUNCTION EditAborted( oBrw1 )
       oBrw1:Refresh()
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */

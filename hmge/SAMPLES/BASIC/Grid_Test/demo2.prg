@@ -10,14 +10,14 @@ FUNCTION Main
    //   SET CELLNAVIGATION MODE HORIZONTAL
 
    DEFINE WINDOW win_1 at 0, 0 width 528 height 300 ;
-         title 'Cell Navigation Downwards Demo' ;
+         TITLE 'Cell Navigation Downwards Demo' ;
          main nomaximize nosize
 
       DEFINE GRID grid_1
-         row 10
-         col 10
-         width 501
-         height 250
+         ROW 10
+         COL 10
+         WIDTH 501
+         HEIGHT 250
          widths { 80, 200, 200 }
          headers { 'No.', 'Name', 'Description' }
          items aItems

@@ -108,12 +108,12 @@ FUNCTION hwg_TimerProc( hWnd, idTimer, Time )
 
    RETURN NIL
 
-   EXIT PROCEDURE CleanTimers
-   LOCAL oTimer, i
+EXIT PROCEDURE CleanTimers
+LOCAL oTimer, i
 
-   FOR i := 1 TO Len( HTimer():aTimers )
-      oTimer := HTimer():aTimers[ i ]
-      hwg_Killtimer( oTimer:oParent:handle, oTimer:id )
-   NEXT
+FOR i := 1 TO Len( HTimer():aTimers )
+   oTimer := HTimer():aTimers[ i ]
+   hwg_Killtimer( oTimer:oParent:handle, oTimer:id )
+NEXT
 
-   RETURN
+RETURN

@@ -1,55 +1,55 @@
 #include "oohg.ch"
-Function main()
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 ;
-		HEIGHT 480 ;
-		TITLE 'InputBox Demo' ;
-		MAIN ;
-		TOPMOST 
+FUNCTION main()
 
-		@ 50 ,100 BUTTON Button_1 ;
-			CAPTION "InputBox Test" ;
-			ACTION CLick() ;
-	                WIDTH 200 ;
-			HEIGHT 30
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE 'InputBox Demo' ;
+         MAIN ;
+         TOPMOST
 
-		@ 100 ,100 BUTTON Button_2 ;
-			CAPTION "InputBox (Timeout) Test" ;
-			ACTION TCLick() ;
-	                WIDTH 200 ;
-			HEIGHT 30
+      @ 50 ,100 BUTTON Button_1 ;
+         CAPTION "InputBox Test" ;
+         ACTION CLick() ;
+         WIDTH 200 ;
+         HEIGHT 30
 
-		@ 150 ,100 BUTTON Button_3 ;
-			CAPTION "InputBox (Timeout) Test 2" ;
-			ACTION TCLick2() ;
-	                WIDTH 200 ;
-			HEIGHT 30
+      @ 100 ,100 BUTTON Button_2 ;
+         CAPTION "InputBox (Timeout) Test" ;
+         ACTION TCLick() ;
+         WIDTH 200 ;
+         HEIGHT 30
 
-	END WINDOW
+      @ 150 ,100 BUTTON Button_3 ;
+         CAPTION "InputBox (Timeout) Test 2" ;
+         ACTION TCLick2() ;
+         WIDTH 200 ;
+         HEIGHT 30
 
-	CENTER WINDOW Form_1
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   CENTER WINDOW Form_1
 
-Return
+   ACTIVATE WINDOW Form_1
 
-Procedure Click
+   RETURN
 
-	MsgInfo ( InputBox ( 'Enter text' , 'InputBox Demo' , 'Default Value' )	)
+PROCEDURE Click
 
-Return
+   MsgInfo ( InputBox ( 'Enter text' , 'InputBox Demo' , 'Default Value' )   )
 
-Procedure TClick
+   RETURN
 
-	MsgInfo ( InputBox ( 'Enter text' , 'InputBox Demo' , 'Default Value' , 5000 ) )
+PROCEDURE TClick
 
-Return
+   MsgInfo ( InputBox ( 'Enter text' , 'InputBox Demo' , 'Default Value' , 5000 ) )
 
-Procedure TClick2
+   RETURN
 
-	MsgInfo ( InputBox ( 'Enter text' , 'InputBox Demo' , 'Default Value' , 5000 , 'Timeout Value' ) )
+PROCEDURE TClick2
 
-Return
+   MsgInfo ( InputBox ( 'Enter text' , 'InputBox Demo' , 'Default Value' , 5000 , 'Timeout Value' ) )
 
+   RETURN

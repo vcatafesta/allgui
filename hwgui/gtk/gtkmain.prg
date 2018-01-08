@@ -106,13 +106,13 @@ FUNCTION hwg_WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrB
    hwg_Selectobject( hDC, ofont:handle )
    aMetr := hwg_Gettextmetric( hDC )
    hwg_Releasedc( hwg_Getactivewindow(), hDC )
-   height := ( aMetr[1] + 1 ) * aLen + 4 + addY
+   HEIGHT := ( aMetr[1] + 1 ) * aLen + 4 + addY
    screenh := hwg_Getdesktopheight()
    IF height > screenh * 2/3
-      height := Int( screenh * 2/3 )
+      HEIGHT := Int( screenh * 2/3 )
       addX := addY := 0
    ENDIF
-   width := Max( minWidth, aMetr[2] * 2 * nLen + addX )
+   WIDTH := Max( minWidth, aMetr[2] * 2 * nLen + addX )
 
    INIT DIALOG oDlg TITLE cTitle ;
       AT nLeft, nTop           ;

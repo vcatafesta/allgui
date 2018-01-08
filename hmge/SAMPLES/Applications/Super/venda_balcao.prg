@@ -21,34 +21,34 @@ FUNCTION venda_balcao()
 
    DEFINE WINDOW form_balcao;
          at 000,000;
-         width getdesktopwidth();
-         height getdesktopheight();
-         title 'Venda Balcão';
-         icon path_imagens+'icone.ico';
+         WIDTH getdesktopwidth();
+         HEIGHT getdesktopheight();
+         TITLE 'Venda Balcão';
+         ICON path_imagens+'icone.ico';
          modal;
          on init zera_tabelas()
 
       * mostrar texto explicando como fechar o pedido
       @ getdesktopheight()-100,000 label label_fechar_pedido;
          of form_balcao;
-         width getdesktopwidth();
-         height 040;
+         WIDTH getdesktopwidth();
+         HEIGHT 040;
          value 'F9-fechar este pedido  ESC-sair';
          font 'verdana' size 022;
          bold;
-         backcolor _preto_001;
+         BACKCOLOR _preto_001;
          fontcolor _cinza_001;
          centeralign
 
       * separar a tela em 2 partes distintas
       DEFINE LABEL label_separador
-         col 400
-         row 000
+         COL 400
+         ROW 000
          value ''
-         width 002
-         height getdesktopheight()-100
+         WIDTH 002
+         HEIGHT getdesktopheight()-100
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
 
       * digitar o telefone
@@ -62,13 +62,13 @@ FUNCTION venda_balcao()
          transparent
       @ 030,010 textbox tbox_telefone;
          of form_balcao;
-         height 030;
-         width 150;
+         HEIGHT 030;
+         WIDTH 150;
          value '';
          maxlength 015;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          on enter procura_cliente('form_balcao','tbox_telefone')
 
@@ -76,8 +76,8 @@ FUNCTION venda_balcao()
       @ 020,170 buttonex botao_cadastrar_cliente;
          parent form_balcao;
          caption 'Cadastrar novo cliente';
-         width 220 height 040;
-         picture path_imagens+'cadastrar_cliente.bmp';
+         WIDTH 220 height 040;
+         PICTURE path_imagens+'cadastrar_cliente.bmp';
          action cadastrar_novo_cliente();
          notabstop;
          tooltip 'Clique aqui para cadastrar um cliente novo, sem precisar sair desta tela'
@@ -121,24 +121,24 @@ FUNCTION venda_balcao()
       * histórico do cliente
       @ 180,010 grid grid_historico;
          parent form_balcao;
-         width 380;
-         height 200;
+         WIDTH 380;
+         HEIGHT 200;
          headers {'id cliente','Onde','Data','Hora','Valor R$'};
          widths {001,100,100,075,090};
          font 'tahoma' size 010;
          bold;
-         backcolor _branco_001;
+         BACKCOLOR _branco_001;
          fontcolor BLUE;
          on change mostra_detalhamento_2()
       @ 390,010 grid grid_detalhamento;
          parent form_balcao;
-         width 380;
-         height (getdesktopheight()-390)-105;
+         WIDTH 380;
+         HEIGHT (getdesktopheight()-390)-105;
          headers {'Qtd.','Produto','Valor R$'};
          widths {080,190,100};
          font 'tahoma' size 010;
          bold;
-         backcolor _branco_001;
+         BACKCOLOR _branco_001;
          fontcolor BLUE
 
       *-Pizzas------------------------------------------------------------------------
@@ -153,13 +153,13 @@ FUNCTION venda_balcao()
          transparent
       @ 030,410 textbox tbox_pizza;
          of form_balcao;
-         height 030;
-         width 100;
+         HEIGHT 030;
+         WIDTH 100;
          value '';
          maxlength 015;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          on enter procura_pizza()
       * mostrar nome da pizza
@@ -175,8 +175,8 @@ FUNCTION venda_balcao()
       @ 030,850 buttonex botao_confirmar_pizza;
          parent form_balcao;
          caption 'Selecionar pizza';
-         width 165 height 040;
-         picture path_imagens+'adicionar.bmp';
+         WIDTH 165 height 040;
+         PICTURE path_imagens+'adicionar.bmp';
          action gravar_adicionar();
          tooltip 'Clique aqui para confirmar a pizza selecionada'
 
@@ -191,8 +191,8 @@ FUNCTION venda_balcao()
          transparent
       @ 080,410 browse grid_pizzas;
          parent form_balcao;
-         width getdesktopwidth()-420;
-         height 200;
+         WIDTH getdesktopwidth()-420;
+         HEIGHT 200;
          headers {'id produto','Seq.','Nome','Tamanho','Preço R$'};
          widths {001,100,190,180,100};
          workarea tmp_pizza;
@@ -200,7 +200,7 @@ FUNCTION venda_balcao()
          value 1;
          font 'tahoma' size 010;
          bold;
-         backcolor _amarelo_001;
+         BACKCOLOR _amarelo_001;
          fontcolor _preto_001
       @ 285,410 label label_observacoes;
          of form_balcao;
@@ -212,13 +212,13 @@ FUNCTION venda_balcao()
          transparent
       @ 305,410 textbox tbox_observacoes;
          of form_balcao;
-         height 030;
-         width 420;
+         HEIGHT 030;
+         WIDTH 420;
          value '';
          maxlength 030;
          font 'courier new' size 012;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
 
@@ -226,8 +226,8 @@ FUNCTION venda_balcao()
       @ 285,850 buttonex botao_excluir_pizza;
          parent form_balcao;
          caption 'Excluir ítem';
-         width 165 height 040;
-         picture path_imagens+'excluir_item.bmp';
+         WIDTH 165 height 040;
+         PICTURE path_imagens+'excluir_item.bmp';
          action excluir_pizza();
          notabstop;
          tooltip 'Clique aqui para excluir uma pizza selecionada acima'
@@ -262,13 +262,13 @@ FUNCTION venda_balcao()
          transparent
       @ 420,410 textbox tbox_produto;
          of form_balcao;
-         height 030;
-         width 100;
+         HEIGHT 030;
+         WIDTH 100;
          value '';
          maxlength 015;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          on enter procura_produto()
       @ 420,520 label label_nome_produto;
@@ -291,12 +291,12 @@ FUNCTION venda_balcao()
          transparent
       @ 470,410 textbox tbox_quantidade;
          of form_balcao;
-         height 030;
-         width 100;
+         HEIGHT 030;
+         WIDTH 100;
          value 0;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter verifica_zero()
@@ -312,29 +312,29 @@ FUNCTION venda_balcao()
          transparent
       @ 470,530 getbox tbox_preco;
          of form_balcao;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 9,999.99'
+         PICTURE '@E 9,999.99'
 
       * botão para confirmar a escolha do produto
       @ 460,670 buttonex botao_confirmar_produto;
          parent form_balcao;
          caption 'Selecionar produto';
-         width 165 height 040;
-         picture path_imagens+'adicionar.bmp';
+         WIDTH 165 height 040;
+         PICTURE path_imagens+'adicionar.bmp';
          action gravar_produto();
          tooltip 'Clique aqui para confirmar o produto selecionado'
 
       * produtos já selecionados
       @ 510,410 browse grid_produtos;
          parent form_balcao;
-         width getdesktopwidth()-420;
-         height getdesktopheight()-615;
+         WIDTH getdesktopwidth()-420;
+         HEIGHT getdesktopheight()-615;
          headers {'id produto','Qtd','Produto','Unitário R$','Subtotal R$'};
          widths {001,080,210,140,140};
          workarea tmp_produto;
@@ -342,15 +342,15 @@ FUNCTION venda_balcao()
          value 1;
          font 'tahoma' size 010;
          bold;
-         backcolor _amarelo_001;
+         BACKCOLOR _amarelo_001;
          fontcolor _preto_001
 
       * botão para excluir produto já selecionado
       @ 460,850 buttonex botao_excluir_produto;
          parent form_balcao;
          caption 'Excluir produto';
-         width 165 height 040;
-         picture path_imagens+'excluir_item.bmp';
+         WIDTH 165 height 040;
+         PICTURE path_imagens+'excluir_item.bmp';
          action excluir_produto();
          notabstop;
          tooltip 'Clique aqui para excluir um produto já selecionado'
@@ -466,16 +466,16 @@ STATIC FUNCTION getcode_clientes(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 690;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 690;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -485,19 +485,19 @@ STATIC FUNCTION getcode_clientes(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 600
+         COL 075
+         ROW 440
+         WIDTH 600
          maxlength 040
          onchange find_clientes()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 680
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 680
+         HEIGHT 430
          headers {'Fixo','Celular','Nome'}
          widths {150,150,350}
          workarea clientes
@@ -506,7 +506,7 @@ STATIC FUNCTION getcode_clientes(value)
          fontname 'courier new'
          fontsize 012
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.,.T.}
@@ -580,26 +580,26 @@ STATIC FUNCTION mostra_listagem_produto()
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 560;
-         height 610;
-         title 'Produtos';
-         icon path_imagens+'icone.ico';
+         WIDTH 560;
+         HEIGHT 610;
+         TITLE 'Produtos';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE GRID grid_pesquisa
          parent form_pesquisa
-         col 000
-         row 000
-         width 555
-         height 580
+         COL 000
+         ROW 000
+         WIDTH 555
+         HEIGHT 580
          headers {'','Nome','Preço R$'}
          widths {001,395,150}
          showheaders .F.
          nolines .T.
          fontname 'courier new'
          fontsize 012
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          fontcolor _preto_001
          ondblclick mostra_informacao_produto()
       END GRID
@@ -695,26 +695,26 @@ STATIC FUNCTION mostra_listagem_pizza()
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 410;
-         height 610;
-         title 'Pizzas';
-         icon path_imagens+'icone.ico';
+         WIDTH 410;
+         HEIGHT 610;
+         TITLE 'Pizzas';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE GRID grid_pesquisa
          parent form_pesquisa
-         col 000
-         row 000
-         width 405
-         height 580
+         COL 000
+         ROW 000
+         WIDTH 405
+         HEIGHT 580
          headers {'','Nome'}
          widths {001,395}
          showheaders .F.
          nolines .T.
          fontname 'courier new'
          fontsize 012
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          fontcolor _preto_001
          ondblclick mostra_informacao()
       END GRID
@@ -791,12 +791,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
 
    DEFINE WINDOW form_incluir_novo_cliente;
          at 000,000;
-         width 585;
-         height 380;
-         title 'Incluir novo cliente';
-         icon path_imagens+'icone.ico';
+         WIDTH 585;
+         HEIGHT 380;
+         TITLE 'Incluir novo cliente';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * entrada de dados
       @ 010,005 label lbl_001;
@@ -809,12 +809,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 030,005 textbox tbox_001;
          of form_incluir_novo_cliente;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_nome;
          maxlength 040;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 010,325 label lbl_002;
@@ -827,13 +827,13 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 030,325 textbox tbox_002;
          of form_incluir_novo_cliente;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_fixo;
          maxlength 010;
          font 'verdana' size 012;
          bold;
-         backcolor BLUE;
+         BACKCOLOR BLUE;
          fontcolor WHITE;
          uppercase
       @ 010,455 label lbl_003;
@@ -846,13 +846,13 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 030,455 textbox tbox_003;
          of form_incluir_novo_cliente;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_celular;
          maxlength 010;
          font 'verdana' size 012;
          bold;
-         backcolor BLUE;
+         BACKCOLOR BLUE;
          fontcolor WHITE;
          uppercase
       @ 060,005 label lbl_004;
@@ -865,12 +865,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 080,005 textbox tbox_004;
          of form_incluir_novo_cliente;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_endereco;
          maxlength 040;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 060,325 label lbl_005;
@@ -883,12 +883,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 080,325 textbox tbox_005;
          of form_incluir_novo_cliente;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_numero;
          maxlength 006;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 060,395 label lbl_006;
@@ -901,12 +901,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 080,395 textbox tbox_006;
          of form_incluir_novo_cliente;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_complem;
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,005 label lbl_007;
@@ -919,12 +919,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 130,005 textbox tbox_007;
          of form_incluir_novo_cliente;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_bairro;
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,195 label lbl_008;
@@ -937,12 +937,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 130,195 textbox tbox_008;
          of form_incluir_novo_cliente;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_cidade;
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,385 label lbl_009;
@@ -955,12 +955,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 130,385 textbox tbox_009;
          of form_incluir_novo_cliente;
-         height 027;
-         width 040;
+         HEIGHT 027;
+         WIDTH 040;
          value x_uf;
          maxlength 002;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,435 label lbl_010;
@@ -973,12 +973,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 130,435 textbox tbox_010;
          of form_incluir_novo_cliente;
-         height 027;
-         width 080;
+         HEIGHT 027;
+         WIDTH 080;
          value x_cep;
          maxlength 008;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 160,005 label lbl_011;
@@ -991,12 +991,12 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 180,005 textbox tbox_011;
          of form_incluir_novo_cliente;
-         height 027;
-         width 450;
+         HEIGHT 027;
+         WIDTH 450;
          value x_email;
          maxlength 050;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          lowercase
       @ 210,005 label lbl_012;
@@ -1009,11 +1009,11 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 230,005 textbox tbox_012;
          of form_incluir_novo_cliente;
-         height 027;
-         width 080;
+         HEIGHT 027;
+         WIDTH 080;
          value x_aniv_dia;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric
       @ 210,120 label lbl_013;
@@ -1026,11 +1026,11 @@ STATIC FUNCTION cadastrar_novo_cliente()
          transparent
       @ 230,120 textbox tbox_013;
          of form_incluir_novo_cliente;
-         height 027;
-         width 080;
+         HEIGHT 027;
+         WIDTH 080;
          value x_aniv_mes;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric
 
@@ -1046,22 +1046,22 @@ STATIC FUNCTION cadastrar_novo_cliente()
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_incluir_novo_cliente.height-090
+         COL 000
+         ROW form_incluir_novo_cliente.height-090
          value ''
-         width form_incluir_novo_cliente.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_incluir_novo_cliente.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_incluir_novo_cliente.width-225
-         row form_incluir_novo_cliente.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_incluir_novo_cliente.width-225
+         ROW form_incluir_novo_cliente.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar_novo_cliente()
          fontbold .T.
@@ -1070,11 +1070,11 @@ STATIC FUNCTION cadastrar_novo_cliente()
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_incluir_novo_cliente.width-100
-         row form_incluir_novo_cliente.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_incluir_novo_cliente.width-100
+         ROW form_incluir_novo_cliente.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_incluir_novo_cliente.release
          fontbold .T.
@@ -1242,12 +1242,12 @@ STATIC FUNCTION fecha_pizza()
 
    DEFINE WINDOW form_finaliza_pizza;
          at 000,000;
-         width 1000;
-         height 400;
-         title 'Finalizar pizza';
-         icon path_imagens+'icone.ico';
+         WIDTH 1000;
+         HEIGHT 400;
+         TITLE 'Finalizar pizza';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       @ 005,005 label lbl_001;
          of form_finaliza_pizza;
@@ -1292,10 +1292,10 @@ STATIC FUNCTION fecha_pizza()
 
       DEFINE GRID grid_finaliza_pizza
          parent form_finaliza_pizza
-         col 005
-         row 105
-         width 985
-         height 260
+         COL 005
+         ROW 105
+         WIDTH 985
+         HEIGHT 260
          headers {'id','Pizza',_tamanho_001,_tamanho_002,_tamanho_003,_tamanho_004,_tamanho_005,_tamanho_006}
          widths {001,250,120,120,120,120,120,120}
          value 1
@@ -1303,7 +1303,7 @@ STATIC FUNCTION fecha_pizza()
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _cinza_005
+         BACKCOLOR _cinza_005
          fontcolor _preto_001
          ondblclick pega_tamanho_valor_pizza()
       END GRID
@@ -1437,31 +1437,31 @@ STATIC FUNCTION fecha_pedido()
 
    DEFINE WINDOW form_fecha_pedido;
          at 000,000;
-         width 500;
-         height 540;
-         title 'Fechamento do pedido';
-         icon path_imagens+'icone.ico';
+         WIDTH 500;
+         HEIGHT 540;
+         TITLE 'Fechamento do pedido';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * linhas para separar os elementos na tela
       DEFINE LABEL label_sep_001
-         col 000
-         row 190
+         COL 000
+         ROW 190
          value ''
-         width 500
-         height 002
+         WIDTH 500
+         HEIGHT 002
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
       DEFINE LABEL label_sep_002
-         col 000
-         row 390
+         COL 000
+         ROW 390
          value ''
-         width 500
-         height 002
+         WIDTH 500
+         HEIGHT 002
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
 
       @ 010,020 label label_001;
@@ -1506,14 +1506,14 @@ STATIC FUNCTION fecha_pedido()
          transparent
       @ 110,250 getbox tbox_desconto;
          of form_fecha_pedido;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _vermelho_002;
-         picture '@E 9,999.99';
+         PICTURE '@E 9,999.99';
          on change setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'));
          on lostfocus setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'))
       @ 150,020 label label_005;
@@ -1548,52 +1548,52 @@ STATIC FUNCTION fecha_pedido()
          itemsource formas_recebimento->nome;
          valuesource formas_recebimento->codigo;
          value 1;
-         width 250;
+         WIDTH 250;
          font 'courier new' size 010
       @ 230,300 getbox tbox_fr001;
          of form_fecha_pedido;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 014;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 99,999.99'
+         PICTURE '@E 99,999.99'
       * 2º
       @ 270,020 combobox combo_2;
          itemsource formas_recebimento->nome;
          valuesource formas_recebimento->codigo;
          value 1;
-         width 250;
+         WIDTH 250;
          font 'courier new' size 010
       @ 270,300 getbox tbox_fr002;
          of form_fecha_pedido;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 014;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 99,999.99'
+         PICTURE '@E 99,999.99'
       * 3º
       @ 310,020 combobox combo_3;
          itemsource formas_recebimento->nome;
          valuesource formas_recebimento->codigo;
          value 1;
-         width 250;
+         WIDTH 250;
          font 'courier new' size 010
       @ 310,300 getbox tbox_fr003;
          of form_fecha_pedido;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 014;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 99,999.99';
+         PICTURE '@E 99,999.99';
          on lostfocus calcula_final()
 
       @ 360,020 label label_011;
@@ -1634,15 +1634,15 @@ STATIC FUNCTION fecha_pedido()
       @ 460,115 buttonex botao_ok;
          parent form_fecha_pedido;
          caption 'Fechar pedido';
-         width 150 height 040;
-         picture path_imagens+'img_pedido.bmp';
+         WIDTH 150 height 040;
+         PICTURE path_imagens+'img_pedido.bmp';
          action fechamento_geral();
          tooltip 'Clique aqui para finalizar o pedido'
       @ 460,270 buttonex botao_voltar;
          parent form_fecha_pedido;
          caption 'Voltar para tela anterior';
-         width 220 height 040;
-         picture path_imagens+'img_sair.bmp';
+         WIDTH 220 height 040;
+         PICTURE path_imagens+'img_sair.bmp';
          action form_fecha_pedido.release;
          tooltip 'Clique aqui para voltar a vender'
 

@@ -825,7 +825,7 @@ STATIC FUNCTION onSysCommand( oDlg, wParam, lParam )
 
    RETURN - 1
 
-   EXIT PROCEDURE Hwg_ExitProcedure
-   Hwg_ExitProc()
+EXIT PROCEDURE Hwg_ExitProcedure
+Hwg_ExitProc()
 
-   RETURN
+RETURN

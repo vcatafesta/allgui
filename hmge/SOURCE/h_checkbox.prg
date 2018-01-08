@@ -112,9 +112,9 @@ FUNCTION _DefineCheckBox ( ControlName, ParentFormName, x, y, Caption, Value, ;
       mVar := _HMG_aFormBkColor[ GetFormIndex ( ParentFormName ) ]
       IF backcolor == NIL .AND. mVar[1] < 0 .AND. mVar[2] < 0 .AND. mVar[3] < 0
          mVar := GetSysColor( COLOR_BTNFACE )
-         backcolor := nRGB2Arr( mVar )
+         BACKCOLOR := nRGB2Arr( mVar )
       ELSE
-         backcolor := mVar
+         BACKCOLOR := mVar
       ENDIF
    ENDIF
 

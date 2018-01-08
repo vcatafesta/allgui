@@ -38,10 +38,10 @@ FUNCTION reajuste()
 
    DEFINE WINDOW form_reajuste;
          at 000,000;
-         width 900;
-         height 600;
-         title 'Reajustar Preços de Produtos';
-         icon path_imagens+'icone.ico';
+         WIDTH 900;
+         HEIGHT 600;
+         TITLE 'Reajustar Preços de Produtos';
+         ICON path_imagens+'icone.ico';
          modal;
          nosize;
          on init zera_temporario();
@@ -57,10 +57,10 @@ FUNCTION reajuste()
          fontcolor _preto_001;
          transparent
       define comboboxex cbo_001
-      row   030
-      col   005
-      width 200
-      height 200
+      ROW   030
+      COL   005
+      WIDTH 200
+      HEIGHT 200
       items a_001
       value 1
    END comboboxex
@@ -75,10 +75,10 @@ FUNCTION reajuste()
       fontcolor _preto_001;
       transparent
    define comboboxex cbo_002
-   row   090
-   col   005
-   width 200
-   height 400
+   ROW   090
+   COL   005
+   WIDTH 200
+   HEIGHT 400
    items a_002
    value 1
    listwidth 300
@@ -94,10 +94,10 @@ END comboboxex
    fontcolor _preto_001;
    transparent
 define comboboxex cbo_003
-row   150
-col   005
-width 200
-height 400
+ROW   150
+COL   005
+WIDTH 200
+HEIGHT 400
 items a_003
 value 1
 listwidth 300
@@ -114,13 +114,13 @@ END comboboxex
    transparent
 @ 200,060 getbox tbox_004;
    of form_reajuste;
-   height 027;
-   width 080;
+   HEIGHT 027;
+   WIDTH 080;
    value 0;
    font 'tahoma' size 010;
-   backcolor _fundo_get;
+   BACKCOLOR _fundo_get;
    fontcolor _letra_get_1;
-   picture '@E 9,999.99'
+   PICTURE '@E 9,999.99'
 @ 200,150 label lbl_0044;
    of form_reajuste;
    value 'ao preço';
@@ -158,13 +158,13 @@ END comboboxex
    transparent
 @ 290,070 getbox tbox_005;
    of form_reajuste;
-   height 027;
-   width 070;
+   HEIGHT 027;
+   WIDTH 070;
    value 0;
    font 'tahoma' size 010;
-   backcolor _fundo_get;
+   BACKCOLOR _fundo_get;
    fontcolor _letra_get_1;
-   picture '@R 999.99'
+   PICTURE '@R 999.99'
 @ 290,150 label lbl_0055;
    of form_reajuste;
    value '% sobre';
@@ -186,20 +186,20 @@ END comboboxex
 @ 360,005 buttonex botao_filtrar;
    parent form_reajuste;
    caption 'Filtrar informações';
-   width 200 height 040;
-   picture path_imagens+'img_filtro.bmp';
+   WIDTH 200 height 040;
+   PICTURE path_imagens+'img_filtro.bmp';
    action filtrar_informacoes();
    tooltip 'Clique aqui para separar as informações e visualizar os reajustes antes de efetivá-los'
 
 * separar a tela em 2 partes
 DEFINE LABEL label_separador
-   col 210
-   row 000
+   COL 210
+   ROW 000
    value ''
-   width 002
-   height 600
+   WIDTH 002
+   HEIGHT 600
    transparent .F.
-   backcolor _cinza_002
+   BACKCOLOR _cinza_002
 END LABEL
 
 * grid e opções do reajuste
@@ -216,15 +216,15 @@ END LABEL
 @ 520,405 buttonex botao_reajustar;
    parent form_reajuste;
    caption 'Reajustar os preços com base na projeção';
-   width 300 height 040;
-   picture path_imagens+'img_aplicar.bmp';
+   WIDTH 300 height 040;
+   PICTURE path_imagens+'img_aplicar.bmp';
    action gravar_reajuste();
    tooltip 'Clique aqui para gravar as informações com reajuste no banco de dados'
 @ 520,710 buttonex botao_sair;
    parent form_reajuste;
    caption 'Sair desta tela';
-   width 180 height 040;
-   picture path_imagens+'img_sair.bmp';
+   WIDTH 180 height 040;
+   PICTURE path_imagens+'img_sair.bmp';
    action (zera_acesso(),form_reajuste.release);
    tooltip 'Clique aqui para sair'
 
@@ -269,32 +269,32 @@ STATIC FUNCTION filtrar_informacoes()
       _conta_acesso ++
       DEFINE GRID grid_reajuste
          parent form_reajuste
-         col 220
-         row 030
-         width 665
-         height 480
+         COL 220
+         ROW 030
+         WIDTH 665
+         HEIGHT 480
          headers {'.','Produto',_tamanho_001,_tamanho_002,_tamanho_003,_tamanho_004,_tamanho_005,_tamanho_006}
          widths {001,300,120,120,120,120,120,120}
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _amarelo_001
+         BACKCOLOR _amarelo_001
          fontcolor BLUE
       END GRID
    ELSEIF x_tipo == 2 //demais produtos
       _conta_acesso ++
       DEFINE GRID grid_reajuste
          parent form_reajuste
-         col 220
-         row 030
-         width 665
-         height 480
+         COL 220
+         ROW 030
+         WIDTH 665
+         HEIGHT 480
          headers {'.','Produto','Preço reajustado R$'}
          widths {001,400,220}
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _amarelo_001
+         BACKCOLOR _amarelo_001
          fontcolor BLUE
       END GRID
    ENDIF

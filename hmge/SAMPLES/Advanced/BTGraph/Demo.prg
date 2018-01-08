@@ -5,39 +5,39 @@ FUNCTION Main
    SET font to _GetSysFont(), 10
    DEFINE WINDOW graph at 0, 0 width 1000 height 700 title 'Bos Taurus Graph' main
       DEFINE LABEL selecttype
-         row 10
-         col 45
-         width 115
+         ROW 10
+         COL 45
+         WIDTH 115
          value 'Select Graph Type'
          vcenteralign .T.
       END LABEL
       DEFINE COMBOBOX graphtype
-         row 10
-         col 160
-         width 100
+         ROW 10
+         COL 160
+         WIDTH 100
          items { 'Bar', 'Lines', 'Points', 'Pie' }
          onchange drawgraph()
       END COMBOBOX
       DEFINE CHECKBOX enable3d
-         row 10
-         col 280
-         width 100
+         ROW 10
+         COL 280
+         WIDTH 100
          caption 'Enable 3D'
          onchange drawgraph()
          value .T.
       END CHECKBOX
       DEFINE BUTTON Button_1
-         row 10
-         col 400
+         ROW 10
+         COL 400
          caption 'Save as PNG'
          action BT_BitmapSaveFile( BT_HMGGetImage( "graph", "grapharea" ), "Graph.PNG", BT_FILEFORMAT_PNG )
       END BUTTON
       DEFINE IMAGE grapharea
-         row 50
-         col 50
-         width 600
-         height 600
-         stretch .T.
+         ROW 50
+         COL 50
+         WIDTH 600
+         HEIGHT 600
+         STRETCH .T.
       END IMAGE
    END WINDOW
    graph.graphtype.value := 1

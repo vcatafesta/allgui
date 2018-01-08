@@ -18,7 +18,7 @@ FUNCTION DBUeditprint
    _b := GetDesktopHeight() - _t
    _r := GetDesktopWidth() - _l
    SET preview rect _t, _l, _b, _r
-   define font "f0" name "Courier New" size 12
+   DEFINE FONT "f0" name "Courier New" size 12
    SELECT font "f0"
    start doc
    SET page orientation DMORIENT_PORTRAIT paperSize DMPAPER_A4 font "f0"
@@ -80,7 +80,7 @@ FUNCTION DBUbrowseprint
    GET default printer to _DBUcurrentprinter
    SELECT default
    start doc
-   define font "f0" name "Courier New" size 12
+   DEFINE FONT "f0" name "Courier New" size 12
    SET page orientation DMORIENT_PORTRAIT paperSize DMPAPER_A4 font "f0"
    _DBUmaxportraitcol := hbprnmaxcol - 4
    SET page orientation DMORIENT_LANDSCAPE paperSize DMPAPER_A4 font "f0"
@@ -102,150 +102,150 @@ FOR _DBUi := 1 to len(_DBUstructarr)
 NEXT _DBUi
 DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fields" modal nosize nosysmenu
    DEFINE LABEL _DBUtotfieldslab
-      row 30
-      col 30
+      ROW 30
+      COL 30
       value "Fields in the dbf"
-      width 200
+      WIDTH 200
       fontbold .t.
    END LABEL
    DEFINE LISTBOX _DBUfields
-      row 60
-      col 30
-      width 200
-      height 400
+      ROW 60
+      COL 30
+      WIDTH 200
+      HEIGHT 400
       items _DBUfieldnamearr
       multiselect .t.
    END listbox
    DEFINE BUTTON _DBUfieldadd
-      row 100
-      col 260
+      ROW 100
+      COL 260
       caption "Add"
-      width 100
+      WIDTH 100
       action DBUprintfieldsadd()
    END BUTTON
    DEFINE BUTTON _DBUfieldremove
-      row 140
-      col 260
+      ROW 140
+      COL 260
       caption "Remove"
-      width 100
+      WIDTH 100
       action DBUprintfieldremove()
    END BUTTON
    DEFINE BUTTON _DBUfieldaddall
-      row 180
-      col 260
+      ROW 180
+      COL 260
       caption "Add All"
-      width 100
+      WIDTH 100
       action DBUprintfieldaddall()
    END BUTTON
    DEFINE BUTTON _DBUfieldremoveall
-      row 220
-      col 260
+      ROW 220
+      COL 260
       caption "Remove All"
-      width 100
+      WIDTH 100
       action (_DBUprintfields._DBUselectedfields.deleteallitems,DBUprintcoltally())
    END BUTTON
    DEFINE LABEL _DBUselectedfieldslabel
-      row 30
-      col 390
-      width 200
+      ROW 30
+      COL 390
+      WIDTH 200
       value "Selected Fields"
       fontbold .t.
    END LABEL
    DEFINE LISTBOX _DBUselectedfields
-      row 60
-      col 390
-      width 200
-      height 400
+      ROW 60
+      COL 390
+      WIDTH 200
+      HEIGHT 400
       multiselect .t.
    END listbox
    DEFINE LABEL _DBUorientationlabel
-      row 30
-      col 600
+      ROW 30
+      COL 600
       value "Orientation"
-      width 150
+      WIDTH 150
       fontbold .t.
    END LABEL
    DEFINE RADIOGROUP _DBUpaperorientation
-      row 60
-      col 600
-      width 150
-      height 100
+      ROW 60
+      COL 600
+      WIDTH 150
+      HEIGHT 100
       options {"Landscape","Portrait"}
       on change DBUorientationchange()
       value 1
    END radiogroup
    DEFINE LABEL _DBUselectprinterlabel
-      row 170
-      col 600
+      ROW 170
+      COL 600
       value "Select Printer"
-      width 150
+      WIDTH 150
       fontbold .t.
    END LABEL
    DEFINE LISTBOX _DBUprinters
-      row 200
-      col 600
-      width 150
-      height 100
+      ROW 200
+      COL 600
+      WIDTH 150
+      HEIGHT 100
       items _DBUavailableprinters
       value ascan(_DBUavailableprinters,_DBUcurrentprinter)
    END listbox
    DEFINE LABEL _DBUselectfontsizelabel
-      row 310
-      col 600
+      ROW 310
+      COL 600
       value "Font Size"
-      width 150
+      WIDTH 150
       fontbold .t.
    END LABEL
    DEFINE LISTBOX _DBUselectfontsize
-      row 340
-      col 600
-      width 150
-      height 100
+      ROW 340
+      COL 600
+      WIDTH 150
+      HEIGHT 100
       items _DBUfontsizesstr
       on change DBUfontsizechanged()
       value 5
    END listbox
    DEFINE BUTTON _DBUbrowseprint1
-      row 260
-      col 260
+      ROW 260
+      COL 260
       caption "Print"
       action DBUprintstart()
-      width 100
+      WIDTH 100
    END BUTTON
    DEFINE BUTTON _DBUbrowseprintcancel
-      row 300
-      col 260
+      ROW 300
+      COL 260
       caption "Cancel"
       action _DBUprintfields.release
-      width 100
+      WIDTH 100
    END BUTTON
    DEFINE LABEL _DBUmaxcollabel
-      row 470
-      col 30
-      width 200
+      ROW 470
+      COL 30
+      WIDTH 200
       value "Maximum Print Columns:"
       fontbold .t.
    END LABEL
    DEFINE TEXTBOX _DBUmaximumcol
-      row 470
-      col 240
-      width 50
+      ROW 470
+      COL 240
+      WIDTH 50
       readonly .t.
       value _DBUmaxcol1
       numeric .t.
       rightalign .t.
    END TEXTBOX
    DEFINE LABEL _DBUcurrentcollabel
-      row 470
-      col 300
-      width 200
+      ROW 470
+      COL 300
+      WIDTH 200
       value "Current Print Columns:"
       fontbold .t.
    END LABEL
    DEFINE TEXTBOX _DBUcurrentcol
-      row 470
-      col 510
-      width 50
+      ROW 470
+      COL 510
+      WIDTH 50
       readonly .t.
       value 2
       numeric .t.
@@ -349,7 +349,7 @@ FUNCTION DBUfontsizechanged
    INIT printsys
    SELECT default
    start doc
-   define font "f0" name "Courier New" size val(alltrim(_DBUprintfields._DBUselectfontsize.item(_DBUprintfields._DBUselectfontsize.value)))
+   DEFINE FONT "f0" name "Courier New" size val(alltrim(_DBUprintfields._DBUselectfontsize.item(_DBUprintfields._DBUselectfontsize.value)))
    SET page orientation DMORIENT_PORTRAIT paperSize DMPAPER_A4 font "f0"
    _DBUmaxportraitcol := hbprnmaxcol - 4
    SET page orientation DMORIENT_LANDSCAPE paperSize DMPAPER_A4 font "f0"
@@ -414,7 +414,7 @@ FUNCTION DBUprintstart
    _r := GetDesktopWidth() - _l
    SET preview rect _t, _l, _b, _r
    enable thumbnails
-   define font "f0" name "Courier New" size val(alltrim(_DBUprintfields._DBUselectfontsize.item(_DBUprintfields._DBUselectfontsize.value)))
+   DEFINE FONT "f0" name "Courier New" size val(alltrim(_DBUprintfields._DBUselectfontsize.item(_DBUprintfields._DBUselectfontsize.value)))
    SELECT font "f0"
    IF _DBUprintfields._DBUpaperorientation.value == 1
       SET page orientation DMORIENT_LANDSCAPE paperSize DMPAPER_A4 font "f0"
@@ -518,7 +518,7 @@ FUNCTION DBUprintstruct
    _b := GetDesktopHeight() - _t
    _r := GetDesktopWidth() - _l
    SET preview rect _t, _l, _b, _r
-   define font "f0" name "Courier New" size 12
+   DEFINE FONT "f0" name "Courier New" size 12
    SELECT font "f0"
    start doc
    SET page orientation DMORIENT_PORTRAIT paperSize DMPAPER_A4 font "f0"

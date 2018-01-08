@@ -10,7 +10,7 @@
 
 PROCEDURE Main()
 
-   SET MULTIPLE OFF Warning
+   SET MULTIPLE OFF WARNING
 
    USE Cuentas
    INDEX ON field->nombre To cuentas

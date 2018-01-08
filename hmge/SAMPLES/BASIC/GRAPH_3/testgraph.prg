@@ -23,31 +23,31 @@ FUNCTION Main
 
    DEFINE WINDOW GraphTest ;
          At 0,0 ;
-         Width 640 ;
-         Height 480 ;
-         Title "Graph" ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Graph" ;
          Main ;
-         Icon "Main" ;
+         ICON "Main" ;
          nomaximize nosize ;
          On Init DrawBarGraph ( aSer )
 
       DEFINE BUTTON Button_1
-         Row   405
-         Col   50
+         ROW   405
+         COL   50
          Caption   'Bars'
          Action DrawBarGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_2
-         Row   405
-         Col   250
+         ROW   405
+         COL   250
          Caption   'Lines'
          Action DrawLinesGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_3
-         Row   405
-         Col   450
+         ROW   405
+         COL   450
          Caption   'Points'
          Action DrawPointsGraph ( aSer )
       END BUTTON

@@ -1,13 +1,12 @@
 /*
- * $Id: recordmerge.prg $
- */
+* $Id: recordmerge.prg $
+*/
 /*
- * ooHG XBrowse multiple database in one browse. (c) 2008-2017 Victor Guerra
- * This demo shows multiple databases on a single browse.
- *
- * NOTES: You can't use XBROWSE's scrollbar or edit capabilities.
- *        However, you can create your own edit procedure.
- */
+* ooHG XBrowse multiple database in one browse. (c) 2008-2017 Victor Guerra
+* This demo shows multiple databases on a single browse.
+* NOTES: You can't use XBROWSE's scrollbar or edit capabilities.
+*        However, you can create your own edit procedure.
+*/
 
 #ifndef NO_SAMPLE
 
@@ -15,7 +14,8 @@
 #include "hbcompat.ch"
 
 PROCEDURE MAIN
-LOCAL oBase1, oBase2, I, J, K, nCount, oMix
+
+   LOCAL oBase1, oBase2, I, J, K, nCount, oMix
 
    SET DELETED ON
 
@@ -56,23 +56,23 @@ LOCAL oBase1, oBase2, I, J, K, nCount, oMix
    oMix := TRecordMerge():New( { oBase1, oBase2 } )
 
    DEFINE WINDOW MAIN ;
-          AT 0,0 WIDTH 420 HEIGHT 320 CLIENTAREA ;
-          TITLE "Tables merged" ;
-          FONT "MS Sans Serif" SIZE 9
+         AT 0,0 WIDTH 420 HEIGHT 320 CLIENTAREA ;
+         TITLE "Tables merged" ;
+         FONT "MS Sans Serif" SIZE 9
 
       @ 10,10 XBROWSE Browse                            ;
-              WIDTH 400                                 ;
-              HEIGHT 300                                ;
-              WORKAREA ( oMix )                         ;
-              FONT 'VERDANA' SIZE 7 NOVSCROLL           ;
-              HEADERS { "Key",         "Data" }         ;
-              WIDTHS  { 50,            300 }            ;
-              FIELDS  { { |o| o:Key }, { |o| o:Data } }
+         WIDTH 400                                 ;
+         HEIGHT 300                                ;
+         WORKAREA ( oMix )                         ;
+         FONT 'VERDANA' SIZE 7 NOVSCROLL           ;
+         HEADERS { "Key",         "Data" }         ;
+         WIDTHS  { 50,            300 }            ;
+         FIELDS  { { |o| o:Key }, { |o| o:Data } }
 
    END WINDOW
    ACTIVATE WINDOW MAIN
 
-RETURN
+   RETURN
 
 #endif   // NO_SAMPLE
 
@@ -97,31 +97,35 @@ CLASS TRecordMerge
    METHOD GoBottom
 
    // Methods used by XBrowse if you'll have a scrollbar
-*   METHOD RecNo              BLOCK { | Self | ::nRecNo }
-*   METHOD RecCount           BLOCK { | Self | LEN( ::aArray ) }
-*   METHOD GoTo( n )          BLOCK { | Self, n | ::nRecNo := MAX( MIN( n, LEN( ::aArray ) ), 1 ) }
-*   METHOD OrdKeyNo           BLOCK { | Self | ::nRecNo }
-*   METHOD OrdKeyCount        BLOCK { | Self | LEN( ::aArray ) }
-*   METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::nRecNo := MAX( MIN( n, LEN( ::aArray ) ), 1 ) }
+   *   METHOD RecNo              BLOCK { | Self | ::nRecNo }
+   *   METHOD RecCount           BLOCK { | Self | LEN( ::aArray ) }
+   *   METHOD GoTo( n )          BLOCK { | Self, n | ::nRecNo := MAX( MIN( n, LEN( ::aArray ) ), 1 ) }
+   *   METHOD OrdKeyNo           BLOCK { | Self | ::nRecNo }
+   *   METHOD OrdKeyCount        BLOCK { | Self | LEN( ::aArray ) }
+   *   METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::nRecNo := MAX( MIN( n, LEN( ::aArray ) ), 1 ) }
 
    // Methods used by XBrowse if you'll allow edition
-*   DATA cAlias__             INIT nil
-*   METHOD Eof                INLINE .F.
+   *   DATA cAlias__             INIT nil
+   *   METHOD Eof                INLINE .F.
 
    // Implemented
    METHOD Skip( n )          BLOCK { | Self, n | ::Skipper( n ) }
    METHOD Seek
    ERROR HANDLER FieldAssign
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( aAreas ) CLASS TRecordMerge
+
    ::aAreas := aAreas
    ::GoTop()
-RETURN Self
+
+   RETURN SELF
 
 METHOD SkipArea( nArea, nStep ) CLASS TRecordMerge
-LOCAL oArea, lSkipped
+
+   LOCAL oArea, lSkipped
+
    IF HB_IsNumeric( nStep )
       nStep := INT( nStep )
    ELSE
@@ -130,7 +134,6 @@ LOCAL oArea, lSkipped
    lSkipped := .F.
    oArea := ::aAreas[ nArea ]
    IF nStep == 0
-      //
    ELSEIF nStep > 0
       oArea:Skip( 1 )
       IF oArea:Eof()
@@ -147,20 +150,26 @@ LOCAL oArea, lSkipped
       ENDIF
    ENDIF
    ::aKeys[ nArea ] := ::GetIndexKey( oArea )
-RETURN lSkipped
+
+   RETURN lSkipped
 
 METHOD GetIndexKey( oArea ) CLASS TRecordMerge
-LOCAL bKey, cKey
+
+   LOCAL bKey, cKey
+
    bKey := ::bIndexKey
    IF HB_IsBlock( bKey )
       cKey := EVAL( bKey, oArea )
    ELSE
       cKey := ( oArea:cAlias__ )->( &( INDEXKEY() ) )
    ENDIF
-RETURN cKey
+
+   RETURN cKey
 
 METHOD ReadAllKeys() CLASS TRecordMerge
-LOCAL I, oArea
+
+   LOCAL I, oArea
+
    ::aKeys := ARRAY( LEN( ::aAreas ) )
    FOR I := 1 TO LEN( ::aAreas )
       oArea := ::aAreas[ I ]
@@ -171,10 +180,13 @@ LOCAL I, oArea
          ::aKeys[ I ] := ::GetIndexKey( oArea )
       ENDIF
    NEXT
-RETURN nil
+
+   RETURN NIL
 
 METHOD Skipper( nSkip ) CLASS TRecordMerge
-LOCAL nCount, aKeys, cKey, nArea, cKey2
+
+   LOCAL nCount, aKeys, cKey, nArea, cKey2
+
    IF HB_IsNumeric( nSkip )
       nSkip := INT( nSkip )
    ELSE
@@ -264,17 +276,20 @@ LOCAL nCount, aKeys, cKey, nArea, cKey2
          ENDIF
       ENDIF
    ENDDO
-RETURN nCount
+
+   RETURN nCount
 
 METHOD GoTop() CLASS TRecordMerge
-LOCAL cKey, nArea, cKey2
+
+   LOCAL cKey, nArea, cKey2
+
    AEVAL( ::aAreas, { |o| o:GoTop() } )
    ::ReadAllKeys()
    ::nCurrent := ASCAN( ::aKeys, { |c| c != NIL } )
    IF ::nCurrent == 0
       ::nCurrent := 1
       ::oCurrent := ::aAreas[ 1 ]
-      RETURN Self
+      RETURN SELF
    ENDIF
    cKey := ::aKeys[ ::nCurrent ]
    nArea := 2
@@ -287,17 +302,20 @@ LOCAL cKey, nArea, cKey2
       nArea++
    ENDDO
    ::oCurrent := ::aAreas[ ::nCurrent ]
-RETURN Self
+
+   RETURN SELF
 
 METHOD GoBottom() CLASS TRecordMerge
-LOCAL cKey, nArea, cKey2
+
+   LOCAL cKey, nArea, cKey2
+
    AEVAL( ::aAreas, { |o| o:GoBottom() } )
    ::ReadAllKeys()
    ::nCurrent := RASCAN( ::aKeys, { |c| c != NIL } )
    IF ::nCurrent == 0
       ::nCurrent := 1
       ::oCurrent := ::aAreas[ 1 ]
-      RETURN Self
+      RETURN SELF
    ENDIF
    cKey := ::aKeys[ ::nCurrent ]
    nArea := LEN( ::aAreas ) - 1
@@ -310,14 +328,17 @@ LOCAL cKey, nArea, cKey2
       nArea--
    ENDDO
    ::oCurrent := ::aAreas[ ::nCurrent ]
-RETURN Self
+
+   RETURN SELF
 
 #ifndef _SET_SOFTSEEK
-   #define _SET_SOFTSEEK 9
+#define _SET_SOFTSEEK 9
 #endif
 
 METHOD Seek( xKey, lSoftSeek /* , lLast */ ) CLASS TRecordMerge
-LOCAL cKey, nArea, cKey2, aFound, nFound, lLast
+
+   LOCAL cKey, nArea, cKey2, aFound, nFound, lLast
+
    aFound := ARRAY( LEN( ::aAreas ) )
    AEVAL( ::aAreas, { |o,i| aFound[ i ] := o:Seek( xKey, .T. /* , lLast */ ) } )
    IF ! HB_IsLogical( lSoftSeek )
@@ -378,14 +399,18 @@ LOCAL cKey, nArea, cKey2, aFound, nFound, lLast
       ::GoBottom()
    ENDIF
    ::oCurrent := ::aAreas[ ::nCurrent ]
-RETURN ( nFound > 0 )
+
+   RETURN ( nFound > 0 )
 
 METHOD FieldAssign( xValue ) CLASS TRecordMerge
-LOCAL cField
+
+   LOCAL cField
+
    cField := ALLTRIM( UPPER( __GetMessage() ) )
    IF PCOUNT() > 0
       RETURN ( ::oCurrent:&( cField ) := xValue )
    ELSE
       RETURN ( ::oCurrent:&( cField ) )
    ENDIF
-RETURN NIL
+
+   RETURN NIL

@@ -60,7 +60,7 @@ MEMVAR aresult, l, aWhen, aWhenVarNames
 FUNCTION _DefineBrowse ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWidths, aFields, value, ;
       fontname, fontsize, tooltip , change , dblclick , aHeadClick , gotfocus , lostfocus , WorkArea , ;
       DELETE , nogrid , aImage , aJust , HelpId , bold , italic , underline , strikeout , break , ;
-      backcolor , fontcolor , lock , inplace , novscroll , appendable , readonly , valid , validmessages , ;
+      BACKCOLOR , fontcolor , lock , inplace , novscroll , appendable , readonly , valid , validmessages , ;
       edit , dynamicforecolor , dynamicbackcolor , aWhenFields , nId , aImageHeader , NoTabStop , ;
       inputitems , displayitems , doublebuffer , columnsort )
    LOCAL i , ParentFormHandle , blInit , mVar , DeltaWidth , k , Style , lsort
@@ -1383,12 +1383,12 @@ FUNCTION _BrowseEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock ,
       GCol   := actpos [1]
       GWidth := actpos [3] - actpos [1]
 
-      Col := GCol + ( GWidth - 310 ) / 2
+      COL := GCol + ( GWidth - 310 ) / 2
 
       IF ValType ( append ) != 'U'
-         Title := _HMG_BRWLangButton [ iif( append == .t., 1, 2 ) ]
+         TITLE := _HMG_BRWLangButton [ iif( append == .t., 1, 2 ) ]
       ELSE
-         Title := _HMG_BRWLangButton [2]
+         TITLE := _HMG_BRWLangButton [2]
       ENDIF
 
       aLabels := _HMG_aControlCaption [i]
@@ -2043,7 +2043,7 @@ STATIC FUNCTION _BrowseInPlaceEdit ( GridHandle , aValid , aValidMessages , aRea
    r := FieldPos ( sFieldName )
 
    IF r > 0
-      Width    := aStruct [r] [DBS_LEN]
+      WIDTH    := aStruct [r] [DBS_LEN]
       Decimals := aStruct [r] [DBS_DEC]
    ENDIF
 

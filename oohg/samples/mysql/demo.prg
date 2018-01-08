@@ -2,16 +2,16 @@
 
 PROCEDURE Main
 
-    DEFINE WINDOW Main ;
-       TITLE "MySQL demo"
+   DEFINE WINDOW Main ;
+         TITLE "MySQL demo"
 
-        @ 10,10 BUTTON Btn CAPTION "Inicio" ACTION Conex()
+      @ 10,10 BUTTON Btn CAPTION "Inicio" ACTION Conex()
 
-    END WINDOW
+   END WINDOW
 
-    ACTIVATE WINDOW Main
+   ACTIVATE WINDOW Main
 
-RETURN
+   RETURN
 
 PROCEDURE Conex()
 
@@ -22,17 +22,17 @@ PROCEDURE Conex()
 
    oServer := TMySQLServer():New(cHostName, cUser, cPassWord,nPort)                       //Abro la conexión con MySQL
 
-   If oServer:NetErr()                                                             //Verifica si ocurrió algún error en la Conexión
-       MsgInfo("Error de Conexión con Servidor " +chr(13)+ oServer:Error(),'MySQL under OOHG')
-       oServer:= Nil
-       Return .f.
-   EndIf
+   IF oServer:NetErr()                                                             //Verifica si ocurrió algún error en la Conexión
+      MsgInfo("Error de Conexión con Servidor " +chr(13)+ oServer:Error(),'MySQL under OOHG')
+      oServer:= Nil
+      RETURN .f.
+   ENDIF
 
-   If oServer == Nil                                                               //Verifica si se Conectó realmente
-       MsgInfo("Conexión con MySQL NO fue Iniciada!!",'MySQL under OOHG')
-       Return Nil
-   EndIf
+   IF oServer == Nil                                                               //Verifica si se Conectó realmente
+      MsgInfo("Conexión con MySQL NO fue Iniciada!!",'MySQL under OOHG')
+      RETURN NIL
+   ENDIF
 
    MsgInfo( "CONECTADO" )
 
-RETURN
+   RETURN

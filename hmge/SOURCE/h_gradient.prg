@@ -66,16 +66,16 @@ INIT PROCEDURE InitGradientFunc()
 
    RETURN
 
-   EXIT PROCEDURE ExitGradientFunc()
+EXIT PROCEDURE ExitGradientFunc()
 
-   _ExitGradientFunc()
+_ExitGradientFunc()
 
-   RETURN
+RETURN
 
-   /*
-   * HMG 1.2 Extended Builds 30-33
-   * Author: P.Chornyj <myorg63@mail.ru>
-   */
+/*
+* HMG 1.2 Extended Builds 30-33
+* Author: P.Chornyj <myorg63@mail.ru>
+*/
 
 FUNCTION DrawGradient( window, row, col, rowr, colr, aColor1, aColor2, vertical, border )
 

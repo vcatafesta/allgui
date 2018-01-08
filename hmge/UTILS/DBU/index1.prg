@@ -15,17 +15,17 @@ FUNCTION DBUcreaindex()
    NEXT _DBUi
    DEFINE WINDOW _DBUcreaindex at 0,0 width 300 height 500 title "Create Index" modal nosize nosysmenu
       DEFINE LABEL _DBUfieldslabel
-         row 10
-         col 10
-         width 280
+         ROW 10
+         COL 10
+         WIDTH 280
          value "Field Names List:"
          fontbold .t.
       END LABEL
       DEFINE GRID _DBUfields
-         row 40
-         col 10
-         width 280
-         height 380
+         ROW 40
+         COL 10
+         WIDTH 280
+         HEIGHT 380
          widths {0,200}
          headers {"","Field Names"}
          image {"wrong","right"}
@@ -33,14 +33,14 @@ FUNCTION DBUcreaindex()
          ondblclick _DBUindexfieldtoggle()
       END GRID
       DEFINE BUTTON _DBUsaveindex
-         row 430
-         col 40
+         ROW 430
+         COL 40
          caption "Create"
          action _DBUcreateindex()
       END BUTTON
       DEFINE BUTTON _DBUcancelindex
-         row 430
-         col 160
+         ROW 430
+         COL 160
          caption "Cancel"
          action _DBUcreaindex.release
       END BUTTON
@@ -171,22 +171,22 @@ FUNCTION DBUcloseindex()
    ENDIF
    DEFINE WINDOW _DBUcloseindex at 0,0 width 300 height 400 title "DBU Close Index" modal nosize nosysmenu
       DEFINE LABEL _DBUcurrentlabel
-         row 10
-         col 10
+         ROW 10
+         COL 10
          value "Choose the index file(s) to close"
-         width 280
+         WIDTH 280
       END LABEL
       DEFINE LISTBOX _DBUcurrentindices
-         row 40
-         col 10
-         width 280
-         height 250
+         ROW 40
+         COL 10
+         WIDTH 280
+         HEIGHT 250
          items _DBUindexfields
          multiselect .t.
       END listbox
       DEFINE BUTTON _DBUcloseindexbutton
-         row 320
-         col 10
+         ROW 320
+         COL 10
          caption "Close"
          action DBUcloseindexdone()
       END BUTTON
@@ -253,22 +253,22 @@ FUNCTION DBUchangeactiveindex()
    ENDIF
    DEFINE WINDOW _DBUactiveindex at 0,0 width 300 height 400 title "DBU Active Index Change" modal nosize nosysmenu
       DEFINE LABEL _DBUcurrentlabel
-         row 10
-         col 10
+         ROW 10
+         COL 10
          value "Change the field to make it active"
-         width 280
+         WIDTH 280
       END LABEL
       DEFINE LISTBOX _DBUcurrentindices
-         row 40
-         col 10
-         width 280
-         height 250
+         ROW 40
+         COL 10
+         WIDTH 280
+         HEIGHT 250
          items _DBUindexfields
          value _DBUactiveindex
       END listbox
       DEFINE BUTTON _DBUchangeactivedone
-         row 320
-         col 10
+         ROW 320
+         COL 10
          caption "Done"
          action DBUchangeactiveindexdone()
       END BUTTON

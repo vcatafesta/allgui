@@ -9,8 +9,8 @@ PROCEDURE main()
 
    DEFINE WINDOW Form_Main ;
          at 0,0 ;
-         width 320 height 240 ;
-         title 'fn:BmpSize() Demo' ;
+         WIDTH 320 height 240 ;
+         TITLE 'fn:BmpSize() Demo' ;
          main ;
          nomaximize nosize
 
@@ -26,7 +26,7 @@ PROCEDURE main()
       END MENU
 
       @ 20, 20 image Image_1 ;
-         picture 'DEMO' ;
+         PICTURE 'DEMO' ;
          action Image_1_OnClick( Form_Main.Image_1.Picture ) ;
          adjust ;
          tooltip 'Click Me'

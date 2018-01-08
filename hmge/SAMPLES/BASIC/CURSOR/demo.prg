@@ -26,11 +26,11 @@ BusyCursor            // An hourglass or watch cursor, usually shown during oper
 FUNCTION Main
 
    DEFINE WINDOW Win_1 ;
-         Row 0 ;
-         Col 0 ;
-         Width 430 ;
-         Height 450 ;
-         Title 'HMG Cursor Demo' ;
+         ROW 0 ;
+         COL 0 ;
+         WIDTH 430 ;
+         HEIGHT 450 ;
+         TITLE 'HMG Cursor Demo' ;
          WindowType MAIN
 
       DEFINE MAIN MENU
@@ -50,166 +50,166 @@ FUNCTION Main
       END MENU
 
       DEFINE LABEL Lbl_0
-         Row       40
-         Col       10
-         Width     180
-         Height    30
+         ROW       40
+         COL       10
+         WIDTH     180
+         HEIGHT    30
          Value     'Arrow Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorArrow()
       END LABEL
 
       DEFINE LABEL Lbl_1
-         Row       40
-         Col       220
-         Width     180
-         Height    30
+         ROW       40
+         COL       220
+         WIDTH     180
+         HEIGHT    30
          Value     'UpArrow Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorUpArrow()
       END LABEL
 
       DEFINE LABEL Lbl_2
-         Row       80
-         Col       10
-         Width     180
-         Height    30
+         ROW       80
+         COL       10
+         WIDTH     180
+         HEIGHT    30
          Value      'Cross Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorCross()
       END LABEL
 
       DEFINE LABEL Lbl_3
-         Row       80
-         Col       220
-         Width     180
-         Height    30
+         ROW       80
+         COL       220
+         WIDTH     180
+         HEIGHT    30
          Value     'Wait Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorWait()
       END LABEL
 
       DEFINE LABEL Lbl_4
-         Row       120
-         Col       10
-         Width     180
-         Height    30
+         ROW       120
+         COL       10
+         WIDTH     180
+         HEIGHT    30
          Value     'IBeam Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorIBeam()
       END LABEL
 
       DEFINE LABEL Lbl_5
-         Row       120
-         Col       220
-         Width     180
-         Height    30
+         ROW       120
+         COL       220
+         WIDTH     180
+         HEIGHT    30
          Value     'SizeVer Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizeNS()
       END LABEL
 
       DEFINE LABEL Lbl_6
-         Row       160
-         Col       10
-         Width     180
-         Height    30
+         ROW       160
+         COL       10
+         WIDTH     180
+         HEIGHT    30
          Value     'SizeHor Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizeWE()
       END LABEL
 
       DEFINE LABEL Lbl_7
-         Row       160
-         Col       220
-         Width     180
-         Height    30
+         ROW       160
+         COL       220
+         WIDTH     180
+         HEIGHT    30
          Value     'SizeBDiag Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizenEsW()
       END LABEL
 
       DEFINE LABEL Lbl_8
-         Row       200
-         Col       10
-         Width     180
-         Height    30
+         ROW       200
+         COL       10
+         WIDTH     180
+         HEIGHT    30
          Value     'SizeFDiag Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizenWsE()
       END LABEL
 
       DEFINE LABEL Lbl_9
-         Row       200
-         Col       220
-         Width     180
-         Height    30
+         ROW       200
+         COL       220
+         WIDTH     180
+         HEIGHT    30
          Value     'SizeAll Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizeAll()
       END LABEL
 
       DEFINE LABEL Lbl_10
-         Row       240
-         Col       10
-         Width     180
-         Height    30
+         ROW       240
+         COL       10
+         WIDTH     180
+         HEIGHT    30
          Value     'Forbidden Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorNo()
       END LABEL
 
       DEFINE LABEL Lbl_11
-         Row       240
-         Col       220
-         Width     180
-         Height    30
+         ROW       240
+         COL       220
+         WIDTH     180
+         HEIGHT    30
          Value     'WhatsThis Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorHelp()
       END LABEL
 
       DEFINE LABEL Lbl_12
-         Row       280
-         Col       10
-         Width     180
-         Height    30
+         ROW       280
+         COL       10
+         WIDTH     180
+         HEIGHT    30
          Value     'Pointing Hand Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorHand()
       END LABEL
 
       DEFINE LABEL Lbl_13
-         Row       280
-         Col       220
-         Width     180
-         Height    30
+         ROW       280
+         COL       220
+         WIDTH     180
+         HEIGHT    30
          Value     'Busy Cursor'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorAppStarting()
       END LABEL
 
       DEFINE LABEL Lbl_14
-         Row       320
-         Col       10
-         Width     180
-         Height    30
+         ROW       320
+         COL       10
+         WIDTH     180
+         HEIGHT    30
          Value     'image = write.cur'
-         BackColor CLR_BACK
+         BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover FileCursor( 'write.cur' )
       END LABEL

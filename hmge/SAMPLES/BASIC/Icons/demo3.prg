@@ -28,7 +28,7 @@ PROCEDURE main()
 
    DEFINE WINDOW Form_Main ;
          clientarea 3*w, 2*h + 2*GetMenuBarHeight() ;
-         title 'Draw the bitmap or icon image using the Windows DrawState' ;
+         TITLE 'Draw the bitmap or icon image using the Windows DrawState' ;
          main ;
          nomaximize nosize ;
          on paint Form_Main_OnPaint( Form_Main.Handle, hIcon, w, h );

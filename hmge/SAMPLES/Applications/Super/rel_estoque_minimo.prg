@@ -14,12 +14,12 @@ FUNCTION relatorio_estoque_minimo()
 
    DEFINE WINDOW form_est_minimo;
          at 000,000;
-         width 400;
-         height 250;
-         title 'Relação estoque mínimo';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 250;
+         TITLE 'Relação estoque mínimo';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       @ 010,010 label lbl_001;
          of form_est_minimo;
@@ -56,22 +56,22 @@ FUNCTION relatorio_estoque_minimo()
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_est_minimo.height-090
+         COL 000
+         ROW form_est_minimo.height-090
          value ''
-         width form_est_minimo.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_est_minimo.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_relatorio.bmp'
-         col form_est_minimo.width-255
-         row form_est_minimo.height-085
-         width 150
-         height 050
+         PICTURE path_imagens+'img_relatorio.bmp'
+         COL form_est_minimo.width-255
+         ROW form_est_minimo.height-085
+         WIDTH 150
+         HEIGHT 050
          caption 'Ok, imprimir'
          action relatorio()
          fontbold .T.
@@ -80,11 +80,11 @@ FUNCTION relatorio_estoque_minimo()
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_sair.bmp'
-         col form_est_minimo.width-100
-         row form_est_minimo.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_sair.bmp'
+         COL form_est_minimo.width-100
+         ROW form_est_minimo.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_est_minimo.release
          fontbold .T.

@@ -1,12 +1,12 @@
 /*
- * $Id: httpdemo.prg $
- */
+* $Id: httpdemo.prg $
+*/
 /*
- * Http Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- */
+* Http Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+*/
 
 #include "oohg.ch"
 #include "i_socket.ch"
@@ -15,11 +15,11 @@
 PROCEDURE Main
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 400 ;
-      HEIGHT 200 ;
-      TITLE 'HTTP GET Sample' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'HTTP GET Sample' ;
+         MAIN
 
       DEFINE MAIN MENU
          POPUP 'Test with memvar'
@@ -40,9 +40,10 @@ PROCEDURE Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
 PROCEDURE TestHttpMem( nOption )
+
    LOCAL cResponse
    MEMVAR oConn
 
@@ -51,7 +52,7 @@ PROCEDURE TestHttpMem( nOption )
    OPEN CONNECTION oConn SERVER 'www.itlnet.net' PORT 80 HTTP
 
    IF oConn == Nil
-       AUTOMSGBOX( "No connection !!!" )
+      AUTOMSGBOX( "No connection !!!" )
    ELSE
       DO CASE
       CASE nOption == 1
@@ -68,9 +69,10 @@ PROCEDURE TestHttpMem( nOption )
       AUTOMSGBOX( cResponse )
    ENDIF
 
-RETURN
+   RETURN
 
 PROCEDURE TestHttpRef( nOption )
+
    LOCAL cResponse, oConn
 
    // The connection's object is stored to an already existing variable
@@ -78,7 +80,7 @@ PROCEDURE TestHttpRef( nOption )
    OPEN CONNECTION OBJ oConn SERVER 'harbour.github.io' PORT 80 HTTP
 
    IF oConn == Nil
-       AUTOMSGBOX( "No connection !!!" )
+      AUTOMSGBOX( "No connection !!!" )
    ELSE
       DO CASE
       CASE nOption == 1
@@ -94,8 +96,8 @@ PROCEDURE TestHttpRef( nOption )
       AUTOMSGBOX( cResponse )
    ENDIF
 
-RETURN
+   RETURN
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */

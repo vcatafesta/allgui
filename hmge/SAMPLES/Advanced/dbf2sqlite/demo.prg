@@ -23,155 +23,155 @@ FUNCTION Main
       DEFINE TAB dbtab at 10, 10 width 350 height 250
          DEFINE PAGE 'DBF -> SQLite'
             DEFINE FRAME dbfframe
-               row 25
-               col 5
-               width 160
+               ROW 25
+               COL 5
+               WIDTH 160
                caption 'DBF to be converted'
-               height 110
+               HEIGHT 110
             END FRAME
             DEFINE BUTTON browsedbf
-               row 50
-               col 10
-               width 150
+               ROW 50
+               COL 10
+               WIDTH 150
                caption "Select a DBF File"
                action browsefordbf()
             END BUTTON
             DEFINE LABEL dbfname
-               row 85
-               col 10
-               width 150
+               ROW 85
+               COL 10
+               WIDTH 150
                fontbold .t.
             END LABEL
             DEFINE LABEL dbfconnection
-               row 110
-               col 10
-               width 150
+               ROW 110
+               COL 10
+               WIDTH 150
                value "DBF is not yet connected"
                fontbold .t.
                fontcolor {255,0,0}
             END LABEL
             DEFINE FRAME sqliteframe
-               row 25
-               col 185
-               width 160
+               ROW 25
+               COL 185
+               WIDTH 160
                caption 'Create/Select SQLite DB'
-               height 110
+               HEIGHT 110
             END FRAME
             DEFINE BUTTON createfile
-               row 50
-               col 190
-               width 150
+               ROW 50
+               COL 190
+               WIDTH 150
                caption 'Create New...'
                action createadb()
             END BUTTON
             DEFINE BUTTON selectfile
-               row 80
-               col 190
-               width 150
+               ROW 80
+               COL 190
+               WIDTH 150
                caption 'Select Existing...'
                action selectdb()
             END BUTTON
             DEFINE LABEL connection
-               row 110
-               col 190
-               width 150
+               ROW 110
+               COL 190
+               WIDTH 150
                value "DB Not Yet Connected"
                fontbold .t.
                fontcolor {255,0,0}
             END LABEL
             DEFINE BUTTON export
-               row 140
-               col 150
-               width 50
+               ROW 140
+               COL 150
+               WIDTH 50
                caption "Export"
                fontbold .t.
                action export2sql()
             END BUTTON
             define progressbar progress
-               row 170
-               col 10
-               width 330
+               ROW 170
+               COL 10
+               WIDTH 330
             END progressbar
             DEFINE LABEL status
-               row 200
-               col 10
-               width 200
+               ROW 200
+               COL 10
+               WIDTH 200
                value ""
             END LABEL
          END PAGE
          DEFINE PAGE 'SQLite -> DBF'
             DEFINE FRAME sqliteframe1
-               row 25
-               col 5
-               width 160
+               ROW 25
+               COL 5
+               WIDTH 160
                caption 'SQLite to be converted'
-               height 110
+               HEIGHT 110
             END FRAME
             DEFINE BUTTON browsesql1
-               row 50
-               col 10
-               width 150
+               ROW 50
+               COL 10
+               WIDTH 150
                caption "Select a SQLite DB"
                action browseforsqlite()
             END BUTTON
             DEFINE LABEL tableslabel
-               row 85
-               col 10
-               width 50
+               ROW 85
+               COL 10
+               WIDTH 50
                value 'Table'
             END LABEL
             DEFINE COMBOBOX tables
-               row 80
-               col 60
-               width 100
+               ROW 80
+               COL 60
+               WIDTH 100
                SORT .t.
             END COMBOBOX
             DEFINE LABEL sqlconnection1
-               row 110
-               col 10
-               width 150
+               ROW 110
+               COL 10
+               WIDTH 150
                value "DB is not yet connected"
                fontbold .t.
                fontcolor {255,0,0}
             END LABEL
             DEFINE FRAME dbfframe1
-               row 25
-               col 185
-               width 160
+               ROW 25
+               COL 185
+               WIDTH 160
                caption 'Enter Table Name'
-               height 110
+               HEIGHT 110
             END FRAME
             DEFINE BUTTON newtable
-               row 50
-               col 190
-               width 150
+               ROW 50
+               COL 190
+               WIDTH 150
                action createnewdbf()
                caption 'Save to...'
             END BUTTON
             DEFINE LABEL newtablename
-               row 85
-               col 190
-               width 150
+               ROW 85
+               COL 190
+               WIDTH 150
                value ''
                fontbold .t.
             END LABEL
             DEFINE BUTTON export1
-               row 140
-               col 150
-               width 50
+               ROW 140
+               COL 150
+               WIDTH 50
                caption "Export"
                fontbold .t.
                action export2dbf()
             END BUTTON
             define progressbar progress1
-               row 170
-               col 10
-               width 330
+               ROW 170
+               COL 10
+               WIDTH 330
             END progressbar
             DEFINE LABEL status1
-               row 200
-               col 10
-               width 200
+               ROW 200
+               COL 10
+               WIDTH 200
                value ""
             END LABEL
          END PAGE

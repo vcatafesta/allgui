@@ -193,7 +193,7 @@ FUNCTION FontFromXML( oXmlNode )
    LOCAL charset := oXmlNode:GetAttribute( "charset" )
 
    IF height != Nil
-      height := Val( height )
+      HEIGHT := Val( height )
    ENDIF
 
    IF bold != Nil

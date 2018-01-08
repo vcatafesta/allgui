@@ -23,13 +23,13 @@ FUNCTION Main
 
    DEFINE WINDOW GraphTest ;
          At 0,0 ;
-         Width 800 ;
-         Height 620 ;
-         Title "Printing bar" ;
+         WIDTH 800 ;
+         HEIGHT 620 ;
+         TITLE "Printing bar" ;
          Main ;
-         Icon "Main" ;
+         ICON "Main" ;
          Nomaximize Nosize ;
-         Backcolor {216,208,200} ;
+         BACKCOLOR {216,208,200} ;
          On Init DrawBarGraph()
 
       @ 552,40 COMBOBOX Combo_1 ;
@@ -37,15 +37,15 @@ FUNCTION Main
          VALUE 1
 
       DEFINE BUTTON Button_1
-         Row   550
-         Col   260
+         ROW   550
+         COL   260
          Caption   'Print'
          Action  PrintGraph(GraphTest.Combo_1.Value)
       END BUTTON
 
       DEFINE BUTTON Button_2
-         Row   550
-         Col   460
+         ROW   550
+         COL   460
          Caption   'Exit'
          Action  GraphTest.Release
       END BUTTON

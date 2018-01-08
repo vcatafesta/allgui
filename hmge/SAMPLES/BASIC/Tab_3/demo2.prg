@@ -13,10 +13,10 @@ FUNCTION Main
          DEFINE PAGE 'Page1'
 
             DEFINE BUTTON b1
-               row 30
-               col 10
+               ROW 30
+               COL 10
                caption 'Press here to add a control'
-               width 180
+               WIDTH 180
                action addnewcontrols({'lbl1','text1'})
             END BUTTON
 
@@ -25,10 +25,10 @@ FUNCTION Main
          DEFINE PAGE 'Page2'
 
             DEFINE BUTTON b2
-               row 30
-               col 10
+               ROW 30
+               COL 10
                caption 'Press here to add a control'
-               width 180
+               WIDTH 180
                action addnewcontrol2('btn1')
             END BUTTON
 
@@ -58,9 +58,9 @@ FUNCTION addnewcontrols(actrl)
 
    DEFINE LABEL &c1
       parent tabsample
-      row 50
-      col 10
-      width 40
+      ROW 50
+      COL 10
+      WIDTH 40
       value 'label'
    END LABEL
 
@@ -70,9 +70,9 @@ FUNCTION addnewcontrols(actrl)
 
    DEFINE TEXTBOX &c2
       parent tabsample
-      row 50
-      col 50
-      width 100
+      ROW 50
+      COL 50
+      WIDTH 100
    END TEXTBOX
 
    tabsample.tab1.addcontrol(c1,1,84,10)
@@ -88,9 +88,9 @@ FUNCTION addnewcontrol2(ctrl)
 
    DEFINE BUTTONEX &ctrl
       parent tabsample
-      row 10
-      col 10
-      width 180
+      ROW 10
+      COL 10
+      WIDTH 180
       caption 'Click me'
       action MsgBox('Button action','Result')
    END BUTTONEX

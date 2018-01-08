@@ -1,51 +1,36 @@
 #include "oohg.ch"
 
+FUNCTION Main
 
-*-------------------------
-Function Main
-*-------------------------
+   DEFINE WINDOW Ventana AT 370 , 333 WIDTH 560 HEIGHT 400 TITLE "Mixed Mode!" ICON NIL MAIN
 
-DEFINE WINDOW Ventana AT 370 , 333 WIDTH 560 HEIGHT 400 TITLE "Mixed Mode!" ICON NIL MAIN
-   
-   DEFINE BUTTON Button_1
-      ROW    170
-      COL    180
-      WIDTH  150
-      HEIGHT 50
-      CAPTION "Run Console!!!"
-      ACTION   Console()
-      FONTNAME  "Arial"
-      FONTSIZE  9
-   END BUTTON
-   
-END WINDOW
+      DEFINE BUTTON Button_1
+         ROW    170
+         COL    180
+         WIDTH  150
+         HEIGHT 50
+         CAPTION "Run Console!!!"
+         ACTION   Console()
+         FONTNAME  "Arial"
+         FONTSIZE  9
+      END BUTTON
 
-Activate window Ventana
+   END WINDOW
 
-Return Nil
+   ACTIVATE WINDOW Ventana
 
+   RETURN NIL
 
-*-------------------------
-Function Console()
-*-------------------------
-REQUEST HB_GT_WIN_DEFAULT
+FUNCTION Console()
 
+   REQUEST HB_GT_WIN_DEFAULT
 
-SetMode(25,80)
+   SetMode(25,80)
 
-CLS
+   CLS
 
-@ 10,10 say 'Hello'
+   @ 10,10 say 'Hello'
 
-alert('Hello')
+   alert('Hello')
 
-Return nil
-
-
-
-
-
-
-
-
-
+   RETURN NIL

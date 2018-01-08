@@ -139,11 +139,11 @@ PROCEDURE ShowQuery ()
 
    DEFINE WINDOW ShowQuery ;
          At 0,0 ;
-         Width 640 ;
-         Height 480 ;
-         Title 'Show Query' ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE 'Show Query' ;
          Modal ;
-         NoSize
+         NOSIZE
 
       DEFINE MAIN MENU
          DEFINE POPUP 'Operations'
@@ -157,10 +157,10 @@ PROCEDURE ShowQuery ()
       END MENU
 
       DEFINE GRID Grid_1
-         Row 0
-         Col 0
-         Width 631
-         Height 430
+         ROW 0
+         COL 0
+         WIDTH 631
+         HEIGHT 430
          Headers {'Code','Name'}
          Widths {250,250}
       END GRID

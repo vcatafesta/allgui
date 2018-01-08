@@ -87,7 +87,7 @@ METHOD End() CLASS HHtml
 
    RETURN NIL
 
-   EXIT PROCEDURE EXITOLE
-   hwgax_OleUninitialize()
+EXIT PROCEDURE EXITOLE
+hwgax_OleUninitialize()
 
-   RETURN
+RETURN

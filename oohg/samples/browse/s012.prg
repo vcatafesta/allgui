@@ -1,20 +1,19 @@
 /*
- * Browse Sample n° 12
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to edit a column of a Browse using
- * another Browse, with EDITKEYS clause.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Browse Sample n° 12
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to edit a column of a Browse using
+* another Browse, with EDITKEYS clause.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
 
 FUNCTION Main
+
    LOCAL oForm1, oBrw1
 
    REQUEST DBFCDX
@@ -26,13 +25,13 @@ FUNCTION Main
    OpenTables()
 
    DEFINE WINDOW Form_1 ;
-      OBJ oForm1 ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 420 HEIGHT 420 ;
-      TITLE 'Use a Browse to edit another Browse' ;
-      MAIN ;
-      ON RELEASE CloseTables()
+         OBJ oForm1 ;
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 420 HEIGHT 420 ;
+         TITLE 'Use a Browse to edit another Browse' ;
+         MAIN ;
+         ON RELEASE CloseTables()
 
       @ 10, 10 BROWSE Browse_1 OBJ oBrw1 ;
          WIDTH 400 ;
@@ -58,15 +57,14 @@ FUNCTION Main
    oForm1:Center()
    oForm1:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION SelectValue( oBrw )
 
    LOCAL nRec, oEdit
 
    IF _OOHG_ThisItemColIndex # 1
-     RETURN NIL
+      RETURN NIL
    ENDIF
 
    nRec := 0
@@ -74,13 +72,13 @@ FUNCTION SelectValue( oBrw )
    oEdit := GetControlObjectByHandle( GetFocus() )
 
    DEFINE WINDOW Form_2 ;
-      OBJ oForm2 ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 420 HEIGHT 420 ;
-      TITLE 'Select Value' ;
-      MODAL ;
-      ON RELEASE ( oEdit:Value := Data->Code, Code->Number := Data->Number )
+         OBJ oForm2 ;
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 420 HEIGHT 420 ;
+         TITLE 'Select Value' ;
+         MODAL ;
+         ON RELEASE ( oEdit:Value := Data->Code, Code->Number := Data->Number )
 
       @ 10, 10 BROWSE Browse_2 OBJ oBrw2 ;
          WIDTH 400 ;
@@ -97,9 +95,8 @@ FUNCTION SelectValue( oBrw )
 
    oForm2:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION OpenTables()
 
    LOCAL aDbf1[ 3 ][ 4 ], aDbf2[ 3 ][ 4 ]
@@ -212,18 +209,17 @@ FUNCTION OpenTables()
 
    GO TOP
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION CloseTables()
 
-  DBCLOSEALL()
+   DBCLOSEALL()
 
-  ERASE Code.dbf
-  ERASE Data.dbf
+   ERASE Code.dbf
+   ERASE Data.dbf
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */

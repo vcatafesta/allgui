@@ -1,64 +1,52 @@
 /*
- * $Id: h_report.prg $
- */
+* $Id: h_report.prg $
+*/
 /*
- * ooHG source code:
- * DO REPORT commands
- *
- * Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
- * https://oohg.github.io/
- *
- * Portions of this project are based upon Harbour MiniGUI library.
- * Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
- *
- * Portions of this project are based upon Harbour GUI framework for Win32.
- * Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
- * Copyright 2001 Antonio Linares <alinares@fivetech.com>
- *
- * Portions of this project are based upon Harbour Project.
- * Copyright 1999-2017, https://harbour.github.io/
- */
+* ooHG source code:
+* DO REPORT commands
+* Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
+* https://oohg.github.io/
+* Portions of this project are based upon Harbour MiniGUI library.
+* Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
+* Portions of this project are based upon Harbour GUI framework for Win32.
+* Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
+* Copyright 2001 Antonio Linares <alinares@fivetech.com>
+* Portions of this project are based upon Harbour Project.
+* Copyright 1999-2017, https://harbour.github.io/
+*/
 /*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file LICENSE.txt. If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
- *
- * As a special exception, the ooHG Project gives permission for
- * additional uses of the text contained in its release of ooHG.
- *
- * The exception is that, if you link the ooHG libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the ooHG library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the ooHG
- * Project under the name ooHG. If you copy code from other
- * ooHG Project or Free Software Foundation releases into a copy of
- * ooHG, as the General Public License permits, the exception does
- * not apply to the code that you add in this way. To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for ooHG, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- */
-
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file LICENSE.txt. If not, write to
+* the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
+* As a special exception, the ooHG Project gives permission for
+* additional uses of the text contained in its release of ooHG.
+* The exception is that, if you link the ooHG libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the ooHG library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the ooHG
+* Project under the name ooHG. If you copy code from other
+* ooHG Project or Free Software Foundation releases into a copy of
+* ooHG, as the General Public License permits, the exception does
+* not apply to the code that you add in this way. To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for ooHG, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include 'oohg.ch'
 #include 'hbclass.ch'
@@ -112,26 +100,26 @@ FUNCTION easyreport(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos
 
    RETURN NIL
 
-static FUNCTION _listreport(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop,lgroupeject)
+STATIC FUNCTION _listreport(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop,lgroupeject)
 
    repobject:=TREPORT()
    sicvar:=setinteractiveclose()
    SET INTERACTIVECLOSE ON
    repobject:easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop,lgroupeject)
    setinteractiveclose(sicvar)
-   release repobject
+   RELEASE repobject
 
-   RETURN nil
+   RETURN NIL
 
 FUNCTION extreport(cfilerep,cheader)
 
    repobject:=TREPORT()
    repobject:extreport1(cfilerep,cheader)
-   release repobject
+   RELEASE repobject
 
    RETURN NIL
 
-function JUSTIFICALINEA(WPR_LINE,WTOPE)
+FUNCTION JUSTIFICALINEA(WPR_LINE,WTOPE)
 
    LOCAL I,WLARLIN
 
@@ -147,7 +135,6 @@ function JUSTIFICALINEA(WPR_LINE,WTOPE)
    NEXT I
 
    RETURN WPR_LINE
-
 
 CREATE CLASS TREPORT FROM TPRINTBASE
 
@@ -178,8 +165,8 @@ CREATE CLASS TREPORT FROM TPRINTBASE
 
 METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop,lgroupeject) CLASS TREPORT
 
-   local nlin,i,aresul,lmode,swt:=0,grpby,k,swmemo,clinea,ti,nmemo,nspace,wtipo
-   private  wfield,wfielda,wfieldt,lexcel:=.F.
+   LOCAL nlin,i,aresul,lmode,swt:=0,grpby,k,swmemo,clinea,ti,nmemo,nspace,wtipo
+   PRIVATE  wfield,wfielda,wfieldt,lexcel:=.F.
 
    IF nllmargin = NIL
       repobject:nlmargin:=0
@@ -291,44 +278,44 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
       ENDIF
    ENDIF
 
-   do case
-   case ncpl= 80
+   DO CASE
+   CASE ncpl= 80
       // ncvcopt:=1
       repobject:nfsize:=12
       IF lnoprop
          oprint:setcpl(80)
       ENDIF
-   case ncpl= 96
+   CASE ncpl= 96
       // ncvcopt:=2
       repobject:nfsize=10
       IF lnoprop
          oprint:setcpl(96)
       ENDIF
-   case ncpl= 120
+   CASE ncpl= 120
       // ncvcopt:=3
       repobject:nfsize:=8
       IF lnoprop
          oprint:setcpl(120)
       ENDIF
-   case ncpl= 140
+   CASE ncpl= 140
       // ncvcopt:=4
       repobject:nfsize:=7
       IF lnoprop
          oprint:setcpl(140)
       ENDIF
-   case ncpl= 160
+   CASE ncpl= 160
       // ncvcopt:=5
       repobject:nfsize:=6
       IF lnoprop
          oprint:setcpl(160)
       ENDIF
-   otherwise
+   OTHERWISE
       // ncvcopt:=1
       repobject:nfsize:=12
       IF lnoprop
          oprint:setcpl(80)
       ENDIF
-   endcase
+   ENDCASE
 
    oprint:selprinter(lselect,lpreview,llandscape,npapersize,,,-2)
    IF oprint:lprerror
@@ -348,13 +335,13 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
    ngrpby:=0
    nlin:=repobject:headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,cheader)
    FOR i:=1 to len(afields)
-       aresul[i]:=0
-       repobject:angrpby[i]:=0
+      aresul[i]:=0
+      repobject:angrpby[i]:=0
    NEXT i
    IF grpby<> NIL
       crompe:=&(grpby)
    ENDIF
-   do while .not. eof()
+   DO WHILE .not. eof()
       do events
       ////   ncol:=repobject:nlmargin
       swt:=0
@@ -364,7 +351,6 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
                oprint:printdata(nlin,repobject:nlmargin, '** Subtotal **',,repobject:nfsize,.T.)
                nlin++
             ENDIF
-            **************
             clinea:=""
             FOR i:=1 to len(afields)
                IF atotals[i]
@@ -374,11 +360,9 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
                ENDIF
             NEXT i
             oprint:printdata(nlin,0+repobject:nlmargin,clinea,,repobject:nfsize ,.T.)
-            **************
             FOR i:=1 to len(afields)
                repobject:angrpby[i]:=0
             NEXT i
-            ********
             ******** seria aqui si decido hacer el rompe por pagina
             *********** IF EJECTGROUP  oprint:endpage()
             IF lgroupeject
@@ -389,15 +373,12 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
                nlin--
             ENDIF
 
-            *************
-            ********
             crompe:=&(grpby)
             nlin++
             oprint:printdata(nlin,repobject:nlmargin,  '** ' + (chdrgrp)+' '+ (&(grpby)),,repobject:nfsize,.T.)
             nlin++
          ENDIF
       ENDIF
-      **********
       clinea:=""
       swmemo:=.F.
       FOR i:=1 to len(afields)
@@ -422,26 +403,26 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
                wtipo:="C"
             ENDIF
          ENDIF
-         do case
-         case wtipo == 'C'
+         DO CASE
+         CASE wtipo == 'C'
             clinea:=clinea+substr(wfield,1,awidths[i])+space(awidths[i]-len(substr(wfield,1,awidths[i]) ))+" "
-         case wtipo == 'N'
+         CASE wtipo == 'N'
             clinea:=clinea + iif(.not.(aformats[i]==NIL),space(awidths[i]-len(transform(wfield,aformats[i])))+transform(wfield,aformats[i]),str(wfield,awidths[i]))+ space(awidths[i] -   len(  iif(.not.(aformats[i]==''),space(awidths[i]-len(transform(wfield,aformats[i])))+transform(wfield,aformats[i]),str(wfield,awidths[i])))   )+" "
-         case wtipo == 'D'
+         CASE wtipo == 'D'
             clinea:=clinea+ substr(dtoc(wfield),1,awidths[i])+space(awidths[i]-len(substr(dtoc(wfield),1,awidths[i])) )+" "
-         case wtipo == 'L'
+         CASE wtipo == 'L'
             clinea:=clinea+iif(wfield,"T","F")+space(awidths[i]-1)+" "
 
-         case wtipo == 'M' .or. wtipo == 'C' //// ojo no quitar la a
+         CASE wtipo == 'M' .or. wtipo == 'C' //// ojo no quitar la a
             nmemo:=mlcount(rtrim(wfield),awidths[i])
             IF nmemo>0
                clinea:=clinea + rtrim(justificalinea(memoline(rtrim(wfield),awidths[i] ,1),awidths[i]))+space(awidths[i]-len(rtrim(justificalinea(memoline(rtrim(wfield),awidths[i] ,1),awidths[i])) ) )+" "
             ELSE
                clinea:=clinea + space(awidths[i])+" "
             ENDIF
-         otherwise
+         OTHERWISE
             clinea:=clinea+replicate('_',awidths[i])+" "
-         endcase
+         ENDCASE
          IF atotals[i]
             aresul[i]:=aresul[i]+wfield
             swt:=1
@@ -496,9 +477,8 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
             ////    nlin--
          ENDIF
       ENDIF
-      **************
-      skip
-   enddo
+      SKIP
+   ENDDO
 
    IF swt==1
       IF grpby<>NIL
@@ -510,11 +490,11 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
             ENDIF
             clinea:=""
             FOR i:=1 to len(afields)
-                IF atotals[i]
-                   clinea:=clinea +iif(.not.(aformats[i]==NIL),space(awidths[i]-len(transform(repobject:angrpby[i],aformats[i])))+transform(repobject:angrpby[i],aformats[i]),str(repobject:angrpby[i],awidths[i]))+ space(awidths[i] -   len(  iif(.not.(aformats[i]==''),space(awidths[i]-len(transform(repobject:angrpby[i],aformats[i])))+transform(repobject:angrpby[i],aformats[i]),str(repobject:angrpby[i],awidths[i])))   )+" "
-                ELSE
-                   clinea:=clinea+ space(awidths[i])+" "
-                ENDIF
+               IF atotals[i]
+                  clinea:=clinea +iif(.not.(aformats[i]==NIL),space(awidths[i]-len(transform(repobject:angrpby[i],aformats[i])))+transform(repobject:angrpby[i],aformats[i]),str(repobject:angrpby[i],awidths[i]))+ space(awidths[i] -   len(  iif(.not.(aformats[i]==''),space(awidths[i]-len(transform(repobject:angrpby[i],aformats[i])))+transform(repobject:angrpby[i],aformats[i]),str(repobject:angrpby[i],awidths[i])))   )+" "
+               ELSE
+                  clinea:=clinea+ space(awidths[i])+" "
+               ENDIF
             NEXT i
             oprint:printdata(nlin,repobject:nlmargin, clinea , ,repobject:nfsize ,.T. )
             FOR i:=1 to len(afields)
@@ -532,7 +512,6 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
          nlin--
       ENDIF
 
-      **************
       nlin++
       IF nlin>nlpp
          nlin:=1
@@ -560,11 +539,11 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
    oprint:enddoc()
    oprint:release()
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,cheader) CLASS TREPORT
 
-   local i,nsum,ncenter,ncenter2,npostitle,ctitle1,ctitle2,clinea,clinea1,clinea2
+   LOCAL i,nsum,ncenter,ncenter2,npostitle,ctitle1,ctitle2,clinea,clinea1,clinea2
 
    empty(lmode)
    nsum:=0
@@ -659,13 +638,13 @@ METHOD headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,chead
 
 METHOD extreport1(cfilerep,cheader) CLASS TREPORT
 
-   local nContlin,i,ctitle,aheaders1,aheaders2,afields,awidths,atotals,aformats
-   local nlpp,ncpl,nllmargin,calias,ldos,lpreview,lselect,cgraphic,lmul,nfi,nci
-   local nff,ncf,cgrpby,chdrgrp,llandscape,lnoprop
+   LOCAL nContlin,i,ctitle,aheaders1,aheaders2,afields,awidths,atotals,aformats
+   LOCAL nlpp,ncpl,nllmargin,calias,ldos,lpreview,lselect,cgraphic,lmul,nfi,nci
+   LOCAL nff,ncf,cgrpby,chdrgrp,llandscape,lnoprop
 
    IF .not. file(cfilerep+'.rpt')
       msginfo('('+cfilerep+'.rpt)  File not found','Information')
-      RETURN Nil
+      RETURN NIL
    ENDIF
 
    creport:=memoread(cfilerep+'.rpt')
@@ -684,13 +663,13 @@ METHOD extreport1(cfilerep,cheader) CLASS TREPORT
    afields:=repobject:leadato('REPORT','FIELDS','{}')
    IF len(afields)=0
       msginfo('Fields not defined','Information')
-      RETURN Nil
+      RETURN NIL
    ENDIF
    afields:=&afields
    awidths:=repobject:leadato('REPORT','WIDTHS','{}')
    IF len(awidths)=0
       msginfo('Widths not defined','Information')
-      RETURN Nil
+      RETURN NIL
    ENDIF
    awidths:=&awidths
    atotals:=repobject:leadato('REPORT','TOTALS',NIL)
@@ -751,11 +730,11 @@ METHOD extreport1(cfilerep,cheader) CLASS TREPORT
 
    easyreport(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop,lgroupeject)
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD leadato(cName,cPropmet,cDefault) CLASS TREPORT
 
-   local i,sw,cfvalue
+   LOCAL i,sw,cfvalue
 
    sw:=0
    FOR i:=1 to len(repobject:aline)
@@ -787,7 +766,7 @@ METHOD leadato(cName,cPropmet,cDefault) CLASS TREPORT
 
 METHOD leaimage(cName,cPropmet,cDefault) CLASS TREPORT
 
-   local i,sw1,npos1,npos2
+   LOCAL i,sw1,npos1,npos2
 
    sw1:=0
    lin:=0
@@ -810,7 +789,7 @@ METHOD leaimage(cName,cPropmet,cDefault) CLASS TREPORT
 
 METHOD leadatoh(cName,cPropmet,cDefault,npar) CLASS TREPORT
 
-   local i,npos1,npos2,sw1
+   LOCAL i,npos1,npos2,sw1
 
    sw1:=0
    lin:=0
@@ -838,7 +817,7 @@ METHOD leadatoh(cName,cPropmet,cDefault,npar) CLASS TREPORT
 
 METHOD leadatologic(cName,cPropmet,cDefault) CLASS TREPORT
 
-   local i,sw
+   LOCAL i,sw
 
    sw:=0
    FOR i:=1 to len(repobject:aline)
@@ -868,28 +847,28 @@ METHOD clean(cfvalue) CLASS TREPORT
 
 METHOD learowi(cname,npar) CLASS TREPORT
 
-   local i,npos1,nrow
+   LOCAL i,npos1,nrow
 
    sw:=0
    nrow:='0'
    cname:=''
    FOR i:=1 to len(repobject:aline)
-       IF at(upper('IMAGE')+' ',upper(repobject:aline[i]))#0
-          IF npar=1
-             npos1:=at("AT",upper(repobject:aline[i]))
-          ELSE
-             npos1:=at("TO",upper(repobject:aline[i]))
-          ENDIF
-          nrow:=substr(repobject:aline[i],npos1+3,4)
-          i:=len(repobject:aline)
-       ENDIF
+      IF at(upper('IMAGE')+' ',upper(repobject:aline[i]))#0
+         IF npar=1
+            npos1:=at("AT",upper(repobject:aline[i]))
+         ELSE
+            npos1:=at("TO",upper(repobject:aline[i]))
+         ENDIF
+         nrow:=substr(repobject:aline[i],npos1+3,4)
+         i:=len(repobject:aline)
+      ENDIF
    NEXT i
 
    RETURN nrow
 
 METHOD leacoli(cname,npar) CLASS TREPORT
 
-   local i,npos,ncol
+   LOCAL i,npos,ncol
 
    ncol:='0'
    cname:=''
@@ -899,7 +878,7 @@ METHOD leacoli(cname,npar) CLASS TREPORT
             npos:=at(",",repobject:aline[i])
          ELSE
             npos:=rat(",",repobject:aline[i])
-        ENDIF
+         ENDIF
          ncol:=substr(repobject:aline[i],npos+1,4)
          i:=len(repobject:aline)
       ENDIF
@@ -907,39 +886,34 @@ METHOD leacoli(cname,npar) CLASS TREPORT
 
    RETURN ncol
 
-*****************************************************************************
-*                                                                           *
-*          MINIFRM - Print FRM files to TPRINT                              *
-*                                                                           *
-*                                V 1.0                                      *
-*  Creador Daniel Piperno                                                   *
-*  Modificado Ciro Vargas Clemow                                            *
-*                                                                           *
-*****************************************************************************
+   *                                                                           *
+   *          MINIFRM - Print FRM files to TPRINT                              *
+   *                                                                           *
+   *                                V 1.0                                      *
+   *  Creador Daniel Piperno                                                   *
+   *  Modificado Ciro Vargas Clemow                                            *
+   *                                                                           *
 
-***************************************** Características *******************************************
-* Funciona en forma similar que con el FRM estándar.
-* Si está la opción TO PRINT, imprime directamente a la impresora. Si no lo está, hace un preview.
-* Usa la impresora por defecto.
-* Si el ancho es <= 80 usa Courier New 12, simulando el modo normal.
-* Si no usa Courier New  7 simulando condensada.
-*
-* Diferencias con el FRM estandar
-* -------------------------------
-* Agregados:
-*   - Agrega separadores de miles en los números
-*   - Imprime en BOLD los títulos, totales y subtotales
-*
-* Eliminados:
-*   - Está deshabilitada la opción PLAIN
-*   - Está deshabilitada la opción TO FILE
-*   - No traduce caracteres especiales CHR(xx)
-*   - Está deshabilitado el salto de hoja antes del reporte
-***************************************************************************************************
+   ***************************************** Características *******************************************
+   * Funciona en forma similar que con el FRM estándar.
+   * Si está la opción TO PRINT, imprime directamente a la impresora. Si no lo está, hace un preview.
+   * Usa la impresora por defecto.
+   * Si el ancho es <= 80 usa Courier New 12, simulando el modo normal.
+   * Si no usa Courier New  7 simulando condensada.
+   * Diferencias con el FRM estandar
+   * -------------------------------
+   * Agregados:
+   *   - Agrega separadores de miles en los números
+   *   - Imprime en BOLD los títulos, totales y subtotales
+   * Eliminados:
+   *   - Está deshabilitada la opción PLAIN
+   *   - Está deshabilitada la opción TO FILE
+   *   - No traduce caracteres especiales CHR(xx)
+   *   - Está deshabilitado el salto de hoja antes del reporte
 
 #include "error.ch"
 
-********* Parámetros del reporte ************
+   ********* Parámetros del reporte ************
 #define _RF_FIRSTCOL  0  // Offset Primer columna
 #define _RF_FIRSTROW  1  // Offset Primer fila
 #define _RF_ROWINC    4  // Interlineado
@@ -948,14 +922,13 @@ METHOD leacoli(cname,npar) CLASS TREPORT
 #define _RF_SIZENORMAL   12   // Tamaño de font a usar cuando el ancho es menor de 80 columnas
 #define _RF_ROWSINLETTER  60  // Cantidad de Filas máximo que soporta el tamaño carta. Si hay mas líneas, se usa Legal
 
-
-**** Constantes para el Nation Message ********
+   **** Constantes para el Nation Message ********
 #define _RF_PAGENO       3     // Página
 #define _RF_SUBTOTAL     4     // Subtotal
 #define _RF_SUBSUBTOTAL  5     // SubSubtotal
 #define _RF_TOTAL        6     // Total
 
-********** Tamaños de buffer *************
+   ********** Tamaños de buffer *************
 #define  SIZE_FILE_BUFF             1990
 #define  SIZE_LENGTHS_BUFF          110
 #define  SIZE_OFFSETS_BUFF          110
@@ -963,7 +936,7 @@ METHOD leacoli(cname,npar) CLASS TREPORT
 #define  SIZE_FIELDS_BUFF           300
 #define  SIZE_PARAMS_BUFF           24
 
-**************** offsets *******************
+   **************** offsets *******************
 #define  LENGTHS_OFFSET             5
 #define  OFFSETS_OFFSET             115
 #define  EXPR_OFFSET                225
@@ -989,7 +962,7 @@ METHOD leacoli(cname,npar) CLASS TREPORT
 #define  PE_OFFSET                  23
 #define  OPTION_OFFSET              24
 
-********* Definiciones para el Array del reporte *************
+   ********* Definiciones para el Array del reporte *************
 #define RP_HEADER   1
 #define RP_WIDTH    2
 #define RP_LMARGIN  3
@@ -1006,8 +979,7 @@ METHOD leacoli(cname,npar) CLASS TREPORT
 
 #define RP_COUNT    13
 
-
-******** Columnas ************
+   ******** Columnas ************
 #define RC_EXP      1
 #define RC_TEXT     2
 #define RC_TYPE     3
@@ -1020,7 +992,7 @@ METHOD leacoli(cname,npar) CLASS TREPORT
 
 #define RC_COUNT    8
 
-****** Grupos ***********
+   ****** Grupos ***********
 #define RG_EXP      1
 #define RG_TEXT     2
 #define RG_TYPE     3
@@ -1029,24 +1001,24 @@ METHOD leacoli(cname,npar) CLASS TREPORT
 
 #define RG_COUNT    5
 
-********** Errores ************
+   ********** Errores ************
 #define  F_OK                       0   // Ok!
 #define  F_EMPTY                   -3   // Archivo vacío
 #define  F_ERROR                   -1   // Error desconocido
 #define  F_NOEXIST                  2   // Archivo inexistente
 
-////#include "oohg.ch"
+   ////#include "oohg.ch"
 
 PROCEDURE __ReportFormwin( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
-                       bWhile, nNext, nRecord, lRest, lPlain, cHeading, ;
-                       lBEject, lSummary )
+      bWhile, nNext, nRecord, lRest, lPlain, cHeading, ;
+      lBEject, lSummary )
 
    LOCAL nCol, nGroup
    LOCAL xBreakVal, lBroke := .F.
    LOCAL err, sAuxST
    LOCAL lAnyTotals
    LOCAL lAnySubTotals ,lSale
-   Private  lUseLetter
+   PRIVATE  lUseLetter
 
    empty(cAltFile)
    empty(lNoConsole)
@@ -1132,7 +1104,7 @@ PROCEDURE __ReportFormwin( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
       FOR nCol := 1 TO LEN(aReportData[RP_COLUMNS])
          IF aReportData[RP_COLUMNS,nCol,RC_TOTAL]
             FOR nGroup := 1 TO LEN(aReportTotals)
-              aReportTotals[nGroup,nCol] := 0
+               aReportTotals[nGroup,nCol] := 0
             NEXT
          ENDIF
       NEXT
@@ -1260,7 +1232,6 @@ PROCEDURE __ReportFormwin( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
 
    RETURN
 
-
 STATIC PROCEDURE EjecutoReporte
 
    *  Ejecutado por DBEVAL() cada vez que un registro está en el scope
@@ -1268,6 +1239,7 @@ STATIC PROCEDURE EjecutoReporte
    LOCAL aRecordToPrint := {}
    LOCAL nCol
    LOCAL nGroup
+
    //LOCAL lGroupChanged  := .F.
    LOCAL lEjectGrp := .F.
    LOCAL nMaxLines
@@ -1300,9 +1272,9 @@ STATIC PROCEDURE EjecutoReporte
 
          ******** Veo si cambio el grupo *********
          IF HB_VALTOSTR(EVAL(aReportData[RP_GROUPS,nGroup,RG_EXP]),;
-            aReportData[RP_GROUPS,nGroup,RG_TYPE]) != aGroupTotals[nGroup]
+               aReportData[RP_GROUPS,nGroup,RG_TYPE]) != aGroupTotals[nGroup]
             AADD( aRecordHeader, IF(nGroup==1,NationMsg(_RF_SUBTOTAL),;
-                                              NationMsg(_RF_SUBSUBTOTAL)) )
+               NationMsg(_RF_SUBSUBTOTAL)) )
             AADD( aRecordHeader, "" )
 
             IF ( nGroup == 1 )
@@ -1399,7 +1371,7 @@ STATIC PROCEDURE EjecutoReporte
    ************ Reseteo grupos ************
    FOR nGroup := 1 TO LEN(aReportData[RP_GROUPS])
       aGroupTotals[nGroup] := HB_VALTOSTR(EVAL(aReportData[RP_GROUPS,nGroup,RG_EXP]),;
-                                   aReportData[RP_GROUPS,nGroup,RG_TYPE])
+         aReportData[RP_GROUPS,nGroup,RG_TYPE])
    NEXT
 
    IF !aReportData[ RP_SUMMARY ]
@@ -1408,7 +1380,7 @@ STATIC PROCEDURE EjecutoReporte
       FOR nCol := 1 TO LEN(aReportData[RP_COLUMNS])
          IF aReportData[RP_COLUMNS,nCol,RC_TYPE] $ "CM"
             nMaxLines := MAX(XMLCOUNT(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP]),;
-                         aReportData[RP_COLUMNS,nCol,RC_WIDTH]), nMaxLines)
+               aReportData[RP_COLUMNS,nCol,RC_WIDTH]), nMaxLines)
          ENDIF
       NEXT
 
@@ -1422,7 +1394,7 @@ STATIC PROCEDURE EjecutoReporte
             ***** Cargo las variables tipo MEMO o CHARACTER **********
             IF aReportData[RP_COLUMNS,nCol,RC_TYPE] $ "CM"
                cLine := XMEMOLINE(TRIM(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP])),;
-                             aReportData[RP_COLUMNS,nCol,RC_WIDTH], nLine )
+                  aReportData[RP_COLUMNS,nCol,RC_WIDTH], nLine )
                cLine := PADR( cLine, aReportData[RP_COLUMNS,nCol,RC_WIDTH] )
             ELSE
                IF nLine == 1
@@ -1431,7 +1403,7 @@ STATIC PROCEDURE EjecutoReporte
                   * cLine := TRANSFORM(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP]),;
                   *               aReportData[RP_COLUMNS,nCol,RC_PICT])
                   cLine := TRANSFORM(EVAL(aReportData[RP_COLUMNS,nCol,RC_EXP]),;
-                           ConvPic(aReportData[RP_COLUMNS,nCol,RC_PICT]))
+                     ConvPic(aReportData[RP_COLUMNS,nCol,RC_PICT]))
                   cLine := PADR( cLine, aReportData[RP_COLUMNS,nCol,RC_WIDTH] )
                ELSE
                   cLine := SPACE( aReportData[RP_COLUMNS,nCol,RC_WIDTH])
@@ -1471,18 +1443,18 @@ STATIC PROCEDURE EjecutoReporte
                CabezalReporte()
             ENDIF
             AEVAL( aRecordToPrint, ;
-                 { | RecordLine | ;
-                 PrintIt(RecordLine, .f. ) ;
-                 } ;
-                 )
+               { | RecordLine | ;
+               PrintIt(RecordLine, .f. ) ;
+               } ;
+               )
             nLinesLeft -= LEN( aRecordToPrint )
          ENDIF
       ELSE
          AEVAL( aRecordToPrint, ;
-              { | RecordLine | ;
-              PrintIt(RecordLine, .f. ) ;
-              } ;
-              )
+            { | RecordLine | ;
+            PrintIt(RecordLine, .f. ) ;
+            } ;
+            )
          nLinesLeft -= LEN( aRecordToPrint )
       ENDIF
 
@@ -1510,7 +1482,6 @@ STATIC PROCEDURE EjecutoReporte
 
    RETURN
 
-
 STATIC PROCEDURE CabezalReporte
 
    LOCAL nLinesInHeader // := 0
@@ -1537,7 +1508,7 @@ STATIC PROCEDURE CabezalReporte
          ****** Agrego las líneas del cabezal al array *****
          FOR nHeadLine := 1 TO nLinesInHeader
             AADD( aPageHeader, SPACE( 15 ) + PADC( TRIM( XMEMOLINE( LTRIM( aTempPgHeader[ nLine ] ),;
-                  nHeadingLength, nHeadLine ) ), nHeadingLength ) )
+               nHeadingLength, nHeadLine ) ), nHeadingLength ) )
          NEXT nHeadLine
       NEXT nLine
       aPageHeader[ 1 ] := STUFF( aPageHeader[ 1 ], 1, 14, NationMsg(_RF_PAGENO) + STR(nPageNumber,6) )
@@ -1584,10 +1555,10 @@ STATIC PROCEDURE CabezalReporte
          ELSE
             IF aReportData[RP_COLUMNS,nCol,RC_TYPE] == "N"
                aPageHeader[ nLinesInHeader + nLine ] += PADL(aReportData[RP_COLUMNS,nCol,RC_HEADER,nLine],;
-                         aReportData[RP_COLUMNS,nCol,RC_WIDTH])
+                  aReportData[RP_COLUMNS,nCol,RC_WIDTH])
             ELSE
                aPageHeader[ nLinesInHeader + nLine ] += PADR(aReportData[RP_COLUMNS,nCol,RC_HEADER,nLine],;
-                       aReportData[RP_COLUMNS,nCol,RC_WIDTH])
+                  aReportData[RP_COLUMNS,nCol,RC_WIDTH])
             ENDIF
          ENDIF
       NEXT
@@ -1648,7 +1619,6 @@ STATIC PROCEDURE EjectPage
 
 STATIC FUNCTION XMLCOUNT( cString, nLineLength, nTabSize, lWrap )
 
-
    nLineLength := IF( nLineLength == NIL, 79, nLineLength )
    nTabSize := IF( nTabSize == NIL, 4, nTabSize )
    lWrap := IF( lWrap == NIL, .T., .F. )
@@ -1676,8 +1646,8 @@ STATIC FUNCTION ConvPic(sPic)
    * Agrego separador de miles, que el FRM estandar no lo hace....
    * Ojo, esto puede hacer que de un overflow si no se prevee el espacio en la columna
 
-   Local nPto, nEnt, nDec, sResult
-   Local aPics := {"9","99","999","9999","9,999","99,999","999,999","9999,999","9,999,999","99,999,999","999,999,999","9999,999,999","9,999,999,999","99,999,999,999","999,999,999,999"}
+   LOCAL nPto, nEnt, nDec, sResult
+   LOCAL aPics := {"9","99","999","9999","9,999","99,999","999,999","9999,999","9,999,999","99,999,999","999,999,999","9999,999,999","9,999,999,999","99,999,999,999","999,999,999,999"}
 
    nPto = at(".",sPic)
 
@@ -1696,7 +1666,7 @@ STATIC FUNCTION ConvPic(sPic)
 
    RETURN sResult
 
-STATIC Function SaltoLin()
+STATIC FUNCTION SaltoLin()
 
    //////nPosRow := nPosRow + _RF_ROWINC    ///para asar a rowcol y quitar mm
    nPosRow++
@@ -1704,9 +1674,9 @@ STATIC Function SaltoLin()
 
    RETURN .t.
 
-STATIC Function ImprimoUnaLinea(sLin, lBold)
+STATIC FUNCTION ImprimoUnaLinea(sLin, lBold)
 
-   Local sAux
+   LOCAL sAux
 
    sAux := HB_OEMTOANSI(sLin)
    IF aReportData[RP_WIDTH] <= 80
@@ -1814,7 +1784,7 @@ STATIC FUNCTION __FrmLoad( cFrmFile )
          IF nFileError = F_OK
             *** Verifico que sea un FRM ****
             IF BIN2W(SUBSTR(cFileBuff, 1, 2)) = 2 .AND.;
-               BIN2W(SUBSTR(cFileBuff, SIZE_FILE_BUFF - 1, 2)) = 2
+                  BIN2W(SUBSTR(cFileBuff, SIZE_FILE_BUFF - 1, 2)) = 2
                nFileError = F_OK
             ELSE
                nFileError = F_ERROR

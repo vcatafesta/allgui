@@ -95,7 +95,7 @@ STATIC FUNCTION CreateTextboxWithLabel( textboxname, nR, nC, cCaption, nW )
 
    DEFINE TEXTBOX &( textboxname )
       ROW nR
-      Col nC
+      COL nC
       WIDTH nW
       HEIGHT 24
       //ONGOTFOCUS SetProperty( ThisWindow.Name, textboxname, "FontColor", BLACK )

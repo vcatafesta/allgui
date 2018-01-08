@@ -207,15 +207,15 @@ METHOD Paint( lpdis ) CLASS HSayFImage
 
    RETURN SELF
 
-   EXIT PROCEDURE CleanImages
-   LOCAL i
+EXIT PROCEDURE CleanImages
+LOCAL i
 
-   FOR i := 1 TO Len( HFreeImage():aImages )
-      hwg_Fi_unload( HFreeImage():aImages[ i ]:handle )
-      IF HFreeImage():aImages[ i ]:hBitmap != Nil
-         hwg_Deleteobject( HFreeImage():aImages[ i ]:hBitmap )
-      ENDIF
-   NEXT
-   hwg_Fi_end()
+FOR i := 1 TO Len( HFreeImage():aImages )
+   hwg_Fi_unload( HFreeImage():aImages[ i ]:handle )
+   IF HFreeImage():aImages[ i ]:hBitmap != Nil
+      hwg_Deleteobject( HFreeImage():aImages[ i ]:hBitmap )
+   ENDIF
+NEXT
+hwg_Fi_end()
 
-   RETURN
+RETURN

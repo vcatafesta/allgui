@@ -53,15 +53,15 @@ FUNCTION IniGetPosWindow( FormName, cProgName )
    cSection := FormName
 
    IF FILE( cPathFileConfig )
-      col    := VAL( GetIni( cSection , "col"    , "0", cPathFileConfig ) )
-      row    := VAL( GetIni( cSection , "row"    , "0", cPathFileConfig ) )
-      width  := VAL( GetIni( cSection , "width"  , "0", cPathFileConfig ) )
-      height := VAL( GetIni( cSection , "height" , "0", cPathFileConfig ) )
+      COL    := VAL( GetIni( cSection , "col"    , "0", cPathFileConfig ) )
+      ROW    := VAL( GetIni( cSection , "row"    , "0", cPathFileConfig ) )
+      WIDTH  := VAL( GetIni( cSection , "width"  , "0", cPathFileConfig ) )
+      HEIGHT := VAL( GetIni( cSection , "height" , "0", cPathFileConfig ) )
 
-      col    := IFNIL( col, actpos[1], col )
-      row    := IFNIL( row, actpos[2], row )
-      width  := IFNIL( width, actpos[3] - actpos[1], width )
-      height := IFNIL( height, actpos[4] - actpos[2], height )
+      COL    := IFNIL( col, actpos[1], col )
+      ROW    := IFNIL( row, actpos[2], row )
+      WIDTH  := IFNIL( width, actpos[3] - actpos[1], width )
+      HEIGHT := IFNIL( height, actpos[4] - actpos[2], height )
       // If there are no sections, ie Variables are 0
       IF width > 0 .AND. height > 0
          MoveWindow( GetFormHandle( FormName ) , col , row , width , height , .t. )
@@ -94,10 +94,10 @@ FUNCTION IniSetPosWindow( FormName, cProgName )
       HB_MemoWrit( cPathFileConfig, cText )
    ENDIF
 
-   col    := actpos[1]
-   row    := actpos[2]
-   width  := actpos[3] - actpos[1]
-   height := actpos[4] - actpos[2]
+   COL    := actpos[1]
+   ROW    := actpos[2]
+   WIDTH  := actpos[3] - actpos[1]
+   HEIGHT := actpos[4] - actpos[2]
 
    WriteIni( cSection, "TitleWin" , cProgName       , cPathFileConfig )
    WriteIni( cSection, "col"      , HB_NToS(col)    , cPathFileConfig )

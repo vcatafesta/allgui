@@ -4,19 +4,19 @@ FUNCTION main
 
    DEFINE WINDOW m main ;
          clientarea 640, 480 ;
-         Title "Print Pie Graph" ;
-         backcolor {216,208,200}
+         TITLE "Print Pie Graph" ;
+         BACKCOLOR {216,208,200}
 
       DEFINE BUTTON x
-         row 10
-         col 10
+         ROW 10
+         COL 10
          caption "Draw"
          action showpie()
       END BUTTON
 
       DEFINE BUTTON x1
-         row 40
-         col 10
+         ROW 40
+         COL 10
          caption "Print"
          action ( showpie(), printpie() )
       END BUTTON

@@ -1,28 +1,27 @@
 /*
- * Zip Sample n° 2
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to extract all the files from a zip
- * archive while recreating the stored folder's structure.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Zip Sample n° 2
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to extract all the files from a zip
+* archive while recreating the stored folder's structure.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include 'oohg.ch'
 #include 'directry.ch'
 
 FUNCTION Main()
+
    LOCAL oUnzip, oZipFile, oFolder
 
    DEFINE WINDOW MainForm ;
-      AT 114,218 ;
-      WIDTH 534 ;
-      HEIGHT 276 ;
-      TITLE 'How to Unzip Files Using MiniZip Library' ;
-      MAIN
+         AT 114,218 ;
+         WIDTH 534 ;
+         HEIGHT 276 ;
+         TITLE 'How to Unzip Files Using MiniZip Library' ;
+         MAIN
 
       @ 20,20 BUTTON btn_1 ;
          CAPTION 'Choose zip file' ;
@@ -62,7 +61,7 @@ FUNCTION Main()
    MainForm.Center
    MainForm.Activate
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION UnzipFiles( cZipFile, cFolder )
 
@@ -79,15 +78,15 @@ FUNCTION UnzipFiles( cZipFile, cFolder )
    MainForm.prg_1.Value := 0
    MainForm.lbl_1.Value := ""
 
-RETURN
+   RETURN
 
 FUNCTION ProgressUpdate( nPos, cFile )
 
    MainForm.prg_1.Value := nPos
    MainForm.lbl_1.Value := cFile
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */

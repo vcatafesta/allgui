@@ -18,21 +18,21 @@ FUNCTION operadores()
 
    DEFINE WINDOW form_operadores;
          at 000,000;
-         width 800;
-         height 605;
-         title 'Operadores do Programa';
-         icon path_imagens+'icone.ico';
+         WIDTH 800;
+         HEIGHT 605;
+         TITLE 'Operadores do Programa';
+         ICON path_imagens+'icone.ico';
          modal;
          nosize;
          on init pesquisar()
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
-         picture path_imagens+'incluir.bmp'
-         col 005
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'incluir.bmp'
+         COL 005
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F5 Incluir'
          action dados(1)
          fontname 'verdana'
@@ -42,14 +42,14 @@ FUNCTION operadores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_alterar
-         picture path_imagens+'alterar.bmp'
-         col 107
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'alterar.bmp'
+         COL 107
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F6 Alterar'
          action dados(2)
          fontname 'verdana'
@@ -59,14 +59,14 @@ FUNCTION operadores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_excluir
-         picture path_imagens+'excluir.bmp'
-         col 209
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'excluir.bmp'
+         COL 209
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F7 Excluir'
          action excluir()
          fontname 'verdana'
@@ -76,14 +76,14 @@ FUNCTION operadores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_imprimir
-         picture path_imagens+'imprimir.bmp'
-         col 311
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'imprimir.bmp'
+         COL 311
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F8 Imprimir'
          action relacao()
          fontname 'verdana'
@@ -93,14 +93,14 @@ FUNCTION operadores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_atualizar
-         picture path_imagens+'atualizar.bmp'
-         col 413
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'atualizar.bmp'
+         COL 413
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Atualizar'
          action atualizar()
          fontname 'verdana'
@@ -110,14 +110,14 @@ FUNCTION operadores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_acessos
-         picture path_imagens+'acessos.bmp'
-         col 515
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'acessos.bmp'
+         COL 515
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Acessos'
          action acesso()
          fontname 'verdana'
@@ -127,14 +127,14 @@ FUNCTION operadores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
-         picture path_imagens+'sair.bmp'
-         col 617
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'sair.bmp'
+         COL 617
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'ESC Voltar'
          action form_operadores.release
          fontname 'verdana'
@@ -144,22 +144,22 @@ FUNCTION operadores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_operadores
             parent form_operadores
-            col 000
-            row 105
-            width 795
-            height 430
+            COL 000
+            ROW 105
+            WIDTH 795
+            HEIGHT 430
             headers {'Código','Nome'}
             widths {100,650}
             fontname 'verdana'
             fontsize 010
             fontbold .T.
-            backcolor _amarelo_001
+            BACKCOLOR _amarelo_001
             fontcolor _preto_001
             ondblclick dados(2)
          END GRID
@@ -167,8 +167,8 @@ FUNCTION operadores()
 
       DEFINE LABEL rodape_001
          parent form_operadores
-         col 005
-         row 545
+         COL 005
+         ROW 545
          value 'Digite sua pesquisa'
          autosize .T.
          fontname 'verdana'
@@ -179,19 +179,19 @@ FUNCTION operadores()
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_operadores;
-         height 027;
-         width 300;
+         HEIGHT 027;
+         WIDTH 300;
          value '';
          maxlength 040;
          font 'verdana' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase;
          on change pesquisar()
       DEFINE LABEL rodape_002
          parent form_operadores
-         col form_operadores.width - 270
-         row 545
+         COL form_operadores.width - 270
+         ROW 545
          value 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
          fontname 'verdana'
@@ -244,12 +244,12 @@ STATIC FUNCTION dados(parametro)
 
    DEFINE WINDOW form_dados;
          at 000,000;
-         width 325;
-         height 220;
-         title (titulo);
-         icon path_imagens+'icone.ico';
+         WIDTH 325;
+         HEIGHT 220;
+         TITLE (titulo);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * entrada de dados
       @ 010,005 label lbl_001;
@@ -262,12 +262,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_nome;
          maxlength 010;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 060,005 label lbl_002;
@@ -280,34 +280,34 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 080,005 textbox tbox_002;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_senha;
          maxlength 010;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase;
          password
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_dados.height-090
+         COL 000
+         ROW form_dados.height-090
          value ''
-         width form_dados.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_dados.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_dados.width-225
-         row form_dados.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_dados.width-225
+         ROW form_dados.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar(parametro)
          fontbold .T.
@@ -316,11 +316,11 @@ STATIC FUNCTION dados(parametro)
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_dados.width-100
-         row form_dados.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_dados.width-100
+         ROW form_dados.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_dados.release
          fontbold .T.
@@ -623,18 +623,18 @@ STATIC FUNCTION acesso()
 
    DEFINE WINDOW form_acesso;
          at 000,000;
-         width 625;
-         height 560;
-         title 'Definir acessos para : '+x_nome;
-         icon path_imagens+'icone.ico';
+         WIDTH 625;
+         HEIGHT 560;
+         TITLE 'Definir acessos para : '+x_nome;
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE TAB tab_acesso;
             of form_acesso;
             at 003,003;
-            width 615;
-            height form_acesso.height-090;
+            WIDTH 615;
+            HEIGHT form_acesso.height-090;
             font 'verdana';
             size 010;
             bold;
@@ -644,9 +644,9 @@ STATIC FUNCTION acesso()
          page 'Principal' image path_imagens+'img_hum.bmp'
             DEFINE CHECKBOX chkbox_001
                caption 'Venda Delivery'
-               col 150
-               row 050
-               width 350
+               COL 150
+               ROW 050
+               WIDTH 350
                value x_opcao_001
                fontname 'verdana'
                fontsize 10
@@ -655,9 +655,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_002
                caption 'Venda Mesas'
-               col 150
-               row 080
-               width 350
+               COL 150
+               ROW 080
+               WIDTH 350
                value x_opcao_002
                fontname 'verdana'
                fontsize 10
@@ -666,9 +666,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_003
                caption 'Venda Balcão'
-               col 150
-               row 110
-               width 350
+               COL 150
+               ROW 110
+               WIDTH 350
                value x_opcao_003
                fontname 'verdana'
                fontsize 10
@@ -677,9 +677,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_004
                caption 'Cadastro Clientes'
-               col 150
-               row 140
-               width 350
+               COL 150
+               ROW 140
+               WIDTH 350
                value x_opcao_004
                fontname 'verdana'
                fontsize 10
@@ -688,9 +688,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_005
                caption 'Cadastro Produtos'
-               col 150
-               row 170
-               width 350
+               COL 150
+               ROW 170
+               WIDTH 350
                value x_opcao_005
                fontname 'verdana'
                fontsize 10
@@ -701,9 +701,9 @@ STATIC FUNCTION acesso()
          page 'Tabelas' image path_imagens+'img_dois.bmp'
             DEFINE CHECKBOX chkbox_006
                caption 'Fornecedores'
-               col 150
-               row 050
-               width 350
+               COL 150
+               ROW 050
+               WIDTH 350
                value x_opcao_006
                fontname 'verdana'
                fontsize 10
@@ -712,9 +712,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_007
                caption 'Grupo de Fornecedores'
-               col 150
-               row 080
-               width 350
+               COL 150
+               ROW 080
+               WIDTH 350
                value x_opcao_007
                fontname 'verdana'
                fontsize 10
@@ -723,9 +723,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_008
                caption 'Matéria Prima'
-               col 150
-               row 110
-               width 350
+               COL 150
+               ROW 110
+               WIDTH 350
                value x_opcao_008
                fontname 'verdana'
                fontsize 10
@@ -734,9 +734,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_009
                caption 'Categorias de Produtos'
-               col 150
-               row 140
-               width 350
+               COL 150
+               ROW 140
+               WIDTH 350
                value x_opcao_009
                fontname 'verdana'
                fontsize 10
@@ -745,9 +745,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_010
                caption 'Sub-Categorias de Produtos'
-               col 150
-               row 170
-               width 350
+               COL 150
+               ROW 170
+               WIDTH 350
                value x_opcao_010
                fontname 'verdana'
                fontsize 10
@@ -756,9 +756,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_011
                caption 'Formas de Recebimento'
-               col 150
-               row 200
-               width 350
+               COL 150
+               ROW 200
+               WIDTH 350
                value x_opcao_011
                fontname 'verdana'
                fontsize 10
@@ -767,9 +767,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_012
                caption 'Formas de Pagamento'
-               col 150
-               row 230
-               width 350
+               COL 150
+               ROW 230
+               WIDTH 350
                value x_opcao_012
                fontname 'verdana'
                fontsize 10
@@ -778,9 +778,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_013
                caption 'Unidades de Medida'
-               col 150
-               row 260
-               width 350
+               COL 150
+               ROW 260
+               WIDTH 350
                value x_opcao_013
                fontname 'verdana'
                fontsize 10
@@ -789,9 +789,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_014
                caption 'Contas Bancárias'
-               col 150
-               row 290
-               width 350
+               COL 150
+               ROW 290
+               WIDTH 350
                value x_opcao_014
                fontname 'verdana'
                fontsize 10
@@ -800,9 +800,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_015
                caption 'Impostos e Alíquotas'
-               col 150
-               row 320
-               width 350
+               COL 150
+               ROW 320
+               WIDTH 350
                value x_opcao_015
                fontname 'verdana'
                fontsize 10
@@ -811,9 +811,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_016
                caption 'Mesas da Pizzaria'
-               col 150
-               row 350
-               width 350
+               COL 150
+               ROW 350
+               WIDTH 350
                value x_opcao_016
                fontname 'verdana'
                fontsize 10
@@ -822,9 +822,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_017
                caption 'Atendentes ou Garçons'
-               col 150
-               row 380
-               width 350
+               COL 150
+               ROW 380
+               WIDTH 350
                value x_opcao_017
                fontname 'verdana'
                fontsize 10
@@ -833,9 +833,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_018
                caption 'Motoboys ou Entregadores'
-               col 150
-               row 410
-               width 350
+               COL 150
+               ROW 410
+               WIDTH 350
                value x_opcao_018
                fontname 'verdana'
                fontsize 10
@@ -844,9 +844,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_019
                caption 'Operadores do Programa'
-               col 150
-               row 440
-               width 350
+               COL 150
+               ROW 440
+               WIDTH 350
                value x_opcao_019
                fontname 'verdana'
                fontsize 10
@@ -857,9 +857,9 @@ STATIC FUNCTION acesso()
          page 'Relatórios' image path_imagens+'img_tres.bmp'
             DEFINE CHECKBOX chkbox_020
                caption 'Fechamento do dia de trabalho'
-               col 150
-               row 050
-               width 350
+               COL 150
+               ROW 050
+               WIDTH 350
                value x_opcao_020
                fontname 'verdana'
                fontsize 10
@@ -868,9 +868,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_021
                caption 'Movimentação do Caixa'
-               col 150
-               row 080
-               width 350
+               COL 150
+               ROW 080
+               WIDTH 350
                value x_opcao_021
                fontname 'verdana'
                fontsize 10
@@ -879,9 +879,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_022
                caption 'Movimentação Bancária'
-               col 150
-               row 110
-               width 350
+               COL 150
+               ROW 110
+               WIDTH 350
                value x_opcao_022
                fontname 'verdana'
                fontsize 10
@@ -890,9 +890,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_023
                caption 'Contas a Pagar por período'
-               col 150
-               row 140
-               width 350
+               COL 150
+               ROW 140
+               WIDTH 350
                value x_opcao_023
                fontname 'verdana'
                fontsize 10
@@ -901,9 +901,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_024
                caption 'Contas a Pagar por fornecedor'
-               col 150
-               row 170
-               width 350
+               COL 150
+               ROW 170
+               WIDTH 350
                value x_opcao_024
                fontname 'verdana'
                fontsize 10
@@ -912,9 +912,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_025
                caption 'Contas a Receber por período'
-               col 150
-               row 200
-               width 350
+               COL 150
+               ROW 200
+               WIDTH 350
                value x_opcao_025
                fontname 'verdana'
                fontsize 10
@@ -923,9 +923,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_026
                caption 'Contas a Receber por cliente'
-               col 150
-               row 230
-               width 350
+               COL 150
+               ROW 230
+               WIDTH 350
                value x_opcao_026
                fontname 'verdana'
                fontsize 10
@@ -934,9 +934,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_027
                caption 'Pizzas mais vendidas'
-               col 150
-               row 260
-               width 350
+               COL 150
+               ROW 260
+               WIDTH 350
                value x_opcao_027
                fontname 'verdana'
                fontsize 10
@@ -945,9 +945,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_028
                caption 'Produtos mais vendidos'
-               col 150
-               row 290
-               width 350
+               COL 150
+               ROW 290
+               WIDTH 350
                value x_opcao_028
                fontname 'verdana'
                fontsize 10
@@ -956,9 +956,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_029
                caption 'Relação estoque mínimo'
-               col 150
-               row 320
-               width 350
+               COL 150
+               ROW 320
+               WIDTH 350
                value x_opcao_029
                fontname 'verdana'
                fontsize 10
@@ -967,9 +967,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_030
                caption 'Posição do estoque (produtos)'
-               col 150
-               row 350
-               width 350
+               COL 150
+               ROW 350
+               WIDTH 350
                value x_opcao_030
                fontname 'verdana'
                fontsize 10
@@ -978,9 +978,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_031
                caption 'Posição do estoque (matéria prima)'
-               col 150
-               row 380
-               width 350
+               COL 150
+               ROW 380
+               WIDTH 350
                value x_opcao_031
                fontname 'verdana'
                fontsize 10
@@ -989,9 +989,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_032
                caption 'Comissão Motoboys/Entregadores'
-               col 150
-               row 410
-               width 350
+               COL 150
+               ROW 410
+               WIDTH 350
                value x_opcao_032
                fontname 'verdana'
                fontsize 10
@@ -1000,9 +1000,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_033
                caption 'Comissão Atendentes/Garçons'
-               col 150
-               row 440
-               width 350
+               COL 150
+               ROW 440
+               WIDTH 350
                value x_opcao_033
                fontname 'verdana'
                fontsize 10
@@ -1013,9 +1013,9 @@ STATIC FUNCTION acesso()
          page 'Financeiro' image path_imagens+'img_quatro.bmp'
             DEFINE CHECKBOX chkbox_034
                caption 'Movimentação do Caixa'
-               col 150
-               row 050
-               width 350
+               COL 150
+               ROW 050
+               WIDTH 350
                value x_opcao_034
                fontname 'verdana'
                fontsize 10
@@ -1024,9 +1024,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_035
                caption 'Movimentação Bancária'
-               col 150
-               row 080
-               width 350
+               COL 150
+               ROW 080
+               WIDTH 350
                value x_opcao_035
                fontname 'verdana'
                fontsize 10
@@ -1035,9 +1035,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_036
                caption 'Compras / Entrada Estoque'
-               col 150
-               row 110
-               width 350
+               COL 150
+               ROW 110
+               WIDTH 350
                value x_opcao_036
                fontname 'verdana'
                fontsize 10
@@ -1046,9 +1046,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_037
                caption 'Contas a Pagar'
-               col 150
-               row 140
-               width 350
+               COL 150
+               ROW 140
+               WIDTH 350
                value x_opcao_037
                fontname 'verdana'
                fontsize 10
@@ -1057,9 +1057,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_038
                caption 'Contas a Receber'
-               col 150
-               row 170
-               width 350
+               COL 150
+               ROW 170
+               WIDTH 350
                value x_opcao_038
                fontname 'verdana'
                fontsize 10
@@ -1070,9 +1070,9 @@ STATIC FUNCTION acesso()
          page 'Ferramentas' image path_imagens+'img_cinco.bmp'
             DEFINE CHECKBOX chkbox_039
                caption 'Tamanhos de Pizza'
-               col 150
-               row 050
-               width 350
+               COL 150
+               ROW 050
+               WIDTH 350
                value x_opcao_039
                fontname 'verdana'
                fontsize 10
@@ -1081,9 +1081,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_040
                caption 'Cadastro da Pizzaria'
-               col 150
-               row 080
-               width 350
+               COL 150
+               ROW 080
+               WIDTH 350
                value x_opcao_040
                fontname 'verdana'
                fontsize 10
@@ -1092,9 +1092,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_041
                caption 'Incluir ou Excluir Promoção'
-               col 150
-               row 110
-               width 350
+               COL 150
+               ROW 110
+               WIDTH 350
                value x_opcao_041
                fontname 'verdana'
                fontsize 10
@@ -1103,9 +1103,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_042
                caption 'Reajustar Preços de Produtos'
-               col 150
-               row 140
-               width 350
+               COL 150
+               ROW 140
+               WIDTH 350
                value x_opcao_042
                fontname 'verdana'
                fontsize 10
@@ -1114,9 +1114,9 @@ STATIC FUNCTION acesso()
             END CHECKBOX
             DEFINE CHECKBOX chkbox_043
                caption 'Backup do Banco de Dados'
-               col 150
-               row 170
-               width 350
+               COL 150
+               ROW 170
+               WIDTH 350
                value x_opcao_043
                fontname 'verdana'
                fontsize 10
@@ -1129,11 +1129,11 @@ STATIC FUNCTION acesso()
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_acesso.width-225
-         row form_acesso.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_acesso.width-225
+         ROW form_acesso.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar_acesso(x_id,x_tipo)
          fontbold .T.
@@ -1142,11 +1142,11 @@ STATIC FUNCTION acesso()
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_acesso.width-100
-         row form_acesso.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_acesso.width-100
+         ROW form_acesso.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_acesso.release
          fontbold .T.

@@ -10,8 +10,8 @@ FUNCTION Main
    DEFINE WINDOW win_1 ;
          main ;
          clientarea 400, 300 ;
-         title "Reading PNG Image from a File" ;
-         backcolor { 204, 220, 240 } nosize
+         TITLE "Reading PNG Image from a File" ;
+         BACKCOLOR { 204, 220, 240 } nosize
 
       ON KEY ESCAPE ACTION win_1.Release()
 

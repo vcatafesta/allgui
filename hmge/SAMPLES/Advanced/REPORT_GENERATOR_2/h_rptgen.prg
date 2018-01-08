@@ -516,7 +516,7 @@ PROCEDURE ExecuteReport ( cReportName , lPreview , lSelect , cOutputFileName )
          ENDIF
       ENDIF
       IF drv = "H"
-         define font "f0" name "courier new" size 12
+         DEFINE FONT "f0" name "courier new" size 12
          define pen "P0" style PS_SOLID width 10
          SET PAGE ORIENTATION nOrientation PAPERSIZE nPapersize FONT "f0"
       ENDIF

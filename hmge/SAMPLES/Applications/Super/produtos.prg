@@ -18,20 +18,20 @@ FUNCTION produtos()
 
    DEFINE WINDOW form_produtos;
          at 000,000;
-         width getdesktopwidth();
-         height getdesktopheight();
-         title 'Produtos';
-         icon path_imagens+'icone.ico';
+         WIDTH getdesktopwidth();
+         HEIGHT getdesktopheight();
+         TITLE 'Produtos';
+         ICON path_imagens+'icone.ico';
          modal;
          on init pesquisar()
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
-         picture path_imagens+'incluir.bmp'
-         col 005
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'incluir.bmp'
+         COL 005
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F5 Incluir'
          action dados(1)
          fontname 'verdana'
@@ -41,14 +41,14 @@ FUNCTION produtos()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_alterar
-         picture path_imagens+'alterar.bmp'
-         col 107
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'alterar.bmp'
+         COL 107
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F6 Alterar'
          action dados(2)
          fontname 'verdana'
@@ -58,14 +58,14 @@ FUNCTION produtos()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_excluir
-         picture path_imagens+'excluir.bmp'
-         col 209
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'excluir.bmp'
+         COL 209
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F7 Excluir'
          action excluir()
          fontname 'verdana'
@@ -75,14 +75,14 @@ FUNCTION produtos()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_imprimir
-         picture path_imagens+'imprimir.bmp'
-         col 311
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'imprimir.bmp'
+         COL 311
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F8 Imprimir'
          action relacao()
          fontname 'verdana'
@@ -92,14 +92,14 @@ FUNCTION produtos()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_atualizar
-         picture path_imagens+'atualizar.bmp'
-         col 413
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'atualizar.bmp'
+         COL 413
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Atualizar'
          action atualizar()
          fontname 'verdana'
@@ -109,14 +109,14 @@ FUNCTION produtos()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_fornecedores
-         picture path_imagens+'fornecedores.bmp'
-         col 515
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'fornecedores.bmp'
+         COL 515
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Fornecedores'
          action fornecedores_produto()
          fontname 'verdana'
@@ -126,14 +126,14 @@ FUNCTION produtos()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_compor
-         picture path_imagens+'compor.bmp'
-         col 617
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'compor.bmp'
+         COL 617
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Compor Prod.'
          action compor_produto()
          fontname 'verdana'
@@ -143,14 +143,14 @@ FUNCTION produtos()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
-         picture path_imagens+'sair.bmp'
-         col 719
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'sair.bmp'
+         COL 719
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'ESC Voltar'
          action form_produtos.release
          fontname 'verdana'
@@ -160,22 +160,22 @@ FUNCTION produtos()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_produtos
             parent form_produtos
-            col 000
-            row 105
-            width getdesktopwidth()
-            height getdesktopheight()-210
+            COL 000
+            ROW 105
+            WIDTH getdesktopwidth()
+            HEIGHT getdesktopheight()-210
             headers {'Pizza','Promoção','Baixa','Código','Código Barra','Nome (longo)','Qtd.Estoque'}
             widths {060,100,060,100,150,400,120}
             fontname 'verdana'
             fontsize 010
             fontbold .T.
-            backcolor _amarelo_001
+            BACKCOLOR _amarelo_001
             fontcolor _preto_001
             ondblclick dados(2)
          END GRID
@@ -183,8 +183,8 @@ FUNCTION produtos()
 
       DEFINE LABEL rodape_001
          parent form_produtos
-         col 005
-         row getdesktopheight()-090
+         COL 005
+         ROW getdesktopheight()-090
          value 'Digite sua pesquisa'
          autosize .T.
          fontname 'verdana'
@@ -195,19 +195,19 @@ FUNCTION produtos()
       END LABEL
       @ getdesktopheight()-095,160 textbox tbox_pesquisa;
          of form_produtos;
-         height 027;
-         width 550;
+         HEIGHT 027;
+         WIDTH 550;
          value '';
          maxlength 040;
          font 'verdana' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase;
          on change pesquisar()
       DEFINE LABEL rodape_002
          parent form_produtos
-         col form_produtos.width - 270
-         row getdesktopheight()-085
+         COL form_produtos.width - 270
+         ROW getdesktopheight()-085
          value 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
          fontname 'verdana'
@@ -298,19 +298,19 @@ STATIC FUNCTION dados(parametro)
 
    DEFINE WINDOW form_dados;
          at 000,000;
-         width 830;
-         height 550;
-         title (titulo);
-         icon path_imagens+'icone.ico';
+         WIDTH 830;
+         HEIGHT 550;
+         TITLE (titulo);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * entrada de dados
       @ 005,005 frame frame_geral;
          parent form_dados;
          caption 'Informações do cadastro';
-         width 510;
-         height 440;
+         WIDTH 510;
+         HEIGHT 440;
          font 'verdana';
          size 010;
          bold;
@@ -326,11 +326,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 045,015 getbox tbox_001;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_codigo;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1
       @ 025,145 label lbl_002;
          of form_dados;
@@ -342,12 +342,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 045,145 textbox tbox_002;
          of form_dados;
-         height 027;
-         width 360;
+         HEIGHT 027;
+         WIDTH 360;
          value x_nome_longo;
          maxlength 040;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 075,015 label lbl_003;
@@ -360,12 +360,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 095,015 textbox tbox_003;
          of form_dados;
-         height 027;
-         width 250;
+         HEIGHT 027;
+         WIDTH 250;
          value x_nome_cupom;
          maxlength 015;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 075,275 label lbl_004;
@@ -378,18 +378,18 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 095,275 textbox tbox_004;
          of form_dados;
-         height 027;
-         width 230;
+         HEIGHT 027;
+         WIDTH 230;
          value x_cbarra;
          maxlength 015;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       DEFINE CHECKBOX tbox_005
-         row 130
-         col 015
-         width 150
+         ROW 130
+         COL 015
+         WIDTH 150
          caption 'Produto é PIZZA ?'
          value x_pizza
          fontname 'verdana'
@@ -397,9 +397,9 @@ STATIC FUNCTION dados(parametro)
          fontbold .T.
       END CHECKBOX
       DEFINE CHECKBOX tbox_006
-         row 130
-         col 175
-         width 130
+         ROW 130
+         COL 175
+         WIDTH 130
          caption 'Em Promoção ?'
          value x_promocao
          fontname 'verdana'
@@ -407,9 +407,9 @@ STATIC FUNCTION dados(parametro)
          fontbold .T.
       END CHECKBOX
       DEFINE CHECKBOX tbox_007
-         row 130
-         col 315
-         width 180
+         ROW 130
+         COL 315
+         WIDTH 180
          caption 'Baixa o estoque ?'
          value x_baixa
          fontname 'verdana'
@@ -426,11 +426,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 200,015 textbox tbox_008;
          of form_dados;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_categoria;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_categoria('form_dados','tbox_008')
@@ -452,11 +452,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 250,015 textbox tbox_009;
          of form_dados;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_subcategoria;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_subcategoria('form_dados','tbox_009')
@@ -478,11 +478,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 310,015 textbox tbox_010;
          of form_dados;
-         height 027;
-         width 100;
+         HEIGHT 027;
+         WIDTH 100;
          value x_qtd_estoque;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric
       @ 290,130 label lbl_011;
@@ -495,11 +495,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 310,130 textbox tbox_011;
          of form_dados;
-         height 027;
-         width 100;
+         HEIGHT 027;
+         WIDTH 100;
          value x_qtd_minimo;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric
       @ 290,240 label lbl_012;
@@ -512,11 +512,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 310,240 textbox tbox_012;
          of form_dados;
-         height 027;
-         width 100;
+         HEIGHT 027;
+         WIDTH 100;
          value x_qtd_maximo;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric
       @ 340,015 label lbl_013;
@@ -529,11 +529,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 360,015 textbox tbox_013;
          of form_dados;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_imposto;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_imposto('form_dados','tbox_013')
@@ -555,13 +555,13 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 410,015 getbox tbox_014;
          of form_dados;
-         height 027;
-         width 150;
+         HEIGHT 027;
+         WIDTH 150;
          value x_valor_custo;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       @ 390,175 label lbl_015;
          of form_dados;
          value 'Valor VENDA R$';
@@ -572,20 +572,20 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 410,175 getbox tbox_015;
          of form_dados;
-         height 027;
-         width 150;
+         HEIGHT 027;
+         WIDTH 150;
          value x_valor_venda;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
 
       * valores referentes aos tamanhos
       @ 005,525 frame frame_valores;
          parent form_dados;
          caption 'Tamanhos e preços (pizza)';
-         width 290;
-         height 440;
+         WIDTH 290;
+         HEIGHT 440;
          font 'verdana';
          size 010;
          bold;
@@ -660,77 +660,77 @@ STATIC FUNCTION dados(parametro)
       * preços das pizzas
       @ 050,670 getbox tbox_preco_001;
          of form_dados;
-         height 030;
-         width 140;
+         HEIGHT 030;
+         WIDTH 140;
          value x_valor_001;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       @ 090,670 getbox tbox_preco_002;
          of form_dados;
-         height 030;
-         width 140;
+         HEIGHT 030;
+         WIDTH 140;
          value x_valor_002;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       @ 130,670 getbox tbox_preco_003;
          of form_dados;
-         height 030;
-         width 140;
+         HEIGHT 030;
+         WIDTH 140;
          value x_valor_003;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       @ 170,670 getbox tbox_preco_004;
          of form_dados;
-         height 030;
-         width 140;
+         HEIGHT 030;
+         WIDTH 140;
          value x_valor_004;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       @ 210,670 getbox tbox_preco_005;
          of form_dados;
-         height 030;
-         width 140;
+         HEIGHT 030;
+         WIDTH 140;
          value x_valor_005;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       @ 250,670 getbox tbox_preco_006;
          of form_dados;
-         height 030;
-         width 140;
+         HEIGHT 030;
+         WIDTH 140;
          value x_valor_006;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_dados.height-090
+         COL 000
+         ROW form_dados.height-090
          value ''
-         width form_dados.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_dados.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_dados.width-225
-         row form_dados.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_dados.width-225
+         ROW form_dados.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar(parametro)
          fontbold .T.
@@ -739,11 +739,11 @@ STATIC FUNCTION dados(parametro)
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_dados.width-100
-         row form_dados.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_dados.width-100
+         ROW form_dados.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_dados.release
          fontbold .T.
@@ -781,20 +781,20 @@ STATIC FUNCTION compor_produto()
 
    DEFINE WINDOW form_compor;
          at 000,000;
-         width 600;
-         height 500;
-         title 'Compor produto : '+alltrim(x_nome_produto);
-         icon path_imagens+'icone.ico';
+         WIDTH 600;
+         HEIGHT 500;
+         TITLE 'Compor produto : '+alltrim(x_nome_produto);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
-         picture path_imagens+'incluir.bmp'
-         col 005
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'incluir.bmp'
+         COL 005
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F5 Incluir'
          action incluir_composicao(x_codigo_produto)
          fontname 'verdana'
@@ -804,14 +804,14 @@ STATIC FUNCTION compor_produto()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_excluir
-         picture path_imagens+'excluir.bmp'
-         col 107
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'excluir.bmp'
+         COL 107
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F7 Excluir'
          action excluir_composicao()
          fontname 'verdana'
@@ -821,14 +821,14 @@ STATIC FUNCTION compor_produto()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
-         picture path_imagens+'sair.bmp'
-         col 209
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'sair.bmp'
+         COL 209
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'ESC Voltar'
          action form_compor.release
          fontname 'verdana'
@@ -838,22 +838,22 @@ STATIC FUNCTION compor_produto()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       DEFINE GRID grid_mprima_composicao
          parent form_compor
-         col 005
-         row 104
-         width 585
-         height 360
+         COL 005
+         ROW 104
+         WIDTH 585
+         HEIGHT 360
          headers {'id produto','id matéria prima','Nome','Quantidade','Unidade Medida'}
          widths {001,001,300,120,150}
          fontname 'verdana'
          fontsize 010
          fontbold .F.
          nolines .T.
-         backcolor _grid_002
+         BACKCOLOR _grid_002
          fontcolor BLUE
       END GRID
 
@@ -872,12 +872,12 @@ STATIC FUNCTION incluir_composicao(parametro)
 
    DEFINE WINDOW form_inccpo;
          at 000,000;
-         width 400;
-         height 200;
-         title 'Incluir composição';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 200;
+         TITLE 'Incluir composição';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       @ 005,005 label lbl_001;
          of form_inccpo;
@@ -889,11 +889,11 @@ STATIC FUNCTION incluir_composicao(parametro)
          transparent
       @ 025,005 textbox tbox_001;
          of form_inccpo;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_mprima('form_inccpo','tbox_001')
@@ -915,32 +915,32 @@ STATIC FUNCTION incluir_composicao(parametro)
          transparent
       @ 065,150 getbox tbox_002;
          of form_inccpo;
-         height 027;
-         width 080;
+         HEIGHT 027;
+         WIDTH 080;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@R 9999.999'
+         PICTURE '@R 9999.999'
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_inccpo.height-090
+         COL 000
+         ROW form_inccpo.height-090
          value ''
-         width form_inccpo.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_inccpo.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_inccpo.width-225
-         row form_inccpo.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_inccpo.width-225
+         ROW form_inccpo.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar_composicao(parametro)
          fontbold .T.
@@ -949,11 +949,11 @@ STATIC FUNCTION incluir_composicao(parametro)
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_inccpo.width-100
-         row form_inccpo.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_inccpo.width-100
+         ROW form_inccpo.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_inccpo.release
          fontbold .T.
@@ -1321,16 +1321,16 @@ STATIC FUNCTION getcode_categoria_produtos(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -1340,19 +1340,19 @@ STATIC FUNCTION getcode_categoria_produtos(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_categoria_produtos()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea categoria_produtos
@@ -1361,7 +1361,7 @@ STATIC FUNCTION getcode_categoria_produtos(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
@@ -1440,16 +1440,16 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -1459,19 +1459,19 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_subcategoria_produtos()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea subcategoria_produtos
@@ -1480,7 +1480,7 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
@@ -1559,16 +1559,16 @@ STATIC FUNCTION getcode_impostos(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -1578,19 +1578,19 @@ STATIC FUNCTION getcode_impostos(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_impostos()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea impostos
@@ -1599,7 +1599,7 @@ STATIC FUNCTION getcode_impostos(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
@@ -1678,16 +1678,16 @@ STATIC FUNCTION getcode_materia_prima(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -1697,19 +1697,19 @@ STATIC FUNCTION getcode_materia_prima(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_materia_prima()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea materia_prima
@@ -1718,7 +1718,7 @@ STATIC FUNCTION getcode_materia_prima(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
@@ -1765,20 +1765,20 @@ STATIC FUNCTION fornecedores_produto()
 
    DEFINE WINDOW form_fornecedor_produto;
          at 000,000;
-         width 600;
-         height 500;
-         title 'Fornecedores de : '+alltrim(x_nome_produto);
-         icon path_imagens+'icone.ico';
+         WIDTH 600;
+         HEIGHT 500;
+         TITLE 'Fornecedores de : '+alltrim(x_nome_produto);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * botões (toolbar)
       DEFINE BUTTONEX button_sair
-         picture path_imagens+'sair.bmp'
-         col 005
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'sair.bmp'
+         COL 005
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'ESC Voltar'
          action form_fornecedor_produto.release
          fontname 'verdana'
@@ -1788,22 +1788,22 @@ STATIC FUNCTION fornecedores_produto()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       DEFINE GRID grid_fornecedor_produto
          parent form_fornecedor_produto
-         col 005
-         row 104
-         width 585
-         height 360
+         COL 005
+         ROW 104
+         WIDTH 585
+         HEIGHT 360
          headers {'Nome do fornecedor'}
          widths {570}
          fontname 'verdana'
          fontsize 010
          fontbold .F.
          nolines .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
          fontcolor _preto_001
       END GRID
 

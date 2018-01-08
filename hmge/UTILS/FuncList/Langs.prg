@@ -170,15 +170,15 @@ PROCEDURE SelectLanguage
 
    DEFINE WINDOW wLangs           ;
          At 0, 0                 ;
-         Width 245               ;
-         Height 125              ;
-         Title aStrings[ 1, 2 ] ;
-         Icon 'STOCK'            ;
+         WIDTH 245               ;
+         HEIGHT 125              ;
+         TITLE aStrings[ 1, 2 ] ;
+         ICON 'STOCK'            ;
          Modal
 
       @ 15, 10 ComboBox cmbLangs ;
-         Width 215         ;
-         Height 165        ;
+         WIDTH 215         ;
+         HEIGHT 165        ;
          Items {}          ;
          On Change SetProperty( 'wLangs', 'btnOK', 'Enabled', !Empty( This.Value ) )
 

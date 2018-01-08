@@ -15,13 +15,13 @@ FUNCTION Main
 
    DEFINE WINDOW GraphTest ;
          At 0,0 ;
-         Width 640 ;
-         Height 480 ;
-         Title "Printing graphs, bars, lines and points" ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Printing graphs, bars, lines and points" ;
          Main ;
-         Icon "Main" ;
+         ICON "Main" ;
          Nomaximize Nosize ;
-         Backcolor {216,208,200} ;
+         BACKCOLOR {216,208,200} ;
          On Init DrawBarGraph ( aSer )
 
       @ 410,40 COMBOBOX Combo_1 ;
@@ -32,15 +32,15 @@ FUNCTION Main
          ON CLOSEUP (lChanged := .t.,escoja(graphtest.combo_1.value))
 
       DEFINE BUTTON Button_1
-         Row   410
-         Col   260
+         ROW   410
+         COL   260
          Caption   'Print'
          Action  PrintGraph(graphtest.combo_1.value)
       END BUTTON
 
       DEFINE BUTTON Button_2
-         Row   410
-         Col   460
+         ROW   410
+         COL   460
          Caption   'Exit'
          Action  GraphTest.Release
       END BUTTON

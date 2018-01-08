@@ -17,19 +17,19 @@ FUNCTION backup()
 
    DEFINE WINDOW form_backup;
          at 000,000;
-         width 400;
-         height 225;
-         title 'Backup do Banco de Dados';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 225;
+         TITLE 'Backup do Banco de Dados';
+         ICON path_imagens+'icone.ico';
          modal ;
-         nosize
+         NOSIZE
 
       DEFINE BUTTONEX button_backup
-         picture path_imagens+'img_zip.bmp'
-         col 060
-         row 140
-         width 180
-         height 040
+         PICTURE path_imagens+'img_zip.bmp'
+         COL 060
+         ROW 140
+         WIDTH 180
+         HEIGHT 040
          caption 'Iniciar o Backup'
          action CreateZip()
          fontname 'verdana'
@@ -37,11 +37,11 @@ FUNCTION backup()
          fontcolor _preto_001
       END BUTTONEX
       DEFINE BUTTONEX button_destino
-         picture path_imagens+'img_destino.bmp'
-         col 280
-         row 010
-         width 100
-         height 040
+         PICTURE path_imagens+'img_destino.bmp'
+         COL 280
+         ROW 010
+         WIDTH 100
+         HEIGHT 040
          caption 'Pasta ?'
          action Escolhe_Pasta()
          fontname 'verdana'
@@ -49,20 +49,20 @@ FUNCTION backup()
          fontcolor _preto_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
-         picture path_imagens+'img_sair.bmp'
-         col 250
-         row 140
-         width 090
-         height 040
+         PICTURE path_imagens+'img_sair.bmp'
+         COL 250
+         ROW 140
+         WIDTH 090
+         HEIGHT 040
          caption 'Sair'
          action form_backup.release
       END BUTTONEX
 
       define progressbar progressbar_1
-         row 070
-         col 045
-         width 310
-         height 030
+         ROW 070
+         COL 045
+         WIDTH 310
+         HEIGHT 030
          rangemin 0
          rangemax 010
          value 0
@@ -70,29 +70,29 @@ FUNCTION backup()
       END progressbar
 
       DEFINE LABEL label_local
-         row 010
-         col 010
+         ROW 010
+         COL 010
          autosize .t.
-         height 20
+         HEIGHT 20
          value 'Escolha o local para ser gerado o backup'
          fontbold .t.
          transparent .t.
       END LABEL
       DEFINE LABEL label_destino
-         row 030
-         col 010
-         width 240
-         height 40
+         ROW 030
+         COL 010
+         WIDTH 240
+         HEIGHT 40
          value ''
          fontbold .t.
          transparent .t.
          fontcolor BLUE
       END LABEL
       DEFINE LABEL label_zip
-         row 110
-         col 25
-         width 350
-         height 20
+         ROW 110
+         COL 25
+         WIDTH 350
+         HEIGHT 20
          value ''
          fontname 'arial'
          fontsize 10

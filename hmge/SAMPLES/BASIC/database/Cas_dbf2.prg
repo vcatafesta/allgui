@@ -77,7 +77,7 @@ FUNCTION Main
          TOOLTIP 'Duplo Click - Move o campo para ser indexado' ;
          ON CHANGE nil ;
          ON DBLCLICK f_click() ;
-         backcolor {0,255,255}
+         BACKCOLOR {0,255,255}
       @ 30,154 label lbl_2 value 'Indexar por' width 140 center backcolor {0,255,0} ;
          TOOLTIP 'Para apagar os campos abaixo, utilize o duplo click'
       @ 50,154 LISTBOX ListBox_2 WIDTH 140 HEIGHT 110 ;
@@ -86,7 +86,7 @@ FUNCTION Main
          TOOLTIP 'Duplo Click - Para apagar o campo escolhido' ;
          ON CHANGE nil ;
          ON DBLCLICK cas_del() ;
-         backcolor {0,255,0}
+         BACKCOLOR {0,255,0}
       * msginfo( ;
       * 'this.value = ' + str(this.value) +chr(13)+;
       * 'this.item( this.value ) = ' + this.item(this.value) )

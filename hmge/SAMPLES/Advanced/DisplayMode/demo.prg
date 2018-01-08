@@ -49,22 +49,22 @@ PROCEDURE main()
       END LISTBOX
 
       DEFINE BUTTON Btn_1
-         row 290
-         col Form_1.Width - 344
+         ROW 290
+         COL Form_1.Width - 344
          caption "OK"
          action ( ApplyChanges(), Form_1.Release() )
       END BUTTON
 
       DEFINE BUTTON Btn_2
-         row 290
-         col Form_1.Width - 234
+         ROW 290
+         COL Form_1.Width - 234
          caption "Cancel"
          action Form_1.Release()
       END BUTTON
 
       DEFINE BUTTON Btn_3
-         row 290
-         col Form_1.Width - 124
+         ROW 290
+         COL Form_1.Width - 124
          caption "Apply"
          action ApplyChanges()
       END BUTTON

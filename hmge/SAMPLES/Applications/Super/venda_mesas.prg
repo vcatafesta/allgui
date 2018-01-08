@@ -39,46 +39,46 @@ FUNCTION venda_mesas()
 
    DEFINE WINDOW form_vda_mesas;
          at 000,000;
-         width getdesktopwidth();
-         height getdesktopheight();
-         title 'Venda Mesas';
-         icon path_imagens+'icone.ico';
+         WIDTH getdesktopwidth();
+         HEIGHT getdesktopheight();
+         TITLE 'Venda Mesas';
+         ICON path_imagens+'icone.ico';
          modal;
          on init (desabilita_consumo(),mostra_mesas())
 
       * mostrar texto explicando como fechar o pedido
       @ getdesktopheight()-100,000 label label_fechar_pedido;
          of form_vda_mesas;
-         width getdesktopwidth();
-         height 040;
+         WIDTH getdesktopwidth();
+         HEIGHT 040;
          value 'F2-abrir mesa  F3-consumo  F4-fechar mesa  F8-limpar mesa  ESC-sair';
          font 'verdana' size 018;
          bold;
-         backcolor _preto_001;
+         BACKCOLOR _preto_001;
          fontcolor _cinza_001;
          centeralign
 
       * separar a tela em 2 partes distintas
       DEFINE LABEL label_separador
-         col 400
-         row 000
+         COL 400
+         ROW 000
          value ''
-         width 002
-         height getdesktopheight()-100
+         WIDTH 002
+         HEIGHT getdesktopheight()-100
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
 
       * mesas
       @ 010,010 grid grid_mesas;
          parent form_vda_mesas;
-         width 380;
-         height getdesktopheight()-115;
+         WIDTH 380;
+         HEIGHT getdesktopheight()-115;
          headers {'id','id mesa','Mesa','Aberta as'};
          widths {001,001,230,130};
          font 'tahoma' size 010;
          bold;
-         backcolor _branco_001;
+         BACKCOLOR _branco_001;
          fontcolor BLUE
 
       *-Pizzas------------------------------------------------------------------------
@@ -93,13 +93,13 @@ FUNCTION venda_mesas()
          transparent
       @ 030,410 textbox tbox_pizza;
          of form_vda_mesas;
-         height 030;
-         width 100;
+         HEIGHT 030;
+         WIDTH 100;
          value '';
          maxlength 015;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          on enter procura_pizza()
       * mostrar nome da pizza
@@ -115,8 +115,8 @@ FUNCTION venda_mesas()
       @ 030,850 buttonex botao_confirmar_pizza;
          parent form_vda_mesas;
          caption 'Selecionar pizza';
-         width 165 height 040;
-         picture path_imagens+'adicionar.bmp';
+         WIDTH 165 height 040;
+         PICTURE path_imagens+'adicionar.bmp';
          action gravar_adicionar();
          tooltip 'Clique aqui para confirmar a pizza selecionada'
 
@@ -131,8 +131,8 @@ FUNCTION venda_mesas()
          transparent
       @ 080,410 browse grid_pizzas;
          parent form_vda_mesas;
-         width getdesktopwidth()-420;
-         height 200;
+         WIDTH getdesktopwidth()-420;
+         HEIGHT 200;
          headers {'id produto','Seq.','Nome','Tamanho','Preço R$'};
          widths {001,100,190,180,100};
          workarea temp_pizzas;
@@ -140,7 +140,7 @@ FUNCTION venda_mesas()
          value 1;
          font 'tahoma' size 010;
          bold;
-         backcolor _amarelo_001;
+         BACKCOLOR _amarelo_001;
          fontcolor _preto_001
       @ 285,410 label label_observacoes;
          of form_vda_mesas;
@@ -152,13 +152,13 @@ FUNCTION venda_mesas()
          transparent
       @ 305,410 textbox tbox_observacoes;
          of form_vda_mesas;
-         height 030;
-         width 420;
+         HEIGHT 030;
+         WIDTH 420;
          value '';
          maxlength 030;
          font 'courier new' size 012;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
 
@@ -166,8 +166,8 @@ FUNCTION venda_mesas()
       @ 285,850 buttonex botao_excluir_pizza;
          parent form_vda_mesas;
          caption 'Excluir ítem';
-         width 165 height 040;
-         picture path_imagens+'excluir_item.bmp';
+         WIDTH 165 height 040;
+         PICTURE path_imagens+'excluir_item.bmp';
          action excluir_pizza();
          notabstop;
          tooltip 'Clique aqui para excluir uma pizza selecionada acima'
@@ -202,13 +202,13 @@ FUNCTION venda_mesas()
          transparent
       @ 420,410 textbox tbox_produto;
          of form_vda_mesas;
-         height 030;
-         width 100;
+         HEIGHT 030;
+         WIDTH 100;
          value '';
          maxlength 015;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          on enter procura_produto()
       @ 420,520 label label_nome_produto;
@@ -231,12 +231,12 @@ FUNCTION venda_mesas()
          transparent
       @ 470,410 textbox tbox_quantidade;
          of form_vda_mesas;
-         height 030;
-         width 100;
+         HEIGHT 030;
+         WIDTH 100;
          value 0;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter verifica_zero()
@@ -252,29 +252,29 @@ FUNCTION venda_mesas()
          transparent
       @ 470,530 getbox tbox_preco;
          of form_vda_mesas;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 9,999.99'
+         PICTURE '@E 9,999.99'
 
       * botão para confirmar a escolha do produto
       @ 460,670 buttonex botao_confirmar_produto;
          parent form_vda_mesas;
          caption 'Selecionar produto';
-         width 165 height 040;
-         picture path_imagens+'adicionar.bmp';
+         WIDTH 165 height 040;
+         PICTURE path_imagens+'adicionar.bmp';
          action gravar_produto();
          tooltip 'Clique aqui para confirmar o produto selecionado'
 
       * produtos já selecionados
       @ 510,410 browse grid_produtos;
          parent form_vda_mesas;
-         width getdesktopwidth()-420;
-         height getdesktopheight()-615;
+         WIDTH getdesktopwidth()-420;
+         HEIGHT getdesktopheight()-615;
          headers {'id produto','Qtd','Produto','Unitário R$','Subtotal R$'};
          widths {001,080,210,140,140};
          workarea temp_produtos;
@@ -282,15 +282,15 @@ FUNCTION venda_mesas()
          value 1;
          font 'tahoma' size 010;
          bold;
-         backcolor _amarelo_001;
+         BACKCOLOR _amarelo_001;
          fontcolor _preto_001
 
       * botão para excluir produto já selecionado
       @ 460,850 buttonex botao_excluir_produto;
          parent form_vda_mesas;
          caption 'Excluir produto';
-         width 165 height 040;
-         picture path_imagens+'excluir_item.bmp';
+         WIDTH 165 height 040;
+         PICTURE path_imagens+'excluir_item.bmp';
          action excluir_produto();
          notabstop;
          tooltip 'Clique aqui para excluir um produto já selecionado'
@@ -350,26 +350,26 @@ STATIC FUNCTION mostra_listagem_produto()
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 560;
-         height 610;
-         title 'Produtos';
-         icon path_imagens+'icone.ico';
+         WIDTH 560;
+         HEIGHT 610;
+         TITLE 'Produtos';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE GRID grid_pesquisa
          parent form_pesquisa
-         col 000
-         row 000
-         width 555
-         height 580
+         COL 000
+         ROW 000
+         WIDTH 555
+         HEIGHT 580
          headers {'','Nome','Preço R$'}
          widths {001,395,150}
          showheaders .F.
          nolines .T.
          fontname 'courier new'
          fontsize 012
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          fontcolor _preto_001
          ondblclick mostra_informacao_produto()
       END GRID
@@ -465,26 +465,26 @@ STATIC FUNCTION mostra_listagem_pizza()
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 410;
-         height 610;
-         title 'Pizzas';
-         icon path_imagens+'icone.ico';
+         WIDTH 410;
+         HEIGHT 610;
+         TITLE 'Pizzas';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE GRID grid_pesquisa
          parent form_pesquisa
-         col 000
-         row 000
-         width 405
-         height 580
+         COL 000
+         ROW 000
+         WIDTH 405
+         HEIGHT 580
          headers {'','Nome'}
          widths {001,395}
          showheaders .F.
          nolines .T.
          fontname 'courier new'
          fontsize 012
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          fontcolor _preto_001
          ondblclick mostra_informacao()
       END GRID
@@ -658,12 +658,12 @@ STATIC FUNCTION fecha_pizza()
 
    DEFINE WINDOW form_finaliza_pizza;
          at 000,000;
-         width 1000;
-         height 400;
-         title 'Finalizar pizza';
-         icon path_imagens+'icone.ico';
+         WIDTH 1000;
+         HEIGHT 400;
+         TITLE 'Finalizar pizza';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       @ 005,005 label lbl_001;
          of form_finaliza_pizza;
@@ -708,10 +708,10 @@ STATIC FUNCTION fecha_pizza()
 
       DEFINE GRID grid_finaliza_pizza
          parent form_finaliza_pizza
-         col 005
-         row 105
-         width 985
-         height 260
+         COL 005
+         ROW 105
+         WIDTH 985
+         HEIGHT 260
          headers {'id','Pizza',_tamanho_001,_tamanho_002,_tamanho_003,_tamanho_004,_tamanho_005,_tamanho_006}
          widths {001,250,120,120,120,120,120,120}
          value 1
@@ -719,7 +719,7 @@ STATIC FUNCTION fecha_pizza()
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _cinza_005
+         BACKCOLOR _cinza_005
          fontcolor _preto_001
          ondblclick pega_tamanho_valor_pizza()
       END GRID
@@ -891,40 +891,40 @@ STATIC FUNCTION fecha_pedido()
 
    DEFINE WINDOW form_fecha_pedido;
          at 000,000;
-         width 500;
-         height 590;
-         title 'Fechamento da mesa : '+alltrim(x_nome_mesa);
-         icon path_imagens+'icone.ico';
+         WIDTH 500;
+         HEIGHT 590;
+         TITLE 'Fechamento da mesa : '+alltrim(x_nome_mesa);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * linhas para separar os elementos na tela
       DEFINE LABEL label_sep_001
-         col 000
-         row 190
+         COL 000
+         ROW 190
          value ''
-         width 500
-         height 002
+         WIDTH 500
+         HEIGHT 002
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
       DEFINE LABEL label_sep_002
-         col 000
-         row 390
+         COL 000
+         ROW 390
          value ''
-         width 500
-         height 002
+         WIDTH 500
+         HEIGHT 002
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
       DEFINE LABEL label_sep_003
-         col 000
-         row 440
+         COL 000
+         ROW 440
          value ''
-         width 500
-         height 002
+         WIDTH 500
+         HEIGHT 002
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
 
       @ 010,020 label label_001;
@@ -969,14 +969,14 @@ STATIC FUNCTION fecha_pedido()
          transparent
       @ 070,250 getbox tbox_taxa;
          of form_fecha_pedido;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 9,999.99'
+         PICTURE '@E 9,999.99'
       @ 110,020 label label_004;
          of form_fecha_pedido;
          value 'DESCONTO';
@@ -987,14 +987,14 @@ STATIC FUNCTION fecha_pedido()
          transparent
       @ 110,250 getbox tbox_desconto;
          of form_fecha_pedido;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 016;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _vermelho_002;
-         picture '@E 9,999.99';
+         PICTURE '@E 9,999.99';
          on change setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod+form_fecha_pedido.tbox_taxa.value)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'));
          on lostfocus setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod+form_fecha_pedido.tbox_taxa.value)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'))
       @ 150,020 label label_005;
@@ -1029,52 +1029,52 @@ STATIC FUNCTION fecha_pedido()
          itemsource formas_recebimento->nome;
          valuesource formas_recebimento->codigo;
          value 1;
-         width 250;
+         WIDTH 250;
          font 'courier new' size 010
       @ 230,300 getbox tbox_fr001;
          of form_fecha_pedido;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 014;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 99,999.99'
+         PICTURE '@E 99,999.99'
       * 2º
       @ 270,020 combobox combo_2;
          itemsource formas_recebimento->nome;
          valuesource formas_recebimento->codigo;
          value 1;
-         width 250;
+         WIDTH 250;
          font 'courier new' size 010
       @ 270,300 getbox tbox_fr002;
          of form_fecha_pedido;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 014;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 99,999.99'
+         PICTURE '@E 99,999.99'
       * 3º
       @ 310,020 combobox combo_3;
          itemsource formas_recebimento->nome;
          valuesource formas_recebimento->codigo;
          value 1;
-         width 250;
+         WIDTH 250;
          font 'courier new' size 010
       @ 310,300 getbox tbox_fr003;
          of form_fecha_pedido;
-         height 030;
-         width 130;
+         HEIGHT 030;
+         WIDTH 130;
          value 0;
          font 'courier new' size 014;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 99,999.99';
+         PICTURE '@E 99,999.99';
          on lostfocus calcula_final()
 
       @ 360,020 label label_011;
@@ -1124,22 +1124,22 @@ STATIC FUNCTION fecha_pedido()
          itemsource atendentes->nome;
          valuesource atendentes->codigo;
          value 1;
-         width 250;
+         WIDTH 250;
          font 'courier new' size 010
 
       * botões
       @ 510,115 buttonex botao_ok;
          parent form_fecha_pedido;
          caption 'Fechar mesa';
-         width 150 height 040;
-         picture path_imagens+'img_pedido.bmp';
+         WIDTH 150 height 040;
+         PICTURE path_imagens+'img_pedido.bmp';
          action fechamento_geral(x_mesa);
          tooltip 'Clique aqui para finalizar a mesa'
       @ 510,270 buttonex botao_voltar;
          parent form_fecha_pedido;
          caption 'Voltar para tela anterior';
-         width 220 height 040;
-         picture path_imagens+'img_sair.bmp';
+         WIDTH 220 height 040;
+         PICTURE path_imagens+'img_sair.bmp';
          action form_fecha_pedido.release;
          tooltip 'Clique aqui para voltar a vender'
 

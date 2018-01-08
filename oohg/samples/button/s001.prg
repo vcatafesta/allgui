@@ -1,15 +1,13 @@
 /*
- * Button Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to highlight a button using the control's
- * OnMouseMove event and the form's OnMouseMouse event.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Button Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to highlight a button using the control's
+* OnMouseMove event and the form's OnMouseMouse event.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include 'oohg.ch'
 
@@ -19,13 +17,13 @@ FUNCTION Main()
    PRIVATE oButton_3, oLbl_1
 
    DEFINE WINDOW MainForm ;
-      OBJ oMainForm ;
-      AT 0, 0 ;
-      WIDTH 600 ;
-      HEIGHT 200 ;
-      TITLE "ooHG Demo - OnMouseMove Control and Form Event" ;
-      MAIN ;
-      ON MOUSEMOVE {|| OnMouseMoveWindow()}
+         OBJ oMainForm ;
+         AT 0, 0 ;
+         WIDTH 600 ;
+         HEIGHT 200 ;
+         TITLE "ooHG Demo - OnMouseMove Control and Form Event" ;
+         MAIN ;
+         ON MOUSEMOVE {|| OnMouseMoveWindow()}
 
       @ 10, 10 BUTTON Button_3 ;
          OBJ oButton_3 ;
@@ -46,7 +44,7 @@ FUNCTION Main()
          WIDTH 200 ;
          HEIGHT 100 ;
          VALUE "Move the mouse around the window and watch " + ;
-               "what happens when you hover the button."
+         "what happens when you hover the button."
 
       ON KEY ESCAPE ACTION oMainForm:Release()
    END WINDOW
@@ -54,24 +52,24 @@ FUNCTION Main()
    CENTER WINDOW MainForm
    ACTIVATE WINDOW MainForm
 
-RETURN Nil
+   RETURN NIL
 
 FUNCTION OnMouseMoveWindow
 
    oLbl_1:Value := "Form - Row " + ;
-                   LTRIM(STR(_OOHG_MouseRow)) + ;
-                   " Col " + LTRIM(STR(_OOHG_MouseCol))
+      LTRIM(STR(_OOHG_MouseRow)) + ;
+      " Col " + LTRIM(STR(_OOHG_MouseCol))
    oButton_3:FontSize := 9
 
-RETURN Nil
+   RETURN NIL
 
 FUNCTION OnMouseMoveButton
 
    oLbl_1:Value := ""
    oButton_3:FontSize := 18
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */

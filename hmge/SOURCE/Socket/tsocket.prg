@@ -45,34 +45,34 @@ INIT PROCEDURE StartSocket
 
    RETURN
 
-   EXIT procedure CleanupSocket
-   SocketExit()
+EXIT PROCEDURE CleanupSocket
+SocketExit()
 
-   RETURN
+RETURN
 
-   /****c* TSocket/TSocket
-   *  NAME
-   *    TSocket
-   *  PURPOSE
-   *    Create a SOCKET connection
-   *  METHODS
-   *    TSocket:new
-   *    TSocket:connect
-   *    TSocket:SendString
-   *    TSocket:ReceiveString
-   *    TSocket:ReceiveLine
-   *    TSocket:ReceiveChar
-   *    TSocket:GetLocalName
-   *    TSocket:GetLocalAddress
-   *    TSocket:Bind
-   *    TSocket:Listen
-   *    TSocket:SetReceiveTimeout
-   *    TSocket:SetSendTimeout
-   *    TSocket:SetDebug
-   *  EXAMPLE
-   *  SEE ALSO
-   *    TSmtp
-   */
+/****c* TSocket/TSocket
+*  NAME
+*    TSocket
+*  PURPOSE
+*    Create a SOCKET connection
+*  METHODS
+*    TSocket:new
+*    TSocket:connect
+*    TSocket:SendString
+*    TSocket:ReceiveString
+*    TSocket:ReceiveLine
+*    TSocket:ReceiveChar
+*    TSocket:GetLocalName
+*    TSocket:GetLocalAddress
+*    TSocket:Bind
+*    TSocket:Listen
+*    TSocket:SetReceiveTimeout
+*    TSocket:SetSendTimeout
+*    TSocket:SetDebug
+*  EXAMPLE
+*  SEE ALSO
+*    TSmtp
+*/
 
 CLASS TSocket
 

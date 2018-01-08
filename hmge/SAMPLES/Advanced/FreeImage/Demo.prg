@@ -56,12 +56,12 @@ PROCEDURE Main
 
    DEFINE WINDOW wMain                   ;
          At 0, 0                        ;
-         Width 780                      ;
-         Height 525                     ;
-         Title 'FreeImage & SQLite3 Usage Demo' ;
+         WIDTH 780                      ;
+         HEIGHT 525                     ;
+         TITLE 'FreeImage & SQLite3 Usage Demo' ;
          NoMaximize                     ;
-         NoSize                         ;
-         Icon 'main.ico'                ;
+         NOSIZE                         ;
+         ICON 'main.ico'                ;
          Main                           ;
          On Release FI_DeInitialise()   ;
          On Paint ShowMe()
@@ -73,29 +73,29 @@ PROCEDURE Main
 
       DEFINE TAB tbData ;
             at 5, 5    ;
-            Width 250  ;
-            Height 470 ;
+            WIDTH 250  ;
+            HEIGHT 470 ;
             On Change SwitchTab()
 
          Page 'Files'
 
             @ 32, 5 Grid grdFiles   ;
-               Width 235       ;
-               Height 340      ;
+               WIDTH 235       ;
+               HEIGHT 340      ;
                Widths { 200 }  ;
                NoHeaders       ;
                On Change ShowMe()
 
             @ 385, 5 ButtonEx btnChDir       ;
                Caption 'Change folder' ;
-               Width 235               ;
-               Picture 'DIR'           ;
+               WIDTH 235               ;
+               PICTURE 'DIR'           ;
                Action ChangeFolder()
 
             @ 430, 5 ButtonEx btnAdd        ;
                Caption 'Copy to base' ;
-               Width 235              ;
-               Picture 'COPY'         ;
+               WIDTH 235              ;
+               PICTURE 'COPY'         ;
                Action AddToBase()
 
          END PAGE
@@ -103,22 +103,22 @@ PROCEDURE Main
          Page 'Records'
 
             @ 32, 5 Grid grdRecords          ;
-               Width 235                ;
-               Height 340               ;
+               WIDTH 235                ;
+               HEIGHT 340               ;
                Widths { 50, 180 }       ;
                Headers { 'ID', 'Name' } ;
                On Change ShowMe()
 
             @ 385, 5 ButtonEx btnDelete      ;
                Caption 'Delete record' ;
-               Width 235               ;
-               Picture 'DELETE'        ;
+               WIDTH 235               ;
+               PICTURE 'DELETE'        ;
                Action DelRecord()
 
             @ 430, 5 ButtonEx btnSave       ;
                Caption 'Save to file' ;
-               Width 235              ;
-               Picture 'SAVE'         ;
+               WIDTH 235              ;
+               PICTURE 'SAVE'         ;
                Action SaveToFile()
 
          END PAGE

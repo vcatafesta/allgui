@@ -43,7 +43,7 @@ proc main
          on init f_init() ;
          on release f_release() ;
          nosysmenu ;
-         Title 'IMAGE to DBF - by cas.soft@gmail.com' Main
+         TITLE 'IMAGE to DBF - by cas.soft@gmail.com' Main
 
       @ 01,1 button btn_read caption 'Importar' action f_importar()
       @ 30,1 button btn_save caption 'Exportar' action f_exportar()
@@ -110,7 +110,7 @@ proc main
 
       DEFINE WINDOW Form_2 ;
             At m_row, m_col Width m_width Height m_height ;
-            title 'CAS' ;
+            TITLE 'CAS' ;
             on init f_size() ;
             on maximize f_size() ;
             on size f_size() ;

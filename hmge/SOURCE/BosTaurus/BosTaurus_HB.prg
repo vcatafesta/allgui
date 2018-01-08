@@ -52,17 +52,17 @@ FUNCTION bt_WinHandle (Win)
 
 FUNCTION bt_FillRectIsNIL (Row, Col, Width, Height, Row_value, Col_value, Width_value, Height_value)
 
-   Row    := IF (Valtype(Row)    =="U",  Row_value,    Row)
-   Col    := IF (Valtype(Col)    =="U",  Col_value,    Col)
-   Width  := IF (Valtype(Width)  =="U",  Width_value,  Width)
-   Height := IF (Valtype(Height) =="U",  Height_value, Height)
+   ROW    := IF (Valtype(Row)    =="U",  Row_value,    Row)
+   COL    := IF (Valtype(Col)    =="U",  Col_value,    Col)
+   WIDTH  := IF (Valtype(Width)  =="U",  Width_value,  Width)
+   HEIGHT := IF (Valtype(Height) =="U",  Height_value, Height)
 
    RETURN NIL
 
 FUNCTION bt_AdjustWidthHeightRect (Row, Col, Width, Height, Max_Width, Max_Height)
 
-   Width  := IF ((Col + Width  > Max_Width),  (Max_Width  - Col), Width)
-   Height := IF ((Row + Height > Max_Height), (Max_Height - Row), Height)
+   WIDTH  := IF ((Col + Width  > Max_Width),  (Max_Width  - Col), Width)
+   HEIGHT := IF ((Row + Height > Max_Height), (Max_Height - Row), Height)
 
    RETURN NIL
 
@@ -434,7 +434,7 @@ FUNCTION BT_StatusBarWidth (Win)
    LOCAL Width :=0
 
    IF hWnd <> 0
-      Width := BT_SCR_GETINFO (hWnd, BT_SCR_WINDOW, BT_SCR_INFO_WIDTH)
+      WIDTH := BT_SCR_GETINFO (hWnd, BT_SCR_WINDOW, BT_SCR_INFO_WIDTH)
    ENDIF
 
    RETURN Width
@@ -445,7 +445,7 @@ FUNCTION BT_StatusBarHeight (Win)
    LOCAL Height :=0
 
    IF hWnd > 0
-      Height := BT_SCR_GETINFO (hWnd, BT_SCR_WINDOW, BT_SCR_INFO_HEIGHT)
+      HEIGHT := BT_SCR_GETINFO (hWnd, BT_SCR_WINDOW, BT_SCR_INFO_HEIGHT)
    ENDIF
 
    RETURN Height

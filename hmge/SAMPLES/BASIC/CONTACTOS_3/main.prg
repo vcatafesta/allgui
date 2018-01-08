@@ -341,9 +341,9 @@ PROCEDURE Imprimir
 
    DEFINE WINDOW Form_3;
          At 0,0   ;
-         Width 450   ;
-         Height 500   ;
-         Title "Contactos por Apellido"+cLetra;
+         WIDTH 450   ;
+         HEIGHT 500   ;
+         TITLE "Contactos por Apellido"+cLetra;
          ICON "Tutor"   ;
          MODAL   ;
          NOSYSMENU   ;

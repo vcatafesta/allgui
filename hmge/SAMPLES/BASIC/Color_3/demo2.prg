@@ -34,7 +34,7 @@ FUNCTION Main
          cas_lbl = 'LBL_'  + alltrim(str(cas_n))
 
          @ cas_n*30 , 30 LABEL &cas_lbl value cas_lbl ;
-            width 95 height 25 backcolor c_lbl_color
+            WIDTH 95 height 25 backcolor c_lbl_color
 
          m_col := form_cas.&cas_lbl..col + form_cas.&cas_lbl..width + 20
 

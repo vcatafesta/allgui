@@ -59,8 +59,8 @@ FUNCTION Main
       aRows1 [20]   := {123.12,date(),2,20, .f. }
 
       DEFINE GRID grid_1
-         row 10
-         col 10
+         ROW 10
+         COL 10
          WIDTH 760
          HEIGHT 200
          HEADERS {'Last Name','First Name','Phone'}
@@ -71,8 +71,8 @@ FUNCTION Main
       END GRID
 
       DEFINE GRID Grid_2
-         row 220
-         col 10
+         ROW 220
+         COL 10
          WIDTH 760
          HEIGHT 200
          HEADERS {'Column 1','Column 2','Column 3','Column 4','Column 5'}
@@ -97,17 +97,17 @@ FUNCTION Main
       END GRID
 
       DEFINE BUTTON b1
-         row 430
-         col 10
-         width 80
+         ROW 430
+         COL 10
+         WIDTH 80
          caption 'HTML1'
          action grid2html1()
       END BUTTON
 
       DEFINE BUTTON b2
-         row 430
-         col 110
-         width 80
+         ROW 430
+         COL 110
+         WIDTH 80
          caption 'HTML2'
          action grid2html2()
       END BUTTON

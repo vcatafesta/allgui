@@ -53,11 +53,11 @@ PROCEDURE Main
    cIntro += '</ol>'
 
    DEFINE WINDOW wMain at 0, 0 ;
-         Width 630 Height 600 ;
-         Title 'QHTM Demo'    ;
+         WIDTH 630 Height 600 ;
+         TITLE 'QHTM Demo'    ;
          Main                 ;
          NoMaximize           ;
-         NoSize
+         NOSIZE
 
       DEFINE MAIN MENU
 
@@ -74,8 +74,8 @@ PROCEDURE Main
 
       @ 0, 0 QHTM HTML_Intro                                                                         ;
          Value cIntro                                                                            ;
-         Width  ( wMain.Width - GetBorderWidth() * 2 )                                           ;
-         Height ( wMain.Height - GetTitleHeight() - GetMenuBarHeight() - GetBorderHeight() * 2 ) ;
+         WIDTH  ( wMain.Width - GetBorderWidth() * 2 )                                           ;
+         HEIGHT ( wMain.Height - GetTitleHeight() - GetMenuBarHeight() - GetBorderHeight() * 2 ) ;
          Border
 
    END WINDOW
@@ -158,14 +158,14 @@ STATIC PROCEDURE TestAddHTML
    PRIVATE nScrollPos := 0
 
    DEFINE WINDOW wAddHTML at 0, 0     ;
-         Width 600 Height 400        ;
-         Title 'Demo QHTM_AddHTML()' ;
+         WIDTH 600 Height 400        ;
+         TITLE 'Demo QHTM_AddHTML()' ;
          Modal                       ;
-         NoSize
+         NOSIZE
 
       @ 0, 0 QHTM MyHTML                                                                ;
-         Width  ( wAddHTML.Width - GetBorderWidth() * 2 )                           ;
-         Height ( wAddHTML.Height - GetTitleHeight() - GetBorderHeight() * 2 - 45 ) ;
+         WIDTH  ( wAddHTML.Width - GetBorderWidth() * 2 )                           ;
+         HEIGHT ( wAddHTML.Height - GetTitleHeight() - GetBorderHeight() * 2 - 45 ) ;
          Border
 
       @ ( wAddHTML.MyHTML.Height + 10 ), ( wAddHTML.MyHTML.Col + 10 ) Button btnGetPos ;
@@ -266,15 +266,15 @@ STATIC PROCEDURE TestAddHTML2
       }
 
    DEFINE WINDOW wAddHTML at 0, 0                    ;
-         Width 400 Height 190                       ;
-         Title 'Logging ouput demo QHTM_AddHTML2()' ;
+         WIDTH 400 Height 190                       ;
+         TITLE 'Logging ouput demo QHTM_AddHTML2()' ;
          Modal                                      ;
-         NoSize
+         NOSIZE
 
       @ 0, 0 QHTM MyHTML                                                                ;
          Value '<body bgcolor="White"><h3>Lengthy operation</h3></body>'            ;
-         Width  ( wAddHTML.Width - GetBorderWidth() * 2 )                           ;
-         Height ( wAddHTML.Height - GetTitleHeight() - GetBorderHeight() * 2 - 45 ) ;
+         WIDTH  ( wAddHTML.Width - GetBorderWidth() * 2 )                           ;
+         HEIGHT ( wAddHTML.Height - GetTitleHeight() - GetBorderHeight() * 2 - 45 ) ;
          Border
 
       @ ( wAddHTML.MyHTML.Height + 20 ), ( wAddHTML.MyHTML.Col + 20 ) Checkbox cbxScroll ;

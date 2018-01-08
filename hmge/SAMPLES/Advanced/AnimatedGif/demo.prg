@@ -17,10 +17,10 @@ FUNCTION main()
    PUBLIC aPictures := {}, aImageInfo := {}
    PUBLIC TotalFrames, CurrentFrame
 
-   picture := Getfile ( { {'Gif Files', '*.gif'} }, 'Open a File' , GetCurrentFolder(), .f. , .t. )
+   PICTURE := Getfile ( { {'Gif Files', '*.gif'} }, 'Open a File' , GetCurrentFolder(), .f. , .t. )
 
    IF Empty( picture )
-      picture := 'ani-free.gif'
+      PICTURE := 'ani-free.gif'
       LoadGif( picture, @aPictInfo, @aPictures, @aImageInfo )
    ELSE
       IF !LoadGif( picture, @aPictInfo, @aPictures, @aImageInfo )

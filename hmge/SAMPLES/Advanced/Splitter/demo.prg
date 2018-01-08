@@ -21,7 +21,7 @@ PROCEDURE main()
 
    DEFINE WINDOW  Form_1 ;
          clientarea  400, 200 ;
-         title       'HSplitter demo' ;
+         TITLE       'HSplitter demo' ;
          windowtype  MAIN ;
          on release  HSplitter_Release( Form_1.Handle )
 
@@ -33,15 +33,15 @@ PROCEDURE main()
       nBorder := 4
 
       @ 0, 0 editbox EditBox_1 ;
-         width    w ;
-         height   nYPos ;
+         WIDTH    w ;
+         HEIGHT   nYPos ;
          value    LOREMIPSUM_L ;
          tooltip  'EditBox_1' ;
          nohscroll
 
       @ nYPos + nBorder, 0 editbox EditBox_2 ;
-         width    w ;
-         height   h - ( nYPos + nBorder ) ;
+         WIDTH    w ;
+         HEIGHT   h - ( nYPos + nBorder ) ;
          value    LOREMIPSUM_R ;
          tooltip  'EditBox_2' ;
          nohscroll

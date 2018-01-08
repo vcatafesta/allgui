@@ -89,11 +89,11 @@ FUNCTION Lis_TarCodigo()
          TOOLTIP 'Impresora' NOTABSTOP
 
       @150, 10 CHECKBOX nImp CAPTION 'Seleccionar impresora' ;
-         width 150 value .f. ;
+         WIDTH 150 value .f. ;
          ON CHANGE W_Imp1.C_Impresora.Enabled:=IF(W_Imp1.nImp.Value=.T.,.F.,.T.)
 
       @180, 10 CHECKBOX nVer CAPTION 'Previsualizar documento' ;
-         width 160 value .t.
+         WIDTH 160 value .t.
 
       @210, 10 BUTTON B_Imprimir CAPTION 'Imprimir' WIDTH 90 HEIGHT 25 ;
          ACTION Lis_TarCodigoi("IMPRESORA")
@@ -202,10 +202,10 @@ FUNCTION Lis_TarCodigoiImp()
    ENDIF
 
    SET UNITS MM
-   define font "ft10" name "times new roman" size 10
-   define font "ft12" name "times new roman" size 12 //bold=negrita
-   define font "ft14" name "times new roman" size 14
-   define font "ft18" name "times new roman" size 18
+   DEFINE FONT "ft10" name "times new roman" size 10
+   DEFINE FONT "ft12" name "times new roman" size 12 //bold=negrita
+   DEFINE FONT "ft14" name "times new roman" size 14
+   DEFINE FONT "ft18" name "times new roman" size 18
 
    define pen "p0" style PS_SOLID width 1 color 0x000000
    define pen "p1" style PS_DOT width 1 color 0xFF0000

@@ -74,8 +74,8 @@ FUNCTION _BeginTab( ControlName , ParentFormName , row , col , w , h , value , f
    ENDIF
 
    IF _HMG_FrameLevel > 0
-      col  := col + _HMG_ActiveFrameCol [_HMG_FrameLevel]
-      row  := row + _HMG_ActiveFrameRow [_HMG_FrameLevel]
+      COL  := col + _HMG_ActiveFrameCol [_HMG_FrameLevel]
+      ROW  := row + _HMG_ActiveFrameRow [_HMG_FrameLevel]
       ParentFormName := _HMG_ActiveFrameParentFormName [_HMG_FrameLevel]
    ENDIF
    lDialogInMemory := _HMG_DialogInMemory

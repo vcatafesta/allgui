@@ -357,7 +357,7 @@ FUNCTION InitDialogGrid( ParentName, ControlHandle, k )
    ownerdata    := _HMG_aControlMiscData1 [k,5]
    itemcount    := _HMG_aControlMiscData1 [k,6]
    nogrid       := _HMG_aControlMiscData1 [k,7]
-   backcolor    := _HMG_aControlMiscData1 [k,8]
+   BACKCOLOR    := _HMG_aControlMiscData1 [k,8]
    fontcolor    := _HMG_aControlMiscData1 [k,9]
    multiselect  := _HMG_aControlMiscData1 [k,10]
    lcheckboxes  := _HMG_aControlMiscData1 [k,18]
@@ -395,7 +395,7 @@ FUNCTION InitDialogGrid( ParentName, ControlHandle, k )
 
    ELSE
 
-      row := iif( ISARRAY ( value ), value [1], value )
+      ROW := iif( ISARRAY ( value ), value [1], value )
       IF row <> 0
          _SetValue ( , , Value , k )
       ENDIF
@@ -508,7 +508,7 @@ FUNCTION _EditItem ( GridHandle )
    GCol   := actpos [1]
    GWidth := actpos [3] - actpos [1]
 
-   Col := GCol + ( ( GWidth - 260 ) / 2 )
+   COL := GCol + ( ( GWidth - 260 ) / 2 )
 
    DEFINE WINDOW _EditItem;
          AT GRow, Col;

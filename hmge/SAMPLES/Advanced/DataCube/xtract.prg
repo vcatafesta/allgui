@@ -25,10 +25,10 @@ FUNCTION Main
    aData := initdata()
    DEFINE WINDOW s at 0,0 width 1024 height 768 title "Xtract Sample" main icon "cube"
       DEFINE GRID data
-         row 10
-         col 10
-         width 1000
-         height 600
+         ROW 10
+         COL 10
+         WIDTH 1000
+         HEIGHT 600
          items aData
          headers {"REGION","PRODUCT","SALESMAN","QUANTITY","DISCOUNT"}
          widths {150,150,150,150,150}
@@ -36,30 +36,30 @@ FUNCTION Main
          COLUMNCONTROLS { {'TEXTBOX','CHARACTER'} , {'TEXTBOX','CHARACTER'} ,{'TEXTBOX','CHARACTER'},{'TEXTBOX','NUMERIC','999999'}  , {'TEXTBOX','NUMERIC','99'}}
       END GRID
       DEFINE BUTTON xtract
-         row 620
-         col 10
-         width 80
+         ROW 620
+         COL 10
+         WIDTH 80
          caption "Xtract"
          action dataxtract("s","data")
       END BUTTON
       DEFINE BUTTON csvexport
-         row 620
-         col 110
-         width 80
+         ROW 620
+         COL 110
+         WIDTH 80
          caption "Xport2CSV"
          action grid2csv("s","data",.t.)
       END BUTTON
       DEFINE BUTTON import
-         row 620
-         col 210
-         width 80
+         ROW 620
+         COL 210
+         WIDTH 80
          caption "DBF Import"
          action importfromdbf()
       END BUTTON
       DEFINE BUTTON close
-         row 620
-         col 310
-         width 80
+         ROW 620
+         COL 310
+         WIDTH 80
          caption "Close"
          action s.release()
       END BUTTON
@@ -142,19 +142,19 @@ FUNCTION dataxtract(cWindow,cGrid)
       END toolbar
 
       DEFINE LABEL available
-         row 45
-         col 10
-         width 200
+         ROW 45
+         COL 10
+         WIDTH 200
          fontsize 14
          fontbold .t.
          value "Xtract Cube Construction"
       END LABEL
 
       DEFINE GRID cols
-         row 75
-         col 10
-         width 300
-         height 150
+         ROW 75
+         COL 10
+         WIDTH 300
+         HEIGHT 150
          widths {110,80,80}
          headers {"Field Name","Placement","Operation"}
          cellnavigation .t.
@@ -165,53 +165,53 @@ FUNCTION dataxtract(cWindow,cGrid)
          on change updateoptions()
       END GRID
       DEFINE BUTTON up
-         row 115
-         col 315
-         width 32
-         height 36
-         picture "up"
+         ROW 115
+         COL 315
+         WIDTH 32
+         HEIGHT 36
+         PICTURE "up"
          action fieldup()
       END BUTTON
       DEFINE BUTTON down
-         row 157
-         col 315
-         width 32
-         height 36
-         picture "down"
+         ROW 157
+         COL 315
+         WIDTH 32
+         HEIGHT 36
+         PICTURE "down"
          action fielddown()
       END BUTTON
 
       DEFINE LABEL skeleton
-         row 45
-         col 350
-         width 200
+         ROW 45
+         COL 350
+         WIDTH 200
          fontsize 14
          fontbold .t.
          value "Data Cube Skeleton"
       END LABEL
       DEFINE GRID options
-         row 75
-         col 350
-         height 150
-         width 430
+         ROW 75
+         COL 350
+         HEIGHT 150
+         WIDTH 430
          showheaders .f.
          widths {120}
          cellnavigation .t.
          on change updateoptions()
       END GRID
       DEFINE LABEL filterlabel
-         row 225
-         col 10
-         width 150
+         ROW 225
+         COL 10
+         WIDTH 150
          fontbold .t.
          fontsize 14
          value "Filters"
       END LABEL
       DEFINE GRID filters
-         row 250
-         col 10
-         width 770
-         height 60
+         ROW 250
+         COL 10
+         WIDTH 770
+         HEIGHT 60
          headers aAvailCols
          widths aWidths
          cellnavigation .t.
@@ -221,9 +221,9 @@ FUNCTION dataxtract(cWindow,cGrid)
       END GRID
 
       DEFINE LABEL datacube
-         row 310
-         col 10
-         width 150
+         ROW 310
+         COL 10
+         WIDTH 150
          fontbold .t.
          fontsize 14
          value "Data Cube"
@@ -412,10 +412,10 @@ FUNCTION updateoptions
 
    DEFINE GRID options
       parent xtract
-      row 75
-      col 350
-      height 150
-      width 430
+      ROW 75
+      COL 350
+      HEIGHT 150
+      WIDTH 430
       showheaders .f.
       widths aWidths
       dynamicbackcolor aBackColors
@@ -992,10 +992,10 @@ FUNCTION createreport(lAutoCalc)
 
       DEFINE GRID data
          parent xtract
-         row 335
-         col 10
-         width 770
-         height 250
+         ROW 335
+         COL 10
+         WIDTH 770
+         HEIGHT 250
          widths aWidths
          headers aHeaders
          justify aJustify
@@ -1103,10 +1103,10 @@ FUNCTION importfromdbf
       ENDIF
       DEFINE GRID data
          parent s
-         row 10
-         col 10
-         width 1000
-         height 600
+         ROW 10
+         COL 10
+         WIDTH 1000
+         HEIGHT 600
          items aData
          headers aFieldNames
          widths aWidths

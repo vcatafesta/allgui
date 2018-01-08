@@ -1,68 +1,55 @@
 /*
- * $Id: h_crypt.prg $
- */
+* $Id: h_crypt.prg $
+*/
 /*
- * ooHG source code:
- * XOR based crypto functions
- *
- * Based upon
- * Crypto Library for MiniGUI by
- * Grigory Filatov <gfilatov@inbox.ru>
- *
- * Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
- * https://oohg.github.io/
- *
- * Portions of this project are based upon Harbour MiniGUI library.
- * Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
- *
- * Portions of this project are based upon Harbour GUI framework for Win32.
- * Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
- * Copyright 2001 Antonio Linares <alinares@fivetech.com>
- *
- * Portions of this project are based upon Harbour Project.
- * Copyright 1999-2017, https://harbour.github.io/
- */
+* ooHG source code:
+* XOR based crypto functions
+* Based upon
+* Crypto Library for MiniGUI by
+* Grigory Filatov <gfilatov@inbox.ru>
+* Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
+* https://oohg.github.io/
+* Portions of this project are based upon Harbour MiniGUI library.
+* Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
+* Portions of this project are based upon Harbour GUI framework for Win32.
+* Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
+* Copyright 2001 Antonio Linares <alinares@fivetech.com>
+* Portions of this project are based upon Harbour Project.
+* Copyright 1999-2017, https://harbour.github.io/
+*/
 /*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file LICENSE.txt. If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
- *
- * As a special exception, the ooHG Project gives permission for
- * additional uses of the text contained in its release of ooHG.
- *
- * The exception is that, if you link the ooHG libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the ooHG library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the ooHG
- * Project under the name ooHG. If you copy code from other
- * ooHG Project or Free Software Foundation releases into a copy of
- * ooHG, as the General Public License permits, the exception does
- * not apply to the code that you add in this way. To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for ooHG, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- */
-
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file LICENSE.txt. If not, write to
+* the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
+* As a special exception, the ooHG Project gives permission for
+* additional uses of the text contained in its release of ooHG.
+* The exception is that, if you link the ooHG libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the ooHG library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the ooHG
+* Project under the name ooHG. If you copy code from other
+* ooHG Project or Free Software Foundation releases into a copy of
+* ooHG, as the General Public License permits, the exception does
+* not apply to the code that you add in this way. To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for ooHG, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #define MSGALERT( c ) MsgEXCLAMATION( c, "Attention" )
 #define MSGSTOP( c ) MsgStop( c, "Stop!" )
@@ -347,7 +334,6 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
       MSGSTOP("No such file")
    ENDIF
 
-
    RETURN NIL
 
 FUNCTION DB_UNENCRYPT(cFile, cPass)
@@ -468,17 +454,17 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
    RETURN NIL
 
-Static Function cFileName( cMask )
+STATIC FUNCTION cFileName( cMask )
 
-   Local cName := AllTrim( cMask )
-   Local n     := At( ".", cName )
+   LOCAL cName := AllTrim( cMask )
+   LOCAL n     := At( ".", cName )
 
-   Return AllTrim( If( n > 0, Left( cName, n - 1 ), cName ) )
+   RETURN AllTrim( If( n > 0, Left( cName, n - 1 ), cName ) )
 
 FUNCTION DB_CODE(cData, cKey, aFields, cPass, cFor, cWhile)
 
-   local cTmpFile := "__temp__.dbf", nRecno := recno(), cVal, cBuf
-   Local aString[Len(aFields)] , nFields , cSeek , i , cAlias , cTmpAlias // RL
+   LOCAL cTmpFile := "__temp__.dbf", nRecno := recno(), cVal, cBuf
+   LOCAL aString[Len(aFields)] , nFields , cSeek , i , cAlias , cTmpAlias // RL
 
    cData:=If(cData=nil,Alias()+".DBF",cData)
    cData:=If(at(".",cData)=0,cData+".DBF",cData)
@@ -490,77 +476,76 @@ FUNCTION DB_CODE(cData, cKey, aFields, cPass, cFor, cWhile)
       cPass := "<PRIMARY>"
    ENDIF
 
-   Copy Stru to &(cTmpFile)
+   COPY Stru to &(cTmpFile)
    cAlias:=Alias()
    nFields:=FCount()
 
-   Use (cTmpFile) New Exclusive
+   USE (cTmpFile) New Exclusive
    cTmpAlias:=Alias()
 
-   Select &cAlias
-   Do while .not. eof() .and. &(cWhile)
-      If !&(cFor)                         // Select records that meet for condition
-         Skip
-         Loop
-      Endif
+   SELECT &cAlias
+   DO WHILE .not. eof() .and. &(cWhile)
+      IF !&(cFor)                         // Select records that meet for condition
+         SKIP
+         LOOP
+      ENDIF
 
-      Select &cTmpAlias
+      SELECT &cTmpAlias
       dbAppend()                          // Create record at target file
 
-      For i=1 to nFields
-          FieldPut(i, &cAlias->(FieldGet(i)))
-      Next
+      FOR i=1 to nFields
+         FieldPut(i, &cAlias->(FieldGet(i)))
+      NEXT
 
-      Select &cAlias
+      SELECT &cAlias
       afill(aString, '')
 
       cBuf:=&cSeek
       cVal:=cBuf
-      Do while cBuf=cVal .and. !Eof()    // Evaluate records with same key
-         If !&(cFor)                     // Evaluate For condition within
-            Skip
-            Loop
-         Endif
+      DO WHILE cBuf=cVal .and. !Eof()    // Evaluate records with same key
+         IF !&(cFor)                     // Evaluate For condition within
+            SKIP
+            LOOP
+         ENDIF
 
-         For i=1 to Len(aString)         // Crypt values
+         FOR i=1 to Len(aString)         // Crypt values
             aString[i]:=_ENCRYPT(FieldGet(FieldPos(aFields[i])), cPass)
-         Next
+         NEXT
 
-         skip                            // Evaluate condition in next record
+         SKIP                            // Evaluate condition in next record
          cVal:=&cSeek
-      Enddo
+      ENDDO
 
-      Select &cTmpAlias
-      For i=1 to Len(aString)            // Place Crypts in target file
+      SELECT &cTmpAlias
+      FOR i=1 to Len(aString)            // Place Crypts in target file
          FieldPut(FieldPos(aFields[i]), aString[i])
-      Next
+      NEXT
 
-      Select &cAlias
-   Enddo
+      SELECT &cAlias
+   ENDDO
 
-   Select &cTmpAlias
-   go top
-   Do while .not. eof()
+   SELECT &cTmpAlias
+   GO TOP
+   DO WHILE .not. eof()
       cVal:=&cSeek
-      Select &cAlias
-      seek cVal
+      SELECT &cAlias
+      SEEK cVal
       rlock()
-      For i=1 to nFields
+      FOR i=1 to nFields
          FieldPut(i, &cTmpAlias->(FieldGet(i)))
-      Next
+      NEXT
       dbunlock()
-      Select &cTmpAlias
-      skip
-   Enddo
-   use                                   // Close target file
+      SELECT &cTmpAlias
+      SKIP
+   ENDDO
+   USE                                   // Close target file
    ferase(cTmpFile)
-   Select &cAlias                        // Select prior file
+   SELECT &cAlias                        // Select prior file
    go nRecno
 
    RETURN NIL
 
-
-EXTERN CHARXOR
+   EXTERN CHARXOR
 
 #pragma BEGINDUMP
 

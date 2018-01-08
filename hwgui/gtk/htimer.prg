@@ -69,12 +69,12 @@ FUNCTION hwg_TimerProc( idTimer )
 
    RETURN NIL
 
-   EXIT PROCEDURE CleanTimers
-   LOCAL oTimer, i
+EXIT PROCEDURE CleanTimers
+LOCAL oTimer, i
 
-   FOR i := 1 TO Len( HTimer():aTimers )
-      oTimer := HTimer():aTimers[i]
-      hwg_KillTimer( oTimer:tag )
-   NEXT
+FOR i := 1 TO Len( HTimer():aTimers )
+   oTimer := HTimer():aTimers[i]
+   hwg_KillTimer( oTimer:tag )
+NEXT
 
-   RETURN
+RETURN

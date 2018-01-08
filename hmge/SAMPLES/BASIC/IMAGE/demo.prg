@@ -10,18 +10,18 @@ FUNCTION Main
    DEFINE WINDOW win_1 ;
          main ;
          clientarea 300, 300 ;
-         title "JPEG Image From Resource" ;
-         backcolor TEAL nosize
+         TITLE "JPEG Image From Resource" ;
+         BACKCOLOR TEAL nosize
 
       ON KEY ESCAPE ACTION win_1.release()
 
       DEFINE IMAGE image_1
-         row 50
-         col 75
-         width 150
-         height 200
-         picture 'OLGA'
-         stretch .T.
+         ROW 50
+         COL 75
+         WIDTH 150
+         HEIGHT 200
+         PICTURE 'OLGA'
+         STRETCH .T.
       END IMAGE
 
    END WINDOW

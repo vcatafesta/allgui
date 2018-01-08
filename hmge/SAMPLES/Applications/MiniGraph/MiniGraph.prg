@@ -321,7 +321,7 @@ FUNCTION CreateGra()
 
    DEFINE WINDOW WinGra ;
          At 0, 0 Width 800 Height 530 ;
-         Title cNameApp ;
+         TITLE cNameApp ;
          MODAL ;
          NOSIZE NOCAPTION ;
          BACKCOLOR aClr[1] ;

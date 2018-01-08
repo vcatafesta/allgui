@@ -270,11 +270,11 @@ FUNCTION hwg_WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrB
    aArea := hwg_GetDeviceArea( hDC )
    aRect := hwg_Getwindowrect( hwg_Getactivewindow() )
    hwg_Releasedc( hwg_Getactivewindow(), hDC )
-   height := ( aMetr[ 1 ] + 1 ) * aLen + 4 + addY + 8
+   HEIGHT := ( aMetr[ 1 ] + 1 ) * aLen + 4 + addY + 8
    IF height > aArea[ 2 ] - aRect[ 2 ] - nTop - 60
-      height := aArea[ 2 ] - aRect[ 2 ] - nTop - 60
+      HEIGHT := aArea[ 2 ] - aRect[ 2 ] - nTop - 60
    ENDIF
-   width := Max( aMetr[ 2 ] * 2 * nLen + addX, minWidth )
+   WIDTH := Max( aMetr[ 2 ] * 2 * nLen + addX, minWidth )
 
    INIT DIALOG oDlg TITLE cTitle ;
       At nLeft, nTop           ;
@@ -340,8 +340,8 @@ FUNCTION hwg_ShowProgress( nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, h
       iCou := 0
       x1 := IIf( x1 == Nil, 0, x1 )
       y1 := IIf( x1 == Nil, 0, y1 )
-      width := IIf( width == Nil, 220, width )
-      height := IIf( height == Nil, 55, height )
+      WIDTH := IIf( width == Nil, 220, width )
+      HEIGHT := IIf( height == Nil, 55, height )
       IF x1 == 0
          nStyle += DS_CENTER
       ENDIF

@@ -1,55 +1,53 @@
 /*
- * $Id: TStreamZip.prg $
- */
+* $Id: TStreamZip.prg $
+*/
 /*
- * Data stream from (((compress/)))uncompress management class.
- * It uses zlib library.
- *
- * TStreamUnZip. Reads compressed data and returns uncompressed.
- *
- * Posted by Vicente Guerra on 2011/07/17.
- */
+* Data stream from (((compress/)))uncompress management class.
+* It uses zlib library.
+* TStreamUnZip. Reads compressed data and returns uncompressed.
+* Posted by Vicente Guerra on 2011/07/17.
+*/
 /* zlib.h -- interface of the 'zlib' general purpose compression library
-  version 1.2.3, July 18th, 2005
+version 1.2.3, July 18th, 2005
 
-  Copyright (C) 1995-2005 Jean-loup Gailly and Mark Adler
+Copyright (C) 1995-2005 Jean-loup Gailly and Mark Adler
 
-  This software is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this software.
+This software is provided 'as-is', without any express or implied
+warranty.  In no event will the authors be held liable for any damages
+arising from the use of this software.
 
-  Permission is granted to anyone to use this software for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
 
-  1. The origin of this software must not be misrepresented; you must not
-     claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original software.
-  3. This notice may not be removed or altered from any source distribution.
+1. The origin of this software must not be misrepresented; you must not
+claim that you wrote the original software. If you use this software
+in a product, an acknowledgment in the product documentation would be
+appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be
+misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
 
-  Jean-loup Gailly jloup@gzip.org
-  Mark Adler madler@alumni.caltech.edu
+Jean-loup Gailly jloup@gzip.org
+Mark Adler madler@alumni.caltech.edu
 */
 
 #include "hbclass.ch"
 
 CLASS TStreamUnZip FROM TStreamBase
+
    DATA oStream    INIT nil    // Data source
    DATA p_zStream  INIT nil    // Stream-info pointer
 
    METHOD New           // New stream
    METHOD IsConnected   // Check if stream is connected
-   //
    METHOD RealFill      // Real filler
    METHOD Disconnect    // Disconnect
-   //
    // METHOD Write         INLINE 0   // No WRITE method.
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oStream ) CLASS TStreamUnZip
+
    ::Close()
    IF HB_IsObject( oStream )
       ::p_zStream := TStreamUnZip_InflateInit()
@@ -58,13 +56,17 @@ METHOD New( oStream ) CLASS TStreamUnZip
          ::ReSize( ::nMax )
       ENDIF
    ENDIF
-RETURN Self
+
+   RETURN SELF
 
 METHOD IsConnected() CLASS TStreamUnZip
-RETURN ( TStreamUnZip_IsPendingBuffer( ::p_zStream ) .OR. ( HB_IsObject( ::oStream ) .AND. ::oStream:IsActive() ) )
+
+   RETURN ( TStreamUnZip_IsPendingBuffer( ::p_zStream ) .OR. ( HB_IsObject( ::oStream ) .AND. ::oStream:IsActive() ) )
 
 METHOD RealFill( pBuffer, nPos, nCount ) CLASS TStreamUnZip
-LOCAL nBytes, nBlock
+
+   LOCAL nBytes, nBlock
+
    nBytes := 0
    DO WHILE nCount > 0
 
@@ -116,9 +118,11 @@ LOCAL nBytes, nBlock
          ENDIF
       ENDIF
    ENDDO
-RETURN nBytes // StreamFile_Read( pBuffer, ::nHdl, nPos, nCount )
+
+   RETURN nBytes // StreamFile_Read( pBuffer, ::nHdl, nPos, nCount )
 
 METHOD Disconnect() CLASS TStreamUnZip
+
    IF HB_IsObject( ::oStream )
       ::oStream:Close()
       ::oStream := NIL
@@ -127,7 +131,8 @@ METHOD Disconnect() CLASS TStreamUnZip
       TStreamUnZip_InflateEnd( ::p_zStream )
       ::p_zStream := NIL
    ENDIF
-RETURN ::Super:Disconnect()
+
+   RETURN ::Super:Disconnect()
 
 #pragma BEGINDUMP
 
@@ -343,18 +348,23 @@ HB_FUNC( TSTREAMUNZIP_INFLATE )   // ( p_zStream )
 #pragma ENDDUMP
 
 FUNCTION Zip_IsHeader( oStream )
-LOCAL lRet := .F.
-LOCAL cBuffer, nLen
+
+   LOCAL lRet := .F.
+   LOCAL cBuffer, nLen
+
    IF oStream:Left( 4 ) == "PK" + CHR( 3 ) + CHR( 4 ) .AND. oStream:Len() >= 30
       cBuffer := oStream:Left( 30 )
       nLen := ASC( cBuffer[ 27 ] ) + ( ASC( cBuffer[ 28 ] ) * 256 ) + ASC( cBuffer[ 29 ] ) + ( ASC( cBuffer[ 30 ] ) * 256 )
       lRet := ( oStream:Len() >= 30 + nLen )
    ENDIF
-RETURN lRet
+
+   RETURN lRet
 
 FUNCTION Zip_GetHeader( oStream )
-LOCAL hHeader := NIL
-LOCAL cBuffer, nAux
+
+   LOCAL hHeader := NIL
+   LOCAL cBuffer, nAux
+
    IF Zip_IsHeader( oStream )
       cBuffer := oStream:Read( 30 )
       hHeader := { => }
@@ -364,14 +374,12 @@ LOCAL cBuffer, nAux
       ENDIF
       hHeader:Extra      := oStream:Read( ASC( cBuffer[ 29 ] ) + ( ASC( cBuffer[ 30 ] ) * 256 ) )
       hHeader:Method     := ASC( cBuffer[ 9 ] ) + ( ASC( cBuffer[ 10 ] ) * 256 )
-      //
       nAux := ASC( cBuffer[ 11 ] ) + ( ASC( cBuffer[ 12 ] ) * 256 )
       hHeader:Time       := STRZERO( INT( nAux / 2048 ), 2 ) + ":" + STRZERO( INT( nAux / 32 ) % 64, 2 ) + ":" + STRZERO( ( nAux % 32 ) * 2, 2 )
       nAux := ASC( cBuffer[ 13 ] ) + ( ASC( cBuffer[ 14 ] ) * 256 )
       hHeader:Date       := STOD( STRZERO( INT( nAux / 512 ) + 1980, 4 ) + STRZERO( INT( nAux / 32 ) % 16, 2 ) + STRZERO( nAux % 32, 2 ) )
       hHeader:Size       := ASC( cBuffer[ 23 ] ) + ( ASC( cBuffer[ 24 ] ) * 256 ) + ( ASC( cBuffer[ 25 ] ) * 65536 ) + ( ASC( cBuffer[ 26 ] ) * 16777216 )
       hHeader:CompressedSize := ASC( cBuffer[ 19 ] ) + ( ASC( cBuffer[ 20 ] ) * 256 ) + ( ASC( cBuffer[ 21 ] ) * 65536 ) + ( ASC( cBuffer[ 22 ] ) * 16777216 )
-      //
       nAux := ASC( cBuffer[ 7 ] ) + ( ASC( cBuffer[ 8 ] ) * 256 )
 #ifndef __XHARBOUR__
       hHeader:Encrypted  := ( hb_bitAnd( nAux, 0x0001 ) != 0 )
@@ -386,21 +394,27 @@ LOCAL cBuffer, nAux
       hHeader:VersionLo  := ASC( cBuffer[ 6 ] )
       hHeader:CRC32      := ASC( cBuffer[ 15 ] ) + ( ASC( cBuffer[ 16 ] ) * 256 ) + ( ASC( cBuffer[ 17 ] ) * 65536 ) + ( ASC( cBuffer[ 18 ] ) * 16777216 )
    ENDIF
-RETURN hHeader
+
+   RETURN hHeader
 
 FUNCTION Zip_IsCentralHeader( oStream )
-LOCAL lRet := .F.
-LOCAL cBuffer, nLen
+
+   LOCAL lRet := .F.
+   LOCAL cBuffer, nLen
+
    IF oStream:Left( 4 ) == "PK" + CHR( 1 ) + CHR( 2 ) .AND. oStream:Len() >= 46
       cBuffer := oStream:Left( 30 )
       nLen := ASC( cBuffer[ 29 ] ) + ( ASC( cBuffer[ 30 ] ) * 256 ) + ASC( cBuffer[ 31 ] ) + ( ASC( cBuffer[ 32 ] ) * 256 ) + ASC( cBuffer[ 33 ] ) + ( ASC( cBuffer[ 34 ] ) * 256 )
       lRet := ( oStream:Len() >= 46 + nLen )
    ENDIF
-RETURN lRet
+
+   RETURN lRet
 
 FUNCTION Zip_GetCentralHeader( oStream )
-LOCAL hHeader := NIL
-LOCAL cBuffer, nAux
+
+   LOCAL hHeader := NIL
+   LOCAL cBuffer, nAux
+
    IF Zip_IsCentralHeader( oStream )
       cBuffer := oStream:Read( 46 )
       hHeader := { => }
@@ -410,14 +424,12 @@ LOCAL cBuffer, nAux
       ENDIF
       hHeader:Extra      := oStream:Read( ASC( cBuffer[ 31 ] ) + ( ASC( cBuffer[ 32 ] ) * 256 ) )
       hHeader:Method     := ASC( cBuffer[ 11 ] ) + ( ASC( cBuffer[ 12 ] ) * 256 )
-      //
       nAux := ASC( cBuffer[ 13 ] ) + ( ASC( cBuffer[ 14 ] ) * 256 )
       hHeader:Time       := STRZERO( INT( nAux / 2048 ), 2 ) + ":" + STRZERO( INT( nAux / 32 ) % 64, 2 ) + ":" + STRZERO( ( nAux % 32 ) * 2, 2 )
       nAux := ASC( cBuffer[ 15 ] ) + ( ASC( cBuffer[ 16 ] ) * 256 )
       hHeader:Date       := STOD( STRZERO( INT( nAux / 512 ) + 1980, 4 ) + STRZERO( INT( nAux / 32 ) % 16, 2 ) + STRZERO( nAux % 32, 2 ) )
       hHeader:Size       := ASC( cBuffer[ 25 ] ) + ( ASC( cBuffer[ 26 ] ) * 256 ) + ( ASC( cBuffer[ 27 ] ) * 65536 ) + ( ASC( cBuffer[ 28 ] ) * 16777216 )
       hHeader:CompressedSize := ASC( cBuffer[ 21 ] ) + ( ASC( cBuffer[ 22 ] ) * 256 ) + ( ASC( cBuffer[ 23 ] ) * 65536 ) + ( ASC( cBuffer[ 24 ] ) * 16777216 )
-      //
       nAux := ASC( cBuffer[ 9 ] ) + ( ASC( cBuffer[ 10 ] ) * 256 )
 #ifndef __XHARBOUR__
       hHeader:Encrypted  := ( hb_bitAnd( nAux, 0x0001 ) != 0 )
@@ -431,15 +443,16 @@ LOCAL cBuffer, nAux
       hHeader:VersionHi  := ASC( cBuffer[ 7 ] )
       hHeader:VersionLo  := ASC( cBuffer[ 8 ] )
       hHeader:CRC32      := ASC( cBuffer[ 17 ] ) + ( ASC( cBuffer[ 18 ] ) * 256 ) + ( ASC( cBuffer[ 19 ] ) * 65536 ) + ( ASC( cBuffer[ 20 ] ) * 16777216 )
-/*
-central file header signature   01: 4 bytes  (0x02014b50)
-version made by                 05: 2 bytes
-disk number start               35: 2 bytes
-internal file attributes        37: 2 bytes
-external file attributes        39: 4 bytes
-relative offset of local header 43: 4 bytes
-*/
+      /*
+      central file header signature   01: 4 bytes  (0x02014b50)
+      version made by                 05: 2 bytes
+      disk number start               35: 2 bytes
+      internal file attributes        37: 2 bytes
+      external file attributes        39: 4 bytes
+      relative offset of local header 43: 4 bytes
+      */
       hHeader:Comment    := oStream:Read( ASC( cBuffer[ 33 ] ) + ( ASC( cBuffer[ 34 ] ) * 256 ) )
       hHeader:OffsetHeader := ASC( cBuffer[ 43 ] ) + ( ASC( cBuffer[ 44 ] ) * 256 ) + ( ASC( cBuffer[ 45 ] ) * 65536 ) + ( ASC( cBuffer[ 46 ] ) * 16777216 )
    ENDIF
-RETURN hHeader
+
+   RETURN hHeader

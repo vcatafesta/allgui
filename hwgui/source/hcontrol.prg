@@ -919,5 +919,5 @@ METHOD Paint( lpdis ) CLASS HLine
 INIT PROCEDURE starttheme()
    hwg_Initthemelib()
 
-   EXIT PROCEDURE endtheme()
-   hwg_Endthemelib()
+EXIT PROCEDURE endtheme()
+hwg_Endthemelib()

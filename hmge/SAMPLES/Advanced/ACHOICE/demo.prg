@@ -21,48 +21,48 @@ FUNCTION Main
 
    DEFINE WINDOW sample at 0,0 width 640 height 480 title "HMG Achoice Demo" main
       DEFINE LABEL label1
-         row 10
-         col 20
-         width 100
+         ROW 10
+         COL 20
+         WIDTH 100
          value "Name"
       END LABEL
       DEFINE TEXTBOX textbox1
-         row 10
-         col 110
-         width 180
+         ROW 10
+         COL 110
+         WIDTH 180
          on enter sample.textbox2.setfocus
       END TEXTBOX
       DEFINE LABEL label2
-         row 40
-         col 20
-         width 100
+         ROW 40
+         COL 20
+         WIDTH 100
          value "Country"
       END LABEL
       define btntextbox textbox2
-      row 40
-      col 110
-      width 180
+      ROW 40
+      COL 110
+      WIDTH 180
       action iif(empty(doachoice(aCountries)),nil,sample.textbox3.setfocus)
       ongotfocus sample.label4.visible:=.t.
       onlostfocus sample.label4.visible:=.f.
       on enter iif(empty(sample.textbox2.value),doachoice(aCountries),sample.textbox3.setfocus)
    END btntextbox
    DEFINE LABEL label3
-      row 70
-      col 20
-      width 100
+      ROW 70
+      COL 20
+      WIDTH 100
       value "City"
    END LABEL
    DEFINE TEXTBOX textbox3
-      row 70
-      col 110
-      width 180
+      ROW 70
+      COL 110
+      WIDTH 180
       on enter sample.textbox1.setfocus
    END TEXTBOX
    DEFINE LABEL label4
-      row 100
-      col 110
-      width 140
+      ROW 100
+      COL 110
+      WIDTH 140
       value "F2 - select country"
       fontbold .t.
       visible .f.
@@ -126,18 +126,18 @@ FUNCTION HMG_Achoice(nTop,nLeft,nBottom,nRight,aList,nDefault,lAnyWhere)
          NOSIZE
 
       DEFINE TEXTBOX _edit
-         row 5
-         col 5
-         width nWidth - 2*GetBorderWidth()
+         ROW 5
+         COL 5
+         WIDTH nWidth - 2*GetBorderWidth()
          on change     _aChoiceTextChanged( lAnyWhere )
          on enter      _aChoiceSelected()
          on gotfocus   _achoicelistchanged()
       END TEXTBOX
       DEFINE LISTBOX _list
-         row 30
-         col 5
-         width nWidth - 2*GetBorderWidth()
-         height nHeight - 50
+         ROW 30
+         COL 5
+         WIDTH nWidth - 2*GetBorderWidth()
+         HEIGHT nHeight - 50
          items aList
          on change _achoicelistchanged()
          on dblclick _aChoiceSelected()

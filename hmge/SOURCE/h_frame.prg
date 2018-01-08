@@ -192,8 +192,8 @@ FUNCTION _BeginFrame( name , parent , row , col , w , h , caption , fontname , f
    ENDIF
 
    IF _HMG_FrameLevel > 0 .AND. !_HMG_ParentWindowActive
-      col    := col + _HMG_ActiveFrameCol [_HMG_FrameLevel]
-      row    := row + _HMG_ActiveFrameRow [_HMG_FrameLevel]
+      COL    := col + _HMG_ActiveFrameCol [_HMG_FrameLevel]
+      ROW    := row + _HMG_ActiveFrameRow [_HMG_FrameLevel]
       Parent := _HMG_ActiveFrameParentFormName [_HMG_FrameLevel]
    ENDIF
 

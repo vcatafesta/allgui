@@ -216,10 +216,10 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
       DEFINE TAB tab1 at 10,10 width 285 height 335
          DEFINE PAGE msgarr[5]
             DEFINE GRID columns
-               row 30
-               col 10
-               width 250
-               height 240
+               ROW 30
+               COL 10
+               WIDTH 250
+               HEIGHT 240
                widths {0,130,70}
                justify {0,0,1}
                headers {"",msgarr[6],msgarr[7]}
@@ -229,170 +229,170 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
                onchange editcoldetails()
             END GRID
             DEFINE LABEL sizelabel1
-               Row 280
-               Col 10
+               ROW 280
+               COL 10
                value msgarr[50]
-               width 40
+               WIDTH 40
             END LABEL
             DEFINE TEXTBOX size
-               Row 280
-               Col 50
-               width 60
+               ROW 280
+               COL 50
+               WIDTH 60
                value 0.0
                numeric .t.
                rightalign .t.
                inputmask "999.99"
             END TEXTBOX
             DEFINE BUTTON done
-               Row 280
-               Col 120
-               width 50
+               ROW 280
+               COL 120
+               WIDTH 50
                caption msgarr[56]
                action setprintgridcoldetails()
             END BUTTON
          END PAGE
          DEFINE PAGE msgarr[16]
             DEFINE LABEL header1label
-               Row 35
-               Col 10
-               width 100
+               ROW 35
+               COL 10
+               WIDTH 100
                value msgarr[12]
             END LABEL
             DEFINE TEXTBOX header1
-               Row 30
-               Col 110
-               width 165
+               ROW 30
+               COL 110
+               WIDTH 165
                Value header1
                on change printgridpreview()
             END TEXTBOX
             DEFINE LABEL header2label
-               Row 75
-               Col 10
-               width 100
+               ROW 75
+               COL 10
+               WIDTH 100
                value msgarr[13]
             END LABEL
             DEFINE TEXTBOX header2
-               Row 70
-               Col 110
+               ROW 70
+               COL 110
                Value header2
                on change printgridpreview()
-               width 165
+               WIDTH 165
             END TEXTBOX
             DEFINE LABEL header3label
-               Row 105
-               Col 10
-               width 100
+               ROW 105
+               COL 10
+               WIDTH 100
                value msgarr[14]
             END LABEL
             DEFINE TEXTBOX Header3
-               Row 100
-               Col 110
+               ROW 100
+               COL 110
                Value header3
                on change printgridpreview()
-               width 165
+               WIDTH 165
             END TEXTBOX
             DEFINE LABEL footer1label
-               Row 135
-               Col 10
-               width 100
+               ROW 135
+               COL 10
+               WIDTH 100
                value msgarr[15]
             END LABEL
             DEFINE TEXTBOX Footer1
-               Row 130
-               Col 110
-               width 165
+               ROW 130
+               COL 110
+               WIDTH 165
                on change printgridpreview()
             END TEXTBOX
             DEFINE LABEL selectfontsizelabel
-               row 165
-               col 10
+               ROW 165
+               COL 10
                value msgarr[17]
-               width 100
+               WIDTH 100
             END LABEL
             DEFINE COMBOBOX selectfontsize
-               row 160
-               col 110
-               width 50
+               ROW 160
+               COL 110
+               WIDTH 50
                items fontsizesstr
                on change fontsizechanged()
                value fontnumber
             END COMBOBOX
             DEFINE LABEL multilinelabel
-               row 195
-               col 10
+               ROW 195
+               COL 10
                value msgarr[18]
-               width 100
+               WIDTH 100
             END LABEL
             DEFINE COMBOBOX wordwrap
-               row 190
-               col 110
-               width 90
+               ROW 190
+               COL 110
+               WIDTH 90
                items {msgarr[19],msgarr[20]}
                on change printgridpreview()
                value 2
             END COMBOBOX
             DEFINE LABEL pagination
-               row 225
-               col 10
+               ROW 225
+               COL 10
                value msgarr[21]
-               width 100
+               WIDTH 100
             END LABEL
             DEFINE COMBOBOX pageno
-               row 220
-               col 110
-               width 90
+               ROW 220
+               COL 110
+               WIDTH 90
                items {msgarr[22],msgarr[23],msgarr[24]}
                on change printgridpreview()
                value 2
             END COMBOBOX
             DEFINE LABEL separatorlab
-               row 255
-               col 10
-               width 100
+               ROW 255
+               COL 10
+               WIDTH 100
                value msgarr[25]
             END LABEL
             DEFINE CHECKBOX collines
-               Row 250
-               Col 110
-               width 70
+               ROW 250
+               COL 110
+               WIDTH 70
                on change printgridpreview()
                caption msgarr[26]
                value .t.
             END CHECKBOX
             DEFINE CHECKBOX rowlines
-               Row 250
-               Col 180
-               width 50
+               ROW 250
+               COL 180
+               WIDTH 50
                on change printgridpreview()
                caption msgarr[27]
                value .t.
             END CHECKBOX
             DEFINE LABEL centerlab
-               row 280
-               col 10
-               width 100
+               ROW 280
+               COL 10
+               WIDTH 100
                value msgarr[28]
             END LABEL
             DEFINE CHECKBOX vertical
-               Row 275
-               Col 110
-               width 60
+               ROW 275
+               COL 110
+               WIDTH 60
                on change printgridpreview()
                caption msgarr[29]
                value .t.
             END CHECKBOX
             DEFINE LABEL spacelab
-               row 305
-               col 10
-               width 100
-               height 20
+               ROW 305
+               COL 10
+               WIDTH 100
+               HEIGHT 20
                value msgarr[54]
             END LABEL
             DEFINE CHECKBOX spread
-               Row 305
-               Col 110
-               width 60
-               height 20
+               ROW 305
+               COL 110
+               WIDTH 60
+               HEIGHT 20
                on change fontsizechanged()
                caption msgarr[55]
                value .t.
@@ -400,149 +400,149 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
          END PAGE
          DEFINE PAGE msgarr[30]
             DEFINE LABEL orientationlabel
-               row 30
-               col 10
+               ROW 30
+               COL 10
                Value msgarr[31]
-               width 100
+               WIDTH 100
             END LABEL
             DEFINE COMBOBOX paperorientation
-               row 30
-               col 110
-               width 90
+               ROW 30
+               COL 110
+               WIDTH 90
                items {msgarr[32],msgarr[33]}
                on change papersizechanged()
                value IIf(orientation == "P",2,1)
             END COMBOBOX
             DEFINE LABEL printerslabel
-               Row 60
-               Col 10
-               width 100
+               ROW 60
+               COL 10
+               WIDTH 100
                value msgarr[34]
             END LABEL
             DEFINE COMBOBOX printers
-               Row 60
-               Col 110
-               width 165
+               ROW 60
+               COL 110
+               WIDTH 165
                items aprinternames
                value printerno
             END COMBOBOX
             DEFINE LABEL sizelabel
-               row 90
-               col 10
-               width 100
+               ROW 90
+               COL 10
+               WIDTH 100
                value msgarr[35]
             END LABEL
             DEFINE COMBOBOX pagesizes
-               Row 90
-               Col 110
-               width 165
+               ROW 90
+               COL 110
+               WIDTH 165
                items papernames
                onchange papersizechanged()
             END COMBOBOX
             DEFINE LABEL widthlabel
-               row 120
-               col 10
+               ROW 120
+               COL 10
                value msgarr[36]
-               width 100
+               WIDTH 100
             END LABEL
             DEFINE TEXTBOX width
-               row 120
-               col 110
-               width 60
+               ROW 120
+               COL 110
+               WIDTH 60
                inputmask "999.99"
                on change printgridpreview()
                numeric .t.
                rightalign .t.
             END TEXTBOX
             DEFINE LABEL widthmm
-               row 120
-               col 170
+               ROW 120
+               COL 170
                value "mm"
-               width 25
+               WIDTH 25
             END LABEL
             DEFINE LABEL heightlabel
-               row 150
-               col 10
+               ROW 150
+               COL 10
                value msgarr[37]
-               width 100
+               WIDTH 100
             END LABEL
             DEFINE TEXTBOX height
-               row 150
-               col 110
-               width 60
+               ROW 150
+               COL 110
+               WIDTH 60
                inputmask "999.99"
                on change printgridpreview()
                numeric .t.
                rightalign .t.
             END TEXTBOX
             DEFINE LABEL heightmm
-               row 150
-               col 170
+               ROW 150
+               COL 170
                value "mm"
-               width 25
+               WIDTH 25
             END LABEL
             DEFINE FRAME margins
-               row 180
-               col 5
-               width 185
-               height 80
+               ROW 180
+               COL 5
+               WIDTH 185
+               HEIGHT 80
                caption msgarr[38]
             END FRAME
             DEFINE LABEL toplabel
-               row 200
-               col 10
-               width 35
+               ROW 200
+               COL 10
+               WIDTH 35
                value msgarr[39]
             END LABEL
             DEFINE TEXTBOX top
-               row 200
-               col 45
-               width 50
+               ROW 200
+               COL 45
+               WIDTH 50
                inputmask "99.99"
                numeric .t.
                on change printgridpreview()
                rightalign .t.
             END TEXTBOX
             DEFINE LABEL rightlabel
-               row 200
-               col 100
-               width 35
+               ROW 200
+               COL 100
+               WIDTH 35
                value msgarr[40]
             END LABEL
             DEFINE TEXTBOX right
-               row 200
-               col 135
-               width 50
+               ROW 200
+               COL 135
+               WIDTH 50
                inputmask "99.99"
                on change papersizechanged()
                numeric .t.
                rightalign .t.
             END TEXTBOX
             DEFINE LABEL leftlabel
-               row 230
-               col 10
-               width 35
+               ROW 230
+               COL 10
+               WIDTH 35
                value msgarr[41]
             END LABEL
             DEFINE TEXTBOX left
-               row 230
-               col 45
-               width 50
+               ROW 230
+               COL 45
+               WIDTH 50
                inputmask "99.99"
                on change papersizechanged()
                numeric .t.
                rightalign .t.
             END TEXTBOX
             DEFINE LABEL bottomlabel
-               row 230
-               col 100
-               width 35
+               ROW 230
+               COL 100
+               WIDTH 35
                value msgarr[42]
             END LABEL
             DEFINE TEXTBOX bottom
-               row 230
-               col 135
-               width 50
+               ROW 230
+               COL 135
+               WIDTH 50
                inputmask "99.99"
                numeric .t.
                on change printgridpreview()
@@ -551,18 +551,18 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
          END PAGE
       END TAB
       DEFINE BUTTON browseprint1
-         row 350
-         col 160
+         ROW 350
+         COL 160
          caption msgarr[43]
          action printstart()
-         width 80
+         WIDTH 80
       END BUTTON
       DEFINE BUTTON browseprintcancel
-         row 350
-         col 260
+         ROW 350
+         COL 260
          caption msgarr[44]
          action printgrid.release
-         width 80
+         WIDTH 80
       END BUTTON
       DEFINE STATUSBAR
          statusitem msgarr[45] width 200
@@ -601,7 +601,7 @@ FUNCTION printcoltally
    ENDIF
    FOR count1 := 1 to Len(columnarr)
       IF columnarr[count1,1] == 1
-         col := col + columnarr[count1,3] + 2 // 2 mm for column separation
+         COL := col + columnarr[count1,3] + 2 // 2 mm for column separation
          count2 := count2 + 1
       ENDIF
    NEXT count1
@@ -612,7 +612,7 @@ FUNCTION printcoltally
             columnarr[count1,3] := (maxcol2 - (count2 *2) - 5) * columnarr[count1,3] / totcol
          ENDIF
       NEXT count1
-      col := maxcol2 - 5
+      COL := maxcol2 - 5
    ENDIF
    curcol1 := col
    printgrid.statusbar.item(2) := msgarr[10]+" "+alltrim(str(curcol1,12,2))+" "+msgarr[11]+" "+alltrim(str(maxcol2,12,2))
@@ -752,31 +752,31 @@ FUNCTION printstart
    size1 := val(alltrim(printgrid.selectfontsize.item(printgrid.selectfontsize.value)))
 
    START PRINTDOC
-      row := printgrid.top.value
+      ROW := printgrid.top.value
       maxrow1 := printgrid.height.value - printgrid.bottom.value
       IF printgrid.vertical.value
-         col := (printgrid.width.value - curcol1)/2
+         COL := (printgrid.width.value - curcol1)/2
       ELSE
-         col := printgrid.left.value
+         COL := printgrid.left.value
       ENDIF
       lh := Int((size1/72 * 25.4)) + 1 // line height
       START PRINTPAGE
          pageno := 1
          IF printgrid.pageno.value == 2
             @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
-            row := row + lh
+            ROW := row + lh
          ENDIF
          IF Len(AllTrim(printgrid.header1.value)) > 0
             @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header1.value) font fontname size size1+2 center
-            row := row + lh + lh
+            ROW := row + lh + lh
          ENDIF
          IF Len(AllTrim(printgrid.header2.value)) > 0
             @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header2.value) font fontname size size1+2 center
-            row := row + lh + lh
+            ROW := row + lh + lh
          ENDIF
          IF Len(AllTrim(printgrid.header3.value)) > 0
             @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header3.value) font fontname size size1+2 center
-            row := row + lh + lh
+            ROW := row + lh + lh
          ENDIF
 
          firstrow := Row
@@ -802,7 +802,7 @@ FUNCTION printstart
             ENDIF
          NEXT count1
          printline(row,col,printdata,justifyarr,sizesarr,fontname,size1)
-         row := row + lh
+         ROW := row + lh
          @ Row,Col-1 print line TO Row,col+maxcol1-1 penwidth 0.25
          FOR count1 := 1 TO totrows
             linedata := getproperty(windowname,gridname,"item",count1)
@@ -839,7 +839,7 @@ FUNCTION printstart
                ENDIF
             NEXT count2
             printline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
-            Row := Row + lh
+            ROW := Row + lh
             dataprintover := .t.
             FOR count2 := 1 to len(nextline)
                IF nextline[count2] > 0
@@ -876,7 +876,7 @@ FUNCTION printstart
                   ENDIF
                NEXT count2
                printline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
-               Row := Row + lh
+               ROW := Row + lh
                dataprintover := .t.
                FOR count2 := 1 to len(nextline)
                   IF nextline[count2] > 0
@@ -903,31 +903,31 @@ FUNCTION printstart
                @ firstrow,col+maxcol1-1 print line TO lastrow,col+maxcol1-1 penwidth 0.25
                IF Len(AllTrim(printgrid.footer1.value)) > 0
                   @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.footer1.value) font fontname size size1+2 center
-                  row := row + lh + lh
+                  ROW := row + lh + lh
                ENDIF
                IF printgrid.pageno.value == 3
-                  Row := Row + lh
+                  ROW := Row + lh
                   @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
                ENDIF
             END PRINTPAGE
             pageno := pageno + 1
-            row := printgrid.top.value
+            ROW := printgrid.top.value
             START PRINTPAGE
                IF printgrid.pageno.value == 2
                   @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
-                  row := row + lh
+                  ROW := row + lh
                ENDIF
                IF Len(AllTrim(printgrid.header1.value)) > 0
                   @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header1.value) font fontname size size1+2 center
-                  row := row + lh + lh
+                  ROW := row + lh + lh
                ENDIF
                IF Len(AllTrim(printgrid.header2.value)) > 0
                   @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header2.value) font fontname size size1+2 center
-                  row := row + lh + lh
+                  ROW := row + lh + lh
                ENDIF
                IF Len(AllTrim(printgrid.header3.value)) > 0
                   @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header3.value) font fontname size size1+2 center
-                  row := row + lh + lh
+                  ROW := row + lh + lh
                ENDIF
 
                firstrow := Row
@@ -953,7 +953,7 @@ FUNCTION printstart
                   ENDIF
                NEXT count2
                printline(row,col,printdata,justifyarr,sizesarr,fontname,size1)
-               row := row + lh
+               ROW := row + lh
                @ Row,Col-1 print line TO Row,col+maxcol1-1 penwidth 0.25
             ELSE
                IF printgrid.rowlines.value
@@ -979,10 +979,10 @@ FUNCTION printstart
 
          IF Len(AllTrim(printgrid.footer1.value)) > 0
             @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.footer1.value) font fontname size size1+2 center
-            row := row + lh + lh
+            ROW := row + lh + lh
          ENDIF
          IF printgrid.pageno.value == 3
-            Row := Row + lh
+            ROW := Row + lh
             @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
          ENDIF
       END PRINTPAGE
@@ -1163,8 +1163,8 @@ FUNCTION printgridpreview
       RETURN NIL
    ENDIF
 
-   width := printgrid.width.value
-   height := printgrid.height.value
+   WIDTH := printgrid.width.value
+   HEIGHT := printgrid.height.value
    maxcol1 := curcol1
 
    IF maxwidth >= width .and. maxheight >= height

@@ -18,21 +18,21 @@ FUNCTION contas_bancarias()
 
    DEFINE WINDOW form_bancos;
          at 000,000;
-         width 800;
-         height 605;
-         title 'Contas Bancárias';
-         icon path_imagens+'icone.ico';
+         WIDTH 800;
+         HEIGHT 605;
+         TITLE 'Contas Bancárias';
+         ICON path_imagens+'icone.ico';
          modal;
          nosize;
          on init pesquisar()
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
-         picture path_imagens+'incluir.bmp'
-         col 005
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'incluir.bmp'
+         COL 005
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F5 Incluir'
          action dados(1)
          fontname 'verdana'
@@ -42,14 +42,14 @@ FUNCTION contas_bancarias()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_alterar
-         picture path_imagens+'alterar.bmp'
-         col 107
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'alterar.bmp'
+         COL 107
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F6 Alterar'
          action dados(2)
          fontname 'verdana'
@@ -59,14 +59,14 @@ FUNCTION contas_bancarias()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_excluir
-         picture path_imagens+'excluir.bmp'
-         col 209
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'excluir.bmp'
+         COL 209
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F7 Excluir'
          action excluir()
          fontname 'verdana'
@@ -76,14 +76,14 @@ FUNCTION contas_bancarias()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_imprimir
-         picture path_imagens+'imprimir.bmp'
-         col 311
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'imprimir.bmp'
+         COL 311
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F8 Imprimir'
          action relacao()
          fontname 'verdana'
@@ -93,14 +93,14 @@ FUNCTION contas_bancarias()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_atualizar
-         picture path_imagens+'atualizar.bmp'
-         col 413
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'atualizar.bmp'
+         COL 413
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Atualizar'
          action atualizar()
          fontname 'verdana'
@@ -110,14 +110,14 @@ FUNCTION contas_bancarias()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
-         picture path_imagens+'sair.bmp'
-         col 515
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'sair.bmp'
+         COL 515
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'ESC Voltar'
          action form_bancos.release
          fontname 'verdana'
@@ -127,22 +127,22 @@ FUNCTION contas_bancarias()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_bancos
             parent form_bancos
-            col 000
-            row 105
-            width 795
-            height 430
+            COL 000
+            ROW 105
+            WIDTH 795
+            HEIGHT 430
             headers {'Código','Nome','Banco','Agência','Conta'}
             widths {100,250,150,150,100}
             fontname 'verdana'
             fontsize 010
             fontbold .T.
-            backcolor _amarelo_001
+            BACKCOLOR _amarelo_001
             fontcolor _preto_001
             ondblclick dados(2)
          END GRID
@@ -150,8 +150,8 @@ FUNCTION contas_bancarias()
 
       DEFINE LABEL rodape_001
          parent form_bancos
-         col 005
-         row 545
+         COL 005
+         ROW 545
          value 'Digite sua pesquisa'
          autosize .T.
          fontname 'verdana'
@@ -162,19 +162,19 @@ FUNCTION contas_bancarias()
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_bancos;
-         height 027;
-         width 300;
+         HEIGHT 027;
+         WIDTH 300;
          value '';
          maxlength 040;
          font 'verdana' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase;
          on change pesquisar()
       DEFINE LABEL rodape_002
          parent form_bancos
-         col form_bancos.width - 270
-         row 545
+         COL form_bancos.width - 270
+         ROW 545
          value 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
          fontname 'verdana'
@@ -239,12 +239,12 @@ STATIC FUNCTION dados(parametro)
 
    DEFINE WINDOW form_dados;
          at 000,000;
-         width 325;
-         height 420;
-         title (titulo);
-         icon path_imagens+'icone.ico';
+         WIDTH 325;
+         HEIGHT 420;
+         TITLE (titulo);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * entrada de dados
       @ 010,005 label lbl_001;
@@ -257,12 +257,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_nome;
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 060,005 label lbl_002;
@@ -275,12 +275,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 080,005 textbox tbox_002;
          of form_dados;
-         height 027;
-         width 140;
+         HEIGHT 027;
+         WIDTH 140;
          value x_banco;
          maxlength 010;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 060,155 label lbl_003;
@@ -293,12 +293,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 080,155 textbox tbox_003;
          of form_dados;
-         height 027;
-         width 140;
+         HEIGHT 027;
+         WIDTH 140;
          value x_agencia;
          maxlength 010;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,005 label lbl_004;
@@ -311,12 +311,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 130,005 textbox tbox_004;
          of form_dados;
-         height 027;
-         width 140;
+         HEIGHT 027;
+         WIDTH 140;
          value x_conta;
          maxlength 010;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,155 label lbl_005;
@@ -329,13 +329,13 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 130,155 getbox tbox_005;
          of form_dados;
-         height 027;
-         width 140;
+         HEIGHT 027;
+         WIDTH 140;
          value x_limite;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       @ 160,005 label lbl_006;
          of form_dados;
          value 'Titular da conta';
@@ -346,12 +346,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 180,005 textbox tbox_006;
          of form_dados;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_titular;
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 210,005 label lbl_007;
@@ -364,12 +364,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 230,005 textbox tbox_007;
          of form_dados;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_gerente;
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 260,005 label lbl_008;
@@ -382,33 +382,33 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 280,005 textbox tbox_008;
          of form_dados;
-         height 027;
-         width 140;
+         HEIGHT 027;
+         WIDTH 140;
          value x_telefone;
          maxlength 010;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_dados.height-090
+         COL 000
+         ROW form_dados.height-090
          value ''
-         width form_dados.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_dados.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_dados.width-225
-         row form_dados.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_dados.width-225
+         ROW form_dados.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar(parametro)
          fontbold .T.
@@ -417,11 +417,11 @@ STATIC FUNCTION dados(parametro)
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_dados.width-100
-         row form_dados.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_dados.width-100
+         ROW form_dados.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_dados.release
          fontbold .T.

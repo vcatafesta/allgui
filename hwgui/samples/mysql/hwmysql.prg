@@ -549,12 +549,12 @@ FUNCTION MsgSay( cText )
 
    RETURN NIL
 
-   EXIT PROCEDURE cleanup
-   IF connHandle > 0
-      sqlClose( connHandle )
-      IF queHandle > 0
-         sqlFreeR( queHandle )
-      ENDIF
+EXIT PROCEDURE cleanup
+IF connHandle > 0
+   sqlClose( connHandle )
+   IF queHandle > 0
+      sqlFreeR( queHandle )
    ENDIF
+ENDIF
 
-   RETURN
+RETURN

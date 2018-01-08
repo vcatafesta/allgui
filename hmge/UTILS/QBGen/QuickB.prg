@@ -3512,7 +3512,7 @@ FUNCTION PickField(aitems,AllF)
          FONTBOLD .T.
          TOOLTIP 'Add Selected Field'
          ONCLICK Fld_add()
-         Backcolor  {204,255,0}
+         BACKCOLOR  {204,255,0}
          NOXPSTYLE .T.
       END BUTTONEX
 
@@ -3542,7 +3542,7 @@ FUNCTION PickField(aitems,AllF)
          FONTBOLD .T.
          TOOLTIP 'Remove Selected Field'
          ONCLICK  Fld_del()
-         Backcolor RED
+         BACKCOLOR RED
          NOXPSTYLE .T.
       END BUTTONEX
 

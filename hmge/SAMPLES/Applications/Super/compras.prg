@@ -13,41 +13,41 @@ FUNCTION compras()
 
    DEFINE WINDOW form_compras;
          at 000,000;
-         width 1000;
-         height 680;
-         title 'Compras / Entrada Estoque ( Produtos e Matéria Prima )';
-         icon path_imagens+'icone.ico';
+         WIDTH 1000;
+         HEIGHT 680;
+         TITLE 'Compras / Entrada Estoque ( Produtos e Matéria Prima )';
+         ICON path_imagens+'icone.ico';
          modal;
          nosize;
          on init zera_temps()
 
       * linhas separadoras
       DEFINE LABEL label_sep_001
-         col 000
-         row 140
+         COL 000
+         ROW 140
          value ''
-         width 1000
-         height 002
+         WIDTH 1000
+         HEIGHT 002
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
       DEFINE LABEL label_sep_002
-         col 000
-         row 590
+         COL 000
+         ROW 590
          value ''
-         width 1000
-         height 002
+         WIDTH 1000
+         HEIGHT 002
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
       DEFINE LABEL label_sep_003
-         col 495
-         row 140
+         COL 495
+         ROW 140
          value ''
-         width 002
-         height 450
+         WIDTH 002
+         HEIGHT 450
          transparent .F.
-         backcolor _cinza_002
+         BACKCOLOR _cinza_002
       END LABEL
 
       * solicita fornecedor
@@ -61,11 +61,11 @@ FUNCTION compras()
          transparent
       @ 030,005 textbox tbox_001;
          of form_compras;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_fornecedor('form_compras','tbox_001')
@@ -89,11 +89,11 @@ FUNCTION compras()
          transparent
       @ 030,400 textbox tbox_004;
          of form_compras;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_forma_pagamento('form_compras','tbox_004')
@@ -117,12 +117,12 @@ FUNCTION compras()
          transparent
       @ 030,650 textbox tbox_documento;
          of form_compras;
-         height 027;
-         width 200;
+         HEIGHT 027;
+         WIDTH 200;
          value '';
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
 
@@ -137,13 +137,13 @@ FUNCTION compras()
          transparent
       @ 070,110 getbox tbox_005;
          of form_compras;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value 1;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@R 999'
+         PICTURE '@R 999'
 
       * vencimento
       @ 070,180 label lbl_006;
@@ -156,11 +156,11 @@ FUNCTION compras()
          transparent
       @ 070,715 textbox tbox_006;
          of form_compras;
-         height 027;
-         width 100;
+         HEIGHT 027;
+         WIDTH 100;
          value date();
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          date
 
@@ -183,13 +183,13 @@ FUNCTION compras()
          transparent
       @ 110,715 getbox tbox_008;
          of form_compras;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@R 999'
+         PICTURE '@R 999'
 
       *                    *
       * compra de produtos *
@@ -206,13 +206,13 @@ FUNCTION compras()
          transparent
       @ 170,005 textbox tbox_produto;
          of form_compras;
-         height 030;
-         width 060;
+         HEIGHT 030;
+         WIDTH 060;
          value '';
          maxlength 015;
          font 'tahoma' size 010;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          on enter procura_produto_2()
       @ 170,075 label label_nome_produto;
@@ -234,13 +234,13 @@ FUNCTION compras()
          transparent
       @ 230,005 getbox tbox_002;
          of form_compras;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@R 999999'
+         PICTURE '@R 999999'
       * valor da compra
       @ 210,135 label lbl_003;
          of form_compras;
@@ -252,41 +252,41 @@ FUNCTION compras()
          transparent
       @ 230,135 getbox tbox_003;
          of form_compras;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       * botão para confirmar
       @ 217,265 buttonex botao_confirmar_001;
          parent form_compras;
          caption 'Confirma';
-         width 115 height 040;
-         picture path_imagens+'adicionar.bmp';
+         WIDTH 115 height 040;
+         PICTURE path_imagens+'adicionar.bmp';
          action gravar_produto()
       * botão para excluir
       @ 217,385 buttonex botao_excluir_produto;
          parent form_compras;
          caption 'Excluir';
-         width 100 height 040;
-         picture path_imagens+'excluir_item.bmp';
+         WIDTH 100 height 040;
+         PICTURE path_imagens+'excluir_item.bmp';
          action excluir_produto();
          notabstop
       * grid
       DEFINE GRID grid_produtos
          parent form_compras
-         col 005
-         row 265
-         width 480
-         height 320
+         COL 005
+         ROW 265
+         WIDTH 480
+         HEIGHT 320
          headers {'id','Fornecedor','Produto','Qtd.','Unitário R$','Subtotal R$'}
          widths {001,250,200,100,120,120}
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _amarelo_001
+         BACKCOLOR _amarelo_001
          fontcolor _preto_001
       END GRID
 
@@ -305,11 +305,11 @@ FUNCTION compras()
          transparent
       @ 170,505 textbox tbox_mprima;
          of form_compras;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_mprima_2('form_compras','tbox_mprima')
@@ -332,13 +332,13 @@ FUNCTION compras()
          transparent
       @ 230,505 getbox tbox_002_2;
          of form_compras;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@R 999,999.999'
+         PICTURE '@R 999,999.999'
       * valor da compra
       @ 210,635 label lbl_003_2;
          of form_compras;
@@ -350,56 +350,56 @@ FUNCTION compras()
          transparent
       @ 230,635 getbox tbox_003_2;
          of form_compras;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value 0;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       * botão para confirmar
       @ 217,765 buttonex botao_confirmar_002;
          parent form_compras;
          caption 'Confirma';
-         width 115 height 040;
-         picture path_imagens+'adicionar.bmp';
+         WIDTH 115 height 040;
+         PICTURE path_imagens+'adicionar.bmp';
          action gravar_mprima()
       * botão para excluir
       @ 217,885 buttonex botao_excluir_mprima;
          parent form_compras;
          caption 'Excluir';
-         width 100 height 040;
-         picture path_imagens+'excluir_item.bmp';
+         WIDTH 100 height 040;
+         PICTURE path_imagens+'excluir_item.bmp';
          action excluir_mprima();
          notabstop
       DEFINE GRID grid_materia_prima
          parent form_compras
-         col 505
-         row 265
-         width 485
-         height 320
+         COL 505
+         ROW 265
+         WIDTH 485
+         HEIGHT 320
          headers {'id','Fornecedor','Matéria Prima','Qtd.','Unitário R$','Subtotal R$'}
          widths {001,250,200,100,120,120}
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _amarelo_001
+         BACKCOLOR _amarelo_001
          fontcolor _preto_001
       END GRID
 
       @ 595,635 buttonex botao_gravar;
          parent form_compras;
-         picture path_imagens+'img_salvar.bmp';
+         PICTURE path_imagens+'img_salvar.bmp';
          caption 'Gravar as informações';
-         width 200 height 050;
+         WIDTH 200 height 050;
          action gravar_compras();
          bold;
          tooltip 'Clique aqui para gravar todas as informações'
       @ 595,840 buttonex botao_sair;
          parent form_compras;
-         picture path_imagens+'img_sair.bmp';
+         PICTURE path_imagens+'img_sair.bmp';
          caption 'Sair desta tela';
-         width 150 height 050;
+         WIDTH 150 height 050;
          action form_compras.release;
          bold;
          tooltip 'Sair desta tela sem gravar informações'
@@ -458,16 +458,16 @@ STATIC FUNCTION getcode_fornecedor(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -477,19 +477,19 @@ STATIC FUNCTION getcode_fornecedor(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_fornecedor()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea fornecedores
@@ -498,7 +498,7 @@ STATIC FUNCTION getcode_fornecedor(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
@@ -577,16 +577,16 @@ STATIC FUNCTION getcode_forma_pagamento(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -596,19 +596,19 @@ STATIC FUNCTION getcode_forma_pagamento(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_forma_pagamento()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea formas_pagamento
@@ -617,7 +617,7 @@ STATIC FUNCTION getcode_forma_pagamento(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
@@ -690,26 +690,26 @@ STATIC FUNCTION mostra_listagem_produto_2()
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 560;
-         height 610;
-         title 'Produtos';
-         icon path_imagens+'icone.ico';
+         WIDTH 560;
+         HEIGHT 610;
+         TITLE 'Produtos';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE GRID grid_pesquisa
          parent form_pesquisa
-         col 000
-         row 000
-         width 555
-         height 580
+         COL 000
+         ROW 000
+         WIDTH 555
+         HEIGHT 580
          headers {'','Nome','Preço R$'}
          widths {001,395,150}
          showheaders .F.
          nolines .T.
          fontname 'courier new'
          fontsize 012
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          fontcolor _preto_001
          ondblclick mostra_informacao_produto_2()
       END GRID
@@ -810,16 +810,16 @@ STATIC FUNCTION getcode_materia_prima_2(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -829,19 +829,19 @@ STATIC FUNCTION getcode_materia_prima_2(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_materia_prima_2()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea materia_prima
@@ -850,7 +850,7 @@ STATIC FUNCTION getcode_materia_prima_2(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}

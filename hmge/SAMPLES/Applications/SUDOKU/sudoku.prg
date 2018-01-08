@@ -67,18 +67,18 @@ FUNCTION Main
    // GAL
    DEFINE WINDOW Sudoku ;
          at 0,0 ;
-         width 486*gkoefh - iif(isthemed(),0,GetBorderWidth()) ;
-         height 550*gkoefv - iif(isthemed(),0,GetTitleHeight()) ;
+         WIDTH 486*gkoefh - iif(isthemed(),0,GetBorderWidth()) ;
+         HEIGHT 550*gkoefv - iif(isthemed(),0,GetTitleHeight()) ;
          main ;
-         title cTitle ;
+         TITLE cTitle ;
          nomaximize ;    /* GAL */
-         nosize          /* GAL */
+         NOSIZE          /* GAL */
 
       DEFINE GRID Square
-         row 10
-         col 10
-         width 460*gkoefh - iif(isthemed(),0,GetBorderWidth())
-         height 445*gkoefv - iif(isthemed(),0,GetTitleHeight()+GetBorderHeight())
+         ROW 10
+         COL 10
+         WIDTH 460*gkoefh - iif(isthemed(),0,GetBorderWidth())
+         HEIGHT 445*gkoefv - iif(isthemed(),0,GetTitleHeight()+GetBorderHeight())
          showheaders .f.
          widths  {gw, gw, gw, gw, gw, gw, gw, gw, gw}
          justify {2, 2, 2, 2, 2, 2, 2, 2, 2}
@@ -112,10 +112,10 @@ FUNCTION Main
       END GRID
 
       DEFINE LABEL valid
-         row 460*gkoefv - iif(isthemed(),0,GetTitleHeight())
-         col 10
-         width 370*gkoefh
-         height 30*gkoefv
+         ROW 460*gkoefv - iif(isthemed(),0,GetTitleHeight())
+         COL 10
+         WIDTH 370*gkoefh
+         HEIGHT 30*gkoefv
          fontname "Arial"
          fontsize 18*gkoefv
       END LABEL
@@ -130,9 +130,9 @@ FUNCTION Main
       ENDIF
 
       DEFINE BUTTON Next
-         row 460*gkoefv - iif(isthemed(),0,GetTitleHeight())
-         col 400*gkoefh - iif(isthemed(),0,GetBorderWidth())
-         width 70*gkoefh
+         ROW 460*gkoefv - iif(isthemed(),0,GetTitleHeight())
+         COL 400*gkoefh - iif(isthemed(),0,GetBorderWidth())
+         WIDTH 70*gkoefh
          caption "Next"
          action NextGame()
       END BUTTON

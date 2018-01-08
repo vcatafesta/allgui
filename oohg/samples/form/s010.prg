@@ -1,28 +1,26 @@
 /*
- * Form Sample n° 10
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to set the value of the currently
- * focused control of a form from a different form.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Form Sample n° 10
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to set the value of the currently
+* focused control of a form from a different form.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
 
    DEFINE WINDOW FormMain ;
-      AT 0, 0 ;
-      WIDTH 640 ;
-      HEIGHT 480 ;
-      TITLE "Set previously focused control" ;
-      MAIN ;
-      NOMAXIMIZE ;
-      NOSIZE
+         AT 0, 0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Set previously focused control" ;
+         MAIN ;
+         NOMAXIMIZE ;
+         NOSIZE
 
       @ 20, 20 BUTTON btn1 ;
          CAPTION "Click me"
@@ -47,7 +45,7 @@ FUNCTION Main
 
    ACTIVATE WINDOW FormMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION OpenSecond( oCtrl )
 
@@ -58,13 +56,13 @@ FUNCTION OpenSecond( oCtrl )
    ENDIF
 
    DEFINE WINDOW SecondForm ;
-      AT 100, 400 ;
-      WIDTH 420 ;
-      HEIGHT 220 ;
-      TITLE "Second Form" ;
-      NOMAXIMIZE ;
-      NOSIZE ;
-      ON RELEASE IIF( lSet, oCtrl:Value := oNewValue:Value, NIL )
+         AT 100, 400 ;
+         WIDTH 420 ;
+         HEIGHT 220 ;
+         TITLE "Second Form" ;
+         NOMAXIMIZE ;
+         NOSIZE ;
+         ON RELEASE IIF( lSet, oCtrl:Value := oNewValue:Value, NIL )
 
       @ 20, 20 TEXTBOX txt3 OBJ oNewValue ;
          NUMERIC ;
@@ -85,8 +83,8 @@ FUNCTION OpenSecond( oCtrl )
 
    ACTIVATE WINDOW SecondForm
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */

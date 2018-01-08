@@ -694,23 +694,23 @@ METHOD RELEASE() CLASS HIcon
 
    RETURN NIL
 
-   EXIT PROCEDURE CleanDrawWidg
-   LOCAL i
+EXIT PROCEDURE CleanDrawWidg
+LOCAL i
 
-   FOR i := 1 TO Len( HPen():aPens )
-      hwg_Deleteobject( HPen():aPens[ i ]:handle )
-   NEXT
-   FOR i := 1 TO Len( HBrush():aBrushes )
-      hwg_Deleteobject( HBrush():aBrushes[ i ]:handle )
-   NEXT
-   FOR i := 1 TO Len( HFont():aFonts )
-      hwg_Deleteobject( HFont():aFonts[ i ]:handle )
-   NEXT
-   FOR i := 1 TO Len( HBitmap():aBitmaps )
-      hwg_Deleteobject( HBitmap():aBitmaps[ i ]:handle )
-   NEXT
-   FOR i := 1 TO Len( HIcon():aIcons )
-      hwg_Deleteobject( HIcon():aIcons[ i ]:handle )
-   NEXT
+FOR i := 1 TO Len( HPen():aPens )
+   hwg_Deleteobject( HPen():aPens[ i ]:handle )
+NEXT
+FOR i := 1 TO Len( HBrush():aBrushes )
+   hwg_Deleteobject( HBrush():aBrushes[ i ]:handle )
+NEXT
+FOR i := 1 TO Len( HFont():aFonts )
+   hwg_Deleteobject( HFont():aFonts[ i ]:handle )
+NEXT
+FOR i := 1 TO Len( HBitmap():aBitmaps )
+   hwg_Deleteobject( HBitmap():aBitmaps[ i ]:handle )
+NEXT
+FOR i := 1 TO Len( HIcon():aIcons )
+   hwg_Deleteobject( HIcon():aIcons[ i ]:handle )
+NEXT
 
-   RETURN
+RETURN

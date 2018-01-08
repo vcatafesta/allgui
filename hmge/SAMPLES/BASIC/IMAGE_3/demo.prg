@@ -13,8 +13,8 @@ FUNCTION Main
    DEFINE WINDOW win_1 ;
          main ;
          clientarea 800, 633 ;
-         title "JPEG Image From URL" ;
-         backcolor { 204, 220, 240 } nosize
+         TITLE "JPEG Image From URL" ;
+         BACKCOLOR { 204, 220, 240 } nosize
 
       ON KEY ESCAPE ACTION win_1.release()
 
@@ -33,12 +33,12 @@ FUNCTION Main
       END TOOLBAR
 
       DEFINE IMAGE image_1
-         row 33
-         col 0
-         width 800
-         height 600
-         picture cURL2
-         stretch .T.
+         ROW 33
+         COL 0
+         WIDTH 800
+         HEIGHT 600
+         PICTURE cURL2
+         STRETCH .T.
       END IMAGE
 
    END WINDOW

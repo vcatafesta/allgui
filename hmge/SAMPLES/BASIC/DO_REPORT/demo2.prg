@@ -11,17 +11,17 @@ FUNCTION Main
    INDEX ON padr(field->CONTINENT,20)+padr(field->NAME,28) to test
 
    DEFINE WINDOW Win1         ;
-         Row   10         ;
-         Col   10         ;
-         Width   400         ;
-         Height   400         ;
-         Title   'Do Report Demo'   ;
+         ROW   10         ;
+         COL   10         ;
+         WIDTH   400         ;
+         HEIGHT   400         ;
+         TITLE   'Do Report Demo'   ;
          MAIN            ;
          On Init   Win1.Center()
 
       @ 40 , 40 Button Button1   ;
          Caption 'Create Report'   ;
-         Width   120      ;
+         WIDTH   120      ;
          On Click ButtonClick()   ;
          DEFAULT
 
@@ -36,7 +36,7 @@ PROCEDURE ButtonClick()
    DbGoTop()
 
    do report ;
-      title  'COUNTRIES SUMMARY'                                   ;
+      TITLE  'COUNTRIES SUMMARY'                                   ;
       headers  {} , { padc('Name',28), padc('Capital',15),         ;
       padc('Area',11), padc('Population',14) }     ;
       fields   {'Name', 'Capital', 'Area', 'Population'}           ;

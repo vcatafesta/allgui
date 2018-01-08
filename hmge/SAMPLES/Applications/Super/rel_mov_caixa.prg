@@ -14,12 +14,12 @@ FUNCTION movimentacao_caixa()
 
    DEFINE WINDOW form_mov_caixa;
          at 000,000;
-         width 400;
-         height 250;
-         title 'Movimentação do Caixa';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 250;
+         TITLE 'Movimentação do Caixa';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       @ 010,010 label lbl_001;
          of form_mov_caixa;
@@ -33,34 +33,34 @@ FUNCTION movimentacao_caixa()
       @ 040,010 datepicker dp_inicio;
          parent form_mov_caixa;
          value date();
-         width 150;
-         height 030;
+         WIDTH 150;
+         HEIGHT 030;
          font 'verdana' size 014
       @ 040,170 datepicker dp_final;
          parent form_mov_caixa;
          value date();
-         width 150;
-         height 030;
+         WIDTH 150;
+         HEIGHT 030;
          font 'verdana' size 014
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_mov_caixa.height-090
+         COL 000
+         ROW form_mov_caixa.height-090
          value ''
-         width form_mov_caixa.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_mov_caixa.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_relatorio.bmp'
-         col form_mov_caixa.width-255
-         row form_mov_caixa.height-085
-         width 150
-         height 050
+         PICTURE path_imagens+'img_relatorio.bmp'
+         COL form_mov_caixa.width-255
+         ROW form_mov_caixa.height-085
+         WIDTH 150
+         HEIGHT 050
          caption 'Ok, imprimir'
          action relatorio()
          fontbold .T.
@@ -69,11 +69,11 @@ FUNCTION movimentacao_caixa()
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_sair.bmp'
-         col form_mov_caixa.width-100
-         row form_mov_caixa.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_sair.bmp'
+         COL form_mov_caixa.width-100
+         ROW form_mov_caixa.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_mov_caixa.release
          fontbold .T.

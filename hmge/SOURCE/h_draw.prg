@@ -241,7 +241,7 @@ FUNCTION HMG_DrawIcon( window, icon, row, col, w, h, rgb, transparent )
       hb_default( @h, 0 )
       hb_default( @transparent, .F. )
       IF transparent
-         backcolor := _HMG_aFormBkColor [i]
+         BACKCOLOR := _HMG_aFormBkColor [i]
          IF IsArrayRGB( backcolor )
             rgb := RGB( backcolor [1], backcolor [2], backcolor [3] )
          ENDIF

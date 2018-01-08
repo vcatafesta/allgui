@@ -155,9 +155,9 @@ PROCEDURE Main
 
    DEFINE WINDOW wMain                      ;
          At 0, 0                           ;
-         Width 780                         ;
-         Height 565                        ;
-         Title 'QHTM & SQLite3 Usage Demo' ;
+         WIDTH 780                         ;
+         HEIGHT 565                        ;
+         TITLE 'QHTM & SQLite3 Usage Demo' ;
          Main                              ;
          On init ReSize()                  ;
          On maximize ReSize()              ;
@@ -201,23 +201,23 @@ PROCEDURE Main
 
       @ LOGO_TOP, LOGO_LEFT QHTM HtmlLogo of wMain ;
          Resource 'TOPBAR'                          ;
-         Width 760                                  ;
-         Height LOGO_HEIGHT                         ;
+         WIDTH 760                                  ;
+         HEIGHT LOGO_HEIGHT                         ;
          Border
 
       // Список файлов/записей
 
       DEFINE TAB tbData         ;
             at TB_TOP, TB_LEFT ;
-            Width TB_WIDTH     ;
-            Height 105         ;
+            WIDTH TB_WIDTH     ;
+            HEIGHT 105         ;
             On change SwitchTab()
 
          Page 'Files'
 
             @ 32, 5 Grid grdFiles           ;
-               Width ( TB_WIDTH - 10 ) ;
-               Height 360              ;
+               WIDTH ( TB_WIDTH - 10 ) ;
+               HEIGHT 360              ;
                Widths { 200 }          ;
                NoHeaders               ;
                On Change ShowMe()      ;
@@ -229,8 +229,8 @@ PROCEDURE Main
          Page 'Records'
 
             @ 32, 5 Grid grdRecords          ;
-               Width ( TB_WIDTH - 10 )  ;
-               Height 360               ;
+               WIDTH ( TB_WIDTH - 10 )  ;
+               HEIGHT 360               ;
                Widths { 50, 180 }       ;
                Headers { 'ID', 'Name' } ;
                On Change ShowMe()       ;
@@ -242,8 +242,8 @@ PROCEDURE Main
 
       @ DATA_TOP, DATA_LEFT QHTM HtmlData of wMain ;
          Value cHTML                                ;
-         Width 505                                  ;
-         Height 105                                 ;
+         WIDTH 505                                  ;
+         HEIGHT 105                                 ;
          Border
 
       DEFINE CONTEXT menu control HtmlData
@@ -1055,21 +1055,21 @@ STATIC PROCEDURE DemoPrint
 
    DEFINE WINDOW wForm       ;
          At 0, 0            ;
-         Width 500          ;
-         Height 500         ;
-         Title 'Print demo' ;
+         WIDTH 500          ;
+         HEIGHT 500         ;
+         TITLE 'Print demo' ;
          Modal
 
       @ 5, 5 QHTM HtmlForm of wForm ;
          File cHTMLFile         ;
-         Width 480              ;
-         Height 350             ;
+         WIDTH 480              ;
+         HEIGHT 350             ;
          Border
 
       @ 370, 160 Button btnPrint ;
          Caption 'Print' ;
-         Width 150       ;
-         Height 80       ;
+         WIDTH 150       ;
+         HEIGHT 80       ;
          Action PrintHTML( cHTMLFile )
 
    END WINDOW
@@ -1161,16 +1161,16 @@ STATIC PROCEDURE DemoSubmit
 
    DEFINE WINDOW wForm        ;
          At 0, 0             ;
-         Width 495           ;
-         Height 385 + Iif( IsAppThemed(), 8, 0 ) ;
-         Title 'Submit demo' ;
+         WIDTH 495           ;
+         HEIGHT 385 + Iif( IsAppThemed(), 8, 0 ) ;
+         TITLE 'Submit demo' ;
          Modal               ;
-         NoSize
+         NOSIZE
 
       @ 5, 5 QHTM HtmlForm of wForm ;
          File cHTMLFile         ;
-         Width 480              ;
-         Height 350             ;
+         WIDTH 480              ;
+         HEIGHT 350             ;
          Border
 
    END WINDOW

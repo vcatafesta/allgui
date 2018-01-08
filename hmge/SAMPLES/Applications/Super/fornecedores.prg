@@ -18,21 +18,21 @@ FUNCTION fornecedores()
 
    DEFINE WINDOW form_fornecedores;
          at 000,000;
-         width 800;
-         height 605;
-         title 'Fornecedores';
-         icon path_imagens+'icone.ico';
+         WIDTH 800;
+         HEIGHT 605;
+         TITLE 'Fornecedores';
+         ICON path_imagens+'icone.ico';
          modal;
          nosize;
          on init pesquisar()
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
-         picture path_imagens+'incluir.bmp'
-         col 005
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'incluir.bmp'
+         COL 005
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F5 Incluir'
          action dados(1)
          fontname 'verdana'
@@ -42,14 +42,14 @@ FUNCTION fornecedores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_alterar
-         picture path_imagens+'alterar.bmp'
-         col 107
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'alterar.bmp'
+         COL 107
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F6 Alterar'
          action dados(2)
          fontname 'verdana'
@@ -59,14 +59,14 @@ FUNCTION fornecedores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_excluir
-         picture path_imagens+'excluir.bmp'
-         col 209
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'excluir.bmp'
+         COL 209
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F7 Excluir'
          action excluir()
          fontname 'verdana'
@@ -76,14 +76,14 @@ FUNCTION fornecedores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_imprimir
-         picture path_imagens+'imprimir.bmp'
-         col 311
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'imprimir.bmp'
+         COL 311
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F8 Imprimir'
          action relacao()
          fontname 'verdana'
@@ -93,14 +93,14 @@ FUNCTION fornecedores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_atualizar
-         picture path_imagens+'atualizar.bmp'
-         col 413
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'atualizar.bmp'
+         COL 413
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Atualizar'
          action atualizar()
          fontname 'verdana'
@@ -110,14 +110,14 @@ FUNCTION fornecedores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
-         picture path_imagens+'sair.bmp'
-         col 515
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'sair.bmp'
+         COL 515
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'ESC Voltar'
          action form_fornecedores.release
          fontname 'verdana'
@@ -127,22 +127,22 @@ FUNCTION fornecedores()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_fornecedores
             parent form_fornecedores
-            col 000
-            row 105
-            width 795
-            height 430
+            COL 000
+            ROW 105
+            WIDTH 795
+            HEIGHT 430
             headers {'Código','Nome','Telefone fixo','Telefone celular'}
             widths {080,400,140,140}
             fontname 'verdana'
             fontsize 010
             fontbold .T.
-            backcolor _amarelo_001
+            BACKCOLOR _amarelo_001
             fontcolor _preto_001
             ondblclick dados(2)
          END GRID
@@ -150,8 +150,8 @@ FUNCTION fornecedores()
 
       DEFINE LABEL rodape_001
          parent form_fornecedores
-         col 005
-         row 545
+         COL 005
+         ROW 545
          value 'Digite sua pesquisa'
          autosize .T.
          fontname 'verdana'
@@ -162,19 +162,19 @@ FUNCTION fornecedores()
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_fornecedores;
-         height 027;
-         width 300;
+         HEIGHT 027;
+         WIDTH 300;
          value '';
          maxlength 040;
          font 'verdana' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase;
          on change pesquisar()
       DEFINE LABEL rodape_002
          parent form_fornecedores
-         col form_fornecedores.width - 270
-         row 545
+         COL form_fornecedores.width - 270
+         ROW 545
          value 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
          fontname 'verdana'
@@ -247,12 +247,12 @@ STATIC FUNCTION dados(parametro)
 
    DEFINE WINDOW form_dados;
          at 000,000;
-         width 585;
-         height 360;
-         title (titulo);
-         icon path_imagens+'icone.ico';
+         WIDTH 585;
+         HEIGHT 360;
+         TITLE (titulo);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * entrada de dados
       @ 010,005 label lbl_001;
@@ -265,12 +265,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_nome;
          maxlength 040;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 010,325 label lbl_002;
@@ -283,12 +283,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 030,325 textbox tbox_002;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_fixo;
          maxlength 010;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 010,455 label lbl_003;
@@ -301,12 +301,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 030,455 textbox tbox_003;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_celular;
          maxlength 010;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 060,005 label lbl_004;
@@ -319,12 +319,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 080,005 textbox tbox_004;
          of form_dados;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_endereco;
          maxlength 040;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 060,325 label lbl_005;
@@ -337,12 +337,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 080,325 textbox tbox_005;
          of form_dados;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_numero;
          maxlength 006;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 060,395 label lbl_006;
@@ -355,12 +355,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 080,395 textbox tbox_006;
          of form_dados;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_complem;
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,005 label lbl_007;
@@ -373,12 +373,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 130,005 textbox tbox_007;
          of form_dados;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_bairro;
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,195 label lbl_008;
@@ -391,12 +391,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 130,195 textbox tbox_008;
          of form_dados;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_cidade;
          maxlength 020;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,385 label lbl_009;
@@ -409,12 +409,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 130,385 textbox tbox_009;
          of form_dados;
-         height 027;
-         width 040;
+         HEIGHT 027;
+         WIDTH 040;
          value x_uf;
          maxlength 002;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,435 label lbl_010;
@@ -427,12 +427,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 130,435 textbox tbox_010;
          of form_dados;
-         height 027;
-         width 080;
+         HEIGHT 027;
+         WIDTH 080;
          value x_cep;
          maxlength 008;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 160,005 label lbl_011;
@@ -445,12 +445,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 180,005 textbox tbox_011;
          of form_dados;
-         height 027;
-         width 450;
+         HEIGHT 027;
+         WIDTH 450;
          value x_email;
          maxlength 050;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          lowercase
       @ 210,005 label lbl_012;
@@ -463,11 +463,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 230,005 textbox tbox_012;
          of form_dados;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_grupo;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_grupo_fornecedores('form_dados','tbox_012')
@@ -482,22 +482,22 @@ STATIC FUNCTION dados(parametro)
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_dados.height-090
+         COL 000
+         ROW form_dados.height-090
          value ''
-         width form_dados.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_dados.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_dados.width-225
-         row form_dados.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_dados.width-225
+         ROW form_dados.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar(parametro)
          fontbold .T.
@@ -506,11 +506,11 @@ STATIC FUNCTION dados(parametro)
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_dados.width-100
-         row form_dados.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_dados.width-100
+         ROW form_dados.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_dados.release
          fontbold .T.
@@ -803,16 +803,16 @@ STATIC FUNCTION getcode_grupo_fornecedores(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -822,19 +822,19 @@ STATIC FUNCTION getcode_grupo_fornecedores(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_grupo_fornecedores()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea grupo_fornecedores
@@ -843,7 +843,7 @@ STATIC FUNCTION getcode_grupo_fornecedores(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}

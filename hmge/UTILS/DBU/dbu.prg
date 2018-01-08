@@ -101,9 +101,9 @@ FUNCTION MAIN()
 
    * (JK) clause ON INIT added
    DEFINE WINDOW _DBU at 0,0 ;
-         width _DBUscrwidth height _DBUscrheight ;
-         title "Harbour Minigui DataBase Utility" ;
-         icon "dbuicon" ;
+         WIDTH _DBUscrwidth height _DBUscrheight ;
+         TITLE "Harbour Minigui DataBase Utility" ;
+         ICON "dbuicon" ;
          main ;
          on init {|| iif(len(_dbase)>0, DBUopendbf(_dbase,_opmode),)} ;
          on release DBUclosedbfs() ;
@@ -265,15 +265,15 @@ FUNCTION MAIN()
       END MENU
 
       DEFINE LABEL _DBUmaillabel
-         row _DBUscrheight - 115
-         col _DBUscrwidth - 290
+         ROW _DBUscrheight - 115
+         COL _DBUscrwidth - 290
          value "E-mail me"
-         width 80
+         WIDTH 80
       END LABEL
 
       define hyperlink _DBUemailid
-         row _DBUscrheight - 115
-         col _DBUscrwidth - 200
+         ROW _DBUscrheight - 115
+         COL _DBUscrwidth - 200
          value "srgiri@dataone.in"
          address "srgiri@dataone.in"
          tooltip "Contact me at the above address"
@@ -295,17 +295,17 @@ FUNCTION MAIN()
    END WINDOW
 
    DEFINE WINDOW DBUsplashwindow at 0,0 ;
-         width 400+2*GetBorderWidth()-2 ;
-         height 400+2*GetBorderHeight()-2 ;
+         WIDTH 400+2*GetBorderWidth()-2 ;
+         HEIGHT 400+2*GetBorderHeight()-2 ;
          topmost nocaption ;
          on init DBUsplash() on release _DBU.restore()
 
       DEFINE IMAGE _DBUlogo
-         row 0
-         col 0
-         picture "splash"
-         width 400
-         height 400
+         ROW 0
+         COL 0
+         PICTURE "splash"
+         WIDTH 400
+         HEIGHT 400
       END IMAGE
 
    END WINDOW
@@ -740,98 +740,98 @@ FUNCTION DBUsetfilter
       {"AllTrim()"},{"Upper()"},{"Lower()"},{"Val()"},{"Str()"},{"Int()"},{"Max()"},{"Min()"}}
    DEFINE WINDOW _DBUfilterbox at 0,0 width 650 height 420 title "Filter Condition" modal nosize nosysmenu
       DEFINE EDITBOX _DBUfiltercondition
-         row 30
-         col 30
-         width 600
-         height 100
-         backcolor _DBUreddish
+         ROW 30
+         COL 30
+         WIDTH 600
+         HEIGHT 100
+         BACKCOLOR _DBUreddish
          value _DBUcondition
       END editbox
       DEFINE GRID _DBUfieldnames
-         row 160
-         col 30
+         ROW 160
+         COL 30
          value 1
-         backcolor _DBUyellowish
+         BACKCOLOR _DBUyellowish
          headers {"Field Name"}
          widths {176}
          items _DBUfieldsarr
          on dblclick _DBUfilterbox._DBUfiltercondition.value := alltrim(alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUfieldsarr[_DBUfilterbox._DBUfieldnames.value,1]))
-         width 200
-         height 152
+         WIDTH 200
+         HEIGHT 152
       END GRID
       DEFINE BUTTON _DBUlessthan
-         row 200
-         col 250
-         width 25
+         ROW 200
+         COL 250
+         WIDTH 25
          caption "<"
          action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" <"
       END BUTTON
       DEFINE BUTTON _DBUgreaterthan
-         row 200
-         col 285
-         width 25
+         ROW 200
+         COL 285
+         WIDTH 25
          caption ">"
          action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" >"
       END BUTTON
       DEFINE BUTTON _DBUequal
-         row 200
-         col 320
-         width 25
+         ROW 200
+         COL 320
+         WIDTH 25
          caption "=="
          action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" =="
       END BUTTON
       DEFINE BUTTON _DBUnotequal
-         row 200
-         col 355
-         width 25
+         ROW 200
+         COL 355
+         WIDTH 25
          caption "<>"
          action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" <>"
       END BUTTON
       DEFINE BUTTON _DBUand
-         row 240
-         col 250
-         width 40
+         ROW 240
+         COL 250
+         WIDTH 40
          caption "and"
          action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" .and."
       END BUTTON
       DEFINE BUTTON _DBUor
-         row 240
-         col 300
-         width 40
+         ROW 240
+         COL 300
+         WIDTH 40
          caption "or"
          action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" .or."
       END BUTTON
       DEFINE BUTTON _DBUnot
-         row 240
-         col 350
-         width 40
+         ROW 240
+         COL 350
+         WIDTH 40
          caption "not"
          action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" .not."
       END BUTTON
       DEFINE GRID _DBUfunctions
-         row 160
-         col 400
+         ROW 160
+         COL 400
          value 1
          headers {"Functions"}
          widths {176}
-         backcolor _DBUgreenish
+         BACKCOLOR _DBUgreenish
          items _DBUdbffunctions
          on dblclick _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUdbffunctions[_DBUfilterbox._DBUfunctions.value,1])
-         width 200
-         height 152
+         WIDTH 200
+         HEIGHT 152
       END GRID
       DEFINE BUTTON _DBUsetfilter
-         row 340
-         col 150
+         ROW 340
+         COL 150
          caption "Set Filter"
-         width 100
+         WIDTH 100
          action DBUfilterset()
       END BUTTON
       DEFINE BUTTON _DBUclearfilter
-         row 340
-         col 400
+         ROW 340
+         COL 400
          caption "Clear Filter"
-         width 100
+         WIDTH 100
          action (DBUfilterclear(),_DBUfilterbox.release)
       END BUTTON
    END WINDOW

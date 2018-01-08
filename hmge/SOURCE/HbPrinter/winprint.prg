@@ -1012,8 +1012,8 @@ METHOD DeleteClipRgn() CLASS HBPrinter
 
 METHOD SetViewPortOrg( row, col ) CLASS HBPrinter
 
-   row := if( row <> NIL, row, 0 )
-   col := if( col <> NIL, col, 0 )
+   ROW := if( row <> NIL, row, 0 )
+   COL := if( col <> NIL, col, 0 )
    ::ViewPortOrg := ::convert( { row, col } )
    rr_setviewportorg( ::ViewPortOrg )
 

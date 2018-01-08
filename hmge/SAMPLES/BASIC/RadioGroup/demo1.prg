@@ -8,11 +8,11 @@ HMG RadioGroup Demo
 FUNCTION Main
 
    DEFINE WINDOW Win1         ;
-         Row   10         ;
-         Col   10         ;
-         Width   400         ;
-         Height   400         ;
-         Title   'HMG RadioGroup Demo'   ;
+         ROW   10         ;
+         COL   10         ;
+         WIDTH   400         ;
+         HEIGHT   400         ;
+         TITLE   'HMG RadioGroup Demo'   ;
          WindowType MAIN         ;
          On Init   Win1.Center()
 
@@ -29,7 +29,7 @@ FUNCTION Main
 
       @ 40,10 RadioGroup RadioGroup1;
          Options {"New 1","New 2","New 3"};
-         Width   60;
+         WIDTH   60;
          Spacing 20;
          Value   2;
          Horizontal;
@@ -38,7 +38,7 @@ FUNCTION Main
 
       @ 110, 10 RadioGroup Radiogroup2;
          Options {"Option 1","Option 2","Option 3","Option 4"} ;
-         Width 240;
+         WIDTH 240;
          Tooltip   'Vertical Radiogroup' ;
          on change {||MsgInfo("OOP Radiogroup 2 Value Changed!")}
 
@@ -90,7 +90,7 @@ PROCEDURE sethorizontal(control,form)
    @ 110, 10 RadioGroup Radiogroup2 of &form ;
       Options aoptions ;
       Horizontal;
-      Width 80;
+      WIDTH 80;
       Spacing 12;
       Value nvalue;
       Tooltip   'Horizontal Radiogroup' ;

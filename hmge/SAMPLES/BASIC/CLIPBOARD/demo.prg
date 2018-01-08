@@ -23,53 +23,53 @@ PROCEDURE Main
 
    DEFINE WINDOW wDemo                    ;
          At 0, 0                          ;
-         Width 400                        ;
-         Height 400                       ;
-         Title 'Clipboard & Others Tests' ;
+         WIDTH 400                        ;
+         HEIGHT 400                       ;
+         TITLE 'Clipboard & Others Tests' ;
          Main                             ;
          NoMaximize                       ;
-         NoSize
+         NOSIZE
 
       DEFINE TAB tbTest ;
             At 5, 5    ;
-            Width 380  ;
-            Height 360 ;
+            WIDTH 380  ;
+            HEIGHT 360 ;
             HotTrack
 
          Page 'Clipboard'  // Operations with Clipboard
 
             @ 35, 20 ButtonEx btnGetClip                                      ;
                Caption 'Get'                                            ;
-               Width 50                                                 ;
+               WIDTH 50                                                 ;
                FontColor BROWN                                          ;
                Action MSGINFO_( System.Clipboard, 'Text in clipboard' ) ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 35, 80 ButtonEx btnSetClip                             ;
                Caption 'Set'                                   ;
-               Width 50                                        ;
+               WIDTH 50                                        ;
                FontColor BROWN                                 ;
                Action System.Clipboard := 'Hello Clipboard!!!' ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 35, 180 ButtonEx btnClearClip                                                       ;
                Caption 'Clear'                                                             ;
-               Width 50                                                                    ;
+               WIDTH 50                                                                    ;
                FontColor RED                                                               ;
                Action { || ClearClipboard(), MSGINFO_( 'Clipboard cleaned!', 'Warning' ) } ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 35, 280 ButtonEx btnTag    ;
                Caption '{...}'    ;
-               Width 50           ;
+               WIDTH 50           ;
                FontColor BLUE     ;
                Bold               ;
                Action Bracketed() ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 75, 20 EditBox edtText ;
-               Width 340       ;
-               Height 260      ;
+               WIDTH 340       ;
+               HEIGHT 260      ;
                Value 'Highlight the text in a word or more, and then click button "{...}"'  ;
                NoHScroll
          END PAGE
@@ -78,17 +78,17 @@ PROCEDURE Main
 
             @ 60, 110 ButtonEx btnWidth                                       ;
                Caption 'Get Desktop Width'                             ;
-               Width 140                                               ;
+               WIDTH 140                                               ;
                Action MSGINFO_( System.DesktopWidth, 'Desktop width' ) ;
                FontColor BROWN                                         ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 130, 110 ButtonEx btnHeight                                        ;
                Caption 'Get Desktop Height'                              ;
-               Width 140                                                 ;
+               WIDTH 140                                                 ;
                Action MSGINFO_( System.DesktopHeight, 'Desktop height' ) ;
                FontColor BROWN                                           ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
          END PAGE
 
@@ -96,45 +96,45 @@ PROCEDURE Main
 
             @ 60, 95 ButtonEx btnDesktopPath                                    ;
                Caption 'Get Desktop Folder'                               ;
-               Width 170                                                  ;
+               WIDTH 170                                                  ;
                Action MSGINFO_( System.DesktopFolder, 'Path to Desktop' ) ;
                FontColor BROWN                                            ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 105, 95 ButtonEx btnMyDocPath                                               ;
                Caption 'Get MyDocuments Folder'                                    ;
-               Width 170                                                           ;
+               WIDTH 170                                                           ;
                Action MSGINFO_( System.MyDocumentsFolder, 'Path to My Documents' ) ;
                FontColor BROWN                                                     ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 150, 95 ButtonEx btnProgPath                                                  ;
                Caption 'Get Program Files Folder'                                    ;
-               Width 170                                                             ;
+               WIDTH 170                                                             ;
                Action MSGINFO_( System.ProgramFilesFolder, 'Path to Program Files' ) ;
                FontColor BROWN                                                       ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 195, 95 ButtonEx btnWinPath                                               ;
                Caption 'Get Windows Folder'                                      ;
-               Width 170                                                         ;
+               WIDTH 170                                                         ;
                Action MSGINFO_( System.WindowsFolder, 'Path to Windows folder' ) ;
                FontColor BROWN                                                   ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 240, 95 ButtonEx btnSysPath                                               ;
                Caption 'Get System Folder'                                       ;
-               Width 170                                                         ;
+               WIDTH 170                                                         ;
                Action MSGINFO_( System.SystemFolder, 'Path to System32 folder' ) ;
                FontColor BROWN                                                   ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
             @ 285, 95 ButtonEx btnTempPath                                        ;
                Caption 'Get Temp Folder'                                   ;
-               Width 170                                                   ;
+               WIDTH 170                                                   ;
                Action MSGINFO_( System.TempFolder, 'Path to Temp folder' ) ;
                FontColor BROWN                                             ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
          END PAGE
 
@@ -142,10 +142,10 @@ PROCEDURE Main
 
             @ 60, 110 ButtonEx btnDefPrinter                                         ;
                Caption 'Get Default Printer'                                  ;
-               Width 140                                                      ;
+               WIDTH 140                                                      ;
                Action MSGINFO_( System.DefaultPrinter, 'Printer by default' ) ;
                FontColor BROWN                                                ;
-               Backcolor WHITE
+               BACKCOLOR WHITE
 
          END PAGE
 

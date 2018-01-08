@@ -8,7 +8,7 @@ FUNCTION main_new_action
 
    IF Main.Query_Server.Enabled == .T.
 
-      Title       := 'New Record'
+      TITLE       := 'New Record'
 
       aLabels    := { 'First:'   , 'Last:'   ,'Street:'      ,'City:'   ,'State:'   ,'Zip:' , 'Hire Date'   , 'Married'   , 'Age'   , 'Salary'   }
       aInitValues    := { ''      , ''       , ''         , ''       , ''       ,''    , DATE()   , .F.      , 0   , 0      }

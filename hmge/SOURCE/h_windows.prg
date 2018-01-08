@@ -240,7 +240,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
    ENDIF
 
    IF ValType ( icon ) == 'U' .AND. ValType ( _HMG_DefaultIconName ) != 'U'
-      icon := _HMG_DefaultIconName
+      ICON := _HMG_DefaultIconName
    ENDIF
 
    _HMG_ActiveFormName := FormName
@@ -536,7 +536,7 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent, nosize, nos
    ENDIF
 
    IF ValType ( icon ) == 'U' .AND. ValType ( _HMG_DefaultIconName ) != 'U'
-      icon := _HMG_DefaultIconName
+      ICON := _HMG_DefaultIconName
    ENDIF
 
    IF _HMG_InplaceParentHandle <> 0
@@ -980,20 +980,20 @@ FUNCTION _SetWindowSizePos ( FormName, row, col, width, height )
 #endif
    GetWindowRect( hWnd, /*@*/actpos )
 
-   col := IFNIL( col, actpos [ 1 ], col )
-   row := IFNIL( row, actpos [ 2 ], row )
-   width := IFNIL( width, actpos [ 3 ] - actpos [ 1 ], width )
-   height := IFNIL( height, actpos [ 4 ] - actpos [ 2 ], height )
+   COL := IFNIL( col, actpos [ 1 ], col )
+   ROW := IFNIL( row, actpos [ 2 ], row )
+   WIDTH := IFNIL( width, actpos [ 3 ] - actpos [ 1 ], width )
+   HEIGHT := IFNIL( height, actpos [ 4 ] - actpos [ 2 ], height )
 
 #ifdef _PANEL_
    IF ISCHARACTER( FormName ) .AND. GetWindowType ( FormName ) == 'P'
       IF lspang
-         col += GetBorderWidth()
-         row += GetTitleHeight() + GetBorderHeight()
+         COL += GetBorderWidth()
+         ROW += GetTitleHeight() + GetBorderHeight()
       ENDIF
       actpos := ScreenToClient ( _HMG_aFormParentHandle [ GetFormIndex ( FormName ) ], col, row )
-      col := actpos [ 1 ]
-      row := actpos [ 2 ]
+      COL := actpos [ 1 ]
+      ROW := actpos [ 2 ]
    ENDIF
 #endif
 

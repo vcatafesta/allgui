@@ -7,127 +7,127 @@ FUNCTION DBUcreanew
    _DBUdbfsaved := .f.
    DEFINE WINDOW _DBUcreadbf at 0,0 width 600 height 500 title "Create a New DataBase Table (.dbf)" modal nosize nosysmenu
       DEFINE FRAME _DBUcurfield
-         row 10
-         col 10
-         width 550
-         height 150
+         ROW 10
+         COL 10
+         WIDTH 550
+         HEIGHT 150
          caption "Field"
       END FRAME
       DEFINE LABEL _DBUnamelabel
-         row 40
-         col 40
-         width 150
-         backcolor _DBUreddish
+         ROW 40
+         COL 40
+         WIDTH 150
+         BACKCOLOR _DBUreddish
          value "Name"
       END LABEL
       DEFINE LABEL _DBUtypelabel
-         row 40
-         col 195
-         backcolor _DBUreddish
-         width 100
+         ROW 40
+         COL 195
+         BACKCOLOR _DBUreddish
+         WIDTH 100
          value "Type"
       END LABEL
       DEFINE LABEL _DBUsizelabel
-         row 40
-         col 300
-         backcolor _DBUreddish
-         width 100
+         ROW 40
+         COL 300
+         BACKCOLOR _DBUreddish
+         WIDTH 100
          value "Size"
       END LABEL
       DEFINE LABEL _DBUdecimallabel
-         row 40
-         col 405
-         backcolor _DBUreddish
-         width 100
+         ROW 40
+         COL 405
+         BACKCOLOR _DBUreddish
+         WIDTH 100
          value "Decimals"
       END LABEL
       DEFINE TEXTBOX _DBUfieldname
-         row 70
-         col 40
-         width 150
-         backcolor _DBUreddish
+         ROW 70
+         COL 40
+         WIDTH 150
+         BACKCOLOR _DBUreddish
          uppercase .t.
          maxlength 10
          value ""
       END TEXTBOX
       DEFINE COMBOBOX _DBUfieldtype
-         row 70
-         col 195
+         ROW 70
+         COL 195
          items {"Character","Numeric","Date","Logical","Memo"}
-         width 100
+         WIDTH 100
          value 1
          on lostfocus DBUtypelostfocus()
          on enter DBUtypelostfocus()
          *      on change DBUtypelostfocus()
       END COMBOBOX
       DEFINE TEXTBOX _DBUfieldsize
-         row 70
-         col 300
-         backcolor _DBUreddish
+         ROW 70
+         COL 300
+         BACKCOLOR _DBUreddish
          value 10
          numeric .t.
-         width 100
+         WIDTH 100
          on lostfocus DBUsizelostfocus()
          rightalign .t.
       END TEXTBOX
       DEFINE TEXTBOX _DBUfielddecimals
-         row 70
-         col 405
-         backcolor _DBUreddish
+         ROW 70
+         COL 405
+         BACKCOLOR _DBUreddish
          value 0
          numeric .t.
-         width 100
+         WIDTH 100
          on lostfocus DBUdeclostfocus()
          rightalign .t.
       END TEXTBOX
       DEFINE BUTTON _DBUaddline
-         row 120
-         col 75
+         ROW 120
+         COL 75
          caption "Add"
-         width 100
+         WIDTH 100
          action DBUaddstruct()
       END BUTTON
       DEFINE BUTTON _DBUinsline
-         row 120
-         col 225
+         ROW 120
+         COL 225
          caption "Insert"
-         width 100
+         WIDTH 100
          action DBUinsstruct()
       END BUTTON
       DEFINE BUTTON _DBUdelline
-         row 120
-         col 400
+         ROW 120
+         COL 400
          caption "Delete"
-         width 100
+         WIDTH 100
          action DBUdelstruct()
       END BUTTON
       DEFINE FRAME _DBUstructframe
-         row 190
-         col 10
+         ROW 190
+         COL 10
          caption "Structure of DBF"
-         width 500
-         height 180
+         WIDTH 500
+         HEIGHT 180
       END FRAME
       DEFINE GRID _DBUstruct
-         row 220
-         col 40
+         ROW 220
+         COL 40
          headers {"Name","Type","Size","Decimals"}
          justify {0,0,1,1}
          widths {150,100,100,75}
-         backcolor _DBUyellowish
-         width 450
+         BACKCOLOR _DBUyellowish
+         WIDTH 450
          on dblclick DBUlineselected()
-         height 120
+         HEIGHT 120
       END GRID
       DEFINE BUTTON _DBUsavestruct
-         row 400
-         col 200
+         ROW 400
+         COL 200
          caption "Create"
          action DBUsavestructure()
       END BUTTON
       DEFINE BUTTON _DBUexitnew
-         row 400
-         col 400
+         ROW 400
+         COL 400
          caption "Exit"
          action DBUexitcreatenew()
       END BUTTON

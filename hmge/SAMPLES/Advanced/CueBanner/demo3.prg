@@ -46,33 +46,33 @@ FUNCTION Main
       END SPINNER
 
       DEFINE BUTTON btn_1
-         row 10
-         col 220
-         height 24
+         ROW 10
+         COL 220
+         HEIGHT 24
          caption "Get CueBanner"
          action MsgInfo( Form_1.Text_1.CueBanner )
       END BUTTON
 
       DEFINE BUTTON btn_2
-         row 40
-         col 220
-         height 24
+         ROW 40
+         COL 220
+         HEIGHT 24
          caption "Get CueBanner"
          action MsgInfo( GetProperty( "Form_1", "Text_2", "CueBanner" ) )
       END BUTTON
 
       DEFINE BUTTON btn_3
-         row 70
-         col 220
-         height 24
+         ROW 70
+         COL 220
+         HEIGHT 24
          caption "Get CueBanner"
          action MsgInfo( Form_1.Combo_1.CueBanner )
       END BUTTON
 
       DEFINE BUTTON btn_4
-         row 100
-         col 220
-         height 24
+         ROW 100
+         COL 220
+         HEIGHT 24
          caption "Get CueBanner"
          action MsgInfo( Form_1.Spinner_1.CueBanner )
       END BUTTON

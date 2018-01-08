@@ -148,13 +148,13 @@ PROCEDURE barre()
 
    DEFINE WINDOW GraphTest  ;
          At 0,0               ;
-         Width  largh_win     ;
-         Height altez_win     ;
-         Title m->titolo_mask ;
+         WIDTH  largh_win     ;
+         HEIGHT altez_win     ;
+         TITLE m->titolo_mask ;
          Main                 ;
-         Icon "Main"          ;
+         ICON "Main"          ;
          Nomaximize Nosize    ;
-         Backcolor m->colore_sfondo ;
+         BACKCOLOR m->colore_sfondo ;
          On Init DrawBarGraph ( )
 
       @ col_bottoni, 30 COMBOBOX Combo_1     ;
@@ -996,10 +996,10 @@ PROCEDURE torta
    ENDIF
 
    DEFINE WINDOW m at 0,0 ;
-         Width m->a_colo+40 ;
-         Height  m->a_riga +80 main;
-         Title titolo_mask ;
-         backcolor m->colore_sfondo
+         WIDTH m->a_colo+40 ;
+         HEIGHT  m->a_riga +80 main;
+         TITLE titolo_mask ;
+         BACKCOLOR m->colore_sfondo
       showpie_3d()
 
       @ pos_button ,20 Button Button_3d ;

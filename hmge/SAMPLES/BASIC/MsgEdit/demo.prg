@@ -745,7 +745,7 @@ FUNCTION MsgLogo( cImage, nSeconds, lRound )
    IF .Not. IsWindowDefined( _Logo )
       IF .Not. Empty( aImgInfo [BM_WIDTH] )
 
-         width := aImgInfo [BM_WIDTH] + GetBorderWidth()
+         WIDTH := aImgInfo [BM_WIDTH] + GetBorderWidth()
          height:= aImgInfo [BM_HEIGHT] + GetBorderHeight()
 
          DEFINE WINDOW _Logo   ;

@@ -23,12 +23,12 @@ FUNCTION fechamento_dia()
 
    DEFINE WINDOW form_fechamento;
          at 000,000;
-         width 400;
-         height 250;
-         title 'Fechamento do dia de trabalho';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 250;
+         TITLE 'Fechamento do dia de trabalho';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       @ 010,010 label lbl_001;
          of form_fechamento;
@@ -66,28 +66,28 @@ FUNCTION fechamento_dia()
       @ 040,010 datepicker dp_data;
          parent form_fechamento;
          value date();
-         width 150;
-         height 030;
+         WIDTH 150;
+         HEIGHT 030;
          font 'verdana' size 014
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_fechamento.height-090
+         COL 000
+         ROW form_fechamento.height-090
          value ''
-         width form_fechamento.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_fechamento.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_relatorio.bmp'
-         col form_fechamento.width-255
-         row form_fechamento.height-085
-         width 150
-         height 050
+         PICTURE path_imagens+'img_relatorio.bmp'
+         COL form_fechamento.width-255
+         ROW form_fechamento.height-085
+         WIDTH 150
+         HEIGHT 050
          caption 'Ok, imprimir'
          action relatorio()
          fontbold .T.
@@ -96,11 +96,11 @@ FUNCTION fechamento_dia()
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_sair.bmp'
-         col form_fechamento.width-100
-         row form_fechamento.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_sair.bmp'
+         COL form_fechamento.width-100
+         ROW form_fechamento.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_fechamento.release
          fontbold .T.

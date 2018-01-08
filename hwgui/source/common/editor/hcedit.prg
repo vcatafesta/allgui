@@ -989,8 +989,8 @@ METHOD AddFont( oFont, name, width, height , weight, ;
 
    IF oFont != Nil
       name := oFont:name
-      width := oFont:width
-      height := oFont:height
+      WIDTH := oFont:width
+      HEIGHT := oFont:height
       weight := oFont:weight
       CharSet := oFont:CharSet
       Italic := oFont:Italic

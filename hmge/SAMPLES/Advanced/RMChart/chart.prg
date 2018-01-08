@@ -36,10 +36,10 @@ FUNCTION Main()
 
    DEFINE WINDOW Win_1 ;
          At 0,0 ;
-         Width 480 ;
-         Height 330 ;
-         Title 'Usando RMChart com a MiniGUI' ;
-         Icon "Main" ;
+         WIDTH 480 ;
+         HEIGHT 330 ;
+         TITLE 'Usando RMChart com a MiniGUI' ;
+         ICON "Main" ;
          Main ;
          On Init fOpenActivex() ;
          On Size Ajust() ;

@@ -51,8 +51,8 @@ FUNCTION Main
       SetProperty( 'Form_1', 'TitleBar', .F. )
       SetProperty( 'Form_1', 'SysMenu', .F. )
 
-      Width := GetProperty( 'Form_1', 'width' )
-      Height := GetProperty( 'Form_1', 'height' )
+      WIDTH := GetProperty( 'Form_1', 'width' )
+      HEIGHT := GetProperty( 'Form_1', 'height' )
 
       DRAW LINE IN WINDOW Form_1 ;
          AT 0, 0 TO 0, Width ;

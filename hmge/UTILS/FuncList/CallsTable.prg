@@ -30,30 +30,30 @@ PROCEDURE CallsTable
 
    DEFINE WINDOW wConsole            ;
          At 132, 235                ;
-         Width 380                  ;
-         Height 390                 ;  /* was 350 */
-         Title aLangStrings[ 1, 2 ] ;
-         Icon 'STOCK'               ;
+         WIDTH 380                  ;
+         HEIGHT 390                 ;  /* was 350 */
+         TITLE aLangStrings[ 1, 2 ] ;
+         ICON 'STOCK'               ;
          Modal                      ;
          On init BuildList()
 
       @ 5, 5 EditBox edtConsole              ;
-         Height ( wConsole.Height - 80 ) ;  /* was 40 */
-         Width ( wConsole.Width - 20 )   ;
+         HEIGHT ( wConsole.Height - 80 ) ;  /* was 40 */
+         WIDTH ( wConsole.Width - 20 )   ;
          ReadOnly
 
       // GAL added (with what .PRG we're working now?)
       @ wConsole.edtConsole.Row + wConsole.edtConsole.Height + 5, 5 ;
          LABEL guworkConsole ;
          Value "" ;
-         Width ( wConsole.Width - 20 )
+         WIDTH ( wConsole.Width - 20 )
 
       @ wConsole.guworkConsole.Row + wConsole.guworkConsole.Height + 5, 5 ;
          ProgressBar guPbConsole ;
          Range 1, 100 ;
          Value 0 ;
-         Width ( wConsole.Width - 20 ) ;
-         Height 10
+         WIDTH ( wConsole.Width - 20 ) ;
+         HEIGHT 10
       // GAL
 
    END WINDOW
@@ -63,15 +63,15 @@ PROCEDURE CallsTable
 
    DEFINE WINDOW wCallsTable         ;
          At 132, 235                ;
-         Width 500                  ;
-         Height 380                 ;  /* was 350 */
-         Title aLangStrings[ 1, 2 ] ;
-         Icon 'STOCK'               ;
+         WIDTH 500                  ;
+         HEIGHT 380                 ;  /* was 350 */
+         TITLE aLangStrings[ 1, 2 ] ;
+         ICON 'STOCK'               ;
          Modal
 
       @ 5, 5 Grid grdList                                          ;
-         Width 480                                             ;
-         Height 310                                            ;
+         WIDTH 480                                             ;
+         HEIGHT 310                                            ;
          Headers { aLangStrings[ 3, 2 ], aLangStrings[ 4, 2 ], ;
          aLangStrings[ 5, 2 ], aLangStrings[ 6, 2 ]  ;
          }                                             ;
@@ -83,14 +83,14 @@ PROCEDURE CallsTable
          Button guExpAll ;
          Caption "Export To HTML (all)" ;
          Action ExpHTML( 0, aLangStrings ) ;
-         Width 200
+         WIDTH 200
 
       @ wCallsTable.guExpAll.Row, ;
          wCallsTable.guExpAll.Col + wCallsTable.guExpAll.Width + 5 ;
          Button ExpNone ;
          Caption "Export To HTML (UNcalled only)" ;
          Action ExpHTML( 1, aLangStrings ) ;
-         Width 200
+         WIDTH 200
 
       On key Escape of wCallsTable Action wCallsTable.Release
       On key Alt+X  of wCallsTable Action ReleaseAllWindows()

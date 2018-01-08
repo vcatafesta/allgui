@@ -19,51 +19,51 @@ FUNCTION Main
          FONT "Tahoma" SIZE 8
 
       DEFINE LABEL lbl_1
-         row 10
-         col 10
+         ROW 10
+         COL 10
          value "Name:"
          autosize .t.
       END LABEL
       define btntextbox name
-      row 26
-      col 10
-      width 318
-      height 21
+      ROW 26
+      COL 10
+      WIDTH 318
+      HEIGHT 21
       cuebanner "Enter your full name here"
       action msgbox('Click!')
    END btntextbox
    DEFINE FRAME frm_1
-      row 54
-      col 10
-      width 318
-      height 64
+      ROW 54
+      COL 10
+      WIDTH 318
+      HEIGHT 64
       caption "Cue banner"
    END FRAME
    DEFINE LABEL lbl_2
-      row 70
-      col 22
+      ROW 70
+      COL 22
       value "Cue text:"
       autosize .t.
    END LABEL
    DEFINE TEXTBOX text
-      row 86
-      col 22
-      width 167
-      height 21
+      ROW 86
+      COL 22
+      WIDTH 167
+      HEIGHT 21
    END TEXTBOX
    DEFINE BUTTON btn_1
-      row 86
-      col 198
-      width 58
-      height 21
+      ROW 86
+      COL 198
+      WIDTH 58
+      HEIGHT 21
       caption "Set"
       action btnSet_click()
    END BUTTON
    DEFINE BUTTON btn_2
-      row 86
-      col 262
-      width 56
-      height 21
+      ROW 86
+      COL 262
+      WIDTH 56
+      HEIGHT 21
       caption "Clear"
       action cue.name.cuebanner := " "
    END BUTTON

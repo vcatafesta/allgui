@@ -179,8 +179,8 @@ STATIC FUNCTION SelectIndex()
       i ++
    ENDDO
 
-   width := Min( oBrw:width * ( iLen + 20 ), hwg_Getdesktopwidth() )
-   height := oBrw:height * ( Len( aIndex ) + 2 )
+   WIDTH := Min( oBrw:width * ( iLen + 20 ), hwg_Getdesktopwidth() )
+   HEIGHT := oBrw:height * ( Len( aIndex ) + 2 )
 
    INIT DIALOG oDlg TITLE "Select Order" ;
       AT 0,0                  ;

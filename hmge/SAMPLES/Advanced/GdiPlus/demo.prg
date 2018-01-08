@@ -31,8 +31,8 @@ PROCEDURE Main()
 
    DEFINE WINDOW Form_Main ;
          at 0,0 ;
-         width 320 height 240 ;
-         title 'GDI+: Save Bitmap To File Demo' ;
+         WIDTH 320 height 240 ;
+         TITLE 'GDI+: Save Bitmap To File Demo' ;
          main ;
          nomaximize nosize
 

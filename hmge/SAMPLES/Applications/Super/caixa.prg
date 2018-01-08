@@ -13,20 +13,20 @@ FUNCTION caixa()
 
    DEFINE WINDOW form_caixa;
          at 000,000;
-         width 800;
-         height 605;
-         title 'Movimentação do Caixa';
-         icon path_imagens+'icone.ico';
+         WIDTH 800;
+         HEIGHT 605;
+         TITLE 'Movimentação do Caixa';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
-         picture path_imagens+'incluir.bmp'
-         col 005
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'incluir.bmp'
+         COL 005
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F5 Incluir'
          action dados(1)
          fontname 'verdana'
@@ -36,14 +36,14 @@ FUNCTION caixa()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_alterar
-         picture path_imagens+'alterar.bmp'
-         col 107
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'alterar.bmp'
+         COL 107
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F6 Alterar'
          action dados(2)
          fontname 'verdana'
@@ -53,14 +53,14 @@ FUNCTION caixa()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_excluir
-         picture path_imagens+'excluir.bmp'
-         col 209
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'excluir.bmp'
+         COL 209
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F7 Excluir'
          action excluir()
          fontname 'verdana'
@@ -70,14 +70,14 @@ FUNCTION caixa()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_atualizar
-         picture path_imagens+'atualizar.bmp'
-         col 311
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'atualizar.bmp'
+         COL 311
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Atualizar'
          action atualizar()
          fontname 'verdana'
@@ -87,14 +87,14 @@ FUNCTION caixa()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
-         picture path_imagens+'sair.bmp'
-         col 413
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'sair.bmp'
+         COL 413
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'ESC Voltar'
          action form_caixa.release
          fontname 'verdana'
@@ -104,22 +104,22 @@ FUNCTION caixa()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_caixa
             parent form_caixa
-            col 000
-            row 105
-            width 795
-            height 430
+            COL 000
+            ROW 105
+            WIDTH 795
+            HEIGHT 430
             headers {'id','Data','Histórico','Entradas','Saídas'}
             widths {001,120,400,120,120}
             fontname 'verdana'
             fontsize 010
             fontbold .T.
-            backcolor _amarelo_001
+            BACKCOLOR _amarelo_001
             fontcolor _preto_001
             ondblclick dados(2)
          END GRID
@@ -127,8 +127,8 @@ FUNCTION caixa()
 
       DEFINE LABEL rodape_001
          parent form_caixa
-         col 005
-         row 545
+         COL 005
+         ROW 545
          value 'Escolha o período'
          autosize .T.
          fontname 'verdana'
@@ -139,8 +139,8 @@ FUNCTION caixa()
       END LABEL
       DEFINE LABEL rodape_002
          parent form_caixa
-         col 250
-         row 545
+         COL 250
+         ROW 545
          value 'até'
          autosize .T.
          fontname 'verdana'
@@ -152,25 +152,25 @@ FUNCTION caixa()
       @ 540,140 datepicker dp_inicio;
          parent form_caixa;
          value date();
-         width 100;
+         WIDTH 100;
          font 'verdana' size 010
       @ 540,280 datepicker dp_final;
          parent form_caixa;
          value date();
-         width 100;
+         WIDTH 100;
          font 'verdana' size 010
       @ 540,390 buttonex botao_filtrar;
          parent form_caixa;
          caption 'Filtrar';
-         width 100 height 030;
+         WIDTH 100 height 030;
          action atualizar();
          bold;
          tooltip 'Clique aqui para mostrar as informações com base no período selecionado'
 
       DEFINE LABEL rodape_003
          parent form_caixa
-         col form_caixa.width - 270
-         row 545
+         COL form_caixa.width - 270
+         ROW 545
          value 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
          fontname 'verdana'
@@ -226,12 +226,12 @@ STATIC FUNCTION dados(parametro)
 
    DEFINE WINDOW form_dados;
          at 000,000;
-         width 325;
-         height 270;
-         title (titulo);
-         icon path_imagens+'icone.ico';
+         WIDTH 325;
+         HEIGHT 270;
+         TITLE (titulo);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * entrada de dados
       @ 010,005 label lbl_001;
@@ -244,11 +244,11 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_data;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          date
       @ 060,005 label lbl_002;
@@ -261,12 +261,12 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 080,005 textbox tbox_002;
          of form_dados;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_historico;
          maxlength 030;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 110,005 label lbl_003;
@@ -279,13 +279,13 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 130,005 getbox tbox_003;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_entrada;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
       @ 110,140 label lbl_004;
          of form_dados;
          value 'Saída';
@@ -296,32 +296,32 @@ STATIC FUNCTION dados(parametro)
          transparent
       @ 130,140 getbox tbox_004;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_saida;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_dados.height-090
+         COL 000
+         ROW form_dados.height-090
          value ''
-         width form_dados.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_dados.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_dados.width-225
-         row form_dados.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_dados.width-225
+         ROW form_dados.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar(parametro)
          fontbold .T.
@@ -330,11 +330,11 @@ STATIC FUNCTION dados(parametro)
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_dados.width-100
-         row form_dados.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_dados.width-100
+         ROW form_dados.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_dados.release
          fontbold .T.

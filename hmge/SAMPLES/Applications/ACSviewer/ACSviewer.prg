@@ -41,7 +41,7 @@ PROCEDURE main()
    LOCAL aAnimate := LoadAnimArray()
    LOCAL aAgents := GetAgentsAvailables()
    LOCAL mVar := GetSysColor( COLOR_WINDOW ), ;
-      backcolor := { GetRed(mVar), GetGreen(mVar), GetBlue(mVar) }
+      BACKCOLOR := { GetRed(mVar), GetGreen(mVar), GetBlue(mVar) }
    LOCAL cRegKey := "Software\Grigory Filatov\ACS Viewer\Preferences"
 
    Aadd( aOptions, {"AgentSize", 2} )

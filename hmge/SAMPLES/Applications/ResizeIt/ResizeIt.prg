@@ -235,8 +235,8 @@ PROCEDURE ResizeForm()
    IF n > 0
 
       FormHandle := aList[ n ][ 2 ]
-      Width   := iif(nSize = 1, 640, iif(nSize = 2, 800, iif(nSize = 3, 1024, nDefaultWidth )))
-      Height   := iif(nSize = 1, 480, iif(nSize = 2, 600, iif(nSize = 3, 768, nDefaultHeight )))
+      WIDTH   := iif(nSize = 1, 640, iif(nSize = 2, 800, iif(nSize = 3, 1024, nDefaultWidth )))
+      HEIGHT   := iif(nSize = 1, 480, iif(nSize = 2, 600, iif(nSize = 3, 768, nDefaultHeight )))
 
       IF IsIconic( FormHandle )
          _Restore( FormHandle )
@@ -249,7 +249,7 @@ PROCEDURE ResizeForm()
       ENDIF
 
       IF lStart
-         Height -= GetSystemMetrics( SM_CYMINSPACING )
+         HEIGHT -= GetSystemMetrics( SM_CYMINSPACING )
          SetWindowHeight( FormHandle, Height )
       ENDIF
 

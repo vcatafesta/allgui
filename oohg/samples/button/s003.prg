@@ -1,48 +1,40 @@
 /*
- * Button Sample n° 3
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to display images in buttons.
- * It also serves as a test case for the TButton class.
- *
- * Buttons can show ICO and BMP images of any size (they are shown in
- * their actual size).
- *
- * Transparency:
- *
- * ICO images:
- * a. color depth 24 bpp + alpha channel, or
- * b. for other color depths, the BLACK color will be transparent.
- *
- * BMP images:
- * a. color depth not greater than 8 bpp, and
- * b. the color of the top-left pixel will be transparent
- * c. if this color it at index 0 in the image's palette.
- *
- * JPG/JPEG/GIF images:
- * a. whatever transparency is defined.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * You can download the resource file and the images from
- * https://github.com/fyurisich/OOHG_Samples/tree/master/English/Samples/Button
- */
+* Button Sample n° 3
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to display images in buttons.
+* It also serves as a test case for the TButton class.
+* Buttons can show ICO and BMP images of any size (they are shown in
+* their actual size).
+* Transparency:
+* ICO images:
+* a. color depth 24 bpp + alpha channel, or
+* b. for other color depths, the BLACK color will be transparent.
+* BMP images:
+* a. color depth not greater than 8 bpp, and
+* b. the color of the top-left pixel will be transparent
+* c. if this color it at index 0 in the image's palette.
+* JPG/JPEG/GIF images:
+* a. whatever transparency is defined.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* You can download the resource file and the images from
+* https://github.com/fyurisich/OOHG_Samples/tree/master/English/Samples/Button
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main()
 
    DEFINE WINDOW FormMain ;
-      AT 0,0 ;
-      WIDTH 258 ;
-      HEIGHT 100 ;
-      MAIN ;
-      NOMINIMIZE ;
-      NOMAXIMIZE ;
-      TITLE "ooHG - Images in Buttons" ;
+         AT 0,0 ;
+         WIDTH 258 ;
+         HEIGHT 100 ;
+         MAIN ;
+         NOMINIMIZE ;
+         NOMAXIMIZE ;
+         TITLE "ooHG - Images in Buttons" ;
 
       @ 20, 20 BUTTON But_1 ;
          CAPTION "With Caption" ;
@@ -62,19 +54,19 @@ FUNCTION Main()
    CENTER WINDOW FormMain
    ACTIVATE WINDOW FormMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ShowForm1
 
    // Buttons with image and caption
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 558 ;
-      HEIGHT 450 ;
-      NOMINIMIZE ;
-      NOMAXIMIZE ;
-      TITLE "ooHG - Images in Buttons" ;
+         AT 0,0 ;
+         WIDTH 558 ;
+         HEIGHT 450 ;
+         NOMINIMIZE ;
+         NOMAXIMIZE ;
+         TITLE "ooHG - Images in Buttons" ;
 
       // First column: ICOs from file
 
@@ -218,19 +210,19 @@ FUNCTION ShowForm1
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ShowForm2
 
    // Buttons with image and no caption
 
    DEFINE WINDOW Form_2 ;
-      AT 0,0 ;
-      WIDTH 558 ;
-      HEIGHT 450 ;
-      NOMINIMIZE ;
-      NOMAXIMIZE ;
-      TITLE "ooHG - Buttons with Image, OOHGDRAW, without Caption" ;
+         AT 0,0 ;
+         WIDTH 558 ;
+         HEIGHT 450 ;
+         NOMINIMIZE ;
+         NOMAXIMIZE ;
+         TITLE "ooHG - Buttons with Image, OOHGDRAW, without Caption" ;
 
       // First column: ICOs from file
 
@@ -374,8 +366,8 @@ FUNCTION ShowForm2
    CENTER WINDOW Form_2
    ACTIVATE WINDOW Form_2
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */

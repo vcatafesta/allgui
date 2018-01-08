@@ -1168,10 +1168,10 @@ FUNCTION hwg_hfrm_FontFromXML( oXmlNode )
    LOCAL under := oXmlNode:GetAttribute( "underline" )
 
    IF width != NIL
-      width := Val( width )
+      WIDTH := Val( width )
    ENDIF
    IF height != NIL
-      height := Val( height )
+      HEIGHT := Val( height )
    ENDIF
    IF weight != NIL
       weight := Val( weight )

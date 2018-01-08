@@ -114,13 +114,13 @@ PROCEDURE Proc_ON_PAINT
    hDC := BT_CreateDC ("Win1", BT_HDC_INVALIDCLIENTAREA, @BTstruct)
 
    IF nMode = BT_COPY
-      Row := -Win1.VscrollBar.value
-      Col := -Win1.HscrollBar.value
+      ROW := -Win1.VscrollBar.value
+      COL := -Win1.HscrollBar.value
       Width1 := 1000
       Height1 := 1000
    ELSE
-      Row := 0
-      Col := 0
+      ROW := 0
+      COL := 0
       Width1 := Width
       Height1 := Height
    ENDIF

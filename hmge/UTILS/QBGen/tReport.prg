@@ -450,14 +450,14 @@ PROCEDURE Treport(act)   // Test the Report
    NEXT
 
    Inde_On := aGrpby[Form_2.Grid_3.Cell( 11, 2 )]
-   Title :=  Form_2.Title1.value
+   TITLE :=  Form_2.Title1.value
 
    IF !empty(Form_2.Grid_3.Cell( 1, 2 ) )
       cGraphic := Form_2.Grid_3.Cell( 1, 2 )
    ENDIF
 
    IF !empty( Form_2.Title2.value )
-      Title := Form_2.Title1.value+"|"+Form_2.title2.value
+      TITLE := Form_2.Title1.value+"|"+Form_2.title2.value
    ENDIF
 
    FOR EACH ni in aHeaders1
@@ -491,7 +491,7 @@ PROCEDURE Treport(act)   // Test the Report
          ENDIF
       ENDIF
       EasyReport (      ;
-         Title     ,;                                                 // Title
+         TITLE     ,;                                                 // Title
          aheaders1 ,;                                                 // Header 1
          aheaders2 ,;                                                 // Header 2
          a         ,;                                                 // Fields

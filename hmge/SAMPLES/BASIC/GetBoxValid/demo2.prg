@@ -13,7 +13,7 @@ FUNCTION main
 
    DEFINE WINDOW form_1 ;
          at 0,0 width 500 height 350 ;
-         title "Getbox Valid demo 2 by Jack Daniels" ;
+         TITLE "Getbox Valid demo 2 by Jack Daniels" ;
          main ;
          on interactiveclose CheckValids(1)
 

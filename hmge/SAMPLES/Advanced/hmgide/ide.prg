@@ -763,8 +763,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE BUTTON &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Caption      cVar
          OnClick      NIL
       END BUTTON
@@ -776,8 +776,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE CHECKBOX &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Caption      cVar
          OnClick      NIL
       END CHECKBOX
@@ -791,10 +791,10 @@ PROCEDURE AddControl( cType )
 
       DEFINE LISTBOX &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
-         Width      100
-         Height      100
+         ROW      nCurrentRow
+         COL      nCurrentCol
+         WIDTH      100
+         HEIGHT      100
          Items      {cVar}
       END LISTBOX
 
@@ -805,10 +805,10 @@ PROCEDURE AddControl( cType )
 
       DEFINE COMBOBOX &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
-         Width      100
-         Height      100
+         ROW      nCurrentRow
+         COL      nCurrentCol
+         WIDTH      100
+         HEIGHT      100
          Items      {cVar}
          Value      1
       END COMBOBOX
@@ -820,8 +820,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE CHECKBUTTON &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Caption      cVar
          Value      .F.
       END CHECKBUTTON
@@ -835,8 +835,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE GRID &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Headers      { '', '' }
          Widths      { 100, 100 }
       END GRID
@@ -848,8 +848,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE SLIDER &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Rangemin   1
          Rangemax   10
          Value      5
@@ -869,8 +869,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE SPINNER &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Rangemin   1
          Rangemax   10
          Value      5
@@ -883,11 +883,11 @@ PROCEDURE AddControl( cType )
 
       DEFINE BUTTON &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
-         Width      30
-         Height      30
-         Picture      'bmp\image.bmp'
+         ROW      nCurrentRow
+         COL      nCurrentCol
+         WIDTH      30
+         HEIGHT      30
+         PICTURE      'bmp\image.bmp'
       END BUTTON
 
    ELSEIF cType == 'TREE'
@@ -915,8 +915,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE DATEPICKER &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Value      date()
       END DATEPICKER
 
@@ -927,8 +927,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE TEXTBOX &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Value      cVar
       END TEXTBOX
 
@@ -941,10 +941,10 @@ PROCEDURE AddControl( cType )
 
       DEFINE EDITBOX &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
-         Width      120
-         Height      120
+         ROW      nCurrentRow
+         COL      nCurrentCol
+         WIDTH      120
+         HEIGHT      120
          Value      cVar
       END EDITBOX
 
@@ -955,8 +955,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE LABEL &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Value      cVar
       END LABEL
 
@@ -967,11 +967,11 @@ PROCEDURE AddControl( cType )
 
       DEFINE BUTTON &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
-         Width      30
-         Height      30
-         Picture      'bmp\timer.bmp'
+         ROW      nCurrentRow
+         COL      nCurrentCol
+         WIDTH      30
+         HEIGHT      30
+         PICTURE      'bmp\timer.bmp'
       END BUTTON
 
    ELSEIF cType == 'RADIOGROUP'
@@ -981,10 +981,10 @@ PROCEDURE AddControl( cType )
 
       DEFINE RADIOGROUP &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
-         Width      100
-         Height      150
+         ROW      nCurrentRow
+         COL      nCurrentCol
+         WIDTH      100
+         HEIGHT      150
          Options      {"New 1","New 2","New 3"}
          Value      1
          Caption      cVar
@@ -999,10 +999,10 @@ PROCEDURE AddControl( cType )
 
       DEFINE FRAME &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
-         Width      200
-         Height      200
+         ROW      nCurrentRow
+         COL      nCurrentCol
+         WIDTH      200
+         HEIGHT      200
          Caption      cVar
       END FRAME
 
@@ -1032,11 +1032,11 @@ PROCEDURE AddControl( cType )
 
       DEFINE BUTTON &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
-         Width      30
-         Height      30
-         Picture      'bmp\animatebox.bmp'
+         ROW      nCurrentRow
+         COL      nCurrentCol
+         WIDTH      30
+         HEIGHT      30
+         PICTURE      'bmp\animatebox.bmp'
       END BUTTON
 
    ELSEIF cType == 'HYPERLINK'
@@ -1046,8 +1046,8 @@ PROCEDURE AddControl( cType )
 
       DEFINE HYPERLINK &cVar
          Parent      oEdit
-         Row      nCurrentRow
-         Col      nCurrentCol
+         ROW      nCurrentRow
+         COL      nCurrentCol
          Value      cVar
          Address      'http://hmgextended.com'
       END HYPERLINK
@@ -1061,10 +1061,10 @@ PROCEDURE AddControl( cType )
 
       DEFINE MONTHCALENDAR &cVar
       Parent      oEdit
-      Row      nCurrentRow
-      Col      nCurrentCol
-      Width      227
-      Height      162
+      ROW      nCurrentRow
+      COL      nCurrentCol
+      WIDTH      227
+      HEIGHT      162
       Value      CTOD("  /  /  ")
    END MONTHCALENDAR
 
@@ -1075,9 +1075,9 @@ ELSEIF cType == 'PROGRESSBAR'
 
    DEFINE PROGRESSBAR &cVar
       Parent      oEdit
-      Row      nCurrentRow
-      Col      nCurrentCol
-      Width      200
+      ROW      nCurrentRow
+      COL      nCurrentCol
+      WIDTH      200
       Rangemin   1
       Rangemax   100
       Value      50
@@ -1091,9 +1091,9 @@ ELSEIF cType == 'IPADDRESS'
 
    DEFINE IPADDRESS &cVar
       Parent      oEdit
-      Row      nCurrentRow
-      Col      nCurrentCol
-      Width      210
+      ROW      nCurrentRow
+      COL      nCurrentCol
+      WIDTH      210
       Value      {255,112,215,32}
    END IPADDRESS
 
@@ -1106,10 +1106,10 @@ ELSEIF cType == 'BROWSE'
 
    DEFINE BROWSE &cVar
       Parent      oEdit
-      Row      nCurrentRow
-      Col      nCurrentCol
-      Width      200
-      Height      200
+      ROW      nCurrentRow
+      COL      nCurrentCol
+      WIDTH      200
+      HEIGHT      200
       WorkArea   demo
       Headers      { 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Salary' , 'Notes' }
       Widths      { 100 , 100 , 100 , 100 , 100 , 250 }

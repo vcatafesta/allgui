@@ -21,7 +21,7 @@ FUNCTION main()
 
    DEFINE WINDOW  Form_1 ;
          clientarea  400, 200 ;
-         title       'VSplitter demo' ;
+         TITLE       'VSplitter demo' ;
          windowtype  MAIN ;
          on release  VSplitter_Release( Form_1.Handle )
 
@@ -33,15 +33,15 @@ FUNCTION main()
       nBorder := 4
 
       @ 0, 0 editbox EditBox_1 ;
-         width    nXPos ;
-         height   h ;
+         WIDTH    nXPos ;
+         HEIGHT   h ;
          value    LOREMIPSUM_L ;
          tooltip  'EditBox_1' ;
          nohscroll
 
       @ 0, nXPos + nBorder editbox EditBox_2 ;
-         width    w  - ( nXPos + nBorder );
-         height   h ;
+         WIDTH    w  - ( nXPos + nBorder );
+         HEIGHT   h ;
          value    LOREMIPSUM_R ;
          tooltip  'EditBox_2' ;
          nohscroll

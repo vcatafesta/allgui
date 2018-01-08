@@ -9,11 +9,11 @@ MINIPRINT DEMO
 FUNCTION Main
 
    DEFINE WINDOW Win1         ;
-         Row   10         ;
-         Col   10         ;
-         Width   400         ;
-         Height   400         ;
-         Title   'Miniprint Demo'   ;
+         ROW   10         ;
+         COL   10         ;
+         WIDTH   400         ;
+         HEIGHT   400         ;
+         TITLE   'Miniprint Demo'   ;
          MAIN            ;
          On Init   Win1.Center()
 

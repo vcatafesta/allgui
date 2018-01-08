@@ -13,20 +13,20 @@ FUNCTION crec()
 
    DEFINE WINDOW form_crec;
          at 000,000;
-         width 1000;
-         height 680;
-         title 'Contas a Receber';
-         icon path_imagens+'icone.ico';
+         WIDTH 1000;
+         HEIGHT 680;
+         TITLE 'Contas a Receber';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir_2
-         picture path_imagens+'incluir.bmp'
-         col 005
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'incluir.bmp'
+         COL 005
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F5 Incluir'
          action dados_crec(1)
          fontname 'verdana'
@@ -36,14 +36,14 @@ FUNCTION crec()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_alterar_2
-         picture path_imagens+'alterar.bmp'
-         col 107
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'alterar.bmp'
+         COL 107
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F6 Alterar'
          action dados_crec(2)
          fontname 'verdana'
@@ -53,14 +53,14 @@ FUNCTION crec()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_excluir_2
-         picture path_imagens+'excluir.bmp'
-         col 209
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'excluir.bmp'
+         COL 209
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'F7 Excluir'
          action excluir_crec()
          fontname 'verdana'
@@ -70,14 +70,14 @@ FUNCTION crec()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_atualizar_2
-         picture path_imagens+'atualizar.bmp'
-         col 311
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'atualizar.bmp'
+         COL 311
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'Atualizar'
          action atualizar_crec()
          fontname 'verdana'
@@ -87,14 +87,14 @@ FUNCTION crec()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair_2
-         picture path_imagens+'sair.bmp'
-         col 413
-         row 002
-         width 100
-         height 100
+         PICTURE path_imagens+'sair.bmp'
+         COL 413
+         ROW 002
+         WIDTH 100
+         HEIGHT 100
          caption 'ESC Voltar'
          action form_crec.release
          fontname 'verdana'
@@ -104,29 +104,29 @@ FUNCTION crec()
          vertical .T.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       DEFINE GRID grid_crec
          parent form_crec
-         col 005
-         row 105
-         width 980
-         height 500
+         COL 005
+         ROW 105
+         WIDTH 980
+         HEIGHT 500
          headers {'id','Vencimento','Cliente','Forma Recebimento','Valor R$','Nº Documento','Observação'}
          widths {001,120,300,200,120,120,200}
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _amarelo_001
+         BACKCOLOR _amarelo_001
          fontcolor _preto_001
          ondblclick dados_crec(2)
       END GRID
 
       DEFINE LABEL rodape_001_2
          parent form_crec
-         col 005
-         row 615
+         COL 005
+         ROW 615
          value 'Escolha o período'
          autosize .T.
          fontname 'verdana'
@@ -137,8 +137,8 @@ FUNCTION crec()
       END LABEL
       DEFINE LABEL rodape_002_2
          parent form_crec
-         col 250
-         row 615
+         COL 250
+         ROW 615
          value 'até'
          autosize .T.
          fontname 'verdana'
@@ -150,25 +150,25 @@ FUNCTION crec()
       @ 610,140 datepicker dp_inicio_2;
          parent form_crec;
          value date();
-         width 100;
+         WIDTH 100;
          font 'verdana' size 010
       @ 610,280 datepicker dp_final_2;
          parent form_crec;
          value date();
-         width 100;
+         WIDTH 100;
          font 'verdana' size 010
       @ 610,390 buttonex botao_filtrar_2;
          parent form_crec;
          caption 'Filtrar';
-         width 100 height 030;
+         WIDTH 100 height 030;
          action atualizar_crec();
          bold;
          tooltip 'Clique aqui para mostrar as informações com base no período selecionado'
 
       DEFINE LABEL rodape_003_2
          parent form_crec
-         col form_crec.width - 270
-         row 615
+         COL form_crec.width - 270
+         ROW 615
          value 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
          fontname 'verdana'
@@ -225,12 +225,12 @@ STATIC FUNCTION dados_crec(parametro)
 
    DEFINE WINDOW form_dados;
          at 000,000;
-         width 430;
-         height 330;
-         title (titulo);
-         icon path_imagens+'icone.ico';
+         WIDTH 430;
+         HEIGHT 330;
+         TITLE (titulo);
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * entrada de dados
       @ 010,005 label lbl_001;
@@ -243,11 +243,11 @@ STATIC FUNCTION dados_crec(parametro)
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_cliente;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_cliente('form_dados','tbox_001')
@@ -269,11 +269,11 @@ STATIC FUNCTION dados_crec(parametro)
          transparent
       @ 080,005 textbox tbox_002;
          of form_dados;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_forma;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on enter procura_forma_recebimento('form_dados','tbox_002')
@@ -296,11 +296,11 @@ STATIC FUNCTION dados_crec(parametro)
          transparent
       @ 130,005 textbox tbox_003;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_data;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          date
 
@@ -314,13 +314,13 @@ STATIC FUNCTION dados_crec(parametro)
          transparent
       @ 130,140 getbox tbox_004;
          of form_dados;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_valor;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@E 999,999.99'
+         PICTURE '@E 999,999.99'
 
       @ 110,270 label lbl_005;
          of form_dados;
@@ -332,12 +332,12 @@ STATIC FUNCTION dados_crec(parametro)
          transparent
       @ 130,270 textbox tbox_005;
          of form_dados;
-         height 027;
-         width 150;
+         HEIGHT 027;
+         WIDTH 150;
          value x_numero;
          maxlength 015;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
 
@@ -351,33 +351,33 @@ STATIC FUNCTION dados_crec(parametro)
          transparent
       @ 180,005 textbox tbox_006;
          of form_dados;
-         height 027;
-         width 200;
+         HEIGHT 027;
+         WIDTH 200;
          value x_obs;
          maxlength 030;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_dados.height-090
+         COL 000
+         ROW form_dados.height-090
          value ''
-         width form_dados.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_dados.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_dados.width-225
-         row form_dados.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_dados.width-225
+         ROW form_dados.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar_crec(parametro)
          fontbold .T.
@@ -386,11 +386,11 @@ STATIC FUNCTION dados_crec(parametro)
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_dados.width-100
-         row form_dados.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_dados.width-100
+         ROW form_dados.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_dados.release
          fontbold .T.
@@ -556,16 +556,16 @@ STATIC FUNCTION getcode_clientes(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -575,19 +575,19 @@ STATIC FUNCTION getcode_clientes(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_clientes()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea clientes
@@ -596,7 +596,7 @@ STATIC FUNCTION getcode_clientes(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}
@@ -675,16 +675,16 @@ STATIC FUNCTION getcode_formas_recebimento(value)
 
    DEFINE WINDOW form_pesquisa;
          at 000,000;
-         width 490;
-         height 500;
-         title 'Pesquisa por nome';
-         icon path_imagens+'icone.ico';
+         WIDTH 490;
+         HEIGHT 500;
+         TITLE 'Pesquisa por nome';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL label_pesquisa
-         col 005
-         row 440
+         COL 005
+         ROW 440
          value 'Buscar'
          autosize .T.
          fontname 'verdana'
@@ -694,19 +694,19 @@ STATIC FUNCTION getcode_formas_recebimento(value)
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
-         col 075
-         row 440
-         width 400
+         COL 075
+         ROW 440
+         WIDTH 400
          maxlength 040
          onchange find_formas_recebimento()
          uppercase .T.
       END TEXTBOX
 
       DEFINE BROWSE browse_pesquisa
-         row 002
-         col 002
-         width 480
-         height 430
+         ROW 002
+         COL 002
+         WIDTH 480
+         HEIGHT 430
          headers {'Código','Nome'}
          widths {080,370}
          workarea formas_recebimento
@@ -715,7 +715,7 @@ STATIC FUNCTION getcode_formas_recebimento(value)
          fontname 'verdana'
          fontsize 010
          fontbold .T.
-         backcolor _ciano_001
+         BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
          readonly {.T.,.T.}

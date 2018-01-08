@@ -51,7 +51,7 @@ Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 FUNCTION _DefineRadioGroup ( ControlName, ParentFormName, x, y, aOptions, Value, ;
       fontname, fontsize, tooltip, change, width, ;
       spacing, HelpId, invisible, notabstop, bold, italic, underline, strikeout, ;
-      backcolor , fontcolor , transparent , horizontal , leftjustify , aReadOnly , aId )
+      BACKCOLOR , fontcolor , transparent , horizontal , leftjustify , aReadOnly , aId )
    LOCAL i , ParentFormHandle , blInit , mVar , BackCol , BackRow , k , Style
    LOCAL aHandles[ 0 ], ControlHandle, FontHandle, n, lDialogInMemory
 
@@ -138,7 +138,7 @@ FUNCTION _DefineRadioGroup ( ControlName, ParentFormName, x, y, aOptions, Value,
 
          x := GetWindowCol ( Controlhandle )
          y := GetWindowRow ( Controlhandle )
-         width := GetWindowWidth  ( Controlhandle )
+         WIDTH := GetWindowWidth  ( Controlhandle )
          spacing := GetWindowHeight ( Controlhandle )
 
          FOR i := 1 TO Len ( aId )

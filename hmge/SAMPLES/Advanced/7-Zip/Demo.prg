@@ -86,25 +86,25 @@ PROCEDURE Main
 
    DEFINE WINDOW wMain                                         ;
          At 0, 0                                               ;
-         Width 553 + iif( IsSeven(), GetBorderWidth() -2, 0 )  ;
-         Height 432 + iif( IsSeven(), GetBorderHeight() -2, 0 );
-         Title 'Demo 7-Zip interaction'                        ;
-         Icon 'main.ico'                                       ;
+         WIDTH 553 + iif( IsSeven(), GetBorderWidth() -2, 0 )  ;
+         HEIGHT 432 + iif( IsSeven(), GetBorderHeight() -2, 0 );
+         TITLE 'Demo 7-Zip interaction'                        ;
+         ICON 'main.ico'                                       ;
          Main                                                  ;
          NoMaximize
 
       DEFINE TAB tbMain ;
             at 5, 5   ;
-            Width 535 ;
-            Height 370
+            WIDTH 535 ;
+            HEIGHT 370
 
          DEFINE PAGE 'Archive'
 
             // Отображаем содержимое выбранного архива.
 
             @ 30, 5 Grid grdContent            ;
-               Width 520                  ;
-               Height 285                 ;
+               WIDTH 520                  ;
+               HEIGHT 285                 ;
                Headers { 'Name' }         ;
                Widths { 400 }             ;
                Multiselect
@@ -136,14 +136,14 @@ PROCEDURE Main
 
             @ 30, 5 Frame frmSelectTest   ;
                Caption 'Select test' ;
-               Width 520             ;
-               Height 65             ;
+               WIDTH 520             ;
+               HEIGHT 65             ;
                Bold                  ;
                FontColor BLUE
 
             @ 55, 15 RadioGroup rdgSelectTest                      ;
                Options { '7-zip32.dll', '7-Zip', '7za.exe' } ;
-               Width 100                                     ;
+               WIDTH 100                                     ;
                Spacing 20                                    ;
                ON Change wMain.btnExtract.Enabled := .F.     ;
                Horizontal
@@ -152,8 +152,8 @@ PROCEDURE Main
 
             @ 110, 5 Frame frmCommon  ;
                Caption 'Common' ;
-               Width 520        ;
-               Height 65        ;
+               WIDTH 520        ;
+               HEIGHT 65        ;
                Bold             ;
                FontColor BLUE
 
@@ -161,15 +161,15 @@ PROCEDURE Main
 
             @ 135, 15 CheckBox cbxHide           ;
                Caption 'Hide progressbar' ;
-               Width 124                  ;
+               WIDTH 124                  ;
                Value .T.
 
             // Параметры извлечения
 
             @ 185, 5 Frame frmExtract  ;
                Caption 'Extract' ;
-               Width 520         ;
-               Height 65         ;
+               WIDTH 520         ;
+               HEIGHT 65         ;
                Bold              ;
                FontColor BLUE
 
@@ -177,47 +177,47 @@ PROCEDURE Main
 
             @ 210, 15 CheckBox cbxExtract                     ;
                Caption 'Extract files with full paths' ;
-               Width 176                               ;
+               WIDTH 176                               ;
                Value .T.
 
             // Отвечать Yes на все вопросы в процессе обработки
 
             @ 210, 200 CheckBox cbxYesAll                    ;
                Caption 'Assume (Yes) on all queries' ;
-               Width 190
+               WIDTH 190
 
             // Полезные ссылки
 
             @ 260, 5 Frame frmLinks  ;
                Caption 'Links' ;
-               Width 520       ;
-               Height 100      ;
+               WIDTH 520       ;
+               HEIGHT 100      ;
                Bold            ;
                FontColor BLUE
             @ 285, 15 LABEL lbl7z   ;
                Value '7-Zip' ;
-               Width 120     ;
-               Height 15
+               WIDTH 120     ;
+               HEIGHT 15
             @ 285, 140 Hyperlink hl7z                 ;
                Value 'http://www.7-zip.org'   ;
             Address 'http://www.7-zip.org' ;
             HandCursor
             @ 305, 15 LABEL lblDLL_JA                ;
                Value '7-Zip32.dll (Japanese)' ;
-               Width 120                      ;
-               Height 15
+               WIDTH 120                      ;
+               HEIGHT 15
             @ 305, 140 Hyperlink hlDLL_JA                              ;
                Value 'http://www.csdinc.co.jp/archiver/lib/'   ;
             Address 'http://www.csdinc.co.jp/archiver/lib/' ;
-            Width 270 HandCursor
+            WIDTH 270 HandCursor
             @ 325, 15 LABEL lblDLL_EN               ;
                Value '7-Zip32.dll (English)' ;
-               Width 120                     ;
-               Height 15
+               WIDTH 120                     ;
+               HEIGHT 15
             @ 325, 140 Hyperlink hlDLL_EN                                         ;
                Value 'http://www.csdinc.co.jp/archiver/lib/main-e.html'   ;
             Address 'http://www.csdinc.co.jp/archiver/lib/main-e.html' ;
-            Width 270 HandCursor
+            WIDTH 270 HandCursor
 
          END PAGE
 

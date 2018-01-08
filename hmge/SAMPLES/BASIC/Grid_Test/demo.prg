@@ -44,9 +44,9 @@ FUNCTION Main
 
    DEFINE WINDOW oWindow            ;
          At 10 , 10            ;
-         Width   650            ;
-         Height   400            ;
-         Title   'HMG Grid Demo'         ;
+         WIDTH   650            ;
+         HEIGHT   400            ;
+         TITLE   'HMG Grid Demo'         ;
          Main
 
       DEFINE MAIN MENU
@@ -124,10 +124,10 @@ FUNCTION LoadGrid(aRows,lmultiselect,lcelled,leditable)
    ENDIF
 
    DEFINE GRID oGrid
-      Row      20
-      Col      10
-      Width      615
-      Height      300
+      ROW      20
+      COL      10
+      WIDTH      615
+      HEIGHT      300
       Parent      oWindow
       Widths      {150,60,70,40,90,40,100}
       Headers      {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6','Column 7'}

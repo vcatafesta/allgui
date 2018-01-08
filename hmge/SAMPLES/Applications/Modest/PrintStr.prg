@@ -81,9 +81,9 @@ PROCEDURE PrintStructure
 
    // Print fonts
 
-   Define font 'fTitle' name 'Times New Roman' Size 12 Bold        // Page number font
-   Define font 'fBase'  name 'Times New Roman' Size 12             // Main font
-   Define font 'fAlert' name 'Times New Roman' Size 12 Italic      // Font for warnings
+   DEFINE FONT 'fTitle' name 'Times New Roman' Size 12 Bold        // Page number font
+   DEFINE FONT 'fBase'  name 'Times New Roman' Size 12             // Main font
+   DEFINE FONT 'fAlert' name 'Times New Roman' Size 12 Italic      // Font for warnings
 
    nLen := oEditStru : nLen
 

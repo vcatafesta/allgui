@@ -1,6 +1,6 @@
 /*
- * $Id: rtl.prg $
- */
+* $Id: rtl.prg $
+*/
 /*
 * ooHG Right-to-left demo
 * (c) 2005-2017 Victor Guerra
@@ -8,19 +8,20 @@
 
 #include "oohg.ch"
 
-Function Main()
-Local oWnd
+FUNCTION Main()
+
+   LOCAL oWnd
 
    SET GLOBALRTL ON
 
    DEFINE WINDOW Main OBJ oWnd ;
-          AT 0,0 ;
-          WIDTH 400 ;
-          HEIGHT 300 ;
-          TITLE 'Right-To-Left demo' ;
-          MAIN ;
-          VIRTUAL HEIGHT 400 ;
-          RTL
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 300 ;
+         TITLE 'Right-To-Left demo' ;
+         MAIN ;
+         VIRTUAL HEIGHT 400 ;
+         RTL
 
       DEFINE MAIN MENU
          POPUP "One"
@@ -64,4 +65,4 @@ Local oWnd
    oWnd:Center()
    oWnd:Activate()
 
-Return
+   RETURN

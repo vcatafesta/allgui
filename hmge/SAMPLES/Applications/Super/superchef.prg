@@ -98,7 +98,7 @@ FUNCTION main()
    SET CENTURY ON
    SET EPOCH TO 1960
    SET BROWSESYNC ON
-   SET MULTIPLE OFF warning
+   SET MULTIPLE OFF WARNING
    SET TOOLTIPBALLOON ON
    SET NAVIGATION EXTENDED
    SET CODEPAGE TO portuguese
@@ -143,38 +143,38 @@ FUNCTION main()
 
    DEFINE WINDOW form_main;
          at 000,000;
-         width getdesktopwidth();
-         height getdesktopheight();
-         title 'SuperChef Pizza 4.0';
+         WIDTH getdesktopwidth();
+         HEIGHT getdesktopheight();
+         TITLE 'SuperChef Pizza 4.0';
          main;
          noshow;
-         icon path_imagens+'icone.ico';
+         ICON path_imagens+'icone.ico';
          nosize;
-         backcolor _azul_005;
+         BACKCOLOR _azul_005;
          on init (cria_dbf_cdx(),login())
 
       DEFINE IMAGE img_wallpaper
-         row 000
-         col 000
-         height getdesktopheight()
-         width getdesktopwidth()
-         picture path_imagens+'wallpaper.bmp'
-         stretch .T.
+         ROW 000
+         COL 000
+         HEIGHT getdesktopheight()
+         WIDTH getdesktopwidth()
+         PICTURE path_imagens+'wallpaper.bmp'
+         STRETCH .T.
       END IMAGE
 
       //se for cópia demo
       IF l_demo
          DEFINE LABEL label_demo
-            col 000
-            row getdesktopheight()-300
-            width getdesktopwidth()
-            height 045
+            COL 000
+            ROW getdesktopheight()-300
+            WIDTH getdesktopwidth()
+            HEIGHT 045
             value 'CÓPIA DE AVALIAÇÃO - CÓPIA DE AVALIAÇÃO - CÓPIA DE AVALIAÇÃO - CÓPIA DE AVALIAÇÃO'
             fontname 'tahoma'
             fontsize 026
             fontbold .T.
             fontcolor _amarelo_002
-            backcolor _vermelho_003
+            BACKCOLOR _vermelho_003
             transparent .F.
          END LABEL
          _numero_serie_ := 'SCP---------------'
@@ -251,11 +251,11 @@ FUNCTION main()
       * botões (toolbar)
       DEFINE BUTTONEX venda_delivery
          parent form_main
-         picture path_imagens+'delivery.bmp'
-         col 000
-         row 000
-         width 170
-         height 080
+         PICTURE path_imagens+'delivery.bmp'
+         COL 000
+         ROW 000
+         WIDTH 170
+         HEIGHT 080
          caption 'F5'+CRLF+'Venda'+CRLF+'Delivery'
          action iif(libera(_a_001),venda_delivery(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          fontname 'verdana'
@@ -266,15 +266,15 @@ FUNCTION main()
          lefttext .F.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX venda_mesas
          parent form_main
-         picture path_imagens+'mesas.bmp'
-         col 170
-         row 000
-         width 170
-         height 080
+         PICTURE path_imagens+'mesas.bmp'
+         COL 170
+         ROW 000
+         WIDTH 170
+         HEIGHT 080
          caption 'F6'+CRLF+'Venda'+CRLF+'Mesas'
          action iif(libera(_a_002),venda_mesas(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          fontname 'verdana'
@@ -285,15 +285,15 @@ FUNCTION main()
          lefttext .F.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX venda_balcao
          parent form_main
-         picture path_imagens+'balcao.bmp'
-         col 340
-         row 000
-         width 170
-         height 080
+         PICTURE path_imagens+'balcao.bmp'
+         COL 340
+         ROW 000
+         WIDTH 170
+         HEIGHT 080
          caption 'F7'+CRLF+'Venda'+CRLF+'Balcão'
          action iif(libera(_a_003),venda_balcao(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          fontname 'verdana'
@@ -304,15 +304,15 @@ FUNCTION main()
          lefttext .F.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX clientes
          parent form_main
-         picture path_imagens+'clientes.bmp'
-         col 510
-         row 000
-         width 170
-         height 080
+         PICTURE path_imagens+'clientes.bmp'
+         COL 510
+         ROW 000
+         WIDTH 170
+         HEIGHT 080
          caption 'F8'+CRLF+'Cadastro'+CRLF+'Clientes'
          action iif(libera(_a_004),clientes(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          fontname 'verdana'
@@ -323,15 +323,15 @@ FUNCTION main()
          lefttext .F.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX produtos
          parent form_main
-         picture path_imagens+'produtos.bmp'
-         col 680
-         row 000
-         width 170
-         height 080
+         PICTURE path_imagens+'produtos.bmp'
+         COL 680
+         ROW 000
+         WIDTH 170
+         HEIGHT 080
          caption 'F9'+CRLF+'Cadastro'+CRLF+'Produtos'
          action iif(libera(_a_005),produtos(),msgexclamation('Este usuário não possui acesso','Mensagem'))
          fontname 'verdana'
@@ -342,15 +342,15 @@ FUNCTION main()
          lefttext .F.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
       DEFINE BUTTONEX sair_programa
          parent form_main
-         picture path_imagens+'sair_programa.bmp'
-         col 850
-         row 000
-         width 172
-         height 080
+         PICTURE path_imagens+'sair_programa.bmp'
+         COL 850
+         ROW 000
+         WIDTH 172
+         HEIGHT 080
          caption 'ESC'+CRLF+'Sair do'+CRLF+'Programa'
          action form_main.release
          fontname 'verdana'
@@ -361,17 +361,17 @@ FUNCTION main()
          lefttext .F.
          flat .T.
          noxpstyle .T.
-         backcolor _branco_001
+         BACKCOLOR _branco_001
       END BUTTONEX
 
       * frame
       DEFINE FRAME frame_main
          parent form_main
-         col getdesktopwidth()-180
-         row 082
+         COL getdesktopwidth()-180
+         ROW 082
          caption ''
-         width 175
-         height 300
+         WIDTH 175
+         HEIGHT 300
          fontname 'verdana'
          fontsize 010
          fontbold .T.
@@ -382,8 +382,8 @@ FUNCTION main()
       * acompanhamento dos pedidos e entregas
       DEFINE LABEL acompanhamento_001
          parent form_main
-         col getdesktopwidth()-175
-         row 095
+         COL getdesktopwidth()-175
+         ROW 095
          value 'tecla F10'
          action mostra_entregas()
          autosize .T.
@@ -395,8 +395,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL acompanhamento_002
          parent form_main
-         col getdesktopwidth()-175
-         row 110
+         COL getdesktopwidth()-175
+         ROW 110
          value 'Acompanhamento dos'
          action mostra_entregas()
          autosize .T.
@@ -408,8 +408,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL acompanhamento_003
          parent form_main
-         col getdesktopwidth()-175
-         row 125
+         COL getdesktopwidth()-175
+         ROW 125
          value 'pedidos feitos'
          action mostra_entregas()
          autosize .T.
@@ -421,8 +421,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL acompanhamento_004
          parent form_main
-         col getdesktopwidth()-175
-         row 140
+         COL getdesktopwidth()-175
+         ROW 140
          value 'em : venda delivery'
          action mostra_entregas()
          autosize .T.
@@ -434,8 +434,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL acompanhamento_005
          parent form_main
-         col getdesktopwidth()-175
-         row 155
+         COL getdesktopwidth()-175
+         ROW 155
          value 'em : venda balcão'
          action mostra_entregas()
          autosize .T.
@@ -449,8 +449,8 @@ FUNCTION main()
       * operador
       DEFINE LABEL operador_001
          parent form_main
-         col getdesktopwidth()-175
-         row 185
+         COL getdesktopwidth()-175
+         ROW 185
          value 'Operador atual'
          autosize .T.
          fontname 'verdana'
@@ -461,8 +461,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL operador_002
          parent form_main
-         col getdesktopwidth()-175
-         row 200
+         COL getdesktopwidth()-175
+         ROW 200
          value ''
          autosize .T.
          fontname 'verdana'
@@ -473,8 +473,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL operador_003
          parent form_main
-         col getdesktopwidth()-175
-         row 215
+         COL getdesktopwidth()-175
+         ROW 215
          value dtoc(date())+' as '+substr(time(),1,5)+'h'
          autosize .T.
          fontname 'verdana'
@@ -487,8 +487,8 @@ FUNCTION main()
       * número de série do produto
       DEFINE LABEL numero_serie_001
          parent form_main
-         col getdesktopwidth()-170
-         row 330
+         COL getdesktopwidth()-170
+         ROW 330
          value 'Número de Série'
          autosize .T.
          fontname 'verdana'
@@ -499,8 +499,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL numero_serie_002
          parent form_main
-         col getdesktopwidth()-170
-         row 350
+         COL getdesktopwidth()-170
+         ROW 350
          value _numero_serie_
          autosize .T.
          fontname 'verdana'
@@ -513,11 +513,11 @@ FUNCTION main()
       * nome do cliente e do programa
       DEFINE LABEL nome_cliente_001
          parent form_main
-         col 005
-         row getdesktopheight()-130
+         COL 005
+         ROW getdesktopheight()-130
          value ''
-         width 600
-         height 080
+         WIDTH 600
+         HEIGHT 080
          fontname 'courier new'
          fontsize 030
          fontbold .T.
@@ -526,11 +526,11 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL nome_programa_001
          parent form_main
-         col getdesktopwidth()-310
-         row getdesktopheight()-230
+         COL getdesktopwidth()-310
+         ROW getdesktopheight()-230
          value 'SuperChef'
-         width 200
-         height 050
+         WIDTH 200
+         HEIGHT 050
          fontname 'tahoma'
          fontsize 022
          fontbold .T.
@@ -539,11 +539,11 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL nome_programa_002
          parent form_main
-         col getdesktopwidth()-150
-         row getdesktopheight()-230
+         COL getdesktopwidth()-150
+         ROW getdesktopheight()-230
          value 'pizza'
-         width 200
-         height 050
+         WIDTH 200
+         HEIGHT 050
          fontname 'tahoma'
          fontsize 022
          fontbold .T.
@@ -554,8 +554,8 @@ FUNCTION main()
       * nome da softhouse
       DEFINE LABEL softhouse_001
          parent form_main
-         col getdesktopwidth()-310
-         row getdesktopheight()-190
+         COL getdesktopwidth()-310
+         ROW getdesktopheight()-190
          value 'Este software foi desenvolvido por'
          autosize .T.
          fontname 'verdana'
@@ -566,8 +566,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL softhouse_002
          parent form_main
-         col getdesktopwidth()-310
-         row getdesktopheight()-175
+         COL getdesktopwidth()-310
+         ROW getdesktopheight()-175
          value 'xxxxxxxxxxxx'
          autosize .T.
          fontname 'verdana'
@@ -577,27 +577,27 @@ FUNCTION main()
          transparent .T.
       END LABEL
       DEFINE IMAGE brasil
-         row getdesktopheight()-175
-         col getdesktopwidth()-150
-         height 038
-         width 054
-         picture path_imagens+'bandeira_brasil.jpg'
-         stretch .T.
+         ROW getdesktopheight()-175
+         COL getdesktopwidth()-150
+         HEIGHT 038
+         WIDTH 054
+         PICTURE path_imagens+'bandeira_brasil.jpg'
+         STRETCH .T.
       END IMAGE
 
       * suporte
       DEFINE IMAGE suporte
-         row getdesktopheight()-135
-         col getdesktopwidth()-360
-         height 048
-         width 048
-         picture path_imagens+'suporte.bmp'
-         stretch .T.
+         ROW getdesktopheight()-135
+         COL getdesktopwidth()-360
+         HEIGHT 048
+         WIDTH 048
+         PICTURE path_imagens+'suporte.bmp'
+         STRETCH .T.
       END IMAGE
       DEFINE LABEL suporte_001
          parent form_main
-         col getdesktopwidth()-310
-         row getdesktopheight()-135
+         COL getdesktopwidth()-310
+         ROW getdesktopheight()-135
          value 'Para obter suporte técnico deste produto'
          autosize .T.
          fontname 'verdana'
@@ -608,8 +608,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL suporte_002
          parent form_main
-         col getdesktopwidth()-310
-         row getdesktopheight()-120
+         COL getdesktopwidth()-310
+         ROW getdesktopheight()-120
          value 'Telefone: (99) 9999-9999'
          autosize .T.
          fontname 'verdana'
@@ -620,8 +620,8 @@ FUNCTION main()
       END LABEL
       DEFINE LABEL suporte_003
          parent form_main
-         col getdesktopwidth()-310
-         row getdesktopheight()-105
+         COL getdesktopwidth()-310
+         ROW getdesktopheight()-105
          value 'E-mail:xxxxxx@xxxxxxxx.com.br'
          autosize .T.
          fontname 'verdana'
@@ -1882,17 +1882,17 @@ STATIC FUNCTION tamanhos_pizza()
 
    DEFINE WINDOW form_tamanhos;
          at 000,000;
-         width 400;
-         height 300;
-         title 'Tamanhos de pizza';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 300;
+         TITLE 'Tamanhos de pizza';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL info_001
          parent form_tamanhos
-         col 010
-         row 005
+         COL 010
+         ROW 005
          value 'Duplo clique ou ENTER altera'
          autosize .T.
          fontname 'tahoma'
@@ -1903,8 +1903,8 @@ STATIC FUNCTION tamanhos_pizza()
       END LABEL
       DEFINE LABEL info_002
          parent form_tamanhos
-         col 010
-         row 025
+         COL 010
+         ROW 025
          value 'ESC fecha esta janela'
          autosize .T.
          fontname 'tahoma'
@@ -1917,13 +1917,13 @@ STATIC FUNCTION tamanhos_pizza()
          parent form_tamanhos;
          caption 'Sair';
          action (define_nomes(),form_tamanhos.release);
-         width 100;
-         height 030
+         WIDTH 100;
+         HEIGHT 030
 
       @ 045,010 browse browse_tamanhos;
          of form_tamanhos;
-         width 375;
-         height 210;
+         WIDTH 375;
+         HEIGHT 210;
          headers {'Tamanho','Nº pedaços'};
          widths {200,120};
          workarea tamanhos;
@@ -1931,7 +1931,7 @@ STATIC FUNCTION tamanhos_pizza()
          value 1;
          font 'verdana';
          size 010;
-         backcolor _amarelo_001;
+         BACKCOLOR _amarelo_001;
          fontcolor BLUE;
          on dblclick altera_tamanho()
 
@@ -1951,12 +1951,12 @@ STATIC FUNCTION altera_tamanho()
 
    DEFINE WINDOW form_altera_tamanho;
          at 000,000;
-         width 200;
-         height 160;
-         title 'Alterar';
-         icon path_imagens+'icone.ico';
+         WIDTH 200;
+         HEIGHT 160;
+         TITLE 'Alterar';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       x_nome   := tamanhos->nome
       x_pedaco := tamanhos->pedacos
@@ -1971,12 +1971,12 @@ STATIC FUNCTION altera_tamanho()
          transparent
       @ 025,005 textbox tbox_001;
          of form_altera_tamanho;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_nome;
          maxlength 015;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 055,005 label lbl_002;
@@ -1989,11 +1989,11 @@ STATIC FUNCTION altera_tamanho()
          transparent
       @ 075,005 textbox tbox_002;
          of form_altera_tamanho;
-         height 027;
-         width 100;
+         HEIGHT 027;
+         WIDTH 100;
          value x_pedaco;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric;
          on lostfocus grava_tamanho()
@@ -2054,10 +2054,10 @@ STATIC FUNCTION login()
 
    DEFINE WINDOW form_login;
          at 000,000;
-         width 400;
-         height 250;
-         title 'Acesso ao programa (senha = 9999)';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 250;
+         TITLE 'Acesso ao programa (senha = 9999)';
+         ICON path_imagens+'icone.ico';
          modal;
          noautorelease;
          nosize;
@@ -2065,51 +2065,51 @@ STATIC FUNCTION login()
 
       DEFINE LABEL lbl_top
          parent form_login
-         col 000
-         row 000
+         COL 000
+         ROW 000
          value ' SuperChef'
-         width 600
-         height 045
+         WIDTH 600
+         HEIGHT 045
          fontname 'tahoma'
          fontsize 022
          fontbold .T.
-         backcolor _azul_006
+         BACKCOLOR _azul_006
          fontcolor _super
          transparent .F.
       END LABEL
       DEFINE LABEL lbl_top1
          parent form_login
-         col 170
-         row 000
+         COL 170
+         ROW 000
          value 'pizza'
-         width 350
-         height 045
+         WIDTH 350
+         HEIGHT 045
          fontname 'tahoma'
          fontsize 022
          fontbold .T.
-         backcolor _azul_006
+         BACKCOLOR _azul_006
          fontcolor _laranja_001
          transparent .T.
       END LABEL
       DEFINE LABEL lbl_top2
          parent form_login
-         col 300
-         row 010
+         COL 300
+         ROW 010
          value 'v.4.0, 2011'
-         width 350
-         height 020
+         WIDTH 350
+         HEIGHT 020
          fontname 'tahoma'
          fontsize 010
          fontbold .T.
-         backcolor _azul_006
+         BACKCOLOR _azul_006
          fontcolor _branco_001
          transparent .T.
       END LABEL
 
       * senha
       DEFINE LABEL label_login
-         col 050
-         row 070
+         COL 050
+         ROW 070
          value 'Digite sua senha'
          autosize .T.
          fontcolor _cinza_001
@@ -2120,19 +2120,19 @@ STATIC FUNCTION login()
       END LABEL
       @ 070,190 textbox tbox_senha;
          of form_login;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_senha;
          maxlength 010;
          font 'verdana' size 010;
-         backcolor _branco_001;
+         BACKCOLOR _branco_001;
          fontcolor _preto_001;
          password
 
       IF l_demo
          DEFINE LABEL label_senha_demo
-            col 100
-            row 100
+            COL 100
+            ROW 100
             value 'digite a senha 9999'
             autosize .T.
             fontcolor RED
@@ -2145,41 +2145,41 @@ STATIC FUNCTION login()
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row 165
+         COL 000
+         ROW 165
          value ''
-         width form_login.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_login.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       @ 170,220 buttonex btn_ok;
          caption 'Ok';
-         picture path_imagens+'img_ok.bmp';
+         PICTURE path_imagens+'img_ok.bmp';
          flat;
          noxpstyle;
-         width 060;
-         height 040;
+         WIDTH 060;
+         HEIGHT 040;
          font 'verdana';
          size 9;
          fontcolor BLACK;
          bold;
-         backcolor WHITE;
+         BACKCOLOR WHITE;
          tooltip 'Confirma a entrada no programa';
          action confirma_entrada()
       @ 170,290 buttonex btnex_cancela;
          caption 'Cancela';
-         picture path_imagens+'img_cancela.bmp';
+         PICTURE path_imagens+'img_cancela.bmp';
          flat;
          noxpstyle;
-         width 100;
-         height 040;
+         WIDTH 100;
+         HEIGHT 040;
          font 'verdana';
          size 9;
          fontcolor BLACK;
          bold;
-         backcolor WHITE;
+         BACKCOLOR WHITE;
          tooltip 'Cancela a entrada ao programa';
          action form_main.release
 
@@ -2336,17 +2336,17 @@ STATIC FUNCTION configurar_venda()
    x_tipo := config->tipo
    DEFINE WINDOW form_configurar;
          at 000,000;
-         width 400;
-         height 270;
-         title 'Configurar Venda de Pizza';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 270;
+         TITLE 'Configurar Venda de Pizza';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL info_001
          parent form_configurar
-         col 010
-         row 005
+         COL 010
+         ROW 005
          value 'ESC fecha esta janela'
          autosize .T.
          fontname 'tahoma'
@@ -2357,8 +2357,8 @@ STATIC FUNCTION configurar_venda()
       END LABEL
       DEFINE LABEL info_002
          parent form_configurar
-         col 010
-         row 050
+         COL 010
+         ROW 050
          value 'Defina de que forma o programa deverá cobrar o valor'
          autosize .T.
          fontname 'tahoma'
@@ -2369,8 +2369,8 @@ STATIC FUNCTION configurar_venda()
       END LABEL
       DEFINE LABEL info_003
          parent form_configurar
-         col 010
-         row 070
+         COL 010
+         ROW 070
          value 'das pizzas vendidas, quando for selecionado mais  de'
          autosize .T.
          fontname 'tahoma'
@@ -2381,8 +2381,8 @@ STATIC FUNCTION configurar_venda()
       END LABEL
       DEFINE LABEL info_004
          parent form_configurar
-         col 010
-         row 090
+         COL 010
+         ROW 090
          value 'um sabor.'
          autosize .T.
          fontname 'tahoma'
@@ -2392,10 +2392,10 @@ STATIC FUNCTION configurar_venda()
          transparent .T.
       END LABEL
       define comboboxex cbo_tipo
-      row 120
-      col 010
-      width 380
-      height 400
+      ROW 120
+      COL 010
+      WIDTH 380
+      HEIGHT 400
       items a_tipos
       value x_tipo
       fontname 'courier new'
@@ -2407,14 +2407,14 @@ STATIC FUNCTION configurar_venda()
       parent form_configurar;
       caption 'Sair';
       action form_configurar.release;
-      width 100;
-      height 030
+      WIDTH 100;
+      HEIGHT 030
    @ 200,290 button btn_gravar;
       parent form_configurar;
       caption 'Gravar';
       action gravar_config();
-      width 100;
-      height 030
+      WIDTH 100;
+      HEIGHT 030
 
    ON KEY ESCAPE ACTION thiswindow.release
 
@@ -2447,17 +2447,17 @@ STATIC FUNCTION bordas_pizza()
 
    DEFINE WINDOW form_bordas;
          at 000,000;
-         width 400;
-         height 300;
-         title 'Bordas de pizza';
-         icon path_imagens+'icone.ico';
+         WIDTH 400;
+         HEIGHT 300;
+         TITLE 'Bordas de pizza';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       DEFINE LABEL info_001
          parent form_bordas
-         col 010
-         row 005
+         COL 010
+         ROW 005
          value 'Duplo clique ou ENTER altera'
          autosize .T.
          fontname 'tahoma'
@@ -2468,8 +2468,8 @@ STATIC FUNCTION bordas_pizza()
       END LABEL
       DEFINE LABEL info_002
          parent form_bordas
-         col 010
-         row 025
+         COL 010
+         ROW 025
          value 'ESC fecha esta janela'
          autosize .T.
          fontname 'tahoma'
@@ -2482,13 +2482,13 @@ STATIC FUNCTION bordas_pizza()
          parent form_bordas;
          caption 'Sair';
          action form_bordas.release;
-         width 100;
-         height 030
+         WIDTH 100;
+         HEIGHT 030
 
       @ 045,010 browse browse_bordas;
          of form_bordas;
-         width 375;
-         height 210;
+         WIDTH 375;
+         HEIGHT 210;
          headers {'Descrição','Preço R$'};
          widths {200,120};
          workarea bordas;
@@ -2496,7 +2496,7 @@ STATIC FUNCTION bordas_pizza()
          value 1;
          font 'verdana';
          size 010;
-         backcolor _amarelo_001;
+         BACKCOLOR _amarelo_001;
          fontcolor BLUE;
          on dblclick altera_borda()
 
@@ -2516,12 +2516,12 @@ STATIC FUNCTION altera_borda()
 
    DEFINE WINDOW form_altera_borda;
          at 000,000;
-         width 200;
-         height 160;
-         title 'Alterar';
-         icon path_imagens+'icone.ico';
+         WIDTH 200;
+         HEIGHT 160;
+         TITLE 'Alterar';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       x_nome  := bordas->nome
       x_preco := bordas->preco
@@ -2536,12 +2536,12 @@ STATIC FUNCTION altera_borda()
          transparent
       @ 025,005 textbox tbox_001;
          of form_altera_borda;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_nome;
          maxlength 015;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          uppercase
       @ 055,005 label lbl_002;
@@ -2554,11 +2554,11 @@ STATIC FUNCTION altera_borda()
          transparent
       @ 075,005 textbox tbox_002;
          of form_altera_borda;
-         height 027;
-         width 100;
+         HEIGHT 027;
+         WIDTH 100;
          value x_preco;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
          numeric INPUTMASK "99,999.99";
          on lostfocus grava_borda()

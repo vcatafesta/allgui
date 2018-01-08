@@ -43,7 +43,7 @@ PROCEDURE main()
 
    DEFINE WINDOW Form_Main ;
          clientarea w, h + GetMenuBarHeight() ;
-         title 'Icons Demo (use a Dll)' ;
+         TITLE 'Icons Demo (use a Dll)' ;
          main ;
          nomaximize nosize ;
          on release ;

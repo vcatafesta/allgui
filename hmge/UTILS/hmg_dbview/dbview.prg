@@ -294,8 +294,8 @@ STATIC FUNCTION SelectIndex()
       i ++
    ENDDO
 
-   width := 14 * ( iLen + 20 )
-   height := 20 * ( Len( aIndex ) + 2 ) + GetBorderHeight()
+   WIDTH := 14 * ( iLen + 20 )
+   HEIGHT := 20 * ( Len( aIndex ) + 2 ) + GetBorderHeight()
 
    DEFINE WINDOW SelectIndex ;
          AT 0 , 0 ;

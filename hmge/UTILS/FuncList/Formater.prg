@@ -23,16 +23,16 @@ PROCEDURE Formater
 
    DEFINE WINDOW wReformat       ;
          At 132, 235            ;
-         Width 280              ;
-         Height 275             ;
-         Title aStrings[ 1, 2 ] ;
-         Icon 'STOCK'           ;
+         WIDTH 280              ;
+         HEIGHT 275             ;
+         TITLE aStrings[ 1, 2 ] ;
+         ICON 'STOCK'           ;
          Modal
 
       @ 5, 5 Frame frmFiles           ;
          Caption aStrings[ 2, 2 ] ;
-         Width ( wReformat.Width - 20 ) ;
-         Height 75                ;
+         WIDTH ( wReformat.Width - 20 ) ;
+         HEIGHT 75                ;
          Bold                     ;
          Fontcolor BLUE
 
@@ -40,20 +40,20 @@ PROCEDURE Formater
          RadioGroup rdgFiles                                              ;
          Options { aStrings[ 3, 2 ], aStrings[ 4, 2 ] }                   ;
          Value nRange                                                     ;
-         Width ( wReformat.frmFiles.Width - 20 )
+         WIDTH ( wReformat.frmFiles.Width - 20 )
 
       @ ( wReformat.frmFiles.Row + wReformat.frmFiles.Height + 5 ), wReformat.frmFiles.Col ;
          Frame frmCase                  ;
          Caption aStrings[ 5, 2 ]       ;
-         Width wReformat.frmFiles.Width ;
-         Height 100                     ;
+         WIDTH wReformat.frmFiles.Width ;
+         HEIGHT 100                     ;
          Bold                           ;
          Fontcolor BLUE
 
       @ ( wReformat.frmCase.Row + 15 ), ( wReformat.frmCase.Col + 10 )   ;
          RadioGroup rdgCase                                               ;
          Options { aStrings[ 6, 2 ], aStrings[ 7, 2 ], aStrings[ 8, 2 ] } ;
-         Width wReformat.rdgFiles.Width                                   ;
+         WIDTH wReformat.rdgFiles.Width                                   ;
          Value nCharCase
 
       @ ( wReformat.frmCase.Row + wReformat.frmCase.Height + 20 ), ;
@@ -85,16 +85,16 @@ PROCEDURE Formater
 
       DEFINE WINDOW wConsole       ;
             At 132, 235             ;
-            Width 380               ;
-            Height 350              ;
-            Title aStrings[ 10, 2 ] ;
-            Icon 'STOCK'            ;
+            WIDTH 380               ;
+            HEIGHT 350              ;
+            TITLE aStrings[ 10, 2 ] ;
+            ICON 'STOCK'            ;
             Modal                   ;
             On init Do_Format( nRange, nCharCase, aStrings )
 
          @ 5, 5 EditBox edtConsole              ;
-            Height ( wConsole.Height - 90 ) ;
-            Width ( wConsole.Width - 20 )   ;
+            HEIGHT ( wConsole.Height - 90 ) ;
+            WIDTH ( wConsole.Width - 20 )   ;
             ReadOnly
 
          @ ( wConsole.edtConsole.Row + wConsole.edtConsole.Height + 15 ), ;

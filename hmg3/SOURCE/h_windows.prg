@@ -4014,7 +4014,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h ,nominimize ,nomaximize ,
    ENDIF
 
    IF valtype(sizable) == "L"
-      nosize   := .Not. sizable
+      NOSIZE   := .Not. sizable
    ENDIF
 
    IF valtype(sysmenu) == "L"
@@ -4247,7 +4247,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h ,nominimize ,nomaximize ,
    UnRegisterWindow (FormName)
 
    IF ValType ( icon ) == 'U' .AND. ValType ( _HMG_DefaultIconName ) != 'U'
-      icon := _HMG_DefaultIconName
+      ICON := _HMG_DefaultIconName
    ENDIF
 
    BrushHandle := RegisterWindow(icon,FormName, aRGB )
@@ -4473,7 +4473,7 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent ,nosize ,nos
    ENDIF
 
    IF valtype(sizable) == "L"
-      NoSize := .Not. Sizable
+      NOSIZE := .Not. Sizable
    ENDIF
 
    IF valtype(visible) == "L"
@@ -4614,7 +4614,7 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent ,nosize ,nos
    UnRegisterWindow (FormName)
 
    IF ValType ( icon ) == 'U' .AND. ValType ( _HMG_DefaultIconName ) != 'U'
-      icon := _HMG_DefaultIconName
+      ICON := _HMG_DefaultIconName
    ENDIF
 
    BrushHandle := RegisterWindow(icon,FormName , aRGB )
@@ -5050,10 +5050,10 @@ FUNCTION _SetWindowSizePos ( FormName , row , col , width , height )
    ENDIF
 
    GetWindowRect (hWnd, actpos)
-   col    := if ( col    == NIL, actpos[1],           col    )
-   row    := if ( row    == NIL, actpos[2],           row    )
-   width  := if ( width  == NIL, actpos[3]-actpos[1], width  )
-   height := if ( height == NIL, actpos[4]-actpos[2], height )
+   COL    := if ( col    == NIL, actpos[1],           col    )
+   ROW    := if ( row    == NIL, actpos[2],           row    )
+   WIDTH  := if ( width  == NIL, actpos[3]-actpos[1], width  )
+   HEIGHT := if ( height == NIL, actpos[4]-actpos[2], height )
 
    nIndex := GetFormIndexByHandle (hWnd)
    IF nIndex > 0 .AND. GetFormTypeByIndex ( nIndex ) == "P"   // Panel Window,   ADD (May 2015, Fixed January 2016)
@@ -5077,10 +5077,10 @@ FUNCTION _GetWindowSizePos ( FormName )   //   ADD   May 2015
    ENDIF
 
    GetWindowRect (hWnd, actpos)
-   col    := actpos[1]
-   row    := actpos[2]
-   width  := actpos[3]-actpos[1]
-   height := actpos[4]-actpos[2]
+   COL    := actpos[1]
+   ROW    := actpos[2]
+   WIDTH  := actpos[3]-actpos[1]
+   HEIGHT := actpos[4]-actpos[2]
 
    nIndex := GetFormIndexByHandle (hWnd)
    IF GetFormTypeByIndex ( nIndex ) == "P"   // Panel Window

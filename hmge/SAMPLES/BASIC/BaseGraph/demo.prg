@@ -60,38 +60,38 @@ PROCEDURE Main
 
    DEFINE WINDOW GraphTest ;
          At 0,0 ;
-         Width 720 ;
-         Height 480 ;
-         Title "Graph Demo" ;
+         WIDTH 720 ;
+         HEIGHT 480 ;
+         TITLE "Graph Demo" ;
          Main ;
-         Icon "Graph.ico" ;
+         ICON "Graph.ico" ;
          nomaximize nosize ;
          On Init DrawBarGraph(aSer,aYvalAll,aColor)
 
       DEFINE BUTTON Button_1
-         Row   405
-         Col   40
+         ROW   405
+         COL   40
          Caption   '1er Semestre'
          Action DrawBarGraph(aSer1,aYval1er,aColor1)
       END BUTTON
 
       DEFINE BUTTON Button_2
-         Row   405
-         Col   180
+         ROW   405
+         COL   180
          Caption   '2do Semestre'
          Action DrawBarGraph(aSer2,aYval2do,aColor1)
       END BUTTON
 
       DEFINE BUTTON Button_3
-         Row   405
-         Col   320
+         ROW   405
+         COL   320
          Caption   'Lineas'
          Action DrawLinesGraph(aSer,aYvalAll,aColor)
       END BUTTON
 
       DEFINE BUTTON Button_4
-         Row   405
-         Col   460
+         ROW   405
+         COL   460
          Caption   'Puntos'
          Action DrawPointsGraph(aSer,aYvalAll,aColor)
       END BUTTON

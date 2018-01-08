@@ -41,12 +41,12 @@ FUNCTION empresa()
 
    DEFINE WINDOW form_empresa;
          at 000,000;
-         width 585;
-         height 380;
-         title 'Cadastro da Pizzaria';
-         icon path_imagens+'icone.ico';
+         WIDTH 585;
+         HEIGHT 380;
+         TITLE 'Cadastro da Pizzaria';
+         ICON path_imagens+'icone.ico';
          modal;
-         nosize
+         NOSIZE
 
       * entrada de dados
       @ 010,005 label lbl_001;
@@ -59,13 +59,13 @@ FUNCTION empresa()
          transparent
       @ 030,005 getbox tbox_001;
          of form_empresa;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_nome;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 010,325 label lbl_002;
          of form_empresa;
          value 'Telefone (1)';
@@ -76,14 +76,14 @@ FUNCTION empresa()
          transparent
       @ 030,325 getbox tbox_002;
          of form_empresa;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_fixo_1;
          font 'verdana' size 012;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 010,455 label lbl_003;
          of form_empresa;
          value 'Telefone (2)';
@@ -94,14 +94,14 @@ FUNCTION empresa()
          transparent
       @ 030,455 getbox tbox_003;
          of form_empresa;
-         height 027;
-         width 120;
+         HEIGHT 027;
+         WIDTH 120;
          value x_fixo_2;
          font 'verdana' size 012;
          bold;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 060,005 label lbl_004;
          of form_empresa;
          value 'Endereço';
@@ -112,13 +112,13 @@ FUNCTION empresa()
          transparent
       @ 080,005 getbox tbox_004;
          of form_empresa;
-         height 027;
-         width 310;
+         HEIGHT 027;
+         WIDTH 310;
          value x_endereco;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 060,325 label lbl_005;
          of form_empresa;
          value 'Número';
@@ -129,13 +129,13 @@ FUNCTION empresa()
          transparent
       @ 080,325 getbox tbox_005;
          of form_empresa;
-         height 027;
-         width 060;
+         HEIGHT 027;
+         WIDTH 060;
          value x_numero;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 060,395 label lbl_006;
          of form_empresa;
          value 'Complemento';
@@ -146,13 +146,13 @@ FUNCTION empresa()
          transparent
       @ 080,395 getbox tbox_006;
          of form_empresa;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_complem;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 110,005 label lbl_007;
          of form_empresa;
          value 'Bairro';
@@ -163,13 +163,13 @@ FUNCTION empresa()
          transparent
       @ 130,005 getbox tbox_007;
          of form_empresa;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_bairro;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 110,195 label lbl_008;
          of form_empresa;
          value 'Cidade';
@@ -180,13 +180,13 @@ FUNCTION empresa()
          transparent
       @ 130,195 getbox tbox_008;
          of form_empresa;
-         height 027;
-         width 180;
+         HEIGHT 027;
+         WIDTH 180;
          value x_cidade;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 110,385 label lbl_009;
          of form_empresa;
          value 'UF';
@@ -197,13 +197,13 @@ FUNCTION empresa()
          transparent
       @ 130,385 getbox tbox_009;
          of form_empresa;
-         height 027;
-         width 040;
+         HEIGHT 027;
+         WIDTH 040;
          value x_uf;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 110,435 label lbl_010;
          of form_empresa;
          value 'CEP';
@@ -214,13 +214,13 @@ FUNCTION empresa()
          transparent
       @ 130,435 getbox tbox_010;
          of form_empresa;
-         height 027;
-         width 080;
+         HEIGHT 027;
+         WIDTH 080;
          value x_cep;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1;
-         picture '@!'
+         PICTURE '@!'
       @ 160,005 label lbl_011;
          of form_empresa;
          value 'e-mail';
@@ -231,11 +231,11 @@ FUNCTION empresa()
          transparent
       @ 180,005 getbox tbox_011;
          of form_empresa;
-         height 027;
-         width 450;
+         HEIGHT 027;
+         WIDTH 450;
          value x_email;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1
       @ 210,005 label lbl_012;
          of form_empresa;
@@ -247,31 +247,31 @@ FUNCTION empresa()
          transparent
       @ 230,005 getbox tbox_012;
          of form_empresa;
-         height 027;
-         width 450;
+         HEIGHT 027;
+         WIDTH 450;
          value x_site;
          font 'tahoma' size 010;
-         backcolor _fundo_get;
+         BACKCOLOR _fundo_get;
          fontcolor _letra_get_1
 
       * linha separadora
       DEFINE LABEL linha_rodape
-         col 000
-         row form_empresa.height-090
+         COL 000
+         ROW form_empresa.height-090
          value ''
-         width form_empresa.width
-         height 001
-         backcolor _preto_001
+         WIDTH form_empresa.width
+         HEIGHT 001
+         BACKCOLOR _preto_001
          transparent .F.
       END LABEL
 
       * botões
       DEFINE BUTTONEX button_ok
-         picture path_imagens+'img_gravar.bmp'
-         col form_empresa.width-225
-         row form_empresa.height-085
-         width 120
-         height 050
+         PICTURE path_imagens+'img_gravar.bmp'
+         COL form_empresa.width-225
+         ROW form_empresa.height-085
+         WIDTH 120
+         HEIGHT 050
          caption 'Ok, gravar'
          action gravar()
          fontbold .T.
@@ -280,11 +280,11 @@ FUNCTION empresa()
          noxpstyle .T.
       END BUTTONEX
       DEFINE BUTTONEX button_cancela
-         picture path_imagens+'img_voltar.bmp'
-         col form_empresa.width-100
-         row form_empresa.height-085
-         width 090
-         height 050
+         PICTURE path_imagens+'img_voltar.bmp'
+         COL form_empresa.width-100
+         ROW form_empresa.height-085
+         WIDTH 090
+         HEIGHT 050
          caption 'Voltar'
          action form_empresa.release
          fontbold .T.

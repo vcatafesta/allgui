@@ -1,15 +1,13 @@
 /*
- * Textbox Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to autocomplete a TextBox with
- * DATE clause, using DEFAULTYEAR clause.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Textbox Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to autocomplete a TextBox with
+* DATE clause, using DEFAULTYEAR clause.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -22,10 +20,10 @@ FUNCTION Main
    SET NAVIGATION EXTENDED
 
    DEFINE WINDOW Win_1 OBJ oWnd ;
-      AT 0,0 ;
-      WIDTH 600 ;
-      HEIGHT 400 ;
-      TITLE 'Autocomplete Date Textbox'
+         AT 0,0 ;
+         WIDTH 600 ;
+         HEIGHT 400 ;
+         TITLE 'Autocomplete Date Textbox'
 
       ON KEY ESCAPE ACTION oWnd:Release()
 
@@ -57,8 +55,8 @@ FUNCTION Main
    oWnd:Center()
    oWnd:Activate()
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */

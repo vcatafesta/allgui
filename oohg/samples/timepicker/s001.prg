@@ -1,26 +1,24 @@
 /*
- * TimePicker Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to define TimePicker controls with
- * customized formats.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* TimePicker Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to define TimePicker controls with
+* customized formats.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 600 ;
-      HEIGHT 400 ;
-      TITLE "ooHG TimePicker Demo" ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 600 ;
+         HEIGHT 400 ;
+         TITLE "ooHG TimePicker Demo" ;
+         MAIN
 
       @ 010, 010 LABEL Lbl_1 VALUE "1" AUTOSIZE
 
@@ -79,8 +77,8 @@ FUNCTION Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */

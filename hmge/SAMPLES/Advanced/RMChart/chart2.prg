@@ -17,10 +17,10 @@ FUNCTION Main()
 
    DEFINE WINDOW Win_1 ;
          At 0,0 ;
-         Width 600 ;
-         Height 450 ;
-         Title 'Demo RMChart - Adapted by Grigory Filatov for MiniGUI' ;
-         Icon "Main" ;
+         WIDTH 600 ;
+         HEIGHT 450 ;
+         TITLE 'Demo RMChart - Adapted by Grigory Filatov for MiniGUI' ;
+         ICON "Main" ;
          Main ;
          On Init fOpenActivex() ;
          On Size Ajust() ;

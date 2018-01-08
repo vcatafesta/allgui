@@ -5,24 +5,24 @@ FUNCTION main
    DEFINE WINDOW sample at 0,0 width 627 height 612 title "Custom Progressbar Demo" main ;
          on gotfocus checkgraph() on lostfocus checkgraph()
       DEFINE BUTTON pressme
-         row 10
-         col 10
-         width 80
+         ROW 10
+         COL 10
+         WIDTH 80
          caption "Press Me!"
          action (sample.t1.value := 2)
       END BUTTON
       DEFINE TAB t1 at 50,10 width 600 height 520 on change checkgraph()
          DEFINE PAGE "Page 1"
             DEFINE BUTTON b1
-               row 40
-               col 20
+               ROW 40
+               COL 20
                caption "Test 1"
                action msginfo("Click 1")
             END BUTTON
 
             DEFINE BUTTON b2
-               row 40
-               col 140
+               ROW 40
+               COL 140
                caption "Test 2"
                action msginfo("Click 2")
             END BUTTON

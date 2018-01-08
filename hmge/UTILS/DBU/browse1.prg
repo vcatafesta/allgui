@@ -72,7 +72,7 @@ FUNCTION DBUbrowse1()
    nWBrowseHeight := _DBUwindowheight - IF(IsXPThemeActive(), 70, 80)
 
    DEFINE WINDOW _DBUBrowse at 0,0 ;
-         width nWBrowseWidth height nWBrowseHeight title "DBU Browse " + _DBUfname;
+         WIDTH nWBrowseWidth height nWBrowseHeight title "DBU Browse " + _DBUfname;
          CHILD NOMINIMIZE NOMAXIMIZE NOSIZE NOSYSMENU
 
       DEFINE SPLITBOX
@@ -93,14 +93,14 @@ FUNCTION DBUbrowse1()
 
       DEFINE BROWSE _DBUrecord
          parent _DBUbrowse
-         row 60
-         col 3
-         width nWBrowseWidth - 10
-         height nWBrowseHeight - IF(IsXPThemeActive(), 160, 150 )
+         ROW 60
+         COL 3
+         WIDTH nWBrowseWidth - 10
+         HEIGHT nWBrowseHeight - IF(IsXPThemeActive(), 160, 150 )
          headers _DBUanames
          widths _DBUasizes
          workarea &_DBUname1
-         backcolor _DBUgreenish
+         BACKCOLOR _DBUgreenish
          fields _DBUanames
          value recno()
          fontname "Arial"
@@ -115,18 +115,18 @@ FUNCTION DBUbrowse1()
       END browse
 
       DEFINE BUTTON _DBUbrowsegotobutton
-         row nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)
-         col 10
+         ROW nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)
+         COL 10
          caption "Goto"
-         width 50
+         WIDTH 50
          action DBUbrowsegotoclick()
       END BUTTON
 
       DEFINE TEXTBOX _DBUbrowsegoto
-         row nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)
-         col 70
-         width 100
-         backcolor _DBUgreenish
+         ROW nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)
+         COL 70
+         WIDTH 100
+         BACKCOLOR _DBUgreenish
          numeric .t.
          rightalign .t.
          value recno()
@@ -135,23 +135,23 @@ FUNCTION DBUbrowse1()
 
       IF _DBUfiltered
          DEFINE LABEL _DBUfilterconditionlabel
-            row nWBrowseHeight - IF(IsXPThemeActive(), 85, 75)
-            col 200
+            ROW nWBrowseHeight - IF(IsXPThemeActive(), 85, 75)
+            COL 200
             value "Filter Condition :"
-            width 150
+            WIDTH 150
             fontbold .T.
             // backcolor _DBUgreenish
             // fontcolor {255,0,0}
          END LABEL
 
          DEFINE TEXTBOX _DBUfiltercondition
-            row nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)
-            col 360
-            width _DBUwindowwidth - 400
+            ROW nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)
+            COL 360
+            WIDTH _DBUwindowwidth - 400
             value _DBUcondition
             readonly .T.
             fontbold .T.
-            backcolor _DBUgreenish
+            BACKCOLOR _DBUgreenish
             // fontcolor {255,0,0}
          END TEXTBOX
       ENDIF

@@ -1,36 +1,34 @@
 /*
- * Menu Sample n° 4
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to programatically open a window's
- * menu using its shortcut key.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Menu Sample n° 4
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to programatically open a window's
+* menu using its shortcut key.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
- #include "oohg.ch"
+#include "oohg.ch"
 
- FUNCTION Main()
+FUNCTION Main()
 
-    DEFINE WINDOW Win_1 ;
-       AT 0,0 ;
-       WIDTH 640 ;
-       HEIGHT 480 ;
-       TITLE "Open Menu" ;
-       MAIN ;
-       ON INIT INSERT_ALT_F()
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Open Menu" ;
+         MAIN ;
+         ON INIT INSERT_ALT_F()
 
-       DEFINE MAIN MENU OF Win_1
-          POPUP "&File"
-             ITEM "One" ACTION MsgInfo( "Menu Option One" )
-             ITEM "Two" ACTION MsgInfo( "Menu Option Two" )
-             SEPARATOR
-             ITEM "Exit" ACTION Win_1.Release
-          END POPUP
-       END MENU
+      DEFINE MAIN MENU OF Win_1
+         POPUP "&File"
+            ITEM "One" ACTION MsgInfo( "Menu Option One" )
+            ITEM "Two" ACTION MsgInfo( "Menu Option Two" )
+            SEPARATOR
+            ITEM "Exit" ACTION Win_1.Release
+         END POPUP
+      END MENU
 
       /*
       The trick is done by defining an accelerator key for the menu,
@@ -40,16 +38,16 @@
       */
 
       @ 100, 10 LABEL Lbl_1 ;
-          VALUE "At start time the menu should be open." ;
-          AUTOSIZE
+         VALUE "At start time the menu should be open." ;
+         AUTOSIZE
 
-       ON KEY ESCAPE ACTION Win_1.Release
-    END WINDOW
+      ON KEY ESCAPE ACTION Win_1.Release
+   END WINDOW
 
-    CENTER WINDOW Win_1
-    ACTIVATE WINDOW Win_1
+   CENTER WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
- RETURN NIL
+   RETURN NIL
 
  #pragma BEGINDUMP
 
@@ -69,6 +67,6 @@
 
  #pragma ENDDUMP
 
- /*
-  * EOF
-  */
+   /*
+   * EOF
+   */

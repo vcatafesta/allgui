@@ -1,15 +1,13 @@
 /*
- * Excel Sample n° 2
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed bajo The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to open an Excel workbook in
- * read only mode.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Excel Sample n° 2
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed bajo The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to open an Excel workbook in
+* read only mode.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include 'oohg.ch'
 
@@ -20,11 +18,11 @@ FUNCTION Main
    SET NAVIGATION EXTENDED
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 600 ;
-      HEIGHT 480 ;
-      TITLE 'Open an Excel workbook in readonly mode' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 600 ;
+         HEIGHT 480 ;
+         TITLE 'Open an Excel workbook in readonly mode' ;
+         MAIN
 
       DEFINE STATUSBAR
          STATUSITEM 'OOHG power !!!'
@@ -41,7 +39,7 @@ FUNCTION Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Open
 
@@ -51,33 +49,35 @@ FUNCTION Open
       RETURN NIL
    ENDIF
 
-   #ifndef __XHARBOUR__
-      IF( oExcel := win_oleCreateObject( 'Excel.Application' ) ) == NIL
-         MsgStop( 'Error: Excel not available. [' + win_oleErrorText()+ ']' )
-         RETURN NIL
-      ENDIF
-   #else
-      oExcel := TOleAuto():New( 'Excel.Application' )
-      IF Ole2TxtError() != 'S_OK'
-         MsgStop( 'Error: Excel not available.' )
-         RETURN NIL
-      ENDIF
-   #endif
+#ifndef __XHARBOUR__
+   IF( oExcel := win_oleCreateObject( 'Excel.Application' ) ) == NIL
+   MsgStop( 'Error: Excel not available. [' + win_oleErrorText()+ ']' )
 
-   // catch any errors
-   bErrBlck1 := ErrorBlock( { | x | break( x ) } )
+   RETURN NIL
+ENDIF
+#else
+oExcel := TOleAuto():New( 'Excel.Application' )
+IF Ole2TxtError() != 'S_OK'
+   MsgStop( 'Error: Excel not available.' )
 
-   BEGIN SEQUENCE
-      oExcel:WorkBooks:Open(w_arch, NIL, .T.)
-      oExcel:Visible := .t.
-   RECOVER USING x
-      MsgStop( x:Description, "Excel Error" )
-   END SEQUENCE
+   RETURN NIL
+ENDIF
+#endif
 
-   ErrorBlock( bErrBlck1 )
+// catch any errors
+bErrBlck1 := ErrorBlock( { | x | break( x ) } )
+
+BEGIN SEQUENCE
+   oExcel:WorkBooks:Open(w_arch, NIL, .T.)
+   oExcel:Visible := .t.
+RECOVER USING x
+   MsgStop( x:Description, "Excel Error" )
+END SEQUENCE
+
+ErrorBlock( bErrBlck1 )
 
 RETURN NIL
 
 /*
- * EOF
- */
+* EOF
+*/

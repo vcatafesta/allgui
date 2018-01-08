@@ -113,11 +113,11 @@ PROCEDURE Lis_TarCodigo()
          TOOLTIP 'Impresora' NOTABSTOP
 
       @150, 10 CHECKBOX nImp CAPTION 'Seleccionar impresora' ;
-         width 160 value .f. ;
+         WIDTH 160 value .f. ;
          ON CHANGE W_Imp1.C_Impresora.Enabled:=IF(W_Imp1.nImp.Value=.T.,.F.,.T.)
 
       @180, 10 CHECKBOX nVer CAPTION 'Previsualizar documento' ;
-         width 160 value .f.
+         WIDTH 160 value .f.
 
       @210, 10 BUTTON B_Imp CAPTION 'Imprimir' WIDTH 90 HEIGHT 25 ;
          ACTION Lis_TarCodigoi("IMPRESORA")

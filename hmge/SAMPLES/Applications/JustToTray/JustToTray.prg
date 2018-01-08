@@ -359,7 +359,7 @@ STATIC FUNCTION GetWindowIcon( hwnd )
 
             IF Empty( icon := GetClassLong( hwnd, GCL_HICON ) )
 
-               icon := LoadIcon( , IDI_WINLOGO )
+               ICON := LoadIcon( , IDI_WINLOGO )
 
             ENDIF
 

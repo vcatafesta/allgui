@@ -25,7 +25,7 @@ FUNCTION Main
          txt_name := 'LABEL_' + hb_ntos(i)
 
          @ i*30 , 30 LABEL &txt_name value txt_name ;
-            width 95 height 23 backcolor c_lbl_color ;
+            WIDTH 95 height 23 backcolor c_lbl_color ;
             VCENTERALIGN
 
          m_col := form_1.&(txt_name).col + form_1.&(txt_name).width + 20

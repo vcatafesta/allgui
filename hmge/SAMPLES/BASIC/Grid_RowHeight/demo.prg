@@ -17,10 +17,10 @@ FUNCTION Main
    DEFINE WINDOW main at 0, 0 width 640 height 480 title 'Grid Row Height demo' main
 
       DEFINE GRID grid_1
-         row 10
-         col 10
-         width 545
-         height 200
+         ROW 10
+         COL 10
+         WIDTH 545
+         HEIGHT 200
          headers { '', 'Column1', 'Column2'  }
          widths { 0, 200, 200 }
          justify { 2, 0, 0 }
@@ -29,10 +29,10 @@ FUNCTION Main
       END GRID
 
       DEFINE GRID grid_2
-         row 230
-         col 10
-         width 545
-         height 200
+         ROW 230
+         COL 10
+         WIDTH 545
+         HEIGHT 200
          headers { '', 'Column1', 'Column2'  }
          widths { 0, 200, 200 }
          justify { 2, 0, 0 }

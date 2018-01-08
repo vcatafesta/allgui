@@ -1,20 +1,19 @@
 /*
- * $Id: TStream.prg $
- */
+* $Id: TStream.prg $
+*/
 /*
- * Data stream management class.
- *
- * TStreamBase. It "reads" data from a memory buffer.
- *              It's also "core" base class.
- * TStreamFile. Reads data from a file.
- *              For read from STDIN, you must use "handle" 1.
- *
- * Posted by Vicente Guerra on 2014/02/04.
- */
+* Data stream management class.
+* TStreamBase. It "reads" data from a memory buffer.
+*              It's also "core" base class.
+* TStreamFile. Reads data from a file.
+*              For read from STDIN, you must use "handle" 1.
+* Posted by Vicente Guerra on 2014/02/04.
+*/
 
 #include "hbclass.ch"
 
 CLASS TStreamBase
+
    DATA pBuffer      INIT nil    // Pointer to buffer
    DATA nLen         INIT 0      // Bytes in buffer
    DATA nMax         INIT 1024   // Buffer size
@@ -62,10 +61,12 @@ CLASS TStreamBase
    METHOD RealFill      // Real filler
    METHOD Disconnect    // Disconnect
    METHOD Write         INLINE 0
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cBuffer ) CLASS TStreamBase
-LOCAL nLen
+
+   LOCAL nLen
+
    IF VALTYPE( cBuffer ) $ "CM" .AND. LEN( cBuffer ) > 0
       nLen := LEN( cBuffer )
       IF ::nMax < nLen
@@ -80,10 +81,13 @@ LOCAL nLen
       ENDIF
       ::ReSize( ::nMax )
    ENDIF
-RETURN Self
+
+   RETURN SELF
 
 METHOD Read( nBytes ) CLASS TStreamBase
-LOCAL cBuffer
+
+   LOCAL cBuffer
+
    IF ! EMPTY( ::pBuffer )
       IF ::lAutoFill .OR. ( ::nMinToFill > 0 .AND. ::nLen < ::nMinToFill )
          ::Fill()
@@ -97,9 +101,11 @@ LOCAL cBuffer
    ELSE
       cBuffer := ""
    ENDIF
-RETURN cBuffer
+
+   RETURN cBuffer
 
 METHOD Remove( nCount, nPosition ) CLASS TStreamBase
+
    IF ! EMPTY( ::pBuffer )
       IF ! HB_ISNUMERIC( nPosition )
          nPosition := 1
@@ -119,10 +125,13 @@ METHOD Remove( nCount, nPosition ) CLASS TStreamBase
          ENDIF
       ENDIF
    ENDIF
-RETURN nil
+
+   RETURN NIL
 
 METHOD Fill() CLASS TStreamBase
-LOCAL nRead
+
+   LOCAL nRead
+
    IF ! EMPTY( ::pBuffer ) .AND. ::IsConnected()
       IF ::nLen < ::nMax
          nRead = ::RealFill( ::pBuffer, ::nLen + 1, ::nMax - ::nLen )
@@ -133,16 +142,21 @@ LOCAL nRead
          ENDIF
       ENDIF
    ENDIF
-RETURN nil
+
+   RETURN NIL
 
 METHOD Len() CLASS TStreamBase
+
    IF ::lAutoFill .OR. ( ::nMinToFill > 0 .AND. ::nLen < ::nMinToFill )
       ::Fill()
    ENDIF
-RETURN IIF( ! EMPTY( ::pBuffer ), ::nLen, 0 )
+
+   RETURN IIF( ! EMPTY( ::pBuffer ), ::nLen, 0 )
 
 METHOD Left( nCount ) CLASS TStreamBase
-LOCAL cBuffer
+
+   LOCAL cBuffer
+
    IF ! EMPTY( ::pBuffer )
       IF ::lAutoFill .OR. ( ::nMinToFill > 0 .AND. ::nLen < ::nMinToFill )
          ::Fill()
@@ -155,10 +169,13 @@ LOCAL cBuffer
    ELSE
       cBuffer := ""
    ENDIF
-RETURN cBuffer
+
+   RETURN cBuffer
 
 METHOD Right( nCount ) CLASS TStreamBase
-LOCAL cBuffer
+
+   LOCAL cBuffer
+
    IF ! EMPTY( ::pBuffer )
       IF ::lAutoFill .OR. ( ::nMinToFill > 0 .AND. ::nLen < ::nMinToFill )
          ::Fill()
@@ -171,10 +188,13 @@ LOCAL cBuffer
    ELSE
       cBuffer := ""
    ENDIF
-RETURN cBuffer
+
+   RETURN cBuffer
 
 METHOD SubStr( nPos, nCount ) CLASS TStreamBase
-LOCAL cBuffer
+
+   LOCAL cBuffer
+
    IF ! EMPTY( ::pBuffer )
       IF ::lAutoFill .OR. ( ::nMinToFill > 0 .AND. ::nLen < ::nMinToFill )
          ::Fill()
@@ -191,14 +211,18 @@ LOCAL cBuffer
    ELSE
       cBuffer := ""
    ENDIF
-RETURN cBuffer
+
+   RETURN cBuffer
 
 METHOD Clear() CLASS TStreamBase
+
    ::nPosition += ::nLen
    ::nLen := 0
-RETURN nil
+
+   RETURN NIL
 
 METHOD Skip( nCount ) CLASS TStreamBase
+
    IF ! HB_IsNumeric( nCount ) .OR. nCount < 0
       nCount := 0
    ENDIF
@@ -217,9 +241,11 @@ METHOD Skip( nCount ) CLASS TStreamBase
          ::Fill()
       ENDIF
    ENDDO
-RETURN nil
+
+   RETURN NIL
 
 METHOD ReSize( nSize ) CLASS TStreamBase
+
    IF ! HB_ISNUMERIC( nSize )
       nSize := 1
    ENDIF
@@ -236,9 +262,11 @@ METHOD ReSize( nSize ) CLASS TStreamBase
       ::nLen := 0
    ENDIF
    ::nMax := nSize
-RETURN nil
+
+   RETURN NIL
 
 METHOD Close() CLASS TStreamBase
+
    ::Disconnect()
    IF ! EMPTY( ::pBuffer )
       Stream_Release( ::pBuffer )
@@ -246,16 +274,21 @@ METHOD Close() CLASS TStreamBase
    ENDIF
    ::nLen := 0
    ::nPosition := 0
-RETURN nil
+
+   RETURN NIL
 
 METHOD IsActive() CLASS TStreamBase
-RETURN ( ! EMPTY( ::pBuffer ) .AND. ( ::nLen > 0 .OR. ::IsConnected() ) )
+
+   RETURN ( ! EMPTY( ::pBuffer ) .AND. ( ::nLen > 0 .OR. ::IsConnected() ) )
 
 METHOD IsConnected() CLASS TStreamBase
-RETURN .F.
+
+   RETURN .F.
 
 METHOD Append( cBuffer ) CLASS TStreamBase
-LOCAL nBytes := 0
+
+   LOCAL nBytes := 0
+
    IF HB_IsString( cBuffer ) .AND. LEN( cBuffer ) > 0
       IF ! EMPTY( ::pBuffer ) .AND. ::IsConnected()
          IF ::nLen < ::nMax
@@ -265,14 +298,19 @@ LOCAL nBytes := 0
          ENDIF
       ENDIF
    ENDIF
-RETURN nBytes
+
+   RETURN nBytes
 
 PROCEDURE Destroy() CLASS TStreamBase
+
    ::Close()
-RETURN
+
+   RETURN
 
 METHOD IsLine() CLASS TStreamBase
-LOCAL lIsLine := .F.
+
+   LOCAL lIsLine := .F.
+
    IF ! EMPTY( ::pBuffer )
       IF ::lAutoFill .OR. ( ::nMinToFill > 0 .AND. ::nLen < ::nMinToFill )
          ::Fill()
@@ -287,10 +325,13 @@ LOCAL lIsLine := .F.
          lIsLine := ( ::CutLineAt() > 0 )
       ENDIF
    ENDIF
-RETURN lIsLine
+
+   RETURN lIsLine
 
 METHOD GetLine() CLASS TStreamBase
-LOCAL cBuffer := "", nPos
+
+   LOCAL cBuffer := "", nPos
+
    IF ! EMPTY( ::pBuffer )
       IF ::lAutoFill .OR. ( ::nMinToFill > 0 .AND. ::nLen < ::nMinToFill )
          ::Fill()
@@ -325,25 +366,35 @@ LOCAL cBuffer := "", nPos
          ENDIF
       ENDIF
    ENDIF
-RETURN cBuffer
+
+   RETURN cBuffer
 
 METHOD CutLineAt() CLASS TStreamBase
-LOCAL nPos := 0
+
+   LOCAL nPos := 0
+
    IF ! EMPTY( ::pBuffer ) .AND. ::nLen > 0
       nPos := Stream_CutLineAtB( ::pBuffer, ::nLen, ::IsConnected(), ::nLineLenght, ::lWordWrap )
    ENDIF
-RETURN nPos
+
+   RETURN nPos
 
 METHOD RealFill() CLASS TStreamBase
+
    // Dummy
-RETURN nil
+
+   RETURN NIL
 
 METHOD Disconnect() CLASS TStreamBase
+
    // Dummy
-RETURN nil
+
+   RETURN NIL
 
 METHOD WriteBuffer( cData ) CLASS TStreamBase
-LOCAL nRet, lRet := .F.
+
+   LOCAL nRet, lRet := .F.
+
    IF ::IsConnected()
       IF VALTYPE( cData ) $ "CM"
          ::cDataToWrite += cData
@@ -360,7 +411,6 @@ LOCAL nRet, lRet := .F.
                   ::cDataToWrite := SUBSTR( ::cDataToWrite, nRet + 1 )
                ENDIF
             ELSEIF ::CanWaitForBuffer()
-               //
             ELSE
                ::Disconnect()
             ENDIF
@@ -370,19 +420,23 @@ LOCAL nRet, lRet := .F.
          ::Close()
       ENDIF
    ENDIF
-RETURN lRet
+
+   RETURN lRet
 
 METHOD CanWrite() CLASS TStreamBase
-RETURN .F.
+
+   RETURN .F.
 
 METHOD CloseAtEnd( lCloseAtEnd ) CLASS TStreamBase
+
    IF HB_IsLogical( lCloseAtEnd )
       ::lCloseAtEnd := lCloseAtEnd
       IF LEN( ::cDataToWrite ) == 0 .AND. ::lCloseAtEnd
          ::Close()
       ENDIF
    ENDIF
-RETURN ::lCloseAtEnd
+
+   RETURN ::lCloseAtEnd
 
 #pragma BEGINDUMP
 
@@ -526,23 +580,20 @@ HB_FUNC( STREAM_CUTLINEATB )
 
 #pragma ENDDUMP
 
-/////////////////////////////////////////////////////////////////////////////
-
 CLASS TStreamFile FROM TStreamBase
+
    DATA nHdl INIT 0
 
    METHOD New
    METHOD IsConnected
-   //
    METHOD RealFill
    METHOD Disconnect
-   //
    METHOD Write
-   //
    METHOD Skip
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cFile, nMode, nHdl ) CLASS TStreamFile
+
    ::Close()
    IF ! HB_IsNumeric( nHdl ) .OR. nHdl <= 0
       ::nHdl := FOpen( cFile, nMode )
@@ -552,23 +603,30 @@ METHOD New( cFile, nMode, nHdl ) CLASS TStreamFile
    IF ::nHdl > 0
       ::ReSize( ::nMax )
    ENDIF
-RETURN Self
+
+   RETURN SELF
 
 METHOD IsConnected() CLASS TStreamFile
-RETURN ( ::nHdl > 0 )
+
+   RETURN ( ::nHdl > 0 )
 
 METHOD RealFill( pBuffer, nPos, nCount ) CLASS TStreamFile
-RETURN StreamFile_Read( pBuffer, ::nHdl, nPos, nCount )
+
+   RETURN StreamFile_Read( pBuffer, ::nHdl, nPos, nCount )
 
 METHOD Disconnect() CLASS TStreamFile
+
    IF ::nHdl > 0
       FClose( ::nHdl )
       ::nHdl := 0
    ENDIF
-RETURN ::Super:Disconnect()
+
+   RETURN ::Super:Disconnect()
 
 METHOD Write( cBuffer ) CLASS TStreamFile
-LOCAL nWrite := 0
+
+   LOCAL nWrite := 0
+
    IF ::IsConnected()
       IF VALTYPE( cBuffer ) $ "CM" .AND. LEN( cBuffer ) > 0
          nWrite := FWrite( ::nHdl, cBuffer )
@@ -577,10 +635,12 @@ LOCAL nWrite := 0
          ENDIF
       ENDIF
    ENDIF
-RETURN nWrite
+
+   RETURN nWrite
 
 METHOD Skip( nCount ) CLASS TStreamFile
-LOCAL nCurrent, nSize
+
+   LOCAL nCurrent, nSize
 
    // HACK to access STDIN at 0
    IF ::nHdl == 1
@@ -609,7 +669,8 @@ LOCAL nCurrent, nSize
    IF ::lAutoFill .OR. ( ::nMinToFill > 0 .AND. ::nLen < ::nMinToFill )
       ::Fill()
    ENDIF
-RETURN nil
+
+   RETURN NIL
 
 #pragma BEGINDUMP
 

@@ -156,11 +156,11 @@ FUNCTION Main
                On Change Change_Cfg(1)
             END SPINNER
             DEFINE LISTBOX List_3
-               Row 95
-               Col 140
+               ROW 95
+               COL 140
                Items aOptions
                value 1
-               Width 200
+               WIDTH 200
                On Change Change_Cfg(2)
             END ListBox
             DEFINE HYPERLINK H1

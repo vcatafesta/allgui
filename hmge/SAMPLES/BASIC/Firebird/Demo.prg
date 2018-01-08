@@ -36,10 +36,10 @@ PROCEDURE start
       @ 0,300 button btn6 caption '&Quit'    width 55 height 20 action form1.release
 
       DEFINE GRID grid1
-         row 22
-         col 5
-         width 300
-         height 300
+         ROW 22
+         COL 5
+         WIDTH 300
+         HEIGHT 300
          headers {'Id','First Name','Last Name','Salary'}
          widths { 50, 80,110,115 }
          justify {BROWSE_JTFY_RIGHT,BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT}
@@ -100,7 +100,7 @@ PROCEDURE events_(n)
       END
       DEFINE WINDOW form1a;
             at 0,0 width 270 height 220;
-            title iif(n = 2,'Edit','Add');
+            TITLE iif(n = 2,'Edit','Add');
             modal;
             font 'ms sans serif' size 8
 

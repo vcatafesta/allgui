@@ -50,36 +50,36 @@ PROCEDURE Main
          ON INIT OpenTable()
 
       DEFINE BUTTON Button_1
-         Row   510
-         Col   30
+         ROW   510
+         COL   30
          Caption   'Chart &1'
          Action  drawchart_1( aser1 )
       END BUTTON
 
       DEFINE BUTTON Button_2
-         Row   510
-         Col   150
+         ROW   510
+         COL   150
          Caption   'Chart &2'
          Action  drawchart_2( aser2 )
       END BUTTON
 
       DEFINE BUTTON Button_3
-         Row   510
-         Col   270
+         ROW   510
+         COL   270
          Caption   'Chart &3'
          Action  drawchart_3( aser3 )
       END BUTTON
 
       DEFINE BUTTON Button_4
-         Row   510
-         Col   390
+         ROW   510
+         COL   390
          Caption   '&Print'
          Action  PrintGraph( nGraphType )
       END BUTTON
 
       DEFINE BUTTON Button_5
-         Row   510
-         Col   510
+         ROW   510
+         COL   510
          Caption   'E&xit'
          Action  GraphTest.Release
       END BUTTON
