@@ -166,7 +166,7 @@ FUNCTION contas_bancarias()
          WIDTH 300;
          VALUE '';
          MAXLENGTH 040;
-         font 'verdana' size 010;
+         FONT 'verdana' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase;
@@ -251,7 +251,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Nome';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -261,7 +261,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 310;
          VALUE x_nome;
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -269,7 +269,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Banco';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -279,7 +279,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 140;
          VALUE x_banco;
          MAXLENGTH 010;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -287,7 +287,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Agência';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -297,7 +297,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 140;
          VALUE x_agencia;
          MAXLENGTH 010;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -305,7 +305,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Nº conta';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -315,7 +315,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 140;
          VALUE x_conta;
          MAXLENGTH 010;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -323,7 +323,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Limite R$';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -332,7 +332,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 140;
          VALUE x_limite;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -340,7 +340,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Titular da conta';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -350,7 +350,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 310;
          VALUE x_titular;
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -358,7 +358,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Gerente da conta';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -368,7 +368,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 310;
          VALUE x_gerente;
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -376,7 +376,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Telefone';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -386,7 +386,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 140;
          VALUE x_telefone;
          MAXLENGTH 010;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase

@@ -34,7 +34,7 @@ FUNCTION Main()
          HEADERS {"Código", "Original", "Cód Fornecedor 1", "Descrição", "Embalagem","Marca", "Preço Venda", "Estoque" , "Aplicação", "Obervação", "Record"};
          WIDTHS  { 100, 100, 100, 240, 60, 80, 90, 60, 300, 300, 70 }  ;
          VALUE 1                        ;
-         Font "Arial" Size 8 Bold;
+         FONT "Arial" Size 8 Bold;
          BACKCOLOR _YELLOW FONTCOLOR BLACK  ;
          JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT}
 

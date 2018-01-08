@@ -1929,7 +1929,7 @@ STATIC FUNCTION tamanhos_pizza()
          WORKAREA tamanhos;
          FIELDS {'tamanhos->nome','tamanhos->pedacos'};
          VALUE 1;
-         font 'verdana';
+         FONT 'verdana';
          size 010;
          BACKCOLOR _amarelo_001;
          FONTCOLOR BLUE;
@@ -1965,7 +1965,7 @@ STATIC FUNCTION altera_tamanho()
          of form_altera_tamanho;
          VALUE 'Nome';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1975,7 +1975,7 @@ STATIC FUNCTION altera_tamanho()
          WIDTH 180;
          VALUE x_nome;
          MAXLENGTH 015;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -1983,7 +1983,7 @@ STATIC FUNCTION altera_tamanho()
          of form_altera_tamanho;
          VALUE 'Nº pedaços';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1992,7 +1992,7 @@ STATIC FUNCTION altera_tamanho()
          HEIGHT 027;
          WIDTH 100;
          VALUE x_pedaco;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -2124,7 +2124,7 @@ STATIC FUNCTION login()
          WIDTH 120;
          VALUE x_senha;
          MAXLENGTH 010;
-         font 'verdana' size 010;
+         FONT 'verdana' size 010;
          BACKCOLOR _branco_001;
          FONTCOLOR _preto_001;
          password
@@ -2161,7 +2161,7 @@ STATIC FUNCTION login()
          noxpstyle;
          WIDTH 060;
          HEIGHT 040;
-         font 'verdana';
+         FONT 'verdana';
          size 9;
          FONTCOLOR BLACK;
          bold;
@@ -2175,7 +2175,7 @@ STATIC FUNCTION login()
          noxpstyle;
          WIDTH 100;
          HEIGHT 040;
-         font 'verdana';
+         FONT 'verdana';
          size 9;
          FONTCOLOR BLACK;
          bold;
@@ -2494,7 +2494,7 @@ STATIC FUNCTION bordas_pizza()
          WORKAREA bordas;
          FIELDS {'bordas->nome',"trans(bordas->preco,'@E 999,999.99')"};
          VALUE 1;
-         font 'verdana';
+         FONT 'verdana';
          size 010;
          BACKCOLOR _amarelo_001;
          FONTCOLOR BLUE;
@@ -2530,7 +2530,7 @@ STATIC FUNCTION altera_borda()
          of form_altera_borda;
          VALUE 'Descrição';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -2540,7 +2540,7 @@ STATIC FUNCTION altera_borda()
          WIDTH 180;
          VALUE x_nome;
          MAXLENGTH 015;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -2548,7 +2548,7 @@ STATIC FUNCTION altera_borda()
          of form_altera_borda;
          VALUE 'Preço R$';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -2557,7 +2557,7 @@ STATIC FUNCTION altera_borda()
          HEIGHT 027;
          WIDTH 100;
          VALUE x_preco;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          NUMERIC INPUTMASK "99,999.99";

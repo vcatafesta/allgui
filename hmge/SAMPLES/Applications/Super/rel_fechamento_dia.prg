@@ -34,7 +34,7 @@ FUNCTION fechamento_dia()
          of form_fechamento;
          VALUE 'Escolha o dia';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -42,7 +42,7 @@ FUNCTION fechamento_dia()
          of form_fechamento;
          VALUE 'Este relatório totaliza todas as operações realizadas no';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -50,7 +50,7 @@ FUNCTION fechamento_dia()
          of form_fechamento;
          VALUE 'dia escolhido pelo usuário, oferecendo um mapa de';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -58,7 +58,7 @@ FUNCTION fechamento_dia()
          of form_fechamento;
          VALUE 'informações muito útil.';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -68,7 +68,7 @@ FUNCTION fechamento_dia()
          VALUE date();
          WIDTH 150;
          HEIGHT 030;
-         font 'verdana' size 014
+         FONT 'verdana' size 014
 
       * linha separadora
       DEFINE LABEL linha_rodape

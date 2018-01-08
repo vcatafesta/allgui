@@ -383,7 +383,7 @@ PROCEDURE Acercade()
          TITLE 'About' ;
          ICON 'main' ;
          modal ;
-         font 'Courier New' size 9
+         FONT 'Courier New' size 9
 
       FOR i := 1 to Len(aTexto)
          clbl := "LBL"+strzero(i, 2)

@@ -28,7 +28,7 @@ FUNCTION mostra_entregas()
          WORKAREA entrega;
          FIELDS {'entrega->situacao','entrega->telefone','entrega->cliente','entrega->endereco','entrega->hora','entrega->origem','entrega->motoboy','trans(entrega->vlr_taxa,"@E 999.99")'};
          VALUE 1;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          BACKCOLOR _acompanhamento;
          FONTCOLOR BLUE
@@ -39,7 +39,7 @@ FUNCTION mostra_entregas()
          CAPTION 'F5 - Escolher motoboy/entregador';
          WIDTH 280 height 040;
          PICTURE path_imagens+'img_motent.bmp';
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          ACTION escolher_motoboy()
       @ getdesktopheight()-110,295 buttonex botao_f6;
@@ -47,7 +47,7 @@ FUNCTION mostra_entregas()
          CAPTION 'F6 - Mudar situação do pedido';
          WIDTH 260 height 040;
          PICTURE path_imagens+'img_situacao.bmp';
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          ACTION mudar_situacao()
       @ getdesktopheight()-110,565 buttonex botao_f9;
@@ -55,7 +55,7 @@ FUNCTION mostra_entregas()
          CAPTION 'F9 - Atualizar pedidos';
          WIDTH 210 height 040;
          PICTURE path_imagens+'img_atualiza.bmp';
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          ACTION atualizar_pedidos()
       @ getdesktopheight()-110,785 buttonex botao_esc;
@@ -63,7 +63,7 @@ FUNCTION mostra_entregas()
          CAPTION 'ESC - Sair desta tela';
          WIDTH 200 height 040;
          PICTURE path_imagens+'img_sair.bmp';
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          ACTION form_entrega.release
 
@@ -133,7 +133,7 @@ STATIC FUNCTION escolher_motoboy()
          WORKAREA motoboys;
          FIELDS {'motoboys->codigo','motoboys->nome'};
          VALUE 1;
-         font 'verdana';
+         FONT 'verdana';
          size 010;
          BACKCOLOR _branco_001;
          FONTCOLOR BLUE;

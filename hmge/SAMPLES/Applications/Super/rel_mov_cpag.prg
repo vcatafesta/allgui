@@ -25,7 +25,7 @@ FUNCTION relatorio_cpag_001()
          of form_mov_cpag;
          VALUE 'Escolha o intervalo de datas';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -35,13 +35,13 @@ FUNCTION relatorio_cpag_001()
          VALUE date();
          WIDTH 150;
          HEIGHT 030;
-         font 'verdana' size 014
+         FONT 'verdana' size 014
       @ 040,170 datepicker dp_final;
          parent form_mov_cpag;
          VALUE date();
          WIDTH 150;
          HEIGHT 030;
-         font 'verdana' size 014
+         FONT 'verdana' size 014
 
       * linha separadora
       DEFINE LABEL linha_rodape

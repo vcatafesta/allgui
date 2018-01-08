@@ -181,7 +181,7 @@ FUNCTION DesignHaruPDF( cFileToSave )
 
       FOR i := 1 to len( font_list )
          samp_text := "abcdefgABCDEFG12345!#$%&+-@?"
-         font := HPDF_GetFont( pdf, font_list[ i ], NIL )
+         FONT := HPDF_GetFont( pdf, font_list[ i ], NIL )
 
          HPDF_Page_SetFontAndSize( page, def_font, 9 )
          HPDF_Page_ShowText( page, font_list[ i ] )
@@ -253,7 +253,7 @@ STATIC FUNCTION Page_Lines( pdf )
    LOCAL x, y, x1, y1, x2, y2, x3, y3, tw
 
    /* create default-font */
-   font := HPDF_GetFont( pdf, "Helvetica", NIL )
+   FONT := HPDF_GetFont( pdf, "Helvetica", NIL )
 
    /* add a new page object. */
    page := HPDF_AddPage(pdf)
@@ -552,7 +552,7 @@ STATIC FUNCTION Page_Text( pdf, grid )
 
       page_height := HPDF_Page_GetHeight(page)
 
-      font := HPDF_GetFont(pdf, "Helvetica", NIL)
+      FONT := HPDF_GetFont(pdf, "Helvetica", NIL)
       HPDF_Page_SetTextLeading(page, 20)
 
       /* text_rect method */
@@ -707,7 +707,7 @@ STATIC FUNCTION Page_Text( pdf, grid )
       angle2 := 180
 
       HPDF_Page_BeginText(page)
-      font := HPDF_GetFont(pdf, "Courier-Bold", NIL)
+      FONT := HPDF_GetFont(pdf, "Courier-Bold", NIL)
       HPDF_Page_SetFontAndSize(page, font, 30)
 
       FOR i := 0  to len(SAMP_TXT)
@@ -753,7 +753,7 @@ STATIC FUNCTION Page_TextScaling( pdf, grid )
    //HPDF_SetCompressionMode(pdf, HPDF_COMP_ALL)
 
    /* create default-font */
-   font = HPDF_GetFont(pdf, "Helvetica", NIL)
+   FONT = HPDF_GetFont(pdf, "Helvetica", NIL)
 
    /* add a new page object. */
    page = HPDF_AddPage(pdf)
@@ -1069,7 +1069,7 @@ STATIC FUNCTION Page_CodePages( pdf )
    HPDF_SetPageMode(pdf, HPDF_PAGE_MODE_USE_OUTLINE)
 
    /* get default font */
-   font := HPDF_GetFont(pdf, "Helvetica", NIL)
+   FONT := HPDF_GetFont(pdf, "Helvetica", NIL)
 
    /* load font object */
    font_name := HPDF_LoadType1FontFromFile(pdf, cAfm, cPfb )
@@ -1266,7 +1266,7 @@ STATIC FUNCTION Page_Annotation( pdf )
    LOCAL page, font, encoding, annot
 
    /* use Times-Roman font. */
-   font = HPDF_GetFont(pdf, "Times-Roman", "WinAnsiEncoding")
+   FONT = HPDF_GetFont(pdf, "Times-Roman", "WinAnsiEncoding")
 
    page = HPDF_AddPage(pdf)
       aadd( cpos, page )
@@ -1362,7 +1362,7 @@ STATIC FUNCTION Page_Images( pdf )
    LOCAL cImagePath := "files" + hb_OSPathSeparator()
 
    /* create default-font */
-   font := HPDF_GetFont(pdf, "Helvetica", Nil)
+   FONT := HPDF_GetFont(pdf, "Helvetica", Nil)
 
    /* add a new page object. */
    page := HPDF_AddPage(pdf)
@@ -1521,7 +1521,7 @@ STATIC FUNCTION Print_jpg( pdf )
    LOCAL cImagePath := "files" + hb_OSPathSeparator(), font, dst, page
    LOCAL image1, image2, x, y, iw, ih
 
-   font = HPDF_GetFont (pdf, "Helvetica", Nil);
+   FONT = HPDF_GetFont (pdf, "Helvetica", Nil);
       /* add a new page object. */
    page = HPDF_AddPage (pdf)
       aadd( cpos, page )
@@ -1569,7 +1569,7 @@ STATIC FUNCTION print_grid( pdf, page )
 
    HEIGHT = HPDF_Page_GetHeight (page)
    WIDTH = HPDF_Page_GetWidth (page)
-   font = HPDF_GetFont (pdf, "Helvetica", Nil)
+   FONT = HPDF_GetFont (pdf, "Helvetica", Nil)
 
    HPDF_Page_SetFontAndSize (page, font, 5)
    HPDF_Page_SetGrayFill (page, 0.5)
@@ -1685,7 +1685,7 @@ STATIC FUNCTION Page_Link_Annotation( pdf )
    #define rBOTTOM 4
    */
    /* create default-font */
-   font := HPDF_GetFont (pdf, "Helvetica", Nil)
+   FONT := HPDF_GetFont (pdf, "Helvetica", Nil)
 
    /* create index page */
    index_page := HPDF_AddPage (pdf)
@@ -1960,7 +1960,7 @@ STATIC FUNCTION Page_slide (pdf)
       page11,page12,page13,page14,page15,page16,font
 
    /* create default-font */
-   font = HPDF_GetFont (pdf, "Courier", NIL)
+   FONT = HPDF_GetFont (pdf, "Courier", NIL)
 
    /* Add 17 pages to the document. */
    page0 := HPDF_AddPage (pdf)

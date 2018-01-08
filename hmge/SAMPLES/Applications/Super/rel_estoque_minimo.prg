@@ -25,7 +25,7 @@ FUNCTION relatorio_estoque_minimo()
          of form_est_minimo;
          VALUE 'Este relatório irá listar somente os produtos que';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -33,7 +33,7 @@ FUNCTION relatorio_estoque_minimo()
          of form_est_minimo;
          VALUE 'estejam com o estoque atual igual ou abaixo do mínimo';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -41,7 +41,7 @@ FUNCTION relatorio_estoque_minimo()
          of form_est_minimo;
          VALUE 'cadastrado. Somente produtos que não sejam - pizza -';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -49,7 +49,7 @@ FUNCTION relatorio_estoque_minimo()
          of form_est_minimo;
          VALUE 'aparecerão no relatório.';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT

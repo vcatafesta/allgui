@@ -52,7 +52,7 @@ FUNCTION reajuste()
          of form_reajuste;
          VALUE 'Quais produtos reajustar ?';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -70,7 +70,7 @@ FUNCTION reajuste()
       of form_reajuste;
       VALUE 'Selecione a Categoria';
       autosize;
-      font 'tahoma' size 010;
+      FONT 'tahoma' size 010;
       bold;
       FONTCOLOR _preto_001;
       TRANSPARENT
@@ -89,7 +89,7 @@ END comboboxex
    of form_reajuste;
    VALUE 'Selecione a Subcategoria';
    autosize;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
    TRANSPARENT
@@ -108,7 +108,7 @@ END comboboxex
    of form_reajuste;
    VALUE 'SOMAR';
    autosize;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    bold;
    FONTCOLOR BLUE;
    TRANSPARENT
@@ -117,7 +117,7 @@ END comboboxex
    HEIGHT 027;
    WIDTH 080;
    VALUE 0;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    BACKCOLOR _fundo_get;
    FONTCOLOR _letra_get_1;
    PICTURE '@E 9,999.99'
@@ -125,7 +125,7 @@ END comboboxex
    of form_reajuste;
    VALUE 'ao preço';
    autosize;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
    TRANSPARENT
@@ -133,7 +133,7 @@ END comboboxex
    of form_reajuste;
    VALUE 'de venda já existente';
    autosize;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
    TRANSPARENT
@@ -142,7 +142,7 @@ END comboboxex
    of form_reajuste;
    VALUE 'ou então';
    autosize;
-   font 'tahoma' size 018;
+   FONT 'tahoma' size 018;
    bold;
    FONTCOLOR _preto_001;
    TRANSPARENT
@@ -152,7 +152,7 @@ END comboboxex
    of form_reajuste;
    VALUE 'APLICAR';
    autosize;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    bold;
    FONTCOLOR BLUE;
    TRANSPARENT
@@ -161,7 +161,7 @@ END comboboxex
    HEIGHT 027;
    WIDTH 070;
    VALUE 0;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    BACKCOLOR _fundo_get;
    FONTCOLOR _letra_get_1;
    PICTURE '@R 999.99'
@@ -169,7 +169,7 @@ END comboboxex
    of form_reajuste;
    VALUE '% sobre';
    autosize;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
    TRANSPARENT
@@ -177,7 +177,7 @@ END comboboxex
    of form_reajuste;
    VALUE 'o preço de venda já existente';
    autosize;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
    TRANSPARENT
@@ -207,7 +207,7 @@ END LABEL
    of form_reajuste;
    VALUE 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado';
    autosize;
-   font 'tahoma' size 010;
+   FONT 'tahoma' size 010;
    bold;
    FONTCOLOR _preto_001;
    TRANSPARENT

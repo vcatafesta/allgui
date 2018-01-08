@@ -55,7 +55,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Fornecedor';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -64,7 +64,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 060;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -73,7 +73,7 @@ FUNCTION compras()
          of form_compras;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -83,7 +83,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Forma de pagamento';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -92,7 +92,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 060;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -101,7 +101,7 @@ FUNCTION compras()
          of form_compras;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -111,7 +111,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Nº do documento';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -121,7 +121,7 @@ FUNCTION compras()
          WIDTH 200;
          VALUE '';
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -131,7 +131,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Nº de parcelas';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -140,7 +140,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 060;
          VALUE 1;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@R 999'
@@ -150,7 +150,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Data de vencimento (se for uma única parcela) ou Data início da primeira parcela';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -159,7 +159,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 100;
          VALUE date();
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          date
@@ -169,7 +169,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Caso a compra seja parcelada, digite a quantidade de dias entre as parcelas';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -177,7 +177,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'para que o programa possa calcular os vencimentos futuros.';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -186,7 +186,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 060;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@R 999'
@@ -200,7 +200,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Produto';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -210,7 +210,7 @@ FUNCTION compras()
          WIDTH 060;
          VALUE '';
          MAXLENGTH 015;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -219,7 +219,7 @@ FUNCTION compras()
          of form_compras;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -228,7 +228,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Quantidade';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -237,7 +237,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 120;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@R 999999'
@@ -246,7 +246,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Valor Unitário R$';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -255,7 +255,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 120;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -299,7 +299,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Matéria prima';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -308,7 +308,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 060;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -317,7 +317,7 @@ FUNCTION compras()
          of form_compras;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -326,7 +326,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Quantidade';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -335,7 +335,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 120;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@R 999,999.999'
@@ -344,7 +344,7 @@ FUNCTION compras()
          of form_compras;
          VALUE 'Valor Unitário R$';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -353,7 +353,7 @@ FUNCTION compras()
          HEIGHT 027;
          WIDTH 120;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -499,9 +499,9 @@ STATIC FUNCTION getcode_fornecedor(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=fornecedores->codigo,thiswindow.release)
       END BROWSE
@@ -618,9 +618,9 @@ STATIC FUNCTION getcode_forma_pagamento(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=formas_pagamento->codigo,thiswindow.release)
       END BROWSE
@@ -706,7 +706,7 @@ STATIC FUNCTION mostra_listagem_produto_2()
          HEADERS {'','Nome','Preço R$'}
          WIDTHS {001,395,150}
          SHOWHEADERS .F.
-         nolines .T.
+         NOLINES .T.
          FONTNAME 'courier new'
          FONTSIZE 012
          BACKCOLOR _ciano_001
@@ -851,9 +851,9 @@ STATIC FUNCTION getcode_materia_prima_2(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=materia_prima->codigo,thiswindow.release)
       END BROWSE

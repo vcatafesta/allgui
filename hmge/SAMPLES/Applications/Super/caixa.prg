@@ -153,12 +153,12 @@ FUNCTION caixa()
          parent form_caixa;
          VALUE date();
          WIDTH 100;
-         font 'verdana' size 010
+         FONT 'verdana' size 010
       @ 540,280 datepicker dp_final;
          parent form_caixa;
          VALUE date();
          WIDTH 100;
-         font 'verdana' size 010
+         FONT 'verdana' size 010
       @ 540,390 buttonex botao_filtrar;
          parent form_caixa;
          CAPTION 'Filtrar';
@@ -238,7 +238,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Data';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -247,7 +247,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_data;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          date
@@ -255,7 +255,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Histórico';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -265,7 +265,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 310;
          VALUE x_historico;
          MAXLENGTH 030;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -273,7 +273,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Entrada';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -282,7 +282,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_entrada;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -290,7 +290,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Saída';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _vermelho_002;
          TRANSPARENT
@@ -299,7 +299,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_saida;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'

@@ -25,7 +25,7 @@ FUNCTION posicao_mprima()
          of form_estoque_mprima;
          VALUE 'Este relatório irá listar todas as matérias primas em';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -33,7 +33,7 @@ FUNCTION posicao_mprima()
          of form_estoque_mprima;
          VALUE 'estoque, mostrando a quantidade atual disponível.';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT

@@ -26,7 +26,7 @@ PROCEDURE start
          on maximize ( adjust() );
          on size ( adjust() );
          ON RELEASE ( oConnection:Destroy() );
-         font 'ms sans serif' size 8
+         FONT 'ms sans serif' size 8
 
       @ 0,  0 button btn1 caption '&Add'    width 55 height 20 action events_(1)
       @ 0, 60 button btn2 caption '&Edit'    width 55 height 20 action events_(2)
@@ -102,7 +102,7 @@ PROCEDURE events_(n)
             at 0,0 width 270 height 220;
             TITLE iif(n = 2,'Edit','Add');
             modal;
-            font 'ms sans serif' size 8
+            FONT 'ms sans serif' size 8
 
          @ 10, 10 label label1 width 60 height 20 value 'ID' RIGHTALIGN
          @ 40, 10 label label2 width 60 height 20 value 'First Name' RIGHTALIGN

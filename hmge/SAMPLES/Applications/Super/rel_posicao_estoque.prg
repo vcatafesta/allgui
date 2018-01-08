@@ -25,7 +25,7 @@ FUNCTION posicao_estoque()
          of form_estoque_produtos;
          VALUE 'Este relatório irá listar todos os produtos em estoque';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -33,7 +33,7 @@ FUNCTION posicao_estoque()
          of form_estoque_produtos;
          VALUE 'mostrando a quantidade atual disponível de cada um.';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -41,7 +41,7 @@ FUNCTION posicao_estoque()
          of form_estoque_produtos;
          VALUE 'Somente produtos que não sejam - pizza -';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -49,7 +49,7 @@ FUNCTION posicao_estoque()
          of form_estoque_produtos;
          VALUE 'aparecerão no relatório.';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT

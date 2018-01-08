@@ -166,7 +166,7 @@ FUNCTION formas_recebimento()
          WIDTH 300;
          VALUE '';
          MAXLENGTH 040;
-         font 'verdana' size 010;
+         FONT 'verdana' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase;
@@ -241,7 +241,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Nome';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -251,7 +251,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 310;
          VALUE x_nome;
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -259,7 +259,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Banco/Conta';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -268,7 +268,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE x_banco;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -277,7 +277,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -285,7 +285,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Dias para receber';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -294,7 +294,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE x_dias;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          NUMERIC
@@ -633,9 +633,9 @@ STATIC FUNCTION getcode_banco(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=bancos->codigo,thiswindow.release)
       END BROWSE

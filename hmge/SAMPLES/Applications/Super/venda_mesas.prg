@@ -52,7 +52,7 @@ FUNCTION venda_mesas()
          WIDTH getdesktopwidth();
          HEIGHT 040;
          VALUE 'F2-abrir mesa  F3-consumo  F4-fechar mesa  F8-limpar mesa  ESC-sair';
-         font 'verdana' size 018;
+         FONT 'verdana' size 018;
          bold;
          BACKCOLOR _preto_001;
          FONTCOLOR _cinza_001;
@@ -76,7 +76,7 @@ FUNCTION venda_mesas()
          HEIGHT getdesktopheight()-115;
          HEADERS {'id','id mesa','Mesa','Aberta as'};
          WIDTHS {001,001,230,130};
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          BACKCOLOR _branco_001;
          FONTCOLOR BLUE
@@ -87,7 +87,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE 'Pizza';
          autosize;
-         font 'courier new' size 012;
+         FONT 'courier new' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -97,7 +97,7 @@ FUNCTION venda_mesas()
          WIDTH 100;
          VALUE '';
          MAXLENGTH 015;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -107,7 +107,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE '';
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -125,7 +125,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE 'Pizzas selecionadas';
          autosize;
-         font 'courier new' size 012;
+         FONT 'courier new' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -138,7 +138,7 @@ FUNCTION venda_mesas()
          WORKAREA temp_pizzas;
          FIELDS {'temp_pizzas->id_produto','temp_pizzas->sequencia','temp_pizzas->nome','temp_pizzas->tamanho','trans(temp_pizzas->preco,"@E 99,999.99")'};
          VALUE 1;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          BACKCOLOR _amarelo_001;
          FONTCOLOR _preto_001
@@ -146,7 +146,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE 'Observações para a montagem da(s) pizza(s)';
          autosize;
-         font 'courier new' size 012;
+         FONT 'courier new' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -156,7 +156,7 @@ FUNCTION venda_mesas()
          WIDTH 420;
          VALUE '';
          MAXLENGTH 030;
-         font 'courier new' size 012;
+         FONT 'courier new' size 012;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -177,7 +177,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE 'tecle F5 após completar a composição de 1 (uma) pizza, para finalizá-la,';
          autosize;
-         font 'verdana' size 010;
+         FONT 'verdana' size 010;
          bold;
          FONTCOLOR _cinza_001;
          TRANSPARENT
@@ -185,7 +185,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE 'ou, para vender mais de 1 (uma) pizza, finalize uma para começar outra.';
          autosize;
-         font 'verdana' size 010;
+         FONT 'verdana' size 010;
          bold;
          FONTCOLOR _cinza_001;
          TRANSPARENT
@@ -196,7 +196,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE 'Produto';
          autosize;
-         font 'courier new' size 012;
+         FONT 'courier new' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -206,7 +206,7 @@ FUNCTION venda_mesas()
          WIDTH 100;
          VALUE '';
          MAXLENGTH 015;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -215,7 +215,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE '';
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -225,7 +225,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE 'Quantidade';
          autosize;
-         font 'courier new' size 012;
+         FONT 'courier new' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -234,7 +234,7 @@ FUNCTION venda_mesas()
          HEIGHT 030;
          WIDTH 100;
          VALUE 0;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -246,7 +246,7 @@ FUNCTION venda_mesas()
          of form_vda_mesas;
          VALUE 'Preço R$';
          autosize;
-         font 'courier new' size 012;
+         FONT 'courier new' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -255,7 +255,7 @@ FUNCTION venda_mesas()
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -280,7 +280,7 @@ FUNCTION venda_mesas()
          WORKAREA temp_produtos;
          FIELDS {'temp_produtos->produto','temp_produtos->qtd','temp_produtos->nome','trans(temp_produtos->unitario,"@E 9,999.99")','trans(temp_produtos->subtotal,"@E 99,999.99")'};
          VALUE 1;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          BACKCOLOR _amarelo_001;
          FONTCOLOR _preto_001
@@ -366,7 +366,7 @@ STATIC FUNCTION mostra_listagem_produto()
          HEADERS {'','Nome','Preço R$'}
          WIDTHS {001,395,150}
          SHOWHEADERS .F.
-         nolines .T.
+         NOLINES .T.
          FONTNAME 'courier new'
          FONTSIZE 012
          BACKCOLOR _ciano_001
@@ -481,7 +481,7 @@ STATIC FUNCTION mostra_listagem_pizza()
          HEADERS {'','Nome'}
          WIDTHS {001,395}
          SHOWHEADERS .F.
-         nolines .T.
+         NOLINES .T.
          FONTNAME 'courier new'
          FONTSIZE 012
          BACKCOLOR _ciano_001
@@ -669,7 +669,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '1- Selecione o tamanho da pizza';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -677,7 +677,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '2- Você poderá escolher entre o menor e o maior preço à ser cobrado, no caso de ter mais de 1 sabor na mesma pizza';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -685,7 +685,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '3- Caso deseje, ao fechamento deste pedido, poderá conceder um desconto especial ao cliente';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -693,7 +693,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '4- Para finalizar esta pizza e continuar vendendo, dê duplo-clique ou enter sobre o tamanho/preço escolhido';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -701,7 +701,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '5- ESC fecha esta janela e retorna para a tela de vendas';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _vermelho_002;
          TRANSPARENT
@@ -931,7 +931,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'SUBTOTAL PIZZAS';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -939,7 +939,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE trans(x_valor_pizza,'@E 999,999.99');
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -947,7 +947,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'SUBTOTAL PRODUTOS';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -955,7 +955,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE trans(x_valor_prod,'@E 999,999.99');
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -963,7 +963,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'TAXA DE ENTREGA';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -972,7 +972,7 @@ STATIC FUNCTION fecha_pedido()
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -981,7 +981,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'DESCONTO';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR _vermelho_002;
          TRANSPARENT
@@ -990,7 +990,7 @@ STATIC FUNCTION fecha_pedido()
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _vermelho_002;
@@ -1001,7 +1001,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'TOTAL DESTA MESA';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1009,7 +1009,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE '';
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1019,7 +1019,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'Você pode escolher até 3 formas de recebimento';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1030,13 +1030,13 @@ STATIC FUNCTION fecha_pedido()
          valuesource formas_recebimento->codigo;
          VALUE 1;
          WIDTH 250;
-         font 'courier new' size 010
+         FONT 'courier new' size 010
       @ 230,300 getbox tbox_fr001;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 014;
+         FONT 'courier new' size 014;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -1047,13 +1047,13 @@ STATIC FUNCTION fecha_pedido()
          valuesource formas_recebimento->codigo;
          VALUE 1;
          WIDTH 250;
-         font 'courier new' size 010
+         FONT 'courier new' size 010
       @ 270,300 getbox tbox_fr002;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 014;
+         FONT 'courier new' size 014;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -1064,13 +1064,13 @@ STATIC FUNCTION fecha_pedido()
          valuesource formas_recebimento->codigo;
          VALUE 1;
          WIDTH 250;
-         font 'courier new' size 010
+         FONT 'courier new' size 010
       @ 310,300 getbox tbox_fr003;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 014;
+         FONT 'courier new' size 014;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -1081,7 +1081,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'TOTAL RECEBIDO';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1089,7 +1089,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE '';
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1098,7 +1098,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'TROCO';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR _vermelho_002;
          TRANSPARENT
@@ -1106,7 +1106,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE '';
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1116,7 +1116,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'atendente/garçon';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1125,7 +1125,7 @@ STATIC FUNCTION fecha_pedido()
          valuesource atendentes->codigo;
          VALUE 1;
          WIDTH 250;
-         font 'courier new' size 010
+         FONT 'courier new' size 010
 
       * botões
       @ 510,115 buttonex botao_ok;

@@ -53,7 +53,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'Nome';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -62,7 +62,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 310;
          VALUE x_nome;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@!'
@@ -70,7 +70,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'Telefone (1)';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -79,7 +79,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 120;
          VALUE x_fixo_1;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -88,7 +88,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'Telefone (2)';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -97,7 +97,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 120;
          VALUE x_fixo_2;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -106,7 +106,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'Endereço';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -115,7 +115,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 310;
          VALUE x_endereco;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@!'
@@ -123,7 +123,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'Número';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -132,7 +132,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 060;
          VALUE x_numero;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@!'
@@ -140,7 +140,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'Complemento';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -149,7 +149,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 180;
          VALUE x_complem;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@!'
@@ -157,7 +157,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'Bairro';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -166,7 +166,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 180;
          VALUE x_bairro;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@!'
@@ -174,7 +174,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'Cidade';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -183,7 +183,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 180;
          VALUE x_cidade;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@!'
@@ -191,7 +191,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'UF';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -200,7 +200,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 040;
          VALUE x_uf;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@!'
@@ -208,7 +208,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'CEP';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -217,7 +217,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 080;
          VALUE x_cep;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@!'
@@ -225,7 +225,7 @@ FUNCTION empresa()
          of form_empresa;
          VALUE 'e-mail';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -234,14 +234,14 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 450;
          VALUE x_email;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1
       @ 210,005 label lbl_012;
          of form_empresa;
          VALUE 'site';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -250,7 +250,7 @@ FUNCTION empresa()
          HEIGHT 027;
          WIDTH 450;
          VALUE x_site;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1
 

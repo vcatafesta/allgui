@@ -151,12 +151,12 @@ FUNCTION cpag()
          parent form_cpag;
          VALUE date();
          WIDTH 100;
-         font 'verdana' size 010
+         FONT 'verdana' size 010
       @ 610,280 datepicker dp_final;
          parent form_cpag;
          VALUE date();
          WIDTH 100;
-         font 'verdana' size 010
+         FONT 'verdana' size 010
       @ 610,390 buttonex botao_filtrar;
          parent form_cpag;
          CAPTION 'Filtrar';
@@ -237,7 +237,7 @@ STATIC FUNCTION dados_cpag(parametro)
          of form_dados;
          VALUE 'Fornecedor';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -246,7 +246,7 @@ STATIC FUNCTION dados_cpag(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE x_fornecedor;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -255,7 +255,7 @@ STATIC FUNCTION dados_cpag(parametro)
          of form_dados;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -263,7 +263,7 @@ STATIC FUNCTION dados_cpag(parametro)
          of form_dados;
          VALUE 'Forma Pagamento';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -272,7 +272,7 @@ STATIC FUNCTION dados_cpag(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE x_forma;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -281,7 +281,7 @@ STATIC FUNCTION dados_cpag(parametro)
          of form_dados;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -290,7 +290,7 @@ STATIC FUNCTION dados_cpag(parametro)
          of form_dados;
          VALUE 'Data';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -299,7 +299,7 @@ STATIC FUNCTION dados_cpag(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_data;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          date
@@ -308,7 +308,7 @@ STATIC FUNCTION dados_cpag(parametro)
          of form_dados;
          VALUE 'Valor R$';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _vermelho_002;
          TRANSPARENT
@@ -317,7 +317,7 @@ STATIC FUNCTION dados_cpag(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_valor;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -326,7 +326,7 @@ STATIC FUNCTION dados_cpag(parametro)
          of form_dados;
          VALUE 'Número documento';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -336,7 +336,7 @@ STATIC FUNCTION dados_cpag(parametro)
          WIDTH 150;
          VALUE x_numero;
          MAXLENGTH 015;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -345,7 +345,7 @@ STATIC FUNCTION dados_cpag(parametro)
          of form_dados;
          VALUE 'Observação';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -355,7 +355,7 @@ STATIC FUNCTION dados_cpag(parametro)
          WIDTH 200;
          VALUE x_obs;
          MAXLENGTH 030;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -597,9 +597,9 @@ STATIC FUNCTION getcode_fornecedores(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=fornecedores->codigo,thiswindow.release)
       END BROWSE
@@ -716,9 +716,9 @@ STATIC FUNCTION getcode_formas_pagamento(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=formas_pagamento->codigo,thiswindow.release)
       END BROWSE

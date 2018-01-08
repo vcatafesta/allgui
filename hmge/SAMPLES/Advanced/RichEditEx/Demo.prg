@@ -854,7 +854,7 @@ FUNCTION Search_click(repl)
          @ 8,100 TEXTBOX text_1 ;
             HEIGHT 23 ;
             WIDTH 250 ;
-            Font 'Arial' ;
+            FONT 'Arial' ;
             size   9;
             MAXLENGTH  230 ;
             ON CHANGE Chng_btn(repl)
@@ -870,7 +870,7 @@ FUNCTION Search_click(repl)
             @ 38,100 TEXTBOX text_2 ;
                HEIGHT 23 ;
                WIDTH 250 ;
-               Font 'Arial' ;
+               FONT 'Arial' ;
                size   9;
                MAXLENGTH  230 ;
                ON CHANGE Chng_btn(repl)

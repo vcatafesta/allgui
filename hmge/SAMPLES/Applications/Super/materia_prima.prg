@@ -183,7 +183,7 @@ FUNCTION materia_prima()
          WIDTH 300;
          VALUE '';
          MAXLENGTH 040;
-         font 'verdana' size 010;
+         FONT 'verdana' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase;
@@ -260,7 +260,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Nome';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -270,7 +270,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 310;
          VALUE x_nome;
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -278,7 +278,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Unidade';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -287,7 +287,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE x_unidade;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -296,7 +296,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -304,7 +304,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Preço R$';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -313,7 +313,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_preco;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -321,7 +321,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Quantidade';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -330,7 +330,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_qtd;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@R 99,999.999'
@@ -686,9 +686,9 @@ STATIC FUNCTION getcode_unidade(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=unidade_medida->codigo,thiswindow.release)
       END BROWSE
@@ -769,7 +769,7 @@ STATIC FUNCTION fornecedores_mprima()
          FONTNAME 'verdana'
          FONTSIZE 010
          FONTBOLD .F.
-         nolines .T.
+         NOLINES .T.
          BACKCOLOR _branco_001
          FONTCOLOR _preto_001
       END GRID

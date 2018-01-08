@@ -184,12 +184,12 @@ FUNCTION movimento_bancario()
       parent form_movban;
       VALUE date();
       WIDTH 100;
-      font 'verdana' size 010
+      FONT 'verdana' size 010
    @ 540,280 datepicker dp_final;
       parent form_movban;
       VALUE date();
       WIDTH 100;
-      font 'verdana' size 010
+      FONT 'verdana' size 010
    @ 540,390 buttonex botao_filtrar;
       parent form_movban;
       CAPTION 'Filtrar';
@@ -271,7 +271,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Banco';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -280,7 +280,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE x_banco;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -289,7 +289,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -297,7 +297,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Data';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -306,7 +306,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_data;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          date
@@ -314,7 +314,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Histórico';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -324,7 +324,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 310;
          VALUE x_historico;
          MAXLENGTH 030;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -332,7 +332,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Entrada';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -341,7 +341,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_entrada;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -349,7 +349,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Saída';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _vermelho_002;
          TRANSPARENT
@@ -358,7 +358,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_saida;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -612,9 +612,9 @@ STATIC FUNCTION getcode_banco_2(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=bancos->codigo,thiswindow.release)
       END BROWSE

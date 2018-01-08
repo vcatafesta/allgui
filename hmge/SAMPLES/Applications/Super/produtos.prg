@@ -199,7 +199,7 @@ FUNCTION produtos()
          WIDTH 550;
          VALUE '';
          MAXLENGTH 040;
-         font 'verdana' size 010;
+         FONT 'verdana' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase;
@@ -311,7 +311,7 @@ STATIC FUNCTION dados(parametro)
          CAPTION 'Informações do cadastro';
          WIDTH 510;
          HEIGHT 440;
-         font 'verdana';
+         FONT 'verdana';
          size 010;
          bold;
          opaque
@@ -320,7 +320,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Código';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -329,14 +329,14 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_codigo;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1
       @ 025,145 label lbl_002;
          of form_dados;
          VALUE 'Nome (longo)';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -346,7 +346,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 360;
          VALUE x_nome_longo;
          MAXLENGTH 040;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -354,7 +354,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Nome (cupom)';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -364,7 +364,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 250;
          VALUE x_nome_cupom;
          MAXLENGTH 015;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -372,7 +372,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Código Barra';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -382,7 +382,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 230;
          VALUE x_cbarra;
          MAXLENGTH 015;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -420,7 +420,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Categoria';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -429,7 +429,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE x_categoria;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -438,7 +438,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -446,7 +446,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Sub Categoria';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -455,7 +455,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE x_subcategoria;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -464,7 +464,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -472,7 +472,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Qtd. em estoque';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -481,7 +481,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 100;
          VALUE x_qtd_estoque;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          NUMERIC
@@ -489,7 +489,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Qtd. mínima';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -498,7 +498,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 100;
          VALUE x_qtd_minimo;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          NUMERIC
@@ -506,7 +506,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Qtd. máxima';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -515,7 +515,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 100;
          VALUE x_qtd_maximo;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          NUMERIC
@@ -523,7 +523,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Imposto';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -532,7 +532,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE x_imposto;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -541,7 +541,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -549,7 +549,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Valor CUSTO R$';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _verde_001;
          TRANSPARENT
@@ -558,7 +558,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 150;
          VALUE x_valor_custo;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -566,7 +566,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Valor VENDA R$';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -575,7 +575,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 150;
          VALUE x_valor_venda;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -586,7 +586,7 @@ STATIC FUNCTION dados(parametro)
          CAPTION 'Tamanhos e preços (pizza)';
          WIDTH 290;
          HEIGHT 440;
-         font 'verdana';
+         FONT 'verdana';
          size 010;
          bold;
          opaque
@@ -594,7 +594,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Tamanhos';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -602,7 +602,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Preços R$';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -612,7 +612,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE _tamanho_001;
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -620,7 +620,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE _tamanho_002;
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -628,7 +628,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE _tamanho_003;
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -636,7 +636,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE _tamanho_004;
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -644,7 +644,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE _tamanho_005;
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -652,7 +652,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE _tamanho_006;
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -663,7 +663,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 030;
          WIDTH 140;
          VALUE x_valor_001;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -672,7 +672,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 030;
          WIDTH 140;
          VALUE x_valor_002;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -681,7 +681,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 030;
          WIDTH 140;
          VALUE x_valor_003;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -690,7 +690,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 030;
          WIDTH 140;
          VALUE x_valor_004;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -699,7 +699,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 030;
          WIDTH 140;
          VALUE x_valor_005;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -708,7 +708,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 030;
          WIDTH 140;
          VALUE x_valor_006;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
@@ -852,7 +852,7 @@ STATIC FUNCTION compor_produto()
          FONTNAME 'verdana'
          FONTSIZE 010
          FONTBOLD .F.
-         nolines .T.
+         NOLINES .T.
          BACKCOLOR _grid_002
          FONTCOLOR BLUE
       END GRID
@@ -883,7 +883,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          of form_inccpo;
          VALUE 'Matéria Prima';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -892,7 +892,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          HEIGHT 027;
          WIDTH 060;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          numeric;
@@ -901,7 +901,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          of form_inccpo;
          VALUE '';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _azul_001;
          TRANSPARENT
@@ -909,7 +909,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          of form_inccpo;
          VALUE 'Quantidade utilizada';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -918,7 +918,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          HEIGHT 027;
          WIDTH 080;
          VALUE 0;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@R 9999.999'
@@ -1362,9 +1362,9 @@ STATIC FUNCTION getcode_categoria_produtos(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=categoria_produtos->codigo,thiswindow.release)
       END BROWSE
@@ -1481,9 +1481,9 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=subcategoria_produtos->codigo,thiswindow.release)
       END BROWSE
@@ -1600,9 +1600,9 @@ STATIC FUNCTION getcode_impostos(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=impostos->codigo,thiswindow.release)
       END BROWSE
@@ -1719,9 +1719,9 @@ STATIC FUNCTION getcode_materia_prima(value)
          FONTSIZE 010
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (creg:=materia_prima->codigo,thiswindow.release)
       END BROWSE
@@ -1802,7 +1802,7 @@ STATIC FUNCTION fornecedores_produto()
          FONTNAME 'verdana'
          FONTSIZE 010
          FONTBOLD .F.
-         nolines .T.
+         NOLINES .T.
          BACKCOLOR _branco_001
          FONTCOLOR _preto_001
       END GRID

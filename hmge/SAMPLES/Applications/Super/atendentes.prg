@@ -166,7 +166,7 @@ FUNCTION atendentes()
          WIDTH 300;
          VALUE '';
          MAXLENGTH 040;
-         font 'verdana' size 010;
+         FONT 'verdana' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase;
@@ -239,7 +239,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Nome';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -249,7 +249,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 310;
          VALUE x_nome;
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -257,7 +257,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Comissão (%)';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -266,7 +266,7 @@ STATIC FUNCTION dados(parametro)
          HEIGHT 027;
          WIDTH 120;
          VALUE x_comissao;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          PICTURE '@R 999.99'

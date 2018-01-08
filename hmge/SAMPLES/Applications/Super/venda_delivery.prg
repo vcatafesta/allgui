@@ -70,7 +70,7 @@ FUNCTION venda_delivery()
          WIDTH getdesktopwidth();
          HEIGHT 040;
          VALUE 'F9-fechar este pedido  ESC-sair';
-         font 'verdana' size 022;
+         FONT 'verdana' size 022;
          bold;
          BACKCOLOR _preto_001;
          FONTCOLOR _cinza_001;
@@ -92,7 +92,7 @@ FUNCTION venda_delivery()
          of form_delivery;
          VALUE 'Telefone';
          autosize;
-         font 'courier new' size 012;
+         FONT 'courier new' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -102,7 +102,7 @@ FUNCTION venda_delivery()
          WIDTH 150;
          VALUE '';
          MAXLENGTH 015;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -123,7 +123,7 @@ FUNCTION venda_delivery()
          of form_delivery;
          VALUE '';
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -133,7 +133,7 @@ FUNCTION venda_delivery()
          of form_delivery;
          VALUE '';
          autosize;
-         font 'courier new' size 014;
+         FONT 'courier new' size 014;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -141,7 +141,7 @@ FUNCTION venda_delivery()
          of form_delivery;
          VALUE '';
          autosize;
-         font 'courier new' size 014;
+         FONT 'courier new' size 014;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -149,7 +149,7 @@ FUNCTION venda_delivery()
          of form_delivery;
          VALUE '';
          autosize;
-         font 'courier new' size 014;
+         FONT 'courier new' size 014;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -161,7 +161,7 @@ FUNCTION venda_delivery()
          HEIGHT 200;
          HEADERS {'id cliente','Onde','Data','Hora','Valor R$'};
          WIDTHS {001,100,100,075,090};
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          BACKCOLOR _branco_001;
          FONTCOLOR BLUE;
@@ -172,7 +172,7 @@ FUNCTION venda_delivery()
          HEIGHT (getdesktopheight()-390)-105;
          HEADERS {'Qtd.','Produto','Valor R$'};
          WIDTHS {080,190,100};
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          BACKCOLOR _branco_001;
          FONTCOLOR BLUE
@@ -191,7 +191,7 @@ FUNCTION venda_delivery()
          of form_delivery;
          VALUE 'Escolha o tamanho da pizza';
          autosize;
-         font 'courier new' size 12;
+         FONT 'courier new' size 12;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -215,7 +215,7 @@ FUNCTION venda_delivery()
       of form_delivery;
       VALUE 'Defina os sabores';
       autosize;
-      font 'courier new' size 12;
+      FONT 'courier new' size 12;
       bold;
       FONTCOLOR _preto_001;
       TRANSPARENT
@@ -223,7 +223,7 @@ FUNCTION venda_delivery()
       of form_delivery;
       VALUE 'duplo-clique/enter seleciona';
       autosize;
-      font 'courier new' size 12;
+      FONT 'courier new' size 12;
       bold;
       FONTCOLOR _azul_001;
       TRANSPARENT
@@ -236,7 +236,7 @@ FUNCTION venda_delivery()
       HEADERS {'','Nome','.','.','.','.','.','.'}
       WIDTHS {1,200,100,100,100,100,100,100}
       SHOWHEADERS .T.
-      nolines .T.
+      NOLINES .T.
       FONTNAME 'courier new'
       FONTSIZE 12
       BACKCOLOR _ciano_001
@@ -252,7 +252,7 @@ FUNCTION venda_delivery()
       WORKAREA   montagem ;
       FIELDS     {'montagem->codigo','montagem->nome'};
       VALUE      1                 ;
-      Font        'courier new'        ;
+      FONT        'courier new'        ;
       Size 12                      ;
       JUSTIFY     {BROWSE_JTFY_CENTER,BROWSE_JTFY_LEFT};
       BACKCOLOR   _amarelo_001            ;
@@ -278,7 +278,7 @@ FUNCTION venda_delivery()
       WIDTH 250;
       VALUE x_observacao_1;
       MAXLENGTH 30;
-      font 'tahoma' size 010;
+      FONT 'tahoma' size 010;
       BACKCOLOR _fundo_get;
       FONTCOLOR _letra_get_1;
       uppercase
@@ -288,7 +288,7 @@ FUNCTION venda_delivery()
       WIDTH 250;
       VALUE x_observacao_2;
       MAXLENGTH 30;
-      font 'tahoma' size 010;
+      FONT 'tahoma' size 010;
       BACKCOLOR _fundo_get;
       FONTCOLOR _letra_get_1;
       uppercase
@@ -309,7 +309,7 @@ END comboboxex
    WIDTH 250;
    HEIGHT 20;
    VALUE 'TOTAL DO PEDIDO';
-   font 'courier new' size 12;
+   FONT 'courier new' size 12;
    bold;
    FONTCOLOR _branco_001;
    BACKCOLOR _azul_002;
@@ -319,7 +319,7 @@ END comboboxex
    WIDTH 250;
    HEIGHT 50;
    VALUE '0,00';
-   font 'courier new' size 24;
+   FONT 'courier new' size 24;
    bold;
    FONTCOLOR _vermelho_001;
    BACKCOLOR _ciano_001;
@@ -338,7 +338,7 @@ END comboboxex
    of form_delivery;
    VALUE 'Bebidas / Outros';
    autosize;
-   font 'courier new' size 12;
+   FONT 'courier new' size 12;
    bold;
    FONTCOLOR _preto_001;
    TRANSPARENT
@@ -346,7 +346,7 @@ END comboboxex
    of form_delivery;
    VALUE 'duplo-clique/enter seleciona';
    autosize;
-   font 'courier new' size 12;
+   FONT 'courier new' size 12;
    bold;
    FONTCOLOR _azul_001;
    TRANSPARENT
@@ -359,7 +359,7 @@ DEFINE GRID grid_produtos
    HEADERS {'','Nome','Preço'}
    WIDTHS {1,250,150}
    SHOWHEADERS .F.
-   nolines .T.
+   NOLINES .T.
    FONTNAME 'courier new'
    FONTSIZE 12
    BACKCOLOR _ciano_001
@@ -372,7 +372,7 @@ END GRID
    of form_delivery;
    VALUE 'Pedido do cliente';
    autosize;
-   font 'courier new' size 12;
+   FONT 'courier new' size 12;
    bold;
    FONTCOLOR _preto_001;
    TRANSPARENT
@@ -392,7 +392,7 @@ END GRID
    WORKAREA   tmp_tela ;
    FIELDS     {'tmp_tela->seq','tmp_tela->item','tmp_tela->qtd','tmp_tela->unitario','tmp_tela->subtotal'};
    VALUE      1                 ;
-   Font        'courier new'        ;
+   FONT        'courier new'        ;
    Size 12                      ;
    JUSTIFY     {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT};
    BACKCOLOR   _branco_001            ;
@@ -559,9 +559,9 @@ STATIC FUNCTION getcode_clientes(value)
          FONTSIZE 012
          FONTBOLD .T.
          BACKCOLOR _ciano_001
-         nolines .T.
-         lock .T.
-         readonly {.T.,.T.,.T.}
+         NOLINES .T.
+         LOCK .T.
+         READONLY {.T.,.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          ON DBLCLICK (iif(empty(clientes->fixo),creg:=clientes->celular,creg:=clientes->fixo),thiswindow.release)
       END BROWSE
@@ -648,7 +648,7 @@ STATIC FUNCTION mostra_listagem_produto()
          HEADERS {'','Nome','Preço R$'}
          WIDTHS {001,395,150}
          SHOWHEADERS .F.
-         nolines .T.
+         NOLINES .T.
          FONTNAME 'courier new'
          FONTSIZE 012
          BACKCOLOR _ciano_001
@@ -763,7 +763,7 @@ STATIC FUNCTION mostra_listagem_pizza()
          HEADERS {'','Nome'}
          WIDTHS {001,395}
          SHOWHEADERS .F.
-         nolines .T.
+         NOLINES .T.
          FONTNAME 'courier new'
          FONTSIZE 012
          BACKCOLOR _ciano_001
@@ -855,7 +855,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Nome';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -865,7 +865,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 310;
          VALUE x_nome;
          MAXLENGTH 040;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -873,7 +873,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Telefone fixo';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -883,7 +883,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 120;
          VALUE x_fixo;
          MAXLENGTH 010;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          BACKCOLOR BLUE;
          FONTCOLOR WHITE;
@@ -892,7 +892,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Telefone celular';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -902,7 +902,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 120;
          VALUE x_celular;
          MAXLENGTH 010;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          BACKCOLOR BLUE;
          FONTCOLOR WHITE;
@@ -911,7 +911,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Endereço';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -921,7 +921,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 310;
          VALUE x_endereco;
          MAXLENGTH 040;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -929,7 +929,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Número';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -939,7 +939,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 060;
          VALUE x_numero;
          MAXLENGTH 006;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -947,7 +947,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Complemento';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -957,7 +957,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 180;
          VALUE x_complem;
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -965,7 +965,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Bairro';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -975,7 +975,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 180;
          VALUE x_bairro;
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -983,7 +983,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Cidade';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -993,7 +993,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 180;
          VALUE x_cidade;
          MAXLENGTH 020;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -1001,7 +1001,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'UF';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1011,7 +1011,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 040;
          VALUE x_uf;
          MAXLENGTH 002;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -1019,7 +1019,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'CEP';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1029,7 +1029,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 080;
          VALUE x_cep;
          MAXLENGTH 008;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -1037,7 +1037,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'e-mail';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1047,7 +1047,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          WIDTH 450;
          VALUE x_email;
          MAXLENGTH 050;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          lowercase
@@ -1055,7 +1055,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Dia aniversário';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1064,7 +1064,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          HEIGHT 027;
          WIDTH 080;
          VALUE x_aniv_dia;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          NUMERIC
@@ -1072,7 +1072,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE 'Mês aniversário';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1081,7 +1081,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          HEIGHT 027;
          WIDTH 080;
          VALUE x_aniv_mes;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          NUMERIC
@@ -1091,7 +1091,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          of form_incluir_novo_cliente;
          VALUE '* os campos na cor azul, telefones fixo e celular, serão utilizados no DELIVERY';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1307,7 +1307,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '1- Selecione o tamanho da pizza';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1315,7 +1315,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '2- Você poderá escolher entre o menor e o maior preço à ser cobrado, no caso de ter mais de 1 sabor na mesma pizza';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1323,7 +1323,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '3- Caso deseje, ao fechamento deste pedido, poderá conceder um desconto especial ao cliente';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1331,7 +1331,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '4- Para finalizar esta pizza e continuar vendendo, dê duplo-clique ou enter sobre o tamanho/preço escolhido';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1339,7 +1339,7 @@ STATIC FUNCTION fecha_pizza()
          of form_finaliza_pizza;
          VALUE '5- ESC fecha esta janela e retorna para a tela de vendas';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _vermelho_002;
          TRANSPARENT
@@ -1541,7 +1541,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'SUBTOTAL PIZZAS';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1549,7 +1549,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE trans(x_valor_pizza,'@E 999,999.99');
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1559,7 +1559,7 @@ STATIC FUNCTION fecha_pedido()
             of form_fecha_pedido;
             VALUE 'valor da borda';
             autosize;
-            font 'tahoma' size 8;
+            FONT 'tahoma' size 8;
             bold;
             FONTCOLOR BLACK;
             TRANSPARENT
@@ -1567,7 +1567,7 @@ STATIC FUNCTION fecha_pedido()
             of form_fecha_pedido;
             VALUE trans(x_preco,'@E 9,999.99');
             autosize;
-            font 'courier new' size 014;
+            FONT 'courier new' size 014;
             bold;
             FONTCOLOR BLUE;
             TRANSPARENT
@@ -1576,7 +1576,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'SUBTOTAL PRODUTOS';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1584,7 +1584,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE trans(x_valor_prod,'@E 999,999.99');
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1592,7 +1592,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'TAXA DE ENTREGA';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1601,7 +1601,7 @@ STATIC FUNCTION fecha_pedido()
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -1610,7 +1610,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'DESCONTO';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR _vermelho_002;
          TRANSPARENT
@@ -1619,7 +1619,7 @@ STATIC FUNCTION fecha_pedido()
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _vermelho_002;
@@ -1630,7 +1630,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'TOTAL DESTE PEDIDO';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1638,7 +1638,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE '';
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1648,7 +1648,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'Você pode escolher até 3 formas de recebimento';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -1659,13 +1659,13 @@ STATIC FUNCTION fecha_pedido()
          valuesource formas_recebimento->codigo;
          VALUE 1;
          WIDTH 250;
-         font 'courier new' size 010
+         FONT 'courier new' size 010
       @ 230,300 getbox tbox_fr001;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 014;
+         FONT 'courier new' size 014;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -1676,13 +1676,13 @@ STATIC FUNCTION fecha_pedido()
          valuesource formas_recebimento->codigo;
          VALUE 1;
          WIDTH 250;
-         font 'courier new' size 010
+         FONT 'courier new' size 010
       @ 270,300 getbox tbox_fr002;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 014;
+         FONT 'courier new' size 014;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -1693,13 +1693,13 @@ STATIC FUNCTION fecha_pedido()
          valuesource formas_recebimento->codigo;
          VALUE 1;
          WIDTH 250;
-         font 'courier new' size 010
+         FONT 'courier new' size 010
       @ 310,300 getbox tbox_fr003;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
          VALUE 0;
-         font 'courier new' size 014;
+         FONT 'courier new' size 014;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -1710,7 +1710,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'TOTAL RECEBIDO';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1718,7 +1718,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE '';
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -1727,7 +1727,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE 'TROCO';
          autosize;
-         font 'verdana' size 012;
+         FONT 'verdana' size 012;
          bold;
          FONTCOLOR _vermelho_002;
          TRANSPARENT
@@ -1735,7 +1735,7 @@ STATIC FUNCTION fecha_pedido()
          of form_fecha_pedido;
          VALUE '';
          autosize;
-         font 'courier new' size 016;
+         FONT 'courier new' size 016;
          bold;
          FONTCOLOR BLUE;
          TRANSPARENT
@@ -2114,7 +2114,7 @@ STATIC FUNCTION pede_quantidade()
       @ 10,10 label label_1;
          VALUE 'Digite a quantidade';
          autosize;
-         font 'courier new' size 12;
+         FONT 'courier new' size 12;
          bold;
          TRANSPARENT
       @ 10,230 textbox tbox_quantidade;
@@ -2122,7 +2122,7 @@ STATIC FUNCTION pede_quantidade()
          WIDTH 60;
          VALUE '';
          numeric;
-         font 'courier new' size 12;
+         FONT 'courier new' size 12;
          bold;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
@@ -2130,7 +2130,7 @@ STATIC FUNCTION pede_quantidade()
       @ 50,10 label label_2;
          WIDTH form_pquantidade.width;
          VALUE 'e tecle ENTER';
-         font 'courier new' size 12;
+         FONT 'courier new' size 12;
          FONTCOLOR BLUE;
          bold;
          transparent;

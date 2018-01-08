@@ -183,7 +183,7 @@ FUNCTION operadores()
          WIDTH 300;
          VALUE '';
          MAXLENGTH 040;
-         font 'verdana' size 010;
+         FONT 'verdana' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase;
@@ -256,7 +256,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Nome';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -266,7 +266,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 310;
          VALUE x_nome;
          MAXLENGTH 010;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase
@@ -274,7 +274,7 @@ STATIC FUNCTION dados(parametro)
          of form_dados;
          VALUE 'Senha';
          autosize;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          bold;
          FONTCOLOR _preto_001;
          TRANSPARENT
@@ -284,7 +284,7 @@ STATIC FUNCTION dados(parametro)
          WIDTH 120;
          VALUE x_senha;
          MAXLENGTH 010;
-         font 'tahoma' size 010;
+         FONT 'tahoma' size 010;
          BACKCOLOR _fundo_get;
          FONTCOLOR _letra_get_1;
          uppercase;
@@ -635,7 +635,7 @@ STATIC FUNCTION acesso()
             at 003,003;
             WIDTH 615;
             HEIGHT form_acesso.height-090;
-            font 'verdana';
+            FONT 'verdana';
             size 010;
             bold;
             VALUE 001;

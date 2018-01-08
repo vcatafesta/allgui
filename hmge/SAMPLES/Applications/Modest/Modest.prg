@@ -473,7 +473,7 @@ PROCEDURE Main( cFile )
          @ 120, 15 EditBox edtComment ;
             VALUE ''           ;
             NoHScroll          ;
-            ReadOnly
+            READONLY
 
          // Transformation rule of field contexts at the changing of value type
 
@@ -512,7 +512,7 @@ PROCEDURE Main( cFile )
          @ 30, 5 EditBox edtGeneral ;
             VALUE ''           ;
             NoHScroll          ;
-            ReadOnly
+            READONLY
 
          // Buttons Apply/Discard changes
 
@@ -586,7 +586,7 @@ PROCEDURE Main( cFile )
    @ 240, 5 EditBox edtMessages ;
       VALUE ''            ;
       HEIGHT 90           ;
-      ReadOnly            ;
+      READONLY            ;
       BACKCOLOR WHITE
 
    On key Alt+X of wModest Action { || Done(), ReleaseAllWindows() }
