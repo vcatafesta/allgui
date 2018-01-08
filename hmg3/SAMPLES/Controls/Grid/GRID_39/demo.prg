@@ -20,7 +20,7 @@ FUNCTION Main
          CELLNAVIGATION .t.
          COLUMNWHEN { {|| .t. }, {|| .t. } }
          COLUMNCONTROLS { { 'TEXTBOX', 'NUMERIC', '999' }, { 'TEXTBOX', 'CHARACTER' } }
-         allowedit .t.
+         ALLOWEDIT .t.
          ITEMS { { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' } }
       END GRID
    END WINDOW

@@ -127,7 +127,7 @@ FUNCTION _DefineGrid (   ControlName   , ;
       FONTCOLOR   , ;
       alloweditInplace   , ;
       editcontrols   , ;
-      DYNAMICbackcolor ,;
+      DYNAMICBACKCOLOR ,;
       DYNAMICforecolor ,;
       columnvalid ,      ;
       COLUMNWHEN ,      ;

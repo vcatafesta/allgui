@@ -21,8 +21,8 @@ FUNCTION Main
          HEADERS { 'First Name', 'Last Name', 'Code' }
          WIDTHS { 200, 150, 100 }
          JUSTIFY { 0, 0, 1 }
-         anywheresearch .t.
-         showheaders .t.
+         ANYWHERESEARCH .t.
+         SHOWHEADERS .t.
       END COMBOSEARCHGRID
       DEFINE LABEL label2
          ROW 40

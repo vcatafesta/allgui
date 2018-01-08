@@ -595,13 +595,13 @@ STATIC FUNCTION mostra_listagem_produto()
          HEIGHT 580
          HEADERS {'','Nome','Preço R$'}
          WIDTHS {001,395,150}
-         showheaders .F.
+         SHOWHEADERS .F.
          nolines .T.
          FONTNAME 'courier new'
          FONTSIZE 012
          BACKCOLOR _ciano_001
          FONTCOLOR _preto_001
-         ondblclick mostra_informacao_produto()
+         ONDBLCLICK mostra_informacao_produto()
       END GRID
 
       ON KEY ESCAPE ACTION thiswindow.release
@@ -710,13 +710,13 @@ STATIC FUNCTION mostra_listagem_pizza()
          HEIGHT 580
          HEADERS {'','Nome'}
          WIDTHS {001,395}
-         showheaders .F.
+         SHOWHEADERS .F.
          nolines .T.
          FONTNAME 'courier new'
          FONTSIZE 012
          BACKCOLOR _ciano_001
          FONTCOLOR _preto_001
-         ondblclick mostra_informacao()
+         ONDBLCLICK mostra_informacao()
       END GRID
 
       ON KEY ESCAPE ACTION thiswindow.release
@@ -1305,7 +1305,7 @@ STATIC FUNCTION fecha_pizza()
          FONTBOLD .T.
          BACKCOLOR _cinza_005
          FONTCOLOR _preto_001
-         ondblclick pega_tamanho_valor_pizza()
+         ONDBLCLICK pega_tamanho_valor_pizza()
       END GRID
 
       ON KEY ESCAPE ACTION thiswindow.release

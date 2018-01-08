@@ -705,13 +705,13 @@ STATIC FUNCTION mostra_listagem_produto_2()
          HEIGHT 580
          HEADERS {'','Nome','Preço R$'}
          WIDTHS {001,395,150}
-         showheaders .F.
+         SHOWHEADERS .F.
          nolines .T.
          FONTNAME 'courier new'
          FONTSIZE 012
          BACKCOLOR _ciano_001
          FONTCOLOR _preto_001
-         ondblclick mostra_informacao_produto_2()
+         ONDBLCLICK mostra_informacao_produto_2()
       END GRID
 
       ON KEY ESCAPE ACTION thiswindow.release

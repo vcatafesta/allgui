@@ -121,7 +121,7 @@ FUNCTION caixa()
             FONTBOLD .T.
             BACKCOLOR _amarelo_001
             FONTCOLOR _preto_001
-            ondblclick dados(2)
+            ONDBLCLICK dados(2)
          END GRID
       END SPLITBOX
 

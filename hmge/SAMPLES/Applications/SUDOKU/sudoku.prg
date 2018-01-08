@@ -79,11 +79,11 @@ FUNCTION Main
          COL 10
          WIDTH 460*gkoefh - iif(isthemed(),0,GetBorderWidth())
          HEIGHT 445*gkoefv - iif(isthemed(),0,GetTitleHeight()+GetBorderHeight())
-         showheaders .f.
+         SHOWHEADERS .f.
          WIDTHS  {gw, gw, gw, gw, gw, gw, gw, gw, gw}
          JUSTIFY {2, 2, 2, 2, 2, 2, 2, 2, 2}
          CELLNAVIGATION .T.
-         allowedit .T.
+         ALLOWEDIT .T.
          COLUMNCONTROLS { {"TEXTBOX", "CHARACTER", "9"}, ;
             {"TEXTBOX", "CHARACTER", "9"}, ;
             {"TEXTBOX", "CHARACTER", "9"}, ;
@@ -95,7 +95,7 @@ FUNCTION Main
             {"TEXTBOX", "CHARACTER", "9"} }
          FONTNAME "Arial"
          FONTSIZE 30*gkoefh
-         dynamicbackcolor { bColor, bColor, bColor, ;
+         DYNAMICBACKCOLOR { bColor, bColor, bColor, ;
             bColor, bColor, bColor, ;
             bColor, bColor, bColor }
          COLUMNWHEN { { || entergrid() }, { || entergrid() }, ;

@@ -161,7 +161,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          COLUMNCONTROLS {{'TEXTBOX','CHARACTER'},{'COMBOBOX',aOptions},{'COMBOBOX',aOperations}}
          COLUMNWHEN {{||.f.},{||.t.},{||checkdata()}}
          columnvalid {{||.t.},{||checkoperation()},{||checkdataoperation()}}
-         allowedit .t.
+         ALLOWEDIT .t.
          ON CHANGE updateoptions()
       END GRID
       DEFINE BUTTON up
@@ -194,7 +194,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          COL 350
          HEIGHT 150
          WIDTH 430
-         showheaders .f.
+         SHOWHEADERS .f.
          WIDTHS {120}
          CELLNAVIGATION .t.
          ON CHANGE updateoptions()
@@ -215,7 +215,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          HEADERS aAvailCols
          WIDTHS aWidths
          CELLNAVIGATION .t.
-         allowedit .t.
+         ALLOWEDIT .t.
          COLUMNCONTROLS aFieldOptions
          ON CHANGE createreport(xtract.tool1.autocalc.value)
       END GRID
@@ -416,9 +416,9 @@ FUNCTION updateoptions
       COL 350
       HEIGHT 150
       WIDTH 430
-      showheaders .f.
+      SHOWHEADERS .f.
       WIDTHS aWidths
-      dynamicbackcolor aBackColors
+      DYNAMICBACKCOLOR aBackColors
    END GRID
 
    xtract.options.additem(aItem)
@@ -999,9 +999,9 @@ FUNCTION createreport(lAutoCalc)
          WIDTHS aWidths
          HEADERS aHeaders
          JUSTIFY aJustify
-         showheaders .f.
+         SHOWHEADERS .f.
          ITEMS aReportGrid
-         dynamicbackcolor aBackColors
+         DYNAMICBACKCOLOR aBackColors
          //      cellnavigation .t.
       END GRID
    ELSE

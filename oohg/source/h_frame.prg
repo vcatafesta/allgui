@@ -86,7 +86,7 @@ METHOD Define( ControlName, ParentForm, y, x, w, h, caption, fontname, ;
    IF valtype( caption ) == 'U'
       CAPTION := ""
       FONTNAME := "Arial"
-      fontsize := 1
+      FONTSIZE := 1
    ENDIF
 
    ::SetForm( ControlName, ParentForm, FontName, FontSize, FontColor, BackColor, , lRtl )

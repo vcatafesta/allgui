@@ -3285,7 +3285,7 @@ FUNCTION inspector( oWind )
       NEXT
 
       @ 0,0 combobox __OOHG_OBJ_INSPECTOR_combo obj oCombo;
-         items aData value 1 width 394;
+         ITEMS aData value 1 width 394;
          ON CHANGE carga(aControls[oCombo:value],oGrd,@ooobj_data)
       carga(aControls[1],oGrd,@ooobj_data)
 

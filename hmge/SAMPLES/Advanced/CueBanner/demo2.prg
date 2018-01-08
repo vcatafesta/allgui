@@ -30,7 +30,7 @@ FUNCTION Main
          WIDTH 318
          HEIGHT 120
          ITEMS {"Item 1","Item 2","Item 3"}
-         cuebanner "ComboBox CueBanner Test"
+         CUEBANNER "ComboBox CueBanner Test"
       END COMBOBOX
       DEFINE FRAME frm_1
          ROW 54

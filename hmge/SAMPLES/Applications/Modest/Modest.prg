@@ -539,7 +539,7 @@ PROCEDURE Main( cFile )
          @ 30, 5 Grid grdCollector                                              ;
             HEADERS { 'Name', 'Type', 'Len', 'Dec', 'Comment' }            ;
             WIDTHS  { 80    , 45    , 40   , 40   , 102    }               ;
-            DynamicBackColor { { | xVal, nItem | DynamicColors( nItem ) }, ;
+            DYNAMICBACKCOLOR { { | xVal, nItem | DynamicColors( nItem ) }, ;
             { | xVal, nItem | DynamicColors( nItem ) }, ;
             { | xVal, nItem | DynamicColors( nItem ) }, ;
             { | xVal, nItem | DynamicColors( nItem ) }, ;

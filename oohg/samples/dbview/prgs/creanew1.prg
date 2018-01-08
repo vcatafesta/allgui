@@ -128,8 +128,8 @@ FUNCTION DBUcreanew(cBase)
          HEIGHT 120
          WIDTHS {145,80,70,70}
          HEADERS {"Name","Type","Size","Decimals"}
-         justify {0,0,1,1}
-         items _DBUstructarr
+         JUSTIFY {0,0,1,1}
+         ITEMS _DBUstructarr
          on dblclick DBUlineselected()
       END GRID
 

@@ -752,7 +752,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
    nJusLine := 0
    lEdit    := .F.
    cPicture := NIL
-   Items := { }
+   ITEMS := { }
    nInterval := 0
    onAction := NIL
    bWhen := NIL
@@ -763,7 +763,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
    ccaption := ""
    nBitIp := 0
    nState := 4
-   onClick := NIL
+   ONCLICK := NIL
    ctoolTip := ""
    amenu := ""
    palette :=  PAL_METAL

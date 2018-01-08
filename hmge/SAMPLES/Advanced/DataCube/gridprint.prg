@@ -225,7 +225,7 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
                HEADERS {"",msgarr[6],msgarr[7]}
                image {'wrong','right'}
                TOOLTIP msgarr[8]
-               ondblclick printgridtoggle()
+               ONDBLCLICK printgridtoggle()
                ONCHANGE editcoldetails()
             END GRID
             DEFINE LABEL sizelabel1

@@ -429,7 +429,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                WIDTHS {130,60,60}
                JUSTIFY {0,1,0}
                HEADERS {msgarr[6],msgarr[7],msgarr[57]}
-               allowedit .t.
+               ALLOWEDIT .t.
                COLUMNCONTROLS {{"TEXTBOX","CHARACTER"},{"TEXTBOX","NUMERIC","9999.99"},{"COMBOBOX",{msgarr[59],msgarr[60]}}}
                COLUMNWHEN {{||.f.},{||iif(pdfgrid.spread.value,.f.,.t.)},{||.t.}}
                columnvalid {{||.t.},{||pdfcolumnsizeverify()},{||pdfcolumnselected()}}
@@ -741,7 +741,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                HEIGHT 240
                HEADERS {msgarr[62],msgarr[63],msgarr[64]}
                WIDTHS {40,40,100}
-               allowedit .t.
+               ALLOWEDIT .t.
                COLUMNCONTROLS {{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","CHARACTER"}}
                columnvalid {{||.t.},{||.t.},{||.t.}}
                ON LOSTFOCUS pdfmergeheaderschanged()

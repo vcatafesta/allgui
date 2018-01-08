@@ -133,7 +133,7 @@ FUNCTION LoadGrid(aRows,lmultiselect,lcelled,leditable)
       HEADERS      {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6','Column 7'}
       ITEMS      aRows
       VALUE      if (lmultiselect, { 1 }, if (lcelled, { 1 , 1 }, 1))
-      AllowEdit   leditable
+      ALLOWEDIT   leditable
       CELLNAVIGATION   lcelled
       MultiSelect   lmultiselect
       JUSTIFY      {0,1,0,0,0,1,0}
@@ -160,12 +160,12 @@ FUNCTION LoadGrid(aRows,lmultiselect,lcelled,leditable)
          {||.t.},;
          {||msgyesno('Is this valid ?','Confirm')};
          }
-      OnDblClick MsgInfo("Double Click event!")
-      DynamicBackColor {bColor,bColor,bColor,bColor,bColor,bColor,bColor}
+      ONDBLCLICK MsgInfo("Double Click event!")
+      DYNAMICBACKCOLOR {bColor,bColor,bColor,bColor,bColor,bColor,bColor}
       DynamicForeColor {fColor,fColor,fColor,fColor,fColor,fColor,fColor}
       HeaderImages {'help.bmp','help.bmp'}
       OnHeadClick {{||MsgInfo("Header1 Clicked!")},{||MsgInfo("Header2 Clicked!")},{||MsgInfo("Header3 Clicked!")},{||MsgInfo("Header4 Clicked!")},{||MsgInfo("Header5 Clicked!")},{||MsgInfo("Header6 Clicked!")},{||MsgInfo("Header7 Clicked!")}}
-      ShowHeaders showheader
+      SHOWHEADERS showheader
    END GRID
 
    AEVAL( Array(7), { | n, i | oWindow.oGrid.HeaderImage( i ):={1, i==2.or.i==6}, n:=nil } )

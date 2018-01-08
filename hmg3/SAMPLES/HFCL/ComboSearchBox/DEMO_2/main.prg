@@ -43,7 +43,7 @@ PROC Main()
          BACKCOLOR {0,0,255}
          ITEMS acountries
          ON ENTER msginfo(frmcsbtest.s1.value)
-         anywheresearch .f.
+         ANYWHERESEARCH .f.
          // dropheight 50
          ADDITIVE .t.
          ROWOFFSET 50

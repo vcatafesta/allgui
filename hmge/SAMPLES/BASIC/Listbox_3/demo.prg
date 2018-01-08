@@ -118,7 +118,7 @@ FUNCTION loadlist(value,lmultiselect,lsort)
       Parent Win1
       ITEMS {}
       ONCHANGE {|| Win1.Label1.Value := iif(isarray(win1.list1.value),"MultiSelect List","Current Value is "+hb_ntos(win1.list1.value))}
-      onDblClick {|| MsgInfo("Double Click Action!")}
+      ONDBLCLICK {|| MsgInfo("Double Click Action!")}
       multiselect lmultiselect
       SORT lsort
    END ListBox

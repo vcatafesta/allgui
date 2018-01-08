@@ -200,7 +200,7 @@ FUNCTION ShowUserList()
             GRID_JTFY_LEFT, ;
             GRID_JTFY_RIGHT, ;
             GRID_JTFY_RIGHT }
-         allowedit ( rank < 10 )
+         ALLOWEDIT ( rank < 10 )
          CELLNAVIGATION ( rank < 10 )
       END GRID
 

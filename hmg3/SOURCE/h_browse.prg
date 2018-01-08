@@ -102,7 +102,7 @@ FUNCTION _DefineBrowse ( ControlName, ;
       valid , ;
       validmessages , ;
       edit , ;
-      DYNAMICbackcolor , ;
+      DYNAMICBACKCOLOR , ;
       aWhenFields , ;
       DYNAMICforecolor , ;
       INPUTMASK , ;

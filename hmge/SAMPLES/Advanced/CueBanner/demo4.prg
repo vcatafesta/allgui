@@ -29,7 +29,7 @@ FUNCTION Main
       COL 10
       WIDTH 318
       HEIGHT 21
-      cuebanner "Enter your full name here"
+      CUEBANNER "Enter your full name here"
       ACTION msgbox('Click!')
    END btntextbox
    DEFINE FRAME frm_1

@@ -120,7 +120,7 @@ FUNCTION cpag()
          FONTBOLD .T.
          BACKCOLOR _amarelo_001
          FONTCOLOR _preto_001
-         ondblclick dados_cpag(2)
+         ONDBLCLICK dados_cpag(2)
       END GRID
 
       DEFINE LABEL rodape_001

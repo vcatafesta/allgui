@@ -43,7 +43,7 @@ PROCEDURE IndexManager()
             HEADERS {'Index File','Index Tag','Expression','Sorting Order','Unique'}
             FONTNAME 'Arial'
             MULTISELECT .T.
-            ondblclick Result()
+            ONDBLCLICK Result()
          END GRID
 
          DEFINE BUTTON Button_133
@@ -236,7 +236,7 @@ FUNCTION Expression()
          HEIGHT 380
          WIDTHS {265}
          HEADERS {"Field Names"}
-         ondblclick ( ModIndex.Text_IndKey.value := SeleField(), IndexExpress.release )
+         ONDBLCLICK ( ModIndex.Text_IndKey.value := SeleField(), IndexExpress.release )
       END GRID
       DEFINE BUTTON setindexbutton
          ROW 430

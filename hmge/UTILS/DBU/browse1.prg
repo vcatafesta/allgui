@@ -107,7 +107,7 @@ FUNCTION DBUbrowse1()
          FONTSIZE 9
          TOOLTIP 'Double click to edit field contents'
          allowappend .t.
-         allowedit .t.
+         ALLOWEDIT .t.
          allowdelete .t.
          lock .t.
          inplaceedit .t.

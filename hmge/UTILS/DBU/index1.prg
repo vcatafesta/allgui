@@ -30,7 +30,7 @@ FUNCTION DBUcreaindex()
          HEADERS {"","Field Names"}
          image {"wrong","right"}
          TOOLTIP "Double Click a field name to toggle between creating and not creating an index for that field."
-         ondblclick _DBUindexfieldtoggle()
+         ONDBLCLICK _DBUindexfieldtoggle()
       END GRID
       DEFINE BUTTON _DBUsaveindex
          ROW 430

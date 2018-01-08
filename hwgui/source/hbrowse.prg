@@ -1267,7 +1267,7 @@ METHOD Rebuild() CLASS HBrowse
       IF oColumn:lEditable
          ::lEditable := .T.
       ENDIF
-      FontSize := iif( oColumn:type $ "DN", hwg_TxtRect( "9", Self, oColumn:oFont )[1], hwg_TxtRect( "N", Self, oColumn:oFont )[1] )
+      FONTSIZE := iif( oColumn:type $ "DN", hwg_TxtRect( "9", Self, oColumn:oFont )[1], hwg_TxtRect( "N", Self, oColumn:oFont )[1] )
       IF oColumn:aBitmaps != NIL
          IF oColumn:heading != NIL
             xSize := Round( ( Len( oColumn:heading ) + 0.6 ) * FontSize, 0 )

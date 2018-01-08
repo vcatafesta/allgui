@@ -699,7 +699,7 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
       font "ms sans serif" size 9
    @ 75, 20 combobox cbIndices                     ;
       of wndABM2Edit                          ;
-      items _aIndice                          ;
+      ITEMS _aIndice                          ;
       VALUE _nIndiceActivo                    ;
       WIDTH 150                               ;
       font "arial" size 9                     ;
@@ -717,7 +717,7 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
       font "ms sans serif" size 9
    @ 75, nColumna combobox cbOpciones              ;
       of wndABM2Edit                          ;
-      items aTextoOp                          ;
+      ITEMS aTextoOp                          ;
       VALUE 1                                 ;
       WIDTH 150                               ;
       font "arial" size 9                     ;
@@ -749,7 +749,7 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
       ON CHANGE {|| (_cArea)->( dbGoto( wndABM2Edit.brwABM2Edit.Value ) ),    ;
       ABM2Redibuja( .f. ) }                                     ;
       on dblclick ABM2Editar( .f. )                                           ;
-      justify _aAlineadoTabla
+      JUSTIFY _aAlineadoTabla
 
    // Comprueba el estado de las opciones de usuario.
    IF Len( _aOpciones ) == 0
@@ -1364,7 +1364,7 @@ STATIC FUNCTION ABM2Seleccionar()
          on dblclick {|| lSalida := .t.,                                 ;
          nReg := wndSeleccionar.brwSeleccionar.Value,    ;
          wndSeleccionar.Release }                        ;
-         justify _aAlineadoTabla
+         JUSTIFY _aAlineadoTabla
 
    END WINDOW
 
@@ -1744,7 +1744,7 @@ STATIC FUNCTION ABM2ActivarFiltro()
       of wndABM2Filtro                        ;
       WIDTH 140                               ;
       HEIGHT 100                              ;
-      items aCampos                           ;
+      ITEMS aCampos                           ;
       VALUE 1                                 ;
       font "Arial" size 9                     ;
       ON CHANGE {|| ABM2ControlFiltro() }     ;
@@ -1754,7 +1754,7 @@ STATIC FUNCTION ABM2ActivarFiltro()
       of wndABM2Filtro                        ;
       WIDTH 140                               ;
       HEIGHT 100                              ;
-      items aCompara                          ;
+      ITEMS aCompara                          ;
       VALUE 1                                 ;
       font "Arial" size 9                     ;
       ON GOTFOCUS wndABM2Filtro.StatusBar.Item(1) := _OOHG_Messages( 10, 26 ) ;
@@ -2201,7 +2201,7 @@ STATIC FUNCTION ABM2Imprimir()
       of wndABM2Listado                                               ;
       WIDTH 140                                                       ;
       HEIGHT 100                                                      ;
-      items aCampoBase                                                ;
+      ITEMS aCampoBase                                                ;
       VALUE 1                                                         ;
       font "Arial" size 9                                             ;
       ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 12 ) ;
@@ -2210,7 +2210,7 @@ STATIC FUNCTION ABM2Imprimir()
       of wndABM2Listado                                               ;
       WIDTH 140                                                       ;
       HEIGHT 100                                                      ;
-      items aCampoListado                                             ;
+      ITEMS aCampoListado                                             ;
       VALUE 1                                                         ;
       font "Arial" size 9                                             ;
       ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 13 ) ;
@@ -2219,7 +2219,7 @@ STATIC FUNCTION ABM2Imprimir()
    // ComboBox.
    @ 220, 20 combobox cbxImpresoras                                        ;
       of wndABM2Listado                                               ;
-      items aImpresoras                                               ;
+      ITEMS aImpresoras                                               ;
       VALUE 1                                                         ;
       WIDTH 140                                                       ;
       font "Arial" size 9                                             ;

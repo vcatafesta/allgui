@@ -13,7 +13,7 @@ PROCEDURE Main
          HEIGHT 200
          HEADERS {"Name","City","Amount"}
          WIDTHS {200,150,100}
-         allowedit .t.
+         ALLOWEDIT .t.
          COLUMNCONTROLS { { 'TEXTBOX','CHARACTER' } , { 'COMBOBOX',{ 'CHENNAI','DELHI','KOLKATTA' } } , { 'TEXTBOX','NUMERIC',"999999.99" } }
          ITEMS { {"Person 1", 1, 1000} , {"Person 2", 3, 2000} }
          JUSTIFY {0,0,1}

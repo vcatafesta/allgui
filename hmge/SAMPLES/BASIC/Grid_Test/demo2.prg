@@ -24,7 +24,7 @@ FUNCTION Main
          COLUMNCONTROLS { { 'TEXTBOX', 'NUMERIC', '999' }, { 'TEXTBOX', 'CHARACTER' }, { 'TEXTBOX', 'CHARACTER' } }
          JUSTIFY { GRID_JTFY_RIGHT, GRID_JTFY_LEFT, GRID_JTFY_LEFT }
          COLUMNWHEN { {|| .t. }, {|| win_1.grid_1.cell( GetProperty("Win_1","Grid_1","Value")[1], 1 ) > 0 }, {|| .t. } }
-         allowedit .t.
+         ALLOWEDIT .t.
          CELLNAVIGATION .t.
          VALUE {1, 1}
       END GRID
