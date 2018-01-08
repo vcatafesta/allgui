@@ -38,24 +38,24 @@ FUNCTION Main
          MAIN
 
       @  10, 10 Label L1 ;
-         width 80;
-         height 20;
+         WIDTH 80;
+         HEIGHT 20;
          value "Search string:"
 
       @  10, 100 Label Label_WhatToSearch ;
-         width 600;
-         height 20;
+         WIDTH 600;
+         HEIGHT 20;
          value "???";
          autosize
 
       @  40, 10 Label L2 ;
-         width 120;
-         height 20;
+         WIDTH 120;
+         HEIGHT 20;
          value "Last pressed char:"
 
       @  40, 140 Label Label_PressedChar ;
-         width 120;
-         height 20;
+         WIDTH 120;
+         HEIGHT 20;
          value ""
 
       @ 80,10 GRID Grid_1 ;

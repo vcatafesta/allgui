@@ -123,7 +123,7 @@ FUNCTION _DefineGrid (   ControlName   , ;
       available2   , ;
       multiselect   , ;
       available3   , ;
-      backcolor   , ;
+      BACKCOLOR   , ;
       fontcolor   , ;
       alloweditInplace   , ;
       editcontrols   , ;
@@ -1011,24 +1011,24 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
                NIL )
 
             DEFINE BUTTON OK
-               row   298
-               col   278 - IF ( IsAppThemed() , 1 , 0 )
-               width   28
-               height   28
+               ROW   298
+               COL   278 - IF ( IsAppThemed() , 1 , 0 )
+               WIDTH   28
+               HEIGHT   28
                action   IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
                   ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ),;  // ADD V parameter, by Pablo on February, 2015
                   NIL )
-               picture   'GRID_MSAV'
+               PICTURE   'GRID_MSAV'
                tooltip _hmg_sysdata [ 133 ] [ 12 ] + ' [Ctrl+W]'
             END BUTTON
 
             DEFINE BUTTON CANCEL
-               row   298
-               col   312 - IF ( IsAppThemed() , 1 , 0 )
-               width   28
-               height   28
+               ROW   298
+               COL   312 - IF ( IsAppThemed() , 1 , 0 )
+               WIDTH   28
+               HEIGHT   28
                action   ( _HMG_SYSDATA [ 256 ] := .T. , THISWINDOW.RELEASE )
-               picture   'GRID_MCAN'
+               PICTURE   'GRID_MCAN'
                tooltip _hmg_sysdata [ 133 ] [ 13 ] + ' [Esc]'
             END BUTTON
 

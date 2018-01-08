@@ -114,11 +114,11 @@ PROCEDURE Paint_Background_Window
    ENDIF
 
    IF nMode = BMP_COPY_NORMAL
-      Row := -Win1.VscrollBar.value
-      Col := -Win1.HscrollBar.value
+      ROW := -Win1.VscrollBar.value
+      COL := -Win1.HscrollBar.value
    ELSE
-      Row := 0
-      Col := 0
+      ROW := 0
+      COL := 0
    ENDIF
 
    hWnd := GetFormHandle ("Win1")

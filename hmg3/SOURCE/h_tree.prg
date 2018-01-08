@@ -89,8 +89,8 @@ FUNCTION _DefineTree ( ControlName , ParentForm , row , col , width , height , c
    ENDIF
    IF _HMG_SYSDATA [ 183 ] > 0
       IF _HMG_SYSDATA [ 240 ] == .F.
-         col    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-         row    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
+         COL    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
+         ROW    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
          ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
       ENDIF
    ENDIF
@@ -115,10 +115,10 @@ FUNCTION _DefineTree ( ControlName , ParentForm , row , col , width , height , c
       _HMG_SYSDATA [ 178 ] := Value
    ENDIF
    IF valtype(Width) == "U"
-      Width := 120
+      WIDTH := 120
    ENDIF
    IF valtype(Height) == "U"
-      Height := 120
+      HEIGHT := 120
    ENDIF
 
    IF valtype(Row) == "U" .or. valtype(Col) == "U"

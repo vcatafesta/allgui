@@ -26,21 +26,21 @@ PROC Main()
       ON KEY ESCAPE ACTION frmCSBTest.Release
 
       DEFINE LABEL countries
-         row 25
-         col 100
-         width 100
+         ROW 25
+         COL 100
+         WIDTH 100
          value "Countries"
       END LABEL
 
       DEFINE COMBOSEARCHBOX s1
-         row 25
-         col 190
-         width 200
+         ROW 25
+         COL 190
+         WIDTH 200
          fontname "Courier"
          fontitalic .t.
          fontbold .t.
          fontcolor {255,255,255}
-         backcolor {0,0,255}
+         BACKCOLOR {0,0,255}
          items acountries
          on enter msginfo(frmcsbtest.s1.value)
          anywheresearch .f.

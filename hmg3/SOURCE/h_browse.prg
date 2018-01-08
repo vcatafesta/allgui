@@ -92,7 +92,7 @@ FUNCTION _DefineBrowse ( ControlName, ;
       underline , ;
       strikeout , ;
       break , ;
-      backcolor , ;
+      BACKCOLOR , ;
       fontcolor , ;
       lock , ;
       inplace , ;
@@ -1571,7 +1571,7 @@ FUNCTION _BrowseInPlaceEdit ( GridHandle , aValid , aValidMessages , aReadOnly ,
 
    IF x > 0
       Type      := aTypes [x]
-      Width      := aWidths [x]
+      WIDTH      := aWidths [x]
       Decimals   := aDecimals [x]
    ENDIF
 

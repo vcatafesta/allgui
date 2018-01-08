@@ -238,7 +238,7 @@ FUNCTION _SetStatusClock ( FormName , Width , ToolTip , action , nIntervalUpdate
    ENDIF
 
    IF ValType (Width) == 'U'
-      Width := 70
+      WIDTH := 70
    ENDIF
    IF ValType (ToolTip) == 'U'
       ToolTip := 'Clock'
@@ -252,7 +252,7 @@ FUNCTION _SetStatusClock ( FormName , Width , ToolTip , action , nIntervalUpdate
 
    nrItem  := _DefineStatusBarItem   (      ;
       Time()   , ;
-      Width      , ;
+      WIDTH      , ;
       , ;
       , ;
       ToolTip   , ;
@@ -272,7 +272,7 @@ FUNCTION _SetStatusKeybrd ( FormName ,Width , ToolTip , action , nIntervalUpdate
    ENDIF
 
    IF ValType (Width) == 'U'
-      Width := 75
+      WIDTH := 75
    ENDIF
    IF ValType (ToolTip) == 'U'
       ToolTip := ''
@@ -286,7 +286,7 @@ FUNCTION _SetStatusKeybrd ( FormName ,Width , ToolTip , action , nIntervalUpdate
 
    nrItem1 := _DefineStatusBarItem   (      ;
       "NumLock"   , ;
-      Width + 20   , ;
+      WIDTH + 20   , ;
       IF ( IsNumLockActive() , "zzz_led_on" , "zzz_led_off" )   , ;
          , ;
          ToolTip   , ;
@@ -295,7 +295,7 @@ FUNCTION _SetStatusKeybrd ( FormName ,Width , ToolTip , action , nIntervalUpdate
 
       nrItem2 := _DefineStatusBarItem   (      ;
          "CapsLock"   , ;
-         Width + 20   , ;
+         WIDTH + 20   , ;
          IF ( IsCapsLockActive() , "zzz_led_on" , "zzz_led_off" )   , ;
             , ;
             ToolTip   , ;
@@ -304,7 +304,7 @@ FUNCTION _SetStatusKeybrd ( FormName ,Width , ToolTip , action , nIntervalUpdate
 
          nrItem3 := _DefineStatusBarItem   (      ;
             "Insert"   , ;
-            Width + 20   , ;
+            WIDTH + 20   , ;
             IF ( IsInsertActive() , "zzz_led_on" , "zzz_led_off" )   , ;
                , ;
                ToolTip   , ;

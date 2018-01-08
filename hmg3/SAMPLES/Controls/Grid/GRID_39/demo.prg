@@ -11,10 +11,10 @@ FUNCTION Main
 
    DEFINE WINDOW sample at 0, 0 width 320 height 200 title 'Sample Cell Navigation Downwards...' main
       DEFINE GRID grid_1
-         row 10
-         col 10
-         width 300
-         height 150
+         ROW 10
+         COL 10
+         WIDTH 300
+         HEIGHT 150
          widths { 100, 170 }
          headers { 'Sl.No.', 'Name' }
          cellnavigation .t.

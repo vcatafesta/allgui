@@ -39,14 +39,14 @@ FUNCTION Main
          MAIN
 
       @  10, 10 Label Label_1 ;
-         width 80;
-         height 20;
+         WIDTH 80;
+         HEIGHT 20;
          value "";
          autosize
 
       @  30, 10 Label Label_2 ;
-         width 80;
-         height 20;
+         WIDTH 80;
+         HEIGHT 20;
          value "";
          autosize
 

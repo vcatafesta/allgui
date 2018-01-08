@@ -9,8 +9,8 @@ FUNCTION Main
 
    DEFINE WINDOW winMain ;
          at 0, 0 ;
-         width 640 height 480 main ;
-         title "Temporary Table"
+         WIDTH 640 height 480 main ;
+         TITLE "Temporary Table"
 
       DEFINE GRID brwTemp
          COL 0

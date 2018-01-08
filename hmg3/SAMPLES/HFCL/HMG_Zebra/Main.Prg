@@ -15,56 +15,56 @@ FUNCTION Main
 
    DEFINE WINDOW barcode at 0, 0 width 300 height 310 main title 'HMG - BarCode Generator'
       DEFINE LABEL barcodetypelabel
-         row 10
-         col 10
-         width 100
+         ROW 10
+         COL 10
+         WIDTH 100
          value 'Select a Type'
       END LABEL
       DEFINE COMBOBOX type
-         row 10
-         col 110
-         width 100
+         ROW 10
+         COL 110
+         WIDTH 100
          items aTypeItems
          ON CHANGE barcode.code.value := aValues [ barcode.Type.value ]
       END COMBOBOX
 
       DEFINE LABEL codelabel
-         row 40
-         col 10
-         width 100
+         ROW 40
+         COL 10
+         WIDTH 100
          value 'Enter the Code'
       END LABEL
       DEFINE TEXTBOX code
-         row 40
-         col 110
-         width 120
+         ROW 40
+         COL 110
+         WIDTH 120
          //         maxlength 13
       END TEXTBOX
       DEFINE LABEL widthlabel
-         row 70
-         col 10
-         width 100
+         ROW 70
+         COL 10
+         WIDTH 100
          value 'Line Width'
       END LABEL
       DEFINE SPINNER linewidth
-         row 70
-         col 110
-         width 80
+         ROW 70
+         COL 110
+         WIDTH 80
          value 2
          rightalign .t.
          rangemin 1
          rangemax 200
       END spinner
       DEFINE LABEL heightlabel
-         row 100
-         col 10
-         width 100
+         ROW 100
+         COL 10
+         WIDTH 100
          value 'Barcode Height'
       END LABEL
       DEFINE SPINNER lineheight
-         row 100
-         col 110
-         width 80
+         ROW 100
+         COL 110
+         WIDTH 80
          value 110
          rightalign .t.
          increment 10
@@ -72,37 +72,37 @@ FUNCTION Main
          rangemax 2000
       END spinner
       DEFINE CHECKBOX showdigits
-         row 130
-         col 10
-         width 120
+         ROW 130
+         COL 10
+         WIDTH 120
          caption 'Display Code'
          value .t.
       END CHECKBOX
       DEFINE CHECKBOX checksum
-         row 130
-         col 150
-         width 120
+         ROW 130
+         COL 150
+         WIDTH 120
          caption 'Checksum'
          value .t.
       END CHECKBOX
       DEFINE CHECKBOX wide2_5
-         row 160
-         col 10
-         width 120
+         ROW 160
+         COL 10
+         WIDTH 120
          caption 'Wide 2.5'
          onchange iif( this.value, barcode.wide3.value := .f., )
       END CHECKBOX
       DEFINE CHECKBOX wide3
-         row 160
-         col 150
-         width 120
+         ROW 160
+         COL 150
+         WIDTH 120
          caption 'Wide 3'
          onchange iif( this.value, barcode.wide2_5.value := .f., )
       END CHECKBOX
       DEFINE LABEL barcolor
-         row 190
-         col 10
-         width 100
+         ROW 190
+         COL 10
+         WIDTH 100
          fontcolor { 0, 0, 0 }
          value 'Barcode Color'
          fontsize 16
@@ -111,10 +111,10 @@ FUNCTION Main
          alignment center
       END LABEL
       DEFINE LABEL backgroundcolor
-         row 190
-         col 150
-         width 100
-         backcolor { 255, 255, 255 }
+         ROW 190
+         COL 150
+         WIDTH 100
+         BACKCOLOR { 255, 255, 255 }
          value 'Back Color'
          fontsize 16
          tooltip 'Click to change color!'
@@ -123,16 +123,16 @@ FUNCTION Main
       END LABEL
 
       DEFINE BUTTON ok
-         row 230
-         col 60
-         width 90
+         ROW 230
+         COL 60
+         WIDTH 90
          caption 'Show Barcode'
          action createbarcode()
       END BUTTON
       DEFINE BUTTON png
-         row 230
-         col 160
-         width 90
+         ROW 230
+         COL 160
+         WIDTH 90
          caption 'Save to PNG'
          action createbarcodepng()
       END BUTTON

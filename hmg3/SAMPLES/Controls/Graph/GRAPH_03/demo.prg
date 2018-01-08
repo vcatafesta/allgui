@@ -12,39 +12,39 @@ FUNCTION Main
 
    DEFINE WINDOW GraphTest ;
          At 0,0 ;
-         Width 640 ;
-         Height 480 ;
-         Title "Graph" ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Graph" ;
          Main ;
          Nomaximize ;
-         Icon "Main" ;
-         BackColor { 255 , 255 , 255 } ;
+         ICON "Main" ;
+         BACKCOLOR { 255 , 255 , 255 } ;
          On Init DrawBarGraph ( aSer ) ;
 
       DEFINE BUTTON Button_1
-         Row   415
-         Col   20
+         ROW   415
+         COL   20
          Caption   'Bars'
          Action DrawBarGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_2
-         Row   415
-         Col   185
+         ROW   415
+         COL   185
          Caption   'Lines'
          Action DrawLinesGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_3
-         Row   415
-         Col   340
+         ROW   415
+         COL   340
          Caption   'Points'
          Action DrawPointsGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_4
-         Row   415
-         Col   500
+         ROW   415
+         COL   500
          Caption   'Print'
          Action PRINT GRAPH OF GraphTest PREVIEW DIALOG
       END BUTTON

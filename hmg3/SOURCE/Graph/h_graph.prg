@@ -895,8 +895,8 @@ FUNCTION drawpiegraph(windowname,fromrow,fromcol,torow,tocol,series,aname,colors
       ENDIF
       DEFINE LABEL title_of_pie
          parent &windowname
-         row fromrow + 10
-         col iif(HMG_LEN(ALLTRIM(ctitle)) * 12 > (tocol - fromcol),fromcol,int(((tocol - fromcol) - (HMG_LEN(ALLTRIM(ctitle)) * 12))/2) + fromcol)
+         ROW fromrow + 10
+         COL iif(HMG_LEN(ALLTRIM(ctitle)) * 12 > (tocol - fromcol),fromcol,int(((tocol - fromcol) - (HMG_LEN(ALLTRIM(ctitle)) * 12))/2) + fromcol)
          autosize .t.
          fontcolor {0,0,255}
          fontbold .t.
@@ -1068,8 +1068,8 @@ FUNCTION drawpiegraph(windowname,fromrow,fromcol,torow,tocol,series,aname,colors
          drawrect(windowname,fromrow,fromcol,fromrow + 15,fromcol + 15,{0,0,0},1,colors[i])
          DEFINE LABEL &cname
             parent &windowname
-            row fromrow
-            col fromcol + 20
+            ROW fromrow
+            COL fromcol + 20
             fontname "Arial"
             fontsize 8
             autosize .t.

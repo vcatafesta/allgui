@@ -314,11 +314,11 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentForm, x, y, inputmask , width
       ENDIF
 
       IF valtype(Width) == "U"
-         Width := 120
+         WIDTH := 120
       ENDIF
 
       IF valtype(height) == "U"
-         height := 24
+         HEIGHT := 24
       ENDIF
 
       IF valtype(Value) == "U"
@@ -524,11 +524,11 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentForm, x, y, inputmask , wid
    ENDIF
 
    IF valtype(Width) == "U"
-      Width := 120
+      WIDTH := 120
    ENDIF
 
    IF valtype(height) == "U"
-      height := 24
+      HEIGHT := 24
    ENDIF
 
    IF valtype(Value) == "U"

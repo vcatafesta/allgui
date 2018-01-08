@@ -5,15 +5,15 @@ FUNCTION main
    DEFINE WINDOW m at 0,0 width 800 height 600 main On Init ShowPie() backcolor { 255,255,255}
 
       DEFINE BUTTON x
-         row 10
-         col 10
+         ROW 10
+         COL 10
          caption "Draw"
          action showpie()
       END BUTTON
 
       DEFINE BUTTON Button_1
-         Row   10
-         Col   150
+         ROW   10
+         COL   150
          Caption   'Print'
          Action PRINT GRAPH OF m PREVIEW DIALOG
       END BUTTON

@@ -9,18 +9,18 @@ FUNCTION MAIN
 
    DEFINE WINDOW Form_1;
          At 0,0;
-         width 700;
-         height 400;
-         title "Move and Resize Control With Cursor";
+         WIDTH 700;
+         HEIGHT 400;
+         TITLE "Move and Resize Control With Cursor";
          main
 
       @ 300, 10 LABEL Label_0 VALUE "Put the cursor over control and press F3 (Info), F5 (Move) or F9 (Resize), while Move or Resize ESC -> Undo" AUTOSIZE
 
       DEFINE BUTTON Button_1
-         Row 120
-         Col 15
-         width 120
-         height 30
+         ROW 120
+         COL 15
+         WIDTH 120
+         HEIGHT 30
          caption "New Form"
          action New_Form()
       END BUTTON
@@ -30,15 +30,15 @@ FUNCTION MAIN
 
          DEFINE LABEL &cLabelName
             PARENT Form_1
-            row 20
-            col 120*(i-1) + 40
+            ROW 20
+            COL 120*(i-1) + 40
             value "Label no. "+ str(i,1)
-            Width 110
-            Height 40
+            WIDTH 110
+            HEIGHT 40
             Fontsize 10
             tooltip "this is label no.  "+str(i,1)
             Alignment Center
-            BackColor {255,255,0}
+            BACKCOLOR {255,255,0}
             TabStop .t.
          END LABEL
 

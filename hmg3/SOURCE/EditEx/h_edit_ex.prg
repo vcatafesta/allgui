@@ -624,11 +624,11 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
    ////////// Definición de la ventana de visualización.--------------------------
    DEFINE WINDOW wndABM2Edit               ;
          AT 60, 30                       ;
-         width _nAnchoPantalla - 60      ;
-         height _nAltoPantalla - 140     ;
-         title _cTitulo                  ;
+         WIDTH _nAnchoPantalla - 60      ;
+         HEIGHT _nAltoPantalla - 140     ;
+         TITLE _cTitulo                  ;
          modal                           ;
-         nosize                          ;
+         NOSIZE                          ;
          nosysmenu                       ;
          on init {|| ABM2Redibuja() }    ;
          on release {|| ABM2salir(nRegistro, cIndiceActivo, cFiltroAnt, nArea) }   ;
@@ -644,22 +644,22 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
       // Define la barra de botones de la ventana de visualización.
       DEFINE TOOLBAR tbEdit buttonsize 90, 32 flat righttext border
          button tbbCerrar  caption _HMG_SYSDATA [ 128 ][1]   ;
-            picture "HMG_EDIT_CLOSE"          ;
+            PICTURE "HMG_EDIT_CLOSE"          ;
             action  wndABM2Edit.Release
          button tbbNuevo   caption _HMG_SYSDATA [ 128 ][2]               ;
-            picture "HMG_EDIT_NEW"            ;
+            PICTURE "HMG_EDIT_NEW"            ;
             action  {|| ABM2Editar( .t. ) }
          button tbbEditar  caption _HMG_SYSDATA [ 128 ][3]               ;
-            picture "HMG_EDIT_EDIT"           ;
+            PICTURE "HMG_EDIT_EDIT"           ;
             action  {|| ABM2Editar( .f. ) }
          button tbbBorrar  caption _HMG_SYSDATA [ 128 ][4]               ;
-            picture "HMG_EDIT_DELETE"         ;
+            PICTURE "HMG_EDIT_DELETE"         ;
             action  {|| ABM2Borrar() }
          button tbbBuscar  caption _HMG_SYSDATA [ 128 ][5]               ;
-            picture "HMG_EDIT_FIND"           ;
+            PICTURE "HMG_EDIT_FIND"           ;
             action  {|| ABM2Buscar() }
          button tbbListado caption _HMG_SYSDATA [ 128 ][6]               ;
-            picture "HMG_EDIT_PRINT"          ;
+            PICTURE "HMG_EDIT_PRINT"          ;
             action  {|| ABM2Imprimir() }
       END toolbar
 
@@ -669,24 +669,24 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
    @ 45, 10 frame frmEditOpciones          ;
       of wndABM2Edit                  ;
       caption ""                      ;
-      width wndABM2Edit.Width - 25    ;
-      height 65
+      WIDTH wndABM2Edit.Width - 25    ;
+      HEIGHT 65
    @ 112, 10 frame frmEditTabla            ;
       of wndABM2Edit                  ;
       caption ""                      ;
-      width wndABM2Edit.Width - 25    ;
-      height wndABM2Edit.Height - 165
+      WIDTH wndABM2Edit.Width - 25    ;
+      HEIGHT wndABM2Edit.Height - 165
    @ 60, 20 label lblIndice               ;
       of wndABM2Edit                  ;
       value _HMG_SYSDATA [ 130 ] [26]            ;
-      width 150                       ;
-      height 25                       ;
+      WIDTH 150                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 75, 20 combobox cbIndices                     ;
       of wndABM2Edit                          ;
       items _aIndice                          ;
       value _nIndiceActivo                    ;
-      width 150                               ;
+      WIDTH 150                               ;
       font "arial" size 9                     ;
       on change {|| ABM2CambiarOrden() }
    nColumna := wndABM2Edit.Width - 175
@@ -697,34 +697,34 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
    @ 60, nColumna label lblOpciones        ;
       of wndABM2Edit                  ;
       value _HMG_SYSDATA [ 129 ] [5]            ;
-      width 150                       ;
-      height 25                       ;
+      WIDTH 150                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 75, nColumna combobox cbOpciones              ;
       of wndABM2Edit                          ;
       items aTextoOp                          ;
       value 1                                 ;
-      width 150                               ;
+      WIDTH 150                               ;
       font "arial" size 9                     ;
       on change {|| ABM2EjecutaOpcion() }
    @ 65, (wndABM2Edit.Width / 2)-110 button btnFiltro1     ;
       of wndABM2Edit                                  ;
       caption _HMG_SYSDATA [ 128 ][10]                       ;
       action {|| ABM2ActivarFiltro() }                ;
-      width 100                                       ;
-      height 32                                       ;
+      WIDTH 100                                       ;
+      HEIGHT 32                                       ;
       font "ms sans serif" size 9
    @ 65, (wndABM2Edit.Width / 2)+5 button btnFiltro2       ;
       of wndABM2Edit                                  ;
       caption _HMG_SYSDATA [ 128 ][11]                    ;
       action {|| ABM2DesactivarFiltro() }             ;
-      width 100                                       ;
-      height 32                                       ;
+      WIDTH 100                                       ;
+      HEIGHT 32                                       ;
       font "ms sans serif" size 9
    @ 132, 20 browse brwABM2Edit                                                    ;
       of wndABM2Edit                                                          ;
-      width wndABM2Edit.Width - 45                                            ;
-      height wndABM2Edit.Height - 195                                         ;
+      WIDTH wndABM2Edit.Width - 45                                            ;
+      HEIGHT wndABM2Edit.Height - 195                                         ;
       headers _aCabeceraTabla                                                 ;
       widths _aAnchoTabla                                                     ;
       workarea &_cArea                                                        ;
@@ -939,11 +939,11 @@ STATIC FUNCTION ABM2Editar( lNuevo )
    ////////// Define la ventana de edición de registro.---------------------------
    DEFINE WINDOW wndABM2EditNuevo                                  ;
          AT 70, 40                                               ;
-         width iif( nAncho > nAnchoTope, nAnchoTope, nAncho )    ;
-         height iif( nAlto > nAltoTope, nAltoTope, nAlto )       ;
-         title cTitulo                                           ;
+         WIDTH iif( nAncho > nAnchoTope, nAnchoTope, nAncho )    ;
+         HEIGHT iif( nAlto > nAltoTope, nAltoTope, nAlto )       ;
+         TITLE cTitulo                                           ;
          modal                                                   ;
-         nosize                                                  ;
+         NOSIZE                                                  ;
          nosysmenu                                               ;
          font "ms sans serif" size 9
 
@@ -957,22 +957,22 @@ STATIC FUNCTION ABM2Editar( lNuevo )
          // Define la barra de botones de la ventana de edición de registro.
          DEFINE TOOLBAR tbEditNuevo buttonsize 90, 32 flat righttext
             button tbbCancelar caption _HMG_SYSDATA [ 128 ][7]              ;
-               picture "HMG_EDIT_CANCEL"        ;
+               PICTURE "HMG_EDIT_CANCEL"        ;
                action  wndABM2EditNuevo.Release
             button tbbAceptar  caption _HMG_SYSDATA [ 128 ][8]              ;
-               picture "HMG_EDIT_OK"            ;
+               PICTURE "HMG_EDIT_OK"            ;
                action  ABM2EditarGuardar( lNuevo )
             button tbbCopiar   caption _HMG_SYSDATA [ 128 ][9]              ;
-               picture "HMG_EDIT_COPY"          ;
+               PICTURE "HMG_EDIT_COPY"          ;
                action  ABM2EditarCopiar()
          END toolbar
 
          // Define la ventana donde van contenidos los controles de edición.
          DEFINE WINDOW wndABM2EditNuevoSplit             ;
-               width iif( nAncho > nAnchoTope,         ;
+               WIDTH iif( nAncho > nAnchoTope,         ;
                nAnchoTope - 10,             ;
                nAnchoSplit  - 1 )           ;
-               height iif( nAlto > nAltoTope,          ;
+               HEIGHT iif( nAlto > nAltoTope,          ;
                nAltoTope - 95,             ;
                nAltoSplit - 1 )            ;
                virtual width nAnchoSplit               ;
@@ -994,8 +994,8 @@ STATIC FUNCTION ABM2Editar( lNuevo )
          LABEL &_HMG_cMacroTemp ;
          of wndABM2EditNuevoSplit                        ;
          value _aNombreCampo[i]                          ;
-         width _aEtiqueta[i,ABM_LBL_WIDTH]               ;
-         height _aEtiqueta[i,ABM_LBL_HEIGHT]             ;
+         WIDTH _aEtiqueta[i,ABM_LBL_WIDTH]               ;
+         HEIGHT _aEtiqueta[i,ABM_LBL_HEIGHT]             ;
          font "ms sans serif" size 9
    NEXT
 
@@ -1009,8 +1009,8 @@ STATIC FUNCTION ABM2Editar( lNuevo )
             TEXTbox &_HMG_cMacroTemp                      ;
             of wndABM2EditNuevoSplit                        ;
             value ""                                        ;
-            height _aControl[i,ABM_CON_HEIGHT]              ;
-            width _aControl[i,ABM_CON_WIDTH]                ;
+            HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
+            WIDTH _aControl[i,ABM_CON_WIDTH]                ;
             font "arial" size 9                             ;
             maxlength _aEstructura[i,DBS_LEN]               ;
             on gotfocus ABM2ConFoco()                       ;
@@ -1021,8 +1021,8 @@ STATIC FUNCTION ABM2Editar( lNuevo )
          @ _aControl[i,ABM_CON_ROW], _aControl[i,ABM_CON_COL]    ;
             datepicker &_HMG_cMacroTemp           ;
             of wndABM2EditNuevoSplit                        ;
-            height _aControl[i,ABM_CON_HEIGHT]              ;
-            width _aControl[i,ABM_CON_WIDTH] + 25           ;
+            HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
+            WIDTH _aControl[i,ABM_CON_WIDTH] + 25           ;
             font "arial" size 9                             ;
             SHOWNONE                ;
             on gotfocus ABM2ConFoco()                       ;
@@ -1034,8 +1034,8 @@ STATIC FUNCTION ABM2Editar( lNuevo )
                TEXTbox &_HMG_cMacroTemp           ;
                of wndABM2EditNuevoSplit                        ;
                value ""                                        ;
-               height _aControl[i,ABM_CON_HEIGHT]              ;
-               width _aControl[i,ABM_CON_WIDTH]                ;
+               HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
+               WIDTH _aControl[i,ABM_CON_WIDTH]                ;
                numeric                                         ;
                font "arial" size 9                             ;
                maxlength _aEstructura[i,DBS_LEN]               ;
@@ -1053,8 +1053,8 @@ STATIC FUNCTION ABM2Editar( lNuevo )
                TEXTbox &_HMG_cMacroTemp              ;
                of wndABM2EditNuevoSplit                        ;
                value ""                                        ;
-               height _aControl[i,ABM_CON_HEIGHT]              ;
-               width _aControl[i,ABM_CON_WIDTH]                ;
+               HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
+               WIDTH _aControl[i,ABM_CON_WIDTH]                ;
                numeric                                         ;
                inputmask cMascara                              ;
                on gotfocus ABM2ConFoco()                       ;
@@ -1067,8 +1067,8 @@ STATIC FUNCTION ABM2Editar( lNuevo )
             checkbox &_HMG_cMacroTemp             ;
             of wndABM2EditNuevoSplit                        ;
             caption ""                                      ;
-            height _aControl[i,ABM_CON_HEIGHT]              ;
-            width _aControl[i,ABM_CON_WIDTH]                ;
+            HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
+            WIDTH _aControl[i,ABM_CON_WIDTH]                ;
             value .f.                                       ;
             on gotfocus ABM2ConFoco()                       ;
             on lostfocus ABM2SinFoco()
@@ -1077,8 +1077,8 @@ STATIC FUNCTION ABM2Editar( lNuevo )
          @ _aControl[i,ABM_CON_ROW], _aControl[i,ABM_CON_COL]    ;
             editbox &_HMG_cMacroTemp              ;
             of wndABM2EditNuevoSplit                        ;
-            width _aControl[i,ABM_CON_WIDTH]                ;
-            height _aControl[i,ABM_CON_HEIGHT]              ;
+            WIDTH _aControl[i,ABM_CON_WIDTH]                ;
+            HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
             value ""                                        ;
             font "arial" size 9                             ;
             on gotfocus ABM2ConFoco()                       ;
@@ -1302,23 +1302,23 @@ STATIC FUNCTION ABM2Seleccionar()
    ////////// Creación de la ventana de selección de registro.--------------------
    DEFINE WINDOW wndSeleccionar            ;
          AT 0, 0                         ;
-         width 500                       ;
-         height 300                      ;
-         title _HMG_SYSDATA [ 129 ][8]            ;
+         WIDTH 500                       ;
+         HEIGHT 300                      ;
+         TITLE _HMG_SYSDATA [ 129 ][8]            ;
          modal                           ;
-         nosize                          ;
+         NOSIZE                          ;
          nosysmenu                       ;
          font "ms sans serif" size 9
 
       // Define la barra de botones de la ventana de selección.
       DEFINE TOOLBAR tbSeleccionar buttonsize 90, 32 flat righttext border
          button tbbCancelarSel caption _HMG_SYSDATA [ 128 ][7]                   ;
-            picture "HMG_EDIT_CANCEL"             ;
+            PICTURE "HMG_EDIT_CANCEL"             ;
             action  {|| lSalida := .f.,               ;
             nReg    := 0,                 ;
             wndSeleccionar.Release }
          button tbbAceptarSel  caption _HMG_SYSDATA [ 128 ][8]                                           ;
-            picture "HMG_EDIT_OK"                                         ;
+            PICTURE "HMG_EDIT_OK"                                         ;
             action  {|| lSalida := .t.,                                       ;
             nReg    := wndSeleccionar.brwSeleccionar.Value,       ;
             wndSeleccionar.Release }
@@ -1331,8 +1331,8 @@ STATIC FUNCTION ABM2Seleccionar()
 
       // Define la tabla de la ventana de selección.
       @ 55, 20 browse brwSeleccionar                                          ;
-         width 460                                                       ;
-         height 190                                                      ;
+         WIDTH 460                                                       ;
+         HEIGHT 190                                                      ;
          headers _aCabeceraTabla                                         ;
          widths _aAnchoTabla                                             ;
          workarea &_cArea                                                ;
@@ -1474,23 +1474,23 @@ STATIC FUNCTION ABM2Buscar()
    ////////// Crea la ventana de busqueda.----------------------------------------
    DEFINE WINDOW wndABMBuscar              ;
          AT 0, 0                         ;
-         width 500                       ;
-         height 170                      ;
-         title _HMG_SYSDATA [ 129 ][9]            ;
+         WIDTH 500                       ;
+         HEIGHT 170                      ;
+         TITLE _HMG_SYSDATA [ 129 ][9]            ;
          modal                           ;
-         nosize                          ;
+         NOSIZE                          ;
          nosysmenu                       ;
          font "ms sans serif" size 9
 
       // Define la barra de botones de la ventana de busqueda.
       DEFINE TOOLBAR tbBuscar buttonsize 90, 32 flat righttext border
          button tbbCancelarBus caption _HMG_SYSDATA [ 128 ][7]                           ;
-            picture "HMG_EDIT_CANCEL"                     ;
+            PICTURE "HMG_EDIT_CANCEL"                     ;
             action  {|| lSalida := .f.,                       ;
             xValor := wndABMBuscar.conBuscar.Value,  ;
             wndABMBuscar.Release }
          button tbbAceptarBus  caption _HMG_SYSDATA [ 128 ][8]                                ;
-            picture "HMG_EDIT_OK"                         ;
+            PICTURE "HMG_EDIT_OK"                         ;
             action  {|| lSalida := .t.,                       ;
             xValor := wndABMBuscar.conBuscar.Value,  ;
             wndABMBuscar.Release }
@@ -1507,15 +1507,15 @@ STATIC FUNCTION ABM2Buscar()
    @ 45, 10 frame frmBuscar                        ;
       of wndABMBuscar                         ;
       caption ""                              ;
-      width wndABMBuscar.Width - 25           ;
-      height wndABMBuscar.Height - 100
+      WIDTH wndABMBuscar.Width - 25           ;
+      HEIGHT wndABMBuscar.Height - 100
 
    // Etiqueta.
    @ 60, 20 label lblBuscar                                ;
       of wndABMBuscar                                 ;
       value _aNombreCampo[nControl]                   ;
-      width _aEtiqueta[nControl,ABM_LBL_WIDTH]        ;
-      height _aEtiqueta[nControl,ABM_LBL_HEIGHT]      ;
+      WIDTH _aEtiqueta[nControl,ABM_LBL_WIDTH]        ;
+      HEIGHT _aEtiqueta[nControl,ABM_LBL_HEIGHT]      ;
       font "ms sans serif" size 9
 
    // Tipo de dato a buscar.
@@ -1526,8 +1526,8 @@ STATIC FUNCTION ABM2Buscar()
       @ 75, 20  textbox conBuscar                             ;
          of wndABMBuscar                                    ;
          value ""                                        ;
-         height _aControl[nControl,ABM_CON_HEIGHT]       ;
-         width _aControl[nControl,ABM_CON_WIDTH]         ;
+         HEIGHT _aControl[nControl,ABM_CON_HEIGHT]       ;
+         WIDTH _aControl[nControl,ABM_CON_WIDTH]         ;
          font "arial" size 9                             ;
          maxlength _aEstructura[nControl,DBS_LEN]
 
@@ -1536,8 +1536,8 @@ STATIC FUNCTION ABM2Buscar()
       @ 75, 20 datepicker conBuscar                           ;
          of wndABMBuscar                                    ;
          value Date()                                    ;
-         height _aControl[nControl,ABM_CON_HEIGHT]       ;
-         width _aControl[nControl,ABM_CON_WIDTH] + 25    ;
+         HEIGHT _aControl[nControl,ABM_CON_HEIGHT]       ;
+         WIDTH _aControl[nControl,ABM_CON_WIDTH] + 25    ;
          font "arial" size 9
 
       // Numerico.
@@ -1548,8 +1548,8 @@ STATIC FUNCTION ABM2Buscar()
          @ 75, 20 textbox conBuscar                              ;
             of wndABMBuscar                                    ;
             value ""                                        ;
-            height _aControl[nControl,ABM_CON_HEIGHT]       ;
-            width _aControl[nControl,ABM_CON_WIDTH]         ;
+            HEIGHT _aControl[nControl,ABM_CON_HEIGHT]       ;
+            WIDTH _aControl[nControl,ABM_CON_WIDTH]         ;
             numeric                                         ;
             font "arial" size 9                             ;
             maxlength _aEstructura[nControl,DBS_LEN]
@@ -1564,8 +1564,8 @@ STATIC FUNCTION ABM2Buscar()
          @ 75, 20 textbox conBuscar                              ;
             of wndABMBuscar                                    ;
             value ""                                        ;
-            height _aControl[nControl,ABM_CON_HEIGHT]       ;
-            width _aControl[nControl,ABM_CON_WIDTH]         ;
+            HEIGHT _aControl[nControl,ABM_CON_HEIGHT]       ;
+            WIDTH _aControl[nControl,ABM_CON_WIDTH]         ;
             numeric                                         ;
             inputmask cMascara
       ENDIF
@@ -1629,11 +1629,11 @@ STATIC FUNCTION ABM2ActivarFiltro()
    ////////// Crea la ventana de filtrado.----------------------------------------
    DEFINE WINDOW wndABM2Filtro                     ;
          AT 0, 0                                 ;
-         width 400                               ;
-         height 325                              ;
-         title _HMG_SYSDATA [ 129 ][21]            ;
+         WIDTH 400                               ;
+         HEIGHT 325                              ;
+         TITLE _HMG_SYSDATA [ 129 ][21]            ;
          modal                                   ;
-         nosize                                  ;
+         NOSIZE                                  ;
          nosysmenu                               ;
          on init {|| ABM2ControlFiltro() }       ;
          font "ms sans serif" size 9
@@ -1641,11 +1641,11 @@ STATIC FUNCTION ABM2ActivarFiltro()
       // Define la barra de botones de la ventana de filtrado.
       DEFINE TOOLBAR tbBuscar buttonsize 90, 32 flat righttext border
          button tbbCancelarFil caption _HMG_SYSDATA [ 128 ][7]           ;
-            picture "HMG_EDIT_CANCEL"     ;
+            PICTURE "HMG_EDIT_CANCEL"     ;
             action  {|| wndABM2Filtro.Release,;
             ABM2Redibuja( .f. ) }
          button tbbAceptarFil  caption _HMG_SYSDATA [ 128 ][8]           ;
-            picture "HMG_EDIT_OK"         ;
+            PICTURE "HMG_EDIT_OK"         ;
             action  {|| ABM2EstableceFiltro() }
       END toolbar
 
@@ -1660,30 +1660,30 @@ STATIC FUNCTION ABM2ActivarFiltro()
    @ 45, 10 frame frmFiltro                        ;
       of wndABM2Filtro                        ;
       caption ""                              ;
-      width wndABM2Filtro.Width - 25          ;
-      height wndABM2Filtro.Height - 100
+      WIDTH wndABM2Filtro.Width - 25          ;
+      HEIGHT wndABM2Filtro.Height - 100
    @ 65, 20 label lblCampos                ;
       of wndABM2Filtro                ;
       value _HMG_SYSDATA [ 129 ][22]        ;
-      width 140                       ;
-      height 25                       ;
+      WIDTH 140                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 65, 220 label lblCompara              ;
       of wndABM2Filtro                ;
       value _HMG_SYSDATA [ 129 ][23]    ;
-      width 140                       ;
-      height 25                       ;
+      WIDTH 140                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 200, 20 label lblValor                ;
       of wndABM2Filtro                ;
       value _HMG_SYSDATA [ 129 ][24]        ;
-      width 140                       ;
-      height 25                       ;
+      WIDTH 140                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 85, 20 listbox lbxCampos                      ;
       of wndABM2Filtro                        ;
-      width 140                               ;
-      height 100                              ;
+      WIDTH 140                               ;
+      HEIGHT 100                              ;
       items aCampos                           ;
       value 1                                 ;
       font "Arial" size 9                     ;
@@ -1692,8 +1692,8 @@ STATIC FUNCTION ABM2ActivarFiltro()
       on lostfocus wndABM2Filtro.StatusBar.Item(1) := ""
    @ 85, 220 listbox lbxCompara                    ;
       of wndABM2Filtro                        ;
-      width 140                               ;
-      height 100                              ;
+      WIDTH 140                               ;
+      HEIGHT 100                              ;
       items aCompara                          ;
       value 1                                 ;
       font "Arial" size 9                     ;
@@ -1702,8 +1702,8 @@ STATIC FUNCTION ABM2ActivarFiltro()
    @ 220, 20 textbox conValor              ;
       of wndABM2Filtro                ;
       value ""                        ;
-      height 25                       ;
-      width 160                       ;
+      HEIGHT 25                       ;
+      WIDTH 160                       ;
       font "arial" size 9             ;
       maxlength 16
 
@@ -1754,8 +1754,8 @@ STATIC FUNCTION ABM2ControlFiltro()
       @ 226, 20  textbox conValor                                     ;
          of wndABM2Filtro                                        ;
          value ""                                                ;
-         height _aControl[nControl,ABM_CON_HEIGHT]               ;
-         width _aControl[nControl,ABM_CON_WIDTH]                 ;
+         HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
+         WIDTH _aControl[nControl,ABM_CON_WIDTH]                 ;
          font "arial" size 9                                     ;
          maxlength _aEstructura[nControl,DBS_LEN]                ;
          on gotfocus wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
@@ -1767,8 +1767,8 @@ STATIC FUNCTION ABM2ControlFiltro()
       @ 226, 20 datepicker conValor                                   ;
          of wndABM2Filtro                                        ;
          value Date()                                            ;
-         height _aControl[nControl,ABM_CON_HEIGHT]               ;
-         width _aControl[nControl,ABM_CON_WIDTH] + 25            ;
+         HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
+         WIDTH _aControl[nControl,ABM_CON_WIDTH] + 25            ;
          font "arial" size 9                                     ;
          on gotfocus wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
          cMensaje                                    ;
@@ -1782,8 +1782,8 @@ STATIC FUNCTION ABM2ControlFiltro()
          @ 226, 20 textbox conValor                                      ;
             of wndABM2Filtro                                        ;
             value ""                                                ;
-            height _aControl[nControl,ABM_CON_HEIGHT]               ;
-            width _aControl[nControl,ABM_CON_WIDTH]                 ;
+            HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
+            WIDTH _aControl[nControl,ABM_CON_WIDTH]                 ;
             numeric                                                 ;
             font "arial" size 9                                     ;
             maxlength _aEstructura[nControl,DBS_LEN]                ;
@@ -1802,8 +1802,8 @@ STATIC FUNCTION ABM2ControlFiltro()
          @ 226, 20 textbox conValor                                      ;
             of wndABM2Filtro                                        ;
             value ""                                                ;
-            height _aControl[nControl,ABM_CON_HEIGHT]               ;
-            width _aControl[nControl,ABM_CON_WIDTH]                 ;
+            HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
+            WIDTH _aControl[nControl,ABM_CON_WIDTH]                 ;
             numeric                                                 ;
             inputmask cMascara                                      ;
             on gotfocus wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
@@ -1816,8 +1816,8 @@ STATIC FUNCTION ABM2ControlFiltro()
       @ 226, 20 checkbox conValor                                     ;
          of wndABM2Filtro                                        ;
          caption ""                                              ;
-         height _aControl[nControl,ABM_CON_HEIGHT]               ;
-         width _aControl[nControl,ABM_CON_WIDTH]                 ;
+         HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
+         WIDTH _aControl[nControl,ABM_CON_WIDTH]                 ;
          value .f.                                               ;
          on gotfocus wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
          cMensaje                                    ;
@@ -2005,22 +2005,22 @@ STATIC FUNCTION ABM2Imprimir()
    ////////// Definición de la ventana de formato de listado.---------------------
    DEFINE WINDOW wndABM2Listado            ;
          AT 0, 0                         ;
-         width 390                       ;
-         height 365                      ;
-         title _HMG_SYSDATA [ 129 ][10]   ;
-         icon "HMG_EDIT_PRINT"       ;
+         WIDTH 390                       ;
+         HEIGHT 365                      ;
+         TITLE _HMG_SYSDATA [ 129 ][10]   ;
+         ICON "HMG_EDIT_PRINT"       ;
          modal                           ;
-         nosize                          ;
+         NOSIZE                          ;
          nosysmenu                       ;
          font "ms sans serif" size 9
 
       // Define la barra de botones de la ventana de formato de listado.
       DEFINE TOOLBAR tbListado buttonsize 90, 32 flat righttext border
          button tbbCancelarLis caption _HMG_SYSDATA [ 128 ][7]                   ;
-            picture "HMG_EDIT_CANCEL"             ;
+            PICTURE "HMG_EDIT_CANCEL"             ;
             action  wndABM2Listado.Release
          button tbbAceptarLis  caption _HMG_SYSDATA [ 128 ][8]                   ;
-            picture "HMG_EDIT_OK"                 ;
+            PICTURE "HMG_EDIT_OK"                 ;
             action  ABM2Listado( aImpresoras )
 
       END toolbar
@@ -2036,46 +2036,46 @@ STATIC FUNCTION ABM2Imprimir()
    @ 45, 10 frame frmListado                       ;
       of wndABM2Listado                       ;
       caption ""                              ;
-      width wndABM2Listado.Width - 25         ;
-      height wndABM2Listado.Height - 100
+      WIDTH wndABM2Listado.Width - 25         ;
+      HEIGHT wndABM2Listado.Height - 100
 
    // Label
    @ 65, 20 label lblCampoBase             ;
       of wndABM2Listado               ;
       value _HMG_SYSDATA [ 129 ][11]       ;
-      width 140                       ;
-      height 25                       ;
+      WIDTH 140                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 65, 220 label lblCampoListado         ;
       of wndABM2Listado               ;
       value _HMG_SYSDATA [ 129 ][12]           ;
-      width 140                       ;
-      height 25                       ;
+      WIDTH 140                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 200, 20 label lblImpresoras           ;
       of wndABM2Listado               ;
       value _HMG_SYSDATA [ 129 ][13]   ;
-      width 140                       ;
-      height 25                       ;
+      WIDTH 140                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 200, 170 label lblInicial             ;
       of wndABM2Listado               ;
       value _HMG_SYSDATA [ 129 ][14]           ;
-      width 160                       ;
-      height 25                       ;
+      WIDTH 160                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 255, 170 label lblFinal               ;
       of wndABM2Listado               ;
       value _HMG_SYSDATA [ 129 ][15]           ;
-      width 160                       ;
-      height 25                       ;
+      WIDTH 160                       ;
+      HEIGHT 25                       ;
       font "ms sans serif" size 9
 
    // Listbox.
    @ 85, 20 listbox lbxCampoBase                                           ;
       of wndABM2Listado                                               ;
-      width 140                                                       ;
-      height 100                                                      ;
+      WIDTH 140                                                       ;
+      HEIGHT 100                                                      ;
       items aCampoBase                                                ;
       value 1                                                         ;
       font "Arial" size 9                                             ;
@@ -2083,8 +2083,8 @@ STATIC FUNCTION ABM2Imprimir()
       on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
    @ 85, 220 listbox lbxCampoListado                                       ;
       of wndABM2Listado                                               ;
-      width 140                                                       ;
-      height 100                                                      ;
+      WIDTH 140                                                       ;
+      HEIGHT 100                                                      ;
       items aCampoListado                                             ;
       value 1                                                         ;
       font "Arial" size 9                                             ;
@@ -2096,7 +2096,7 @@ STATIC FUNCTION ABM2Imprimir()
       of wndABM2Listado                                               ;
       items aImpresoras                                               ;
       value 1                                                         ;
-      width 140                                                       ;
+      WIDTH 140                                                       ;
       font "Arial" size 9                                             ;
       on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _HMG_SYSDATA [ 130 ][14] ;
       on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
@@ -2104,34 +2104,34 @@ STATIC FUNCTION ABM2Imprimir()
    // PicButton.
    @ 90, 170 button btnMas                                                 ;
       of wndABM2Listado                                               ;
-      picture "HMG_EDIT_ADD"                                      ;
+      PICTURE "HMG_EDIT_ADD"                                      ;
       action ABM2DefinirColumnas( ABM_LIS_ADD )                       ;
-      width 40                                                        ;
-      height 40                                                       ;
+      WIDTH 40                                                        ;
+      HEIGHT 40                                                       ;
       on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _HMG_SYSDATA [ 130 ][15] ;
       on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
    @ 140, 170 button btnMenos                                              ;
       of wndABM2Listado                                               ;
-      picture "HMG_EDIT_DEL"                                      ;
+      PICTURE "HMG_EDIT_DEL"                                      ;
       action ABM2DefinirColumnas( ABM_LIS_DEL )                       ;
-      width 40                                                        ;
-      height 40                                                       ;
+      WIDTH 40                                                        ;
+      HEIGHT 40                                                       ;
       on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _HMG_SYSDATA [ 130 ][16] ;
       on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
    @ 220, 170 button btnSet1                                               ;
       of wndABM2Listado                                               ;
-      picture "HMG_EDIT_SET"                                      ;
+      PICTURE "HMG_EDIT_SET"                                      ;
       action ABM2DefinirRegistro( ABM_LIS_SET1 )                      ;
-      width 25                                                        ;
-      height 25                                                       ;
+      WIDTH 25                                                        ;
+      HEIGHT 25                                                       ;
       on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _HMG_SYSDATA [ 130 ][17] ;
       on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
    @ 275, 170 button btnSet2                                               ;
       of wndABM2Listado                                               ;
-      picture "HMG_EDIT_SET"                                      ;
+      PICTURE "HMG_EDIT_SET"                                      ;
       action ABM2DefinirRegistro( ABM_LIS_SET2 )                      ;
-      width 25                                                        ;
-      height 25                                                       ;
+      WIDTH 25                                                        ;
+      HEIGHT 25                                                       ;
       on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _HMG_SYSDATA [ 130 ][18] ;
       on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
 
@@ -2140,8 +2140,8 @@ STATIC FUNCTION ABM2Imprimir()
    @ 275, 20 checkbox chkPrevio            ;
       of wndABM2Listado               ;
       caption _HMG_SYSDATA [ 129 ][17]      ;
-      width 140                       ;
-      height 25                       ;
+      WIDTH 140                       ;
+      HEIGHT 25                       ;
       value .t.                       ;
       font "ms sans serif" size 9
 
@@ -2149,15 +2149,15 @@ STATIC FUNCTION ABM2Imprimir()
    @ 220, 196 textbox txtRegistro1         ;
       of wndABM2Listado               ;
       value cRegistro1                ;
-      height 25                       ;
-      width 160                       ;
+      HEIGHT 25                       ;
+      WIDTH 160                       ;
       font "arial" size 9             ;
       maxlength 16
    @ 275, 196 textbox txtRegistro2         ;
       of wndABM2Listado               ;
       value cRegistro2                ;
-      height 25                       ;
-      width 160                       ;
+      HEIGHT 25                       ;
+      WIDTH 160                       ;
       font "arial" size 9             ;
       maxlength 16
 

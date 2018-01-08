@@ -51,7 +51,6 @@
    =>;
    _HMG_SYSDATA \[ 450 \]      := <coloffset>
 
-
     #xcommand DEFINE COMBOSEARCHBOX <name>;
        =>;
        _HMG_SYSDATA \[ 416 \]   := <"name">   ;; //name

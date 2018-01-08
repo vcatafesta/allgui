@@ -336,8 +336,8 @@ FUNCTION _BeginTab( name , parent , row , col , w , h , value , f , s , tooltip 
    ENDIF
 
    IF _HMG_SYSDATA [ 183 ] > 0
-      col    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-      row    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
+      COL    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
+      ROW    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
       Parent   := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
    ENDIF
 

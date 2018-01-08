@@ -22,9 +22,9 @@ FUNCTION main
 
    DEFINE WINDOW x ;
          at 0,0 ;
-         width 640 ;
-         height 480 ;
-         title "Draw Box And Panel Sample By Grigory Filatov" ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Draw Box And Panel Sample By Grigory Filatov" ;
          main nomaximize nosize ;
          on init x.Button_1.Setfocus
 

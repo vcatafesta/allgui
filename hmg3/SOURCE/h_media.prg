@@ -66,8 +66,8 @@ FUNCTION _DefinePlayer(ControlName,ParentForm,file,col,row,w,h,noasw,noasm,noed,
 
    IF _HMG_SYSDATA [ 183 ] > 0
       IF _HMG_SYSDATA [ 240 ] == .F.
-         col    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-         row    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
+         COL    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
+         ROW    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
          ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
       ENDIF
    ENDIF
@@ -84,8 +84,8 @@ FUNCTION _DefinePlayer(ControlName,ParentForm,file,col,row,w,h,noasw,noasm,noed,
 
    Hh :=InitPlayer ( GetFormHandle(ParentForm)   , ;
       file             , ;
-      col             , ;
-      row            , ;
+      COL             , ;
+      ROW            , ;
       w            , ;
       h            , ;
       noasw            , ;
@@ -390,8 +390,8 @@ FUNCTION _DefineAnimateBox(ControlName,ParentForm,col,row,w,h,autoplay,center,tr
 
    IF _HMG_SYSDATA [ 183 ] > 0
       IF _HMG_SYSDATA [ 240 ] == .F.
-         col    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-         row    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
+         COL    := col + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
+         ROW    := row + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
          ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
       ENDIF
    ENDIF

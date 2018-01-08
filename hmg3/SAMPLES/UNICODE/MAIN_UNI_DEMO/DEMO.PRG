@@ -611,7 +611,7 @@ PROCEDURE InputWindow_Click
 
    LOCAL Title , aLabels , aInitValues , aFormats , aResults
 
-   Title       := 'உள்ளீட்டுச் சாளரச் சோதனை'
+   TITLE       := 'உள்ளீட்டுச் சாளரச் சோதனை'
 
    aLabels    := { 'புலம் 1:'   , 'புலம் 2:'   ,'புலம் 3:'      ,'புலம் 4:'   ,'புலம் 5:'   ,'புலம் 6:' }
    aInitValues    := { 'ஆரம்ப உரை', .t.       ,2         , Date()    , 12.34    ,'ஆரம்ப உரை' }
@@ -827,14 +827,14 @@ PROCEDURE Modal_CLick
          ROW   10
          COL   30
          CAPTION 'பட்டியல் மதிப்பு பெற'
-         width 150
+         WIDTH 150
          ACTION MultiTest_GetValue()
       END BUTTON
 
       DEFINE BUTTON BUTTON_2
          ROW   40
          COL   30
-         width 150
+         WIDTH 150
          CAPTION 'பட்டியல் மதிப்பு மாற்ற'
          ACTION Form_2.List_1.Value := { 1 , 3 }
       END BUTTON
@@ -842,7 +842,7 @@ PROCEDURE Modal_CLick
       DEFINE BUTTON BUTTON_3
          ROW   70
          COL   30
-         width 150
+         WIDTH 150
          CAPTION 'பட்டியல் வரி பெற'
          ACTION Multilist_GetItem()
       END BUTTON
@@ -850,7 +850,7 @@ PROCEDURE Modal_CLick
       DEFINE BUTTON BUTTON_4
          ROW   100
          COL   30
-         width 150
+         WIDTH 150
          CAPTION 'பட்டியல் வரி மாற்ற'
          ACTION Form_2.List_1.Item ( 1 ) := 'புதிய வரி!!'
       END BUTTON
@@ -858,7 +858,7 @@ PROCEDURE Modal_CLick
       DEFINE BUTTON BUTTON_10
          ROW   130
          COL   30
-         width 150
+         WIDTH 150
          CAPTION 'எண்ணிக்கை பெற'
          ACTION MsgInfo ( Str ( ( Form_2.List_1.ItemCount ) ) )
       END BUTTON
@@ -867,14 +867,14 @@ PROCEDURE Modal_CLick
          ROW   10
          COL   200
          CAPTION 'அட்டவணை மதிப்பு பெற'
-         width 150
+         WIDTH 150
          ACTION MultiGrid_GetValue()
       END BUTTON
 
       DEFINE BUTTON BUTTON_6
          ROW   40
          COL   200
-         width 150
+         WIDTH 150
          CAPTION 'அட்டவணை மதிப்பு மாற்ற'
          ACTION Form_2.Grid_1.Value := { 1 , 3 }
       END BUTTON
@@ -882,7 +882,7 @@ PROCEDURE Modal_CLick
       DEFINE BUTTON BUTTON_7
          ROW   70
          COL   200
-         width 150
+         WIDTH 150
          CAPTION 'அட்டவணை வரி பெற'
          ACTION MultiGrid_GetItem()
       END BUTTON
@@ -890,7 +890,7 @@ PROCEDURE Modal_CLick
       DEFINE BUTTON BUTTON_8
          ROW   100
          COL   200
-         width 150
+         WIDTH 150
          CAPTION 'அட்டவணை வரி மாற்ற'
          ACTION Form_2.Grid_1.Item(1) := {'அனைவருக்கும்','வணக்கம்'}
       END BUTTON
@@ -898,7 +898,7 @@ PROCEDURE Modal_CLick
       DEFINE BUTTON BUTTON_9
          ROW   130
          COL   200
-         width 150
+         WIDTH 150
          CAPTION 'அட்டவணை எண்ணிக்கை பெற'
          ACTION MsgInfo ( Str ( ( Form_2.Grid_1.ItemCount ) ) )
       END BUTTON

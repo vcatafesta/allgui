@@ -6,9 +6,9 @@ PROCEDURE main()
 
    DEFINE WINDOW pr_form ;
          at 0,0 ;
-         width 100;
-         height 100 ;
-         title 'DO REPORT Test' ;
+         WIDTH 100;
+         HEIGHT 100 ;
+         TITLE 'DO REPORT Test' ;
          main
 
       DEFINE MAIN MENU

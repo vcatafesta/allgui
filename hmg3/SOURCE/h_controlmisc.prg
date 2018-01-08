@@ -5087,18 +5087,18 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       ON KEY RETURN  ACTION _HMG_PRINTER_PrintPagesDo()
 
       DEFINE FRAME Frame_1
-         Row 5
-         Col 10
-         Width 275
-         Height 147
+         ROW 5
+         COL 10
+         WIDTH 275
+         HEIGHT 147
          FontName 'Arial'
          FontSize 9
          Caption _HMG_SYSDATA [ 371 ] [15]
       END FRAME
 
       DEFINE RADIOGROUP Radio_1
-         Row 25
-         Col 20
+         ROW 25
+         COL 20
          FontName 'Arial'
          FontSize 9
          Value 1
@@ -5107,19 +5107,19 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       END RadioGroup
 
       DEFINE LABEL Label_1
-         Row 84
-         Col 55
-         Width 50
-         Height 25
+         ROW 84
+         COL 55
+         WIDTH 50
+         HEIGHT 25
          FontName 'Arial'
          FontSize 9
          Value _HMG_SYSDATA [ 371 ] [18] + ':'
       END LABEL
 
       DEFINE SPINNER Spinner_1
-         Row 81
-         Col 110
-         Width 50
+         ROW 81
+         COL 110
+         WIDTH 50
          FontName 'Arial'
          FontSize 9
          Value 1
@@ -5128,19 +5128,19 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       END Spinner
 
       DEFINE LABEL Label_2
-         Row 84
-         Col 165
-         Width 35
-         Height 25
+         ROW 84
+         COL 165
+         WIDTH 35
+         HEIGHT 25
          FontName 'Arial'
          FontSize 9
          Value _HMG_SYSDATA [ 371 ] [19] + ':'
       END LABEL
 
       DEFINE SPINNER Spinner_2
-         Row 81
-         Col 205
-         Width 50
+         ROW 81
+         COL 205
+         WIDTH 50
          FontName 'Arial'
          FontSize 9
          Value _HMG_SYSDATA [ 380 ]
@@ -5149,19 +5149,19 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       END Spinner
 
       DEFINE LABEL Label_4
-         Row 115
-         Col 55
-         Width 50
-         Height 25
+         ROW 115
+         COL 55
+         WIDTH 50
+         HEIGHT 25
          FontName 'Arial'
          FontSize 9
          Value _HMG_SYSDATA [ 371 ] [09] + ':'
       END LABEL
 
       DEFINE COMBOBOX Combo_1
-         Row 113
-         Col 110
-         Width 145
+         ROW 113
+         COL 110
+         WIDTH 145
          FontName 'Arial'
          FontSize 9
          Value 1
@@ -5169,10 +5169,10 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       END COMBOBOX
 
       DEFINE BUTTON Ok
-         Row 10
-         Col 300
-         Width 105
-         Height 25
+         ROW 10
+         COL 300
+         WIDTH 105
+         HEIGHT 25
          FontName 'Arial'
          FontSize 9
          Caption _HMG_SYSDATA [ 371 ] [11]
@@ -5180,10 +5180,10 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       END BUTTON
 
       DEFINE BUTTON Cancel
-         Row 40
-         Col 300
-         Width 105
-         Height 25
+         ROW 40
+         COL 300
+         WIDTH 105
+         HEIGHT 25
          FontName 'Arial'
          FontSize 9
          Caption _HMG_SYSDATA [ 371 ] [12]
@@ -5191,19 +5191,19 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       END BUTTON
 
       DEFINE LABEL Label_3
-         Row 103
-         Col 300
-         Width 45
-         Height 25
+         ROW 103
+         COL 300
+         WIDTH 45
+         HEIGHT 25
          FontName 'Arial'
          FontSize 9
          Value _HMG_SYSDATA [ 371 ] [20] + ':'
       END LABEL
 
       DEFINE SPINNER Spinner_3
-         Row 100
-         Col 355
-         Width 50
+         ROW 100
+         COL 355
+         WIDTH 50
          FontName 'Arial'
          FontSize 9
          Value _HMG_SYSDATA [ 376 ]
@@ -5213,9 +5213,9 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       END Spinner
 
       DEFINE CHECKBOX CheckBox_1
-         Row 132
-         Col 300
-         Width 110
+         ROW 132
+         COL 300
+         WIDTH 110
          FontName 'Arial'
          FontSize 9
          Value if ( _HMG_SYSDATA [ 377 ] == 1 , .T. , .F. )
@@ -5243,19 +5243,19 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          DoMethod("SPLITCHILD_1","SetFocus") )
 
       DEFINE LABEL Label_1
-         Row 13
-         Col 10
-         Width 94
-         Height 25
+         ROW 13
+         COL 10
+         WIDTH 94
+         HEIGHT 25
          FontName 'Arial'
          FontSize 9
          Value _HMG_SYSDATA [ 371 ] [10] + ':'
       END LABEL
 
       DEFINE SPINNER Spinner_1
-         Row 10
-         Col 105
-         Width 75
+         ROW 10
+         COL 105
+         WIDTH 75
          FontName 'Arial'
          FontSize 9
          Value _HMG_SYSDATA [ 361 ]
@@ -5264,10 +5264,10 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       END Spinner
 
       DEFINE BUTTON Ok
-         Row 48
-         Col 10
-         Width 80
-         Height 25
+         ROW 48
+         COL 10
+         WIDTH 80
+         HEIGHT 25
          FontName 'Arial'
          FontSize 9
          Caption _HMG_SYSDATA [ 371 ] [11]
@@ -5281,10 +5281,10 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
       END BUTTON
 
       DEFINE BUTTON Cancel
-         Row 48
-         Col 100
-         Width 80
-         Height 25
+         ROW 48
+         COL 100
+         WIDTH 80
+         HEIGHT 25
          FontName 'Arial'
          FontSize 9
          Caption _HMG_SYSDATA [ 371 ] [12]

@@ -23,28 +23,28 @@ FUNCTION main
    DEFINE WINDOW sample at 0,0 width 800 height 500 main
 
       DEFINE GRID table
-         row 10
-         col 10
-         width 780
-         height 400
+         ROW 10
+         COL 10
+         WIDTH 780
+         HEIGHT 400
          widths {200,100,100,100,50,200}
          headers {"Text","Number","Floating","Date1","Logic","Text2"}
       END GRID
 
       DEFINE BUTTON P_ViewRecord
-         row 420
-         col 100
-         width 140
-         height 24
+         ROW 420
+         COL 100
+         WIDTH 140
+         HEIGHT 24
          caption "View record = Giri11"
          action ViewRecord()
       END BUTTON
 
       DEFINE BUTTON P_ChangeRecord
-         row 420
-         col 300
-         width 140
-         height 24
+         ROW 420
+         COL 300
+         WIDTH 140
+         HEIGHT 24
          caption "Popraw"
          action ChangeRecord()
       END BUTTON

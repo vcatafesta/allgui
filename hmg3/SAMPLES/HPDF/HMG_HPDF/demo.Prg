@@ -4,8 +4,8 @@ FUNCTION Main()
 
    DEFINE WINDOW main at 0, 0 width 300 height 300 main title 'HMG HPDF Document'
       DEFINE BUTTON create
-         row 100
-         col 100
+         ROW 100
+         COL 100
          caption 'HMG HPDF DOC'
          action pdf_create()
       END BUTTON

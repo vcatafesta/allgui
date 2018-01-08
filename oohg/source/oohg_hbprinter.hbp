@@ -1,0 +1,9 @@
+-hblib
+-o${HB_INSTALL_PREFIX}/addons/oohg/lib/${hb_plat}/${hb_comp}/${hb_name}
+-hbx=${HB_INSTALL_PREFIX}/addons/oohg/${hb_Name}.hbx
+-n -q0 -w3 -es2
+-beep
+
+oohg.hbc
+
+winprint.prg

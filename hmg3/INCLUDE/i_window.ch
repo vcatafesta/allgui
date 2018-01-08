@@ -486,7 +486,6 @@
    DECLARE WINDOW <w>  ;;
    _DefineSplitChildWindow ( <"w">, <wi>, <h> , <.break.> , <grippertext> , <.nocaption.> , <title> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth> , <.focused.>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <cursor> , <titlebar> , <{PaintProcedure}>  ) ;;
 
-
    #xcommand LOAD WINDOW <w> ;
    => ;
    DECLARE WINDOW <w> ;;

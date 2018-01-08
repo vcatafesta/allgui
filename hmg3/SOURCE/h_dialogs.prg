@@ -107,7 +107,7 @@ FUNCTION GetFile( aFilter, title, cIniFolder, multiselect, nochangedir, nFilterI
    ENDIF
 
    IF title == NIL
-      title := ""
+      TITLE := ""
    ENDIF
 
    IF cIniFolder == NIL

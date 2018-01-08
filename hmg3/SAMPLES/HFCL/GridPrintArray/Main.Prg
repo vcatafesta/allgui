@@ -180,10 +180,10 @@ FUNCTION Main
 
    DEFINE WINDOW sample at 0,0 width 400 height 300 main
       DEFINE GRID grid1
-         row 10
-         col 10
-         width 300
-         height 150
+         ROW 10
+         COL 10
+         WIDTH 300
+         HEIGHT 150
          virtual .t.
          on querydata this.querydata := aArray[this.queryrowindex,this.querycolindex]
          itemcount HMG_LEN(aArray)
@@ -191,9 +191,9 @@ FUNCTION Main
          widths {100,100,70}
       END GRID
       DEFINE BUTTON print
-         row 160
-         col 10
-         width 80
+         ROW 160
+         COL 10
+         WIDTH 80
          caption "Print"
          action printarray()
       END BUTTON

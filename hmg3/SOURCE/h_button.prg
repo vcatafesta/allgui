@@ -278,7 +278,7 @@ FUNCTION _DefineMixedButton ( ControlName, ParentForm, x, y, Caption, ;
       ProcedureName, w, h, fontname, fontsize, tooltip, ;
       gotfocus, lostfocus, flat, NoTabStop, HelpId, ;
       invisible , bold, italic, underline, strikeout , ;
-      picture , alignment , multiline, notrans )
+      PICTURE , alignment , multiline, notrans )
    LOCAL cParentForm , mVar , ControlHandle , FontHandle , k := 0 , cParentTabName
    LOCAL aRet := {}
    LOCAL aWinver := WindowsVersion()

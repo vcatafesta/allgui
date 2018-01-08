@@ -564,9 +564,9 @@ FUNCTION Imprimir()
 
    DEFINE WINDOW Form_3;
          At 0,0              ;
-         Width 450        ;
-         Height 500       ;
-         Title "Contatos Cadastrados com Letra "+cLetra;
+         WIDTH 450        ;
+         HEIGHT 500       ;
+         TITLE "Contatos Cadastrados com Letra "+cLetra;
          ICON "AGENDA";
          CHILD ;
          NOSYSMENU;

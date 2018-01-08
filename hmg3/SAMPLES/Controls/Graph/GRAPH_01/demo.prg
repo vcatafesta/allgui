@@ -3,9 +3,9 @@
 FUNCTION main
 
    DEFINE WINDOW x at 0,0 ;
-         width 800 ;
-         height 600 ;
-         title "Shapes Demo" ;
+         WIDTH 800 ;
+         HEIGHT 600 ;
+         TITLE "Shapes Demo" ;
          main on init drawshapes()
 
    END WINDOW

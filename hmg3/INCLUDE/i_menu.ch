@@ -93,7 +93,6 @@ _DefineContextMenu( <"parent"> )
 =>;
 _DefineContextMenu( <"parent"> )
 
-
 #xcommand DEFINE NOTIFY MENU [ OF <parent> ] ;
 =>;
 _DefineNotifyMenu( <"parent"> )
