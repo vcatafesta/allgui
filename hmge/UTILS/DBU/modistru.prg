@@ -129,7 +129,7 @@ FUNCTION DBUmodistruct
          WIDTH 450
          BACKCOLOR _DBUyellowish
          ITEMS _DBUstructarr
-         on dblclick DBUlineselected()
+         ON DBLCLICK DBUlineselected()
          HEIGHT 120
       END GRID
       DEFINE BUTTON _DBUsavestruct

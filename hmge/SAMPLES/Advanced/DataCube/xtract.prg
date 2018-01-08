@@ -160,7 +160,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          CELLNAVIGATION .t.
          COLUMNCONTROLS {{'TEXTBOX','CHARACTER'},{'COMBOBOX',aOptions},{'COMBOBOX',aOperations}}
          COLUMNWHEN {{||.f.},{||.t.},{||checkdata()}}
-         columnvalid {{||.t.},{||checkoperation()},{||checkdataoperation()}}
+         COLUMNVALID {{||.t.},{||checkoperation()},{||checkdataoperation()}}
          ALLOWEDIT .t.
          ON CHANGE updateoptions()
       END GRID

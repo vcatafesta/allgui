@@ -848,7 +848,7 @@ STATIC FUNCTION getcode_grupo_fornecedores(value)
          lock .T.
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
-         on dblclick (creg:=grupo_fornecedores->codigo,thiswindow.release)
+         ON DBLCLICK (creg:=grupo_fornecedores->codigo,thiswindow.release)
       END browse
 
       ON KEY ESCAPE ACTION thiswindow.release

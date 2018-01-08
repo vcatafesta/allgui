@@ -1366,7 +1366,7 @@ STATIC FUNCTION getcode_categoria_produtos(value)
          lock .T.
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
-         on dblclick (creg:=categoria_produtos->codigo,thiswindow.release)
+         ON DBLCLICK (creg:=categoria_produtos->codigo,thiswindow.release)
       END browse
 
       ON KEY ESCAPE ACTION thiswindow.release
@@ -1485,7 +1485,7 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
          lock .T.
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
-         on dblclick (creg:=subcategoria_produtos->codigo,thiswindow.release)
+         ON DBLCLICK (creg:=subcategoria_produtos->codigo,thiswindow.release)
       END browse
 
       ON KEY ESCAPE ACTION thiswindow.release
@@ -1604,7 +1604,7 @@ STATIC FUNCTION getcode_impostos(value)
          lock .T.
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
-         on dblclick (creg:=impostos->codigo,thiswindow.release)
+         ON DBLCLICK (creg:=impostos->codigo,thiswindow.release)
       END browse
 
       ON KEY ESCAPE ACTION thiswindow.release
@@ -1723,7 +1723,7 @@ STATIC FUNCTION getcode_materia_prima(value)
          lock .T.
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
-         on dblclick (creg:=materia_prima->codigo,thiswindow.release)
+         ON DBLCLICK (creg:=materia_prima->codigo,thiswindow.release)
       END browse
 
       ON KEY ESCAPE ACTION thiswindow.release

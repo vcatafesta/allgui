@@ -733,7 +733,7 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
       font "arial" size 9                                                     ;
       ON CHANGE {|| (_cArea)->( dbGoto( wndABM2Edit.brwABM2Edit.Value ) ),    ;
       ABM2Redibuja( .f. ) }                                     ;
-      on dblclick ABM2Editar( .f. )                                           ;
+      ON DBLCLICK ABM2Editar( .f. )                                           ;
       JUSTIFY _aAlineadoTabla
 
    // Comprueba el estado de las opciones de usuario.
@@ -1339,7 +1339,7 @@ STATIC FUNCTION ABM2Seleccionar()
          FIELDS _aCampoTabla                                             ;
          VALUE (_cArea)->( RecNo() )                                     ;
          font "arial" size 9                                             ;
-         on dblclick {|| lSalida := .t.,                                 ;
+         ON DBLCLICK {|| lSalida := .t.,                                 ;
          nReg := wndSeleccionar.brwSeleccionar.Value,    ;
          wndSeleccionar.Release }                        ;
          JUSTIFY _aAlineadoTabla

@@ -331,7 +331,7 @@ PROCEDURE Main( cFile )
          WIDTH 200                               ;
          HEIGHT 200                              ;
          ON CHANGE ShowValues()                  ;
-         On DblClick EditField( MODE_EDITFIELD ) ;
+         ON DBLCLICK EditField( MODE_EDITFIELD ) ;
          Celled
 
       oEditStru : SetArray( aStru )

@@ -1933,7 +1933,7 @@ STATIC FUNCTION tamanhos_pizza()
          size 010;
          BACKCOLOR _amarelo_001;
          FONTCOLOR BLUE;
-         on dblclick altera_tamanho()
+         ON DBLCLICK altera_tamanho()
 
       ON KEY ESCAPE ACTION thiswindow.release
 
@@ -2498,7 +2498,7 @@ STATIC FUNCTION bordas_pizza()
          size 010;
          BACKCOLOR _amarelo_001;
          FONTCOLOR BLUE;
-         on dblclick altera_borda()
+         ON DBLCLICK altera_borda()
 
       ON KEY ESCAPE ACTION thiswindow.release
 

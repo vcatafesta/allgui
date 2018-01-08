@@ -511,7 +511,7 @@ STATIC FUNCTION getcode_clientes(value)
          lock .T.
          readonly {.T.,.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
-         on dblclick (iif(empty(clientes->fixo),creg:=clientes->celular,creg:=clientes->fixo),thiswindow.release)
+         ON DBLCLICK (iif(empty(clientes->fixo),creg:=clientes->celular,creg:=clientes->fixo),thiswindow.release)
       END browse
 
       ON KEY ESCAPE ACTION thiswindow.release

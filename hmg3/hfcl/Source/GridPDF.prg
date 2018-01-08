@@ -407,7 +407,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                ALLOWEDIT .t.
                COLUMNCONTROLS {{"TEXTBOX","CHARACTER"},{"TEXTBOX","NUMERIC","9999.99"},{"COMBOBOX",{msgarr[59],msgarr[60]}}}
                COLUMNWHEN {{||.f.},{||iif(pdfgrid.spread.value,.f.,.t.)},{||.t.}}
-               columnvalid {{||.t.},{||pdfcolumnsizeverify()},{||pdfcolumnselected()}}
+               COLUMNVALID {{||.t.},{||pdfcolumnsizeverify()},{||pdfcolumnselected()}}
                ON LOSTFOCUS refreshpdfgrid()
             END GRID
             /*
@@ -718,7 +718,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                WIDTHS {40,40,100}
                ALLOWEDIT .t.
                COLUMNCONTROLS {{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","CHARACTER"}}
-               columnvalid {{||.t.},{||.t.},{||.t.}}
+               COLUMNVALID {{||.t.},{||.t.},{||.t.}}
                ON LOSTFOCUS pdfmergeheaderschanged()
             END GRID
             DEFINE BUTTON add

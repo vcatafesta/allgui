@@ -106,11 +106,11 @@ FUNCTION DBUbrowse1()
          FONTNAME "Arial"
          FONTSIZE 9
          TOOLTIP 'Double click to edit field contents'
-         allowappend .t.
+         ALLOWAPPEND .t.
          ALLOWEDIT .t.
-         allowdelete .t.
+         ALLOWDELETE .t.
          lock .t.
-         inplaceedit .t.
+         INPLACEEDIT .t.
          ON CHANGE DBUbrowsechanged()
       END browse
 

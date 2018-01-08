@@ -601,7 +601,7 @@ STATIC FUNCTION getcode_fornecedores(value)
          lock .T.
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
-         on dblclick (creg:=fornecedores->codigo,thiswindow.release)
+         ON DBLCLICK (creg:=fornecedores->codigo,thiswindow.release)
       END browse
 
       ON KEY ESCAPE ACTION thiswindow.release
@@ -720,7 +720,7 @@ STATIC FUNCTION getcode_formas_pagamento(value)
          lock .T.
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
-         on dblclick (creg:=formas_pagamento->codigo,thiswindow.release)
+         ON DBLCLICK (creg:=formas_pagamento->codigo,thiswindow.release)
       END browse
 
       ON KEY ESCAPE ACTION thiswindow.release

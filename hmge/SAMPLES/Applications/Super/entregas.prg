@@ -137,7 +137,7 @@ STATIC FUNCTION escolher_motoboy()
          size 010;
          BACKCOLOR _branco_001;
          FONTCOLOR BLUE;
-         on dblclick grava_motoboy(motoboys->codigo,alltrim(motoboys->nome))
+         ON DBLCLICK grava_motoboy(motoboys->codigo,alltrim(motoboys->nome))
 
       ON KEY ESCAPE ACTION form_escolhe.release
 
@@ -217,7 +217,7 @@ STATIC FUNCTION mudar_situacao()
          HEADERS {'Situações'};
          WIDTHS {320};
          FONTCOLOR BLUE;
-         on dblclick grava_situacao()
+         ON DBLCLICK grava_situacao()
 
    END WINDOW
 

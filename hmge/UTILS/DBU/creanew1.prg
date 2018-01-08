@@ -116,7 +116,7 @@ FUNCTION DBUcreanew
          WIDTHS {150,100,100,75}
          BACKCOLOR _DBUyellowish
          WIDTH 450
-         on dblclick DBUlineselected()
+         ON DBLCLICK DBUlineselected()
          HEIGHT 120
       END GRID
       DEFINE BUTTON _DBUsavestruct

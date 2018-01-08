@@ -152,7 +152,7 @@ FUNCTION LoadGrid(aRows,lmultiselect,lcelled,leditable)
          {||.t.},;
          {||.t.};
          }
-      ColumnValid {{||.t.},;
+      COLUMNVALID {{||.t.},;
          {||.t.},;
          {||.t.},;
          {||.t.},;

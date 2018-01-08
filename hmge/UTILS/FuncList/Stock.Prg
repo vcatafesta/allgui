@@ -878,7 +878,7 @@ STATIC PROCEDURE FindAll
             WIDTHS { 150, 100, 200 }                                         ;
             Font 'Tahoma' Size 10                                            ;
             NoLines                                                          ;
-            On DblClick Do_GoTo( aMatches )
+            ON DBLCLICK Do_GoTo( aMatches )
 
          @ ( wFindAll.grdMatches.Row + wFindAll.grdMatches.Height + 10 ), ;
             ( wFindAll.grdMatches.Col + 55 )                               ;

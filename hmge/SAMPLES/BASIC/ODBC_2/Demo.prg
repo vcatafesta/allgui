@@ -29,7 +29,7 @@ PROCEDURE inicio
          HEIGHT 300
          HEADERS {'Id','Descripcion'}
          WIDTHS { 60, 300 }
-         on dblclick    eventos(2)
+         ON DBLCLICK    eventos(2)
          ON CHANGE    form1.statusbar.item(1) := "Registro "+;
             ltrim(str(form1.grid1.value))+" de "+alltrim(str(form1.grid1.itemcount))
          COLUMNCONTROLS   { ;

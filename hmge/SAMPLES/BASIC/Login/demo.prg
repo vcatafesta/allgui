@@ -190,7 +190,7 @@ FUNCTION ShowUserList()
          WIDTHS  { 110, 110, 90, 50 }
          ITEMS   list
          VALUE   1
-         inplaceedit { ;
+         INPLACEEDIT { ;
             { 'TEXTBOX', 'CHARACTER' }, ;
             { 'TEXTBOX', 'CHARACTER' }, ;
             { 'TEXTBOX', 'NUMERIC', '99' }, ;

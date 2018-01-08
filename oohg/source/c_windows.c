@@ -98,7 +98,6 @@
 #define RECTWIDTH(lpRect)     ((lpRect)->right - (lpRect)->left)
 #define RECTHEIGHT(lpRect)    ((lpRect)->bottom - (lpRect)->top)
 
-
 #include <shlobj.h>
 #include <windows.h>
 #include "richedit.h"

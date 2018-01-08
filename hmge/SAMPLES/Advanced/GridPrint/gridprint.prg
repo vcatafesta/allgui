@@ -241,7 +241,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                ALLOWEDIT .t.
                COLUMNCONTROLS {{"TEXTBOX","CHARACTER"},{"TEXTBOX","NUMERIC","9999.99"},{"COMBOBOX",{msgarr[59],msgarr[60]}}}
                COLUMNWHEN {{||.f.},{||iif(printgrid.spread.value,.f.,.t.)},{||.t.}}
-               columnvalid {{||.t.},{||columnsizeverify()},{||columnselected()}}
+               COLUMNVALID {{||.t.},{||columnsizeverify()},{||columnselected()}}
                ON LOSTFOCUS refreshprintgrid()
             END GRID
          END PAGE
@@ -542,7 +542,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                WIDTHS {50,50,100}
                ALLOWEDIT .t.
                COLUMNCONTROLS {{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","CHARACTER"}}
-               columnvalid {{||.t.},{||.t.},{||.t.}}
+               COLUMNVALID {{||.t.},{||.t.},{||.t.}}
                ON LOSTFOCUS mergeheaderschanged()
             END GRID
             DEFINE BUTTON add

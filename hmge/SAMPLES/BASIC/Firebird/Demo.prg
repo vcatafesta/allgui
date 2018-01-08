@@ -43,7 +43,7 @@ PROCEDURE start
          HEADERS {'Id','First Name','Last Name','Salary'}
          WIDTHS { 50, 80,110,115 }
          JUSTIFY {BROWSE_JTFY_RIGHT,BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT}
-         on dblclick    events_(2)
+         ON DBLCLICK    events_(2)
          ON CHANGE    form1.statusbar.item(1) := "Register "+;
             ltrim(str(form1.grid1.value))+" of "+alltrim(str(form1.grid1.itemcount))
          COLUMNCONTROLS   { ;

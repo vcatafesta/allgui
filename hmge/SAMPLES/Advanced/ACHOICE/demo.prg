@@ -140,7 +140,7 @@ FUNCTION HMG_Achoice(nTop,nLeft,nBottom,nRight,aList,nDefault,lAnyWhere)
          HEIGHT nHeight - 50
          ITEMS aList
          ON CHANGE _achoicelistchanged()
-         on dblclick _aChoiceSelected()
+         ON DBLCLICK _aChoiceSelected()
       END listbox
    END WINDOW
 

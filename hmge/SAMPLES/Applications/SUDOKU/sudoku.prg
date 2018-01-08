@@ -103,7 +103,7 @@ FUNCTION Main
             { || entergrid() }, { || entergrid() }, ;
             { || entergrid() }, { || entergrid() }, ;
             { || entergrid() } }
-         columnvalid { { || checkgrid() }, { || checkgrid() }, ;
+         COLUMNVALID { { || checkgrid() }, { || checkgrid() }, ;
             { || checkgrid() }, { || checkgrid() }, ;
             { || checkgrid() }, { || checkgrid() }, ;
             { || checkgrid() }, { || checkgrid() }, ;

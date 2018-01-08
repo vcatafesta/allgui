@@ -755,7 +755,7 @@ FUNCTION DBUsetfilter
          HEADERS {"Field Name"}
          WIDTHS {176}
          ITEMS _DBUfieldsarr
-         on dblclick _DBUfilterbox._DBUfiltercondition.value := alltrim(alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUfieldsarr[_DBUfilterbox._DBUfieldnames.value,1]))
+         ON DBLCLICK _DBUfilterbox._DBUfiltercondition.value := alltrim(alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUfieldsarr[_DBUfilterbox._DBUfieldnames.value,1]))
          WIDTH 200
          HEIGHT 152
       END GRID
@@ -816,7 +816,7 @@ FUNCTION DBUsetfilter
          WIDTHS {176}
          BACKCOLOR _DBUgreenish
          ITEMS _DBUdbffunctions
-         on dblclick _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUdbffunctions[_DBUfilterbox._DBUfunctions.value,1])
+         ON DBLCLICK _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUdbffunctions[_DBUfilterbox._DBUfunctions.value,1])
          WIDTH 200
          HEIGHT 152
       END GRID

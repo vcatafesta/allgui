@@ -690,7 +690,7 @@ STATIC FUNCTION getcode_unidade(value)
          lock .T.
          readonly {.T.,.T.}
          JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
-         on dblclick (creg:=unidade_medida->codigo,thiswindow.release)
+         ON DBLCLICK (creg:=unidade_medida->codigo,thiswindow.release)
       END browse
 
       ON KEY ESCAPE ACTION thiswindow.release
