@@ -15,9 +15,9 @@ FUNCTION Main
             DEFINE BUTTON b1
                ROW 30
                COL 10
-               caption 'Press here to add a control'
+               CAPTION 'Press here to add a control'
                WIDTH 180
-               action addnewcontrols({'lbl1','text1'})
+               ACTION addnewcontrols({'lbl1','text1'})
             END BUTTON
 
          END PAGE
@@ -27,9 +27,9 @@ FUNCTION Main
             DEFINE BUTTON b2
                ROW 30
                COL 10
-               caption 'Press here to add a control'
+               CAPTION 'Press here to add a control'
                WIDTH 180
-               action addnewcontrol2('btn1')
+               ACTION addnewcontrol2('btn1')
             END BUTTON
 
          END PAGE
@@ -61,7 +61,7 @@ FUNCTION addnewcontrols(actrl)
       ROW 50
       COL 10
       WIDTH 40
-      value 'label'
+      VALUE 'label'
    END LABEL
 
    IF iscontroldefined(&c2,tabsample)
@@ -91,8 +91,8 @@ FUNCTION addnewcontrol2(ctrl)
       ROW 10
       COL 10
       WIDTH 180
-      caption 'Click me'
-      action MsgBox('Button action','Result')
+      CAPTION 'Click me'
+      ACTION MsgBox('Button action','Result')
    END BUTTONEX
 
    tabsample.tab1.addcontrol(ctrl,2,80,10)

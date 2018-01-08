@@ -27,9 +27,9 @@ FUNCTION AddMenuUndo( nUndo ,typ )
    LOCAL action , cAction , Caption, cyUndo_Id, cxUndo_Id
 
    X:=len(aUndo)
-   Caption := emumUndo[nUndo+1]
+   CAPTION := emumUndo[nUndo+1]
    cAction := '{|| mUndo_Click( 1 ) }'
-   action :=&cAction
+   ACTION :=&cAction
 
    IF typ == 1
       // Check if this is the first item
@@ -47,7 +47,7 @@ FUNCTION AddMenuUndo( nUndo ,typ )
             ASIZE(aUndo, Len(aUndo)+1)
             AINS( aUndo, 1 )
             cAction := '{|| mUndo_Click( 1 )}'
-            action :=&cAction
+            ACTION :=&cAction
             aUndo[ 1 ] := {nUndo,cyUndo_Id,action,1}
          ELSE
             nU := aUndo[ 1 , 4 ] + 1
@@ -79,9 +79,9 @@ FUNCTION AddMenuUndo( nUndo ,typ )
       IF len(aUndo) != X
          FOR n := 1 to len(aUndo)
             cAction := '{|| mUndo_Click( '+str(n) + ') }'
-            action :=&cAction
+            ACTION :=&cAction
             nU := aUndo[ n , 4 ]
-            Caption := emumUndo[aUndo[n,1]+1]
+            CAPTION := emumUndo[aUndo[n,1]+1]
             cxUndo_Id := aUndo[n,2]
             _ModifyMenuItem ( cxUndo_Id , MainForm , Caption+' ('+alltrim(str(nU))+')' , action )
          NEXT

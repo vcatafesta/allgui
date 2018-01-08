@@ -26,11 +26,11 @@ FUNCTION Main
          WIDTH 800 ;
          HEIGHT 620 ;
          TITLE "Printing bar" ;
-         Main ;
+         MAIN ;
          ICON "Main" ;
-         Nomaximize Nosize ;
+         NOMAXIMIZE Nosize ;
          BACKCOLOR {216,208,200} ;
-         On Init DrawBarGraph()
+         ON INIT DrawBarGraph()
 
       @ 552,40 COMBOBOX Combo_1 ;
          ITEMS {'MiniPrint', 'HbPrinter'} ;
@@ -39,15 +39,15 @@ FUNCTION Main
       DEFINE BUTTON Button_1
          ROW   550
          COL   260
-         Caption   'Print'
-         Action  PrintGraph(GraphTest.Combo_1.Value)
+         CAPTION   'Print'
+         ACTION  PrintGraph(GraphTest.Combo_1.Value)
       END BUTTON
 
       DEFINE BUTTON Button_2
          ROW   550
          COL   460
-         Caption   'Exit'
-         Action  GraphTest.Release
+         CAPTION   'Exit'
+         ACTION  GraphTest.Release
       END BUTTON
 
    END WINDOW

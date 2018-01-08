@@ -295,7 +295,7 @@ FUNCTION _DefineToolButton ( ControlName, ParentControl, x, y, Caption, Procedur
       Eval ( _HMG_bOnControlInit, k, mVar )
    ENDIF
 
-   Caption := Upper ( Caption )
+   CAPTION := Upper ( Caption )
 
    i := At ( '&' , Caption )
 

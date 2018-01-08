@@ -118,7 +118,7 @@ FUNCTION _DefineCombo ( ControlName, ParentFormName, x, y, w, rows, value, ;
       IF At ( '>' , ItemSource ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + " (ItemSource): You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( ItemSource , At ( '>' , ItemSource ) - 2 )
+         WORKAREA := Left ( ItemSource , At ( '>' , ItemSource ) - 2 )
          cField := Right ( ItemSource , Len ( ItemSource ) - At ( '>' , ItemSource ) )
       ENDIF
    ENDIF
@@ -306,11 +306,11 @@ FUNCTION _DefineCombo ( ControlName, ParentFormName, x, y, w, rows, value, ;
 FUNCTION InitDialogComboBox( ParentName, ControlHandle, k )
 
    LOCAL WorkArea , BackRec , rcount := 0 , cset := 0 , ItemHeight , ;
-      Value , rows , DisplayChange , ItemSource , cField , ListWidth , cuetext
+      VALUE , rows , DisplayChange , ItemSource , cField , ListWidth , cuetext
 
-   WorkArea      := _HMG_aControlSpacing [k]
+   WORKAREA      := _HMG_aControlSpacing [k]
    cField        := _HMG_aControlPageMap [k]
-   Value         := _HMG_aControlValue [k]
+   VALUE         := _HMG_aControlValue [k]
    rows          := _HMG_aControlMiscData1 [k,4]
    DisplayChange := _HMG_aControlMiscData1 [k,2]
    ItemSource    := _HMG_aControlMiscData1 [k,3]
@@ -327,13 +327,13 @@ FUNCTION InitDialogComboBox( ParentName, ControlHandle, k )
       ENDIF
 
       IF !Empty( cuetext ) .AND. IsVistaOrLater()
-         value := 0
+         VALUE := 0
          SendMessageWideString( _HMG_aControlRangeMin [k], EM_SETCUEBANNER, .T., cuetext )
       ENDIF
 
    ELSEIF !Empty( cuetext ) .AND. IsVistaOrLater()
 
-      value := 0
+      VALUE := 0
       SendMessageWideString( ControlHandle, CB_SETCUEBANNER, .T., cuetext )
 
    ENDIF
@@ -474,7 +474,7 @@ FUNCTION _DefineComboEx ( ;
       IF  At ( '>', ItemSource ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentForm + " (ItemSource): You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( ItemSource , At ( '>', ItemSource ) - 2 )
+         WORKAREA := Left ( ItemSource , At ( '>', ItemSource ) - 2 )
          cField   := Right ( ItemSource , Len ( ItemSource ) - At ( '>', ItemSource ) )
       ENDIF
    ENDIF
@@ -691,7 +691,7 @@ PROCEDURE _DataComboRefresh ( i )  // (JK) Modified for extend COMBO HMG 1.0 Bui
 
    ControlHandle := _HMG_aControlHandles [i]
 
-   WorkArea := _HMG_aControlSpacing [i]
+   WORKAREA := _HMG_aControlSpacing [i]
 
    BackRec := ( WorkArea )->( RecNo() )
 

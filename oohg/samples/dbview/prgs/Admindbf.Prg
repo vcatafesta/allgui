@@ -47,7 +47,7 @@ PROCEDURE AdministraDBF( nReg )
                at 40,10                                 ;
                WIDTH 650                                ;
                HEIGHT 450                               ;
-               virtual height MAX(nAlto-70,451)         ;
+               VIRTUAL height MAX(nAlto-70,451)         ;
                INTERNAL                                 ;
                nocaption                                ;
                font "ms sans serif" size 9              ;
@@ -183,7 +183,7 @@ PROCEDURE Buscando()
          DEFINE WINDOW Win_Busca1                    ;
                WIDTH 650                                ;
                HEIGHT 450                               ;
-               virtual height MAX(nAlto-70,451)         ;
+               VIRTUAL height MAX(nAlto-70,451)         ;
                INTERNAL                                 ;
                nocaption                                ;
                font "ms sans serif" size 9              ;

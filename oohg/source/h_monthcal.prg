@@ -112,7 +112,7 @@ METHOD Define2( ControlName, ParentForm, x, y, w, h, value, fontname, ;
    ASSIGN ::nHeight VALUE h TYPE "N"
 
    IF ! HB_IsDate( value )
-      value := DATE()
+      VALUE := DATE()
    ENDIF
 
    ::SetForm( ControlName, ParentForm, FontName, FontSize,,,, lRtl )

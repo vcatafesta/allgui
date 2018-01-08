@@ -180,17 +180,17 @@ PROCEDURE SelectLanguage
          WIDTH 215         ;
          HEIGHT 165        ;
          Items {}          ;
-         On Change SetProperty( 'wLangs', 'btnOK', 'Enabled', !Empty( This.Value ) )
+         ON CHANGE SetProperty( 'wLangs', 'btnOK', 'Enabled', !Empty( This.Value ) )
 
       @ ( wLangs.cmbLangs.Row + 40 ), wLangs.cmbLangs.Col ;
          Button btnOK                                      ;
-         Caption _HMG_MESSAGE[ 6 ]                         ;
-         Action LangReset( aFiles )
+         CAPTION _HMG_MESSAGE[ 6 ]                         ;
+         ACTION LangReset( aFiles )
 
       @ wLangs.btnOk.Row, ( wLangs.btnOk.Col + wLangs.btnOk.Width + 15 ) ;
          Button btnCancel                                                 ;
-         Caption _HMG_MESSAGE[ 7 ]                                        ;
-         Action ThisWindow.Release
+         CAPTION _HMG_MESSAGE[ 7 ]                                        ;
+         ACTION ThisWindow.Release
 
       On key Escape of wLangs Action wLangs.Release
       On key Alt+X  of wLangs Action ReleaseAllWindows()

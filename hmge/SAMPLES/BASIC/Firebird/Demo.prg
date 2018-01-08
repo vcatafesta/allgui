@@ -22,10 +22,10 @@ PROCEDURE start
    DEFINE WINDOW form1;
          at 0,0 width 400 height 400 title 'Demo Odbc/Firebird';
          Main;
-         on init ( adjust(), load_data(1) );
+         ON INIT ( adjust(), load_data(1) );
          on maximize ( adjust() );
          on size ( adjust() );
-         on release ( oConnection:Destroy() );
+         ON RELEASE ( oConnection:Destroy() );
          font 'ms sans serif' size 8
 
       @ 0,  0 button btn1 caption '&Add'    width 55 height 20 action events_(1)
@@ -40,13 +40,13 @@ PROCEDURE start
          COL 5
          WIDTH 300
          HEIGHT 300
-         headers {'Id','First Name','Last Name','Salary'}
-         widths { 50, 80,110,115 }
+         HEADERS {'Id','First Name','Last Name','Salary'}
+         WIDTHS { 50, 80,110,115 }
          justify {BROWSE_JTFY_RIGHT,BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT}
          on dblclick    events_(2)
-         on change    form1.statusbar.item(1) := "Register "+;
+         ON CHANGE    form1.statusbar.item(1) := "Register "+;
             ltrim(str(form1.grid1.value))+" of "+alltrim(str(form1.grid1.itemcount))
-         columncontrols   { ;
+         COLUMNCONTROLS   { ;
             {'TEXTBOX','NUMERIC'} , ;
             {'TEXTBOX','CHARACTER'}, ;
             {'TEXTBOX','CHARACTER'}, ;

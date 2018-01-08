@@ -30,8 +30,8 @@ FUNCTION Main
          WIDTH 1000
          HEIGHT 600
          items aData
-         headers {"REGION","PRODUCT","SALESMAN","QUANTITY","DISCOUNT"}
-         widths {150,150,150,150,150}
+         HEADERS {"REGION","PRODUCT","SALESMAN","QUANTITY","DISCOUNT"}
+         WIDTHS {150,150,150,150,150}
          justify {0,0,0,1,1}
          COLUMNCONTROLS { {'TEXTBOX','CHARACTER'} , {'TEXTBOX','CHARACTER'} ,{'TEXTBOX','CHARACTER'},{'TEXTBOX','NUMERIC','999999'}  , {'TEXTBOX','NUMERIC','99'}}
       END GRID
@@ -39,29 +39,29 @@ FUNCTION Main
          ROW 620
          COL 10
          WIDTH 80
-         caption "Xtract"
-         action dataxtract("s","data")
+         CAPTION "Xtract"
+         ACTION dataxtract("s","data")
       END BUTTON
       DEFINE BUTTON csvexport
          ROW 620
          COL 110
          WIDTH 80
-         caption "Xport2CSV"
-         action grid2csv("s","data",.t.)
+         CAPTION "Xport2CSV"
+         ACTION grid2csv("s","data",.t.)
       END BUTTON
       DEFINE BUTTON import
          ROW 620
          COL 210
          WIDTH 80
-         caption "DBF Import"
-         action importfromdbf()
+         CAPTION "DBF Import"
+         ACTION importfromdbf()
       END BUTTON
       DEFINE BUTTON close
          ROW 620
          COL 310
          WIDTH 80
-         caption "Close"
-         action s.release()
+         CAPTION "Close"
+         ACTION s.release()
       END BUTTON
    END WINDOW
    s.center
@@ -146,8 +146,8 @@ FUNCTION dataxtract(cWindow,cGrid)
          COL 10
          WIDTH 200
          fontsize 14
-         fontbold .t.
-         value "Xtract Cube Construction"
+         FONTBOLD .t.
+         VALUE "Xtract Cube Construction"
       END LABEL
 
       DEFINE GRID cols
@@ -155,14 +155,14 @@ FUNCTION dataxtract(cWindow,cGrid)
          COL 10
          WIDTH 300
          HEIGHT 150
-         widths {110,80,80}
-         headers {"Field Name","Placement","Operation"}
-         cellnavigation .t.
-         columncontrols {{'TEXTBOX','CHARACTER'},{'COMBOBOX',aOptions},{'COMBOBOX',aOperations}}
-         columnwhen {{||.f.},{||.t.},{||checkdata()}}
+         WIDTHS {110,80,80}
+         HEADERS {"Field Name","Placement","Operation"}
+         CELLNAVIGATION .t.
+         COLUMNCONTROLS {{'TEXTBOX','CHARACTER'},{'COMBOBOX',aOptions},{'COMBOBOX',aOperations}}
+         COLUMNWHEN {{||.f.},{||.t.},{||checkdata()}}
          columnvalid {{||.t.},{||checkoperation()},{||checkdataoperation()}}
          allowedit .t.
-         on change updateoptions()
+         ON CHANGE updateoptions()
       END GRID
       DEFINE BUTTON up
          ROW 115
@@ -170,7 +170,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          WIDTH 32
          HEIGHT 36
          PICTURE "up"
-         action fieldup()
+         ACTION fieldup()
       END BUTTON
       DEFINE BUTTON down
          ROW 157
@@ -178,7 +178,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          WIDTH 32
          HEIGHT 36
          PICTURE "down"
-         action fielddown()
+         ACTION fielddown()
       END BUTTON
 
       DEFINE LABEL skeleton
@@ -186,8 +186,8 @@ FUNCTION dataxtract(cWindow,cGrid)
          COL 350
          WIDTH 200
          fontsize 14
-         fontbold .t.
-         value "Data Cube Skeleton"
+         FONTBOLD .t.
+         VALUE "Data Cube Skeleton"
       END LABEL
       DEFINE GRID options
          ROW 75
@@ -195,38 +195,38 @@ FUNCTION dataxtract(cWindow,cGrid)
          HEIGHT 150
          WIDTH 430
          showheaders .f.
-         widths {120}
-         cellnavigation .t.
-         on change updateoptions()
+         WIDTHS {120}
+         CELLNAVIGATION .t.
+         ON CHANGE updateoptions()
       END GRID
       DEFINE LABEL filterlabel
          ROW 225
          COL 10
          WIDTH 150
-         fontbold .t.
+         FONTBOLD .t.
          fontsize 14
-         value "Filters"
+         VALUE "Filters"
       END LABEL
       DEFINE GRID filters
          ROW 250
          COL 10
          WIDTH 770
          HEIGHT 60
-         headers aAvailCols
-         widths aWidths
-         cellnavigation .t.
+         HEADERS aAvailCols
+         WIDTHS aWidths
+         CELLNAVIGATION .t.
          allowedit .t.
-         columncontrols aFieldOptions
-         on change createreport(xtract.tool1.autocalc.value)
+         COLUMNCONTROLS aFieldOptions
+         ON CHANGE createreport(xtract.tool1.autocalc.value)
       END GRID
 
       DEFINE LABEL datacube
          ROW 310
          COL 10
          WIDTH 150
-         fontbold .t.
+         FONTBOLD .t.
          fontsize 14
-         value "Data Cube"
+         VALUE "Data Cube"
       END LABEL
 
       DEFINE STATUSBAR
@@ -417,7 +417,7 @@ FUNCTION updateoptions
       HEIGHT 150
       WIDTH 430
       showheaders .f.
-      widths aWidths
+      WIDTHS aWidths
       dynamicbackcolor aBackColors
    END GRID
 
@@ -996,8 +996,8 @@ FUNCTION createreport(lAutoCalc)
          COL 10
          WIDTH 770
          HEIGHT 250
-         widths aWidths
-         headers aHeaders
+         WIDTHS aWidths
+         HEADERS aHeaders
          justify aJustify
          showheaders .f.
          items aReportGrid
@@ -1108,8 +1108,8 @@ FUNCTION importfromdbf
          WIDTH 1000
          HEIGHT 600
          items aData
-         headers aFieldNames
-         widths aWidths
+         HEADERS aFieldNames
+         WIDTHS aWidths
          justify aJustify
       END GRID
    ENDIF
@@ -1294,7 +1294,7 @@ FUNCTION C2SQL(Value)
    LOCAL cdate := ""
 
    IF valtype(value) == "C" .and. len(alltrim(value)) > 0
-      value := strtran(value,"'","''")
+      VALUE := strtran(value,"'","''")
    ENDIF
    DO CASE
    CASE Valtype(Value) == "N"

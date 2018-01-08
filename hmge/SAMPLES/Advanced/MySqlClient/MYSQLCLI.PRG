@@ -95,8 +95,8 @@ PROCEDURE Main()
          HEIGHT      600                 ;
          TITLE       PROGRAM             ;
          ICON        "A_ICO_MAIN"        ;
-         main                            ;
-         nomaximize                      ;
+         MAIN                            ;
+         NOMAXIMIZE                      ;
          NOSIZE                          ;
          ON INIT     {|| UpdateMain() }  ;
          ON RELEASE Disconnect()
@@ -104,27 +104,27 @@ PROCEDURE Main()
       DEFINE MAIN MENU
          DEFINE POPUP " &File "
             MENUITEM "  &Connect  "                ;
-               action { || Connect() }        ;
+               ACTION { || Connect() }        ;
                name mnuConnect
             MENUITEM "  &Disconnect  "             ;
-               action { || Disconnect() }     ;
+               ACTION { || Disconnect() }     ;
                name mnuDisconnect
             SEPARATOR
             MENUITEM "  &Export to DBF  "             ;
-               action { || SQL2Dbf() }     ;
+               ACTION { || SQL2Dbf() }     ;
                name mnusql2dbf
             MENUITEM "  &Import from DBF  "           ;
-               action { || Dbf2Sql(.t.) }     ;
+               ACTION { || Dbf2Sql(.t.) }     ;
                name mnudbf2sql
             SEPARATOR
             MENUITEM "  &Exit  "                   ;
-               action F_Main.Release     ;
+               ACTION F_Main.Release     ;
                name mnuEnd
          END POPUP
 
          DEFINE POPUP " &Help "
             MENUITEM "About" ;
-               action ShellAbout( "", PROGRAM+" v.2.0" + CRLF + "Cristobal Molla, Mitja Podgornik" )
+               ACTION ShellAbout( "", PROGRAM+" v.2.0" + CRLF + "Cristobal Molla, Mitja Podgornik" )
          END POPUP
 
       END MENU
@@ -136,24 +136,24 @@ PROCEDURE Main()
                righttext
 
             button tbbConnect                              ;
-               caption "Connect"                      ;
+               CAPTION "Connect"                      ;
                PICTURE "BMP_32_CONNECT"               ;
-               action {|| Connect() }
+               ACTION {|| Connect() }
 
             button tbbDisconnect                           ;
-               caption "Disconnect"                   ;
+               CAPTION "Disconnect"                   ;
                PICTURE "BMP_32_DISCONNECT"            ;
-               action {|| Disconnect() }
+               ACTION {|| Disconnect() }
 
             button tbbsql2dbf                              ;
-               caption "Export to DBF"                ;
+               CAPTION "Export to DBF"                ;
                PICTURE "BMP_32_BASE"                  ;
-               action {|| SQL2Dbf() }
+               ACTION {|| SQL2Dbf() }
 
             button tbbdbf2sql                              ;
-               caption "Import from DBF"              ;
+               CAPTION "Import from DBF"              ;
                PICTURE "BMP_32_TABLE"                 ;
-               action {|| Dbf2Sql(.t.) }
+               ACTION {|| Dbf2Sql(.t.) }
 
          END toolbar
       END SPLITBOX
@@ -168,7 +168,7 @@ PROCEDURE Main()
             at           60,10                      ;
             WIDTH        200                        ;
             HEIGHT       460                        ;
-            ON change    {|| TreeChange() }         ;
+            ON CHANGE    {|| TreeChange() }         ;
             nodeimages   { "BMP_16_SERVER" }        ;
             itemimages   { "BMP_16_ITEMOFF", "BMP_16_ITEMON" } ;
             itemids
@@ -179,11 +179,11 @@ PROCEDURE Main()
             at        60, 220       ;
             WIDTH     565           ;
             HEIGHT    460           ;
-            value     1
+            VALUE     1
 
          page "&Structure"
             @ 30, 15 frame  frmTable                ;
-               caption "Structure"             ;
+               CAPTION "Structure"             ;
                WIDTH   535                     ;
                HEIGHT  415                     ;
                bold
@@ -191,18 +191,18 @@ PROCEDURE Main()
             @ 50, 30 grid        GRD_Table                   ;
                WIDTH        505                        ;
                HEIGHT       380                        ;
-               headers      { "Name", "Type",      ;
+               HEADERS      { "Name", "Type",      ;
                "Null", "Key",       ;
                "Default value",     ;
                "Extra" }                ;
-               widths       { 125, 125, 50, 50, 125, 150 } ;
-               ON gotfocus  {|| setControl( .T. ) }    ;
-               ON lostfocus {|| setControl( .F. ) }
+               WIDTHS       { 125, 125, 50, 50, 125, 150 } ;
+               ON GOTFOCUS  {|| setControl( .T. ) }    ;
+               ON LOSTFOCUS {|| setControl( .F. ) }
          END PAGE
 
          page "&Data"
             @ 30, 15 frame  frmData ;
-               caption "Data" ;
+               CAPTION "Data" ;
                WIDTH   535 ;
                HEIGHT  415 ;
                bold
@@ -210,13 +210,13 @@ PROCEDURE Main()
             @ 50, 30 grid        GRD_Data                   ;
                WIDTH        505                        ;
                HEIGHT       380                        ;
-               headers      { "" }                     ;
-               widths       { 100 }                    ;
+               HEADERS      { "" }                     ;
+               WIDTHS       { 100 }                    ;
                items        { { "" } }                 ;
-               value        1                          ;
-               ON gotfocus  {|| setControl( .T. ) }    ;
+               VALUE        1                          ;
+               ON GOTFOCUS  {|| setControl( .T. ) }    ;
                ON CHANGE {|| AddData(F_Main.GRD_Data.Value), setmessage("Record: "+ntrim(F_Main.GRD_Data.value), 2 ) }    ;
-               ON lostfocus {|| setControl( .F. ) }
+               ON LOSTFOCUS {|| setControl( .F. ) }
 
          END PAGE
       END TAB
@@ -248,57 +248,57 @@ FUNCTION Connect()
          TITLE  " Connect to MySQL server" ;
          modal ;
          NOSIZE ;
-         nosysmenu
+         NOSYSMENU
 
       @ 10, 10 frame  frm_Data ;
-         caption "" ;
+         CAPTION "" ;
          WIDTH   285 ;
          HEIGHT  120 ;
          bold
 
       @ 34, 20 label lblServer ;
-         value "Server" ;
+         VALUE "Server" ;
          WIDTH 50 ;
          HEIGHT 21
 
       @ 64, 20 label lblUser ;
-         value "User" ;
+         VALUE "User" ;
          WIDTH 50 ;
          HEIGHT 21
 
       @ 94, 20 label lblPaswd ;
-         value "Password" ;
+         VALUE "Password" ;
          WIDTH 55 ;
          HEIGHT 21
 
       @ 30, 85 textbox txtServer ;
          HEIGHT 21 ;
-         value cServer ;
+         VALUE cServer ;
          WIDTH 200 ;
-         ON gotfocus {|| setControl( .T. ) }  ;
-         ON lostfocus {|| setControl( .F. ) } ;
-         maxlength 60
+         ON GOTFOCUS {|| setControl( .T. ) }  ;
+         ON LOSTFOCUS {|| setControl( .F. ) } ;
+         MAXLENGTH 60
 
       @ 60, 85 textbox txtUser ;
          HEIGHT 21 ;
-         value cUser ;
+         VALUE cUser ;
          WIDTH 100 ;
-         ON gotfocus {|| setControl( .T. ) }  ;
-         ON lostfocus {|| setControl( .F. ) } ;
-         maxlength 40
+         ON GOTFOCUS {|| setControl( .T. ) }  ;
+         ON LOSTFOCUS {|| setControl( .F. ) } ;
+         MAXLENGTH 40
 
       @ 90, 85 textbox txtPaswd ;
          HEIGHT 21 ;
-         value cPaswd ;
+         VALUE cPaswd ;
          WIDTH 100 ;
          password ;
-         ON gotfocus {|| setControl( .T. ) } ;
-         ON lostfocus {|| setControl( .F. ) } ;
-         maxlength 40
+         ON GOTFOCUS {|| setControl( .T. ) } ;
+         ON LOSTFOCUS {|| setControl( .F. ) } ;
+         MAXLENGTH 40
 
       @ 140, 225 button btnConnect ;
-         caption "&Connect" ;
-         action {|| Login() } ;
+         CAPTION "&Connect" ;
+         ACTION {|| Login() } ;
          WIDTH   70 ;
          HEIGHT  25
 
@@ -661,51 +661,51 @@ FUNCTION SQL2Dbf()
          NOSIZE
 
       @ 10, 10 frame  frm_2Dbf ;
-         caption "" ;
+         CAPTION "" ;
          WIDTH   335 ;
          HEIGHT  100 ;
          bold
 
       @ 34, 20 label lblFile ;
-         value "Table name:" ;
+         VALUE "Table name:" ;
          WIDTH 70 ;
          HEIGHT 21
 
       @ 30, 100 textbox txtFile ;
          HEIGHT 21 ;
-         value cFileName ;
+         VALUE cFileName ;
          WIDTH 200 ;
-         ON gotfocus {|| setControl( .T. ) }  ;
-         ON lostfocus {|| setControl( .F. ) } ;
-         maxlength 60
+         ON GOTFOCUS {|| setControl( .T. ) }  ;
+         ON LOSTFOCUS {|| setControl( .F. ) } ;
+         MAXLENGTH 60
 
       @ 64, 20 label lblMap ;
-         value "Folder:" ;
+         VALUE "Folder:" ;
          WIDTH 70 ;
          HEIGHT 21
 
       @ 60, 100 textbox txtMap ;
          HEIGHT 21 ;
-         value BSL+lower(curdir())+BSL ;
+         VALUE BSL+lower(curdir())+BSL ;
          WIDTH 200 ;
-         ON gotfocus {|| setControl( .T. ) } ;
-         ON lostfocus {|| setControl( .F. ) }
+         ON GOTFOCUS {|| setControl( .T. ) } ;
+         ON LOSTFOCUS {|| setControl( .F. ) }
 
       @ 60, 305 button btnFolder ;
-         caption "..." ;
-         action  {|| (F_2Dbf.txtMap.Value:=GetFolder( "Select folder:" )), F_2Dbf.txtMap.SetFocus } ;
+         CAPTION "..." ;
+         ACTION  {|| (F_2Dbf.txtMap.Value:=GetFolder( "Select folder:" )), F_2Dbf.txtMap.SetFocus } ;
          WIDTH 30 ;
          HEIGHT 21
 
       @ 120, 275 button btn2Dbf ;
-         caption "&Export" ;
-         action  {|| copy2dbf(F_2Dbf.txtMap.Value, F_2Dbf.txtFile.Value), F_2Dbf.Release } ;
+         CAPTION "&Export" ;
+         ACTION  {|| copy2dbf(F_2Dbf.txtMap.Value, F_2Dbf.txtFile.Value), F_2Dbf.Release } ;
          WIDTH   70 ;
          HEIGHT  25
 
       @ 155, 275 button btn2DbfCancel ;
-         caption "&Cancel" ;
-         action  {|| F_2Dbf.Release } ;
+         CAPTION "&Cancel" ;
+         ACTION  {|| F_2Dbf.Release } ;
          WIDTH   70 ;
          HEIGHT  25
 

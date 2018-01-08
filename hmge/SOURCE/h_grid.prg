@@ -140,7 +140,7 @@ FUNCTION _DefineGrid ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWidth
    ENDIF
 
    IF ValType( value ) == "U" .AND. ! MultiSelect
-      value := 0
+      VALUE := 0
    ENDIF
 
    __defaultNIL( @aRows, {} )
@@ -349,16 +349,16 @@ FUNCTION InitDialogGrid( ParentName, ControlHandle, k )
    LOCAL aWidths, aJust, nogrid, lcheckboxes, lockcolumns, doublebuffer
 
    ControlName  := _HMG_aControlNames [k]
-   Value        := _HMG_aControlValue [k]
+   VALUE        := _HMG_aControlValue [k]
 
    aWidths      := _HMG_aControlMiscData1 [k,2]
    aJust        := _HMG_aControlMiscData1 [k,3]
    aRows        := _HMG_aControlMiscData1 [k,4]
    ownerdata    := _HMG_aControlMiscData1 [k,5]
-   itemcount    := _HMG_aControlMiscData1 [k,6]
+   ITEMCOUNT    := _HMG_aControlMiscData1 [k,6]
    nogrid       := _HMG_aControlMiscData1 [k,7]
    BACKCOLOR    := _HMG_aControlMiscData1 [k,8]
-   fontcolor    := _HMG_aControlMiscData1 [k,9]
+   FONTCOLOR    := _HMG_aControlMiscData1 [k,9]
    multiselect  := _HMG_aControlMiscData1 [k,10]
    lcheckboxes  := _HMG_aControlMiscData1 [k,18]
    lockcolumns  := _HMG_aControlMiscData1 [k,19]

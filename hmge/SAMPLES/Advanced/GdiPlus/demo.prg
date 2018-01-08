@@ -33,8 +33,8 @@ PROCEDURE Main()
          at 0,0 ;
          WIDTH 320 height 240 ;
          TITLE 'GDI+: Save Bitmap To File Demo' ;
-         main ;
-         nomaximize nosize
+         MAIN ;
+         NOMAXIMIZE nosize
 
       s_CreateMenu()
 

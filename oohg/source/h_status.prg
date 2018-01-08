@@ -350,7 +350,7 @@ METHOD SetClock( Width, ToolTip, action, lAmPm, icon, cstyl, cAlign ) CLASS TMes
       WIDTH := If( lAmPm, 95, 70 )
    ENDIF
    IF ! ValType( ToolTip ) $ "CM"
-      ToolTip := 'Clock'
+      TOOLTIP := 'Clock'
    ENDIF
 
    IF ! lAmPm
@@ -389,10 +389,10 @@ METHOD SetKeybrd( Width, ToolTip, action, icon, cstyl, cAlign ) CLASS TMessageBa
       WIDTH := 45
    ENDIF
    IF ValType( ToolTip ) == 'U'
-      ToolTip := ''
+      TOOLTIP := ''
    ENDIF
    IF ValType( Action ) == 'U'
-      Action := ''
+      ACTION := ''
    ENDIF
    IF ValType( icon ) $ "CM"
       ::cLedOn := icon

@@ -78,7 +78,7 @@ FUNCTION _DefineButton ( ControlName, ParentForm, x, y, Caption, ;
    IF _HMG_SYSDATA [ 264 ] = TRUE
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]
@@ -174,7 +174,7 @@ FUNCTION _DefineButton ( ControlName, ParentForm, x, y, Caption, ;
 FUNCTION _DefineImageButton ( ControlName, ParentForm, x, y, Caption, ;
       ProcedureName, w, h, image, tooltip, gotfocus, ;
       lostfocus, flat, notrans, HelpId, invisible, ;
-      notabstop )
+      NOTABSTOP )
    LOCAL cParentForm , mVar , ControlHandle , k := 0
    LOCAL nhImage
    LOCAL aRet [2]
@@ -311,27 +311,27 @@ FUNCTION _DefineMixedButton ( ControlName, ParentForm, x, y, Caption, ;
    DEFAULT invisible TO FALSE
 
    IF valtype (alignment) = 'U'
-      alignment := BUTTON_IMAGELIST_ALIGN_TOP
+      ALIGNMENT := BUTTON_IMAGELIST_ALIGN_TOP
    ELSEIF valtype (alignment) = 'C'
       IF   ALLTRIM(HMG_UPPER(alignment)) == 'LEFT'
-         alignment := BUTTON_IMAGELIST_ALIGN_LEFT
+         ALIGNMENT := BUTTON_IMAGELIST_ALIGN_LEFT
       ELSEIF   ALLTRIM(HMG_UPPER(alignment)) == 'RIGHT'
-         alignment := BUTTON_IMAGELIST_ALIGN_RIGHT
+         ALIGNMENT := BUTTON_IMAGELIST_ALIGN_RIGHT
       ELSEIF   ALLTRIM(HMG_UPPER(alignment)) == 'TOP'
-         alignment := BUTTON_IMAGELIST_ALIGN_TOP
+         ALIGNMENT := BUTTON_IMAGELIST_ALIGN_TOP
       ELSEIF   ALLTRIM(HMG_UPPER(alignment)) == 'BOTTOM'
-         alignment := BUTTON_IMAGELIST_ALIGN_BOTTOM
+         ALIGNMENT := BUTTON_IMAGELIST_ALIGN_BOTTOM
       ELSE
-         alignment := BUTTON_IMAGELIST_ALIGN_TOP
+         ALIGNMENT := BUTTON_IMAGELIST_ALIGN_TOP
       ENDIF
    ELSE
-      alignment := BUTTON_IMAGELIST_ALIGN_TOP
+      ALIGNMENT := BUTTON_IMAGELIST_ALIGN_TOP
    ENDIF
 
    IF _HMG_SYSDATA [ 264 ] = TRUE
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]

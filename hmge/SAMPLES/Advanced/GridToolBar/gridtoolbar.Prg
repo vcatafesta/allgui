@@ -23,8 +23,8 @@ FUNCTION  _addGridToolBar( cGrid, cWindow )
       WIDTH nButtonSize
       HEIGHT nButtonSize
       PICTURE 'pdf'
-      tooltip 'Export to PDF file'
-      action _grid2pdf( cGrid, cWindow )
+      TOOLTIP 'Export to PDF file'
+      ACTION _grid2pdf( cGrid, cWindow )
    END BUTTON
    DEFINE BUTTON &cCsv
       parent &cWindow
@@ -33,8 +33,8 @@ FUNCTION  _addGridToolBar( cGrid, cWindow )
       WIDTH nButtonSize
       HEIGHT nButtonSize
       PICTURE 'csv'
-      tooltip 'Export to CSV file'
-      action _grid2csv( cGrid, cWindow )
+      TOOLTIP 'Export to CSV file'
+      ACTION _grid2csv( cGrid, cWindow )
    END BUTTON
    DEFINE BUTTON &cPrint
       parent &cWindow
@@ -43,8 +43,8 @@ FUNCTION  _addGridToolBar( cGrid, cWindow )
       WIDTH nButtonSize
       HEIGHT nButtonSize
       PICTURE 'print'
-      tooltip 'Print this table'
-      action _gridprint( cGrid, cWindow )
+      TOOLTIP 'Print this table'
+      ACTION _gridprint( cGrid, cWindow )
    END BUTTON
 
    RETURN NIL

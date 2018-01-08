@@ -18,7 +18,7 @@ FUNCTION Main
          ROW 10
          COL 10
          WIDTH 100
-         value 'Select a Type'
+         VALUE 'Select a Type'
       END LABEL
       DEFINE COMBOBOX type
          ROW 10
@@ -32,7 +32,7 @@ FUNCTION Main
          ROW 40
          COL 10
          WIDTH 100
-         value 'Enter the Code'
+         VALUE 'Enter the Code'
       END LABEL
       DEFINE TEXTBOX code
          ROW 40
@@ -44,97 +44,97 @@ FUNCTION Main
          ROW 70
          COL 10
          WIDTH 100
-         value 'Line Width'
+         VALUE 'Line Width'
       END LABEL
       DEFINE SPINNER linewidth
          ROW 70
          COL 110
          WIDTH 80
-         value 2
-         rightalign .t.
-         rangemin 1
-         rangemax 200
+         VALUE 2
+         RIGHTALIGN .t.
+         RANGEMIN 1
+         RANGEMAX 200
       END spinner
       DEFINE LABEL heightlabel
          ROW 100
          COL 10
          WIDTH 100
-         value 'Barcode Height'
+         VALUE 'Barcode Height'
       END LABEL
       DEFINE SPINNER lineheight
          ROW 100
          COL 110
          WIDTH 80
-         value 110
-         rightalign .t.
-         increment 10
-         rangemin 10
-         rangemax 2000
+         VALUE 110
+         RIGHTALIGN .t.
+         INCREMENT 10
+         RANGEMIN 10
+         RANGEMAX 2000
       END spinner
       DEFINE CHECKBOX showdigits
          ROW 130
          COL 10
          WIDTH 120
-         caption 'Display Code'
-         value .t.
+         CAPTION 'Display Code'
+         VALUE .t.
       END CHECKBOX
       DEFINE CHECKBOX checksum
          ROW 130
          COL 150
          WIDTH 120
-         caption 'Checksum'
-         value .t.
+         CAPTION 'Checksum'
+         VALUE .t.
       END CHECKBOX
       DEFINE CHECKBOX wide2_5
          ROW 160
          COL 10
          WIDTH 120
-         caption 'Wide 2.5'
+         CAPTION 'Wide 2.5'
          onchange iif( this.value, barcode.wide3.value := .f., )
       END CHECKBOX
       DEFINE CHECKBOX wide3
          ROW 160
          COL 150
          WIDTH 120
-         caption 'Wide 3'
+         CAPTION 'Wide 3'
          onchange iif( this.value, barcode.wide2_5.value := .f., )
       END CHECKBOX
       DEFINE LABEL barcolor
          ROW 190
          COL 10
          WIDTH 100
-         fontcolor { 0, 0, 0 }
-         value 'Barcode Color'
+         FONTCOLOR { 0, 0, 0 }
+         VALUE 'Barcode Color'
          fontsize 16
-         tooltip 'Click to change color!'
-         action changebarcolor()
-         alignment center
+         TOOLTIP 'Click to change color!'
+         ACTION changebarcolor()
+         ALIGNMENT center
       END LABEL
       DEFINE LABEL backgroundcolor
          ROW 190
          COL 150
          WIDTH 100
          BACKCOLOR { 255, 255, 255 }
-         value 'Back Color'
+         VALUE 'Back Color'
          fontsize 16
-         tooltip 'Click to change color!'
-         action changebackcolor()
-         alignment center
+         TOOLTIP 'Click to change color!'
+         ACTION changebackcolor()
+         ALIGNMENT center
       END LABEL
 
       DEFINE BUTTON ok
          ROW 230
          COL 60
          WIDTH 90
-         caption 'Show Barcode'
-         action createbarcode()
+         CAPTION 'Show Barcode'
+         ACTION createbarcode()
       END BUTTON
       DEFINE BUTTON png
          ROW 230
          COL 160
          WIDTH 90
-         caption 'Save to PNG'
-         action createbarcodepng()
+         CAPTION 'Save to PNG'
+         ACTION createbarcodepng()
       END BUTTON
 
    END WINDOW

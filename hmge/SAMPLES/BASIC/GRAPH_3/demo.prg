@@ -27,37 +27,37 @@ FUNCTION Main
          WIDTH 640 ;
          HEIGHT 480 ;
          TITLE "Graph" ;
-         Main ;
+         MAIN ;
          ICON "Graph.ico" ;
-         nomaximize nosize ;
-         On Init DrawBarGraph ( aSer )
+         NOMAXIMIZE nosize ;
+         ON INIT DrawBarGraph ( aSer )
 
       DEFINE BUTTON Button_1
          ROW   405
          COL   40
-         Caption   'Bars'
-         Action DrawBarGraph ( aSer )
+         CAPTION   'Bars'
+         ACTION DrawBarGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_2
          ROW   405
          COL   180
-         Caption   'Lines'
-         Action DrawLinesGraph ( aSer )
+         CAPTION   'Lines'
+         ACTION DrawLinesGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_3
          ROW   405
          COL   320
-         Caption   'Points'
-         Action DrawPointsGraph ( aSer )
+         CAPTION   'Points'
+         ACTION DrawPointsGraph ( aSer )
       END BUTTON
 
       Define CheckButton Button_4
          ROW   405
          COL   460
          WIDTH   120
-         Caption   'Show Data Values'
+         CAPTION   'Show Data Values'
          OnChange ( lShowData := !lShowData, ;
             if(nGraph = 1, DrawBarGraph ( aSer ), ;
             if(nGraph = 2, DrawLinesGraph ( aSer ), ;

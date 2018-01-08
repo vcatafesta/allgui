@@ -86,7 +86,7 @@ FUNCTION _DefineImage ( ControlName, ParentFormName, x, y, FileName, w, h, ;
    IF ValType( ProcedureName ) == "U"
       ProcedureName := ""
    ELSE
-      action := .T.
+      ACTION := .T.
    ENDIF
 
    IF IsArrayRGB( aBKColor )

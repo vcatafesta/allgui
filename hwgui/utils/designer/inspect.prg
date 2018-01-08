@@ -164,7 +164,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
       IF lRes
          cName := Lower( aProp[ oBrw1:cargo,1 ] )
          j := Ascan( aDataDef, {|a|a[1]==cName} )
-         value := aProp[ oBrw1:cargo,2 ] := varbuf
+         VALUE := aProp[ oBrw1:cargo,2 ] := varbuf
          aCtrlProp[ oBrw1:cargo,2 ] := value
          IF j != 0 .AND. aDataDef[ j,3 ] != NIL
             EvalCode( aDataDef[ j,3 ] )
@@ -284,10 +284,10 @@ STATIC FUNCTION VldBrwGet( oGet ,oBtn)
 
    IF oGet:Classname() == "HCOMBOBOX"
       vari := hwg_Sendmessage( oGet:handle,CB_GETCURSEL,0,0 ) + 1
-      value := aProp[ oBrw1:cargo,2 ] := oGet:aItems[ vari ]
+      VALUE := aProp[ oBrw1:cargo,2 ] := oGet:aItems[ vari ]
    ELSE
       vari := TRIM(oGet:GetText())   // :LFB -  COLOCOU TRIM
-      value := aProp[ oBrw1:cargo,2 ] := vari
+      VALUE := aProp[ oBrw1:cargo,2 ] := vari
    ENDIF
    IF oCombo:value == 1
       oCtrl:oParent:aProp[ oBrw1:cargo,2 ] := value
@@ -560,7 +560,7 @@ FUNCTION InspUpdBrowse()
    oCtrl := Iif( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected( HFormGen():oDlgSelected ) )
    IF oDesigner:oDlgInsp != NIL
       FOR i := 1 TO Len( aProp )
-         value := Iif( oCombo:value == 1,oCtrl:oParent:aProp[ i,2 ],oCtrl:aProp[ i,2 ] )
+         VALUE := Iif( oCombo:value == 1,oCtrl:oParent:aProp[ i,2 ],oCtrl:aProp[ i,2 ] )
          IF Valtype(aProp[ i,2 ]) != "O" .AND. Valtype(aProp[ i,2 ]) != "A" ;
                .AND. ( aProp[ i,2 ] == NIL .OR. !( aProp[ i,2 ] == value ) )
             aProp[ i,2 ] := value
@@ -791,10 +791,10 @@ STATIC FUNCTION resettodefault(oBrw1)
       RETURN NIL
    ENDIF
    IF ltrim(oBrw1:aArray[oBrw1:nCurrent,1]) = "Font"
-      value := aProp[ oBrw1:nCurrent,2 ]
+      VALUE := aProp[ oBrw1:nCurrent,2 ]
       value:name := ""
    ELSE
-      value := aProp[ oBrw1:nCurrent,2 ]
+      VALUE := aProp[ oBrw1:nCurrent,2 ]
       //aProp[ oBrw1:nCurrent,2 ] := NIL //value
    ENDIF
    IF j != 0 .AND. oDesigner:aDataDef[ j,3 ] != NIL

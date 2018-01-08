@@ -18,37 +18,37 @@ FUNCTION CrearMenuPpal()
    DEFINE MAIN MENU Of frmMain
       DEFINE MENU PopUp "&Operaciones"
          MENUITEM "&Operación 1" ;
-            Action CrearChild( 1 )
+            ACTION CrearChild( 1 )
          SEPARATOR
          MENUITEM "&Operación 2"   ;
-            Action CrearChild( 2 )
+            ACTION CrearChild( 2 )
          SEPARATOR
          MENUITEM "&Operación 3"   ;
-            Action CrearChild( 3 )
+            ACTION CrearChild( 3 )
          SEPARATOR
          MENUITEM "&Salir" ;
-            Action ThisWindow.Release()
+            ACTION ThisWindow.Release()
       END POPUP
       DEFINE MENU PopUp "&Ventanas"
          POPUP '&Tiled'
             MENUITEM '&Horizontal' ;
-               Action WinChildTile( .F. )
+               ACTION WinChildTile( .F. )
             MENUITEM '&Vertical' ;
-               Action WinChildTile( .T. )
+               ACTION WinChildTile( .T. )
          END POPUP
          MENUITEM '&Cascade' ;
-            Action WinChildCascade()
+            ACTION WinChildCascade()
          MENUITEM '&Maximize' ;
-            Action WinChildMaximize()
+            ACTION WinChildMaximize()
          SEPARATOR
          MENUITEM "&Listar" ;
-            Action MostrarVentanasCargadas()
+            ACTION MostrarVentanasCargadas()
       END POPUP
       DEFINE MENU PopUp "&Ayuda"
          MENUITEM 'HMG Version' ;
-            Action MsgInfo( MiniGuiVersion() )
+            ACTION MsgInfo( MiniGuiVersion() )
          MENUITEM "&Ayuda" ;
-            Action MsgInfo( "MiniGUI MDI Childs Load Demo" )
+            ACTION MsgInfo( "MiniGUI MDI Childs Load Demo" )
       END POPUP
 
    END MENU

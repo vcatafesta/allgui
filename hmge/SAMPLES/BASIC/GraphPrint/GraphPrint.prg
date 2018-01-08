@@ -18,11 +18,11 @@ FUNCTION Main
          WIDTH 640 ;
          HEIGHT 480 ;
          TITLE "Printing graphs, bars, lines and points" ;
-         Main ;
+         MAIN ;
          ICON "Main" ;
-         Nomaximize Nosize ;
+         NOMAXIMIZE Nosize ;
          BACKCOLOR {216,208,200} ;
-         On Init DrawBarGraph ( aSer )
+         ON INIT DrawBarGraph ( aSer )
 
       @ 410,40 COMBOBOX Combo_1 ;
          ITEMS {'Bars','Lines','Points'} ;
@@ -34,15 +34,15 @@ FUNCTION Main
       DEFINE BUTTON Button_1
          ROW   410
          COL   260
-         Caption   'Print'
-         Action  PrintGraph(graphtest.combo_1.value)
+         CAPTION   'Print'
+         ACTION  PrintGraph(graphtest.combo_1.value)
       END BUTTON
 
       DEFINE BUTTON Button_2
          ROW   410
          COL   460
-         Caption   'Exit'
-         Action  GraphTest.Release
+         CAPTION   'Exit'
+         ACTION  GraphTest.Release
       END BUTTON
 
    END WINDOW

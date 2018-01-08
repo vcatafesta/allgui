@@ -40,11 +40,11 @@ FUNCTION Main()
          HEIGHT 330 ;
          TITLE 'Usando RMChart com a MiniGUI' ;
          ICON "Main" ;
-         Main ;
-         On Init fOpenActivex() ;
+         MAIN ;
+         ON INIT fOpenActivex() ;
          On Size Ajust() ;
          On Maximize Ajust() ;
-         On Release fCloseActivex()
+         ON RELEASE fCloseActivex()
 
    END WINDOW
 

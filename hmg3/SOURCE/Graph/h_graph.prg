@@ -898,12 +898,12 @@ FUNCTION drawpiegraph(windowname,fromrow,fromcol,torow,tocol,series,aname,colors
          ROW fromrow + 10
          COL iif(HMG_LEN(ALLTRIM(ctitle)) * 12 > (tocol - fromcol),fromcol,int(((tocol - fromcol) - (HMG_LEN(ALLTRIM(ctitle)) * 12))/2) + fromcol)
          autosize .t.
-         fontcolor {0,0,255}
-         fontbold .t.
-         fontname "Arial"
+         FONTCOLOR {0,0,255}
+         FONTBOLD .t.
+         FONTNAME "Arial"
          fontunderline .t.
          fontsize 12
-         value ALLTRIM(ctitle)
+         VALUE ALLTRIM(ctitle)
          transparent .t.
       END LABEL
       fromrow := fromrow + 40
@@ -1070,11 +1070,11 @@ FUNCTION drawpiegraph(windowname,fromrow,fromcol,torow,tocol,series,aname,colors
             parent &windowname
             ROW fromrow
             COL fromcol + 20
-            fontname "Arial"
+            FONTNAME "Arial"
             fontsize 8
             autosize .t.
-            value aname[i]+iif(lxval," - "+ALLTRIM(STR(series[i],19,2))+" ("+ALLTRIM(STR(degrees[i] / 360 * 100,6,2))+" %)","")
-            fontcolor colors[i]
+            VALUE aname[i]+iif(lxval," - "+ALLTRIM(STR(series[i],19,2))+" ("+ALLTRIM(STR(degrees[i] / 360 * 100,6,2))+" %)","")
+            FONTCOLOR colors[i]
             transparent .t.
          END LABEL
          fromrow := fromrow + 20

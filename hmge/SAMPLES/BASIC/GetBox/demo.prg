@@ -126,7 +126,7 @@ END GETBOX
    FIELDS { 'Test->Datev' , 'Test->Numeric' , 'Test->Character' , 'Test->Logical'} ;
    JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT, BROWSE_JTFY_LEFT,BROWSE_JTFY_CENTER} ;
    FONT "MS Sans serif" SIZE 09 ;
-   Value 1;
+   VALUE 1;
    LOCK;
    TOOLTIP "Double Click to edit";
    ON DBLCLICK { || UnlockData( ) } ;

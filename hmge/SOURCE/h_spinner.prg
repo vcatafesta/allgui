@@ -168,7 +168,7 @@ FUNCTION _DefineSpinner ( ControlName, ParentForm, x, y, w, value , fontname, ;
    ENDIF
 
    IF !Empty ( cuetext ) .AND. IsVistaOrLater() .AND. IsThemed()
-      value := ""
+      VALUE := ""
       SendMessageWideString ( ControlHandle, EM_SETCUEBANNER, .T., cuetext )
    ENDIF
 

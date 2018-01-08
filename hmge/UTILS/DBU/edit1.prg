@@ -84,25 +84,25 @@ FUNCTION DBUedit1
                         DEFINE LABEL &_DBUheader1
                            ROW _DBUcontrolarr[_DBUj,1]
                            COL _DBUcontrolarr[_DBUj,2]
-                           value _DBUcontrolarr[_DBUj,3]+iif(_DBUcontrolarr[_DBUj,6] > 0,":"+alltrim(str(_DBUcontrolarr[_DBUj,6],6,0)),"")
+                           VALUE _DBUcontrolarr[_DBUj,3]+iif(_DBUcontrolarr[_DBUj,6] > 0,":"+alltrim(str(_DBUcontrolarr[_DBUj,6],6,0)),"")
                            WIDTH _DBUcontrolarr[_DBUj,4]
-                           fontbold .t.
+                           FONTBOLD .t.
                            //                           backcolor _DBUyellowish
-                           fontcolor {0,0,255}
+                           FONTCOLOR {0,0,255}
                         END LABEL
                      CASE _DBUcontrolarr[_DBUj,5] == "C" // Character
 
                         DEFINE TEXTBOX &_DBUControlName
                            ROW _DBUcontrolarr[_DBUj,1]
                            COL _DBUcontrolarr[_DBUj,2]
-                           tooltip "Enter the value for the field "+alltrim(_DBUcontrolarr[_DBUj,3])+". Type of the field is Character. Maximum Length is "+alltrim(str(_DBUcontrolarr[_DBUj,6],6,0))+"."
+                           TOOLTIP "Enter the value for the field "+alltrim(_DBUcontrolarr[_DBUj,3])+". Type of the field is Character. Maximum Length is "+alltrim(str(_DBUcontrolarr[_DBUj,6],6,0))+"."
                            WIDTH _DBUcontrolarr[_DBUj,4]
                            field &_DBUFieldName
 
                            BACKCOLOR _DBUyellowish
-                           fontcolor {0,0,255}
-                           fontbold .t.
-                           maxlength _DBUcontrolarr[_DBUj,6]
+                           FONTCOLOR {0,0,255}
+                           FONTBOLD .t.
+                           MAXLENGTH _DBUcontrolarr[_DBUj,6]
                         END TEXTBOX
 
                      CASE _DBUcontrolarr[_DBUj,5] == "N" // Numeric
@@ -111,50 +111,50 @@ FUNCTION DBUedit1
                            ROW _DBUcontrolarr[_DBUj,1]
                            COL _DBUcontrolarr[_DBUj,2]
                            WIDTH _DBUcontrolarr[_DBUj,4]
-                           maxlength _DBUcontrolarr[_DBUj,6]
-                           tooltip "Enter the value for the field "+alltrim(_DBUcontrolarr[_DBUj,3])+". Type of the field is Numeric. Maximum Length is "+alltrim(str(_DBUcontrolarr[_DBUj,6],6,0))+", with decimals "+alltrim(str(_DBUcontrolarr[_DBUj,7],3,0))+"."
+                           MAXLENGTH _DBUcontrolarr[_DBUj,6]
+                           TOOLTIP "Enter the value for the field "+alltrim(_DBUcontrolarr[_DBUj,3])+". Type of the field is Numeric. Maximum Length is "+alltrim(str(_DBUcontrolarr[_DBUj,6],6,0))+", with decimals "+alltrim(str(_DBUcontrolarr[_DBUj,7],3,0))+"."
                            BACKCOLOR _DBUyellowish
-                           fontcolor {255,0,0}
-                           numeric .t.
-                           fontbold .t.
+                           FONTCOLOR {255,0,0}
+                           NUMERIC .t.
+                           FONTBOLD .t.
                            field &_DBUFieldName
 
-                           rightalign .t.
+                           RIGHTALIGN .t.
                            IF _DBUcontrolarr[_DBUj,7] > 0
-                              inputmask replicate("9",_DBUcontrolarr[_DBUj,6] - _DBUcontrolarr[_DBUj,7] - 1)+"."+replicate("9",_DBUcontrolarr[_DBUj,7])
+                              INPUTMASK replicate("9",_DBUcontrolarr[_DBUj,6] - _DBUcontrolarr[_DBUj,7] - 1)+"."+replicate("9",_DBUcontrolarr[_DBUj,7])
                            ENDIF
                         END TEXTBOX
                      CASE _DBUcontrolarr[_DBUj,5] == "D" // Date
                         DEFINE DATEPICKER &_DBUControlName
                            ROW _DBUcontrolarr[_DBUj,1]
                            COL _DBUcontrolarr[_DBUj,2]
-                           tooltip "Enter the date value for the field "+alltrim(_DBUcontrolarr[_DBUj,3])+"."
+                           TOOLTIP "Enter the date value for the field "+alltrim(_DBUcontrolarr[_DBUj,3])+"."
                            field &_DBUFieldName
 
-                           fontbold .t.
+                           FONTBOLD .t.
                            WIDTH _DBUcontrolarr[_DBUj,4]
-                           shownone .t.
+                           SHOWNONE .t.
                         END datepicker
                      CASE _DBUcontrolarr[_DBUj,5] == "L" // Logical
                         DEFINE CHECKBOX &_DBUControlName
                            ROW _DBUcontrolarr[_DBUj,1]
                            COL _DBUcontrolarr[_DBUj,2]
-                           tooltip "Select True of False for this Logical Field "+alltrim(_DBUcontrolarr[_DBUj,3])+"."
+                           TOOLTIP "Select True of False for this Logical Field "+alltrim(_DBUcontrolarr[_DBUj,3])+"."
                            field &_DBUFieldName
 
-                           fontbold .t.
+                           FONTBOLD .t.
                            BACKCOLOR _DBUyellowish
                            //                              fontcolor {0,255,0}
                            WIDTH _DBUcontrolarr[_DBUj,4]
-                           caption _DBUcontrolarr[_DBUj,3]
+                           CAPTION _DBUcontrolarr[_DBUj,3]
                         END CHECKBOX
                      CASE _DBUcontrolarr[_DBUj,5] == "M" // Memo
                         DEFINE TEXTBOX &_DBUControlName
                            ROW _DBUcontrolarr[_DBUj,1]
                            COL _DBUcontrolarr[_DBUj,2]
-                           tooltip "Enter the value for the field "+alltrim(_DBUcontrolarr[_DBUj,3])+". Type of the field is Memo."
-                           fontbold .t.
-                           fontcolor {255,0,0}
+                           TOOLTIP "Enter the value for the field "+alltrim(_DBUcontrolarr[_DBUj,3])+". Type of the field is Memo."
+                           FONTBOLD .t.
+                           FONTCOLOR {255,0,0}
                            BACKCOLOR _DBUyellowish
                            field &_DBUFieldName
 
@@ -169,28 +169,28 @@ FUNCTION DBUedit1
       DEFINE BUTTON _DBUeditgotobutton
          ROW _DBUbuttonfirstrow - 10
          COL 10
-         caption "Goto"
+         CAPTION "Goto"
          WIDTH 50
-         action DBUeditgotoclick()
+         ACTION DBUeditgotoclick()
       END BUTTON
       DEFINE TEXTBOX _DBUeditgoto
          ROW _DBUbuttonfirstrow - 10
          COL 70
          WIDTH 100
          BACKCOLOR _DBUyellowish
-         numeric .t.
-         rightalign .t.
-         value recno()
-         on enter DBUeditgotoclick()
+         NUMERIC .t.
+         RIGHTALIGN .t.
+         VALUE recno()
+         ON ENTER DBUeditgotoclick()
       END TEXTBOX
       IF _DBUfiltered
          DEFINE LABEL _DBUfilterconditionlabel
             ROW _DBUbuttonfirstrow - 5
             COL 200
-            value "Filter Condition :"
+            VALUE "Filter Condition :"
             //         backcolor _DBUyellowish
             WIDTH 150
-            fontbold .t.
+            FONTBOLD .t.
          END LABEL
          DEFINE TEXTBOX _DBUfiltercondition
             ROW _DBUbuttonfirstrow - 10
@@ -198,8 +198,8 @@ FUNCTION DBUedit1
             //         fontcolor {255,0,0}
             WIDTH _DBUwindowwidth - 400
             BACKCOLOR _DBUyellowish
-            fontbold .t.
-            value _DBUcondition
+            FONTBOLD .t.
+            VALUE _DBUcondition
             readonly .t.
          END TEXTBOX
       ENDIF

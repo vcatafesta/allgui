@@ -136,7 +136,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
       NEXT
    ENDIF
    FOR i := 1 TO Len( ::aProp )
-      value := ::aProp[ i,2 ]
+      VALUE := ::aProp[ i,2 ]
       cPropertyName := Lower( ::aProp[ i,1 ] )
       j := Ascan( oDesigner:aDataDef, {|a|a[1]==cPropertyName} )
       IF value != NIL

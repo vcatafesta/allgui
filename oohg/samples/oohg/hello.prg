@@ -266,7 +266,7 @@ FUNCTION printform( )
          TITLE "Printing Bar Graphs" ;
          modal ;
          BACKCOLOR {255,255,255 } ;
-         On Init DrawBarGraph ( aser ) ;
+         ON INIT DrawBarGraph ( aser ) ;
          on mouseclick graphtest:print()
 
    END WINDOW

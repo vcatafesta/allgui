@@ -58,13 +58,13 @@ PROCEDURE Main
          WIDTH 810                    ;
          HEIGHT 525                   ;
          TITLE 'FreeImage Demo'       ;
-         NoMaximize                   ;
+         NOMAXIMIZE                   ;
          NOSIZE                       ;
          ICON 'MAINICON'              ;
-         Main                         ;
+         MAIN                         ;
          BACKCOLOR WHITE              ;
-         On Init ( OpenImgFile( GetStartupFolder() + "\Res\Bird.png" ), OpenImgRes( PNG_BIRD, 'PNG' ) ) ;
-         On Release FI_DeInitialise() ;
+         ON INIT ( OpenImgFile( GetStartupFolder() + "\Res\Bird.png" ), OpenImgRes( PNG_BIRD, 'PNG' ) ) ;
+         ON RELEASE FI_DeInitialise() ;
          On Paint { || ShowFile(), ShowRes() }
 
       DEFINE MAIN MENU
@@ -87,13 +87,13 @@ PROCEDURE Main
       END MENU
 
       @ ( FI_TOP - 25 ), ( FI_LEFT - 25 ) Frame frmFile             ;
-         Caption 'File'            ;
+         CAPTION 'File'            ;
          WIDTH ( FI_WIDTH   + 45 ) ;
          HEIGHT ( FI_HEIGHT + 45 ) ;
          BACKCOLOR WHITE
 
       @ ( RES_TOP - 25 ), ( RES_LEFT - 25 ) Frame frmResource          ;
-         Caption 'Resource'         ;
+         CAPTION 'Resource'         ;
          WIDTH ( RES_WIDTH   + 45 ) ;
          HEIGHT ( RES_HEIGHT + 45 ) ;
          BACKCOLOR WHITE

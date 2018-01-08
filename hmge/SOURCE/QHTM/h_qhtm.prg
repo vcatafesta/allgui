@@ -65,7 +65,7 @@ FUNCTION _DefineQhtm( ControlName, ParentForm, x, y, w, h, Value, fname, resname
       ParentForm := _HMG_ActiveFormName
 
       IF !Empty( ParentForm ) .and. ValType( FontName ) == "U"
-         FontName := _HMG_ActiveFontName
+         FONTNAME := _HMG_ActiveFontName
       ENDIF
 
       IF !Empty( ParentForm ) .and. ValType( FontSize ) == "U"

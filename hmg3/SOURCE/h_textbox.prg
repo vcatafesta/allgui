@@ -114,7 +114,7 @@ FUNCTION _DefineTextBox( cControlName, cParentForm, nx, ny, nWidth, nHeight, ;
       IF  HB_UAT ( '>', Field ) == 0
          MsgHMGError ("Control: " + cControlName + " Of " + cParentForm + " : You must specify a fully qualified field name. Program Terminated")
       ELSE
-         WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
+         WORKAREA := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
          IF Select (WorkArea) != 0
             cValue := &(Field)
          ENDIF
@@ -248,7 +248,7 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentForm, x, y, inputmask , width
    LOCAL cParentTabName
 
    * Unused Parameters
-   RightAlign := NIL
+   RIGHTALIGN := NIL
    DEFAULT readonly TO .f.
    DEFAULT bold TO .f.
    DEFAULT italic TO .f.
@@ -262,9 +262,9 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentForm, x, y, inputmask , width
       IF  HB_UAT ( '>', Field ) == 0
          MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " : You must specify a fully qualified field name. Program Terminated" )
       ELSE
-         WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
+         WORKAREA := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
          IF Select (WorkArea) != 0
-            Value := &(Field)
+            VALUE := &(Field)
          ENDIF
       ENDIF
    ENDIF
@@ -322,21 +322,21 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentForm, x, y, inputmask , width
       ENDIF
 
       IF valtype(Value) == "U"
-         Value := ""
+         VALUE := ""
       ENDIF
 
       IF .Not. Empty (Format)
          Format := '@' + ALLTRIM(Format)
       ENDIF
 
-      InputMask :=  Format + ' ' + InputMask
+      INPUTMASK :=  Format + ' ' + InputMask
 
-      Value := Transform ( value , InputMask )
+      VALUE := Transform ( value , InputMask )
 
       IF _HMG_SYSDATA [ 264 ] = .T.
          ParentForm := _HMG_SYSDATA [ 223 ]
          IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-            FontName := _HMG_SYSDATA [ 224 ]
+            FONTNAME := _HMG_SYSDATA [ 224 ]
          ENDIF
          IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
             FontSize := _HMG_SYSDATA [ 182 ]
@@ -496,9 +496,9 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentForm, x, y, inputmask , wid
       IF  HB_UAT ( '>', Field ) == 0
          MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " : You must specify a fully qualified field name. Program Terminated" )
       ELSE
-         WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
+         WORKAREA := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
          IF Select (WorkArea) != 0
-            Value := &(Field)
+            VALUE := &(Field)
          ENDIF
       ENDIF
    ENDIF
@@ -533,9 +533,9 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentForm, x, y, inputmask , wid
 
    IF valtype(Value) == "U"
       IF date == .F.
-         Value := ""
+         VALUE := ""
       ELSE
-         Value := ctod ('  /  /  ')
+         VALUE := ctod ('  /  /  ')
       ENDIF
    ENDIF
 
@@ -545,31 +545,31 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentForm, x, y, inputmask , wid
       IF HMG_LOWER ( HB_ULEFT ( dateformat , 4 ) ) == "yyyy"
 
          IF '/' $ dateformat
-            Inputmask := '9999/99/99'
+            INPUTMASK := '9999/99/99'
          ELSEIF '.' $ dateformat
-            Inputmask := '9999.99.99'
+            INPUTMASK := '9999.99.99'
          ELSEIF '-' $ dateformat
-            Inputmask := '9999-99-99'
+            INPUTMASK := '9999-99-99'
          ENDIF
 
       ELSEIF HMG_LOWER ( HB_URIGHT ( dateformat , 4 ) ) == "yyyy"
 
          IF '/' $ dateformat
-            Inputmask := '99/99/9999'
+            INPUTMASK := '99/99/9999'
          ELSEIF '.' $ dateformat
-            Inputmask := '99.99.9999'
+            INPUTMASK := '99.99.9999'
          ELSEIF '-' $ dateformat
-            Inputmask := '99-99-9999'
+            INPUTMASK := '99-99-9999'
          ENDIF
 
       ELSE
 
          IF '/' $ dateformat
-            Inputmask := '99/99/99'
+            INPUTMASK := '99/99/99'
          ELSEIF '.' $ dateformat
-            Inputmask := '99.99.99'
+            INPUTMASK := '99.99.99'
          ELSEIF '-' $ dateformat
-            Inputmask := '99-99-99'
+            INPUTMASK := '99-99-99'
          ENDIF
 
       ENDIF
@@ -578,7 +578,7 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentForm, x, y, inputmask , wid
    IF _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]

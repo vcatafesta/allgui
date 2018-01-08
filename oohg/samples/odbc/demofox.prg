@@ -23,7 +23,7 @@ FUNCTION Main
          HEIGHT 400 ;
          TITLE 'OOHG ODBC Demo ADS DBF/CDX ' ;
          MAIN  on init conectar() ;
-         on release cerrar()
+         ON RELEASE cerrar()
 
       DEFINE MAIN MENU
          DEFINE POPUP 'File'

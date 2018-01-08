@@ -30,11 +30,11 @@ FUNCTION backup()
          ROW 140
          WIDTH 180
          HEIGHT 040
-         caption 'Iniciar o Backup'
-         action CreateZip()
-         fontname 'verdana'
+         CAPTION 'Iniciar o Backup'
+         ACTION CreateZip()
+         FONTNAME 'verdana'
          fontsize 9
-         fontcolor _preto_001
+         FONTCOLOR _preto_001
       END BUTTONEX
       DEFINE BUTTONEX button_destino
          PICTURE path_imagens+'img_destino.bmp'
@@ -42,11 +42,11 @@ FUNCTION backup()
          ROW 010
          WIDTH 100
          HEIGHT 040
-         caption 'Pasta ?'
-         action Escolhe_Pasta()
-         fontname 'verdana'
+         CAPTION 'Pasta ?'
+         ACTION Escolhe_Pasta()
+         FONTNAME 'verdana'
          fontsize 9
-         fontcolor _preto_001
+         FONTCOLOR _preto_001
       END BUTTONEX
       DEFINE BUTTONEX button_sair
          PICTURE path_imagens+'img_sair.bmp'
@@ -54,8 +54,8 @@ FUNCTION backup()
          ROW 140
          WIDTH 090
          HEIGHT 040
-         caption 'Sair'
-         action form_backup.release
+         CAPTION 'Sair'
+         ACTION form_backup.release
       END BUTTONEX
 
       define progressbar progressbar_1
@@ -63,9 +63,9 @@ FUNCTION backup()
          COL 045
          WIDTH 310
          HEIGHT 030
-         rangemin 0
-         rangemax 010
-         value 0
+         RANGEMIN 0
+         RANGEMAX 010
+         VALUE 0
          forecolor {000,130,000}
       END progressbar
 
@@ -74,8 +74,8 @@ FUNCTION backup()
          COL 010
          autosize .t.
          HEIGHT 20
-         value 'Escolha o local para ser gerado o backup'
-         fontbold .t.
+         VALUE 'Escolha o local para ser gerado o backup'
+         FONTBOLD .t.
          transparent .t.
       END LABEL
       DEFINE LABEL label_destino
@@ -83,21 +83,21 @@ FUNCTION backup()
          COL 010
          WIDTH 240
          HEIGHT 40
-         value ''
-         fontbold .t.
+         VALUE ''
+         FONTBOLD .t.
          transparent .t.
-         fontcolor BLUE
+         FONTCOLOR BLUE
       END LABEL
       DEFINE LABEL label_zip
          ROW 110
          COL 25
          WIDTH 350
          HEIGHT 20
-         value ''
-         fontname 'arial'
+         VALUE ''
+         FONTNAME 'arial'
          fontsize 10
-         tooltip ''
-         fontbold .t.
+         TOOLTIP ''
+         FONTBOLD .t.
          transparent .t.
          centeralign .t.
       END LABEL

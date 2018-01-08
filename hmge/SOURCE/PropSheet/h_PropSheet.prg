@@ -170,7 +170,7 @@ FUNCTION _BeginPropSheet(  FormName, ParentForm, row, col, width, height, captio
 
    IF ( FontHandle := GetFontHandle( FontName ) ) != 0
       aFont := GetFontParam( FontHandle )
-      FontName      := aFont[ 1 ]
+      FONTNAME      := aFont[ 1 ]
       FontSize      := aFont[ 2 ]
       bold          := aFont[ 3 ]
       italic        := aFont[ 4 ]
@@ -180,7 +180,7 @@ FUNCTION _BeginPropSheet(  FormName, ParentForm, row, col, width, height, captio
 
    IF _HMG_BeginWindowActive = .T.
       IF .NOT. Empty ( _HMG_ActiveFontName ) .AND. ValType( fontname ) == "U"
-         fontname := _HMG_ActiveFontName
+         FONTNAME := _HMG_ActiveFontName
       ENDIF
       IF .NOT. Empty ( _HMG_ActiveFontSize ) .AND. ValType( fontsize ) == "U"
          fontsize := _HMG_ActiveFontSize

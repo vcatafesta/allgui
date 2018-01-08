@@ -35,7 +35,7 @@ PROCEDURE CallsTable
          TITLE aLangStrings[ 1, 2 ] ;
          ICON 'STOCK'               ;
          Modal                      ;
-         On init BuildList()
+         ON INIT BuildList()
 
       @ 5, 5 EditBox edtConsole              ;
          HEIGHT ( wConsole.Height - 80 ) ;  /* was 40 */
@@ -45,13 +45,13 @@ PROCEDURE CallsTable
       // GAL added (with what .PRG we're working now?)
       @ wConsole.edtConsole.Row + wConsole.edtConsole.Height + 5, 5 ;
          LABEL guworkConsole ;
-         Value "" ;
+         VALUE "" ;
          WIDTH ( wConsole.Width - 20 )
 
       @ wConsole.guworkConsole.Row + wConsole.guworkConsole.Height + 5, 5 ;
          ProgressBar guPbConsole ;
          Range 1, 100 ;
-         Value 0 ;
+         VALUE 0 ;
          WIDTH ( wConsole.Width - 20 ) ;
          HEIGHT 10
       // GAL
@@ -72,24 +72,24 @@ PROCEDURE CallsTable
       @ 5, 5 Grid grdList                                          ;
          WIDTH 480                                             ;
          HEIGHT 310                                            ;
-         Headers { aLangStrings[ 3, 2 ], aLangStrings[ 4, 2 ], ;
+         HEADERS { aLangStrings[ 3, 2 ], aLangStrings[ 4, 2 ], ;
          aLangStrings[ 5, 2 ], aLangStrings[ 6, 2 ]  ;
          }                                             ;
-         Widths { 130, 100, 130, 130 }                        ;
+         WIDTHS { 130, 100, 130, 130 }                        ;
          Font 'Tahoma' Size 10
 
       // GAL added
       @ wCallsTable.grdList.Row + wCallsTable.grdList.Height + 5, 5 ;
          Button guExpAll ;
-         Caption "Export To HTML (all)" ;
-         Action ExpHTML( 0, aLangStrings ) ;
+         CAPTION "Export To HTML (all)" ;
+         ACTION ExpHTML( 0, aLangStrings ) ;
          WIDTH 200
 
       @ wCallsTable.guExpAll.Row, ;
          wCallsTable.guExpAll.Col + wCallsTable.guExpAll.Width + 5 ;
          Button ExpNone ;
-         Caption "Export To HTML (UNcalled only)" ;
-         Action ExpHTML( 1, aLangStrings ) ;
+         CAPTION "Export To HTML (UNcalled only)" ;
+         ACTION ExpHTML( 1, aLangStrings ) ;
          WIDTH 200
 
       On key Escape of wCallsTable Action wCallsTable.Release

@@ -93,7 +93,7 @@ FUNCTION _DefineBtnTextBox ( ControlName, ParentFormName, x, y, w, h, ;
       IF  At ( '>', Field ) == 0
          MsgMiniGuiError ( "Control " + ControlName + " Of " + ParentFormName + " : You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( Field , At ( '>', Field ) - 2 )
+         WORKAREA := Left ( Field , At ( '>', Field ) - 2 )
          IF Select ( WorkArea ) != 0
             cValue := &( Field )
          ENDIF

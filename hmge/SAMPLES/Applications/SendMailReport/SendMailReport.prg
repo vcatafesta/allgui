@@ -183,7 +183,7 @@ PROCEDURE Main( Silent, cLog, Compress)
          ICON IDI_MAIN ;
          MAIN ;
          NOMINIMIZE NOMAXIMIZE NOSIZE ;
-         On INIT ReadLog() ;
+         ON INIT ReadLog() ;
          ON RELEASE if(lchg,SaveData(.t.),nil) ;
          FONT "MS Sans Serif" SIZE 10
 

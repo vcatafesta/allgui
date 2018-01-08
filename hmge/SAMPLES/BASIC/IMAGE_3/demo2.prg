@@ -8,7 +8,7 @@
 FUNCTION Main
 
    DEFINE WINDOW win_1 ;
-         main ;
+         MAIN ;
          clientarea 400, 300 ;
          TITLE "Reading PNG Image from a File" ;
          BACKCOLOR { 204, 220, 240 } nosize

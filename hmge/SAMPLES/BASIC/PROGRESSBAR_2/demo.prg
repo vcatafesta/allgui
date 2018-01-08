@@ -3,28 +3,28 @@
 FUNCTION main
 
    DEFINE WINDOW sample at 0,0 width 627 height 612 title "Custom Progressbar Demo" main ;
-         on gotfocus checkgraph() on lostfocus checkgraph()
+         ON GOTFOCUS checkgraph() on lostfocus checkgraph()
       DEFINE BUTTON pressme
          ROW 10
          COL 10
          WIDTH 80
-         caption "Press Me!"
-         action (sample.t1.value := 2)
+         CAPTION "Press Me!"
+         ACTION (sample.t1.value := 2)
       END BUTTON
       DEFINE TAB t1 at 50,10 width 600 height 520 on change checkgraph()
          DEFINE PAGE "Page 1"
             DEFINE BUTTON b1
                ROW 40
                COL 20
-               caption "Test 1"
-               action msginfo("Click 1")
+               CAPTION "Test 1"
+               ACTION msginfo("Click 1")
             END BUTTON
 
             DEFINE BUTTON b2
                ROW 40
                COL 140
-               caption "Test 2"
-               action msginfo("Click 2")
+               CAPTION "Test 2"
+               ACTION msginfo("Click 2")
             END BUTTON
          END PAGE
          DEFINE PAGE "Page 2"

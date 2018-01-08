@@ -12,7 +12,7 @@ FUNCTION MAIN
          WIDTH 700;
          HEIGHT 400;
          TITLE "Move and Resize Control With Cursor";
-         main
+         MAIN
 
       @ 300, 10 LABEL Label_0 VALUE "Put the cursor over control and press F3 (Info), F5 (Move) or F9 (Resize), while Move or Resize ESC -> Undo" AUTOSIZE
 
@@ -21,8 +21,8 @@ FUNCTION MAIN
          COL 15
          WIDTH 120
          HEIGHT 30
-         caption "New Form"
-         action New_Form()
+         CAPTION "New Form"
+         ACTION New_Form()
       END BUTTON
 
       FOR i := 1 to 3
@@ -32,14 +32,14 @@ FUNCTION MAIN
             PARENT Form_1
             ROW 20
             COL 120*(i-1) + 40
-            value "Label no. "+ str(i,1)
+            VALUE "Label no. "+ str(i,1)
             WIDTH 110
             HEIGHT 40
             Fontsize 10
-            tooltip "this is label no.  "+str(i,1)
-            Alignment Center
+            TOOLTIP "this is label no.  "+str(i,1)
+            ALIGNMENT Center
             BACKCOLOR {255,255,0}
-            TabStop .t.
+            TABSTOP .t.
          END LABEL
 
       NEXT i

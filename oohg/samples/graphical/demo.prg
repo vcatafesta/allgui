@@ -6,7 +6,7 @@ FUNCTION main
          WIDTH 800 ;
          HEIGHT 600 ;
          TITLE "Shapes Demo" ;
-         main on init drawshapes()
+         MAIN on init drawshapes()
 
       on key f9 action oWin:Print()
 

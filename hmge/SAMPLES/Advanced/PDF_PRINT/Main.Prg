@@ -8,8 +8,8 @@ FUNCTION Main
          ROW 100
          COL 90
          WIDTH 120
-         caption 'HMG HPDF DOC'
-         action pdf_create()
+         CAPTION 'HMG HPDF DOC'
+         ACTION pdf_create()
          DEFAULT .t.
       END BUTTON
       ON KEY ESCAPE ACTION thiswindow.release

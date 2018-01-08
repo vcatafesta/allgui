@@ -32,40 +32,40 @@ FUNCTION fechamento_dia()
 
       @ 010,010 label lbl_001;
          of form_fechamento;
-         value 'Escolha o dia';
+         VALUE 'Escolha o dia';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,010 label lbl_002;
          of form_fechamento;
-         value 'Este relatório totaliza todas as operações realizadas no';
+         VALUE 'Este relatório totaliza todas as operações realizadas no';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 100,010 label lbl_003;
          of form_fechamento;
-         value 'dia escolhido pelo usuário, oferecendo um mapa de';
+         VALUE 'dia escolhido pelo usuário, oferecendo um mapa de';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 120,010 label lbl_004;
          of form_fechamento;
-         value 'informações muito útil.';
+         VALUE 'informações muito útil.';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
 
       @ 040,010 datepicker dp_data;
          parent form_fechamento;
-         value date();
+         VALUE date();
          WIDTH 150;
          HEIGHT 030;
          font 'verdana' size 014
@@ -74,7 +74,7 @@ FUNCTION fechamento_dia()
       DEFINE LABEL linha_rodape
          COL 000
          ROW form_fechamento.height-090
-         value ''
+         VALUE ''
          WIDTH form_fechamento.width
          HEIGHT 001
          BACKCOLOR _preto_001
@@ -88,10 +88,10 @@ FUNCTION fechamento_dia()
          ROW form_fechamento.height-085
          WIDTH 150
          HEIGHT 050
-         caption 'Ok, imprimir'
-         action relatorio()
-         fontbold .T.
-         tooltip 'Gerar o relatório'
+         CAPTION 'Ok, imprimir'
+         ACTION relatorio()
+         FONTBOLD .T.
+         TOOLTIP 'Gerar o relatório'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -101,10 +101,10 @@ FUNCTION fechamento_dia()
          ROW form_fechamento.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_fechamento.release
-         fontbold .T.
-         tooltip 'Sair desta tela'
+         CAPTION 'Voltar'
+         ACTION form_fechamento.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela'
          flat .F.
          noxpstyle .T.
       END BUTTONEX

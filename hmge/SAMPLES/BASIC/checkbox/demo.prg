@@ -21,17 +21,17 @@ FUNCTION Main
          ROW 10
          COL 10
          WIDTH 300
-         Value 'This is for status!'
+         VALUE 'This is for status!'
          BACKCOLOR {200,200,200}
-         Alignment Center
-         Alignment VCenter
+         ALIGNMENT Center
+         ALIGNMENT VCenter
       END LABEL
 
       DEFINE CHECKBOX Check1
          ROW      40
          COL      10
-         Value      .F.
-         Caption      'Simple CheckBox'
+         VALUE      .F.
+         CAPTION      'Simple CheckBox'
          WIDTH      120
          OnChange MsgInfo( "CheckBox 1 Value is Changed!" )
       END CHECKBOX
@@ -40,14 +40,14 @@ FUNCTION Main
          ROW      70
          COL      10
          WIDTH      280
-         Value      .F.
-         FontName   "Arial"
+         VALUE      .F.
+         FONTNAME   "Arial"
          FontSize   12
-         FontBold   .t.
-         FontItalic   .t.
+         FONTBOLD   .t.
+         FONTITALIC   .t.
          FontUnderline   .t.
          FontStrikeOut   .t.
-         Caption      'CheckBox with Font Properties'
+         CAPTION      'CheckBox with Font Properties'
          OnChange MsgInfo( "CheckBox 2 Value is Changed!" )
       END CHECKBOX
 
@@ -55,8 +55,8 @@ FUNCTION Main
          ROW      120
          COL      10
          WIDTH      250
-         Value      .F.
-         Caption      'CheckBox with OnGot/LostFocus Events'
+         VALUE      .F.
+         CAPTION      'CheckBox with OnGot/LostFocus Events'
          OnGotFocus { || Win1.Label1.Value := "CheckBox GotFocus!" }
          OnLostFocus { || Win1.Label1.Value := "CheckBox LostFocus!" }
       END CHECKBOX
@@ -66,7 +66,7 @@ FUNCTION Main
          COL   40
          WIDTH   140
          HEIGHT   28
-         Caption 'Change Event Block!'
+         CAPTION 'Change Event Block!'
          OnClick Win1.Check1.OnChange := { || MsgInfo( "Event Block of 'On Change' event of Checkbox 1 is Changed dynamically!" ) }
       END BUTTON
 
@@ -75,7 +75,7 @@ FUNCTION Main
          COL   40
          WIDTH   140
          HEIGHT   28
-         Caption 'Win1.Check1.Value'
+         CAPTION 'Win1.Check1.Value'
          OnClick MsgInfo( Win1.Check1.value )
       END BUTTON
 

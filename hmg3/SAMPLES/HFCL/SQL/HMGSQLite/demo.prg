@@ -27,8 +27,8 @@ FUNCTION main
          COL 10
          WIDTH 780
          HEIGHT 400
-         widths {200,100,100,100,50,200}
-         headers {"Text","Number","Floating","Date1","Logic","Text2"}
+         WIDTHS {200,100,100,100,50,200}
+         HEADERS {"Text","Number","Floating","Date1","Logic","Text2"}
       END GRID
 
       DEFINE BUTTON P_ViewRecord
@@ -36,8 +36,8 @@ FUNCTION main
          COL 100
          WIDTH 140
          HEIGHT 24
-         caption "View record = Giri11"
-         action ViewRecord()
+         CAPTION "View record = Giri11"
+         ACTION ViewRecord()
       END BUTTON
 
       DEFINE BUTTON P_ChangeRecord
@@ -45,8 +45,8 @@ FUNCTION main
          COL 300
          WIDTH 140
          HEIGHT 24
-         caption "Popraw"
-         action ChangeRecord()
+         CAPTION "Popraw"
+         ACTION ChangeRecord()
       END BUTTON
 
    END WINDOW

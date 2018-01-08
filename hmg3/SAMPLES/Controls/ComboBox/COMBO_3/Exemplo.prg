@@ -32,7 +32,7 @@ FUNCTION Main
 
       @ 160   , 150  COMBOBOX  C_ESPECIE ;
          ITEMS { 'A' , 'B' , 'C' } ;
-         value 1 ;
+         VALUE 1 ;
          ON GOTFOCUS Form_1.L_ESPECIE.FontBold := .T. ;
          ON LOSTFOCUS Form_1.L_ESPECIE.FontBold := .F.
 

@@ -23,8 +23,8 @@ FUNCTION Main()
          WIDTH 200 ;
          HEIGHT 100 ;
          TITLE 'DO REPORT Tests' ;
-         main ;
-         on release ( DbCloseArea(), FErase("lista.ntx") )
+         MAIN ;
+         ON RELEASE ( DbCloseArea(), FErase("lista.ntx") )
 
       DEFINE MAIN MENU
          POPUP 'File'
@@ -49,12 +49,12 @@ FUNCTION PrintTest()
 
    do report ;
       TITLE  'REPORT OF CINEMA ARTISTS | second title'                        ;
-      headers  {'','','',''} , { 'SIMPLE', 'LAST NAME', 'BIO', 'INCOME' }     ;
-      fields   {'code','last','BIO','incoming'}                               ;
-      widths   {10,20,26,14}                                                  ;
+      HEADERS  {'','','',''} , { 'SIMPLE', 'LAST NAME', 'BIO', 'INCOME' }     ;
+      FIELDS   {'code','last','BIO','incoming'}                               ;
+      WIDTHS   {10,20,26,14}                                                  ;
       totals   {.F.,.F.,.F.,.T.}                                              ;
       nformats {'','','','@E 99,999,999.99'}                                  ;
-      workarea Test                                                           ;
+      WORKAREA Test                                                           ;
       lpp      55                                                             ;
       cpl      77                                                             ;
       lmargin  3                                                              ;

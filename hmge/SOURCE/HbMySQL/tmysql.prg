@@ -148,13 +148,13 @@ METHOD FieldPut( cnField, Value ) CLASS TMySQLRow
          // if it is a char field remove trailing spaces
          IF VALTYPE(Value) == "C"
             IF ! ::cMyCollation == SET(_SET_CODEPAGE)
-               Value := RTrim( HB_TRANSLATE( Value, SET(_SET_CODEPAGE), ::cMyCollation ) )
+               VALUE := RTrim( HB_TRANSLATE( Value, SET(_SET_CODEPAGE), ::cMyCollation ) )
             ELSE
-               Value := RTrim( Value )
+               VALUE := RTrim( Value )
             ENDIF
          ELSEIF VALTYPE(Value) == "M"
             IF ! ::cMyCollation == SET(_SET_CODEPAGE)
-               Value := HB_TRANSLATE( Value, SET(_SET_CODEPAGE), ::cMyCollation )
+               VALUE := HB_TRANSLATE( Value, SET(_SET_CODEPAGE), ::cMyCollation )
             ENDIF
          ENDIF
 
@@ -657,7 +657,7 @@ METHOD FieldGet( cnField ) CLASS TMySQLQuery
    ENDIF
 
    IF nNum > 0 .AND. nNum <= ::nNumfields
-      Value := ::aRow[ nNum ]
+      VALUE := ::aRow[ nNum ]
 
       // Char fields are padded with spaces since a real .dbf field would be
       IF ::FieldType( nNum ) == "C"
@@ -1213,13 +1213,13 @@ METHOD FieldPut( cnField, Value ) CLASS TMySQLTable
          // if it is a char field remove trailing spaces
          IF ValType(Value) == "C"
             IF ! ::cMyCollation == SET(_SET_CODEPAGE)
-               Value := HB_TRANSLATE( RTrim( Value ), SET(_SET_CODEPAGE), ::cMyCollation )
+               VALUE := HB_TRANSLATE( RTrim( Value ), SET(_SET_CODEPAGE), ::cMyCollation )
             ELSE
-               Value := RTrim( Value )
+               VALUE := RTrim( Value )
             ENDIF
          ELSEIF ValType(Value) == "M"
             IF ! ::cMyCollation == SET(_SET_CODEPAGE)
-               Value := HB_TRANSLATE( Value, SET(_SET_CODEPAGE), ::cMyCollation )
+               VALUE := HB_TRANSLATE( Value, SET(_SET_CODEPAGE), ::cMyCollation )
             ENDIF
          ENDIF
 

@@ -66,8 +66,8 @@ PROCEDURE Main
          HEIGHT 403                                         ;
          TITLE APPTITLE                                     ;
          ICON 'STOCK'                                       ;
-         Main                                               ;
-         On Init ReSize()                                   ;
+         MAIN                                               ;
+         ON INIT ReSize()                                   ;
          On Size ReSize()                                   ;
          On Maximize ReSize()                               ;
          On Minimize ReSize()
@@ -90,20 +90,20 @@ PROCEDURE Main
       @ 31, 3 Grid grdContent                                   ;
          WIDTH 535                                         ;
          HEIGHT 305                                        ;
-         Headers { 'Name', 'Type', 'Comment' }             ;
-         Widths { 200, 100, 200 }                          ;
+         HEADERS { 'Name', 'Type', 'Comment' }             ;
+         WIDTHS { 200, 100, 200 }                          ;
          Font 'Tahoma' Size 10                             ;
-         On change GridStatus()                            ;
+         ON CHANGE GridStatus()                            ;
          NoLines                                           ;
          Edit Inplace {}                                   ;
-         ColumnWhen { { || .F. }, { || .F. }, { || .T. } }
+         COLUMNWHEN { { || .F. }, { || .F. }, { || .T. } }
 
       // Условие поиска
 
       @ 340, 5 Label lblSearch    ;
-         Value 'Find'       ;
+         VALUE 'Find'       ;
          WIDTH 40 Height 18 ;
-         FontColor BLUE     ;
+         FONTCOLOR BLUE     ;
          Bold
 
       @ ( wStock.lblSearch.Row - 4 ), ( wStock.lblSearch.Col + wStock.lblSearch.Width + 10 ) ;
@@ -111,25 +111,25 @@ PROCEDURE Main
          WIDTH 400                            ;
          HEIGHT 20                            ;
          UpperCase                            ;
-         On change QSeek()                    ;
-         On enter wStock.grdContent.SetFocus  ;
-         Tooltip 'String for search'
+         ON CHANGE QSeek()                    ;
+         ON ENTER wStock.grdContent.SetFocus  ;
+         TOOLTIP 'String for search'
 
       @ wStock.txbSearch.Row, ( wStock.txbSearch.Col + wStock.txbSearch.Width + 5 ) ;
          Button btnSearch   ;
          PICTURE 'FIND'     ;
          WIDTH 20           ;
          HEIGHT 20          ;
-         Action QSeek()     ;
-         Tooltip 'Find more'
+         ACTION QSeek()     ;
+         TOOLTIP 'Find more'
 
       @ wStock.btnSearch.Row, ( wStock.btnSearch.Col + wStock.btnSearch.Width + 5 ) ;
          Button btnFindAll  ;
          PICTURE 'FINDALL'  ;
          WIDTH 20           ;
          HEIGHT 20          ;
-         Action FindAll()   ;
-         Tooltip 'Find all'
+         ACTION FindAll()   ;
+         TOOLTIP 'Find all'
 
       // Строка состояния
 
@@ -219,45 +219,45 @@ PROCEDURE BuildMenu( aStrings )
 
       DEFINE POPUP aStrings[ 1, 2 ]             // File
          MENUITEM aStrings[ 2, 2 ] ;
-            Action NewList()      ;
+            ACTION NewList()      ;
             Message aStrings[ 3, 2 ]
          MENUITEM aStrings[ 4, 2 ] ;
-            Action LoadList()     ;
+            ACTION LoadList()     ;
             Message aStrings[ 5, 2 ]
          MENUITEM aStrings[ 6, 2 ] ;
-            Action SaveList()     ;
+            ACTION SaveList()     ;
             Name SaveList         ;
             Message aStrings[ 7, 2 ]
          SEPARATOR
          MENUITEM ( aStrings[ 8, 2 ]  + '   Alt+X' ) ;
-            Action ThisWindow.Release                     ;
+            ACTION ThisWindow.Release                     ;
             Message aStrings[ 9, 2 ]
       END POPUP
 
       DEFINE POPUP aStrings[ 10, 2 ]           // Edit
          MENUITEM aStrings[ 11, 2 ] ;
-            Action SetTitle()      ;
+            ACTION SetTitle()      ;
             Name SetTitle          ;
             Message aStrings[ 12, 2 ]
          SEPARATOR
          MENUITEM aStrings[ 13, 2 ] ;
-            Action OpenFile()      ;
+            ACTION OpenFile()      ;
             Name OpenFile          ;
             Message aStrings[ 14, 2 ]
          SEPARATOR
          MENUITEM aStrings[ 15, 2 ]                      ;
-            Action CopyToClipboard( GetNameFunction() ) ;
+            ACTION CopyToClipboard( GetNameFunction() ) ;
             Name CopyIt                                 ;
             Message aStrings[ 16, 2 ]
       END POPUP
 
       DEFINE POPUP aStrings[ 17, 2 ]           // Tools
          MENUITEM aStrings[ 18, 2 ] ;
-            Action Formater()      ;
+            ACTION Formater()      ;
             Name Reformatter       ;
             Message aStrings[ 19, 2 ]
          MENUITEM aStrings[ 20, 2 ]   ;
-            Action CallsTable()      ;
+            ACTION CallsTable()      ;
             Name CallsTable          ;
             Message aStrings[ 21, 2 ]
       END POPUP
@@ -265,23 +265,23 @@ PROCEDURE BuildMenu( aStrings )
       DEFINE POPUP aStrings[ 22, 2 ]           // Service
          DEFINE POPUP aStrings[ 23, 2 ]
             MENUITEM aStrings[ 24, 2 ]  ;
-               Action SelectLanguage() ;
+               ACTION SelectLanguage() ;
                Message aStrings[ 25, 2 ]
             SEPARATOR
             MENUITEM aStrings[ 26, 2 ]    ;
-               Action MakeLangTemplate() ;
+               ACTION MakeLangTemplate() ;
                Message aStrings[ 27, 2 ]
          END POPUP
 
          SEPARATOR
          MENUITEM aStrings[ 28, 2 ] ;
-            Action Options()       ;
+            ACTION Options()       ;
             Message aStrings[ 29, 2 ]
       END POPUP
 
       DEFINE POPUP '?'                         // ?
          MENUITEM aStrings[ 30, 2 ]        ;
-            Action About( aStrings[ 30, 2 ] ) ;
+            ACTION About( aStrings[ 30, 2 ] ) ;
             Message aStrings[ 31, 2 ]
       END POPUP
 
@@ -864,18 +864,18 @@ STATIC PROCEDURE FindAll
             Modal
 
          @ 10, 5 Label lblName                                    ;
-            Value ( aStrings[ 1, 2 ] + ' [' + cValue + ']' ) ;
+            VALUE ( aStrings[ 1, 2 ] + ' [' + cValue + ']' ) ;
             WIDTH 330                                        ;
             HEIGHT 18                                        ;
             Bold                                             ;
-            FontColor BLUE
+            FONTCOLOR BLUE
 
          @ ( wFindAll.lblName.Row + wFindAll.lblName.Height + 3 ), wFindAll.lblName.Col ;
             Grid grdMatches                                                  ;
             WIDTH 330                                                        ;
             HEIGHT 200                                                       ;
-            Headers { aStrings[ 3, 2 ], aStrings[ 4, 2 ], aStrings[ 5, 2 ] } ;
-            Widths { 150, 100, 200 }                                         ;
+            HEADERS { aStrings[ 3, 2 ], aStrings[ 4, 2 ], aStrings[ 5, 2 ] } ;
+            WIDTHS { 150, 100, 200 }                                         ;
             Font 'Tahoma' Size 10                                            ;
             NoLines                                                          ;
             On DblClick Do_GoTo( aMatches )
@@ -883,13 +883,13 @@ STATIC PROCEDURE FindAll
          @ ( wFindAll.grdMatches.Row + wFindAll.grdMatches.Height + 10 ), ;
             ( wFindAll.grdMatches.Col + 55 )                               ;
             Button btnGoto                                                 ;
-            Caption aStrings[ 6, 2 ]                                       ;
-            Action Do_GoTo( aMatches )
+            CAPTION aStrings[ 6, 2 ]                                       ;
+            ACTION Do_GoTo( aMatches )
 
          @ wFindAll.btnGoto.Row, ( wFindAll.btnGoto.Col + wFindAll.btnGoto.Width + 30 ) ;
             Button btnCancel                                                             ;
-            Caption _HMG_MESSAGE[ 7 ]                                                    ;
-            Action wFindAll.Release
+            CAPTION _HMG_MESSAGE[ 7 ]                                                    ;
+            ACTION wFindAll.Release
 
          On key Escape of wFindAll Action wFindAll.Release
          On key Alt+X  of wFindAll Action ReleaseAllWindows()
@@ -1187,29 +1187,29 @@ STATIC PROCEDURE SetTitle
          Modal
 
       @ 10, 5 Label lblName          ;
-         Value aStrings[ 2, 2 ] ;
+         VALUE aStrings[ 2, 2 ] ;
          WIDTH 100              ;
          HEIGHT 18              ;
          Bold                   ;
-         FontColor BLUE
+         FONTCOLOR BLUE
 
       @ ( wSetTitle.lblName.Row + wSetTitle.lblName.Height + 10 ), wSetTitle.lblName.Col ;
          TextBox txbName                 ;
          HEIGHT 20                       ;
-         Value aOptions[ OPTIONS_TITLE ]
+         VALUE aOptions[ OPTIONS_TITLE ]
 
       @ ( wSetTitle.txbName.Row + wSetTitle.txbName.Height + 15 ), 150               ;
          Button btnOK                                                                 ;
-         Caption _HMG_MESSAGE[ 6 ]                                                    ;
-         Action { || aOptions[ OPTIONS_TITLE ] := AllTrim( wSetTitle.txbName.Value ), ;
+         CAPTION _HMG_MESSAGE[ 6 ]                                                    ;
+         ACTION { || aOptions[ OPTIONS_TITLE ] := AllTrim( wSetTitle.txbName.Value ), ;
          StoreTitle()                                                   , ;
          ThisWindow.Release                                               ;
          }
 
       @ wSetTitle.btnOk.Row, ( wSetTitle.btnOk.Col + wSetTitle.btnOk.Width + 25 ) ;
          Button btnCancel          ;
-         Caption _HMG_MESSAGE[ 7 ] ;
-         Action ThisWindow.Release
+         CAPTION _HMG_MESSAGE[ 7 ] ;
+         ACTION ThisWindow.Release
 
       On key Escape of wSetTitle Action wSetTitle.Release
       On key Alt+X  of wSetTitle Action ReleaseAllWindows()
@@ -1265,44 +1265,44 @@ STATIC PROCEDURE Options
          Modal
 
       @ 5, 5 Frame frmOnStart         ;
-         Caption aStrings[ 2, 2 ] ;
+         CAPTION aStrings[ 2, 2 ] ;
          WIDTH 205                ;
          HEIGHT 75                ;
          Bold                     ;
-         Fontcolor BLUE
+         FONTCOLOR BLUE
 
       @ ( wOptions.frmOnStart.Row + 15 ), ( wOptions.frmOnStart.Col + 10 ) ;
          RadioGroup rdgOnStart                                              ;
          Options { aStrings[ 3, 2 ], aStrings[ 4, 2 ] }                     ;
          WIDTH 185                                                          ;
-         Value aOptions[ OPTIONS_ONSTART ]
+         VALUE aOptions[ OPTIONS_ONSTART ]
 
       @ wOptions.frmOnStart.Row                                           , ;
          ( wOptions.frmOnStart.Col + wOptions.frmOnStart.Width + 5 )         ;
          Frame frmSearch                                                     ;
-         Caption aStrings[ 5, 2 ]                                            ;
+         CAPTION aStrings[ 5, 2 ]                                            ;
          WIDTH wOptions.frmOnStart.Width Height wOptions.frmOnStart.Height   ;
          Bold                                                                ;
-         Fontcolor BLUE
+         FONTCOLOR BLUE
 
       @ wOptions.rdgOnStart.Row, ( wOptions.frmSearch.Col + 15 ) ;
          RadioGroup rdgSearch                                     ;
          Options { aStrings[ 6, 2 ], aStrings[ 7, 2 ] }           ;
          WIDTH 165                                                ;
-         Value aOptions[ OPTIONS_SEARCH ]
+         VALUE aOptions[ OPTIONS_SEARCH ]
 
       @ ( wOptions.frmOnStart.Row + wOptions.frmOnStart.Height + 5 )      , ;
          wOptions.frmOnStart.Col                                             ;
          Frame frmEditor                                                     ;
-         Caption aStrings[ 8, 2 ]                                            ;
+         CAPTION aStrings[ 8, 2 ]                                            ;
          WIDTH ( wOptions.frmOnStart.Width + wOptions.frmSearch.Width + 5 )  ;
          HEIGHT 140                                                          ;
          Bold                                                                ;
-         Fontcolor BLUE
+         FONTCOLOR BLUE
 
       @ ( wOptions.frmEditor.Row + 25 ), ( wOptions.frmEditor.Col + 10 ) ;
          Textbox txbEditor                                                ;
-         Value aOptions[ OPTIONS_EDITOR ]                                 ;
+         VALUE aOptions[ OPTIONS_EDITOR ]                                 ;
          HEIGHT 20                                                        ;
          WIDTH ( wOptions.frmEditor.Width - 45 )
 
@@ -1310,7 +1310,7 @@ STATIC PROCEDURE Options
          ( wOptions.txbEditor.Col + wOptions.txbEditor.Width + 5 )         ;
          Button btnSearch                                                  ;
          PICTURE 'FIND'                                                    ;
-         Action { |cFile| cFile  := GetFile( { { aLang[ 4, 2 ], '*.exe' }, ;
+         ACTION { |cFile| cFile  := GetFile( { { aLang[ 4, 2 ], '*.exe' }, ;
          { aLang[ 5, 2 ], '*.*'   }  ;
          }                           , ;
          aLang[ 2, 2 ]             , , ;
@@ -1327,8 +1327,8 @@ STATIC PROCEDURE Options
          Options { aStrings[ 9, 2 ], aStrings[ 10, 2 ], aStrings[ 11, 2 ] } ;
          WIDTH 270                                                          ;
          Spacing 28                                                         ;
-         Value aOptions[ OPTIONS_RUNMODE ]                                  ;
-         On change EnableParameters()
+         VALUE aOptions[ OPTIONS_RUNMODE ]                                  ;
+         ON CHANGE EnableParameters()
 
       @ ( wOptions.rdgParameters.Row + 30 )                              , ;
          ( wOptions.rdgParameters.Col + wOptions.rdgParameters.Width + 5 )  ;
@@ -1342,11 +1342,11 @@ STATIC PROCEDURE Options
          WIDTH 120
 
       @ ( wOptions.Height - 70 ), 80 Button btnOk Caption _HMG_MESSAGE[ 6 ] ;
-         Action { || SaveOptions(), wOptions.Release }
+         ACTION { || SaveOptions(), wOptions.Release }
 
       @ wOptions.btnOk.Row, ( wOptions.btnOk.Col + wOptions.btnOk.Width + 70 ) ;
          Button btnCancel Caption _HMG_MESSAGE[ 7 ]                             ;
-         Action wOptions.Release
+         ACTION wOptions.Release
 
       On key Escape of wOptions Action wOptions.Release
       On key Alt+X  of wOptions Action ReleaseAllWindows()

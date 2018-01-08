@@ -23,35 +23,35 @@ FUNCTION DBUmodistruct
          WIDTH 550
          HEIGHT 150
          //      backcolor _DBUgreenish
-         caption "Field"
+         CAPTION "Field"
       END FRAME
       DEFINE LABEL _DBUnamelabel
          ROW 40
          COL 40
          WIDTH 150
          BACKCOLOR _DBUgreenish
-         value "Name"
+         VALUE "Name"
       END LABEL
       DEFINE LABEL _DBUtypelabel
          ROW 40
          COL 195
          WIDTH 100
          BACKCOLOR _DBUgreenish
-         value "Type"
+         VALUE "Type"
       END LABEL
       DEFINE LABEL _DBUsizelabel
          ROW 40
          COL 300
          WIDTH 100
          BACKCOLOR _DBUgreenish
-         value "Size"
+         VALUE "Size"
       END LABEL
       DEFINE LABEL _DBUdecimallabel
          ROW 40
          COL 405
          BACKCOLOR _DBUgreenish
          WIDTH 100
-         value "Decimals"
+         VALUE "Decimals"
       END LABEL
       DEFINE TEXTBOX _DBUfieldname
          ROW 70
@@ -59,73 +59,73 @@ FUNCTION DBUmodistruct
          WIDTH 150
          uppercase .t.
          BACKCOLOR _DBUgreenish
-         maxlength 10
-         value ""
+         MAXLENGTH 10
+         VALUE ""
       END TEXTBOX
       DEFINE COMBOBOX _DBUfieldtype
          ROW 70
          COL 195
          items {"Character","Numeric","Date","Logical","Memo"}
          WIDTH 100
-         value 1
-         on lostfocus DBUtypelostfocus()
-         on enter DBUtypelostfocus()
+         VALUE 1
+         ON LOSTFOCUS DBUtypelostfocus()
+         ON ENTER DBUtypelostfocus()
          *      on change typelostfocus()
       END COMBOBOX
       DEFINE TEXTBOX _DBUfieldsize
          ROW 70
          COL 300
          BACKCOLOR _DBUgreenish
-         value 10
-         numeric .t.
+         VALUE 10
+         NUMERIC .t.
          WIDTH 100
-         on lostfocus DBUsizelostfocus()
-         rightalign .t.
+         ON LOSTFOCUS DBUsizelostfocus()
+         RIGHTALIGN .t.
       END TEXTBOX
       DEFINE TEXTBOX _DBUfielddecimals
          ROW 70
          COL 405
-         value 0
+         VALUE 0
          BACKCOLOR _DBUgreenish
-         numeric .t.
+         NUMERIC .t.
          WIDTH 100
-         on lostfocus DBUdeclostfocus()
-         rightalign .t.
+         ON LOSTFOCUS DBUdeclostfocus()
+         RIGHTALIGN .t.
       END TEXTBOX
       DEFINE BUTTON _DBUaddline
          ROW 120
          COL 75
-         caption "Add"
+         CAPTION "Add"
          WIDTH 100
-         action DBUaddstruct()
+         ACTION DBUaddstruct()
       END BUTTON
       DEFINE BUTTON _DBUinsline
          ROW 120
          COL 225
-         caption "Insert"
+         CAPTION "Insert"
          WIDTH 100
-         action DBUinsstruct()
+         ACTION DBUinsstruct()
       END BUTTON
       DEFINE BUTTON _DBUdelline
          ROW 120
          COL 400
-         caption "Delete"
+         CAPTION "Delete"
          WIDTH 100
-         action DBUdelstruct()
+         ACTION DBUdelstruct()
       END BUTTON
       DEFINE FRAME _DBUstructframe
          ROW 190
          COL 10
-         caption "Structure of DBF"
+         CAPTION "Structure of DBF"
          WIDTH 500
          HEIGHT 180
       END FRAME
       DEFINE GRID _DBUstruct
          ROW 220
          COL 40
-         headers {"Name","Type","Size","Decimals"}
+         HEADERS {"Name","Type","Size","Decimals"}
          justify {0,0,1,1}
-         widths {150,100,100,75}
+         WIDTHS {150,100,100,75}
          WIDTH 450
          BACKCOLOR _DBUyellowish
          items _DBUstructarr
@@ -135,14 +135,14 @@ FUNCTION DBUmodistruct
       DEFINE BUTTON _DBUsavestruct
          ROW 400
          COL 200
-         caption "Modify"
-         action DBUmodistructure()
+         CAPTION "Modify"
+         ACTION DBUmodistructure()
       END BUTTON
       DEFINE BUTTON _DBUexitnew
          ROW 400
          COL 400
-         caption "Exit"
-         action DBUexitmodidbf()
+         CAPTION "Exit"
+         ACTION DBUexitmodidbf()
       END BUTTON
    END WINDOW
    CENTER WINDOW _DBUcreadbf

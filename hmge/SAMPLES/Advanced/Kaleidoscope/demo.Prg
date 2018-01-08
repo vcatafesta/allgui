@@ -19,72 +19,72 @@ FUNCTION main
       DEFINE LABEL iterationslabel
          ROW 10
          COL 510
-         value "Iterations"
+         VALUE "Iterations"
          WIDTH 80
       END LABEL
       DEFINE SPINNER iterations
          ROW 10
          COL 590
          WIDTH 50
-         rangemin 1
-         rangemax 999
-         value 3
+         RANGEMIN 1
+         RANGEMAX 999
+         VALUE 3
       END spinner
       DEFINE FRAME shapes
          ROW 40
          COL 505
          WIDTH 135
          HEIGHT 200
-         caption "Shapes"
+         CAPTION "Shapes"
       END FRAME
       DEFINE CHECKBOX triangles
          ROW 60
          COL 510
          WIDTH 120
-         caption "Triangles"
+         CAPTION "Triangles"
       END CHECKBOX
       DEFINE CHECKBOX circles
          ROW 90
          COL 510
          WIDTH 120
-         caption "Circles"
+         CAPTION "Circles"
       END CHECKBOX
       DEFINE CHECKBOX rectangles
          ROW 120
          COL 510
          WIDTH 120
-         caption "Rectangles"
+         CAPTION "Rectangles"
       END CHECKBOX
       DEFINE CHECKBOX ellipses
          ROW 150
          COL 510
          WIDTH 120
-         caption "Ellipses"
+         CAPTION "Ellipses"
       END CHECKBOX
       DEFINE CHECKBOX squares
          ROW 180
          COL 510
          WIDTH 120
-         caption "Squares"
+         CAPTION "Squares"
       END CHECKBOX
       DEFINE CHECKBOX polygons
          ROW 210
          COL 510
          WIDTH 120
-         caption "Polygons"
-         value .t.
+         CAPTION "Polygons"
+         VALUE .t.
       END CHECKBOX
       DEFINE BUTTON backcolor
          ROW 250
          COL 510
          WIDTH 130
-         caption "Background Colour"
-         action  setbackcolor()
+         CAPTION "Background Colour"
+         ACTION  setbackcolor()
       END BUTTON
       DEFINE CHECKBOX show1
          ROW 280
          COL 510
-         caption "Slideshow ("+alltrim(str(showinterval/1000,5,0))+" Sec)"
+         CAPTION "Slideshow ("+alltrim(str(showinterval/1000,5,0))+" Sec)"
          WIDTH 130
          onchange show1changed()
       END CHECKBOX
@@ -92,27 +92,27 @@ FUNCTION main
          ROW 310
          COL 510
          WIDTH 60
-         caption "Show"
-         action drawkalai()
+         CAPTION "Show"
+         ACTION drawkalai()
       END BUTTON
       DEFINE BUTTON save
          ROW 310
          COL 580
          WIDTH 60
-         caption "Save"
-         action savewindow1()
+         CAPTION "Save"
+         ACTION savewindow1()
       END BUTTON
       DEFINE BUTTON showstereo
          ROW 340
          COL 510
          WIDTH 130
-         caption "Show Stereo"
-         action showstereowindow()
+         CAPTION "Show Stereo"
+         ACTION showstereowindow()
       END BUTTON
       define hyperlink email1
          ROW 400
          COL 510
-         value "Algorithm of Cliff"
+         VALUE "Algorithm of Cliff"
          WIDTH 130
          handcursor .t.
          address "http://sprott.physics.wisc.edu/pickover/ekscop.html"
@@ -120,7 +120,7 @@ FUNCTION main
       define hyperlink email
          ROW 430
          COL 510
-         value "E-Mail me"
+         VALUE "E-Mail me"
          WIDTH 130
          handcursor .t.
          address "srgiri@dataone.in"
@@ -356,15 +356,15 @@ FUNCTION showstereowindow
             ROW 520
             COL 10
             WIDTH 50
-            caption "Save"
-            action savestereowindow1()
+            CAPTION "Save"
+            ACTION savestereowindow1()
          END BUTTON
          DEFINE BUTTON close1
             ROW 520
             COL 70
             WIDTH 50
-            caption "Close"
-            action s.release()
+            CAPTION "Close"
+            ACTION s.release()
          END BUTTON
 
          ON KEY ESCAPE ACTION thiswindow.release()

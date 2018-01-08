@@ -765,7 +765,7 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Caption      cVar
+         CAPTION      cVar
          OnClick      NIL
       END BUTTON
 
@@ -778,7 +778,7 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Caption      cVar
+         CAPTION      cVar
          OnClick      NIL
       END CHECKBOX
 
@@ -810,7 +810,7 @@ PROCEDURE AddControl( cType )
          WIDTH      100
          HEIGHT      100
          Items      {cVar}
-         Value      1
+         VALUE      1
       END COMBOBOX
 
    ELSEIF cType == 'CHECKBUTTON'
@@ -822,8 +822,8 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Caption      cVar
-         Value      .F.
+         CAPTION      cVar
+         VALUE      .F.
       END CHECKBUTTON
 
    ELSEIF cType == 'GRID'
@@ -837,8 +837,8 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Headers      { '', '' }
-         Widths      { 100, 100 }
+         HEADERS      { '', '' }
+         WIDTHS      { 100, 100 }
       END GRID
 
    ELSEIF cType == 'SLIDER'
@@ -850,11 +850,11 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Rangemin   1
-         Rangemax   10
-         Value      5
+         RANGEMIN   1
+         RANGEMAX   10
+         VALUE      5
          Vertical   .F.
-         Tooltip      ""
+         TOOLTIP      ""
          TickMarks   .T.
       END SLIDER
 
@@ -871,9 +871,9 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Rangemin   1
-         Rangemax   10
-         Value      5
+         RANGEMIN   1
+         RANGEMAX   10
+         VALUE      5
       END SPINNER
 
    ELSEIF cType == 'IMAGE'
@@ -917,7 +917,7 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Value      date()
+         VALUE      date()
       END DATEPICKER
 
    ELSEIF cType == 'TEXTBOX'
@@ -929,7 +929,7 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Value      cVar
+         VALUE      cVar
       END TEXTBOX
 
    ELSEIF cType == 'EDITBOX'
@@ -945,7 +945,7 @@ PROCEDURE AddControl( cType )
          COL      nCurrentCol
          WIDTH      120
          HEIGHT      120
-         Value      cVar
+         VALUE      cVar
       END EDITBOX
 
    ELSEIF cType == 'LABEL'
@@ -957,7 +957,7 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Value      cVar
+         VALUE      cVar
       END LABEL
 
    ELSEIF cType == 'TIMER'
@@ -986,8 +986,8 @@ PROCEDURE AddControl( cType )
          WIDTH      100
          HEIGHT      150
          Options      {"New 1","New 2","New 3"}
-         Value      1
-         Caption      cVar
+         VALUE      1
+         CAPTION      cVar
       END RADIOGROUP
 
       oEdit.&(cVar).OnChange := bOnClickAction
@@ -1003,7 +1003,7 @@ PROCEDURE AddControl( cType )
          COL      nCurrentCol
          WIDTH      200
          HEIGHT      200
-         Caption      cVar
+         CAPTION      cVar
       END FRAME
 
    ELSEIF cType == 'TAB'
@@ -1048,7 +1048,7 @@ PROCEDURE AddControl( cType )
          Parent      oEdit
          ROW      nCurrentRow
          COL      nCurrentCol
-         Value      cVar
+         VALUE      cVar
          Address      'http://hmgextended.com'
       END HYPERLINK
 
@@ -1065,7 +1065,7 @@ PROCEDURE AddControl( cType )
       COL      nCurrentCol
       WIDTH      227
       HEIGHT      162
-      Value      CTOD("  /  /  ")
+      VALUE      CTOD("  /  /  ")
    END MONTHCALENDAR
 
 ELSEIF cType == 'PROGRESSBAR'
@@ -1078,10 +1078,10 @@ ELSEIF cType == 'PROGRESSBAR'
       ROW      nCurrentRow
       COL      nCurrentCol
       WIDTH      200
-      Rangemin   1
-      Rangemax   100
-      Value      50
-      Tooltip      cVar
+      RANGEMIN   1
+      RANGEMAX   100
+      VALUE      50
+      TOOLTIP      cVar
    END PROGRESSBAR
 
 ELSEIF cType == 'IPADDRESS'
@@ -1094,7 +1094,7 @@ ELSEIF cType == 'IPADDRESS'
       ROW      nCurrentRow
       COL      nCurrentCol
       WIDTH      210
-      Value      {255,112,215,32}
+      VALUE      {255,112,215,32}
    END IPADDRESS
 
 ELSEIF cType == 'BROWSE'
@@ -1110,11 +1110,11 @@ ELSEIF cType == 'BROWSE'
       COL      nCurrentCol
       WIDTH      200
       HEIGHT      200
-      WorkArea   demo
-      Headers      { 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Salary' , 'Notes' }
-      Widths      { 100 , 100 , 100 , 100 , 100 , 250 }
-      Fields      { 'Demo->First' , 'Demo->Last' , 'Demo->Hiredate' , 'Demo->Married' , 'Demo->Salary' , 'Demo->Notes' }
-      Value      1
+      WORKAREA   demo
+      HEADERS      { 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Salary' , 'Notes' }
+      WIDTHS      { 100 , 100 , 100 , 100 , 100 , 250 }
+      FIELDS      { 'Demo->First' , 'Demo->Last' , 'Demo->Hiredate' , 'Demo->Married' , 'Demo->Salary' , 'Demo->Notes' }
+      VALUE      1
    END BROWSE
 
 ENDIF

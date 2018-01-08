@@ -84,9 +84,9 @@ FUNCTION _DefineCheckBox ( ControlName, ParentForm, x, y, Caption, Value, ;
       IF  HB_UAT ( '>', Field ) == 0
          MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " : You must specify a fully qualified field name. Program Terminated" )
       ELSE
-         WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
+         WORKAREA := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
          IF Select (WorkArea) != 0
-            Value := &(Field)
+            VALUE := &(Field)
          ENDIF
       ENDIF
    ENDIF
@@ -94,7 +94,7 @@ FUNCTION _DefineCheckBox ( ControlName, ParentForm, x, y, Caption, Value, ;
    IF _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]
@@ -203,7 +203,7 @@ FUNCTION _DefineCheckBox ( ControlName, ParentForm, x, y, Caption, Value, ;
 FUNCTION _DefineCheckButton ( ControlName, ParentForm, x, y, Caption, Value, ;
       fontname, fontsize, tooltip, changeprocedure, ;
       w, h, lostfocus, gotfocus, HelpId, invisible, ;
-      notabstop , bold, italic, underline, strikeout, OnEnter )
+      NOTABSTOP , bold, italic, underline, strikeout, OnEnter )
    LOCAL cParentForm , mVar , k
    LOCAL ControlHandle
    LOCAL FontHandle
@@ -220,7 +220,7 @@ FUNCTION _DefineCheckButton ( ControlName, ParentForm, x, y, Caption, Value, ;
    IF _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]

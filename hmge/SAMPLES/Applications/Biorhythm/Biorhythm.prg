@@ -608,11 +608,11 @@ PROCEDURE DrawBiorhythm()
       nPercent++
       draw text in window oBiorhythm;
          at (nOffsetX+i)-5,37;
-         value aValue[nPercent] transparent;
+         VALUE aValue[nPercent] transparent;
          Font "arial" size 7
       draw text in window oBiorhythm;
          at (nOffsetX+i)-5,743;
-         value aValue[nPercent] transparent;
+         VALUE aValue[nPercent] transparent;
          Font "arial" size 7
 
    NEXT I

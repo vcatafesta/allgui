@@ -11,10 +11,10 @@ PROCEDURE inicio
    DEFINE WINDOW form1;
          at 0,0 width 400 height 400 title 'Demo Odbc/Access';
          Main;
-         on init ( ajustar(), cargar_datos(1) );
+         ON INIT ( ajustar(), cargar_datos(1) );
          on maximize ( ajustar() );
          on size ( ajustar() );
-         on release ( oConexion:Destroy() );
+         ON RELEASE ( oConexion:Destroy() );
          font 'ms sans serif' size 8
 
       @ 0,  0 button btn1 caption '&Agregar'    width 80 height 20 action eventos(1)
@@ -27,12 +27,12 @@ PROCEDURE inicio
          COL 5
          WIDTH 300
          HEIGHT 300
-         headers {'Id','Descripcion'}
-         widths { 60, 300 }
+         HEADERS {'Id','Descripcion'}
+         WIDTHS { 60, 300 }
          on dblclick    eventos(2)
-         on change    form1.statusbar.item(1) := "Registro "+;
+         ON CHANGE    form1.statusbar.item(1) := "Registro "+;
             ltrim(str(form1.grid1.value))+" de "+alltrim(str(form1.grid1.itemcount))
-         columncontrols   { ;
+         COLUMNCONTROLS   { ;
             {'TEXTBOX','NUMERIC',repl('9',10)} , ;
             {'TEXTBOX','CHARACTER'} ;
             }

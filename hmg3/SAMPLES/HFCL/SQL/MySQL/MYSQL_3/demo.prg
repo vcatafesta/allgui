@@ -153,8 +153,8 @@ PROCEDURE ShowQuery ()
          COL 0
          WIDTH 631
          HEIGHT 430
-         Headers {'Code','Name'}
-         Widths {250,250}
+         HEADERS {'Code','Name'}
+         WIDTHS {250,250}
       END GRID
 
    END WINDOW

@@ -44,17 +44,17 @@ FUNCTION reajuste()
          ICON path_imagens+'icone.ico';
          modal;
          nosize;
-         on init zera_temporario();
-         on release zera_acesso()
+         ON INIT zera_temporario();
+         ON RELEASE zera_acesso()
 
       * fase 1
       @ 010,005 label lbl_001;
          of form_reajuste;
-         value 'Quais produtos reajustar ?';
+         VALUE 'Quais produtos reajustar ?';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       define comboboxex cbo_001
       ROW   030
@@ -62,17 +62,17 @@ FUNCTION reajuste()
       WIDTH 200
       HEIGHT 200
       items a_001
-      value 1
+      VALUE 1
    END comboboxex
 
    * fase 2
    @ 070,005 label lbl_002;
       of form_reajuste;
-      value 'Selecione a Categoria';
+      VALUE 'Selecione a Categoria';
       autosize;
       font 'tahoma' size 010;
       bold;
-      fontcolor _preto_001;
+      FONTCOLOR _preto_001;
       transparent
    define comboboxex cbo_002
    ROW   090
@@ -80,18 +80,18 @@ FUNCTION reajuste()
    WIDTH 200
    HEIGHT 400
    items a_002
-   value 1
+   VALUE 1
    listwidth 300
 END comboboxex
 
 * fase 3
 @ 130,005 label lbl_003;
    of form_reajuste;
-   value 'Selecione a Subcategoria';
+   VALUE 'Selecione a Subcategoria';
    autosize;
    font 'tahoma' size 010;
    bold;
-   fontcolor _preto_001;
+   FONTCOLOR _preto_001;
    transparent
 define comboboxex cbo_003
 ROW   150
@@ -99,103 +99,103 @@ COL   005
 WIDTH 200
 HEIGHT 400
 items a_003
-value 1
+VALUE 1
 listwidth 300
 END comboboxex
 
 * fase 4
 @ 200,005 label lbl_004;
    of form_reajuste;
-   value 'SOMAR';
+   VALUE 'SOMAR';
    autosize;
    font 'tahoma' size 010;
    bold;
-   fontcolor BLUE;
+   FONTCOLOR BLUE;
    transparent
 @ 200,060 getbox tbox_004;
    of form_reajuste;
    HEIGHT 027;
    WIDTH 080;
-   value 0;
+   VALUE 0;
    font 'tahoma' size 010;
    BACKCOLOR _fundo_get;
-   fontcolor _letra_get_1;
+   FONTCOLOR _letra_get_1;
    PICTURE '@E 9,999.99'
 @ 200,150 label lbl_0044;
    of form_reajuste;
-   value 'ao preço';
+   VALUE 'ao preço';
    autosize;
    font 'tahoma' size 010;
    bold;
-   fontcolor _preto_001;
+   FONTCOLOR _preto_001;
    transparent
 @ 230,005 label lbl_00444;
    of form_reajuste;
-   value 'de venda já existente';
+   VALUE 'de venda já existente';
    autosize;
    font 'tahoma' size 010;
    bold;
-   fontcolor _preto_001;
+   FONTCOLOR _preto_001;
    transparent
 
 @ 250,040 label lbl_ou;
    of form_reajuste;
-   value 'ou então';
+   VALUE 'ou então';
    autosize;
    font 'tahoma' size 018;
    bold;
-   fontcolor _preto_001;
+   FONTCOLOR _preto_001;
    transparent
 
 * fase 5
 @ 290,005 label lbl_005;
    of form_reajuste;
-   value 'APLICAR';
+   VALUE 'APLICAR';
    autosize;
    font 'tahoma' size 010;
    bold;
-   fontcolor BLUE;
+   FONTCOLOR BLUE;
    transparent
 @ 290,070 getbox tbox_005;
    of form_reajuste;
    HEIGHT 027;
    WIDTH 070;
-   value 0;
+   VALUE 0;
    font 'tahoma' size 010;
    BACKCOLOR _fundo_get;
-   fontcolor _letra_get_1;
+   FONTCOLOR _letra_get_1;
    PICTURE '@R 999.99'
 @ 290,150 label lbl_0055;
    of form_reajuste;
-   value '% sobre';
+   VALUE '% sobre';
    autosize;
    font 'tahoma' size 010;
    bold;
-   fontcolor _preto_001;
+   FONTCOLOR _preto_001;
    transparent
 @ 320,005 label lbl_00555;
    of form_reajuste;
-   value 'o preço de venda já existente';
+   VALUE 'o preço de venda já existente';
    autosize;
    font 'tahoma' size 010;
    bold;
-   fontcolor _preto_001;
+   FONTCOLOR _preto_001;
    transparent
 
 * botão filtrar
 @ 360,005 buttonex botao_filtrar;
    parent form_reajuste;
-   caption 'Filtrar informações';
+   CAPTION 'Filtrar informações';
    WIDTH 200 height 040;
    PICTURE path_imagens+'img_filtro.bmp';
-   action filtrar_informacoes();
-   tooltip 'Clique aqui para separar as informações e visualizar os reajustes antes de efetivá-los'
+   ACTION filtrar_informacoes();
+   TOOLTIP 'Clique aqui para separar as informações e visualizar os reajustes antes de efetivá-los'
 
 * separar a tela em 2 partes
 DEFINE LABEL label_separador
    COL 210
    ROW 000
-   value ''
+   VALUE ''
    WIDTH 002
    HEIGHT 600
    transparent .F.
@@ -205,28 +205,28 @@ END LABEL
 * grid e opções do reajuste
 @ 010,220 label lbl_reajuste;
    of form_reajuste;
-   value 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado';
+   VALUE 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado';
    autosize;
    font 'tahoma' size 010;
    bold;
-   fontcolor _preto_001;
+   FONTCOLOR _preto_001;
    transparent
 
 * botões
 @ 520,405 buttonex botao_reajustar;
    parent form_reajuste;
-   caption 'Reajustar os preços com base na projeção';
+   CAPTION 'Reajustar os preços com base na projeção';
    WIDTH 300 height 040;
    PICTURE path_imagens+'img_aplicar.bmp';
-   action gravar_reajuste();
-   tooltip 'Clique aqui para gravar as informações com reajuste no banco de dados'
+   ACTION gravar_reajuste();
+   TOOLTIP 'Clique aqui para gravar as informações com reajuste no banco de dados'
 @ 520,710 buttonex botao_sair;
    parent form_reajuste;
-   caption 'Sair desta tela';
+   CAPTION 'Sair desta tela';
    WIDTH 180 height 040;
    PICTURE path_imagens+'img_sair.bmp';
-   action (zera_acesso(),form_reajuste.release);
-   tooltip 'Clique aqui para sair'
+   ACTION (zera_acesso(),form_reajuste.release);
+   TOOLTIP 'Clique aqui para sair'
 
 ON KEY ESCAPE ACTION thiswindow.release
 
@@ -273,13 +273,13 @@ STATIC FUNCTION filtrar_informacoes()
          ROW 030
          WIDTH 665
          HEIGHT 480
-         headers {'.','Produto',_tamanho_001,_tamanho_002,_tamanho_003,_tamanho_004,_tamanho_005,_tamanho_006}
-         widths {001,300,120,120,120,120,120,120}
-         fontname 'verdana'
+         HEADERS {'.','Produto',_tamanho_001,_tamanho_002,_tamanho_003,_tamanho_004,_tamanho_005,_tamanho_006}
+         WIDTHS {001,300,120,120,120,120,120,120}
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
+         FONTBOLD .T.
          BACKCOLOR _amarelo_001
-         fontcolor BLUE
+         FONTCOLOR BLUE
       END GRID
    ELSEIF x_tipo == 2 //demais produtos
       _conta_acesso ++
@@ -289,13 +289,13 @@ STATIC FUNCTION filtrar_informacoes()
          ROW 030
          WIDTH 665
          HEIGHT 480
-         headers {'.','Produto','Preço reajustado R$'}
-         widths {001,400,220}
-         fontname 'verdana'
+         HEADERS {'.','Produto','Preço reajustado R$'}
+         WIDTHS {001,400,220}
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
+         FONTBOLD .T.
          BACKCOLOR _amarelo_001
-         fontcolor BLUE
+         FONTCOLOR BLUE
       END GRID
    ENDIF
 

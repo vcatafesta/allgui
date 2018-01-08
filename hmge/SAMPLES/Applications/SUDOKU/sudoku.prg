@@ -69,9 +69,9 @@ FUNCTION Main
          at 0,0 ;
          WIDTH 486*gkoefh - iif(isthemed(),0,GetBorderWidth()) ;
          HEIGHT 550*gkoefv - iif(isthemed(),0,GetTitleHeight()) ;
-         main ;
+         MAIN ;
          TITLE cTitle ;
-         nomaximize ;    /* GAL */
+         NOMAXIMIZE ;    /* GAL */
          NOSIZE          /* GAL */
 
       DEFINE GRID Square
@@ -80,11 +80,11 @@ FUNCTION Main
          WIDTH 460*gkoefh - iif(isthemed(),0,GetBorderWidth())
          HEIGHT 445*gkoefv - iif(isthemed(),0,GetTitleHeight()+GetBorderHeight())
          showheaders .f.
-         widths  {gw, gw, gw, gw, gw, gw, gw, gw, gw}
+         WIDTHS  {gw, gw, gw, gw, gw, gw, gw, gw, gw}
          justify {2, 2, 2, 2, 2, 2, 2, 2, 2}
-         cellnavigation .T.
+         CELLNAVIGATION .T.
          allowedit .T.
-         columncontrols { {"TEXTBOX", "CHARACTER", "9"}, ;
+         COLUMNCONTROLS { {"TEXTBOX", "CHARACTER", "9"}, ;
             {"TEXTBOX", "CHARACTER", "9"}, ;
             {"TEXTBOX", "CHARACTER", "9"}, ;
             {"TEXTBOX", "CHARACTER", "9"}, ;
@@ -93,12 +93,12 @@ FUNCTION Main
             {"TEXTBOX", "CHARACTER", "9"}, ;
             {"TEXTBOX", "CHARACTER", "9"}, ;
             {"TEXTBOX", "CHARACTER", "9"} }
-         fontname "Arial"
+         FONTNAME "Arial"
          fontsize 30*gkoefh
          dynamicbackcolor { bColor, bColor, bColor, ;
             bColor, bColor, bColor, ;
             bColor, bColor, bColor }
-         columnwhen { { || entergrid() }, { || entergrid() }, ;
+         COLUMNWHEN { { || entergrid() }, { || entergrid() }, ;
             { || entergrid() }, { || entergrid() }, ;
             { || entergrid() }, { || entergrid() }, ;
             { || entergrid() }, { || entergrid() }, ;
@@ -116,7 +116,7 @@ FUNCTION Main
          COL 10
          WIDTH 370*gkoefh
          HEIGHT 30*gkoefv
-         fontname "Arial"
+         FONTNAME "Arial"
          fontsize 18*gkoefv
       END LABEL
 
@@ -133,8 +133,8 @@ FUNCTION Main
          ROW 460*gkoefv - iif(isthemed(),0,GetTitleHeight())
          COL 400*gkoefh - iif(isthemed(),0,GetBorderWidth())
          WIDTH 70*gkoefh
-         caption "Next"
-         action NextGame()
+         CAPTION "Next"
+         ACTION NextGame()
       END BUTTON
 
    END WINDOW

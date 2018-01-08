@@ -21,8 +21,8 @@ FUNCTION Main
          COL 10
          WIDTH 545
          HEIGHT 200
-         headers { '', 'Column1', 'Column2'  }
-         widths { 0, 200, 200 }
+         HEADERS { '', 'Column1', 'Column2'  }
+         WIDTHS { 0, 200, 200 }
          justify { 2, 0, 0 }
          image { 'redbullet.bmp', 'whitebullet.bmp', 'greenbullet.bmp' }
          items aItems
@@ -33,8 +33,8 @@ FUNCTION Main
          COL 10
          WIDTH 545
          HEIGHT 200
-         headers { '', 'Column1', 'Column2'  }
-         widths { 0, 200, 200 }
+         HEADERS { '', 'Column1', 'Column2'  }
+         WIDTHS { 0, 200, 200 }
          justify { 2, 0, 0 }
          image { 'redbullet1.bmp', 'whitebullet1.bmp', 'greenbullet1.bmp' }
          items aItems

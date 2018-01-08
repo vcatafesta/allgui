@@ -297,7 +297,7 @@ FUNCTION InitDialogListBox( ParentName, ControlHandle, k )
    HB_SYMBOL_UNUSED( ParentName )
 
    Rows   := _HMG_aControlRangeMin [k]
-   Value  := _HMG_aControlValue [k]
+   VALUE  := _HMG_aControlValue [k]
    aWidth := _HMG_aControlRangeMax [k]
    multitabs := _HMG_aControlMiscData1 [k] [2]
 

@@ -13,19 +13,19 @@ FUNCTION Main
          HEIGHT 400;
          TITLE "HMG ListBox Demo";
          WindowType MAIN ;
-         On Init loadlist(3, .f., .f.)
+         ON INIT loadlist(3, .f., .f.)
 
       DEFINE LABEL Label1
          ROW 10
          COL 10
-         Value 'This is for status!'
+         VALUE 'This is for status!'
          AutoSize .t.
       END LABEL
 
       DEFINE BUTTON Button1
          ROW 240
          COL 10
-         Caption "Add Item"
+         CAPTION "Add Item"
          OnClick {|| Win1.List1.Additem("Added Item "+hb_ntos(Win1.List1.Itemcount + 1)), ;
             Win1.List1.Value := iif(islistmultiselect('List1','Win1'), {Win1.List1.Itemcount}, Win1.List1.Itemcount)}
       END BUTTON
@@ -33,14 +33,14 @@ FUNCTION Main
       DEFINE BUTTON Button2
          ROW 240
          COL 110
-         Caption "Delete Item"
+         CAPTION "Delete Item"
          OnClick {|| Win1.List1.Deleteitem(1)}
       END BUTTON
 
       DEFINE BUTTON Button3
          ROW 240
          COL 210
-         Caption "Set Value"
+         CAPTION "Set Value"
          WIDTH 120
          OnClick Win1.List1.Value := iif(islistmultiselect('List1','Win1'), {1,3,5}, 2)
       END BUTTON
@@ -48,14 +48,14 @@ FUNCTION Main
       DEFINE BUTTON Button4
          ROW 270
          COL 10
-         Caption "Get Value"
+         CAPTION "Get Value"
          OnClick ShowValues()
       END BUTTON
 
       DEFINE BUTTON Button5
          ROW 270
          COL 110
-         Caption "Get ItemCount"
+         CAPTION "Get ItemCount"
          OnClick {|| MsgInfo(str(Win1.List1.ItemCount))}
       END BUTTON
 
@@ -63,21 +63,21 @@ FUNCTION Main
          ROW 270
          COL 210
          WIDTH 120
-         Caption "Delete All Items"
+         CAPTION "Delete All Items"
          OnClick {|| Win1.List1.DeleteAllItems()}
       END BUTTON
 
       DEFINE BUTTON Button7
          ROW 300
          COL 10
-         Caption "Set Items"
+         CAPTION "Set Items"
          OnClick {|| SetItems({"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"})}
       END BUTTON
 
       DEFINE BUTTON Button8
          ROW 300
          COL 110
-         Caption "Sort Items"
+         CAPTION "Sort Items"
          OnClick {|| loadlist( win1.list1.value, islistmultiselect('List1','Win1'), .t.)}
       END BUTTON
 
@@ -85,7 +85,7 @@ FUNCTION Main
          ROW 300
          COL 210
          WIDTH 120
-         Caption "Toggle Multiselect"
+         CAPTION "Toggle Multiselect"
          OnClick {|| loadlist( if(isarray(win1.list1.value),1,{1}), !islistmultiselect('List1','Win1'), .f.)}
       END BUTTON
 

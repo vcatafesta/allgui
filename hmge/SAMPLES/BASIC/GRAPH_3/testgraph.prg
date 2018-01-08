@@ -26,30 +26,30 @@ FUNCTION Main
          WIDTH 640 ;
          HEIGHT 480 ;
          TITLE "Graph" ;
-         Main ;
+         MAIN ;
          ICON "Main" ;
-         nomaximize nosize ;
-         On Init DrawBarGraph ( aSer )
+         NOMAXIMIZE nosize ;
+         ON INIT DrawBarGraph ( aSer )
 
       DEFINE BUTTON Button_1
          ROW   405
          COL   50
-         Caption   'Bars'
-         Action DrawBarGraph ( aSer )
+         CAPTION   'Bars'
+         ACTION DrawBarGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_2
          ROW   405
          COL   250
-         Caption   'Lines'
-         Action DrawLinesGraph ( aSer )
+         CAPTION   'Lines'
+         ACTION DrawLinesGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_3
          ROW   405
          COL   450
-         Caption   'Points'
-         Action DrawPointsGraph ( aSer )
+         CAPTION   'Points'
+         ACTION DrawPointsGraph ( aSer )
       END BUTTON
 
       ON KEY ESCAPE ACTION ThisWindow.Release

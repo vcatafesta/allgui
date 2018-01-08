@@ -378,7 +378,7 @@ FUNCTION MAIN()
          FONTNAME 'Arial'
          FONTSIZE 9
          VALUE 1
-         Tooltip ''
+         TOOLTIP ''
          BACKCOLOR {0,255,255}
          ITEMS m->aProperties
          ON DBLCLICK  AssignProperties()
@@ -657,7 +657,7 @@ FUNCTION MyScreen(nOption)
          VALUE 1
          FONTNAME 'Arial'
          FONTSIZE 9
-         Tooltip ''
+         TOOLTIP ''
          BACKCOLOR {0,255,255}
          FONTCOLOR {0,0,0}
          ON CHANGE SelectControl('Grid_1')
@@ -3508,7 +3508,7 @@ FUNCTION PickField(aitems,AllF)
          COL     167
          WIDTH   25
          HEIGHT  21
-         Caption ">"
+         CAPTION ">"
          FONTBOLD .T.
          TOOLTIP 'Add Selected Field'
          ONCLICK Fld_add()
@@ -3521,7 +3521,7 @@ FUNCTION PickField(aitems,AllF)
          COL     167
          WIDTH   25
          HEIGHT  21
-         Caption ">>"
+         CAPTION ">>"
          FONTBOLD .T.
          TOOLTIP 'Add all checked fields'
          ONCLICK Fld_add(.T.)
@@ -3538,7 +3538,7 @@ FUNCTION PickField(aitems,AllF)
          COL     167
          WIDTH   25
          HEIGHT  21
-         Caption "<"
+         CAPTION "<"
          FONTBOLD .T.
          TOOLTIP 'Remove Selected Field'
          ONCLICK  Fld_del()

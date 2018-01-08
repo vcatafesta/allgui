@@ -26,66 +26,66 @@ FUNCTION Main
                ROW 25
                COL 5
                WIDTH 160
-               caption 'DBF to be converted'
+               CAPTION 'DBF to be converted'
                HEIGHT 110
             END FRAME
             DEFINE BUTTON browsedbf
                ROW 50
                COL 10
                WIDTH 150
-               caption "Select a DBF File"
-               action browsefordbf()
+               CAPTION "Select a DBF File"
+               ACTION browsefordbf()
             END BUTTON
             DEFINE LABEL dbfname
                ROW 85
                COL 10
                WIDTH 150
-               fontbold .t.
+               FONTBOLD .t.
             END LABEL
             DEFINE LABEL dbfconnection
                ROW 110
                COL 10
                WIDTH 150
-               value "DBF is not yet connected"
-               fontbold .t.
-               fontcolor {255,0,0}
+               VALUE "DBF is not yet connected"
+               FONTBOLD .t.
+               FONTCOLOR {255,0,0}
             END LABEL
             DEFINE FRAME sqliteframe
                ROW 25
                COL 185
                WIDTH 160
-               caption 'Create/Select SQLite DB'
+               CAPTION 'Create/Select SQLite DB'
                HEIGHT 110
             END FRAME
             DEFINE BUTTON createfile
                ROW 50
                COL 190
                WIDTH 150
-               caption 'Create New...'
-               action createadb()
+               CAPTION 'Create New...'
+               ACTION createadb()
             END BUTTON
             DEFINE BUTTON selectfile
                ROW 80
                COL 190
                WIDTH 150
-               caption 'Select Existing...'
-               action selectdb()
+               CAPTION 'Select Existing...'
+               ACTION selectdb()
             END BUTTON
             DEFINE LABEL connection
                ROW 110
                COL 190
                WIDTH 150
-               value "DB Not Yet Connected"
-               fontbold .t.
-               fontcolor {255,0,0}
+               VALUE "DB Not Yet Connected"
+               FONTBOLD .t.
+               FONTCOLOR {255,0,0}
             END LABEL
             DEFINE BUTTON export
                ROW 140
                COL 150
                WIDTH 50
-               caption "Export"
-               fontbold .t.
-               action export2sql()
+               CAPTION "Export"
+               FONTBOLD .t.
+               ACTION export2sql()
             END BUTTON
             define progressbar progress
                ROW 170
@@ -96,7 +96,7 @@ FUNCTION Main
                ROW 200
                COL 10
                WIDTH 200
-               value ""
+               VALUE ""
             END LABEL
          END PAGE
          DEFINE PAGE 'SQLite -> DBF'
@@ -104,21 +104,21 @@ FUNCTION Main
                ROW 25
                COL 5
                WIDTH 160
-               caption 'SQLite to be converted'
+               CAPTION 'SQLite to be converted'
                HEIGHT 110
             END FRAME
             DEFINE BUTTON browsesql1
                ROW 50
                COL 10
                WIDTH 150
-               caption "Select a SQLite DB"
-               action browseforsqlite()
+               CAPTION "Select a SQLite DB"
+               ACTION browseforsqlite()
             END BUTTON
             DEFINE LABEL tableslabel
                ROW 85
                COL 10
                WIDTH 50
-               value 'Table'
+               VALUE 'Table'
             END LABEL
             DEFINE COMBOBOX tables
                ROW 80
@@ -130,38 +130,38 @@ FUNCTION Main
                ROW 110
                COL 10
                WIDTH 150
-               value "DB is not yet connected"
-               fontbold .t.
-               fontcolor {255,0,0}
+               VALUE "DB is not yet connected"
+               FONTBOLD .t.
+               FONTCOLOR {255,0,0}
             END LABEL
             DEFINE FRAME dbfframe1
                ROW 25
                COL 185
                WIDTH 160
-               caption 'Enter Table Name'
+               CAPTION 'Enter Table Name'
                HEIGHT 110
             END FRAME
             DEFINE BUTTON newtable
                ROW 50
                COL 190
                WIDTH 150
-               action createnewdbf()
-               caption 'Save to...'
+               ACTION createnewdbf()
+               CAPTION 'Save to...'
             END BUTTON
             DEFINE LABEL newtablename
                ROW 85
                COL 190
                WIDTH 150
-               value ''
-               fontbold .t.
+               VALUE ''
+               FONTBOLD .t.
             END LABEL
             DEFINE BUTTON export1
                ROW 140
                COL 150
                WIDTH 50
-               caption "Export"
-               fontbold .t.
-               action export2dbf()
+               CAPTION "Export"
+               FONTBOLD .t.
+               ACTION export2dbf()
             END BUTTON
             define progressbar progress1
                ROW 170
@@ -172,7 +172,7 @@ FUNCTION Main
                ROW 200
                COL 10
                WIDTH 200
-               value ""
+               VALUE ""
             END LABEL
          END PAGE
       END TAB

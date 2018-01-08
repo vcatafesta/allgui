@@ -59,7 +59,7 @@ FUNCTION _BrowseDelete ( ControlName , ParentForm , z )
 
    _BrowseRecMap := _HMG_aControlRangeMax [i]
 
-   Value := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_aControlHandles [i] ) ]
+   VALUE := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_aControlHandles [i] ) ]
 
    IF Value == 0
 

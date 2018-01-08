@@ -97,29 +97,29 @@ FUNCTION DBUbrowse1()
          COL 3
          WIDTH nWBrowseWidth - 10
          HEIGHT nWBrowseHeight - IF(IsXPThemeActive(), 160, 150 )
-         headers _DBUanames
-         widths _DBUasizes
-         workarea &_DBUname1
+         HEADERS _DBUanames
+         WIDTHS _DBUasizes
+         WORKAREA &_DBUname1
          BACKCOLOR _DBUgreenish
-         fields _DBUanames
-         value recno()
-         fontname "Arial"
+         FIELDS _DBUanames
+         VALUE recno()
+         FONTNAME "Arial"
          fontsize 9
-         tooltip 'Double click to edit field contents'
+         TOOLTIP 'Double click to edit field contents'
          allowappend .t.
          allowedit .t.
          allowdelete .t.
          lock .t.
          inplaceedit .t.
-         on change DBUbrowsechanged()
+         ON CHANGE DBUbrowsechanged()
       END browse
 
       DEFINE BUTTON _DBUbrowsegotobutton
          ROW nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)
          COL 10
-         caption "Goto"
+         CAPTION "Goto"
          WIDTH 50
-         action DBUbrowsegotoclick()
+         ACTION DBUbrowsegotoclick()
       END BUTTON
 
       DEFINE TEXTBOX _DBUbrowsegoto
@@ -127,19 +127,19 @@ FUNCTION DBUbrowse1()
          COL 70
          WIDTH 100
          BACKCOLOR _DBUgreenish
-         numeric .t.
-         rightalign .t.
-         value recno()
-         on enter DBUbrowsegotoclick()
+         NUMERIC .t.
+         RIGHTALIGN .t.
+         VALUE recno()
+         ON ENTER DBUbrowsegotoclick()
       END TEXTBOX
 
       IF _DBUfiltered
          DEFINE LABEL _DBUfilterconditionlabel
             ROW nWBrowseHeight - IF(IsXPThemeActive(), 85, 75)
             COL 200
-            value "Filter Condition :"
+            VALUE "Filter Condition :"
             WIDTH 150
-            fontbold .T.
+            FONTBOLD .T.
             // backcolor _DBUgreenish
             // fontcolor {255,0,0}
          END LABEL
@@ -148,9 +148,9 @@ FUNCTION DBUbrowse1()
             ROW nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)
             COL 360
             WIDTH _DBUwindowwidth - 400
-            value _DBUcondition
+            VALUE _DBUcondition
             readonly .T.
-            fontbold .T.
+            FONTBOLD .T.
             BACKCOLOR _DBUgreenish
             // fontcolor {255,0,0}
          END TEXTBOX

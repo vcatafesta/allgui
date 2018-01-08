@@ -11,8 +11,8 @@ PROCEDURE main()
          at 0,0 ;
          WIDTH 320 height 240 ;
          TITLE 'fn:BmpSize() Demo' ;
-         main ;
-         nomaximize nosize
+         MAIN ;
+         NOMAXIMIZE nosize
 
       DEFINE MAIN MENU
          DEFINE POPUP "&File"
@@ -27,9 +27,9 @@ PROCEDURE main()
 
       @ 20, 20 image Image_1 ;
          PICTURE 'DEMO' ;
-         action Image_1_OnClick( Form_Main.Image_1.Picture ) ;
+         ACTION Image_1_OnClick( Form_Main.Image_1.Picture ) ;
          adjust ;
-         tooltip 'Click Me'
+         TOOLTIP 'Click Me'
 
    END WINDOW
 

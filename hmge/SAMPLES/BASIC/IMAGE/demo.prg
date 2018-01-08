@@ -8,7 +8,7 @@
 FUNCTION Main
 
    DEFINE WINDOW win_1 ;
-         main ;
+         MAIN ;
          clientarea 300, 300 ;
          TITLE "JPEG Image From Resource" ;
          BACKCOLOR TEAL nosize

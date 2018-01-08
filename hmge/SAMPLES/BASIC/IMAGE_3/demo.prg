@@ -11,7 +11,7 @@ FUNCTION Main
    LOCAL cURL2 := "http://cdn.history.com/sites/2/2015/04/hith-eiffel-tower-iStock_000016468972Large.jpg"
 
    DEFINE WINDOW win_1 ;
-         main ;
+         MAIN ;
          clientarea 800, 633 ;
          TITLE "JPEG Image From URL" ;
          BACKCOLOR { 204, 220, 240 } nosize

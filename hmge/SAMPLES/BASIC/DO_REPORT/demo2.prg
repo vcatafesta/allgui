@@ -17,10 +17,10 @@ FUNCTION Main
          HEIGHT   400         ;
          TITLE   'Do Report Demo'   ;
          MAIN            ;
-         On Init   Win1.Center()
+         ON INIT   Win1.Center()
 
       @ 40 , 40 Button Button1   ;
-         Caption 'Create Report'   ;
+         CAPTION 'Create Report'   ;
          WIDTH   120      ;
          On Click ButtonClick()   ;
          DEFAULT
@@ -37,13 +37,13 @@ PROCEDURE ButtonClick()
 
    do report ;
       TITLE  'COUNTRIES SUMMARY'                                   ;
-      headers  {} , { padc('Name',28), padc('Capital',15),         ;
+      HEADERS  {} , { padc('Name',28), padc('Capital',15),         ;
       padc('Area',11), padc('Population',14) }     ;
-      fields   {'Name', 'Capital', 'Area', 'Population'}           ;
-      widths   {28,15,11,14}                                       ;
+      FIELDS   {'Name', 'Capital', 'Area', 'Population'}           ;
+      WIDTHS   {28,15,11,14}                                       ;
       totals   {.F.,.F.,.T.,.T.}                                   ;
       nformats {'','','999 999 999','99 999 999 999'}              ;
-      workarea Test                                                ;
+      WORKAREA Test                                                ;
       lpp      55                                                  ;
       cpl      77                                                  ;
       lmargin  4                                                   ;

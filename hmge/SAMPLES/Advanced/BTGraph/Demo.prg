@@ -8,7 +8,7 @@ FUNCTION Main
          ROW 10
          COL 45
          WIDTH 115
-         value 'Select Graph Type'
+         VALUE 'Select Graph Type'
          vcenteralign .T.
       END LABEL
       DEFINE COMBOBOX graphtype
@@ -22,15 +22,15 @@ FUNCTION Main
          ROW 10
          COL 280
          WIDTH 100
-         caption 'Enable 3D'
+         CAPTION 'Enable 3D'
          onchange drawgraph()
-         value .T.
+         VALUE .T.
       END CHECKBOX
       DEFINE BUTTON Button_1
          ROW 10
          COL 400
-         caption 'Save as PNG'
-         action BT_BitmapSaveFile( BT_HMGGetImage( "graph", "grapharea" ), "Graph.PNG", BT_FILEFORMAT_PNG )
+         CAPTION 'Save as PNG'
+         ACTION BT_BitmapSaveFile( BT_HMGGetImage( "graph", "grapharea" ), "Graph.PNG", BT_FILEFORMAT_PNG )
       END BUTTON
       DEFINE IMAGE grapharea
          ROW 50

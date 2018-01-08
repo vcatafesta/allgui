@@ -151,11 +151,11 @@ PROCEDURE barre()
          WIDTH  largh_win     ;
          HEIGHT altez_win     ;
          TITLE m->titolo_mask ;
-         Main                 ;
+         MAIN                 ;
          ICON "Main"          ;
-         Nomaximize Nosize    ;
+         NOMAXIMIZE Nosize    ;
          BACKCOLOR m->colore_sfondo ;
-         On Init DrawBarGraph ( )
+         ON INIT DrawBarGraph ( )
 
       @ col_bottoni, 30 COMBOBOX Combo_1     ;
          ITEMS {'Barre','Linee','Punti'} ;
@@ -188,17 +188,17 @@ PROCEDURE barre()
          ON CLOSEUP  (m->lMostraDati := .t.,escoja(graphtest.combo_1.value))
 
       @ col_bottoni, 390 Button Button_1 ;
-         Caption 'Stampa'            ;
+         CAPTION 'Stampa'            ;
          HEIGHT  24                  ;
-         Action  PrintGraph(graphtest.combo_1.value) ;
+         ACTION  PrintGraph(graphtest.combo_1.value) ;
          TOOLTIP 'Trasferisci il grafico sul foglio di stampa' ;
          bold
 
       @ col_bottoni, 510 Button Button_2  ;
-         Caption 'Esci'               ;
+         CAPTION 'Esci'               ;
          HEIGHT  24                   ;
          TOOLTIP 'Esci dal programma' ;
-         Action  GraphTest.Release    ;
+         ACTION  GraphTest.Release    ;
          bold
 
    END WINDOW
@@ -1003,24 +1003,24 @@ PROCEDURE torta
       showpie_3d()
 
       @ pos_button ,20 Button Button_3d ;
-         Caption   'Torta 3D'             ;
-         Action  ( showpie_3d() )          ;
+         CAPTION   'Torta 3D'             ;
+         ACTION  ( showpie_3d() )          ;
          bold
 
       @ pos_button,140 Button Button_flat ;
-         Caption   'Torta Flat'             ;
-         Action  ( showpie_flat() )          ;
+         CAPTION   'Torta Flat'             ;
+         ACTION  ( showpie_flat() )          ;
          bold
 
       @ pos_button,260 Button Button_pie ;
-         Caption   'Stampa'                ;
-         Action  ( printpie() )             ;
+         CAPTION   'Stampa'                ;
+         ACTION  ( printpie() )             ;
          bold
 
       @ pos_button, 380 Button Button_exit ;
-         Caption   'Esci'                    ;
+         CAPTION   'Esci'                    ;
          TOOLTIP 'Esci dal programma'         ;
-         Action  m.Release                    ;
+         ACTION  m.Release                    ;
          bold
 
    END WINDOW

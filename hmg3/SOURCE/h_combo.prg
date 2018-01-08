@@ -109,7 +109,7 @@ FUNCTION _DefineCombo ( ControlName, ;
    IF _HMG_SYSDATA [ 264 ] = TRUE
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]
@@ -169,7 +169,7 @@ FUNCTION _DefineCombo ( ControlName, ;
       IF  HB_UAT ( '>',ItemSource ) == 0
          MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " (ItemSource): You must specify a fully qualified field name. Program Terminated" )
       ELSE
-         WorkArea := HB_ULEFT ( ItemSource , HB_UAT ( '>', ItemSource ) - 2 )
+         WORKAREA := HB_ULEFT ( ItemSource , HB_UAT ( '>', ItemSource ) - 2 )
          cField := HB_URIGHT ( ItemSource , HMG_LEN (ItemSource) - HB_UAT ( '>', ItemSource ) )
       ENDIF
    ENDIF
@@ -184,7 +184,7 @@ FUNCTION _DefineCombo ( ControlName, ;
    ENDIF
 
    IF valtype(value) == "U"
-      value := 0
+      VALUE := 0
    ENDIF
 
    mVar := '_' + ParentForm + '_' + ControlName
@@ -399,7 +399,7 @@ PROCEDURE _DataComboRefresh (i)
    cField := _HMG_SYSDATA [  7 ] [i]
    cImageField := _HMG_SYSDATA [  14 ] [i]
 
-   WorkArea := _HMG_SYSDATA [ 22 ] [i]
+   WORKAREA := _HMG_SYSDATA [ 22 ] [i]
 
    BackRec := (WorkArea)->(RecNo())
 

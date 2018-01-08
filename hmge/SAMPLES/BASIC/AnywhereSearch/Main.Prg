@@ -25,7 +25,7 @@ FUNCTION Main
       DEFINE LABEL textboxlabel
          ROW 10
          COL 10
-         value 'Enter a search string'
+         VALUE 'Enter a search string'
          autosize .t.
          vcenteralign .t.
       END LABEL
@@ -38,7 +38,7 @@ FUNCTION Main
             ( setproperty( ThisWindow.Name, 'textbox', 'VALUE', _cAnywhereSearchStr ), ;
             main.textbox.caretpos := len(_cAnywhereSearchStr) ), ) ;
             )
-         on lostfocus _HMGAnywhereSearchClear()
+         ON LOSTFOCUS _HMGAnywhereSearchClear()
       END TEXTBOX
       DEFINE RADIOGROUP Radio
          ROW    10
@@ -56,7 +56,7 @@ FUNCTION Main
       END RADIOGROUP
 
       DEFINE TREE tree1 at 40, 10 width 200 height 200 ;
-            on gotfocus ( cActiveControl := this.name, main.Radio.Value := 1 )
+            ON GOTFOCUS ( cActiveControl := this.name, main.Radio.Value := 1 )
          node 'Parent 1'
             treeitem 'Child 1'
             treeitem 'Child 2'
@@ -72,21 +72,21 @@ FUNCTION Main
          WIDTH 200
          HEIGHT 200
          multiselect .t.
-         fontname 'Arial'
+         FONTNAME 'Arial'
          fontsize 14
          items aCountries
-         value { 1 }
-         on gotfocus ( cActiveControl := this.name, main.Radio.Value := 2 )
+         VALUE { 1 }
+         ON GOTFOCUS ( cActiveControl := this.name, main.Radio.Value := 2 )
       END listbox
       DEFINE COMBOBOX combo1
          ROW 250
          COL 10
          WIDTH 200
          items aNationalities
-         fontname 'FixedSys'
+         FONTNAME 'FixedSys'
          fontsize 12
-         value 1
-         on gotfocus ( cActiveControl := this.name, main.Radio.Value := 3 )
+         VALUE 1
+         ON GOTFOCUS ( cActiveControl := this.name, main.Radio.Value := 3 )
       END COMBOBOX
       DEFINE GRID grid1
          ROW 280
@@ -94,34 +94,34 @@ FUNCTION Main
          WIDTH 350
          HEIGHT 200
          items aGrid
-         headers { 'Head1', 'Head2', 'Head3' }
-         widths { 100, 100, 120 }
-         value { 1 }
+         HEADERS { 'Head1', 'Head2', 'Head3' }
+         WIDTHS { 100, 100, 120 }
+         VALUE { 1 }
          multiselect .t.
-         on gotfocus ( cActiveControl := this.name, main.Radio.Value := 4 )
+         ON GOTFOCUS ( cActiveControl := this.name, main.Radio.Value := 4 )
       END GRID
       DEFINE GRID grid2
          ROW 280
          COL 370
          WIDTH 330
          HEIGHT 200
-         virtual .t.
-         itemcount 1000
-         headers { 'Column1', 'Column2' }
-         widths { 150, 150 }
-         value 1
+         VIRTUAL .t.
+         ITEMCOUNT 1000
+         HEADERS { 'Column1', 'Column2' }
+         WIDTHS { 150, 150 }
+         VALUE 1
          onquerydata testquery()
-         on gotfocus ( cActiveControl := this.name, main.Radio.Value := 5 )
+         ON GOTFOCUS ( cActiveControl := this.name, main.Radio.Value := 5 )
       END GRID
       DEFINE LABEL _anywherelabel
          ROW GetProperty( ThisWindow.Name, 'HEIGHT' ) - 85
          COL 10
          WIDTH 200
          transparent .t.
-         fontcolor { 255, 0, 0 }
-         fontname 'Arial'
+         FONTCOLOR { 255, 0, 0 }
+         FONTNAME 'Arial'
          fontsize 14
-         fontbold .t.
+         FONTBOLD .t.
          autosize .t.
       END LABEL
 

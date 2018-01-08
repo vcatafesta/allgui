@@ -6,8 +6,8 @@ FUNCTION Main()
       DEFINE BUTTON create
          ROW 100
          COL 100
-         caption 'HMG HPDF DOC'
-         action pdf_create()
+         CAPTION 'HMG HPDF DOC'
+         ACTION pdf_create()
       END BUTTON
    END WINDOW
    main.center

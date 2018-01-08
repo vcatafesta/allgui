@@ -81,7 +81,7 @@ FUNCTION DBUcreanew(cBase)
          RANGEMIN 1
          RANGEMAX 100
          VALUE 10
-         on lostfocus DBUsizelostfocus()
+         ON LOSTFOCUS DBUsizelostfocus()
       END SPINNER
 
       DEFINE SPINNER _DBUfielddecimals
@@ -91,7 +91,7 @@ FUNCTION DBUcreanew(cBase)
          HEIGHT 24
          RANGEMIN 0
          RANGEMAX 99
-         on lostfocus DBUdeclostfocus()
+         ON LOSTFOCUS DBUdeclostfocus()
       END SPINNER
 
       DEFINE BUTTON _DBUaddline
@@ -100,7 +100,7 @@ FUNCTION DBUcreanew(cBase)
          WIDTH  80
          HEIGHT 28
          CAPTION "Add"
-         action DBUaddstruct()
+         ACTION DBUaddstruct()
       END BUTTON
 
       DEFINE BUTTON _DBUinsline
@@ -109,7 +109,7 @@ FUNCTION DBUcreanew(cBase)
          WIDTH  80
          HEIGHT 28
          CAPTION "Insert"
-         action DBUinsstruct()
+         ACTION DBUinsstruct()
       END BUTTON
 
       DEFINE BUTTON _DBUdelline
@@ -118,7 +118,7 @@ FUNCTION DBUcreanew(cBase)
          WIDTH  80
          HEIGHT 28
          CAPTION "Delete"
-         action DBUdelstruct()
+         ACTION DBUdelstruct()
       END BUTTON
 
       DEFINE GRID _DBUstruct
@@ -139,7 +139,7 @@ FUNCTION DBUcreanew(cBase)
          WIDTH  80
          HEIGHT 28
          CAPTION "Create"
-         action DBUsavestructure()
+         ACTION DBUsavestructure()
       END BUTTON
 
       DEFINE BUTTON _DBUexitnew
@@ -148,7 +148,7 @@ FUNCTION DBUcreanew(cBase)
          WIDTH  80
          HEIGHT 28
          CAPTION "Exit"
-         action DBUexitcreatenew()
+         ACTION DBUexitcreatenew()
       END BUTTON
 
    END WINDOW

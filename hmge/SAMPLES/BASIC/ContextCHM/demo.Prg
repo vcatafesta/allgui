@@ -15,8 +15,8 @@ PROCEDURE Main
          At 0, 0 ;
          WIDTH 550 Height 350 ;
          TITLE 'Usage Help File in Format CHM' ;
-         Main ;
-         NoMaximize ;
+         MAIN ;
+         NOMAXIMIZE ;
          NOSIZE
 
       DEFINE MAIN MENU
@@ -37,7 +37,7 @@ PROCEDURE Main
       DEFINE BUTTON b1
          ROW 20
          COL 20
-         caption 'Press me'
+         CAPTION 'Press me'
          onclick DisplayHelpTopic( "helpindex.htm" )
       END BUTTON
 

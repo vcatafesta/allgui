@@ -1610,7 +1610,7 @@ METHOD Delete() CLASS TXBrowse
       RETURN .F.
    ENDIF
 
-   Value := ::CurrentRow
+   VALUE := ::CurrentRow
    IF Value == 0
       RETURN .F.
    ENDIF

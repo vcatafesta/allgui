@@ -10,15 +10,15 @@ FUNCTION main
       DEFINE BUTTON x
          ROW 10
          COL 10
-         caption "Draw"
-         action showpie()
+         CAPTION "Draw"
+         ACTION showpie()
       END BUTTON
 
       DEFINE BUTTON x1
          ROW 40
          COL 10
-         caption "Print"
-         action ( showpie(), printpie() )
+         CAPTION "Print"
+         ACTION ( showpie(), printpie() )
       END BUTTON
 
    END WINDOW

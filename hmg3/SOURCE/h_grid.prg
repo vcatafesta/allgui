@@ -97,10 +97,10 @@ FUNCTION _DefineGrid (   ControlName   , ;
       aHeaders, ;
       aWidths, ;
       aRows, ;
-      value      , ;
-      fontname   , ;
+      VALUE      , ;
+      FONTNAME   , ;
       fontsize   , ;
-      tooltip      , ;
+      TOOLTIP      , ;
       change      , ;
       dblclick   , ;
       aHeadClick   , ;
@@ -117,23 +117,23 @@ FUNCTION _DefineGrid (   ControlName   , ;
       strikeout   , ;
       ownerdata   , ;
       ondispinfo   , ;
-      itemcount   , ;
+      ITEMCOUNT   , ;
       available0   , ;
       available1   , ;
       available2   , ;
       multiselect   , ;
       available3   , ;
       BACKCOLOR   , ;
-      fontcolor   , ;
+      FONTCOLOR   , ;
       alloweditInplace   , ;
       editcontrols   , ;
       DYNAMICbackcolor ,;
       DYNAMICforecolor ,;
       columnvalid ,      ;
-      columnwhen ,      ;
+      COLUMNWHEN ,      ;
       columnheaders ,   ;
       aHeaderImages ,   ;
-      cellnavigation ,  ;
+      CELLNAVIGATION ,  ;
       cRecordSource   , ;
       aColumnFields   , ;
       allowappend      , ;
@@ -178,8 +178,8 @@ FUNCTION _DefineGrid (   ControlName   , ;
       ENDIF
 
       ownerdata      := .t.
-      itemcount      := GridRecCount( cRecordSource )
-      cellnavigation := .t.
+      ITEMCOUNT      := GridRecCount( cRecordSource )
+      CELLNAVIGATION := .t.
       buffered       := .t.
       lArrayRows     := .F.   // ADD3
 
@@ -241,7 +241,7 @@ FUNCTION _DefineGrid (   ControlName   , ;
    IF _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]
@@ -334,7 +334,7 @@ FUNCTION _DefineGrid (   ControlName   , ;
       h := 120
    ENDIF
    IF ValType(value) == "U" .and. !MultiSelect
-      value := 0
+      VALUE := 0
    ENDIF
    IF ValType(aRows) == "U"
       aRows := {}
@@ -1015,11 +1015,11 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
                COL   278 - IF ( IsAppThemed() , 1 , 0 )
                WIDTH   28
                HEIGHT   28
-               action   IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
+               ACTION   IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
                   ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ),;  // ADD V parameter, by Pablo on February, 2015
                   NIL )
                PICTURE   'GRID_MSAV'
-               tooltip _hmg_sysdata [ 133 ] [ 12 ] + ' [Ctrl+W]'
+               TOOLTIP _hmg_sysdata [ 133 ] [ 12 ] + ' [Ctrl+W]'
             END BUTTON
 
             DEFINE BUTTON CANCEL
@@ -1027,9 +1027,9 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
                COL   312 - IF ( IsAppThemed() , 1 , 0 )
                WIDTH   28
                HEIGHT   28
-               action   ( _HMG_SYSDATA [ 256 ] := .T. , THISWINDOW.RELEASE )
+               ACTION   ( _HMG_SYSDATA [ 256 ] := .T. , THISWINDOW.RELEASE )
                PICTURE   'GRID_MCAN'
-               tooltip _hmg_sysdata [ 133 ] [ 13 ] + ' [Esc]'
+               TOOLTIP _hmg_sysdata [ 133 ] [ 13 ] + ' [Esc]'
             END BUTTON
 
          ELSE

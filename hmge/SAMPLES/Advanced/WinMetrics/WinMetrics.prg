@@ -37,7 +37,7 @@ FUNCTION Main()
       DEFINE MAIN MENU OF MainWin
          POPUP "&File"
             ITEM "&Reload System metrics" ;
-               Action {|| aMetrics := FilSysMet(), GridMetricsHeadClick(1, aMetrics, .F.), ;
+               ACTION {|| aMetrics := FilSysMet(), GridMetricsHeadClick(1, aMetrics, .F.), ;
                Rebox_Update(), NIL }   // GAL
             SEPARATOR
             ITEM "&Exit" ACTION MainWin.Release

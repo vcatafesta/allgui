@@ -24,7 +24,7 @@ FUNCTION formas_recebimento()
          ICON path_imagens+'icone.ico';
          modal;
          nosize;
-         on init pesquisar()
+         ON INIT pesquisar()
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
@@ -33,12 +33,12 @@ FUNCTION formas_recebimento()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F5 Incluir'
-         action dados(1)
-         fontname 'verdana'
+         CAPTION 'F5 Incluir'
+         ACTION dados(1)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -50,12 +50,12 @@ FUNCTION formas_recebimento()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F6 Alterar'
-         action dados(2)
-         fontname 'verdana'
+         CAPTION 'F6 Alterar'
+         ACTION dados(2)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -67,12 +67,12 @@ FUNCTION formas_recebimento()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F7 Excluir'
-         action excluir()
-         fontname 'verdana'
+         CAPTION 'F7 Excluir'
+         ACTION excluir()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -84,12 +84,12 @@ FUNCTION formas_recebimento()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F8 Imprimir'
-         action relacao()
-         fontname 'verdana'
+         CAPTION 'F8 Imprimir'
+         ACTION relacao()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -101,12 +101,12 @@ FUNCTION formas_recebimento()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'Atualizar'
-         action atualizar()
-         fontname 'verdana'
+         CAPTION 'Atualizar'
+         ACTION atualizar()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -118,12 +118,12 @@ FUNCTION formas_recebimento()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'ESC Voltar'
-         action form_formas_recebimento.release
-         fontname 'verdana'
+         CAPTION 'ESC Voltar'
+         ACTION form_formas_recebimento.release
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -137,13 +137,13 @@ FUNCTION formas_recebimento()
             ROW 105
             WIDTH 795
             HEIGHT 430
-            headers {'Código','Nome','Banco','Dias p/rec.'}
-            widths {100,350,200,100}
-            fontname 'verdana'
+            HEADERS {'Código','Nome','Banco','Dias p/rec.'}
+            WIDTHS {100,350,200,100}
+            FONTNAME 'verdana'
             fontsize 010
-            fontbold .T.
+            FONTBOLD .T.
             BACKCOLOR _amarelo_001
-            fontcolor _preto_001
+            FONTCOLOR _preto_001
             ondblclick dados(2)
          END GRID
       END SPLITBOX
@@ -152,35 +152,35 @@ FUNCTION formas_recebimento()
          parent form_formas_recebimento
          COL 005
          ROW 545
-         value 'Digite sua pesquisa'
+         VALUE 'Digite sua pesquisa'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
+         FONTBOLD .T.
+         FONTCOLOR _cinza_001
          transparent .T.
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_formas_recebimento;
          HEIGHT 027;
          WIDTH 300;
-         value '';
-         maxlength 040;
+         VALUE '';
+         MAXLENGTH 040;
          font 'verdana' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase;
-         on change pesquisar()
+         ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
          parent form_formas_recebimento
          COL form_formas_recebimento.width - 270
          ROW 545
-         value 'DUPLO CLIQUE : Alterar informação'
+         VALUE 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _verde_002
+         FONTBOLD .T.
+         FONTCOLOR _verde_002
          transparent .T.
       END LABEL
 
@@ -239,71 +239,71 @@ STATIC FUNCTION dados(parametro)
       * entrada de dados
       @ 010,005 label lbl_001;
          of form_dados;
-         value 'Nome';
+         VALUE 'Nome';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
          WIDTH 310;
-         value x_nome;
-         maxlength 020;
+         VALUE x_nome;
+         MAXLENGTH 020;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 060,005 label lbl_003;
          of form_dados;
-         value 'Banco/Conta';
+         VALUE 'Banco/Conta';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,005 textbox tbox_003;
          of form_dados;
          HEIGHT 027;
          WIDTH 060;
-         value x_banco;
+         VALUE x_banco;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          numeric;
-         on enter procura_banco('form_dados','tbox_003')
+         ON ENTER procura_banco('form_dados','tbox_003')
       @ 080,070 label lbl_nome_banco;
          of form_dados;
-         value '';
+         VALUE '';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _azul_001;
+         FONTCOLOR _azul_001;
          transparent
       @ 110,005 label lbl_004;
          of form_dados;
-         value 'Dias para receber';
+         VALUE 'Dias para receber';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 130,005 textbox tbox_004;
          of form_dados;
          HEIGHT 027;
          WIDTH 060;
-         value x_dias;
+         VALUE x_dias;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
-         numeric
+         FONTCOLOR _letra_get_1;
+         NUMERIC
 
       * linha separadora
       DEFINE LABEL linha_rodape
          COL 000
          ROW form_dados.height-090
-         value ''
+         VALUE ''
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
@@ -317,10 +317,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 120
          HEIGHT 050
-         caption 'Ok, gravar'
-         action gravar(parametro)
-         fontbold .T.
-         tooltip 'Confirmar as informações digitadas'
+         CAPTION 'Ok, gravar'
+         ACTION gravar(parametro)
+         FONTBOLD .T.
+         TOOLTIP 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -330,10 +330,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_dados.release
-         fontbold .T.
-         tooltip 'Sair desta tela sem gravar informações'
+         CAPTION 'Voltar'
+         ACTION form_dados.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -602,19 +602,19 @@ STATIC FUNCTION getcode_banco(value)
       DEFINE LABEL label_pesquisa
          COL 005
          ROW 440
-         value 'Buscar'
+         VALUE 'Buscar'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 012
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
-         maxlength 040
+         MAXLENGTH 040
          onchange find_banco()
          uppercase .T.
       END TEXTBOX
@@ -624,14 +624,14 @@ STATIC FUNCTION getcode_banco(value)
          COL 002
          WIDTH 480
          HEIGHT 430
-         headers {'Código','Nome'}
-         widths {080,370}
-         workarea bancos
-         fields {'bancos->codigo','bancos->nome'}
-         value nreg
-         fontname 'verdana'
+         HEADERS {'Código','Nome'}
+         WIDTHS {080,370}
+         WORKAREA bancos
+         FIELDS {'bancos->codigo','bancos->nome'}
+         VALUE nreg
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
+         FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.

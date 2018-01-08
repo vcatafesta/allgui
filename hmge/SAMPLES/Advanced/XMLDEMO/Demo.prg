@@ -48,7 +48,7 @@ FUNCTION Main
                FOR i := 1 TO Len( oXmlDoc:aItems[1]:aItems )
                   oXmlNode := oXmlDoc:aItems[1]:aItems[i]
                   fname := oXmlNode:GetAttribute("name")
-                  action := &( "{||NewItem("+LTrim(Str( i, 2 ))+")}" )
+                  ACTION := &( "{||NewItem("+LTrim(Str( i, 2 ))+")}" )
                   IF i == 1
                      cIdXML := cId+LTrim(Str( i ))
                      ITEM '' ACTION {|| Nil } NAME &cIdXML
@@ -155,14 +155,14 @@ FUNCTION NewItem( nItem )
          lIniChanged := .T.
 
          nId := Len( oXmlNode:aItems ) + 1
-         action := &( "{||NewItem("+LTrim(Str( nId, 2 ))+")}" )
+         ACTION := &( "{||NewItem("+LTrim(Str( nId, 2 ))+")}" )
          _InsertMenuItem ( cIdXML , 'Form_1' , cName , action, cId+LTrim(Str( nId ))  )
       ELSE
          IF oXmlNode:GetAttribute( "name" ) != cName
             oXmlNode:SetAttribute( "name", cName )
             lIniChanged := .T.
 
-            action := &( "{||NewItem("+LTrim(Str( nItem, 2 ))+")}" )
+            ACTION := &( "{||NewItem("+LTrim(Str( nItem, 2 ))+")}" )
             _ModifyMenuItem ( cId+LTrim(Str( nItem )) , 'Form_1' , cName , action )
          ENDIF
          FOR i := 1 TO Len( oXmlNode:aItems )

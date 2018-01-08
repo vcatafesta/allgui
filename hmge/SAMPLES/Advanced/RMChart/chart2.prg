@@ -21,11 +21,11 @@ FUNCTION Main()
          HEIGHT 450 ;
          TITLE 'Demo RMChart - Adapted by Grigory Filatov for MiniGUI' ;
          ICON "Main" ;
-         Main ;
-         On Init fOpenActivex() ;
+         MAIN ;
+         ON INIT fOpenActivex() ;
          On Size Ajust() ;
          On Maximize Ajust() ;
-         On Release fCloseActivex()
+         ON RELEASE fCloseActivex()
 
       Win_1.MinWidth  := 600
       Win_1.MinHeight := 450

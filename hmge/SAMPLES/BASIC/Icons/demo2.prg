@@ -44,9 +44,9 @@ PROCEDURE main()
    DEFINE WINDOW Form_Main ;
          clientarea w, h + GetMenuBarHeight() ;
          TITLE 'Icons Demo (use a Dll)' ;
-         main ;
-         nomaximize nosize ;
-         on release ;
+         MAIN ;
+         NOMAXIMIZE nosize ;
+         ON RELEASE ;
          ( ;
          DestroyIcon( hIcon ) ;
          )

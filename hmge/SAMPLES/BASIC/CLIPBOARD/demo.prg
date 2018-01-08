@@ -26,8 +26,8 @@ PROCEDURE Main
          WIDTH 400                        ;
          HEIGHT 400                       ;
          TITLE 'Clipboard & Others Tests' ;
-         Main                             ;
-         NoMaximize                       ;
+         MAIN                             ;
+         NOMAXIMIZE                       ;
          NOSIZE
 
       DEFINE TAB tbTest ;
@@ -39,55 +39,55 @@ PROCEDURE Main
          Page 'Clipboard'  // Operations with Clipboard
 
             @ 35, 20 ButtonEx btnGetClip                                      ;
-               Caption 'Get'                                            ;
+               CAPTION 'Get'                                            ;
                WIDTH 50                                                 ;
-               FontColor BROWN                                          ;
-               Action MSGINFO_( System.Clipboard, 'Text in clipboard' ) ;
+               FONTCOLOR BROWN                                          ;
+               ACTION MSGINFO_( System.Clipboard, 'Text in clipboard' ) ;
                BACKCOLOR WHITE
 
             @ 35, 80 ButtonEx btnSetClip                             ;
-               Caption 'Set'                                   ;
+               CAPTION 'Set'                                   ;
                WIDTH 50                                        ;
-               FontColor BROWN                                 ;
-               Action System.Clipboard := 'Hello Clipboard!!!' ;
+               FONTCOLOR BROWN                                 ;
+               ACTION System.Clipboard := 'Hello Clipboard!!!' ;
                BACKCOLOR WHITE
 
             @ 35, 180 ButtonEx btnClearClip                                                       ;
-               Caption 'Clear'                                                             ;
+               CAPTION 'Clear'                                                             ;
                WIDTH 50                                                                    ;
-               FontColor RED                                                               ;
-               Action { || ClearClipboard(), MSGINFO_( 'Clipboard cleaned!', 'Warning' ) } ;
+               FONTCOLOR RED                                                               ;
+               ACTION { || ClearClipboard(), MSGINFO_( 'Clipboard cleaned!', 'Warning' ) } ;
                BACKCOLOR WHITE
 
             @ 35, 280 ButtonEx btnTag    ;
-               Caption '{...}'    ;
+               CAPTION '{...}'    ;
                WIDTH 50           ;
-               FontColor BLUE     ;
+               FONTCOLOR BLUE     ;
                Bold               ;
-               Action Bracketed() ;
+               ACTION Bracketed() ;
                BACKCOLOR WHITE
 
             @ 75, 20 EditBox edtText ;
                WIDTH 340       ;
                HEIGHT 260      ;
-               Value 'Highlight the text in a word or more, and then click button "{...}"'  ;
+               VALUE 'Highlight the text in a word or more, and then click button "{...}"'  ;
                NoHScroll
          END PAGE
 
          Page 'Desktop'   // Desktop sizes
 
             @ 60, 110 ButtonEx btnWidth                                       ;
-               Caption 'Get Desktop Width'                             ;
+               CAPTION 'Get Desktop Width'                             ;
                WIDTH 140                                               ;
-               Action MSGINFO_( System.DesktopWidth, 'Desktop width' ) ;
-               FontColor BROWN                                         ;
+               ACTION MSGINFO_( System.DesktopWidth, 'Desktop width' ) ;
+               FONTCOLOR BROWN                                         ;
                BACKCOLOR WHITE
 
             @ 130, 110 ButtonEx btnHeight                                        ;
-               Caption 'Get Desktop Height'                              ;
+               CAPTION 'Get Desktop Height'                              ;
                WIDTH 140                                                 ;
-               Action MSGINFO_( System.DesktopHeight, 'Desktop height' ) ;
-               FontColor BROWN                                           ;
+               ACTION MSGINFO_( System.DesktopHeight, 'Desktop height' ) ;
+               FONTCOLOR BROWN                                           ;
                BACKCOLOR WHITE
 
          END PAGE
@@ -95,45 +95,45 @@ PROCEDURE Main
          Page 'System Folders'  // System Folders location
 
             @ 60, 95 ButtonEx btnDesktopPath                                    ;
-               Caption 'Get Desktop Folder'                               ;
+               CAPTION 'Get Desktop Folder'                               ;
                WIDTH 170                                                  ;
-               Action MSGINFO_( System.DesktopFolder, 'Path to Desktop' ) ;
-               FontColor BROWN                                            ;
+               ACTION MSGINFO_( System.DesktopFolder, 'Path to Desktop' ) ;
+               FONTCOLOR BROWN                                            ;
                BACKCOLOR WHITE
 
             @ 105, 95 ButtonEx btnMyDocPath                                               ;
-               Caption 'Get MyDocuments Folder'                                    ;
+               CAPTION 'Get MyDocuments Folder'                                    ;
                WIDTH 170                                                           ;
-               Action MSGINFO_( System.MyDocumentsFolder, 'Path to My Documents' ) ;
-               FontColor BROWN                                                     ;
+               ACTION MSGINFO_( System.MyDocumentsFolder, 'Path to My Documents' ) ;
+               FONTCOLOR BROWN                                                     ;
                BACKCOLOR WHITE
 
             @ 150, 95 ButtonEx btnProgPath                                                  ;
-               Caption 'Get Program Files Folder'                                    ;
+               CAPTION 'Get Program Files Folder'                                    ;
                WIDTH 170                                                             ;
-               Action MSGINFO_( System.ProgramFilesFolder, 'Path to Program Files' ) ;
-               FontColor BROWN                                                       ;
+               ACTION MSGINFO_( System.ProgramFilesFolder, 'Path to Program Files' ) ;
+               FONTCOLOR BROWN                                                       ;
                BACKCOLOR WHITE
 
             @ 195, 95 ButtonEx btnWinPath                                               ;
-               Caption 'Get Windows Folder'                                      ;
+               CAPTION 'Get Windows Folder'                                      ;
                WIDTH 170                                                         ;
-               Action MSGINFO_( System.WindowsFolder, 'Path to Windows folder' ) ;
-               FontColor BROWN                                                   ;
+               ACTION MSGINFO_( System.WindowsFolder, 'Path to Windows folder' ) ;
+               FONTCOLOR BROWN                                                   ;
                BACKCOLOR WHITE
 
             @ 240, 95 ButtonEx btnSysPath                                               ;
-               Caption 'Get System Folder'                                       ;
+               CAPTION 'Get System Folder'                                       ;
                WIDTH 170                                                         ;
-               Action MSGINFO_( System.SystemFolder, 'Path to System32 folder' ) ;
-               FontColor BROWN                                                   ;
+               ACTION MSGINFO_( System.SystemFolder, 'Path to System32 folder' ) ;
+               FONTCOLOR BROWN                                                   ;
                BACKCOLOR WHITE
 
             @ 285, 95 ButtonEx btnTempPath                                        ;
-               Caption 'Get Temp Folder'                                   ;
+               CAPTION 'Get Temp Folder'                                   ;
                WIDTH 170                                                   ;
-               Action MSGINFO_( System.TempFolder, 'Path to Temp folder' ) ;
-               FontColor BROWN                                             ;
+               ACTION MSGINFO_( System.TempFolder, 'Path to Temp folder' ) ;
+               FONTCOLOR BROWN                                             ;
                BACKCOLOR WHITE
 
          END PAGE
@@ -141,10 +141,10 @@ PROCEDURE Main
          Page 'Printer'  // Show Default Printer
 
             @ 60, 110 ButtonEx btnDefPrinter                                         ;
-               Caption 'Get Default Printer'                                  ;
+               CAPTION 'Get Default Printer'                                  ;
                WIDTH 140                                                      ;
-               Action MSGINFO_( System.DefaultPrinter, 'Printer by default' ) ;
-               FontColor BROWN                                                ;
+               ACTION MSGINFO_( System.DefaultPrinter, 'Printer by default' ) ;
+               FONTCOLOR BROWN                                                ;
                BACKCOLOR WHITE
 
          END PAGE

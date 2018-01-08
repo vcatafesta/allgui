@@ -27,12 +27,12 @@ FUNCTION cpag()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F5 Incluir'
-         action dados_cpag(1)
-         fontname 'verdana'
+         CAPTION 'F5 Incluir'
+         ACTION dados_cpag(1)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -44,12 +44,12 @@ FUNCTION cpag()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F6 Alterar'
-         action dados_cpag(2)
-         fontname 'verdana'
+         CAPTION 'F6 Alterar'
+         ACTION dados_cpag(2)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -61,12 +61,12 @@ FUNCTION cpag()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F7 Excluir'
-         action excluir_cpag()
-         fontname 'verdana'
+         CAPTION 'F7 Excluir'
+         ACTION excluir_cpag()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -78,12 +78,12 @@ FUNCTION cpag()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'Atualizar'
-         action atualizar_cpag()
-         fontname 'verdana'
+         CAPTION 'Atualizar'
+         ACTION atualizar_cpag()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -95,12 +95,12 @@ FUNCTION cpag()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'ESC Voltar'
-         action form_cpag.release
-         fontname 'verdana'
+         CAPTION 'ESC Voltar'
+         ACTION form_cpag.release
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -113,13 +113,13 @@ FUNCTION cpag()
          ROW 105
          WIDTH 980
          HEIGHT 500
-         headers {'id','Vencimento','Fornecedor','Forma Pagamento','Valor R$','Nº Documento','Observação'}
-         widths {001,120,300,200,120,120,200}
-         fontname 'verdana'
+         HEADERS {'id','Vencimento','Fornecedor','Forma Pagamento','Valor R$','Nº Documento','Observação'}
+         WIDTHS {001,120,300,200,120,120,200}
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
+         FONTBOLD .T.
          BACKCOLOR _amarelo_001
-         fontcolor _preto_001
+         FONTCOLOR _preto_001
          ondblclick dados_cpag(2)
       END GRID
 
@@ -127,54 +127,54 @@ FUNCTION cpag()
          parent form_cpag
          COL 005
          ROW 615
-         value 'Escolha o período'
+         VALUE 'Escolha o período'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
+         FONTBOLD .T.
+         FONTCOLOR _cinza_001
          transparent .T.
       END LABEL
       DEFINE LABEL rodape_002
          parent form_cpag
          COL 250
          ROW 615
-         value 'até'
+         VALUE 'até'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
+         FONTBOLD .T.
+         FONTCOLOR _cinza_001
          transparent .T.
       END LABEL
       @ 610,140 datepicker dp_inicio;
          parent form_cpag;
-         value date();
+         VALUE date();
          WIDTH 100;
          font 'verdana' size 010
       @ 610,280 datepicker dp_final;
          parent form_cpag;
-         value date();
+         VALUE date();
          WIDTH 100;
          font 'verdana' size 010
       @ 610,390 buttonex botao_filtrar;
          parent form_cpag;
-         caption 'Filtrar';
+         CAPTION 'Filtrar';
          WIDTH 100 height 030;
-         action atualizar_cpag();
+         ACTION atualizar_cpag();
          bold;
-         tooltip 'Clique aqui para mostrar as informações com base no período selecionado'
+         TOOLTIP 'Clique aqui para mostrar as informações com base no período selecionado'
 
       DEFINE LABEL rodape_003
          parent form_cpag
          COL form_cpag.width - 270
          ROW 615
-         value 'DUPLO CLIQUE : Alterar informação'
+         VALUE 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _verde_002
+         FONTBOLD .T.
+         FONTCOLOR _verde_002
          transparent .T.
       END LABEL
 
@@ -235,136 +235,136 @@ STATIC FUNCTION dados_cpag(parametro)
       * entrada de dados
       @ 010,005 label lbl_001;
          of form_dados;
-         value 'Fornecedor';
+         VALUE 'Fornecedor';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
          WIDTH 060;
-         value x_fornecedor;
+         VALUE x_fornecedor;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          numeric;
-         on enter procura_fornecedor('form_dados','tbox_001')
+         ON ENTER procura_fornecedor('form_dados','tbox_001')
       @ 030,075 label lbl_nome_fornecedor;
          of form_dados;
-         value '';
+         VALUE '';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _azul_001;
+         FONTCOLOR _azul_001;
          transparent
       @ 060,005 label lbl_002;
          of form_dados;
-         value 'Forma Pagamento';
+         VALUE 'Forma Pagamento';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,005 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
          WIDTH 060;
-         value x_forma;
+         VALUE x_forma;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          numeric;
-         on enter procura_forma_pagamento('form_dados','tbox_002')
+         ON ENTER procura_forma_pagamento('form_dados','tbox_002')
       @ 080,075 label lbl_nome_forma_pagamento;
          of form_dados;
-         value '';
+         VALUE '';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _azul_001;
+         FONTCOLOR _azul_001;
          transparent
 
       @ 110,005 label lbl_003;
          of form_dados;
-         value 'Data';
+         VALUE 'Data';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 130,005 textbox tbox_003;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_data;
+         VALUE x_data;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          date
 
       @ 110,140 label lbl_004;
          of form_dados;
-         value 'Valor R$';
+         VALUE 'Valor R$';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _vermelho_002;
+         FONTCOLOR _vermelho_002;
          transparent
       @ 130,140 getbox tbox_004;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_valor;
+         VALUE x_valor;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
 
       @ 110,270 label lbl_005;
          of form_dados;
-         value 'Número documento';
+         VALUE 'Número documento';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 130,270 textbox tbox_005;
          of form_dados;
          HEIGHT 027;
          WIDTH 150;
-         value x_numero;
-         maxlength 015;
+         VALUE x_numero;
+         MAXLENGTH 015;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
 
       @ 160,005 label lbl_006;
          of form_dados;
-         value 'Observação';
+         VALUE 'Observação';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 180,005 textbox tbox_006;
          of form_dados;
          HEIGHT 027;
          WIDTH 200;
-         value x_obs;
-         maxlength 030;
+         VALUE x_obs;
+         MAXLENGTH 030;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
 
       * linha separadora
       DEFINE LABEL linha_rodape
          COL 000
          ROW form_dados.height-090
-         value ''
+         VALUE ''
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
@@ -378,10 +378,10 @@ STATIC FUNCTION dados_cpag(parametro)
          ROW form_dados.height-085
          WIDTH 120
          HEIGHT 050
-         caption 'Ok, gravar'
-         action gravar_cpag(parametro)
-         fontbold .T.
-         tooltip 'Confirmar as informações digitadas'
+         CAPTION 'Ok, gravar'
+         ACTION gravar_cpag(parametro)
+         FONTBOLD .T.
+         TOOLTIP 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -391,10 +391,10 @@ STATIC FUNCTION dados_cpag(parametro)
          ROW form_dados.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_dados.release
-         fontbold .T.
-         tooltip 'Sair desta tela sem gravar informações'
+         CAPTION 'Voltar'
+         ACTION form_dados.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -566,19 +566,19 @@ STATIC FUNCTION getcode_fornecedores(value)
       DEFINE LABEL label_pesquisa
          COL 005
          ROW 440
-         value 'Buscar'
+         VALUE 'Buscar'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 012
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
-         maxlength 040
+         MAXLENGTH 040
          onchange find_fornecedores()
          uppercase .T.
       END TEXTBOX
@@ -588,14 +588,14 @@ STATIC FUNCTION getcode_fornecedores(value)
          COL 002
          WIDTH 480
          HEIGHT 430
-         headers {'Código','Nome'}
-         widths {080,370}
-         workarea fornecedores
-         fields {'fornecedores->codigo','fornecedores->nome'}
-         value nreg
-         fontname 'verdana'
+         HEADERS {'Código','Nome'}
+         WIDTHS {080,370}
+         WORKAREA fornecedores
+         FIELDS {'fornecedores->codigo','fornecedores->nome'}
+         VALUE nreg
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
+         FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
@@ -685,19 +685,19 @@ STATIC FUNCTION getcode_formas_pagamento(value)
       DEFINE LABEL label_pesquisa
          COL 005
          ROW 440
-         value 'Buscar'
+         VALUE 'Buscar'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 012
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
-         maxlength 040
+         MAXLENGTH 040
          onchange find_formas_pagamento()
          uppercase .T.
       END TEXTBOX
@@ -707,14 +707,14 @@ STATIC FUNCTION getcode_formas_pagamento(value)
          COL 002
          WIDTH 480
          HEIGHT 430
-         headers {'Código','Nome'}
-         widths {080,370}
-         workarea formas_pagamento
-         fields {'formas_pagamento->codigo','formas_pagamento->nome'}
-         value nreg
-         fontname 'verdana'
+         HEADERS {'Código','Nome'}
+         WIDTHS {080,370}
+         WORKAREA formas_pagamento
+         FIELDS {'formas_pagamento->codigo','formas_pagamento->nome'}
+         VALUE nreg
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
+         FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.

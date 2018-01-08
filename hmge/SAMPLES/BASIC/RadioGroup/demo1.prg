@@ -14,7 +14,7 @@ FUNCTION Main
          HEIGHT   400         ;
          TITLE   'HMG RadioGroup Demo'   ;
          WindowType MAIN         ;
-         On Init   Win1.Center()
+         ON INIT   Win1.Center()
 
       DEFINE MAIN MENU
          DEFINE POPUP "&Properties"
@@ -31,16 +31,16 @@ FUNCTION Main
          Options {"New 1","New 2","New 3"};
          WIDTH   60;
          Spacing 20;
-         Value   2;
+         VALUE   2;
          Horizontal;
-         Tooltip   'Horizontal Radiogroup';
-         on change MsgInfo("OOP Radiogroup 1 Value Changed!")
+         TOOLTIP   'Horizontal Radiogroup';
+         ON CHANGE MsgInfo("OOP Radiogroup 1 Value Changed!")
 
       @ 110, 10 RadioGroup Radiogroup2;
          Options {"Option 1","Option 2","Option 3","Option 4"} ;
          WIDTH 240;
-         Tooltip   'Vertical Radiogroup' ;
-         on change {||MsgInfo("OOP Radiogroup 2 Value Changed!")}
+         TOOLTIP   'Vertical Radiogroup' ;
+         ON CHANGE {||MsgInfo("OOP Radiogroup 2 Value Changed!")}
 
    END WINDOW
 
@@ -92,8 +92,8 @@ PROCEDURE sethorizontal(control,form)
       Horizontal;
       WIDTH 80;
       Spacing 12;
-      Value nvalue;
-      Tooltip   'Horizontal Radiogroup' ;
-      on change {||MsgInfo("OOP Radiogroup 2 Value Changed!")}
+      VALUE nvalue;
+      TOOLTIP   'Horizontal Radiogroup' ;
+      ON CHANGE {||MsgInfo("OOP Radiogroup 2 Value Changed!")}
 
    RETURN

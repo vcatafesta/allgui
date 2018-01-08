@@ -30,37 +30,37 @@ PROCEDURE Formater
          Modal
 
       @ 5, 5 Frame frmFiles           ;
-         Caption aStrings[ 2, 2 ] ;
+         CAPTION aStrings[ 2, 2 ] ;
          WIDTH ( wReformat.Width - 20 ) ;
          HEIGHT 75                ;
          Bold                     ;
-         Fontcolor BLUE
+         FONTCOLOR BLUE
 
       @ ( wReformat.frmFiles.Row + 15 ), ( wReformat.frmFiles.Col + 10 ) ;
          RadioGroup rdgFiles                                              ;
          Options { aStrings[ 3, 2 ], aStrings[ 4, 2 ] }                   ;
-         Value nRange                                                     ;
+         VALUE nRange                                                     ;
          WIDTH ( wReformat.frmFiles.Width - 20 )
 
       @ ( wReformat.frmFiles.Row + wReformat.frmFiles.Height + 5 ), wReformat.frmFiles.Col ;
          Frame frmCase                  ;
-         Caption aStrings[ 5, 2 ]       ;
+         CAPTION aStrings[ 5, 2 ]       ;
          WIDTH wReformat.frmFiles.Width ;
          HEIGHT 100                     ;
          Bold                           ;
-         Fontcolor BLUE
+         FONTCOLOR BLUE
 
       @ ( wReformat.frmCase.Row + 15 ), ( wReformat.frmCase.Col + 10 )   ;
          RadioGroup rdgCase                                               ;
          Options { aStrings[ 6, 2 ], aStrings[ 7, 2 ], aStrings[ 8, 2 ] } ;
          WIDTH wReformat.rdgFiles.Width                                   ;
-         Value nCharCase
+         VALUE nCharCase
 
       @ ( wReformat.frmCase.Row + wReformat.frmCase.Height + 20 ), ;
          ( wReformat.frmCase.Col + 15 )                             ;
          Button btnGoto                                             ;
-         Caption aStrings[ 9, 2 ]                                   ;
-         Action { || lContinue := .T.                    , ;
+         CAPTION aStrings[ 9, 2 ]                                   ;
+         ACTION { || lContinue := .T.                    , ;
          nRange := wReformat.rdgFiles.Value  , ;
          nCharCase := wReformat.rdgCase.Value, ;
          wReformat.Release                     ;
@@ -68,8 +68,8 @@ PROCEDURE Formater
 
       @ wReformat.btnGoto.Row, ( wReformat.btnGoto.Col + wReformat.btnGoto.Width + 30 ) ;
          Button btnCancel                                                                ;
-         Caption _HMG_MESSAGE[ 7 ]                                                       ;
-         Action wReformat.Release
+         CAPTION _HMG_MESSAGE[ 7 ]                                                       ;
+         ACTION wReformat.Release
 
       On key Escape of wReformat Action wReformat.Release
       On key Alt+X  of wReformat Action ReleaseAllWindows()
@@ -90,7 +90,7 @@ PROCEDURE Formater
             TITLE aStrings[ 10, 2 ] ;
             ICON 'STOCK'            ;
             Modal                   ;
-            On init Do_Format( nRange, nCharCase, aStrings )
+            ON INIT Do_Format( nRange, nCharCase, aStrings )
 
          @ 5, 5 EditBox edtConsole              ;
             HEIGHT ( wConsole.Height - 90 ) ;
@@ -100,8 +100,8 @@ PROCEDURE Formater
          @ ( wConsole.edtConsole.Row + wConsole.edtConsole.Height + 15 ), ;
             ( wConsole.edtConsole.Col + 125 )                              ;
             Button btnOK                                                   ;
-            Caption _HMG_MESSAGE[ 6 ]                                      ;
-            Action wConsole.Release
+            CAPTION _HMG_MESSAGE[ 6 ]                                      ;
+            ACTION wConsole.Release
 
          On key Alt+X  of wConsole Action ReleaseAllWindows()
 

@@ -7,15 +7,15 @@ FUNCTION main
       DEFINE BUTTON x
          ROW 10
          COL 10
-         caption "Draw"
-         action showpie()
+         CAPTION "Draw"
+         ACTION showpie()
       END BUTTON
 
       DEFINE BUTTON Button_1
          ROW   10
          COL   150
-         Caption   'Print'
-         Action PRINT GRAPH OF m PREVIEW DIALOG
+         CAPTION   'Print'
+         ACTION PRINT GRAPH OF m PREVIEW DIALOG
       END BUTTON
 
    END WINDOW

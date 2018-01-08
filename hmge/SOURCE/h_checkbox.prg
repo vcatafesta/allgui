@@ -80,9 +80,9 @@ FUNCTION _DefineCheckBox ( ControlName, ParentFormName, x, y, Caption, Value, ;
       IF At ( '>', Field ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + " : You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( Field , At ( '>', Field ) - 2 )
+         WORKAREA := Left ( Field , At ( '>', Field ) - 2 )
          IF Select ( WorkArea ) != 0
-            Value := &( Field )
+            VALUE := &( Field )
          ENDIF
       ENDIF
    ENDIF
@@ -258,7 +258,7 @@ FUNCTION _DefineCheckBox ( ControlName, ParentFormName, x, y, Caption, Value, ;
 FUNCTION _DefineCheckButton ( ControlName, ParentFormName, x, y, Caption, Value, ;
       fontname, fontsize, tooltip, changeprocedure, ;
       w, h, lostfocus, gotfocus, HelpId, invisible, ;
-      notabstop , bold, italic, underline, strikeout, nId )
+      NOTABSTOP , bold, italic, underline, strikeout, nId )
    LOCAL ParentFormHandle , blInit, mVar , k , Style
    LOCAL ControlHandle , FontHandle
    LOCAL lDialogInMemory
@@ -418,7 +418,7 @@ FUNCTION InitDialogCheckButton ( ParentName, ControlHandle, k )
    LOCAL Value , BitMap , threestate
 
    BitMap := _HMG_aControlPicture [k]
-   Value := _HMG_aControlValue [k]
+   VALUE := _HMG_aControlValue [k]
    threestate := _HMG_aControlSpacing [k]
    IF !Empty( BitMap ) .AND. ValType( ParentName ) <> 'U'
       _SetBtnPicture( ControlHandle, BitMap )

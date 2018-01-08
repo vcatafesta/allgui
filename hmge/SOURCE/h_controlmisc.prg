@@ -180,7 +180,7 @@ FUNCTION _GetValue ( ControlName, ParentForm, Index )
    CASE T == "COMBO"
       IF ValType ( _HMG_aControlSpacing [ix] ) == 'C'
          auxval := ComboGetCursel ( c )
-         WorkArea := _HMG_aControlSpacing [ix]
+         WORKAREA := _HMG_aControlSpacing [ix]
          BackRec := ( WorkArea )->( RecNo() )
          ( WorkArea )->( dbGoTop() )
          DO WHILE ! ( WorkArea )->( EOF() )
@@ -305,7 +305,7 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
       _BrowseSetValue ( '' , '' , Value , ix )
 #endif
    CASE T == "IPADDRESS"
-      Value := IFEMPTY( Value, {}, Value )
+      VALUE := IFEMPTY( Value, {}, Value )
 
       IF Len( Value ) == 0
          ClearIpAddress( c )
@@ -314,7 +314,7 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
       ENDIF
 
    CASE T == "MONTHCAL"
-      Value := IFEMPTY( Value, CToD( '' ), Value )
+      VALUE := IFEMPTY( Value, CToD( '' ), Value )
       SetMonthCalValue( c, Year( value ), Month( value ), Day( value ) )
 
       _DoControlEventProcedure ( _HMG_aControlChangeProcedure [ix] , ix , 'CONTROL_ONCHANGE' )
@@ -342,7 +342,7 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
       TreeView_SelectItem ( c , TreeItemHandle )
 
    CASE T == "MASKEDTEXT"
-      Value := IFEMPTY( Value, 0, Value )
+      VALUE := IFEMPTY( Value, 0, Value )
 
       IF GetFocus() == c
          SetWindowText ( _HMG_aControlhandles [ix] , Transform ( Value , _HMG_aControlInputMask [ix] ) )
@@ -368,7 +368,7 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
 
    CASE "LABEL" $ T .OR. T == "HYPERLINK"
       IF Empty( Value )
-         value := iif( "LABEL" $ T, iif( ISCHARACTER( Value ), Value, "" ), "@" )
+         VALUE := iif( "LABEL" $ T, iif( ISCHARACTER( Value ), Value, "" ), "@" )
       ENDIF
 
       IF _HMG_aControlSpacing [ix] == 1
@@ -386,7 +386,7 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
       ENDIF
 
    CASE T == "TEXT" .OR. T == "BTNTEXT" .OR. T == "EDIT" .OR. T == "CHARMASKTEXT" .OR. T == "RICHEDIT"
-      Value := IFEMPTY( Value, '', Value )
+      VALUE := IFEMPTY( Value, '', Value )
 
       IF T == "CHARMASKTEXT"
          IF ISLOGICAL ( _HMG_aControlHeadCLick [ix] )
@@ -414,15 +414,15 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
       ENDIF
 
    CASE "NUMTEXT" $ T
-      Value := IFEMPTY( Value, 0, Value )
+      VALUE := IFEMPTY( Value, 0, Value )
       SetWindowText ( c , hb_ntos( Int( value ) ) )
 
    CASE T == "SPINNER"
-      Value := IFEMPTY( Value, 0, Value )
+      VALUE := IFEMPTY( Value, 0, Value )
       SetSpinnerValue ( c [2] , Value )
 
    CASE T == "CHECKBOX"
-      Value := iif( ISLOGICAL ( Value ), Value, NIL )
+      VALUE := iif( ISLOGICAL ( Value ), Value, NIL )
 
       IF _HMG_aControlSpacing [ix] .AND. value == NIL
          SendMessage ( c , BM_SETCHECK , BST_INDETERMINATE , 0 )
@@ -456,17 +456,17 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
       ENDIF
 
    CASE T == "COMBO"
-      Value := IFNUMERIC( Value, Value, 0 )
+      VALUE := IFNUMERIC( Value, Value, 0 )
 
       IF ValType ( _HMG_aControlSpacing [ix] ) == 'C'
          _HMG_aControlValue [ix] := value
-         WorkArea := _HMG_aControlSpacing [ix]
+         WORKAREA := _HMG_aControlSpacing [ix]
          BackRec := ( WorkArea )->( RecNo() )
          ( WorkArea )->( dbGoTop() )
          DO WHILE ! ( WorkArea )->( EOF() )
             rcount++
             IF value == ( WorkArea )->( RecNo() )
-               value := rcount
+               VALUE := rcount
                EXIT
             ENDIF
             ( WorkArea )->( dbSkip() )
@@ -481,7 +481,7 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
       ENDIF
 
    CASE T == "LIST" .OR. T == "CHKLIST"
-      Value := IFNUMERIC( Value, Value, 0 )
+      VALUE := IFNUMERIC( Value, Value, 0 )
 
       ListBoxSetCursel ( c , value )
 
@@ -551,11 +551,11 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
       _DoControlEventProcedure ( _HMG_aControlChangeProcedure [ix] , ix , 'CONTROL_ONCHANGE' )
 
    CASE T == "PROGRESSBAR"
-      Value := IFEMPTY( Value, 0, Value )
+      VALUE := IFEMPTY( Value, 0, Value )
       SendMessage( c, PBM_SETPOS , value , 0 )
 
    CASE T == "SLIDER"
-      Value := IFEMPTY( Value, 0, Value )
+      VALUE := IFEMPTY( Value, 0, Value )
       SendMessage( c , TBM_SETPOS , 1 , value )
 
       _DoControlEventProcedure ( _HMG_aControlChangeProcedure [ix] , ix , 'CONTROL_ONCHANGE' )
@@ -565,7 +565,7 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
 
    CASE T == "MULTIGRID"
       IF ISNUMBER( value )  // GF 09/02/2013
-         Value := { Value }
+         VALUE := { Value }
       ENDIF
       LISTVIEWSETMULTISEL ( c , value )
 
@@ -755,7 +755,7 @@ FUNCTION _AddItem ( ControlName , ParentForm , Value , Parent , aImage , Id )
          ChkListboxAddItem ( c , value, 1 )
       ELSE
          IF _HMG_aControlMiscData1 [ix] [2] .AND. ValType( value ) == 'A'
-            value := LB_Array2String( value )
+            VALUE := LB_Array2String( value )
          ENDIF
 
          ListBoxAddstring ( c , value )
@@ -1655,7 +1655,7 @@ FUNCTION _SetItem ( ControlName , ParentForm , Item , Value , index )
    CASE T == "LIST"
 
       IF _HMG_aControlMiscData1 [i] [2] .AND. ValType(value) == 'A'
-         value := LB_Array2String( value )
+         VALUE := LB_Array2String( value )
       ENDIF
 
       ListBoxDeleteString ( c , Item )
@@ -6182,7 +6182,7 @@ FUNCTION _IsFieldExists ( Field )
    LOCAL WorkArea
    LOCAL x := At ( '>', Field )
 
-   WorkArea := Left ( Field , x - 2 )
+   WORKAREA := Left ( Field , x - 2 )
    Field := Right ( Field, Len ( Field ) - x )
 
    RETURN ( ( WorkArea )->( FieldPos ( Field ) ) != 0 )

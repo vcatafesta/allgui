@@ -100,7 +100,6 @@
 
 
 
-
 #include <shlobj.h>
 #include <windows.h>
 #include "richedit.h"

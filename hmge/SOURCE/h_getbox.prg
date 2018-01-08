@@ -92,9 +92,9 @@ FUNCTION _DefineGetBox ( ControlName, ParentFormName, x, y, w, h, Value, ;
       IF  At ( '>', Field ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + " : You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( Field , At ( '>', Field ) - 2 )
+         WORKAREA := Left ( Field , At ( '>', Field ) - 2 )
          IF Select ( WorkArea ) != 0
-            Value := &( Field )
+            VALUE := &( Field )
          ENDIF
       ENDIF
    ENDIF
@@ -277,7 +277,7 @@ FUNCTION _DefineGetBox ( ControlName, ParentFormName, x, y, w, h, Value, ;
    ENDIF
 
    IF ! Empty( aPicData[2] ) .AND. oget:type == "C"
-      Value := PadR( Value, Len( aPicData[2] ) )
+      VALUE := PadR( Value, Len( aPicData[2] ) )
       oget:cargo := Value
    ENDIF
 
@@ -1289,7 +1289,7 @@ PROCEDURE _SetGetBoxValue( nId, hWnd, Value )
       ENDIF
 
       IF ! Empty( aPicData[2] ) .AND. oGet:type == "C"
-         Value := PadR( Value, Len( aPicData [2] ) )
+         VALUE := PadR( Value, Len( aPicData [2] ) )
          oGet:cargo := Value
       ENDIF
       IF aPicData [3] .AND. oGet:type == "N" .AND. oGet:VarGet() == 0

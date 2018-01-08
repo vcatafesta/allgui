@@ -78,9 +78,9 @@ FUNCTION _DefineDatePick ( ControlName, ParentFormName, x, y, w, h, value, ;
       IF  At ( '>', Field ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + " : You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( Field , At ( '>', Field ) - 2 )
+         WORKAREA := Left ( Field , At ( '>', Field ) - 2 )
          IF Select ( WorkArea ) != 0
-            Value := &( Field )
+            VALUE := &( Field )
          ENDIF
       ENDIF
    ENDIF
@@ -305,9 +305,9 @@ FUNCTION _DefineTimePick ( ControlName, ParentFormName, x, y, w, h, value, ;
       IF  At ( '>', Field ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + " : You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( Field , At ( '>', Field ) - 2 )
+         WORKAREA := Left ( Field , At ( '>', Field ) - 2 )
          IF Select ( WorkArea ) != 0
-            Value := &( Field )
+            VALUE := &( Field )
          ENDIF
       ENDIF
    ENDIF
@@ -466,7 +466,7 @@ FUNCTION _DefineTimePick ( ControlName, ParentFormName, x, y, w, h, value, ;
    IF SetDatePickerDateFormat( ControlHandle , cTimeFormat )
       _HMG_aControlSpacing [k] := cTimeFormat
       IF AScan( _HMG_aControlFontAttributes [k], .T. ) > 0 .OR. ;
-            FontName != _HMG_DefaultFontName .OR. FontSize != _HMG_DefaultFontSize
+            FONTNAME != _HMG_DefaultFontName .OR. FontSize != _HMG_DefaultFontSize
          _SetFontName ( ControlName, ParentFormName , fontname )
       ENDIF
    ELSE

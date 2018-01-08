@@ -40,23 +40,23 @@ FUNCTION Main
       @  10, 10 Label L1 ;
          WIDTH 80;
          HEIGHT 20;
-         value "Search string:"
+         VALUE "Search string:"
 
       @  10, 100 Label Label_WhatToSearch ;
          WIDTH 600;
          HEIGHT 20;
-         value "???";
+         VALUE "???";
          autosize
 
       @  40, 10 Label L2 ;
          WIDTH 120;
          HEIGHT 20;
-         value "Last pressed char:"
+         VALUE "Last pressed char:"
 
       @  40, 140 Label Label_PressedChar ;
          WIDTH 120;
          HEIGHT 20;
-         value ""
+         VALUE ""
 
       @ 80,10 GRID Grid_1 ;
          WIDTH 760 ;

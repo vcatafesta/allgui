@@ -602,7 +602,7 @@ STATIC FUNCTION _HMG_CSG_C2SQL( Value )
    LOCAL cdate := ""
 
    IF ( valtype(value) == "C" .or. valtype( value ) == "M" ) .and. len(alltrim(value)) > 0
-      value := strtran(value, "'", "''" )
+      VALUE := strtran(value, "'", "''" )
    ENDIF
    DO CASE
    CASE Valtype(Value) == "N"

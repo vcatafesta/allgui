@@ -8,7 +8,7 @@ FUNCTION main()
          WIDTH 400 ;
          HEIGHT 400 ;
          TITLE 'hola' ;
-         main
+         MAIN
 
       @ 40,10 button b_2 caption 'Do External Report (.rpt)' action testrepo() WIDTH 150
 

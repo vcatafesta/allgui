@@ -54,7 +54,7 @@ FUNCTION Main
          COL       10
          WIDTH     180
          HEIGHT    30
-         Value     'Arrow Cursor'
+         VALUE     'Arrow Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorArrow()
@@ -65,7 +65,7 @@ FUNCTION Main
          COL       220
          WIDTH     180
          HEIGHT    30
-         Value     'UpArrow Cursor'
+         VALUE     'UpArrow Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorUpArrow()
@@ -76,7 +76,7 @@ FUNCTION Main
          COL       10
          WIDTH     180
          HEIGHT    30
-         Value      'Cross Cursor'
+         VALUE      'Cross Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorCross()
@@ -87,7 +87,7 @@ FUNCTION Main
          COL       220
          WIDTH     180
          HEIGHT    30
-         Value     'Wait Cursor'
+         VALUE     'Wait Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorWait()
@@ -98,7 +98,7 @@ FUNCTION Main
          COL       10
          WIDTH     180
          HEIGHT    30
-         Value     'IBeam Cursor'
+         VALUE     'IBeam Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorIBeam()
@@ -109,7 +109,7 @@ FUNCTION Main
          COL       220
          WIDTH     180
          HEIGHT    30
-         Value     'SizeVer Cursor'
+         VALUE     'SizeVer Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizeNS()
@@ -120,7 +120,7 @@ FUNCTION Main
          COL       10
          WIDTH     180
          HEIGHT    30
-         Value     'SizeHor Cursor'
+         VALUE     'SizeHor Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizeWE()
@@ -131,7 +131,7 @@ FUNCTION Main
          COL       220
          WIDTH     180
          HEIGHT    30
-         Value     'SizeBDiag Cursor'
+         VALUE     'SizeBDiag Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizenEsW()
@@ -142,7 +142,7 @@ FUNCTION Main
          COL       10
          WIDTH     180
          HEIGHT    30
-         Value     'SizeFDiag Cursor'
+         VALUE     'SizeFDiag Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizenWsE()
@@ -153,7 +153,7 @@ FUNCTION Main
          COL       220
          WIDTH     180
          HEIGHT    30
-         Value     'SizeAll Cursor'
+         VALUE     'SizeAll Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizeAll()
@@ -164,7 +164,7 @@ FUNCTION Main
          COL       10
          WIDTH     180
          HEIGHT    30
-         Value     'Forbidden Cursor'
+         VALUE     'Forbidden Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorNo()
@@ -175,7 +175,7 @@ FUNCTION Main
          COL       220
          WIDTH     180
          HEIGHT    30
-         Value     'WhatsThis Cursor'
+         VALUE     'WhatsThis Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorHelp()
@@ -186,7 +186,7 @@ FUNCTION Main
          COL       10
          WIDTH     180
          HEIGHT    30
-         Value     'Pointing Hand Cursor'
+         VALUE     'Pointing Hand Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorHand()
@@ -197,7 +197,7 @@ FUNCTION Main
          COL       220
          WIDTH     180
          HEIGHT    30
-         Value     'Busy Cursor'
+         VALUE     'Busy Cursor'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorAppStarting()
@@ -208,7 +208,7 @@ FUNCTION Main
          COL       10
          WIDTH     180
          HEIGHT    30
-         Value     'image = write.cur'
+         VALUE     'image = write.cur'
          BACKCOLOR CLR_BACK
          CenterAlign .t.
          OnMouseHover FileCursor( 'write.cur' )

@@ -23,42 +23,42 @@ FUNCTION posicao_estoque()
 
       @ 010,010 label lbl_001;
          of form_estoque_produtos;
-         value 'Este relatório irá listar todos os produtos em estoque';
+         VALUE 'Este relatório irá listar todos os produtos em estoque';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,010 label lbl_002;
          of form_estoque_produtos;
-         value 'mostrando a quantidade atual disponível de cada um.';
+         VALUE 'mostrando a quantidade atual disponível de cada um.';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 050,010 label lbl_003;
          of form_estoque_produtos;
-         value 'Somente produtos que não sejam - pizza -';
+         VALUE 'Somente produtos que não sejam - pizza -';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 070,010 label lbl_004;
          of form_estoque_produtos;
-         value 'aparecerão no relatório.';
+         VALUE 'aparecerão no relatório.';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
 
       * linha separadora
       DEFINE LABEL linha_rodape
          COL 000
          ROW form_estoque_produtos.height-090
-         value ''
+         VALUE ''
          WIDTH form_estoque_produtos.width
          HEIGHT 001
          BACKCOLOR _preto_001
@@ -72,10 +72,10 @@ FUNCTION posicao_estoque()
          ROW form_estoque_produtos.height-085
          WIDTH 150
          HEIGHT 050
-         caption 'Ok, imprimir'
-         action relatorio()
-         fontbold .T.
-         tooltip 'Gerar o relatório'
+         CAPTION 'Ok, imprimir'
+         ACTION relatorio()
+         FONTBOLD .T.
+         TOOLTIP 'Gerar o relatório'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -85,10 +85,10 @@ FUNCTION posicao_estoque()
          ROW form_estoque_produtos.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_estoque_produtos.release
-         fontbold .T.
-         tooltip 'Sair desta tela'
+         CAPTION 'Voltar'
+         ACTION form_estoque_produtos.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela'
          flat .F.
          noxpstyle .T.
       END BUTTONEX

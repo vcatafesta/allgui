@@ -234,21 +234,21 @@ FUNCTION Expression()
          COL 12
          WIDTH 270
          HEIGHT 380
-         widths {265}
-         headers {"Field Names"}
+         WIDTHS {265}
+         HEADERS {"Field Names"}
          ondblclick ( ModIndex.Text_IndKey.value := SeleField(), IndexExpress.release )
       END GRID
       DEFINE BUTTON setindexbutton
          ROW 430
          COL 85
-         caption "Set the Field"
-         action  ( ModIndex.Text_IndKey.value := SeleField(), IndexExpress.release )
+         CAPTION "Set the Field"
+         ACTION  ( ModIndex.Text_IndKey.value := SeleField(), IndexExpress.release )
       END BUTTON
       DEFINE BUTTON closeindexbutton
          ROW 430
          COL 185
-         caption "Close"
-         action IndexExpress.release
+         CAPTION "Close"
+         ACTION IndexExpress.release
       END BUTTON
    END WINDOW
    aEst  := DBstruct()

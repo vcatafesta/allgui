@@ -298,7 +298,7 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
       sumarr := summation
    ENDIF
 
-   fontname := fontname1
+   FONTNAME := fontname1
    IF len(aData) > 0 // array
       lines := len(aData)
       lArrayMode := .t.
@@ -426,14 +426,14 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                COL 10
                WIDTH 270
                HEIGHT 300
-               widths {130,60,60}
+               WIDTHS {130,60,60}
                justify {0,1,0}
-               headers {msgarr[6],msgarr[7],msgarr[57]}
+               HEADERS {msgarr[6],msgarr[7],msgarr[57]}
                allowedit .t.
-               columncontrols {{"TEXTBOX","CHARACTER"},{"TEXTBOX","NUMERIC","9999.99"},{"COMBOBOX",{msgarr[59],msgarr[60]}}}
-               columnwhen {{||.f.},{||iif(pdfgrid.spread.value,.f.,.t.)},{||.t.}}
+               COLUMNCONTROLS {{"TEXTBOX","CHARACTER"},{"TEXTBOX","NUMERIC","9999.99"},{"COMBOBOX",{msgarr[59],msgarr[60]}}}
+               COLUMNWHEN {{||.f.},{||iif(pdfgrid.spread.value,.f.,.t.)},{||.t.}}
                columnvalid {{||.t.},{||pdfcolumnsizeverify()},{||pdfcolumnselected()}}
-               on lostfocus refreshpdfgrid()
+               ON LOSTFOCUS refreshpdfgrid()
             END GRID
             /*
             DEFINE button editdetails
@@ -453,54 +453,54 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                ROW 30
                COL 10
                WIDTH 100
-               value msgarr[12]
+               VALUE msgarr[12]
             END LABEL
             DEFINE TEXTBOX header1
                ROW 30
                COL 110
                WIDTH 165
-               on change pdfgridpreview()
+               ON CHANGE pdfgridpreview()
             END TEXTBOX
             DEFINE LABEL header2label
                ROW 70
                COL 10
                WIDTH 100
-               value msgarr[13]
+               VALUE msgarr[13]
             END LABEL
             DEFINE TEXTBOX header2
                ROW 70
                COL 110
-               on change pdfgridpreview()
+               ON CHANGE pdfgridpreview()
                WIDTH 165
             END TEXTBOX
             DEFINE LABEL header3label
                ROW 100
                COL 10
                WIDTH 100
-               value msgarr[14]
+               VALUE msgarr[14]
             END LABEL
             DEFINE TEXTBOX Header3
                ROW 100
                COL 110
-               on change pdfgridpreview()
+               ON CHANGE pdfgridpreview()
                WIDTH 165
             END TEXTBOX
             DEFINE LABEL footer1label
                ROW 130
                COL 10
                WIDTH 100
-               value msgarr[15]
+               VALUE msgarr[15]
             END LABEL
             DEFINE TEXTBOX Footer1
                ROW 130
                COL 110
                WIDTH 165
-               on change pdfgridpreview()
+               ON CHANGE pdfgridpreview()
             END TEXTBOX
             DEFINE LABEL selectfontsizelabel
                ROW 160
                COL 10
-               value msgarr[17]
+               VALUE msgarr[17]
                WIDTH 100
             END LABEL
             DEFINE COMBOBOX selectfontsize
@@ -508,12 +508,12 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                COL 110
                WIDTH 50
                items fontsizesstr
-               on change pdffontsizechanged()
+               ON CHANGE pdffontsizechanged()
             END COMBOBOX
             DEFINE LABEL multilinelabel
                ROW 190
                COL 10
-               value msgarr[18]
+               VALUE msgarr[18]
                WIDTH 100
             END LABEL
             DEFINE COMBOBOX wordwrap
@@ -521,12 +521,12 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                COL 110
                WIDTH 90
                items {msgarr[19],msgarr[20]}
-               on change pdfgridpreview()
+               ON CHANGE pdfgridpreview()
             END COMBOBOX
             DEFINE LABEL pagination
                ROW 220
                COL 10
-               value msgarr[21]
+               VALUE msgarr[21]
                WIDTH 100
             END LABEL
             DEFINE COMBOBOX pageno
@@ -534,60 +534,60 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                COL 110
                WIDTH 90
                items {msgarr[22],msgarr[23],msgarr[24]}
-               on change pdfgridpreview()
+               ON CHANGE pdfgridpreview()
             END COMBOBOX
             DEFINE LABEL separatorlab
                ROW 250
                COL 10
                WIDTH 100
-               value msgarr[25]
+               VALUE msgarr[25]
             END LABEL
             DEFINE CHECKBOX collines
                ROW 245
                COL 110
                WIDTH 60
-               on change pdfgridpreview()
-               caption msgarr[26]
+               ON CHANGE pdfgridpreview()
+               CAPTION msgarr[26]
             END CHECKBOX
             DEFINE CHECKBOX rowlines
                ROW 245
                COL 180
                WIDTH 60
-               on change pdfgridpreview()
-               caption msgarr[27]
+               ON CHANGE pdfgridpreview()
+               CAPTION msgarr[27]
             END CHECKBOX
             DEFINE LABEL centerlab
                ROW 280
                COL 10
                WIDTH 100
-               value msgarr[28]
+               VALUE msgarr[28]
             END LABEL
             DEFINE CHECKBOX vertical
                ROW 275
                COL 110
                WIDTH 60
-               on change pdfgridpreview()
-               caption msgarr[29]
+               ON CHANGE pdfgridpreview()
+               CAPTION msgarr[29]
             END CHECKBOX
             DEFINE LABEL spacelab
                ROW 310
                COL 10
                WIDTH 100
-               value msgarr[54]
+               VALUE msgarr[54]
             END LABEL
             DEFINE CHECKBOX spread
                ROW 305
                COL 110
                WIDTH 60
-               on change pdfspreadchanged()
-               caption msgarr[55]
+               ON CHANGE pdfspreadchanged()
+               CAPTION msgarr[55]
             END CHECKBOX
          END PAGE
          DEFINE PAGE msgarr[30]
             DEFINE LABEL orientationlabel
                ROW 30
                COL 10
-               Value msgarr[31]
+               VALUE msgarr[31]
                WIDTH 100
             END LABEL
             DEFINE COMBOBOX paperorientation
@@ -595,74 +595,74 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                COL 110
                WIDTH 90
                items {msgarr[32],msgarr[33]}
-               on change pdfpapersizechanged()
+               ON CHANGE pdfpapersizechanged()
             END COMBOBOX
             DEFINE LABEL printerslabel
                ROW 60
                COL 10
                WIDTH 100
-               value msgarr[34]
+               VALUE msgarr[34]
             END LABEL
             DEFINE COMBOBOX printers
                ROW 60
                COL 110
                WIDTH 165
                items aprinternames
-               value printerno
+               VALUE printerno
             END COMBOBOX
             DEFINE LABEL sizelabel
                ROW 90
                COL 10
                WIDTH 100
-               value msgarr[35]
+               VALUE msgarr[35]
             END LABEL
             DEFINE COMBOBOX pagesizes
                ROW 90
                COL 110
                WIDTH 165
                items papernames
-               on change pdfpapersizechanged()
+               ON CHANGE pdfpapersizechanged()
             END COMBOBOX
             DEFINE LABEL widthlabel
                ROW 120
                COL 10
-               value msgarr[36]
+               VALUE msgarr[36]
                WIDTH 100
             END LABEL
             DEFINE TEXTBOX width
                ROW 120
                COL 110
                WIDTH 60
-               inputmask "999.99"
-               on change pdfpagesizechanged()
-               numeric .t.
-               rightalign .t.
+               INPUTMASK "999.99"
+               ON CHANGE pdfpagesizechanged()
+               NUMERIC .t.
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL widthmm
                ROW 120
                COL 170
-               value "mm"
+               VALUE "mm"
                WIDTH 25
             END LABEL
             DEFINE LABEL heightlabel
                ROW 150
                COL 10
-               value msgarr[37]
+               VALUE msgarr[37]
                WIDTH 100
             END LABEL
             DEFINE TEXTBOX height
                ROW 150
                COL 110
                WIDTH 60
-               inputmask "999.99"
-               on change pdfpagesizechanged()
-               numeric .t.
-               rightalign .t.
+               INPUTMASK "999.99"
+               ON CHANGE pdfpagesizechanged()
+               NUMERIC .t.
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL heightmm
                ROW 150
                COL 170
-               value "mm"
+               VALUE "mm"
                WIDTH 25
             END LABEL
             DEFINE FRAME margins
@@ -670,67 +670,67 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                COL 5
                WIDTH 185
                HEIGHT 80
-               caption msgarr[38]
+               CAPTION msgarr[38]
             END FRAME
             DEFINE LABEL toplabel
                ROW 200
                COL 10
                WIDTH 35
-               value msgarr[39]
+               VALUE msgarr[39]
             END LABEL
             DEFINE TEXTBOX top
                ROW 200
                COL 45
                WIDTH 50
-               inputmask "99.99"
-               numeric .t.
-               on change pdfgridpreview()
-               rightalign .t.
+               INPUTMASK "99.99"
+               NUMERIC .t.
+               ON CHANGE pdfgridpreview()
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL rightlabel
                ROW 200
                COL 100
                WIDTH 35
-               value msgarr[40]
+               VALUE msgarr[40]
             END LABEL
             DEFINE TEXTBOX right
                ROW 200
                COL 135
                WIDTH 50
-               inputmask "99.99"
-               on change pdfpapersizechanged()
-               numeric .t.
-               rightalign .t.
+               INPUTMASK "99.99"
+               ON CHANGE pdfpapersizechanged()
+               NUMERIC .t.
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL leftlabel
                ROW 230
                COL 10
                WIDTH 35
-               value msgarr[41]
+               VALUE msgarr[41]
             END LABEL
             DEFINE TEXTBOX left
                ROW 230
                COL 45
                WIDTH 50
-               inputmask "99.99"
-               on change pdfpapersizechanged()
-               numeric .t.
-               rightalign .t.
+               INPUTMASK "99.99"
+               ON CHANGE pdfpapersizechanged()
+               NUMERIC .t.
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL bottomlabel
                ROW 230
                COL 100
                WIDTH 35
-               value msgarr[42]
+               VALUE msgarr[42]
             END LABEL
             DEFINE TEXTBOX bottom
                ROW 230
                COL 135
                WIDTH 50
-               inputmask "99.99"
-               numeric .t.
-               on change pdfgridpreview()
-               rightalign .t.
+               INPUTMASK "99.99"
+               NUMERIC .t.
+               ON CHANGE pdfgridpreview()
+               RIGHTALIGN .t.
             END TEXTBOX
          END PAGE
          DEFINE PAGE msgarr[61]
@@ -739,34 +739,34 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
                COL 10
                WIDTH 240
                HEIGHT 240
-               headers {msgarr[62],msgarr[63],msgarr[64]}
-               widths {40,40,100}
+               HEADERS {msgarr[62],msgarr[63],msgarr[64]}
+               WIDTHS {40,40,100}
                allowedit .t.
-               columncontrols {{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","CHARACTER"}}
+               COLUMNCONTROLS {{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","CHARACTER"}}
                columnvalid {{||.t.},{||.t.},{||.t.}}
-               on lostfocus pdfmergeheaderschanged()
+               ON LOSTFOCUS pdfmergeheaderschanged()
             END GRID
             DEFINE BUTTON add
                ROW 30
                COL 260
                WIDTH 20
                HEIGHT 20
-               caption "+"
-               fontbold .t.
+               CAPTION "+"
+               FONTBOLD .t.
                fontsize 16
                //               picture "additem"
-               action pdfaddmergeheadrow()
+               ACTION pdfaddmergeheadrow()
             END BUTTON
             DEFINE BUTTON del
                ROW 55
                COL 260
                WIDTH 20
                HEIGHT 20
-               caption "-"
-               fontbold .t.
+               CAPTION "-"
+               FONTBOLD .t.
                fontsize 16
                //               picture "delitem"
-               action pdfdelmergeheadrow()
+               ACTION pdfdelmergeheadrow()
             END BUTTON
 
          END PAGE
@@ -774,22 +774,22 @@ FUNCTION _gridpdf(cGrid,cWindow,cPDFFile, fontsize,orientation,aHeaders,fontname
       DEFINE BUTTON browseprint1
          ROW 350
          COL 160
-         caption msgarr[43]
-         action printpdfstart()
+         CAPTION msgarr[43]
+         ACTION printpdfstart()
          WIDTH 80
       END BUTTON
       DEFINE BUTTON browseprintcancel
          ROW 350
          COL 260
-         caption msgarr[44]
-         action pdfgrid.release
+         CAPTION msgarr[44]
+         ACTION pdfgrid.release
          WIDTH 80
       END BUTTON
       DEFINE BUTTON browseprintreset
          ROW 350
          COL 360
-         caption msgarr[66]
-         action resetpdfgridform()
+         CAPTION msgarr[66]
+         ACTION resetpdfgridform()
          WIDTH 80
       END BUTTON
       DEFINE STATUSBAR

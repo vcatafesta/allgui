@@ -100,16 +100,16 @@ FUNCTION Main
          ROW 430
          COL 10
          WIDTH 80
-         caption 'HTML1'
-         action grid2html1()
+         CAPTION 'HTML1'
+         ACTION grid2html1()
       END BUTTON
 
       DEFINE BUTTON b2
          ROW 430
          COL 110
          WIDTH 80
-         caption 'HTML2'
-         action grid2html2()
+         CAPTION 'HTML2'
+         ACTION grid2html2()
       END BUTTON
 
    END WINDOW

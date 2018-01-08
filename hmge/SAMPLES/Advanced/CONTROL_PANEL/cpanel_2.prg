@@ -136,7 +136,7 @@ FUNCTION showabout()
       @ 80, 6 EditBox readText;
          WIDTH 334       ;
          HEIGHT 140      ;
-         Value cAbout   ;
+         VALUE cAbout   ;
          NoHScroll
 
       _ExtDisableControl ( "readText", "Win_2" )

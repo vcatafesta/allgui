@@ -732,7 +732,7 @@ METHOD Define( ControlName, ParentForm, x, y, Caption, Value, fontname, ;
    ENDIF
 
    IF ! HB_IsLogical( Value )
-      Value := .F.
+      VALUE := .F.
    ENDIF
    ::SetVarBlock( Field, Value )
 

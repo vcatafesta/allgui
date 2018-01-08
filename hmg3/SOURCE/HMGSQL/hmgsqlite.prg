@@ -143,7 +143,7 @@ FUNCTION C2SQL(Value)
    LOCAL cdate := ""
 
    IF ( valtype(value) == "C" .or. valtype( value ) == "M" ) .and. HMG_LEN(alltrim(value)) > 0
-      value := HB_UTF8STRTRAN(value, "'", "''" )
+      VALUE := HB_UTF8STRTRAN(value, "'", "''" )
    ENDIF
    DO CASE
    CASE Valtype(Value) == "N"

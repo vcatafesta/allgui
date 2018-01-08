@@ -80,10 +80,10 @@ FUNCTION _DefineLabel ( ControlName, ParentForm, x, y, Caption, w, h, ;
       ELSE
          cText := hb_ValToStr( value )
       ENDIF
-      value := cText
+      VALUE := cText
    ENDIF
 
-   Caption := value
+   CAPTION := value
 
    DEFAULT w              TO 120
    DEFAULT h              TO 24
@@ -97,7 +97,7 @@ FUNCTION _DefineLabel ( ControlName, ParentForm, x, y, Caption, w, h, ;
    IF _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]
@@ -136,7 +136,7 @@ FUNCTION _DefineLabel ( ControlName, ParentForm, x, y, Caption, w, h, ;
       FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
    ELSE
       FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
-      fontname := _HMG_SYSDATA [ 342 ]
+      FONTNAME := _HMG_SYSDATA [ 342 ]
       fontsize := _HMG_SYSDATA [ 343 ]
    ENDIF
 

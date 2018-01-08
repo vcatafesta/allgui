@@ -151,7 +151,7 @@ FUNCTION MsgWait(bAction, cMsg, cTitle, lNoCancel, oParent)
       font oFont
    @ 22, 63 button "Cancel" size 43, 11 pixel of oDlg ;
       font oFont ;
-      action lEnd := .T. ;
+      ACTION lEnd := .T. ;
       when !lNoCancel
 
    oDlg:oWnd := oParent

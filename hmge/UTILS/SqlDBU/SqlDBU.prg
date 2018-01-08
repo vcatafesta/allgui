@@ -336,7 +336,7 @@ FUNCTION CreateDatabase()
          WIDTH 350 ;
          VALUE ""   ;
          BACKCOLOR DBUgreen ;
-         Action  {|| FrameNewBase.Text_Path.value := GetFolder (,FrameNewBase.Text_Path.value),cFileName:= FileNameCreta() }
+         ACTION  {|| FrameNewBase.Text_Path.value := GetFolder (,FrameNewBase.Text_Path.value),cFileName:= FileNameCreta() }
 
       @ 80,40 LABEL Lbl_Name;
          VALUE "Name" ;
@@ -635,7 +635,7 @@ FUNCTION c2Sql(Value)
    LOCAL cdate := ""
 
    IF valtype(value) == "C" .and. len(alltrim(value)) > 0
-      value := strtran(value,"'","''")
+      VALUE := strtran(value,"'","''")
    ENDIF
    DO CASE
    CASE Valtype(Value) == "N"

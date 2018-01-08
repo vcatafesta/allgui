@@ -485,7 +485,7 @@ PROCEDURE _BrowseUpdate( ControlName, ParentName, z )
       RETURN
    ENDIF
 
-   Fields := _HMG_aControlRangeMin [i]
+   FIELDS := _HMG_aControlRangeMin [i]
 
    aDisplayItems := _HMG_aControlMiscData1 [ i ] [ 14 ]
 
@@ -1272,7 +1272,7 @@ FUNCTION  _BrowseDelete (  ControlName , ParentForm , z  )
 
    _BrowseRecMap := _HMG_aControlRangeMax [i]
 
-   Value := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_aControlHandles [i] ) ]
+   VALUE := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_aControlHandles [i] ) ]
 
    IF Value == 0
 

@@ -33,30 +33,30 @@ FUNCTION relatorio_motoboy()
 
       @ 010,010 label lbl_001;
          of form_comissao_motoboy;
-         value 'Escolha o intervalo de datas';
+         VALUE 'Escolha o intervalo de datas';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,010 label lbl_002;
          of form_comissao_motoboy;
-         value 'Escolha o motoboy/entregador';
+         VALUE 'Escolha o motoboy/entregador';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
 
       @ 040,010 datepicker dp_inicio;
          parent form_comissao_motoboy;
-         value date();
+         VALUE date();
          WIDTH 150;
          HEIGHT 030;
          font 'verdana' size 014
       @ 040,170 datepicker dp_final;
          parent form_comissao_motoboy;
-         value date();
+         VALUE date();
          WIDTH 150;
          HEIGHT 030;
          font 'verdana' size 014
@@ -66,14 +66,14 @@ FUNCTION relatorio_motoboy()
       WIDTH 310
       HEIGHT 200
       items a_001
-      value 1
+      VALUE 1
    END comboboxex
 
    * linha separadora
    DEFINE LABEL linha_rodape
       COL 000
       ROW form_comissao_motoboy.height-090
-      value ''
+      VALUE ''
       WIDTH form_comissao_motoboy.width
       HEIGHT 001
       BACKCOLOR _preto_001
@@ -87,10 +87,10 @@ FUNCTION relatorio_motoboy()
       ROW form_comissao_motoboy.height-085
       WIDTH 150
       HEIGHT 050
-      caption 'Ok, imprimir'
-      action relatorio()
-      fontbold .T.
-      tooltip 'Gerar o relatório'
+      CAPTION 'Ok, imprimir'
+      ACTION relatorio()
+      FONTBOLD .T.
+      TOOLTIP 'Gerar o relatório'
       flat .F.
       noxpstyle .T.
    END BUTTONEX
@@ -100,10 +100,10 @@ FUNCTION relatorio_motoboy()
       ROW form_comissao_motoboy.height-085
       WIDTH 090
       HEIGHT 050
-      caption 'Voltar'
-      action form_comissao_motoboy.release
-      fontbold .T.
-      tooltip 'Sair desta tela'
+      CAPTION 'Voltar'
+      ACTION form_comissao_motoboy.release
+      FONTBOLD .T.
+      TOOLTIP 'Sair desta tela'
       flat .F.
       noxpstyle .T.
    END BUTTONEX

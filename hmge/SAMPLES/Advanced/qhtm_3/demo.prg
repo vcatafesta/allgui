@@ -55,8 +55,8 @@ PROCEDURE Main
    DEFINE WINDOW wMain at 0, 0 ;
          WIDTH 630 Height 600 ;
          TITLE 'QHTM Demo'    ;
-         Main                 ;
-         NoMaximize           ;
+         MAIN                 ;
+         NOMAXIMIZE           ;
          NOSIZE
 
       DEFINE MAIN MENU
@@ -73,7 +73,7 @@ PROCEDURE Main
       END MENU
 
       @ 0, 0 QHTM HTML_Intro                                                                         ;
-         Value cIntro                                                                            ;
+         VALUE cIntro                                                                            ;
          WIDTH  ( wMain.Width - GetBorderWidth() * 2 )                                           ;
          HEIGHT ( wMain.Height - GetTitleHeight() - GetMenuBarHeight() - GetBorderHeight() * 2 ) ;
          Border
@@ -169,18 +169,18 @@ STATIC PROCEDURE TestAddHTML
          Border
 
       @ ( wAddHTML.MyHTML.Height + 10 ), ( wAddHTML.MyHTML.Col + 10 ) Button btnGetPos ;
-         Caption 'GetScrollPos' Action GetQHTMPos( nHandle )
+         CAPTION 'GetScrollPos' Action GetQHTMPos( nHandle )
 
       @ ( wAddHTML.MyHTML.Height + 10 ), ( wAddHTML.btnGetPos.Col + wAddHTML.btnGetPos.Width + 20 ) Button btnSetPos ;
-         Caption 'SetScrollPos' Action SetQHTMPos( nHandle )
+         CAPTION 'SetScrollPos' Action SetQHTMPos( nHandle )
 
       @ ( wAddHTML.MyHTML.Height + 10 ), ( wAddHTML.btnSetPos.Col + wAddHTML.btnSetPos.Width + 20 ) Button btnGoTo ;
-         Caption 'Goto 50%' Action { || MsgInfo( 'Current position: ' + hb_ntos( QHTM_ScrollPercent( nHandle ) ) + '%' ), ;
+         CAPTION 'Goto 50%' Action { || MsgInfo( 'Current position: ' + hb_ntos( QHTM_ScrollPercent( nHandle ) ) + '%' ), ;
          QHTM_ScrollPercent( nHandle, 50 )                                                     ;
          }
 
       @ ( wAddHTML.MyHTML.Height + 10 ), ( wAddHTML.MyHTML.Width - 120 ) Button btnStart                          ;
-         Caption 'Add HTML' Action { | nHeight, aSize | QHTM_AddHTML( nHandle, cValue )                          , ;
+         CAPTION 'Add HTML' Action { | nHeight, aSize | QHTM_AddHTML( nHandle, cValue )                          , ;
          nHeight := GetWindowHeight( nHandle )                    , ;
          aSize := QHTM_GetSize( nHandle )                         , ;
          Iif( ( aSize[ 2 ] > nHeight )                            , ;
@@ -272,16 +272,16 @@ STATIC PROCEDURE TestAddHTML2
          NOSIZE
 
       @ 0, 0 QHTM MyHTML                                                                ;
-         Value '<body bgcolor="White"><h3>Lengthy operation</h3></body>'            ;
+         VALUE '<body bgcolor="White"><h3>Lengthy operation</h3></body>'            ;
          WIDTH  ( wAddHTML.Width - GetBorderWidth() * 2 )                           ;
          HEIGHT ( wAddHTML.Height - GetTitleHeight() - GetBorderHeight() * 2 - 45 ) ;
          Border
 
       @ ( wAddHTML.MyHTML.Height + 20 ), ( wAddHTML.MyHTML.Col + 20 ) Checkbox cbxScroll ;
-         Caption 'Auto scroll' Width 80 Height 15
+         CAPTION 'Auto scroll' Width 80 Height 15
 
       @ ( wAddHTML.MyHTML.Height + 10 ), ( wAddHTML.MyHTML.Width - 120 ) Button btnStart ;
-         Caption 'Start' Action { || HB_HFill( aBreak, .F. ), Logging() }
+         CAPTION 'Start' Action { || HB_HFill( aBreak, .F. ), Logging() }
 
    END WINDOW
 

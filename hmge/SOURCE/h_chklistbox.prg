@@ -285,7 +285,7 @@ FUNCTION InitDialogChkListBox( ParentName, ControlHandle, k )
    HB_SYMBOL_UNUSED( ParentName )
 
    Rows        := _HMG_aControlRangeMin [k]
-   Value       := _HMG_aControlValue [k]
+   VALUE       := _HMG_aControlValue [k]
    FontSize    := _HMG_aControlFontSize  [k]
    FontHandle  := _HMG_aControlFontHandle  [k]
 

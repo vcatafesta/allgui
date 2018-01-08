@@ -84,8 +84,8 @@ METHOD Define( ControlName, ParentForm, y, x, w, h, caption, fontname, ;
    ENDIF
 
    IF valtype( caption ) == 'U'
-      caption := ""
-      fontname := "Arial"
+      CAPTION := ""
+      FONTNAME := "Arial"
       fontsize := 1
    ENDIF
 

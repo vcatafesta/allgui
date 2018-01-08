@@ -76,7 +76,7 @@ FUNCTION Main()
 
          @ 30,0 COMBOBOX directo obj ocombo ;
             font "Arial" size 9 width 720 items {"https://oohg.github.io/","http://www.google.com","http://www.yahoo.com"} ;
-         value 1  on enter navegar() displayedit ///////// on change navegar()
+         VALUE 1  on enter navegar() displayedit ///////// on change navegar()
 
          DEFINE TOOLBAR ir BUTTONSIZE 20,20 FONT "Arial" SIZE 9 FLAT BOTTOM
             BUTTON ir_Btn1 PICTURE "seis" ACTION Navegar() TOOLTIP "Ir" AUTOSIZE

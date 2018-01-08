@@ -153,15 +153,15 @@ FUNCTION Main
                WIDTH 100
                HEIGHT 20
                INCREMENT 1
-               On Change Change_Cfg(1)
+               ON CHANGE Change_Cfg(1)
             END SPINNER
             DEFINE LISTBOX List_3
                ROW 95
                COL 140
                Items aOptions
-               value 1
+               VALUE 1
                WIDTH 200
-               On Change Change_Cfg(2)
+               ON CHANGE Change_Cfg(2)
             END ListBox
             DEFINE HYPERLINK H1
                ROW             370
@@ -267,7 +267,7 @@ PROCEDURE Properties(lNew)
       @  80,470  Button   Button_2  caption '...' Action Get_Folders(2) Width 20 Height 20
       @ 110,70   RadioGroup RadioGroup_1  ;
          Options {'incremental','full','zip'} value aTemp[4] Width 90 spacing 10 Horizontal ;
-         On Change Change_RGroup()
+         ON CHANGE Change_RGroup()
       @ 150,275  Button   CancelButton  caption 'Cancel' Action Thiswindow.Release Width 100 Height 30
       @ 150,395  Button   SaveButton    caption 'Save'   Action SaveProperties(lNew) Width 100 Height 30
    END WINDOW

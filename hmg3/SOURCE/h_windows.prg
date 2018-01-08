@@ -4018,7 +4018,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h ,nominimize ,nomaximize ,
    ENDIF
 
    IF valtype(sysmenu) == "L"
-      nosysmenu   := .Not. sysmenu
+      NOSYSMENU   := .Not. sysmenu
    ENDIF
 
    IF valtype(titlebar) == "L"
@@ -4030,7 +4030,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h ,nominimize ,nomaximize ,
    ENDIF
 
    IF valtype(maxbutton) == "L"
-      nomaximize   := .Not. maxbutton
+      NOMAXIMIZE   := .Not. maxbutton
    ENDIF
 
    IF valtype(autorelease) == "L"
@@ -4154,7 +4154,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h ,nominimize ,nomaximize ,
    ENDIF
 
    IF valtype(Caption) == "U"
-      Caption := ""
+      CAPTION := ""
    ENDIF
 
    IF valtype(scrollup) == "U"
@@ -4469,7 +4469,7 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent ,nosize ,nos
    ENDIF
 
    IF valtype(sysmenu) == "L"
-      NoSysMenu := .Not. sysmenu
+      NOSYSMENU := .Not. sysmenu
    ENDIF
 
    IF valtype(sizable) == "L"
@@ -4514,7 +4514,7 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent ,nosize ,nos
    ENDIF
 
    IF valtype(Caption) == "U"
-      Caption := ""
+      CAPTION := ""
    ENDIF
 
    IF valtype(InitProcedure) == "U"

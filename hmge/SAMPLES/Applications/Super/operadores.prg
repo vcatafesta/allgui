@@ -24,7 +24,7 @@ FUNCTION operadores()
          ICON path_imagens+'icone.ico';
          modal;
          nosize;
-         on init pesquisar()
+         ON INIT pesquisar()
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
@@ -33,12 +33,12 @@ FUNCTION operadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F5 Incluir'
-         action dados(1)
-         fontname 'verdana'
+         CAPTION 'F5 Incluir'
+         ACTION dados(1)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -50,12 +50,12 @@ FUNCTION operadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F6 Alterar'
-         action dados(2)
-         fontname 'verdana'
+         CAPTION 'F6 Alterar'
+         ACTION dados(2)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -67,12 +67,12 @@ FUNCTION operadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F7 Excluir'
-         action excluir()
-         fontname 'verdana'
+         CAPTION 'F7 Excluir'
+         ACTION excluir()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -84,12 +84,12 @@ FUNCTION operadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F8 Imprimir'
-         action relacao()
-         fontname 'verdana'
+         CAPTION 'F8 Imprimir'
+         ACTION relacao()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -101,12 +101,12 @@ FUNCTION operadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'Atualizar'
-         action atualizar()
-         fontname 'verdana'
+         CAPTION 'Atualizar'
+         ACTION atualizar()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -118,12 +118,12 @@ FUNCTION operadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'Acessos'
-         action acesso()
-         fontname 'verdana'
+         CAPTION 'Acessos'
+         ACTION acesso()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -135,12 +135,12 @@ FUNCTION operadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'ESC Voltar'
-         action form_operadores.release
-         fontname 'verdana'
+         CAPTION 'ESC Voltar'
+         ACTION form_operadores.release
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -154,13 +154,13 @@ FUNCTION operadores()
             ROW 105
             WIDTH 795
             HEIGHT 430
-            headers {'Código','Nome'}
-            widths {100,650}
-            fontname 'verdana'
+            HEADERS {'Código','Nome'}
+            WIDTHS {100,650}
+            FONTNAME 'verdana'
             fontsize 010
-            fontbold .T.
+            FONTBOLD .T.
             BACKCOLOR _amarelo_001
-            fontcolor _preto_001
+            FONTCOLOR _preto_001
             ondblclick dados(2)
          END GRID
       END SPLITBOX
@@ -169,35 +169,35 @@ FUNCTION operadores()
          parent form_operadores
          COL 005
          ROW 545
-         value 'Digite sua pesquisa'
+         VALUE 'Digite sua pesquisa'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
+         FONTBOLD .T.
+         FONTCOLOR _cinza_001
          transparent .T.
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_operadores;
          HEIGHT 027;
          WIDTH 300;
-         value '';
-         maxlength 040;
+         VALUE '';
+         MAXLENGTH 040;
          font 'verdana' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase;
-         on change pesquisar()
+         ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
          parent form_operadores
          COL form_operadores.width - 270
          ROW 545
-         value 'DUPLO CLIQUE : Alterar informação'
+         VALUE 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _verde_002
+         FONTBOLD .T.
+         FONTCOLOR _verde_002
          transparent .T.
       END LABEL
 
@@ -254,39 +254,39 @@ STATIC FUNCTION dados(parametro)
       * entrada de dados
       @ 010,005 label lbl_001;
          of form_dados;
-         value 'Nome';
+         VALUE 'Nome';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
          WIDTH 310;
-         value x_nome;
-         maxlength 010;
+         VALUE x_nome;
+         MAXLENGTH 010;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 060,005 label lbl_002;
          of form_dados;
-         value 'Senha';
+         VALUE 'Senha';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,005 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_senha;
-         maxlength 010;
+         VALUE x_senha;
+         MAXLENGTH 010;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase;
          password
 
@@ -294,7 +294,7 @@ STATIC FUNCTION dados(parametro)
       DEFINE LABEL linha_rodape
          COL 000
          ROW form_dados.height-090
-         value ''
+         VALUE ''
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
@@ -308,10 +308,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 120
          HEIGHT 050
-         caption 'Ok, gravar'
-         action gravar(parametro)
-         fontbold .T.
-         tooltip 'Confirmar as informações digitadas'
+         CAPTION 'Ok, gravar'
+         ACTION gravar(parametro)
+         FONTBOLD .T.
+         TOOLTIP 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -321,10 +321,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_dados.release
-         fontbold .T.
-         tooltip 'Sair desta tela sem gravar informações'
+         CAPTION 'Voltar'
+         ACTION form_dados.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -638,489 +638,489 @@ STATIC FUNCTION acesso()
             font 'verdana';
             size 010;
             bold;
-            value 001;
+            VALUE 001;
             flat
 
          page 'Principal' image path_imagens+'img_hum.bmp'
             DEFINE CHECKBOX chkbox_001
-               caption 'Venda Delivery'
+               CAPTION 'Venda Delivery'
                COL 150
                ROW 050
                WIDTH 350
-               value x_opcao_001
-               fontname 'verdana'
+               VALUE x_opcao_001
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_002
-               caption 'Venda Mesas'
+               CAPTION 'Venda Mesas'
                COL 150
                ROW 080
                WIDTH 350
-               value x_opcao_002
-               fontname 'verdana'
+               VALUE x_opcao_002
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_003
-               caption 'Venda Balcão'
+               CAPTION 'Venda Balcão'
                COL 150
                ROW 110
                WIDTH 350
-               value x_opcao_003
-               fontname 'verdana'
+               VALUE x_opcao_003
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_004
-               caption 'Cadastro Clientes'
+               CAPTION 'Cadastro Clientes'
                COL 150
                ROW 140
                WIDTH 350
-               value x_opcao_004
-               fontname 'verdana'
+               VALUE x_opcao_004
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_005
-               caption 'Cadastro Produtos'
+               CAPTION 'Cadastro Produtos'
                COL 150
                ROW 170
                WIDTH 350
-               value x_opcao_005
-               fontname 'verdana'
+               VALUE x_opcao_005
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
          END PAGE
          page 'Tabelas' image path_imagens+'img_dois.bmp'
             DEFINE CHECKBOX chkbox_006
-               caption 'Fornecedores'
+               CAPTION 'Fornecedores'
                COL 150
                ROW 050
                WIDTH 350
-               value x_opcao_006
-               fontname 'verdana'
+               VALUE x_opcao_006
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_007
-               caption 'Grupo de Fornecedores'
+               CAPTION 'Grupo de Fornecedores'
                COL 150
                ROW 080
                WIDTH 350
-               value x_opcao_007
-               fontname 'verdana'
+               VALUE x_opcao_007
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_008
-               caption 'Matéria Prima'
+               CAPTION 'Matéria Prima'
                COL 150
                ROW 110
                WIDTH 350
-               value x_opcao_008
-               fontname 'verdana'
+               VALUE x_opcao_008
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_009
-               caption 'Categorias de Produtos'
+               CAPTION 'Categorias de Produtos'
                COL 150
                ROW 140
                WIDTH 350
-               value x_opcao_009
-               fontname 'verdana'
+               VALUE x_opcao_009
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_010
-               caption 'Sub-Categorias de Produtos'
+               CAPTION 'Sub-Categorias de Produtos'
                COL 150
                ROW 170
                WIDTH 350
-               value x_opcao_010
-               fontname 'verdana'
+               VALUE x_opcao_010
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_011
-               caption 'Formas de Recebimento'
+               CAPTION 'Formas de Recebimento'
                COL 150
                ROW 200
                WIDTH 350
-               value x_opcao_011
-               fontname 'verdana'
+               VALUE x_opcao_011
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_012
-               caption 'Formas de Pagamento'
+               CAPTION 'Formas de Pagamento'
                COL 150
                ROW 230
                WIDTH 350
-               value x_opcao_012
-               fontname 'verdana'
+               VALUE x_opcao_012
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_013
-               caption 'Unidades de Medida'
+               CAPTION 'Unidades de Medida'
                COL 150
                ROW 260
                WIDTH 350
-               value x_opcao_013
-               fontname 'verdana'
+               VALUE x_opcao_013
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_014
-               caption 'Contas Bancárias'
+               CAPTION 'Contas Bancárias'
                COL 150
                ROW 290
                WIDTH 350
-               value x_opcao_014
-               fontname 'verdana'
+               VALUE x_opcao_014
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_015
-               caption 'Impostos e Alíquotas'
+               CAPTION 'Impostos e Alíquotas'
                COL 150
                ROW 320
                WIDTH 350
-               value x_opcao_015
-               fontname 'verdana'
+               VALUE x_opcao_015
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_016
-               caption 'Mesas da Pizzaria'
+               CAPTION 'Mesas da Pizzaria'
                COL 150
                ROW 350
                WIDTH 350
-               value x_opcao_016
-               fontname 'verdana'
+               VALUE x_opcao_016
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_017
-               caption 'Atendentes ou Garçons'
+               CAPTION 'Atendentes ou Garçons'
                COL 150
                ROW 380
                WIDTH 350
-               value x_opcao_017
-               fontname 'verdana'
+               VALUE x_opcao_017
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_018
-               caption 'Motoboys ou Entregadores'
+               CAPTION 'Motoboys ou Entregadores'
                COL 150
                ROW 410
                WIDTH 350
-               value x_opcao_018
-               fontname 'verdana'
+               VALUE x_opcao_018
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_019
-               caption 'Operadores do Programa'
+               CAPTION 'Operadores do Programa'
                COL 150
                ROW 440
                WIDTH 350
-               value x_opcao_019
-               fontname 'verdana'
+               VALUE x_opcao_019
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
          END PAGE
          page 'Relatórios' image path_imagens+'img_tres.bmp'
             DEFINE CHECKBOX chkbox_020
-               caption 'Fechamento do dia de trabalho'
+               CAPTION 'Fechamento do dia de trabalho'
                COL 150
                ROW 050
                WIDTH 350
-               value x_opcao_020
-               fontname 'verdana'
+               VALUE x_opcao_020
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_021
-               caption 'Movimentação do Caixa'
+               CAPTION 'Movimentação do Caixa'
                COL 150
                ROW 080
                WIDTH 350
-               value x_opcao_021
-               fontname 'verdana'
+               VALUE x_opcao_021
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_022
-               caption 'Movimentação Bancária'
+               CAPTION 'Movimentação Bancária'
                COL 150
                ROW 110
                WIDTH 350
-               value x_opcao_022
-               fontname 'verdana'
+               VALUE x_opcao_022
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_023
-               caption 'Contas a Pagar por período'
+               CAPTION 'Contas a Pagar por período'
                COL 150
                ROW 140
                WIDTH 350
-               value x_opcao_023
-               fontname 'verdana'
+               VALUE x_opcao_023
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_024
-               caption 'Contas a Pagar por fornecedor'
+               CAPTION 'Contas a Pagar por fornecedor'
                COL 150
                ROW 170
                WIDTH 350
-               value x_opcao_024
-               fontname 'verdana'
+               VALUE x_opcao_024
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_025
-               caption 'Contas a Receber por período'
+               CAPTION 'Contas a Receber por período'
                COL 150
                ROW 200
                WIDTH 350
-               value x_opcao_025
-               fontname 'verdana'
+               VALUE x_opcao_025
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_026
-               caption 'Contas a Receber por cliente'
+               CAPTION 'Contas a Receber por cliente'
                COL 150
                ROW 230
                WIDTH 350
-               value x_opcao_026
-               fontname 'verdana'
+               VALUE x_opcao_026
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_027
-               caption 'Pizzas mais vendidas'
+               CAPTION 'Pizzas mais vendidas'
                COL 150
                ROW 260
                WIDTH 350
-               value x_opcao_027
-               fontname 'verdana'
+               VALUE x_opcao_027
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_028
-               caption 'Produtos mais vendidos'
+               CAPTION 'Produtos mais vendidos'
                COL 150
                ROW 290
                WIDTH 350
-               value x_opcao_028
-               fontname 'verdana'
+               VALUE x_opcao_028
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_029
-               caption 'Relação estoque mínimo'
+               CAPTION 'Relação estoque mínimo'
                COL 150
                ROW 320
                WIDTH 350
-               value x_opcao_029
-               fontname 'verdana'
+               VALUE x_opcao_029
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_030
-               caption 'Posição do estoque (produtos)'
+               CAPTION 'Posição do estoque (produtos)'
                COL 150
                ROW 350
                WIDTH 350
-               value x_opcao_030
-               fontname 'verdana'
+               VALUE x_opcao_030
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_031
-               caption 'Posição do estoque (matéria prima)'
+               CAPTION 'Posição do estoque (matéria prima)'
                COL 150
                ROW 380
                WIDTH 350
-               value x_opcao_031
-               fontname 'verdana'
+               VALUE x_opcao_031
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_032
-               caption 'Comissão Motoboys/Entregadores'
+               CAPTION 'Comissão Motoboys/Entregadores'
                COL 150
                ROW 410
                WIDTH 350
-               value x_opcao_032
-               fontname 'verdana'
+               VALUE x_opcao_032
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_033
-               caption 'Comissão Atendentes/Garçons'
+               CAPTION 'Comissão Atendentes/Garçons'
                COL 150
                ROW 440
                WIDTH 350
-               value x_opcao_033
-               fontname 'verdana'
+               VALUE x_opcao_033
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
          END PAGE
          page 'Financeiro' image path_imagens+'img_quatro.bmp'
             DEFINE CHECKBOX chkbox_034
-               caption 'Movimentação do Caixa'
+               CAPTION 'Movimentação do Caixa'
                COL 150
                ROW 050
                WIDTH 350
-               value x_opcao_034
-               fontname 'verdana'
+               VALUE x_opcao_034
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_035
-               caption 'Movimentação Bancária'
+               CAPTION 'Movimentação Bancária'
                COL 150
                ROW 080
                WIDTH 350
-               value x_opcao_035
-               fontname 'verdana'
+               VALUE x_opcao_035
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_036
-               caption 'Compras / Entrada Estoque'
+               CAPTION 'Compras / Entrada Estoque'
                COL 150
                ROW 110
                WIDTH 350
-               value x_opcao_036
-               fontname 'verdana'
+               VALUE x_opcao_036
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_037
-               caption 'Contas a Pagar'
+               CAPTION 'Contas a Pagar'
                COL 150
                ROW 140
                WIDTH 350
-               value x_opcao_037
-               fontname 'verdana'
+               VALUE x_opcao_037
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_038
-               caption 'Contas a Receber'
+               CAPTION 'Contas a Receber'
                COL 150
                ROW 170
                WIDTH 350
-               value x_opcao_038
-               fontname 'verdana'
+               VALUE x_opcao_038
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
          END PAGE
          page 'Ferramentas' image path_imagens+'img_cinco.bmp'
             DEFINE CHECKBOX chkbox_039
-               caption 'Tamanhos de Pizza'
+               CAPTION 'Tamanhos de Pizza'
                COL 150
                ROW 050
                WIDTH 350
-               value x_opcao_039
-               fontname 'verdana'
+               VALUE x_opcao_039
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_040
-               caption 'Cadastro da Pizzaria'
+               CAPTION 'Cadastro da Pizzaria'
                COL 150
                ROW 080
                WIDTH 350
-               value x_opcao_040
-               fontname 'verdana'
+               VALUE x_opcao_040
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_041
-               caption 'Incluir ou Excluir Promoção'
+               CAPTION 'Incluir ou Excluir Promoção'
                COL 150
                ROW 110
                WIDTH 350
-               value x_opcao_041
-               fontname 'verdana'
+               VALUE x_opcao_041
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_042
-               caption 'Reajustar Preços de Produtos'
+               CAPTION 'Reajustar Preços de Produtos'
                COL 150
                ROW 140
                WIDTH 350
-               value x_opcao_042
-               fontname 'verdana'
+               VALUE x_opcao_042
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
             DEFINE CHECKBOX chkbox_043
-               caption 'Backup do Banco de Dados'
+               CAPTION 'Backup do Banco de Dados'
                COL 150
                ROW 170
                WIDTH 350
-               value x_opcao_043
-               fontname 'verdana'
+               VALUE x_opcao_043
+               FONTNAME 'verdana'
                fontsize 10
-               fontbold .T.
+               FONTBOLD .T.
                transparent .F.
             END CHECKBOX
          END PAGE
@@ -1134,10 +1134,10 @@ STATIC FUNCTION acesso()
          ROW form_acesso.height-085
          WIDTH 120
          HEIGHT 050
-         caption 'Ok, gravar'
-         action gravar_acesso(x_id,x_tipo)
-         fontbold .T.
-         tooltip 'Confirmar as informações selecionadas'
+         CAPTION 'Ok, gravar'
+         ACTION gravar_acesso(x_id,x_tipo)
+         FONTBOLD .T.
+         TOOLTIP 'Confirmar as informações selecionadas'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -1147,10 +1147,10 @@ STATIC FUNCTION acesso()
          ROW form_acesso.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_acesso.release
-         fontbold .T.
-         tooltip 'Sair desta tela sem selecionar informações'
+         CAPTION 'Voltar'
+         ACTION form_acesso.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela sem selecionar informações'
          flat .F.
          noxpstyle .T.
       END BUTTONEX

@@ -21,7 +21,7 @@ FUNCTION Main
       DEFINE LABEL lbl_1
          ROW 10
          COL 10
-         value "Name:"
+         VALUE "Name:"
          autosize .t.
       END LABEL
       DEFINE COMBOBOX name
@@ -37,12 +37,12 @@ FUNCTION Main
          COL 10
          WIDTH 318
          HEIGHT 64
-         caption "Cue banner"
+         CAPTION "Cue banner"
       END FRAME
       DEFINE LABEL lbl_2
          ROW 70
          COL 22
-         value "Cue text:"
+         VALUE "Cue text:"
          autosize .t.
       END LABEL
       DEFINE TEXTBOX text
@@ -56,16 +56,16 @@ FUNCTION Main
          COL 198
          WIDTH 58
          HEIGHT 21
-         caption "Set"
-         action btnSet_click()
+         CAPTION "Set"
+         ACTION btnSet_click()
       END BUTTON
       DEFINE BUTTON btn_2
          ROW 86
          COL 262
          WIDTH 56
          HEIGHT 21
-         caption "Clear"
-         action cue.name.cuebanner := " "
+         CAPTION "Clear"
+         ACTION cue.name.cuebanner := " "
       END BUTTON
 
    END WINDOW

@@ -23,7 +23,7 @@ PROCEDURE main()
          clientarea  400, 200 ;
          TITLE       'HSplitter demo' ;
          windowtype  MAIN ;
-         on release  HSplitter_Release( Form_1.Handle )
+         ON RELEASE  HSplitter_Release( Form_1.Handle )
 
       GetClientRect( This.Handle, @aRect )
       w := RECTWIDTH ( aRect )
@@ -35,15 +35,15 @@ PROCEDURE main()
       @ 0, 0 editbox EditBox_1 ;
          WIDTH    w ;
          HEIGHT   nYPos ;
-         value    LOREMIPSUM_L ;
-         tooltip  'EditBox_1' ;
+         VALUE    LOREMIPSUM_L ;
+         TOOLTIP  'EditBox_1' ;
          nohscroll
 
       @ nYPos + nBorder, 0 editbox EditBox_2 ;
          WIDTH    w ;
          HEIGHT   h - ( nYPos + nBorder ) ;
-         value    LOREMIPSUM_R ;
-         tooltip  'EditBox_2' ;
+         VALUE    LOREMIPSUM_R ;
+         TOOLTIP  'EditBox_2' ;
          nohscroll
    END WINDOW
 

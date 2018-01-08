@@ -78,7 +78,7 @@ FUNCTION _DefineRichEditBox ( ControlName, ;
       break, ;
       HelpId, ;
       invisible, ;
-      notabstop , ;
+      NOTABSTOP , ;
       bold, ;
       italic, ;
       underline, ;
@@ -102,16 +102,16 @@ FUNCTION _DefineRichEditBox ( ControlName, ;
    DEFAULT MaxLength    TO -1  // 64000
 
    IF MaxLength == 0
-      MaxLength := -1   // for compatibility with TextBox and EditBox
+      MAXLENGTH := -1   // for compatibility with TextBox and EditBox
    ENDIF
 
    IF ValType ( Field ) != 'U'
       IF  HB_UAT ( '>', Field ) == 0
          MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " : You must specify a fully qualified field name. Program Terminated")
       ELSE
-         WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
+         WORKAREA := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
          IF Select (WorkArea) != 0
-            Value := &(Field)
+            VALUE := &(Field)
          ENDIF
       ENDIF
    ENDIF
@@ -119,7 +119,7 @@ FUNCTION _DefineRichEditBox ( ControlName, ;
    IF _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]

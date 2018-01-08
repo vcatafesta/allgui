@@ -445,7 +445,7 @@ FUNCTION _DefineOwnerButton ( ControlName, ParentForm, x, y, Caption, ;
    hb_default( @imageheight, -1 )
 
    IF ladjust  // ignore CAPTION clause when ADJUST is defined
-      Caption := ""
+      CAPTION := ""
    ENDIF
 
    IF _HMG_ToolBarActive

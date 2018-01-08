@@ -159,7 +159,7 @@ FUNCTION CreateMDIClient(Buffer,title)
          ACTION MsgInfo("You pressed Button OK") ;
          WIDTH 50 ;
          HEIGHT 50 ;
-         ToolTip "OK Button"
+         TOOLTIP "OK Button"
 
       ON KEY F3 ACTION MsgInfo("F3 pressed in CHILD MDI")
       ON KEY F4 ACTION DOMETHOD( MyGetMDIHandle(), "Button_1", "OnClick" ) //JP

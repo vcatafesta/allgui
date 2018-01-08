@@ -18,7 +18,7 @@ FUNCTION main
 
    DEFINE WINDOW sample ;
          At 0, 0 width 600 height 400 ;
-         main ;
+         MAIN ;
          TITLE "Want to login?" ;
          ON INIT loginattempt( 2 )
 
@@ -65,43 +65,43 @@ FUNCTION loginattempt( level )
          ROW 10
          COL 10
          WIDTH 80
-         Value "Username"
+         VALUE "Username"
       END LABEL
       DEFINE TEXTBOX username
          ROW 10
          COL 90
          WIDTH 100
-         value username
+         VALUE username
          uppercase .T.
       END TEXTBOX
       DEFINE LABEL passwordlabel
          ROW 40
          COL 10
          WIDTH 80
-         Value "Password"
+         VALUE "Password"
       END LABEL
       DEFINE TEXTBOX password
          ROW 40
          COL 90
          WIDTH 100
          password .T.
-         value ""
+         VALUE ""
          uppercase .T.
       END TEXTBOX
       DEFINE BUTTON login
          ROW 80
          COL 45
          WIDTH 50
-         caption "Login"
-         action ( attempts++, ok := ( login.username.value == username .AND. login.password.value == password ), ;
+         CAPTION "Login"
+         ACTION ( attempts++, ok := ( login.username.value == username .AND. login.password.value == password ), ;
             iif( ok, Loginok( username ), iif( attempts < maxattempt, ( MsgStop( "Not Authorized!" ), login.username.setfocus ), logincancelled( .T. ) ) ) )
       END BUTTON
       DEFINE BUTTON cancel
          ROW 80
          COL 115
          WIDTH 50
-         caption "Cancel"
-         action logincancelled( .F. )
+         CAPTION "Cancel"
+         ACTION logincancelled( .F. )
       END BUTTON
 
    END WINDOW
@@ -186,10 +186,10 @@ FUNCTION ShowUserList()
          COL     0
          WIDTH   384
          HEIGHT  262
-         headers { 'User', 'Password', 'Max attempt', 'Rank' }
-         widths  { 110, 110, 90, 50 }
+         HEADERS { 'User', 'Password', 'Max attempt', 'Rank' }
+         WIDTHS  { 110, 110, 90, 50 }
          items   list
-         value   1
+         VALUE   1
          inplaceedit { ;
             { 'TEXTBOX', 'CHARACTER' }, ;
             { 'TEXTBOX', 'CHARACTER' }, ;
@@ -201,7 +201,7 @@ FUNCTION ShowUserList()
             GRID_JTFY_RIGHT, ;
             GRID_JTFY_RIGHT }
          allowedit ( rank < 10 )
-         cellnavigation ( rank < 10 )
+         CELLNAVIGATION ( rank < 10 )
       END GRID
 
    END WINDOW

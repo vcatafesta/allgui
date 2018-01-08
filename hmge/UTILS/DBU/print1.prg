@@ -104,9 +104,9 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
    DEFINE LABEL _DBUtotfieldslab
       ROW 30
       COL 30
-      value "Fields in the dbf"
+      VALUE "Fields in the dbf"
       WIDTH 200
-      fontbold .t.
+      FONTBOLD .t.
    END LABEL
    DEFINE LISTBOX _DBUfields
       ROW 60
@@ -119,37 +119,37 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
    DEFINE BUTTON _DBUfieldadd
       ROW 100
       COL 260
-      caption "Add"
+      CAPTION "Add"
       WIDTH 100
-      action DBUprintfieldsadd()
+      ACTION DBUprintfieldsadd()
    END BUTTON
    DEFINE BUTTON _DBUfieldremove
       ROW 140
       COL 260
-      caption "Remove"
+      CAPTION "Remove"
       WIDTH 100
-      action DBUprintfieldremove()
+      ACTION DBUprintfieldremove()
    END BUTTON
    DEFINE BUTTON _DBUfieldaddall
       ROW 180
       COL 260
-      caption "Add All"
+      CAPTION "Add All"
       WIDTH 100
-      action DBUprintfieldaddall()
+      ACTION DBUprintfieldaddall()
    END BUTTON
    DEFINE BUTTON _DBUfieldremoveall
       ROW 220
       COL 260
-      caption "Remove All"
+      CAPTION "Remove All"
       WIDTH 100
-      action (_DBUprintfields._DBUselectedfields.deleteallitems,DBUprintcoltally())
+      ACTION (_DBUprintfields._DBUselectedfields.deleteallitems,DBUprintcoltally())
    END BUTTON
    DEFINE LABEL _DBUselectedfieldslabel
       ROW 30
       COL 390
       WIDTH 200
-      value "Selected Fields"
-      fontbold .t.
+      VALUE "Selected Fields"
+      FONTBOLD .t.
    END LABEL
    DEFINE LISTBOX _DBUselectedfields
       ROW 60
@@ -161,9 +161,9 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
    DEFINE LABEL _DBUorientationlabel
       ROW 30
       COL 600
-      value "Orientation"
+      VALUE "Orientation"
       WIDTH 150
-      fontbold .t.
+      FONTBOLD .t.
    END LABEL
    DEFINE RADIOGROUP _DBUpaperorientation
       ROW 60
@@ -171,15 +171,15 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       WIDTH 150
       HEIGHT 100
       options {"Landscape","Portrait"}
-      on change DBUorientationchange()
-      value 1
+      ON CHANGE DBUorientationchange()
+      VALUE 1
    END radiogroup
    DEFINE LABEL _DBUselectprinterlabel
       ROW 170
       COL 600
-      value "Select Printer"
+      VALUE "Select Printer"
       WIDTH 150
-      fontbold .t.
+      FONTBOLD .t.
    END LABEL
    DEFINE LISTBOX _DBUprinters
       ROW 200
@@ -187,14 +187,14 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       WIDTH 150
       HEIGHT 100
       items _DBUavailableprinters
-      value ascan(_DBUavailableprinters,_DBUcurrentprinter)
+      VALUE ascan(_DBUavailableprinters,_DBUcurrentprinter)
    END listbox
    DEFINE LABEL _DBUselectfontsizelabel
       ROW 310
       COL 600
-      value "Font Size"
+      VALUE "Font Size"
       WIDTH 150
-      fontbold .t.
+      FONTBOLD .t.
    END LABEL
    DEFINE LISTBOX _DBUselectfontsize
       ROW 340
@@ -202,54 +202,54 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       WIDTH 150
       HEIGHT 100
       items _DBUfontsizesstr
-      on change DBUfontsizechanged()
-      value 5
+      ON CHANGE DBUfontsizechanged()
+      VALUE 5
    END listbox
    DEFINE BUTTON _DBUbrowseprint1
       ROW 260
       COL 260
-      caption "Print"
-      action DBUprintstart()
+      CAPTION "Print"
+      ACTION DBUprintstart()
       WIDTH 100
    END BUTTON
    DEFINE BUTTON _DBUbrowseprintcancel
       ROW 300
       COL 260
-      caption "Cancel"
-      action _DBUprintfields.release
+      CAPTION "Cancel"
+      ACTION _DBUprintfields.release
       WIDTH 100
    END BUTTON
    DEFINE LABEL _DBUmaxcollabel
       ROW 470
       COL 30
       WIDTH 200
-      value "Maximum Print Columns:"
-      fontbold .t.
+      VALUE "Maximum Print Columns:"
+      FONTBOLD .t.
    END LABEL
    DEFINE TEXTBOX _DBUmaximumcol
       ROW 470
       COL 240
       WIDTH 50
       readonly .t.
-      value _DBUmaxcol1
-      numeric .t.
-      rightalign .t.
+      VALUE _DBUmaxcol1
+      NUMERIC .t.
+      RIGHTALIGN .t.
    END TEXTBOX
    DEFINE LABEL _DBUcurrentcollabel
       ROW 470
       COL 300
       WIDTH 200
-      value "Current Print Columns:"
-      fontbold .t.
+      VALUE "Current Print Columns:"
+      FONTBOLD .t.
    END LABEL
    DEFINE TEXTBOX _DBUcurrentcol
       ROW 470
       COL 510
       WIDTH 50
       readonly .t.
-      value 2
-      numeric .t.
-      rightalign .t.
+      VALUE 2
+      NUMERIC .t.
+      RIGHTALIGN .t.
    END TEXTBOX
 END WINDOW
 DBUprintcoltally()

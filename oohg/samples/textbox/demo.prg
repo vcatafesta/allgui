@@ -17,7 +17,7 @@ FUNCTION Main
          MAIN
 
       @ 10,10 TEXTBOX Txt WIDTH 200 OBJ oTxt ;
-         action msginfo("uno!") ;
+         ACTION msginfo("uno!") ;
          action2 msginfo("dos!") ;
 
       @ 0,0 LABEL Label VALUE " Label " WIDTH 40 OF ( oTxt ) ;
@@ -35,7 +35,7 @@ FUNCTION Main
          FONT 'Verdana' SIZE 12 ;
          TOOLTIP 'Numeric TextBox' ;
          NUMERIC ;
-         inputmask "999,999,999.99"  ;
+         INPUTMASK "999,999,999.99"  ;
          RIGHTALIGN ;
          ON LOSTFOCUS if ( This.Value < 100 , This.SetFocus , Nil)
 

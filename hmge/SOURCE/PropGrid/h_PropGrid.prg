@@ -170,7 +170,7 @@ FUNCTION _DefinePropGrid ( ControlName, ParentFormName, row, col, width, height,
 
    IF ( FontHandle := GetFontHandle( FontName ) ) != 0
       aFont := GetFontParam( FontHandle )
-      FontName     := aFont[1]
+      FONTNAME     := aFont[1]
       FontSize     := aFont[2]
       bold         := aFont[3]
       italic       := aFont[4]
@@ -181,7 +181,7 @@ FUNCTION _DefinePropGrid ( ControlName, ParentFormName, row, col, width, height,
    IF _HMG_BeginWindowActive
       ParentFormName := _HMG_ActiveFormName
       IF .NOT. Empty ( _HMG_ActiveFontName ) .AND. ValType( FontName ) == "U"
-         FontName := _HMG_ActiveFontName
+         FONTNAME := _HMG_ActiveFontName
       ENDIF
       IF .NOT. Empty ( _HMG_ActiveFontSize ) .AND. ValType( FontSize ) == "U"
          FontSize := _HMG_ActiveFontSize
@@ -237,7 +237,7 @@ FUNCTION _DefinePropGrid ( ControlName, ParentFormName, row, col, width, height,
             _SetFontHandle( aControlHandle[1], FontHandle )
          ELSE
             IF ValType( fontname ) == "U"
-               FontName := _HMG_DefaultFontName
+               FONTNAME := _HMG_DefaultFontName
             ENDIF
             IF ValType( fontsize ) == "U"
                FontSize := _HMG_DefaultFontSize
@@ -264,7 +264,7 @@ FUNCTION _DefinePropGrid ( ControlName, ParentFormName, row, col, width, height,
       _SetFontHandle( aControlHandle[2], FontHandle )
    ELSE
       IF ValType( fontname ) == "U"
-         fontname := _HMG_DefaultFontName
+         FONTNAME := _HMG_DefaultFontName
       ENDIF
       IF ValType( fontsize ) == "U"
          fontsize := _HMG_DefaultFontSize

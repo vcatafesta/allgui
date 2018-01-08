@@ -26,7 +26,7 @@ FUNCTION main()
 
       @ 0,1 LISTBOX ListBox_1 WIDTH form_1.width-10 HEIGHT 170 ;
          ITEMS { '01 UM' , '02 DOIS' , '03 TRES' , '04 QUATRO' , '05 CINCO' } ;
-         value 2 ;
+         VALUE 2 ;
          ON CHANGE cas_change() ;
          ON DBLCLICK msginfo( ;
          'this.value = ' + str(this.value) +chr(13)+;

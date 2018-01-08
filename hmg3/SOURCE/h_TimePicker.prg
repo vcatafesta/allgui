@@ -46,7 +46,7 @@ FUNCTION _DefineTimePick ( ControlName, ParentForm, x, y, w, h, cValue, ;
       IF HB_UAT ( '>', Field ) == 0
          MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " : You must specify a fully qualified field name. Program Terminated" )
       ELSE
-         WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
+         WORKAREA := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
          IF Select (WorkArea) != 0
             cValue := &(Field)
          ENDIF
@@ -56,7 +56,7 @@ FUNCTION _DefineTimePick ( ControlName, ParentForm, x, y, w, h, cValue, ;
    IF _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]

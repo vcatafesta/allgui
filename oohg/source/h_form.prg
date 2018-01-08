@@ -248,7 +248,7 @@ METHOD Define( FormName, Caption, x, y, w, h, nominimize, nomaximize, nosize, ;
       restoreprocedure, RClickProcedure, MClickProcedure, ;
       DblClickProcedure, RDblClickProcedure, MDblClickProcedure, ;
       minwidth, maxwidth, minheight, maxheight, MoveProcedure, ;
-      fontcolor ) CLASS TForm
+      FONTCOLOR ) CLASS TForm
 
    LOCAL nStyle := 0, nStyleEx := 0
    LOCAL hParent
@@ -306,7 +306,7 @@ METHOD Define2( FormName, Caption, x, y, w, h, Parent, helpbutton, nominimize, n
    ENDIF
 
    IF ! valtype( Caption ) $ "CM"
-      Caption := ""
+      CAPTION := ""
    ENDIF
 
    ASSIGN ::nVirtualHeight VALUE VirtualHeight TYPE "N"
@@ -2392,7 +2392,7 @@ FUNCTION DefineWindow( FormName, Caption, x, y, w, h, nominimize, nomaximize, no
       RClickProcedure, MClickProcedure, DblClickProcedure, ;
       RDblClickProcedure, MDblClickProcedure, minwidth, maxwidth, ;
       minheight, maxheight, MoveProcedure, cBackImage, lStretchBack, ;
-      fontcolor )
+      FONTCOLOR )
 
    //Local nStyle := 0, nStyleEx := 0
    LOCAL Self
@@ -2401,7 +2401,7 @@ FUNCTION DefineWindow( FormName, Caption, x, y, w, h, nominimize, nomaximize, no
    ///////////////////// Check for non-"implemented" parameters at Tform's subclasses....
 
    IF !HB_IsLogical( main )
-      main := .F.
+      MAIN := .F.
    ELSEIF main
       AADD( aError, "MAIN" )
    ENDIF
@@ -2411,7 +2411,7 @@ FUNCTION DefineWindow( FormName, Caption, x, y, w, h, nominimize, nomaximize, no
       AADD( aError, "SPLITCHILD" )
    ENDIF
    IF !HB_IsLogical( child )
-      child := .F.
+      CHILD := .F.
    ELSEIF child
       AADD( aError, "CHILD" )
    ENDIF
@@ -2459,7 +2459,7 @@ FUNCTION DefineWindow( FormName, Caption, x, y, w, h, nominimize, nomaximize, no
          clientarea, restoreprocedure, RClickProcedure, MClickProcedure, ;
          DblClickProcedure, RDblClickProcedure, MDblClickProcedure, ;
          minwidth, maxwidth, minheight, maxheight, MoveProcedure, ;
-         fontcolor )
+         FONTCOLOR )
    ELSEIF splitchild
       Self := _OOHG_SelectSubClass( TFormSplit(), subclass )
       ::Define( FormName, w, h, break, grippertext, nocaption, caption, aRGB, ;
@@ -2483,7 +2483,7 @@ FUNCTION DefineWindow( FormName, Caption, x, y, w, h, nominimize, nomaximize, no
          DblClickProcedure, RDblClickProcedure, MDblClickProcedure, ;
          nominimize, nomaximize, maximizeprocedure, minimizeprocedure, ;
          minwidth, maxwidth, minheight, maxheight, MoveProcedure, ;
-         fontcolor )
+         FONTCOLOR )
    ELSEIF mdiclient
       Self := _OOHG_SelectSubClass( TFormMDIClient(), subclass )
       ::Define( FormName, Caption, x, y, w, h, MouseDragProcedure, ;
@@ -3264,8 +3264,8 @@ FUNCTION inspector( oWind )
 
       @ 24,0 grid __oohg_obj_Inspector_Grid obj oGrd ;
          HEIGHT 240 width 394 ;
-         headers {"DATA","Values"};
-         widths {150,180};
+         HEADERS {"DATA","Values"};
+         WIDTHS {150,180};
          on dblclick (selecciona(aControls[oCombo:value],aControlsNames[oCombo:value],oooBj_Data[this.cellrowindex]),carga(aControls[oCombo:value],oGrd,@ooobj_data))
 
       aData := {}
@@ -3286,7 +3286,7 @@ FUNCTION inspector( oWind )
 
       @ 0,0 combobox __OOHG_OBJ_INSPECTOR_combo obj oCombo;
          items aData value 1 width 394;
-         on change carga(aControls[oCombo:value],oGrd,@ooobj_data)
+         ON CHANGE carga(aControls[oCombo:value],oGrd,@ooobj_data)
       carga(aControls[1],oGrd,@ooobj_data)
 
    END WINDOW

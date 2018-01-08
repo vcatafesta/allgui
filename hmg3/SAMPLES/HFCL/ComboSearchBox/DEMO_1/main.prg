@@ -29,23 +29,23 @@ PROC Main()
          ROW 25
          COL 100
          WIDTH 100
-         value "Countries"
+         VALUE "Countries"
       END LABEL
 
       DEFINE COMBOSEARCHBOX s1
          ROW 25
          COL 190
          WIDTH 200
-         fontname "Courier"
-         fontitalic .t.
-         fontbold .t.
-         fontcolor {255,255,255}
+         FONTNAME "Courier"
+         FONTITALIC .t.
+         FONTBOLD .t.
+         FONTCOLOR {255,255,255}
          BACKCOLOR {0,0,255}
          items acountries
-         on enter msginfo(frmcsbtest.s1.value)
+         ON ENTER msginfo(frmcsbtest.s1.value)
          anywheresearch .f.
          // dropheight 50
-         additive .t.
+         ADDITIVE .t.
          rowoffset 50
          coloffset 0
       END COMBOSEARCHBOX

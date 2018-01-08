@@ -24,47 +24,47 @@ FUNCTION Main
          ROW 10
          COL 20
          WIDTH 100
-         value "Name"
+         VALUE "Name"
       END LABEL
       DEFINE TEXTBOX textbox1
          ROW 10
          COL 110
          WIDTH 180
-         on enter sample.textbox2.setfocus
+         ON ENTER sample.textbox2.setfocus
       END TEXTBOX
       DEFINE LABEL label2
          ROW 40
          COL 20
          WIDTH 100
-         value "Country"
+         VALUE "Country"
       END LABEL
       define btntextbox textbox2
       ROW 40
       COL 110
       WIDTH 180
-      action iif(empty(doachoice(aCountries)),nil,sample.textbox3.setfocus)
+      ACTION iif(empty(doachoice(aCountries)),nil,sample.textbox3.setfocus)
       ongotfocus sample.label4.visible:=.t.
       onlostfocus sample.label4.visible:=.f.
-      on enter iif(empty(sample.textbox2.value),doachoice(aCountries),sample.textbox3.setfocus)
+      ON ENTER iif(empty(sample.textbox2.value),doachoice(aCountries),sample.textbox3.setfocus)
    END btntextbox
    DEFINE LABEL label3
       ROW 70
       COL 20
       WIDTH 100
-      value "City"
+      VALUE "City"
    END LABEL
    DEFINE TEXTBOX textbox3
       ROW 70
       COL 110
       WIDTH 180
-      on enter sample.textbox1.setfocus
+      ON ENTER sample.textbox1.setfocus
    END TEXTBOX
    DEFINE LABEL label4
       ROW 100
       COL 110
       WIDTH 140
-      value "F2 - select country"
-      fontbold .t.
+      VALUE "F2 - select country"
+      FONTBOLD .t.
       visible .f.
    END LABEL
    on key F2 action iif(thiswindow.focusedcontrol=='textbox2',doachoice(aCountries),nil)
@@ -129,9 +129,9 @@ FUNCTION HMG_Achoice(nTop,nLeft,nBottom,nRight,aList,nDefault,lAnyWhere)
          ROW 5
          COL 5
          WIDTH nWidth - 2*GetBorderWidth()
-         on change     _aChoiceTextChanged( lAnyWhere )
-         on enter      _aChoiceSelected()
-         on gotfocus   _achoicelistchanged()
+         ON CHANGE     _aChoiceTextChanged( lAnyWhere )
+         ON ENTER      _aChoiceSelected()
+         ON GOTFOCUS   _achoicelistchanged()
       END TEXTBOX
       DEFINE LISTBOX _list
          ROW 30
@@ -139,7 +139,7 @@ FUNCTION HMG_Achoice(nTop,nLeft,nBottom,nRight,aList,nDefault,lAnyWhere)
          WIDTH nWidth - 2*GetBorderWidth()
          HEIGHT nHeight - 50
          items aList
-         on change _achoicelistchanged()
+         ON CHANGE _achoicelistchanged()
          on dblclick _aChoiceSelected()
       END listbox
    END WINDOW

@@ -49,32 +49,32 @@ FUNCTION Main
          ROW 10
          COL 220
          HEIGHT 24
-         caption "Get CueBanner"
-         action MsgInfo( Form_1.Text_1.CueBanner )
+         CAPTION "Get CueBanner"
+         ACTION MsgInfo( Form_1.Text_1.CueBanner )
       END BUTTON
 
       DEFINE BUTTON btn_2
          ROW 40
          COL 220
          HEIGHT 24
-         caption "Get CueBanner"
-         action MsgInfo( GetProperty( "Form_1", "Text_2", "CueBanner" ) )
+         CAPTION "Get CueBanner"
+         ACTION MsgInfo( GetProperty( "Form_1", "Text_2", "CueBanner" ) )
       END BUTTON
 
       DEFINE BUTTON btn_3
          ROW 70
          COL 220
          HEIGHT 24
-         caption "Get CueBanner"
-         action MsgInfo( Form_1.Combo_1.CueBanner )
+         CAPTION "Get CueBanner"
+         ACTION MsgInfo( Form_1.Combo_1.CueBanner )
       END BUTTON
 
       DEFINE BUTTON btn_4
          ROW 100
          COL 220
          HEIGHT 24
-         caption "Get CueBanner"
-         action MsgInfo( Form_1.Spinner_1.CueBanner )
+         CAPTION "Get CueBanner"
+         ACTION MsgInfo( Form_1.Spinner_1.CueBanner )
       END BUTTON
 
    END WINDOW

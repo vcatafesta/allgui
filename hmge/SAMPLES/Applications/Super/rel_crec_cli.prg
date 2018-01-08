@@ -33,30 +33,30 @@ FUNCTION relatorio_crec_002()
 
       @ 010,010 label lbl_001;
          of form_mov_crec_cli;
-         value 'Escolha o intervalo de datas';
+         VALUE 'Escolha o intervalo de datas';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,010 label lbl_002;
          of form_mov_crec_cli;
-         value 'Escolha o cliente';
+         VALUE 'Escolha o cliente';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
 
       @ 040,010 datepicker dp_inicio;
          parent form_mov_crec_cli;
-         value date();
+         VALUE date();
          WIDTH 150;
          HEIGHT 030;
          font 'verdana' size 014
       @ 040,170 datepicker dp_final;
          parent form_mov_crec_cli;
-         value date();
+         VALUE date();
          WIDTH 150;
          HEIGHT 030;
          font 'verdana' size 014
@@ -66,14 +66,14 @@ FUNCTION relatorio_crec_002()
       WIDTH 310
       HEIGHT 200
       items a_001
-      value 1
+      VALUE 1
    END comboboxex
 
    * linha separadora
    DEFINE LABEL linha_rodape
       COL 000
       ROW form_mov_crec_cli.height-090
-      value ''
+      VALUE ''
       WIDTH form_mov_crec_cli.width
       HEIGHT 001
       BACKCOLOR _preto_001
@@ -87,10 +87,10 @@ FUNCTION relatorio_crec_002()
       ROW form_mov_crec_cli.height-085
       WIDTH 150
       HEIGHT 050
-      caption 'Ok, imprimir'
-      action relatorio()
-      fontbold .T.
-      tooltip 'Gerar o relatório'
+      CAPTION 'Ok, imprimir'
+      ACTION relatorio()
+      FONTBOLD .T.
+      TOOLTIP 'Gerar o relatório'
       flat .F.
       noxpstyle .T.
    END BUTTONEX
@@ -100,10 +100,10 @@ FUNCTION relatorio_crec_002()
       ROW form_mov_crec_cli.height-085
       WIDTH 090
       HEIGHT 050
-      caption 'Voltar'
-      action form_mov_crec_cli.release
-      fontbold .T.
-      tooltip 'Sair desta tela'
+      CAPTION 'Voltar'
+      ACTION form_mov_crec_cli.release
+      FONTBOLD .T.
+      TOOLTIP 'Sair desta tela'
       flat .F.
       noxpstyle .T.
    END BUTTONEX

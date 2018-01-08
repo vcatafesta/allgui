@@ -52,7 +52,7 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
       nHeight   := 12 ,;
       lUpdate   := .F.,;
       lNoBorder := .F.,;
-      shownone  := .F.
+      SHOWNONE  := .F.
 
    HB_SYMBOL_UNUSED( cPict )
    HB_SYMBOL_UNUSED( lCenter )
@@ -121,7 +121,7 @@ METHOD Default() CLASS TDatePicker
 
    LOCAL Value
 
-   Value := Eval( ::bSetGet )
+   VALUE := Eval( ::bSetGet )
    IF Empty (Value)
       SetDatePickNull( ::hWnd )
    ELSE

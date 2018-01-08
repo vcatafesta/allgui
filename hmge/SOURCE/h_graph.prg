@@ -689,13 +689,13 @@ FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname
          COL fromcol + iif( Len( ctitle ) * 8 > ( tocol - fromcol ), 0, 5 )
          WIDTH iif( Len( ctitle ) * 8 > ( tocol - fromcol ), Len( ctitle ) * 10, tocol - fromcol - 10 )
          HEIGHT 16 + _HMG_DefaultFontSize
-         fontbold .T.
-         fontname _HMG_DefaultFontName
+         FONTBOLD .T.
+         FONTNAME _HMG_DefaultFontName
          fontsize _HMG_DefaultFontSize + 3
          centeralign ( Len( ctitle ) * 8 < ( tocol - fromcol ) )
          vcenteralign .T.
-         value ctitle
-         fontcolor { 0, 0, 0 }
+         VALUE ctitle
+         FONTCOLOR { 0, 0, 0 }
          BACKCOLOR iif( lPrint, WHITE, backcolor )
       END LABEL
       RedrawWindow( GetControlHandle( cname, windowname ) )
@@ -853,14 +853,14 @@ FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname
             parent &windowname
             ROW fromrow
             COL fromcol + 20
-            fontname _HMG_DefaultFontName
+            FONTNAME _HMG_DefaultFontName
             fontsize _HMG_DefaultFontSize - 1
             autosize .T.
             IF !lPrint .AND. !lNoborder
                HEIGHT 16
             ENDIF
-            value aname[i] + iif( lxval, " - " + LTrim( Transform( series[i], cPicture ) ) + " (" + LTrim( Str( series[i] / ser_sum * 100, 6, 2 ) ) + " %)", "" )
-            fontcolor iif( RGB( colors[i][1], colors[i][2], colors[i][3] ) == RGB( 255, 255, 255 ), BLACK, colors[i] )
+            VALUE aname[i] + iif( lxval, " - " + LTrim( Transform( series[i], cPicture ) ) + " (" + LTrim( Str( series[i] / ser_sum * 100, 6, 2 ) ) + " %)", "" )
+            FONTCOLOR iif( RGB( colors[i][1], colors[i][2], colors[i][3] ) == RGB( 255, 255, 255 ), BLACK, colors[i] )
             BACKCOLOR iif( lPrint, WHITE, NIL )
             transparent .T.
          END LABEL
@@ -898,7 +898,7 @@ FUNCTION _PiePrint( cForm, fromrow, fromcol, torow, tocol, series, aname, colors
          WIDTH GetProperty( cForm, 'Width' );
          HEIGHT GetProperty( cForm, 'Height' );
          Child;
-         On Init ( drawpiegraph( "_PieGraph",fromrow,fromcol,torow,tocol,series,aname,colors,ctitle,depth,l3d,lxval,lsleg,cPicture, .T., placement, .T. ),;
+         ON INIT ( drawpiegraph( "_PieGraph",fromrow,fromcol,torow,tocol,series,aname,colors,ctitle,depth,l3d,lxval,lsleg,cPicture, .T., placement, .T. ),;
          _bmpprint( ThisWindow.Name, x, y, iif( "HBPRINT" $ Upper( cLibrary ), 2, 1 ) ) );
          BACKCOLOR WHITE
 
@@ -920,7 +920,7 @@ FUNCTION _GraphPrint( cForm, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
          WIDTH GetProperty( cForm, 'Width' );
          HEIGHT GetProperty( cForm, 'Height' );
          Child;
-         On Init ( GraphShow("_Graph",nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle,aYVals,nBarD,nWideB,nSep,nXRanges,;
+         ON INIT ( GraphShow("_Graph",nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle,aYVals,nBarD,nWideB,nSep,nXRanges,;
          l3D, lGrid, lxGrid, lyGrid, lxVal, lyVal, lLegends, aSeries, aColors, nType, lViewVal, cPicture, nLegendsWidth, .T. , .T. ),;
          _bmpprint( ThisWindow.Name, x, y, iif( "HBPRINT" $ Upper( cLibrary ), 2, 1 ) ) );
          BACKCOLOR WHITE

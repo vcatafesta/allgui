@@ -24,7 +24,7 @@ FUNCTION Main()
       @ 97,35  EDITBOX EditBox_1 WIDTH 164 HEIGHT 146 VALUE "EditBox_1 "
 
       @ 247,34 CHECKBOX CheckBox_1 CAPTION "Readonly" WIDTH 100 HEIGHT 28;
-         ON Change {|| IIf(This.Value,(Form_1.TextBox_1.Readonly:=.t.,Form_1.EditBox_1.Readonly:=.t.),(Form_1.TextBox_1.Readonly:=.f.,Form_1.EditBox_1.Readonly:=.f.))}
+         ON CHANGE {|| IIf(This.Value,(Form_1.TextBox_1.Readonly:=.t.,Form_1.EditBox_1.Readonly:=.t.),(Form_1.TextBox_1.Readonly:=.f.,Form_1.EditBox_1.Readonly:=.f.))}
 
       // Back and fontcolor set
 
@@ -35,7 +35,7 @@ FUNCTION Main()
       @ 97,35+180  EDITBOX EditBox_1a WIDTH 164 HEIGHT 146 VALUE "EditBox_1a " FontColor  {255,255,255}  BackColor {200,0,0}
 
       @ 247,34+180 CHECKBOX CheckBox_1a CAPTION "Readonly" WIDTH 100 HEIGHT 28;
-         ON Change {|| IIf(This.Value,(Form_1.TextBox_1a.Readonly:=.t.,Form_1.EditBox_1a.Readonly:=.t.),(Form_1.TextBox_1a.Readonly:=.f.,Form_1.EditBox_1a.Readonly:=.f.))}
+         ON CHANGE {|| IIf(This.Value,(Form_1.TextBox_1a.Readonly:=.t.,Form_1.EditBox_1a.Readonly:=.t.),(Form_1.TextBox_1a.Readonly:=.f.,Form_1.EditBox_1a.Readonly:=.f.))}
 
       // Back and fontcolor set as arrays {aEnable,aReadonly}
 
@@ -46,7 +46,7 @@ FUNCTION Main()
       @ 97,35+180+180  EDITBOX EditBox_1b WIDTH 164 HEIGHT 146 VALUE "EditBox_1b " FontColor  {{255,255,255},{255,255,0}}  BackColor {{0,0,200},{0,0,100}}
 
       @ 247,34+180+180 CHECKBOX CheckBox_1b CAPTION "Readonly" WIDTH 100 HEIGHT 28;
-         ON Change {|| IIf(This.Value,(Form_1.TextBox_1b.Readonly:=.t.,Form_1.EditBox_1b.Readonly:=.t.),(Form_1.TextBox_1b.Readonly:=.f.,Form_1.EditBox_1b.Readonly:=.f.))}
+         ON CHANGE {|| IIf(This.Value,(Form_1.TextBox_1b.Readonly:=.t.,Form_1.EditBox_1b.Readonly:=.t.),(Form_1.TextBox_1b.Readonly:=.f.,Form_1.EditBox_1b.Readonly:=.f.))}
 
       DEFINE MAIN MENU
 

@@ -46,8 +46,8 @@ FUNCTION main()
          WIDTH ColChartopix(nWidth) height Rowchartopix(nHeight) ;
          TITLE 'Simple Editor' ;
          ICON 'main' ;
-         main ;
-         on init nuevo() ;
+         MAIN ;
+         ON INIT nuevo() ;
          on maximize ( frm1.tmr1.enabled := .t. ) ;
          on size ( frm1.tmr1.enabled := .t. )
 
@@ -158,13 +158,13 @@ PROCEDURE editor()
       WIDTH      colchartopix( nWidth - 1 )
       HEIGHT      rowchartopix( nHeight - 7 )
       parent      frm1
-      fontname   cFontName
+      FONTNAME   cFontName
       fontsize   nFontSize
-      fontbold   lBold
-      fontitalic   lItalic
+      FONTBOLD   lBold
+      FONTITALIC   lItalic
       fontUnderline   lUnderline
       fontStrikeout   lStrikeOut
-      fontcolor   aColour
+      FONTCOLOR   aColour
       BACKCOLOR   { 240, 240, 241 }
       HScrollBar   !lWordWrap
       onchange   (lSaveNeeded := .T., Frm1.Button_3.Enabled := lSaveNeeded)
@@ -391,7 +391,7 @@ PROCEDURE Acercade()
       NEXT
 
       @ Rowchartopix(i+1), Colchartopix(22) button BTN1 caption 'OK' default ;
-         action Frm2.release width 74 height 22 font 'MS Sans Serif' size 9
+         ACTION Frm2.release width 74 height 22 font 'MS Sans Serif' size 9
 
    END WINDOW
    CENTER WINDOW Frm2

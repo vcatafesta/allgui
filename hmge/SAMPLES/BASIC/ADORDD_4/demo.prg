@@ -135,7 +135,7 @@ FUNCTION FindPos( met, value, oBrw )
 
    LOCAL cState, FindWar, cWar, pos, lFound := .T.
 
-   Value := Upper( value )
+   VALUE := Upper( value )
    SELECT( "Employee" )
    DO CASE
    CASE met == 1
@@ -410,7 +410,7 @@ FUNCTION SaveDan( aFld )
       FOR n := 1 TO Len( aFld )
          cFld  := aFld[ n ]
          cGBox := "GBox_" + hb_ntos( n )
-         value := GetProperty( "Form_Ed", cGBox, 'Value' )
+         VALUE := GetProperty( "Form_Ed", cGBox, 'Value' )
          REPLACE &cFld WITH value
       NEXT
       dbUnlock()

@@ -784,7 +784,7 @@ FUNCTION drawtextout(window,row,col,string,fontcolor,backcolor,fontname,fontsize
    IF formhandle > 0
 
       IF valtype(fontname) == "U"
-         fontname := _HMG_DefaultFontName
+         FONTNAME := _HMG_DefaultFontName
       ENDIF
       IF valtype(fontsize) == "U"
          fontsize := _HMG_DefaultFontSize
@@ -793,7 +793,7 @@ FUNCTION drawtextout(window,row,col,string,fontcolor,backcolor,fontname,fontsize
          BACKCOLOR := {255,255,255}
       ENDIF
       IF valtype(fontcolor) == "U"
-         fontcolor := {0,0,0}
+         FONTCOLOR := {0,0,0}
       ENDIF
 
       torow := row + if(transparent, 0, fontsize + 4)

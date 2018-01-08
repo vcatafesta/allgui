@@ -171,7 +171,7 @@ METHOD Define( ControlName, ParentForm, x, y, w, rows, value, fontname, ;
    ENDIF
 
    IF ValType( itemsource ) == 'A'
-      WorkArea := itemsource[ 1 ]
+      WORKAREA := itemsource[ 1 ]
       uField := itemsource[ 2 ]
       IF Len( itemsource ) > 2
          ASSIGN ::SourceOrder VALUE itemsource[ 3 ] TYPE "CMNB"
@@ -180,7 +180,7 @@ METHOD Define( ControlName, ParentForm, x, y, w, rows, value, fontname, ;
       IF ! '->' $ itemsource
          MsgOOHGError( "ITEMSOURCE clause must be a fully qualified field name. Program terminated." )
       ELSE
-         WorkArea := Left( itemsource, At( '->', itemsource ) - 1 )
+         WORKAREA := Left( itemsource, At( '->', itemsource ) - 1 )
          uField := Right( itemsource, Len( itemsource ) - At( '->', itemsource ) - 1 )
       ENDIF
    ENDIF

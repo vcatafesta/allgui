@@ -93,7 +93,7 @@ METHOD Define( ControlName, ParentForm, x, y, Caption, Value, fontname, ;
    ASSIGN autosize      VALUE autosize    TYPE "L" DEFAULT .F.
 
    IF ! ::Threestate .and. ! HB_IsLogical( value )
-      value := .F.
+      VALUE := .F.
    ENDIF
 
    IF ::Transparent .AND. _OOHG_UsesVisualStyle()

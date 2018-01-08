@@ -643,9 +643,9 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
          TITLE _cTitulo                  ;
          modal                           ;
          NOSIZE                          ;
-         nosysmenu                       ;
-         on init {|| ABM2Redibuja() }    ;
-         on release {|| ABM2salir(nRegistro, cIndiceActivo, cFiltroAnt, nArea) }   ;
+         NOSYSMENU                       ;
+         ON INIT {|| ABM2Redibuja() }    ;
+         ON RELEASE {|| ABM2salir(nRegistro, cIndiceActivo, cFiltroAnt, nArea) }   ;
          font "ms sans serif" size 9     ;
          BACKCOLOR ( GetFormObjectByHandle( GetActiveWindow() ):BackColor )
 
@@ -660,22 +660,22 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
       DEFINE TOOLBAR tbEdit buttonsize 90, 32 flat righttext border
          button tbbCerrar  caption _OOHG_Messages( 9, 1 ) ;
             PICTURE "MINIGUI_EDIT_CLOSE"          ;
-            action  wndABM2Edit.Release
+            ACTION  wndABM2Edit.Release
          button tbbNuevo   caption _OOHG_Messages( 9, 2 ) ;
             PICTURE "MINIGUI_EDIT_NEW"            ;
-            action  {|| ABM2Editar( .t. ) }
+            ACTION  {|| ABM2Editar( .t. ) }
          button tbbEditar  caption _OOHG_Messages( 9, 3 ) ;
             PICTURE "MINIGUI_EDIT_EDIT"           ;
-            action  {|| ABM2Editar( .f. ) }
+            ACTION  {|| ABM2Editar( .f. ) }
          button tbbBorrar  caption _OOHG_Messages( 9, 4 ) ;
             PICTURE "MINIGUI_EDIT_DELETE"         ;
-            action  {|| ABM2Borrar() }
+            ACTION  {|| ABM2Borrar() }
          button tbbBuscar  caption _OOHG_Messages( 9, 5 ) ;
             PICTURE "MINIGUI_EDIT_FIND"           ;
-            action  {|| ABM2Buscar() }
+            ACTION  {|| ABM2Buscar() }
          button tbbListado caption _OOHG_Messages( 9, 6 ) ;
             PICTURE "MINIGUI_EDIT_PRINT"          ;
-            action  {|| ABM2Imprimir() }
+            ACTION  {|| ABM2Imprimir() }
       END toolbar
 
    END WINDOW
@@ -683,27 +683,27 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
    ////////// Creación de los controles de la ventana de visualización.-----------
    @ 45, 10 frame frmEditOpciones          ;
       of wndABM2Edit                  ;
-      caption ""                      ;
+      CAPTION ""                      ;
       WIDTH wndABM2Edit.Width - 25    ;
       HEIGHT 65
    @ 112, 10 frame frmEditTabla            ;
       of wndABM2Edit                  ;
-      caption ""                      ;
+      CAPTION ""                      ;
       WIDTH wndABM2Edit.Width - 25    ;
       HEIGHT wndABM2Edit.Height - 165
    @ 60, 20 label lblIndice               ;
       of wndABM2Edit                  ;
-      value _OOHG_Messages( 11, 26 )  ;
+      VALUE _OOHG_Messages( 11, 26 )  ;
       WIDTH 150                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 75, 20 combobox cbIndices                     ;
       of wndABM2Edit                          ;
       items _aIndice                          ;
-      value _nIndiceActivo                    ;
+      VALUE _nIndiceActivo                    ;
       WIDTH 150                               ;
       font "arial" size 9                     ;
-      on change {|| ABM2CambiarOrden() }
+      ON CHANGE {|| ABM2CambiarOrden() }
    nColumna := wndABM2Edit.Width - 175
    aTextoOp := {}
    FOR i := 1 to Len( _aOpciones )
@@ -711,28 +711,28 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
    NEXT
    @ 60, nColumna label lblOpciones        ;
       of wndABM2Edit                  ;
-      value _OOHG_Messages( 10, 5 )   ;
+      VALUE _OOHG_Messages( 10, 5 )   ;
       WIDTH 150                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 75, nColumna combobox cbOpciones              ;
       of wndABM2Edit                          ;
       items aTextoOp                          ;
-      value 1                                 ;
+      VALUE 1                                 ;
       WIDTH 150                               ;
       font "arial" size 9                     ;
-      on change {|| ABM2EjecutaOpcion() }
+      ON CHANGE {|| ABM2EjecutaOpcion() }
    @ 65, (wndABM2Edit.Width / 2)-110 button btnFiltro1     ;
       of wndABM2Edit                                  ;
-      caption _OOHG_Messages( 9, 10 )                 ;
-      action {|| ABM2ActivarFiltro() }                ;
+      CAPTION _OOHG_Messages( 9, 10 )                 ;
+      ACTION {|| ABM2ActivarFiltro() }                ;
       WIDTH 100                                       ;
       HEIGHT 32                                       ;
       font "ms sans serif" size 9
    @ 65, (wndABM2Edit.Width / 2)+5 button btnFiltro2       ;
       of wndABM2Edit                                  ;
-      caption _OOHG_Messages( 9, 11 )                 ;
-      action {|| ABM2DesactivarFiltro() }             ;
+      CAPTION _OOHG_Messages( 9, 11 )                 ;
+      ACTION {|| ABM2DesactivarFiltro() }             ;
       WIDTH 100                                       ;
       HEIGHT 32                                       ;
       font "ms sans serif" size 9
@@ -740,13 +740,13 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
       of wndABM2Edit                                                          ;
       WIDTH wndABM2Edit.Width - 45                                            ;
       HEIGHT wndABM2Edit.Height - 195                                         ;
-      headers _aCabeceraTabla                                                 ;
-      widths _aAnchoTabla                                                     ;
-      workarea &_cArea                                                        ;
-      fields _aCampoTabla                                                     ;
-      value ( _cArea)->( RecNo() )                                            ;
+      HEADERS _aCabeceraTabla                                                 ;
+      WIDTHS _aAnchoTabla                                                     ;
+      WORKAREA &_cArea                                                        ;
+      FIELDS _aCampoTabla                                                     ;
+      VALUE ( _cArea)->( RecNo() )                                            ;
       font "arial" size 9                                                     ;
-      on change {|| (_cArea)->( dbGoto( wndABM2Edit.brwABM2Edit.Value ) ),    ;
+      ON CHANGE {|| (_cArea)->( dbGoto( wndABM2Edit.brwABM2Edit.Value ) ),    ;
       ABM2Redibuja( .f. ) }                                     ;
       on dblclick ABM2Editar( .f. )                                           ;
       justify _aAlineadoTabla
@@ -966,7 +966,7 @@ STATIC FUNCTION ABM2Editar( lNuevo )
          TITLE cTitulo                                           ;
          modal                                                   ;
          NOSIZE                                                  ;
-         nosysmenu                                               ;
+         NOSYSMENU                                               ;
          font "ms sans serif" size 9                             ;
          BACKCOLOR ( GetFormObjectByHandle( GetActiveWindow() ):BackColor )
 
@@ -981,13 +981,13 @@ STATIC FUNCTION ABM2Editar( lNuevo )
          DEFINE TOOLBAR tbEditNuevo buttonsize 90, 32 flat righttext
             button tbbCancelar caption _OOHG_Messages( 9, 7 ) ;
                PICTURE "MINIGUI_EDIT_CANCEL"        ;
-               action  wndABM2EditNuevo.Release
+               ACTION  wndABM2EditNuevo.Release
             button tbbAceptar  caption _OOHG_Messages( 9, 8 ) ;
                PICTURE "MINIGUI_EDIT_OK"            ;
-               action  ABM2EditarGuardar( lNuevo )
+               ACTION  ABM2EditarGuardar( lNuevo )
             button tbbCopiar   caption _OOHG_Messages( 9, 9 ) ;
                PICTURE "MINIGUI_EDIT_COPY"          ;
-               action  ABM2EditarCopiar()
+               ACTION  ABM2EditarCopiar()
          END toolbar
 
          // Define la ventana donde van contenidos los controles de edición.
@@ -998,8 +998,8 @@ STATIC FUNCTION ABM2Editar( lNuevo )
                HEIGHT iif( nAlto > nAltoTope,          ;
                nAltoTope - 95,             ;
                nAltoSplit - 1 )            ;
-               virtual width nAnchoSplit               ;
-               virtual height nAltoSplit               ;
+               VIRTUAL width nAnchoSplit               ;
+               VIRTUAL height nAltoSplit               ;
                splitchild                              ;
                nocaption                               ;
                font "ms sans serif" size 9             ;
@@ -1016,7 +1016,7 @@ STATIC FUNCTION ABM2Editar( lNuevo )
       @ _aEtiqueta[i,ABM_LBL_ROW], _aEtiqueta[i,ABM_LBL_COL]  ;
          LABEL &( _aEtiqueta[i,ABM_LBL_NAME] )           ;
          of wndABM2EditNuevoSplit                        ;
-         value _aNombreCampo[i]                          ;
+         VALUE _aNombreCampo[i]                          ;
          WIDTH _aEtiqueta[i,ABM_LBL_WIDTH]               ;
          HEIGHT _aEtiqueta[i,ABM_LBL_HEIGHT]             ;
          font "ms sans serif" size 9
@@ -1030,14 +1030,14 @@ STATIC FUNCTION ABM2Editar( lNuevo )
          @ _aControl[i,ABM_CON_ROW], _aControl[i,ABM_CON_COL]    ;
             textbox &( _aControl[i,ABM_CON_NAME] )          ;
             of wndABM2EditNuevoSplit                        ;
-            value ""                                        ;
+            VALUE ""                                        ;
             HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
             WIDTH _aControl[i,ABM_CON_WIDTH]                ;
             font "arial" size 9                             ;
-            maxlength _aEstructura[i,DBS_LEN]               ;
-            on gotfocus ABM2ConFoco()                       ;
-            on lostfocus ABM2SinFoco()                      ;
-            on enter ABM2AlEntrar( )
+            MAXLENGTH _aEstructura[i,DBS_LEN]               ;
+            ON GOTFOCUS ABM2ConFoco()                       ;
+            ON LOSTFOCUS ABM2SinFoco()                      ;
+            ON ENTER ABM2AlEntrar( )
       CASE _aControl[i,ABM_CON_TYPE] == ABM_DATEPICKER
          @ _aControl[i,ABM_CON_ROW], _aControl[i,ABM_CON_COL]    ;
             datepicker &( _aControl[i,ABM_CON_NAME] )       ;
@@ -1046,22 +1046,22 @@ STATIC FUNCTION ABM2Editar( lNuevo )
             WIDTH _aControl[i,ABM_CON_WIDTH] + 25           ;
             font "arial" size 9                             ;
             SHOWNONE                ;
-            on gotfocus ABM2ConFoco()                       ;
-            on lostfocus ABM2SinFoco()
+            ON GOTFOCUS ABM2ConFoco()                       ;
+            ON LOSTFOCUS ABM2SinFoco()
       CASE _aControl[i,ABM_CON_TYPE] == ABM_TEXTBOXN
          IF ( _aEstructura[i,DBS_DEC] == 0 )
             @ _aControl[i,ABM_CON_ROW], _aControl[i,ABM_CON_COL]    ;
                textbox &( _aControl[i,ABM_CON_NAME] )          ;
                of wndABM2EditNuevoSplit                        ;
-               value ""                                        ;
+               VALUE ""                                        ;
                HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
                WIDTH _aControl[i,ABM_CON_WIDTH]                ;
-               numeric                                         ;
+               NUMERIC                                         ;
                font "arial" size 9                             ;
-               maxlength _aEstructura[i,DBS_LEN]               ;
-               on gotfocus ABM2ConFoco( i )                    ;
-               on lostfocus ABM2SinFoco( i )                   ;
-               on enter ABM2AlEntrar()
+               MAXLENGTH _aEstructura[i,DBS_LEN]               ;
+               ON GOTFOCUS ABM2ConFoco( i )                    ;
+               ON LOSTFOCUS ABM2SinFoco( i )                   ;
+               ON ENTER ABM2AlEntrar()
          ELSE
             cMascara := Replicate( "9", _aEstructura[i,DBS_LEN] -   ;
                ( _aEstructura[i,DBS_DEC] + 1 ) )
@@ -1070,35 +1070,35 @@ STATIC FUNCTION ABM2Editar( lNuevo )
             @ _aControl[i,ABM_CON_ROW], _aControl[i,ABM_CON_COL]    ;
                textbox &( _aControl[i,ABM_CON_NAME] )          ;
                of wndABM2EditNuevoSplit                        ;
-               value ""                                        ;
+               VALUE ""                                        ;
                HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
                WIDTH _aControl[i,ABM_CON_WIDTH]                ;
-               numeric                                         ;
-               inputmask cMascara                              ;
-               on gotfocus ABM2ConFoco()                       ;
-               on lostfocus ABM2SinFoco()                      ;
-               on enter ABM2AlEntrar()
+               NUMERIC                                         ;
+               INPUTMASK cMascara                              ;
+               ON GOTFOCUS ABM2ConFoco()                       ;
+               ON LOSTFOCUS ABM2SinFoco()                      ;
+               ON ENTER ABM2AlEntrar()
          ENDIF
       CASE _aControl[i,ABM_CON_TYPE] == ABM_CHECKBOX
          @ _aControl[i,ABM_CON_ROW], _aControl[i,ABM_CON_COL]    ;
             checkbox &( _aControl[i,ABM_CON_NAME] )         ;
             of wndABM2EditNuevoSplit                        ;
-            caption ""                                      ;
+            CAPTION ""                                      ;
             HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
             WIDTH _aControl[i,ABM_CON_WIDTH]                ;
-            value .f.                                       ;
-            on gotfocus ABM2ConFoco()                       ;
-            on lostfocus ABM2SinFoco()
+            VALUE .f.                                       ;
+            ON GOTFOCUS ABM2ConFoco()                       ;
+            ON LOSTFOCUS ABM2SinFoco()
       CASE _aControl[i,ABM_CON_TYPE] == ABM_EDITBOX
          @ _aControl[i,ABM_CON_ROW], _aControl[i,ABM_CON_COL]    ;
             editbox &( _aControl[i,ABM_CON_NAME] )          ;
             of wndABM2EditNuevoSplit                        ;
             WIDTH _aControl[i,ABM_CON_WIDTH]                ;
             HEIGHT _aControl[i,ABM_CON_HEIGHT]              ;
-            value ""                                        ;
+            VALUE ""                                        ;
             font "arial" size 9                             ;
-            on gotfocus ABM2ConFoco()                       ;
-            on lostfocus ABM2SinFoco()
+            ON GOTFOCUS ABM2ConFoco()                       ;
+            ON LOSTFOCUS ABM2SinFoco()
       ENDCASE
    NEXT
 
@@ -1328,7 +1328,7 @@ STATIC FUNCTION ABM2Seleccionar()
          TITLE _OOHG_Messages( 10, 8 )   ;
          modal                           ;
          NOSIZE                          ;
-         nosysmenu                       ;
+         NOSYSMENU                       ;
          font "ms sans serif" size 9     ;
          BACKCOLOR ( GetFormObjectByHandle( GetActiveWindow() ):BackColor )
 
@@ -1336,12 +1336,12 @@ STATIC FUNCTION ABM2Seleccionar()
       DEFINE TOOLBAR tbSeleccionar buttonsize 90, 32 flat righttext border
          button tbbCancelarSel caption _OOHG_Messages( 9, 7 ) ;
             PICTURE "MINIGUI_EDIT_CANCEL"             ;
-            action  {|| lSalida := .f.,               ;
+            ACTION  {|| lSalida := .f.,               ;
             nReg    := 0,                 ;
             wndSeleccionar.Release }
          button tbbAceptarSel  caption _OOHG_Messages( 9, 8 ) ;
             PICTURE "MINIGUI_EDIT_OK"                                         ;
-            action  {|| lSalida := .t.,                                       ;
+            ACTION  {|| lSalida := .t.,                                       ;
             nReg    := wndSeleccionar.brwSeleccionar.Value,       ;
             wndSeleccionar.Release }
       END toolbar
@@ -1355,11 +1355,11 @@ STATIC FUNCTION ABM2Seleccionar()
       @ 55, 20 browse brwSeleccionar                                          ;
          WIDTH 460                                                       ;
          HEIGHT 190                                                      ;
-         headers _aCabeceraTabla                                         ;
-         widths _aAnchoTabla                                             ;
-         workarea &_cArea                                                ;
-         fields _aCampoTabla                                             ;
-         value (_cArea)->( RecNo() )                                     ;
+         HEADERS _aCabeceraTabla                                         ;
+         WIDTHS _aAnchoTabla                                             ;
+         WORKAREA &_cArea                                                ;
+         FIELDS _aCampoTabla                                             ;
+         VALUE (_cArea)->( RecNo() )                                     ;
          font "arial" size 9                                             ;
          on dblclick {|| lSalida := .t.,                                 ;
          nReg := wndSeleccionar.brwSeleccionar.Value,    ;
@@ -1526,7 +1526,7 @@ STATIC FUNCTION ABM2Buscar()
          TITLE _OOHG_Messages( 10, 9 )   ;
          modal                           ;
          NOSIZE                          ;
-         nosysmenu                       ;
+         NOSYSMENU                       ;
          font "ms sans serif" size 9     ;
          BACKCOLOR ( GetFormObjectByHandle( GetActiveWindow() ):BackColor )
 
@@ -1534,12 +1534,12 @@ STATIC FUNCTION ABM2Buscar()
       DEFINE TOOLBAR tbBuscar buttonsize 90, 32 flat righttext border
          button tbbCancelarBus caption _OOHG_Messages( 9, 7 ) ;
             PICTURE "MINIGUI_EDIT_CANCEL"                     ;
-            action  {|| lSalida := .f.,                       ;
+            ACTION  {|| lSalida := .f.,                       ;
             xValor := wndABMBuscar.conBuscar.Value,  ;
             wndABMBuscar.Release }
          button tbbAceptarBus  caption _OOHG_Messages( 9, 8 ) ;
             PICTURE "MINIGUI_EDIT_OK"                         ;
-            action  {|| lSalida := .t.,                       ;
+            ACTION  {|| lSalida := .t.,                       ;
             xValor := wndABMBuscar.conBuscar.Value,  ;
             wndABMBuscar.Release }
       END toolbar
@@ -1554,14 +1554,14 @@ STATIC FUNCTION ABM2Buscar()
    // Frame.
    @ 45, 10 frame frmBuscar                        ;
       of wndABMBuscar                         ;
-      caption ""                              ;
+      CAPTION ""                              ;
       WIDTH wndABMBuscar.Width - 25           ;
       HEIGHT wndABMBuscar.Height - 100
 
    // Etiqueta.
    @ 60, 20 label lblBuscar                                ;
       of wndABMBuscar                                 ;
-      value _aNombreCampo[nControl]                   ;
+      VALUE _aNombreCampo[nControl]                   ;
       WIDTH _aEtiqueta[nControl,ABM_LBL_WIDTH]        ;
       HEIGHT _aEtiqueta[nControl,ABM_LBL_HEIGHT]      ;
       font "ms sans serif" size 9
@@ -1573,17 +1573,17 @@ STATIC FUNCTION ABM2Buscar()
    CASE _aControl[nControl,ABM_CON_TYPE] == ABM_TEXTBOXC
       @ 75, 20  textbox conBuscar                             ;
          of wndABMBuscar                                    ;
-         value ""                                        ;
+         VALUE ""                                        ;
          HEIGHT _aControl[nControl,ABM_CON_HEIGHT]       ;
          WIDTH _aControl[nControl,ABM_CON_WIDTH]         ;
          font "arial" size 9                             ;
-         maxlength _aEstructura[nControl,DBS_LEN]
+         MAXLENGTH _aEstructura[nControl,DBS_LEN]
 
       // Fecha.
    CASE _aControl[nControl,ABM_CON_TYPE] == ABM_DATEPICKER
       @ 75, 20 datepicker conBuscar                           ;
          of wndABMBuscar                                    ;
-         value Date()                                    ;
+         VALUE Date()                                    ;
          HEIGHT _aControl[nControl,ABM_CON_HEIGHT]       ;
          WIDTH _aControl[nControl,ABM_CON_WIDTH] + 25    ;
          font "arial" size 9
@@ -1595,12 +1595,12 @@ STATIC FUNCTION ABM2Buscar()
          // Sin decimales.
          @ 75, 20 textbox conBuscar                              ;
             of wndABMBuscar                                    ;
-            value ""                                        ;
+            VALUE ""                                        ;
             HEIGHT _aControl[nControl,ABM_CON_HEIGHT]       ;
             WIDTH _aControl[nControl,ABM_CON_WIDTH]         ;
-            numeric                                         ;
+            NUMERIC                                         ;
             font "arial" size 9                             ;
-            maxlength _aEstructura[nControl,DBS_LEN]
+            MAXLENGTH _aEstructura[nControl,DBS_LEN]
       ELSE
 
          // Con decimales.
@@ -1610,11 +1610,11 @@ STATIC FUNCTION ABM2Buscar()
          cMascara += Replicate( "9", _aEstructura[nControl,DBS_DEC] )
          @ 75, 20 textbox conBuscar                              ;
             of wndABMBuscar                                    ;
-            value ""                                        ;
+            VALUE ""                                        ;
             HEIGHT _aControl[nControl,ABM_CON_HEIGHT]       ;
             WIDTH _aControl[nControl,ABM_CON_WIDTH]         ;
-            numeric                                         ;
-            inputmask cMascara
+            NUMERIC                                         ;
+            INPUTMASK cMascara
       ENDIF
    ENDCASE
 
@@ -1693,8 +1693,8 @@ STATIC FUNCTION ABM2ActivarFiltro()
          TITLE _OOHG_Messages( 10, 21 )          ;
          modal                                   ;
          NOSIZE                                  ;
-         nosysmenu                               ;
-         on init {|| ABM2ControlFiltro() }       ;
+         NOSYSMENU                               ;
+         ON INIT {|| ABM2ControlFiltro() }       ;
          font "ms sans serif" size 9             ;
          BACKCOLOR ( GetFormObjectByHandle( GetActiveWindow() ):BackColor )
 
@@ -1702,11 +1702,11 @@ STATIC FUNCTION ABM2ActivarFiltro()
       DEFINE TOOLBAR tbBuscar buttonsize 90, 32 flat righttext border
          button tbbCancelarFil caption _OOHG_Messages( 9, 7 ) ;
             PICTURE "MINIGUI_EDIT_CANCEL"     ;
-            action  {|| wndABM2Filtro.Release,;
+            ACTION  {|| wndABM2Filtro.Release,;
             ABM2Redibuja( .f. ) }
          button tbbAceptarFil  caption _OOHG_Messages( 9, 8 ) ;
             PICTURE "MINIGUI_EDIT_OK"         ;
-            action  {|| ABM2EstableceFiltro() }
+            ACTION  {|| ABM2EstableceFiltro() }
       END toolbar
 
       // Define la barra de estado de la ventana de filtrado.
@@ -1719,24 +1719,24 @@ STATIC FUNCTION ABM2ActivarFiltro()
    // Frame.
    @ 45, 10 frame frmFiltro                        ;
       of wndABM2Filtro                        ;
-      caption ""                              ;
+      CAPTION ""                              ;
       WIDTH wndABM2Filtro.Width - 25          ;
       HEIGHT wndABM2Filtro.Height - 100
    @ 65, 20 label lblCampos                ;
       of wndABM2Filtro                ;
-      value _OOHG_Messages( 10, 22 )  ;
+      VALUE _OOHG_Messages( 10, 22 )  ;
       WIDTH 140                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 65, 220 label lblCompara              ;
       of wndABM2Filtro                ;
-      value _OOHG_Messages( 10, 23 )  ;
+      VALUE _OOHG_Messages( 10, 23 )  ;
       WIDTH 140                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 200, 20 label lblValor                ;
       of wndABM2Filtro                ;
-      value _OOHG_Messages( 10, 24 )  ;
+      VALUE _OOHG_Messages( 10, 24 )  ;
       WIDTH 140                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
@@ -1745,27 +1745,27 @@ STATIC FUNCTION ABM2ActivarFiltro()
       WIDTH 140                               ;
       HEIGHT 100                              ;
       items aCampos                           ;
-      value 1                                 ;
+      VALUE 1                                 ;
       font "Arial" size 9                     ;
-      on change {|| ABM2ControlFiltro() }     ;
-      on gotfocus wndABM2Filtro.StatusBar.Item(1) := _OOHG_Messages( 10, 25 ) ;
-      on lostfocus wndABM2Filtro.StatusBar.Item(1) := ""
+      ON CHANGE {|| ABM2ControlFiltro() }     ;
+      ON GOTFOCUS wndABM2Filtro.StatusBar.Item(1) := _OOHG_Messages( 10, 25 ) ;
+      ON LOSTFOCUS wndABM2Filtro.StatusBar.Item(1) := ""
    @ 85, 220 listbox lbxCompara                    ;
       of wndABM2Filtro                        ;
       WIDTH 140                               ;
       HEIGHT 100                              ;
       items aCompara                          ;
-      value 1                                 ;
+      VALUE 1                                 ;
       font "Arial" size 9                     ;
-      on gotfocus wndABM2Filtro.StatusBar.Item(1) := _OOHG_Messages( 10, 26 ) ;
-      on lostfocus wndABM2Filtro.StatusBar.Item(1) := ""
+      ON GOTFOCUS wndABM2Filtro.StatusBar.Item(1) := _OOHG_Messages( 10, 26 ) ;
+      ON LOSTFOCUS wndABM2Filtro.StatusBar.Item(1) := ""
    @ 220, 20 textbox conValor              ;
       of wndABM2Filtro                ;
-      value ""                        ;
+      VALUE ""                        ;
       HEIGHT 25                       ;
       WIDTH 160                       ;
       font "arial" size 9             ;
-      maxlength 16
+      MAXLENGTH 16
 
    ////////// Activa la ventana.
    CENTER WINDOW wndABM2Filtro
@@ -1829,26 +1829,26 @@ STATIC FUNCTION ABM2ControlFiltro()
    CASE _aControl[nControl,ABM_CON_TYPE] == ABM_TEXTBOXC
       @ 226, 20  textbox conValor                                     ;
          of wndABM2Filtro                                        ;
-         value ""                                                ;
+         VALUE ""                                                ;
          HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
          WIDTH _aControl[nControl,ABM_CON_WIDTH]                 ;
          font "arial" size 9                                     ;
-         maxlength _aEstructura[nControl,DBS_LEN]                ;
-         on gotfocus wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
+         MAXLENGTH _aEstructura[nControl,DBS_LEN]                ;
+         ON GOTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
          cMensaje                                    ;
-         on lostfocus wndABM2Filtro.StatusBar.Item( 1 ) := ""
+         ON LOSTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) := ""
 
       // Fecha.
    CASE _aControl[nControl,ABM_CON_TYPE] == ABM_DATEPICKER
       @ 226, 20 datepicker conValor                                   ;
          of wndABM2Filtro                                        ;
-         value Date()                                            ;
+         VALUE Date()                                            ;
          HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
          WIDTH _aControl[nControl,ABM_CON_WIDTH] + 25            ;
          font "arial" size 9                                     ;
-         on gotfocus wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
+         ON GOTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
          cMensaje                                    ;
-         on lostfocus wndABM2Filtro.StatusBar.Item( 1 ) := ""
+         ON LOSTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) := ""
 
       // Numerico.
    CASE _aControl[nControl,ABM_CON_TYPE] == ABM_TEXTBOXN
@@ -1857,15 +1857,15 @@ STATIC FUNCTION ABM2ControlFiltro()
          // Sin decimales.
          @ 226, 20 textbox conValor                                      ;
             of wndABM2Filtro                                        ;
-            value ""                                                ;
+            VALUE ""                                                ;
             HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
             WIDTH _aControl[nControl,ABM_CON_WIDTH]                 ;
-            numeric                                                 ;
+            NUMERIC                                                 ;
             font "arial" size 9                                     ;
-            maxlength _aEstructura[nControl,DBS_LEN]                ;
-            on gotfocus wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
+            MAXLENGTH _aEstructura[nControl,DBS_LEN]                ;
+            ON GOTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
             cMensaje                                    ;
-            on lostfocus wndABM2Filtro.StatusBar.Item( 1 ) := ""
+            ON LOSTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) := ""
 
       ELSE
 
@@ -1876,27 +1876,27 @@ STATIC FUNCTION ABM2ControlFiltro()
          cMascara += Replicate( "9", _aEstructura[nControl,DBS_DEC] )
          @ 226, 20 textbox conValor                                      ;
             of wndABM2Filtro                                        ;
-            value ""                                                ;
+            VALUE ""                                                ;
             HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
             WIDTH _aControl[nControl,ABM_CON_WIDTH]                 ;
-            numeric                                                 ;
-            inputmask cMascara                                      ;
-            on gotfocus wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
+            NUMERIC                                                 ;
+            INPUTMASK cMascara                                      ;
+            ON GOTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
             cMensaje                                    ;
-            on lostfocus wndABM2Filtro.StatusBar.Item( 1 ) := ""
+            ON LOSTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) := ""
       ENDIF
 
       // Logico
    CASE _aControl[nControl,ABM_CON_TYPE] == ABM_CHECKBOX
       @ 226, 20 checkbox conValor                                     ;
          of wndABM2Filtro                                        ;
-         caption ""                                              ;
+         CAPTION ""                                              ;
          HEIGHT _aControl[nControl,ABM_CON_HEIGHT]               ;
          WIDTH _aControl[nControl,ABM_CON_WIDTH]                 ;
-         value .f.                                               ;
-         on gotfocus wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
+         VALUE .f.                                               ;
+         ON GOTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) :=        ;
          cMensaje                                    ;
-         on lostfocus wndABM2Filtro.StatusBar.Item( 1 ) := ""
+         ON LOSTFOCUS wndABM2Filtro.StatusBar.Item( 1 ) := ""
 
    ENDCASE
 
@@ -2135,7 +2135,7 @@ STATIC FUNCTION ABM2Imprimir()
          ICON "MINIGUI_EDIT_PRINT"       ;
          modal                           ;
          NOSIZE                          ;
-         nosysmenu                       ;
+         NOSYSMENU                       ;
          font "ms sans serif" size 9     ;
          BACKCOLOR ( GetFormObjectByHandle( GetActiveWindow() ):BackColor )
 
@@ -2143,10 +2143,10 @@ STATIC FUNCTION ABM2Imprimir()
       DEFINE TOOLBAR tbListado buttonsize 90, 32 flat righttext border
          button tbbCancelarLis caption _OOHG_Messages( 9, 7 ) ;
             PICTURE "MINIGUI_EDIT_CANCEL"             ;
-            action  wndABM2Listado.Release
+            ACTION  wndABM2Listado.Release
          button tbbAceptarLis  caption _OOHG_Messages( 9, 8 ) ;
             PICTURE "MINIGUI_EDIT_OK"                 ;
-            action  ABM2Listado( aImpresoras )
+            ACTION  ABM2Listado( aImpresoras )
 
       END toolbar
 
@@ -2160,38 +2160,38 @@ STATIC FUNCTION ABM2Imprimir()
    // Frame.
    @ 45, 10 frame frmListado                       ;
       of wndABM2Listado                       ;
-      caption ""                              ;
+      CAPTION ""                              ;
       WIDTH wndABM2Listado.Width - 25         ;
       HEIGHT wndABM2Listado.Height - 100
 
    // Label
    @ 65, 20 label lblCampoBase             ;
       of wndABM2Listado               ;
-      value _OOHG_Messages( 10, 11 )  ;
+      VALUE _OOHG_Messages( 10, 11 )  ;
       WIDTH 140                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 65, 220 label lblCampoListado         ;
       of wndABM2Listado               ;
-      value _OOHG_Messages( 10, 12 )  ;
+      VALUE _OOHG_Messages( 10, 12 )  ;
       WIDTH 140                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 200, 20 label lblImpresoras           ;
       of wndABM2Listado               ;
-      value _OOHG_Messages( 10, 13 )  ;
+      VALUE _OOHG_Messages( 10, 13 )  ;
       WIDTH 140                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 200, 170 label lblInicial             ;
       of wndABM2Listado               ;
-      value _OOHG_Messages( 10, 14 )  ;
+      VALUE _OOHG_Messages( 10, 14 )  ;
       WIDTH 160                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
    @ 255, 170 label lblFinal               ;
       of wndABM2Listado               ;
-      value _OOHG_Messages( 10, 15 )  ;
+      VALUE _OOHG_Messages( 10, 15 )  ;
       WIDTH 160                       ;
       HEIGHT 25                       ;
       font "ms sans serif" size 9
@@ -2202,95 +2202,95 @@ STATIC FUNCTION ABM2Imprimir()
       WIDTH 140                                                       ;
       HEIGHT 100                                                      ;
       items aCampoBase                                                ;
-      value 1                                                         ;
+      VALUE 1                                                         ;
       font "Arial" size 9                                             ;
-      on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 12 ) ;
-      on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
+      ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 12 ) ;
+      ON LOSTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := ""
    @ 85, 220 listbox lbxCampoListado                                       ;
       of wndABM2Listado                                               ;
       WIDTH 140                                                       ;
       HEIGHT 100                                                      ;
       items aCampoListado                                             ;
-      value 1                                                         ;
+      VALUE 1                                                         ;
       font "Arial" size 9                                             ;
-      on gotFocus wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 13 ) ;
-      on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
+      ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 13 ) ;
+      ON LOSTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := ""
 
    // ComboBox.
    @ 220, 20 combobox cbxImpresoras                                        ;
       of wndABM2Listado                                               ;
       items aImpresoras                                               ;
-      value 1                                                         ;
+      VALUE 1                                                         ;
       WIDTH 140                                                       ;
       font "Arial" size 9                                             ;
-      on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 14 ) ;
-      on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
+      ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 14 ) ;
+      ON LOSTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := ""
 
    // PicButton.
    @ 90, 170 button btnMas                                                 ;
       of wndABM2Listado                                               ;
       PICTURE "MINIGUI_EDIT_ADD"                                      ;
-      action ABM2DefinirColumnas( ABM_LIS_ADD )                       ;
+      ACTION ABM2DefinirColumnas( ABM_LIS_ADD )                       ;
       WIDTH 40                                                        ;
       HEIGHT 40                                                       ;
-      on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 15 ) ;
-      on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
+      ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 15 ) ;
+      ON LOSTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := ""
    @ 140, 170 button btnMenos                                              ;
       of wndABM2Listado                                               ;
       PICTURE "MINIGUI_EDIT_DEL"                                      ;
-      action ABM2DefinirColumnas( ABM_LIS_DEL )                       ;
+      ACTION ABM2DefinirColumnas( ABM_LIS_DEL )                       ;
       WIDTH 40                                                        ;
       HEIGHT 40                                                       ;
-      on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 16 ) ;
-      on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
+      ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 16 ) ;
+      ON LOSTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := ""
    @ 220, 170 button btnSet1                                               ;
       of wndABM2Listado                                               ;
       PICTURE "MINIGUI_EDIT_SET"                                      ;
-      action ABM2DefinirRegistro( ABM_LIS_SET1 )                      ;
+      ACTION ABM2DefinirRegistro( ABM_LIS_SET1 )                      ;
       WIDTH 25                                                        ;
       HEIGHT 25                                                       ;
-      on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 17 ) ;
-      on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
+      ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 17 ) ;
+      ON LOSTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := ""
    @ 275, 170 button btnSet2                                               ;
       of wndABM2Listado                                               ;
       PICTURE "MINIGUI_EDIT_SET"                                      ;
-      action ABM2DefinirRegistro( ABM_LIS_SET2 )                      ;
+      ACTION ABM2DefinirRegistro( ABM_LIS_SET2 )                      ;
       WIDTH 25                                                        ;
       HEIGHT 25                                                       ;
-      on gotfocus wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 18 ) ;
-      on lostfocus wndABM2Listado.StatusBar.Item( 1 ) := ""
+      ON GOTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := _OOHG_Messages( 11, 18 ) ;
+      ON LOSTFOCUS wndABM2Listado.StatusBar.Item( 1 ) := ""
 
    // CheckBox.
    @ 255, 20 checkbox chkVistas            ;
       of wndABM2Listado               ;
-      caption _OOHG_Messages( 10, 18 ) ;
+      CAPTION _OOHG_Messages( 10, 18 ) ;
       WIDTH 140                       ;
       HEIGHT 25                       ;
-      value .t.                       ;
+      VALUE .t.                       ;
       font "ms sans serif" size 9
    @ 275, 20 checkbox chkPrevio            ;
       of wndABM2Listado               ;
-      caption _OOHG_Messages( 10, 17 ) ;
+      CAPTION _OOHG_Messages( 10, 17 ) ;
       WIDTH 140                       ;
       HEIGHT 25                       ;
-      value .t.                       ;
+      VALUE .t.                       ;
       font "ms sans serif" size 9
 
    // Editbox.
    @ 220, 196 textbox txtRegistro1         ;
       of wndABM2Listado               ;
-      value cRegistro1                ;
+      VALUE cRegistro1                ;
       HEIGHT 25                       ;
       WIDTH 160                       ;
       font "arial" size 9             ;
-      maxlength 16
+      MAXLENGTH 16
    @ 275, 196 textbox txtRegistro2         ;
       of wndABM2Listado               ;
-      value cRegistro2                ;
+      VALUE cRegistro2                ;
       HEIGHT 25                       ;
       WIDTH 160                       ;
       font "arial" size 9             ;
-      maxlength 16
+      MAXLENGTH 16
 
    ////////// Estado de los controles.--------------------------------------------
    wndABM2Listado.txtRegistro1.Enabled := .f.

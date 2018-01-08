@@ -10,7 +10,7 @@ FUNCTION Main
          ROW 10
          COL 10
          WIDTH 60
-         value 'Name'
+         VALUE 'Name'
          vcenteralign .t.
       END LABEL
       DEFINE COMBOSEARCHGRID name
@@ -18,8 +18,8 @@ FUNCTION Main
          COL 80
          WIDTH 480
          items aItems
-         headers { 'First Name', 'Last Name', 'Code' }
-         widths { 200, 150, 100 }
+         HEADERS { 'First Name', 'Last Name', 'Code' }
+         WIDTHS { 200, 150, 100 }
          justify { 0, 0, 1 }
          anywheresearch .t.
          showheaders .t.
@@ -28,7 +28,7 @@ FUNCTION Main
          ROW 40
          COL 10
          WIDTH 60
-         value 'Label 2'
+         VALUE 'Label 2'
          vcenteralign .t.
       END LABEL
       DEFINE TEXTBOX textbox2
@@ -39,9 +39,9 @@ FUNCTION Main
       DEFINE BUTTON selected
          ROW 40
          COL 300
-         caption 'Click after selecting an item'
+         CAPTION 'Click after selecting an item'
          WIDTH 200
-         action findselecteditem()
+         ACTION findselecteditem()
       END BUTTON
    END WINDOW
    csg.center

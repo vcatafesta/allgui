@@ -23,7 +23,7 @@ FUNCTION main()
          clientarea  400, 200 ;
          TITLE       'VSplitter demo' ;
          windowtype  MAIN ;
-         on release  VSplitter_Release( Form_1.Handle )
+         ON RELEASE  VSplitter_Release( Form_1.Handle )
 
       GetClientRect( This.Handle, @aRect )
       w := RECTWIDTH ( aRect )
@@ -35,15 +35,15 @@ FUNCTION main()
       @ 0, 0 editbox EditBox_1 ;
          WIDTH    nXPos ;
          HEIGHT   h ;
-         value    LOREMIPSUM_L ;
-         tooltip  'EditBox_1' ;
+         VALUE    LOREMIPSUM_L ;
+         TOOLTIP  'EditBox_1' ;
          nohscroll
 
       @ 0, nXPos + nBorder editbox EditBox_2 ;
          WIDTH    w  - ( nXPos + nBorder );
          HEIGHT   h ;
-         value    LOREMIPSUM_R ;
-         tooltip  'EditBox_2' ;
+         VALUE    LOREMIPSUM_R ;
+         TOOLTIP  'EditBox_2' ;
          nohscroll
    END WINDOW
 

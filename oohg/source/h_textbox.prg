@@ -1611,35 +1611,35 @@ FUNCTION DefineTextBox( cControlName, cParentForm, x, y, Width, Height, ;
    // If format is specified, inputmask is enabled
    IF ValType( format ) $ "CM"
       IF ValType( inputmask ) $ "CM"
-         inputmask := "@" + format + " " + inputmask
+         INPUTMASK := "@" + format + " " + inputmask
       ELSE
-         inputmask := "@" + format
+         INPUTMASK := "@" + format
       ENDIF
    ENDIF
 
    // Checks for date textbox
    IF ( HB_IsLogical( date ) .AND. date ) .OR. HB_IsDate( value )
       lInsert := .F.
-      numeric := .F.
+      NUMERIC := .F.
       IF ValType( Value ) $ "CM"
-         Value := CtoD( Value )
+         VALUE := CtoD( Value )
       ELSEIF !HB_IsDate( Value )
-         Value := StoD( "" )
+         VALUE := StoD( "" )
       ENDIF
       IF ! ValType( inputmask ) $ "CM"
-         inputmask := "@D"
+         INPUTMASK := "@D"
       ENDIF
    ENDIF
 
    // Checks for numeric textbox
    IF ! HB_IsLogical( numeric )
-      numeric := .F.
+      NUMERIC := .F.
    ELSEIF numeric
       lInsert := .F.
       IF ValType( Value ) $ "CM"
-         Value := Val( Value )
+         VALUE := Val( Value )
       ELSEIF ! HB_IsNumeric( Value )
-         Value := 0
+         VALUE := 0
       ENDIF
    ENDIF
 

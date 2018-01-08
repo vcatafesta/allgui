@@ -125,7 +125,7 @@ FUNCTION FindPos(met,value)
 
    LOCAL cState,FindWar,pos,nRec
 
-   Value   := Upper(value)
+   VALUE   := Upper(value)
 
    DO CASE
    CASE met == 1
@@ -412,7 +412,7 @@ FUNCTION SaveDan(aFld,nPos,aItemState)
       FOR n:=1 TO Len(aFld)
          cFld  := aFld[n]
          cGBox := "GBox_"+AllTrim(Str(n))
-         value :=GetProperty("Form_Ed",cGBox,'Value')
+         VALUE :=GetProperty("Form_Ed",cGBox,'Value')
          REPLACE &cFld   with value
          IF nPos > 0
             IF cFld =='Age' .or. cFld == 'Salary'

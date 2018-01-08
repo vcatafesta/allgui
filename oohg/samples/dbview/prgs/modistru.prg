@@ -87,7 +87,7 @@ FUNCTION DBUmodistruct(cBase)
             RANGEMIN 1
             RANGEMAX 100
             VALUE 10
-            on lostfocus DBUsizelostfocus()
+            ON LOSTFOCUS DBUsizelostfocus()
          END SPINNER
 
          DEFINE SPINNER _DBUfielddecimals
@@ -97,7 +97,7 @@ FUNCTION DBUmodistruct(cBase)
             HEIGHT 24
             RANGEMIN 0
             RANGEMAX 99
-            on lostfocus DBUdeclostfocus()
+            ON LOSTFOCUS DBUdeclostfocus()
          END SPINNER
 
          DEFINE BUTTON _DBUaddline
@@ -106,7 +106,7 @@ FUNCTION DBUmodistruct(cBase)
             WIDTH  80
             HEIGHT 28
             CAPTION "Add"
-            action DBUaddstruct()
+            ACTION DBUaddstruct()
          END BUTTON
 
          DEFINE BUTTON _DBUinsline
@@ -115,7 +115,7 @@ FUNCTION DBUmodistruct(cBase)
             WIDTH  80
             HEIGHT 28
             CAPTION "Insert"
-            action DBUinsstruct()
+            ACTION DBUinsstruct()
          END BUTTON
 
          DEFINE BUTTON _DBUdelline
@@ -124,7 +124,7 @@ FUNCTION DBUmodistruct(cBase)
             WIDTH  80
             HEIGHT 28
             CAPTION "Delete"
-            action DBUdelstruct()
+            ACTION DBUdelstruct()
          END BUTTON
 
          DEFINE GRID _DBUstruct
@@ -145,7 +145,7 @@ FUNCTION DBUmodistruct(cBase)
             WIDTH  80
             HEIGHT 28
             CAPTION "Save"
-            action lModYes := Modi_Now(cBase) //DBUmodistructure()
+            ACTION lModYes := Modi_Now(cBase) //DBUmodistructure()
          END BUTTON
 
          DEFINE BUTTON _DBUexitnew
@@ -154,7 +154,7 @@ FUNCTION DBUmodistruct(cBase)
             WIDTH  80
             HEIGHT 28
             CAPTION "Cancel"
-            action lModYes := DBUexitmodidbf()
+            ACTION lModYes := DBUexitmodidbf()
          END BUTTON
 
       END WINDOW

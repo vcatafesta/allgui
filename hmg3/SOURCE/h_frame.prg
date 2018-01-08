@@ -148,7 +148,7 @@ FUNCTION _BeginFrame( name , parent , row , col , w , h , caption , fontname , f
 
    IF _HMG_SYSDATA [ 264 ] = .T.
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]
@@ -168,8 +168,8 @@ FUNCTION _BeginFrame( name , parent , row , col , w , h , caption , fontname , f
    ENDIF
 
    IF valtype (caption) == 'U'
-      caption := ""
-      fontname := "Arial"
+      CAPTION := ""
+      FONTNAME := "Arial"
       fontsize := 1
    ENDIF
 

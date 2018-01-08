@@ -29,7 +29,7 @@ FUNCTION Main()
          HEIGHT RowCharToPix( nHeight ) + GetBorderHeight() / iif( IsWinXP(), .5, 2 ) ;
          TITLE "Enter Form" ;
          ICON "demo2.ico" ;
-         Main ;
+         MAIN ;
          ON Maximize ( f1.width := ColCharToPix( nWidth ), ;
          f1.height := RowCharToPix( nHeight ) + GetBorderHeight() / iif( IsWinXP(), .5, 2 ) ) ;
          NOSIZE
@@ -74,10 +74,10 @@ FUNCTION Main()
          COL nCol
          WIDTH ColCharToPix( 9 )
          HEIGHT RowCharToPix( 1.65 )
-         caption "&Ok"
-         fontname "MS Sans Serif"
+         CAPTION "&Ok"
+         FONTNAME "MS Sans Serif"
          fontsize 8
-         action ( lOk := !Empty( cName ) .AND. !Empty( cStreet1 ) .AND. !Empty( cCity ) .AND. !Empty( cState ) .AND. !Empty( cZipcode ), ;
+         ACTION ( lOk := !Empty( cName ) .AND. !Empty( cStreet1 ) .AND. !Empty( cCity ) .AND. !Empty( cState ) .AND. !Empty( cZipcode ), ;
             ShowMsg(), f1.release() )
       END BUTTON
 
@@ -86,10 +86,10 @@ FUNCTION Main()
          COL nCol + f1 .b1. width + 10
          WIDTH ColCharToPix( 9 )
          HEIGHT RowCharToPix( 1.65 )
-         caption "&Cancel"
-         fontname "MS Sans Serif"
+         CAPTION "&Cancel"
+         FONTNAME "MS Sans Serif"
          fontsize 8
-         action f1.release()
+         ACTION f1.release()
       END BUTTON
 
       ON KEY ESCAPE ACTION f1 .b2. onclick()

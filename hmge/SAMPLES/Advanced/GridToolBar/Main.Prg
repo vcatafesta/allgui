@@ -25,8 +25,8 @@ FUNCTION Main
          COL 120
          WIDTH 500
          HEIGHT 400
-         headers {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6'}
-         widths { 100, 160, 160, 100, 100, 100 }
+         HEADERS {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6'}
+         WIDTHS { 100, 160, 160, 100, 100, 100 }
          justify { BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER }
       END GRID
    END WINDOW

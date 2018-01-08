@@ -29,10 +29,10 @@ PROCEDURE main()
    DEFINE WINDOW Form_Main ;
          clientarea 3*w, 2*h + 2*GetMenuBarHeight() ;
          TITLE 'Draw the bitmap or icon image using the Windows DrawState' ;
-         main ;
-         nomaximize nosize ;
+         MAIN ;
+         NOMAXIMIZE nosize ;
          on paint Form_Main_OnPaint( Form_Main.Handle, hIcon, w, h );
-         on release ;
+         ON RELEASE ;
          ( ;
          DestroyIcon( hIcon ) ;
          )

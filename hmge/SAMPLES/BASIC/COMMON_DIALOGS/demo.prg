@@ -63,7 +63,7 @@ FUNCTION Main
       @ 10 , 10 EditBox Edit1 ;
          WIDTH 365 ;
          HEIGHT 320 ;
-         Value  '' NoHScroll
+         VALUE  '' NoHScroll
 
    END WINDOW
 

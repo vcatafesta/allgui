@@ -242,7 +242,7 @@ FUNCTION Main()
          FONT 'MS Sans serif' SIZE 9 ;
          ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
          IMAGELIST "imagelst_2" ;
-         Tooltip "Extend Data ComboEx_2 - Edit disabled"
+         TOOLTIP "Extend Data ComboEx_2 - Edit disabled"
 
       @ 83,10 Label Label_2ex Value "Extend Data ComboEx_2" AUTOSIZE
 
@@ -266,7 +266,7 @@ FUNCTION Main()
          DISPLAYEDIT;
          ON ENTER RunMSIE(This.DisplayValue) ;
          FONT 'MS Sans serif' SIZE 10 ;
-         Tooltip "Select or modify URL and press RETURN Key to open Browser" ;
+         TOOLTIP "Select or modify URL and press RETURN Key to open Browser" ;
          IMAGELIST "imagelst_3"
 
       @ 185,10 Label Label_4ex Value "URL Extend ComboEx_4 - Edit enabled" AUTOSIZE

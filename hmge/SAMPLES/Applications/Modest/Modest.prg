@@ -121,8 +121,8 @@ PROCEDURE Main( cFile )
          HEIGHT 580           ;
          TITLE APPNAME        ;
          ICON '1MODEST'       ;
-         Main                 ;
-         On Init ReSize()     ;
+         MAIN                 ;
+         ON INIT ReSize()     ;
          On Size ReSize()     ;
          On Maximize ReSize() ;
          On Minimize ReSize() ;
@@ -229,66 +229,66 @@ PROCEDURE Main( cFile )
       DEFINE TOOLBAR tbrAction ButtonSize 24, 24 Flat
          Button btnNewFile         ;
             PICTURE 'NEW_FILE' ;
-            Action NewFile()   ;
-            Tooltip 'New file'
+            ACTION NewFile()   ;
+            TOOLTIP 'New file'
          Button btnOpenFile         ;
             PICTURE 'OPEN_FILE' ;
-            Action LoadFile()   ;
-            Tooltip 'Load structure from file'
+            ACTION LoadFile()   ;
+            TOOLTIP 'Load structure from file'
          Button btnSave           ;
             PICTURE 'SAVE'    ;
-            Action SaveData() ;
-            Tooltip 'Save files'
+            ACTION SaveData() ;
+            TOOLTIP 'Save files'
          Button btnPrint Picture 'PRINT'               ;
-            Action PrintStructure()                ;
-            Tooltip 'Print structure and comments' ;
+            ACTION PrintStructure()                ;
+            TOOLTIP 'Print structure and comments' ;
             SEPARATOR
          Button btnEditGeneral                        ;
             PICTURE 'EDIT_TEXT'                   ;
-            Action EditGeneralDesc()              ;
-            Tooltip 'Modify database description' ;
+            ACTION EditGeneralDesc()              ;
+            TOOLTIP 'Modify database description' ;
             SEPARATOR
          Button btnAddField                       ;
             PICTURE 'ADD_FIELD'               ;
-            Action EditField( MODE_NEWFIELD ) ;
-            Tooltip 'Add field'
+            ACTION EditField( MODE_NEWFIELD ) ;
+            TOOLTIP 'Add field'
          Button btnInsField                                           ;
             PICTURE 'INS_FIELD'                                   ;
-            Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
+            ACTION { || nShift := 1, EditField( MODE_INSFIELD ) } ;
             DropDown                                              ;
-            Tooltip 'Insert field after current (default)'
+            TOOLTIP 'Insert field after current (default)'
          Button btnEditField                       ;
             PICTURE 'EDIT_FIELD'               ;
-            Action EditField( MODE_EDITFIELD ) ;
-            Tooltip 'Modify field'
+            ACTION EditField( MODE_EDITFIELD ) ;
+            TOOLTIP 'Modify field'
          Button btnDeleteField         ;
             PICTURE 'DEL_FIELD'    ;
-            Action DelField()      ;
-            Tooltip 'Delete field' ;
+            ACTION DelField()      ;
+            TOOLTIP 'Delete field' ;
             SEPARATOR
          Button btnCopy                            ;
             PICTURE 'COPY'                     ;
-            Action AddInCollector( MODE_COPY ) ;
-            Tooltip 'Copy to Collector'
+            ACTION AddInCollector( MODE_COPY ) ;
+            TOOLTIP 'Copy to Collector'
          Button btnCut                            ;
             PICTURE 'CUT'                     ;
-            Action AddInCollector( MODE_CUT ) ;
-            Tooltip 'Cut to Collector'
+            ACTION AddInCollector( MODE_CUT ) ;
+            TOOLTIP 'Cut to Collector'
          Button btnPaste                                               ;
             PICTURE 'PASTE'                                        ;
-            Action { || nShift := 1, PasteFromCollector() }        ;
+            ACTION { || nShift := 1, PasteFromCollector() }        ;
             DropDown                                               ;
-            Tooltip 'Paste from Collector after current (default)' ;
+            TOOLTIP 'Paste from Collector after current (default)' ;
             SEPARATOR
          Button btnOptions                           ;
             PICTURE 'OPTIONS'                    ;
-            Action Options()                     ;
-            Tooltip 'Set parameters application' ;
+            ACTION Options()                     ;
+            TOOLTIP 'Set parameters application' ;
             SEPARATOR
          Button btnAbout         ;
             PICTURE 'ABOUT'  ;
-            Action AboutMe() ;
-            Tooltip 'About me'
+            ACTION AboutMe() ;
+            TOOLTIP 'About me'
       END Toolbar
 
       // Dropdown menu for inserting a new field
@@ -330,7 +330,7 @@ PROCEDURE Main( cFile )
          At 40 + If(IsXPThemeActive(), 5, 0), 5  ;
          WIDTH 200                               ;
          HEIGHT 200                              ;
-         On Change ShowValues()                  ;
+         ON CHANGE ShowValues()                  ;
          On DblClick EditField( MODE_EDITFIELD ) ;
          Celled
 
@@ -408,98 +408,98 @@ PROCEDURE Main( cFile )
          // Field name
 
          @ 40, 15 Label lblName  ;
-            Value 'Name'   ;
+            VALUE 'Name'   ;
             WIDTH 50       ;
             HEIGHT 18      ;
             Bold           ;
-            FontColor NAVY_COLOR
+            FONTCOLOR NAVY_COLOR
          @ 40, 40 TextBox txbName ;
-            Value ''        ;
+            VALUE ''        ;
             WIDTH 90        ;
-            MaxLength 10    ;
+            MAXLENGTH 10    ;
             UpperCase
 
          // Field type
 
          @ 40, 80 Label lblType  ;
-            Value 'Type'   ;
+            VALUE 'Type'   ;
             HEIGHT 18      ;
             WIDTH 60       ;
             Bold           ;
-            FontColor NAVY_COLOR
+            FONTCOLOR NAVY_COLOR
          @ 40, 100 ComboBox cmbType    ;
             WIDTH 40            ;
             HEIGHT 110          ;
             Items CORRECT_TYPES ;
-            Value 1             ;
+            VALUE 1             ;
             ListWidth 40        ;
-            On change ChangeMaxLimit()
+            ON CHANGE ChangeMaxLimit()
 
          // Field length
 
          @ 60, 15 Label lblLen   ;
-            Value 'Length' ;
+            VALUE 'Length' ;
             WIDTH 35       ;
             HEIGHT 18      ;
             Bold           ;
-            FontColor NAVY_COLOR
+            FONTCOLOR NAVY_COLOR
          @ 60, 40 Spinner spnLen       ;
             Range 1, LEN_IS_CHAR ;
-            Value 1              ;
+            VALUE 1              ;
             WIDTH 50             ;
-            On Lostfocus ChangeMaxLimit()
+            ON LOSTFOCUS ChangeMaxLimit()
 
          // Field decimal
 
          @ 60, 80 Label lblDec     ;
-            Value 'Decimals' ;
+            VALUE 'Decimals' ;
             HEIGHT 18        ;
             Bold             ;
-            FontColor NAVY_COLOR
+            FONTCOLOR NAVY_COLOR
          @ 60, 100 Spinner spnDec      ;
             Range 0, LEN_IS_NUM ;
-            Value 0             ;
+            VALUE 0             ;
             WIDTH 50            ;
-            On LostFocus ChangeMaxLimit()
+            ON LOSTFOCUS ChangeMaxLimit()
 
          // Comment of field
 
          @ 80, 5 Label lblComment ;
-            Value 'Comment'   ;
+            VALUE 'Comment'   ;
             HEIGHT 18         ;
             WIDTH 60          ;
             Bold              ;
-            FontColor NAVY_COLOR
+            FONTCOLOR NAVY_COLOR
          @ 120, 15 EditBox edtComment ;
-            Value ''           ;
+            VALUE ''           ;
             NoHScroll          ;
             ReadOnly
 
          // Transformation rule of field contexts at the changing of value type
 
          @ 210, 5 Label lblRule               ;
-            Value 'Transformation rule' ;
+            VALUE 'Transformation rule' ;
             HEIGHT 18                   ;
             WIDTH 130                   ;
             Bold                        ;
-            FontColor NAVY_COLOR
+            FONTCOLOR NAVY_COLOR
          @ 230, 40 TextBox txbRule ;
-            Value ''
+            VALUE ''
 
          // Buttons Apply/Discard changes in field description
 
          @ 240, 110 ButtonEx btnFldOk              ;
             WIDTH 30 Height 30             ;
             ICON 'OK'                      ;
-            Action FiniEditField( SET_OK ) ;
-            Tooltip 'Apply changes [F2]'   ;
+            ACTION FiniEditField( SET_OK ) ;
+            TOOLTIP 'Apply changes [F2]'   ;
             Flat                           ;
             BACKCOLOR WHITE
          @ 240, 145 ButtonEx btnFldCancel              ;
             WIDTH 30 Height 30                 ;
             ICON 'CANCEL'                      ;
-            Action FiniEditField( SET_CANCEL ) ;
-            Tooltip 'Discard changes [Esc]'    ;
+            ACTION FiniEditField( SET_CANCEL ) ;
+            TOOLTIP 'Discard changes [Esc]'    ;
             Flat                               ;
             BACKCOLOR WHITE
 
@@ -510,7 +510,7 @@ PROCEDURE Main( cFile )
          // General description of database
 
          @ 30, 5 EditBox edtGeneral ;
-            Value ''           ;
+            VALUE ''           ;
             NoHScroll          ;
             ReadOnly
 
@@ -519,15 +519,15 @@ PROCEDURE Main( cFile )
          @ 240, 110 ButtonEx btnGeneralOk           ;
             WIDTH 30 Height 30              ;
             ICON 'OK'                       ;
-            Action FiniEdtGeneral( SET_OK ) ;
-            Tooltip 'Apply changes [F2]'    ;
+            ACTION FiniEdtGeneral( SET_OK ) ;
+            TOOLTIP 'Apply changes [F2]'    ;
             Flat                            ;
             BACKCOLOR WHITE
          @ 240, 145 ButtonEx btnGeneralCancel           ;
             WIDTH 30 Height 30                  ;
             ICON 'CANCEL'                       ;
-            Action FiniEdtGeneral( SET_CANCEL ) ;
-            Tooltip 'Discard changes [Esc]'     ;
+            ACTION FiniEdtGeneral( SET_CANCEL ) ;
+            TOOLTIP 'Discard changes [Esc]'     ;
             Flat                                ;
             BACKCOLOR WHITE
       END PAGE
@@ -537,8 +537,8 @@ PROCEDURE Main( cFile )
          // Collector of fields
 
          @ 30, 5 Grid grdCollector                                              ;
-            Headers { 'Name', 'Type', 'Len', 'Dec', 'Comment' }            ;
-            Widths  { 80    , 45    , 40   , 40   , 102    }               ;
+            HEADERS { 'Name', 'Type', 'Len', 'Dec', 'Comment' }            ;
+            WIDTHS  { 80    , 45    , 40   , 40   , 102    }               ;
             DynamicBackColor { { | xVal, nItem | DynamicColors( nItem ) }, ;
             { | xVal, nItem | DynamicColors( nItem ) }, ;
             { | xVal, nItem | DynamicColors( nItem ) }, ;
@@ -552,39 +552,39 @@ PROCEDURE Main( cFile )
    // Decoding of used colors in table
 
    @ 220, 5 Label lblLegend ;
-      Value 'Legend:' ;
+      VALUE 'Legend:' ;
       HEIGHT 20       ;
       Bold            ;
-      FontColor NAVY_COLOR  ;
+      FONTCOLOR NAVY_COLOR  ;
       Autosize
    @ 220, 55 Label lblNew    ;
-      Value 'New'     ;
+      VALUE 'New'     ;
       HEIGHT 18       ;
       WIDTH 60        ;
       CenterAlign     ;
       Border          ;
       BACKCOLOR { 227, 227, 234 }
    @ 220, 105 Label lblModified         ;
-      Value 'Modified'          ;
+      VALUE 'Modified'          ;
       HEIGHT 18                 ;
       WIDTH 60                  ;
       CenterAlign               ;
       Border                    ;
       BACKCOLOR { 128, 255, 0 } ;
-      FontColor BLACK
+      FONTCOLOR BLACK
    @ 220, 155 Label lblDeleted            ;
-      Value 'Deleted'             ;
+      VALUE 'Deleted'             ;
       HEIGHT 18                   ;
       WIDTH 60                    ;
       CenterAlign                 ;
       Border                      ;
       BACKCOLOR { 255, 128, 128 } ;
-      FontColor BLACK
+      FONTCOLOR BLACK
 
    // System messages area
 
    @ 240, 5 EditBox edtMessages ;
-      Value ''            ;
+      VALUE ''            ;
       HEIGHT 90           ;
       ReadOnly            ;
       BACKCOLOR WHITE

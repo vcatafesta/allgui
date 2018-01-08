@@ -8,7 +8,7 @@ PROCEDURE Main
          HEIGHT 200 ;
          TITLE 'Menu Test' ;
          ICON 'Demo.ico' ;
-         Main ;
+         MAIN ;
          NotifyIcon 'Demo.ico'
 
       DEFINE MAIN MENU

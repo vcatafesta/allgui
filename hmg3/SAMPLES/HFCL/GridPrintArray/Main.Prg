@@ -184,18 +184,18 @@ FUNCTION Main
          COL 10
          WIDTH 300
          HEIGHT 150
-         virtual .t.
+         VIRTUAL .t.
          on querydata this.querydata := aArray[this.queryrowindex,this.querycolindex]
-         itemcount HMG_LEN(aArray)
-         headers {"Head1","Head2","Head3"}
-         widths {100,100,70}
+         ITEMCOUNT HMG_LEN(aArray)
+         HEADERS {"Head1","Head2","Head3"}
+         WIDTHS {100,100,70}
       END GRID
       DEFINE BUTTON print
          ROW 160
          COL 10
          WIDTH 80
-         caption "Print"
-         action printarray()
+         CAPTION "Print"
+         ACTION printarray()
       END BUTTON
    END WINDOW
    sample.center

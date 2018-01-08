@@ -95,7 +95,7 @@ FUNCTION _DefineTBrowse ( ControlName, ParentFormName, nCol, nRow, nWidth, nHeig
       nCol        := 0, ;
       nHeight     := 120, ;
       nWidth      := 240, ;
-      value       := 0, ;
+      VALUE       := 0, ;
       aImages     := {}, ;
       aHeadClick  := {}, ;
       aFlds       := {},;
@@ -175,7 +175,7 @@ FUNCTION _DefineTBrowse ( ControlName, ParentFormName, nCol, nRow, nWidth, nHeig
          ParentFormName := if( _HMG_BeginDialogActive, _HMG_ActiveDialogName, _HMG_ActiveFormName )
       ENDIF
       IF .Not. Empty( _HMG_ActiveFontName ) .And. ValType( FontName ) == "U"
-         FontName := _HMG_ActiveFontName
+         FONTNAME := _HMG_ActiveFontName
       ENDIF
       IF .Not. Empty( _HMG_ActiveFontSize ) .And. ValType( FontSize ) == "U"
          FontSize := _HMG_ActiveFontSize
@@ -298,7 +298,7 @@ FUNCTION _DefineTBrowse ( ControlName, ParentFormName, nCol, nRow, nWidth, nHeig
          oBrw:hFont := FontHandle
       ELSE
          IF valtype(fontname) == "U"
-            FontName := _HMG_DefaultFontName
+            FONTNAME := _HMG_DefaultFontName
          ENDIF
          IF valtype(fontsize) == "U"
             FontSize := _HMG_DefaultFontSize

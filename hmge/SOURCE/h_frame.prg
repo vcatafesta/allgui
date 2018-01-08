@@ -205,7 +205,7 @@ FUNCTION _BeginFrame( name , parent , row , col , w , h , caption , fontname , f
 
    hb_default( @caption, "" )
    IF Empty ( caption )
-      fontname := "Arial"
+      FONTNAME := "Arial"
       fontsize := 1
    ENDIF
 

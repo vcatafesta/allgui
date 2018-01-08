@@ -15,38 +15,38 @@ FUNCTION Main
          WIDTH 640 ;
          HEIGHT 480 ;
          TITLE "Graph" ;
-         Main ;
-         Nomaximize ;
+         MAIN ;
+         NOMAXIMIZE ;
          ICON "Main" ;
          BACKCOLOR { 255 , 255 , 255 } ;
-         On Init DrawBarGraph ( aSer ) ;
+         ON INIT DrawBarGraph ( aSer ) ;
 
       DEFINE BUTTON Button_1
          ROW   415
          COL   20
-         Caption   'Bars'
-         Action DrawBarGraph ( aSer )
+         CAPTION   'Bars'
+         ACTION DrawBarGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_2
          ROW   415
          COL   185
-         Caption   'Lines'
-         Action DrawLinesGraph ( aSer )
+         CAPTION   'Lines'
+         ACTION DrawLinesGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_3
          ROW   415
          COL   340
-         Caption   'Points'
-         Action DrawPointsGraph ( aSer )
+         CAPTION   'Points'
+         ACTION DrawPointsGraph ( aSer )
       END BUTTON
 
       DEFINE BUTTON Button_4
          ROW   415
          COL   500
-         Caption   'Print'
-         Action PRINT GRAPH OF GraphTest PREVIEW DIALOG
+         CAPTION   'Print'
+         ACTION PRINT GRAPH OF GraphTest PREVIEW DIALOG
       END BUTTON
 
    END WINDOW

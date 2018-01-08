@@ -104,9 +104,9 @@ FUNCTION MAIN()
          WIDTH _DBUscrwidth height _DBUscrheight ;
          TITLE "Harbour Minigui DataBase Utility" ;
          ICON "dbuicon" ;
-         main ;
-         on init {|| iif(len(_dbase)>0, DBUopendbf(_dbase,_opmode),)} ;
-         on release DBUclosedbfs() ;
+         MAIN ;
+         ON INIT {|| iif(len(_dbase)>0, DBUopendbf(_dbase,_opmode),)} ;
+         ON RELEASE DBUclosedbfs() ;
          on maximize DBUwinSize()  ;
          on size DBUwinSize()      ;
          font 'Arial' size 8       ;
@@ -133,78 +133,78 @@ FUNCTION MAIN()
 
          POPUP "&File"
             item " Create &New DBF" + Space(16) + 'Ctrl+N' ;
-               action DBUcreanew()                 image 'MENUNEW'
+               ACTION DBUcreanew()                 image 'MENUNEW'
             SEPARATOR
             item " &Open DBF file"  + Space(16) + 'Ctrl+O' ;
-               action DBUopendbf()                 image 'MENUOPEN'
+               ACTION DBUopendbf()                 image 'MENUOPEN'
             item " &Close DBF"  ;
-               action DBUclosedbf() name _DBUitem1 image 'MENUCLOSE'
+               ACTION DBUclosedbf() name _DBUitem1 image 'MENUCLOSE'
             SEPARATOR
             item " Modiy Structure" + Space(16) + 'Ctrl+T' ;
-               action DBUmodistruct() name _DBUitem7 image 'MENUSTRU'
+               ACTION DBUmodistruct() name _DBUitem7 image 'MENUSTRU'
             SEPARATOR
             item " E&xit" + Space(16) + 'Ctrl+X'           ;
-               action _DBU.release()               image 'MENUEXIT'
+               ACTION _DBU.release()               image 'MENUEXIT'
             IF len(alltrim(_DBUlastfname)) > 0
                SEPARATOR
                item _DBUlastfname ;
-                  action DBUopenlastdbf()
+                  ACTION DBUopenlastdbf()
             ENDIF
          END POPUP
 
          POPUP "&View"
             item " Browse Mode" + Space(16)+'Ctrl+B' ;
-               action DBUbrowse1()  name _DBUitem9   image 'MENUBROW'
+               ACTION DBUbrowse1()  name _DBUitem9   image 'MENUBROW'
             SEPARATOR
             item " Edit Mode" + Space(16)+'Ctrl+E' ;
-               action DBUedit1()      name _DBUitem8 image 'MENUEDIT'
+               ACTION DBUedit1()      name _DBUitem8 image 'MENUEDIT'
          END POPUP
 
          POPUP "&Index"
             item " Open index" ;
-               action DBUopenindex() name _DBUitem3
+               ACTION DBUopenindex() name _DBUitem3
             item " Change Active" ;
-               action DBUchangeactiveindex() name _DBUitem4
+               ACTION DBUchangeactiveindex() name _DBUitem4
             SEPARATOR
             item " Create new index" ;
-               action DBUcreaindex() name _DBUitem2  image 'MENUINDEX'
+               ACTION DBUcreaindex() name _DBUitem2  image 'MENUINDEX'
             item " Reindex" ;
-               action DBUreindex() name _DBUitem5    image 'MENUREIND'
+               ACTION DBUreindex() name _DBUitem5    image 'MENUREIND'
             SEPARATOR
             item " Close index" ;
-               action DBUcloseindex() name _DBUitem6 image 'MENUCLOIN'
+               ACTION DBUcloseindex() name _DBUitem6 image 'MENUCLOIN'
          END POPUP
 
          POPUP "&Edit"
             item " &Replace" + Space(16) + 'Ctrl+R' ;
-               action DBUreplace() name _DBUitem13   image 'MENUREPL'
+               ACTION DBUreplace() name _DBUitem13   image 'MENUREPL'
             item " Reca&ll"  + Space(16) + 'Ctrl+L' ;
-               action DBUrecallrec() name _DBUitem10 image 'MENURECA'
+               ACTION DBUrecallrec() name _DBUitem10 image 'MENURECA'
             item " Pack"  + Space(16)+'Ctrl+K' ;
-               action DBUpackdbf() name _DBUitem11   image 'MENUPACK'
+               ACTION DBUpackdbf() name _DBUitem11   image 'MENUPACK'
             SEPARATOR
             item " Zap" + Space(16) + 'Ctrl+Z' ;
-               action DBUzapdbf() name _DBUitem12    image 'MENUZAP'
+               ACTION DBUzapdbf() name _DBUitem12    image 'MENUZAP'
          END POPUP
 
          POPUP "&Utilities"
 
             item " Export OEM dbf to &Ansi" + Space(16) + 'Ctrl+A' ;
-               action DBU_OEM2ANSI(.T.) name _DBUitem14 image 'MenuAnsi'
+               ACTION DBU_OEM2ANSI(.T.) name _DBUitem14 image 'MenuAnsi'
             SEPARATOR
             item " Export Ansi dbf to OE&M" + Space(16) + 'Ctrl+M' ;
-               action DBU_OEM2ANSI(.F.) name _DBUitem15 image 'MenuOem'
+               ACTION DBU_OEM2ANSI(.F.) name _DBUitem15 image 'MenuOem'
 
          END POPUP
 
          POPUP "&Help"
             item ' &Help ' + Space(16) + 'F1' ;
-               action HELP() image 'MENUHELP'
+               ACTION HELP() image 'MENUHELP'
             SEPARATOR
             item " About" ;
-               action DBUaboutclick() image 'MENUQUEST'
+               ACTION DBUaboutclick() image 'MENUQUEST'
             item ' Version' ;
-               action MsgInfo ("Dbu version: " + DBU_VERSION      + CR_LF + ;
+               ACTION MsgInfo ("Dbu version: " + DBU_VERSION      + CR_LF + ;
                "GUI Library : " + MiniGuiVersion() + CR_LF + ;
                "Compiler     : " + Version(), 'Versions') image 'MENUVER'
          END POPUP
@@ -267,19 +267,19 @@ FUNCTION MAIN()
       DEFINE LABEL _DBUmaillabel
          ROW _DBUscrheight - 115
          COL _DBUscrwidth - 290
-         value "E-mail me"
+         VALUE "E-mail me"
          WIDTH 80
       END LABEL
 
       define hyperlink _DBUemailid
          ROW _DBUscrheight - 115
          COL _DBUscrwidth - 200
-         value "srgiri@dataone.in"
+         VALUE "srgiri@dataone.in"
          address "srgiri@dataone.in"
-         tooltip "Contact me at the above address"
+         TOOLTIP "Contact me at the above address"
          autosize .t.
          handcursor .t.
-         fontname "Arial"
+         FONTNAME "Arial"
          fontsize 9
       END hyperlink
 
@@ -298,7 +298,7 @@ FUNCTION MAIN()
          WIDTH 400+2*GetBorderWidth()-2 ;
          HEIGHT 400+2*GetBorderHeight()-2 ;
          topmost nocaption ;
-         on init DBUsplash() on release _DBU.restore()
+         ON INIT DBUsplash() on release _DBU.restore()
 
       DEFINE IMAGE _DBUlogo
          ROW 0
@@ -745,15 +745,15 @@ FUNCTION DBUsetfilter
          WIDTH 600
          HEIGHT 100
          BACKCOLOR _DBUreddish
-         value _DBUcondition
+         VALUE _DBUcondition
       END editbox
       DEFINE GRID _DBUfieldnames
          ROW 160
          COL 30
-         value 1
+         VALUE 1
          BACKCOLOR _DBUyellowish
-         headers {"Field Name"}
-         widths {176}
+         HEADERS {"Field Name"}
+         WIDTHS {176}
          items _DBUfieldsarr
          on dblclick _DBUfilterbox._DBUfiltercondition.value := alltrim(alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUfieldsarr[_DBUfilterbox._DBUfieldnames.value,1]))
          WIDTH 200
@@ -763,57 +763,57 @@ FUNCTION DBUsetfilter
          ROW 200
          COL 250
          WIDTH 25
-         caption "<"
-         action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" <"
+         CAPTION "<"
+         ACTION _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" <"
       END BUTTON
       DEFINE BUTTON _DBUgreaterthan
          ROW 200
          COL 285
          WIDTH 25
-         caption ">"
-         action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" >"
+         CAPTION ">"
+         ACTION _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" >"
       END BUTTON
       DEFINE BUTTON _DBUequal
          ROW 200
          COL 320
          WIDTH 25
-         caption "=="
-         action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" =="
+         CAPTION "=="
+         ACTION _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" =="
       END BUTTON
       DEFINE BUTTON _DBUnotequal
          ROW 200
          COL 355
          WIDTH 25
-         caption "<>"
-         action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" <>"
+         CAPTION "<>"
+         ACTION _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" <>"
       END BUTTON
       DEFINE BUTTON _DBUand
          ROW 240
          COL 250
          WIDTH 40
-         caption "and"
-         action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" .and."
+         CAPTION "and"
+         ACTION _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" .and."
       END BUTTON
       DEFINE BUTTON _DBUor
          ROW 240
          COL 300
          WIDTH 40
-         caption "or"
-         action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" .or."
+         CAPTION "or"
+         ACTION _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" .or."
       END BUTTON
       DEFINE BUTTON _DBUnot
          ROW 240
          COL 350
          WIDTH 40
-         caption "not"
-         action _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" .not."
+         CAPTION "not"
+         ACTION _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" .not."
       END BUTTON
       DEFINE GRID _DBUfunctions
          ROW 160
          COL 400
-         value 1
-         headers {"Functions"}
-         widths {176}
+         VALUE 1
+         HEADERS {"Functions"}
+         WIDTHS {176}
          BACKCOLOR _DBUgreenish
          items _DBUdbffunctions
          on dblclick _DBUfilterbox._DBUfiltercondition.value := alltrim(_DBUfilterbox._DBUfiltercondition.value)+" "+alltrim(_DBUdbffunctions[_DBUfilterbox._DBUfunctions.value,1])
@@ -823,16 +823,16 @@ FUNCTION DBUsetfilter
       DEFINE BUTTON _DBUsetfilter
          ROW 340
          COL 150
-         caption "Set Filter"
+         CAPTION "Set Filter"
          WIDTH 100
-         action DBUfilterset()
+         ACTION DBUfilterset()
       END BUTTON
       DEFINE BUTTON _DBUclearfilter
          ROW 340
          COL 400
-         caption "Clear Filter"
+         CAPTION "Clear Filter"
          WIDTH 100
-         action (DBUfilterclear(),_DBUfilterbox.release)
+         ACTION (DBUfilterclear(),_DBUfilterbox.release)
       END BUTTON
    END WINDOW
    CENTER WINDOW _DBUfilterbox

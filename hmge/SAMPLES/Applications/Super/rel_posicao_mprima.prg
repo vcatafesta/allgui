@@ -23,26 +23,26 @@ FUNCTION posicao_mprima()
 
       @ 010,010 label lbl_001;
          of form_estoque_mprima;
-         value 'Este relatório irá listar todas as matérias primas em';
+         VALUE 'Este relatório irá listar todas as matérias primas em';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,010 label lbl_002;
          of form_estoque_mprima;
-         value 'estoque, mostrando a quantidade atual disponível.';
+         VALUE 'estoque, mostrando a quantidade atual disponível.';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
 
       * linha separadora
       DEFINE LABEL linha_rodape
          COL 000
          ROW form_estoque_mprima.height-090
-         value ''
+         VALUE ''
          WIDTH form_estoque_mprima.width
          HEIGHT 001
          BACKCOLOR _preto_001
@@ -56,10 +56,10 @@ FUNCTION posicao_mprima()
          ROW form_estoque_mprima.height-085
          WIDTH 150
          HEIGHT 050
-         caption 'Ok, imprimir'
-         action relatorio()
-         fontbold .T.
-         tooltip 'Gerar o relatório'
+         CAPTION 'Ok, imprimir'
+         ACTION relatorio()
+         FONTBOLD .T.
+         TOOLTIP 'Gerar o relatório'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -69,10 +69,10 @@ FUNCTION posicao_mprima()
          ROW form_estoque_mprima.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_estoque_mprima.release
-         fontbold .T.
-         tooltip 'Sair desta tela'
+         CAPTION 'Voltar'
+         ACTION form_estoque_mprima.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela'
          flat .F.
          noxpstyle .T.
       END BUTTONEX

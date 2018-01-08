@@ -73,9 +73,9 @@ FUNCTION _DefineEditbox ( ControlName, ParentFormName, x, y, w, h, value, ;
       IF  At ( '>', Field ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + " : You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( Field , At ( '>', Field ) - 2 )
+         WORKAREA := Left ( Field , At ( '>', Field ) - 2 )
          IF Select ( WorkArea ) != 0
-            Value := &( Field )
+            VALUE := &( Field )
          ENDIF
       ENDIF
    ENDIF
@@ -308,7 +308,7 @@ FUNCTION InitDialogEdit( ParentName, ControlHandle, k )
 
    ParentName := Nil
 
-   maxlength := _HMG_aControlMiscData1 [k,2]
+   MAXLENGTH := _HMG_aControlMiscData1 [k,2]
    readonly  := _HMG_aControlMiscData1 [k,3]
 
    IF ValType ( readonly ) == 'L'

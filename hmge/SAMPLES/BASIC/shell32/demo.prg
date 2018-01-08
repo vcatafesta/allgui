@@ -36,24 +36,24 @@ PROCEDURE Main( nOper, cFile, cCopy )
       DEFINE BUTTON x
          ROW 10
          COL 10
-         caption "Test 1"
+         CAPTION "Test 1"
          DEFAULT .t.
-         action test( aFile, aCopy, nOper, cCopy )
+         ACTION test( aFile, aCopy, nOper, cCopy )
       END BUTTON
 
       DEFINE BUTTON x2
          ROW 40
          COL 10
-         caption "Test 2"
+         CAPTION "Test 2"
          DEFAULT .t.
-         action test2( aFile, aCopy, nOper )
+         ACTION test2( aFile, aCopy, nOper )
       END BUTTON
 
       DEFINE BUTTON y
          ROW 70
          COL 10
-         caption "Exit"
-         action ThisWindow.Release
+         CAPTION "Exit"
+         ACTION ThisWindow.Release
       END BUTTON
 
    END WINDOW

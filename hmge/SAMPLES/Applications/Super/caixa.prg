@@ -27,12 +27,12 @@ FUNCTION caixa()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F5 Incluir'
-         action dados(1)
-         fontname 'verdana'
+         CAPTION 'F5 Incluir'
+         ACTION dados(1)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -44,12 +44,12 @@ FUNCTION caixa()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F6 Alterar'
-         action dados(2)
-         fontname 'verdana'
+         CAPTION 'F6 Alterar'
+         ACTION dados(2)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -61,12 +61,12 @@ FUNCTION caixa()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F7 Excluir'
-         action excluir()
-         fontname 'verdana'
+         CAPTION 'F7 Excluir'
+         ACTION excluir()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -78,12 +78,12 @@ FUNCTION caixa()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'Atualizar'
-         action atualizar()
-         fontname 'verdana'
+         CAPTION 'Atualizar'
+         ACTION atualizar()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -95,12 +95,12 @@ FUNCTION caixa()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'ESC Voltar'
-         action form_caixa.release
-         fontname 'verdana'
+         CAPTION 'ESC Voltar'
+         ACTION form_caixa.release
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -114,13 +114,13 @@ FUNCTION caixa()
             ROW 105
             WIDTH 795
             HEIGHT 430
-            headers {'id','Data','Histórico','Entradas','Saídas'}
-            widths {001,120,400,120,120}
-            fontname 'verdana'
+            HEADERS {'id','Data','Histórico','Entradas','Saídas'}
+            WIDTHS {001,120,400,120,120}
+            FONTNAME 'verdana'
             fontsize 010
-            fontbold .T.
+            FONTBOLD .T.
             BACKCOLOR _amarelo_001
-            fontcolor _preto_001
+            FONTCOLOR _preto_001
             ondblclick dados(2)
          END GRID
       END SPLITBOX
@@ -129,54 +129,54 @@ FUNCTION caixa()
          parent form_caixa
          COL 005
          ROW 545
-         value 'Escolha o período'
+         VALUE 'Escolha o período'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
+         FONTBOLD .T.
+         FONTCOLOR _cinza_001
          transparent .T.
       END LABEL
       DEFINE LABEL rodape_002
          parent form_caixa
          COL 250
          ROW 545
-         value 'até'
+         VALUE 'até'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
+         FONTBOLD .T.
+         FONTCOLOR _cinza_001
          transparent .T.
       END LABEL
       @ 540,140 datepicker dp_inicio;
          parent form_caixa;
-         value date();
+         VALUE date();
          WIDTH 100;
          font 'verdana' size 010
       @ 540,280 datepicker dp_final;
          parent form_caixa;
-         value date();
+         VALUE date();
          WIDTH 100;
          font 'verdana' size 010
       @ 540,390 buttonex botao_filtrar;
          parent form_caixa;
-         caption 'Filtrar';
+         CAPTION 'Filtrar';
          WIDTH 100 height 030;
-         action atualizar();
+         ACTION atualizar();
          bold;
-         tooltip 'Clique aqui para mostrar as informações com base no período selecionado'
+         TOOLTIP 'Clique aqui para mostrar as informações com base no período selecionado'
 
       DEFINE LABEL rodape_003
          parent form_caixa
          COL form_caixa.width - 270
          ROW 545
-         value 'DUPLO CLIQUE : Alterar informação'
+         VALUE 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _verde_002
+         FONTBOLD .T.
+         FONTCOLOR _verde_002
          transparent .T.
       END LABEL
 
@@ -236,79 +236,79 @@ STATIC FUNCTION dados(parametro)
       * entrada de dados
       @ 010,005 label lbl_001;
          of form_dados;
-         value 'Data';
+         VALUE 'Data';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_data;
+         VALUE x_data;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          date
       @ 060,005 label lbl_002;
          of form_dados;
-         value 'Histórico';
+         VALUE 'Histórico';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,005 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
          WIDTH 310;
-         value x_historico;
-         maxlength 030;
+         VALUE x_historico;
+         MAXLENGTH 030;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 110,005 label lbl_003;
          of form_dados;
-         value 'Entrada';
+         VALUE 'Entrada';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 130,005 getbox tbox_003;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_entrada;
+         VALUE x_entrada;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
       @ 110,140 label lbl_004;
          of form_dados;
-         value 'Saída';
+         VALUE 'Saída';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _vermelho_002;
+         FONTCOLOR _vermelho_002;
          transparent
       @ 130,140 getbox tbox_004;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_saida;
+         VALUE x_saida;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
 
       * linha separadora
       DEFINE LABEL linha_rodape
          COL 000
          ROW form_dados.height-090
-         value ''
+         VALUE ''
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
@@ -322,10 +322,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 120
          HEIGHT 050
-         caption 'Ok, gravar'
-         action gravar(parametro)
-         fontbold .T.
-         tooltip 'Confirmar as informações digitadas'
+         CAPTION 'Ok, gravar'
+         ACTION gravar(parametro)
+         FONTBOLD .T.
+         TOOLTIP 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -335,10 +335,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_dados.release
-         fontbold .T.
-         tooltip 'Sair desta tela sem gravar informações'
+         CAPTION 'Voltar'
+         ACTION form_dados.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
       END BUTTONEX

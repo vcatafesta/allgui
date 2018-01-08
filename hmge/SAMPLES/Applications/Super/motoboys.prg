@@ -24,7 +24,7 @@ FUNCTION motoboys_entregadores()
          ICON path_imagens+'icone.ico';
          modal;
          nosize;
-         on init pesquisar()
+         ON INIT pesquisar()
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
@@ -33,12 +33,12 @@ FUNCTION motoboys_entregadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F5 Incluir'
-         action dados(1)
-         fontname 'verdana'
+         CAPTION 'F5 Incluir'
+         ACTION dados(1)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -50,12 +50,12 @@ FUNCTION motoboys_entregadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F6 Alterar'
-         action dados(2)
-         fontname 'verdana'
+         CAPTION 'F6 Alterar'
+         ACTION dados(2)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -67,12 +67,12 @@ FUNCTION motoboys_entregadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F7 Excluir'
-         action excluir()
-         fontname 'verdana'
+         CAPTION 'F7 Excluir'
+         ACTION excluir()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -84,12 +84,12 @@ FUNCTION motoboys_entregadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F8 Imprimir'
-         action relacao()
-         fontname 'verdana'
+         CAPTION 'F8 Imprimir'
+         ACTION relacao()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -101,12 +101,12 @@ FUNCTION motoboys_entregadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'Atualizar'
-         action atualizar()
-         fontname 'verdana'
+         CAPTION 'Atualizar'
+         ACTION atualizar()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -118,12 +118,12 @@ FUNCTION motoboys_entregadores()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'ESC Voltar'
-         action form_motoboys.release
-         fontname 'verdana'
+         CAPTION 'ESC Voltar'
+         ACTION form_motoboys.release
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -137,13 +137,13 @@ FUNCTION motoboys_entregadores()
             ROW 105
             WIDTH 795
             HEIGHT 430
-            headers {'Código','Nome','Telefone fixo','Telefone celular'}
-            widths {080,400,140,140}
-            fontname 'verdana'
+            HEADERS {'Código','Nome','Telefone fixo','Telefone celular'}
+            WIDTHS {080,400,140,140}
+            FONTNAME 'verdana'
             fontsize 010
-            fontbold .T.
+            FONTBOLD .T.
             BACKCOLOR _amarelo_001
-            fontcolor _preto_001
+            FONTCOLOR _preto_001
             ondblclick dados(2)
          END GRID
       END SPLITBOX
@@ -152,35 +152,35 @@ FUNCTION motoboys_entregadores()
          parent form_motoboys
          COL 005
          ROW 545
-         value 'Digite sua pesquisa'
+         VALUE 'Digite sua pesquisa'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
+         FONTBOLD .T.
+         FONTCOLOR _cinza_001
          transparent .T.
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_motoboys;
          HEIGHT 027;
          WIDTH 300;
-         value '';
-         maxlength 040;
+         VALUE '';
+         MAXLENGTH 040;
          font 'verdana' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase;
-         on change pesquisar()
+         ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
          parent form_motoboys
          COL form_motoboys.width - 270
          ROW 545
-         value 'DUPLO CLIQUE : Alterar informação'
+         VALUE 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _verde_002
+         FONTBOLD .T.
+         FONTCOLOR _verde_002
          transparent .T.
       END LABEL
 
@@ -257,225 +257,225 @@ STATIC FUNCTION dados(parametro)
       * entrada de dados
       @ 010,005 label lbl_001;
          of form_dados;
-         value 'Nome';
+         VALUE 'Nome';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
          WIDTH 310;
-         value x_nome;
-         maxlength 040;
+         VALUE x_nome;
+         MAXLENGTH 040;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 010,325 label lbl_002;
          of form_dados;
-         value 'Telefone fixo';
+         VALUE 'Telefone fixo';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,325 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_fixo;
-         maxlength 010;
+         VALUE x_fixo;
+         MAXLENGTH 010;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 010,455 label lbl_003;
          of form_dados;
-         value 'Telefone celular';
+         VALUE 'Telefone celular';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,455 textbox tbox_003;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_celular;
-         maxlength 010;
+         VALUE x_celular;
+         MAXLENGTH 010;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 060,005 label lbl_004;
          of form_dados;
-         value 'Endereço';
+         VALUE 'Endereço';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,005 textbox tbox_004;
          of form_dados;
          HEIGHT 027;
          WIDTH 310;
-         value x_endereco;
-         maxlength 040;
+         VALUE x_endereco;
+         MAXLENGTH 040;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 060,325 label lbl_005;
          of form_dados;
-         value 'Número';
+         VALUE 'Número';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,325 textbox tbox_005;
          of form_dados;
          HEIGHT 027;
          WIDTH 060;
-         value x_numero;
-         maxlength 006;
+         VALUE x_numero;
+         MAXLENGTH 006;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 060,395 label lbl_006;
          of form_dados;
-         value 'Complemento';
+         VALUE 'Complemento';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,395 textbox tbox_006;
          of form_dados;
          HEIGHT 027;
          WIDTH 180;
-         value x_complem;
-         maxlength 020;
+         VALUE x_complem;
+         MAXLENGTH 020;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 110,005 label lbl_007;
          of form_dados;
-         value 'Bairro';
+         VALUE 'Bairro';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 130,005 textbox tbox_007;
          of form_dados;
          HEIGHT 027;
          WIDTH 180;
-         value x_bairro;
-         maxlength 020;
+         VALUE x_bairro;
+         MAXLENGTH 020;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 110,195 label lbl_008;
          of form_dados;
-         value 'Cidade';
+         VALUE 'Cidade';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 130,195 textbox tbox_008;
          of form_dados;
          HEIGHT 027;
          WIDTH 180;
-         value x_cidade;
-         maxlength 020;
+         VALUE x_cidade;
+         MAXLENGTH 020;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 110,385 label lbl_009;
          of form_dados;
-         value 'UF';
+         VALUE 'UF';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 130,385 textbox tbox_009;
          of form_dados;
          HEIGHT 027;
          WIDTH 040;
-         value x_uf;
-         maxlength 002;
+         VALUE x_uf;
+         MAXLENGTH 002;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 110,435 label lbl_010;
          of form_dados;
-         value 'CEP';
+         VALUE 'CEP';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 130,435 textbox tbox_010;
          of form_dados;
          HEIGHT 027;
          WIDTH 080;
-         value x_cep;
-         maxlength 008;
+         VALUE x_cep;
+         MAXLENGTH 008;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 160,005 label lbl_011;
          of form_dados;
-         value 'e-mail';
+         VALUE 'e-mail';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 180,005 textbox tbox_011;
          of form_dados;
          HEIGHT 027;
          WIDTH 450;
-         value x_email;
-         maxlength 050;
+         VALUE x_email;
+         MAXLENGTH 050;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          lowercase
       @ 210,005 label lbl_013;
          of form_dados;
-         value 'Diária (R$)';
+         VALUE 'Diária (R$)';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 230,005 getbox tbox_013;
          of form_dados;
          HEIGHT 027;
          WIDTH 140;
-         value x_diaria;
+         VALUE x_diaria;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 9,999.99'
 
       * linha separadora
       DEFINE LABEL linha_rodape
          COL 000
          ROW form_dados.height-090
-         value ''
+         VALUE ''
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
@@ -489,10 +489,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 120
          HEIGHT 050
-         caption 'Ok, gravar'
-         action gravar(parametro)
-         fontbold .T.
-         tooltip 'Confirmar as informações digitadas'
+         CAPTION 'Ok, gravar'
+         ACTION gravar(parametro)
+         FONTBOLD .T.
+         TOOLTIP 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -502,10 +502,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_dados.release
-         fontbold .T.
-         tooltip 'Sair desta tela sem gravar informações'
+         CAPTION 'Voltar'
+         ACTION form_dados.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
       END BUTTONEX

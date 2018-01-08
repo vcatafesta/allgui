@@ -331,10 +331,10 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
          HEIGHT 480 ;
          TITLE  _cTitulo ;
          modal ;
-         nosysmenu ;
+         NOSYSMENU ;
          font "Serif" ;
          size 8 ;
-         on init ABMRefresh( ABM_MODO_VER )
+         ON INIT ABMRefresh( ABM_MODO_VER )
    END WINDOW
 
    // Defincición del frame.------------------------------------------------------
@@ -347,7 +347,7 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
 
       @ aEtiquetas[nItem,2], aEtiquetas[nItem,3] label &_HMG_cMacroTemp ;
          of     wndABM ;
-         value  _aCampos[nItem] ;
+         VALUE  _aCampos[nItem] ;
          WIDTH  70 ;
          HEIGHT 21 ;
          font   "ms sans serif" ;
@@ -355,28 +355,28 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
    NEXT
    @ 310, 535 label  lblLabel1 ;
       of     wndABM ;
-      value  _HMG_SYSDATA [ 132 ][1] ;
+      VALUE  _HMG_SYSDATA [ 132 ][1] ;
       WIDTH  85 ;
       HEIGHT 20 ;
       font   "ms sans serif" ;
       size   8
    @ 330, 535 label  lblRegistro ;
       of     wndABM ;
-      value  "9999" ;
+      VALUE  "9999" ;
       WIDTH  85 ;
       HEIGHT 20 ;
       font   "ms sans serif" ;
       size   8
    @ 350, 535 label  lblLabel2 ;
       of     wndABM ;
-      value  _HMG_SYSDATA [ 132 ][2] ;
+      VALUE  _HMG_SYSDATA [ 132 ][2] ;
       WIDTH  85 ;
       HEIGHT 20 ;
       font   "ms sans serif" ;
       size   8
    @ 370, 535 label  lblTotales ;
       of     wndABM ;
-      value  "9999" ;
+      VALUE  "9999" ;
       WIDTH  85 ;
       HEIGHT 20 ;
       font   "ms sans serif" ;
@@ -387,124 +387,124 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
       of wndABM ;
       WIDTH    510 ;
       HEIGHT   125 ;
-      headers  _aCampos ;
-      widths   aBrwAnchos ;
-      workarea &_cArea ;
-      fields   aBrwCampos ;
-      value    (_cArea)->( RecNo() ) ;
-      on change {|| (_cArea)->( dbGoTo( wndABM.brwBrowse.Value ) ), ABMRefresh( ABM_MODO_VER ) }
+      HEADERS  _aCampos ;
+      WIDTHS   aBrwAnchos ;
+      WORKAREA &_cArea ;
+      FIELDS   aBrwCampos ;
+      VALUE    (_cArea)->( RecNo() ) ;
+      ON CHANGE {|| (_cArea)->( dbGoTo( wndABM.brwBrowse.Value ) ), ABMRefresh( ABM_MODO_VER ) }
 
    // Definición de los botones.--------------------------------------------------
    @ 400, 535 button btnCerrar ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][1] ;
-      action  ABMEventos( ABM_EVENTO_SALIR ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][1] ;
+      ACTION  ABMEventos( ABM_EVENTO_SALIR ) ;
       WIDTH   85 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8
    @ 20, 535 button btnNuevo ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][2] ;
-      action  ABMEventos( ABM_EVENTO_NUEVO ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][2] ;
+      ACTION  ABMEventos( ABM_EVENTO_NUEVO ) ;
       WIDTH   85 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 65, 535 button btnEditar ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][3] ;
-      action  ABMEventos( ABM_EVENTO_EDITAR ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][3] ;
+      ACTION  ABMEventos( ABM_EVENTO_EDITAR ) ;
       WIDTH   85 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 110, 535 button btnBorrar ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][4] ;
-      action  ABMEventos( ABM_EVENTO_BORRAR ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][4] ;
+      ACTION  ABMEventos( ABM_EVENTO_BORRAR ) ;
       WIDTH   85 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 155, 535 button btnBuscar ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][5] ;
-      action  ABMEventos( ABM_EVENTO_BUSCAR ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][5] ;
+      ACTION  ABMEventos( ABM_EVENTO_BUSCAR ) ;
       WIDTH   85 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 200, 535 button btnIr ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][6] ;
-      action  ABMEventos( ABM_EVENTO_IR ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][6] ;
+      ACTION  ABMEventos( ABM_EVENTO_IR ) ;
       WIDTH   85 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 245, 535 button btnListado ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][7] ;
-      action  ABMEventos( ABM_EVENTO_LISTADO ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][7] ;
+      ACTION  ABMEventos( ABM_EVENTO_LISTADO ) ;
       WIDTH   85 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 260, 20 button btnPrimero ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][8] ;
-      action  ABMEventos( ABM_EVENTO_PRIMERO ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][8] ;
+      ACTION  ABMEventos( ABM_EVENTO_PRIMERO ) ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 260, 100 button btnAnterior ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][9] ;
-      action  ABMEventos( ABM_EVENTO_ANTERIOR ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][9] ;
+      ACTION  ABMEventos( ABM_EVENTO_ANTERIOR ) ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 260, 180 button btnSiguiente ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][10] ;
-      action  ABMEventos( ABM_EVENTO_SIGUIENTE ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][10] ;
+      ACTION  ABMEventos( ABM_EVENTO_SIGUIENTE ) ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 260, 260 button btnUltimo ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][11] ;
-      action  ABMEventos( ABM_EVENTO_ULTIMO ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][11] ;
+      ACTION  ABMEventos( ABM_EVENTO_ULTIMO ) ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 260, 355 button btnGuardar ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][12] ;
-      action  ABMEventos( ABM_EVENTO_GUARDAR ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][12] ;
+      ACTION  ABMEventos( ABM_EVENTO_GUARDAR ) ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8
    @ 260, 435 button btnCancelar ;
       of      wndABM ;
-      caption _HMG_SYSDATA [ 133 ][13] ;
-      action  ABMEventos( ABM_EVENTO_CANCELAR ) ;
+      CAPTION _HMG_SYSDATA [ 133 ][13] ;
+      ACTION  ABMEventos( ABM_EVENTO_CANCELAR ) ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
@@ -520,11 +520,11 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
          @ _HMG_aControles[nItem,2], _HMG_aControles[nItem,3] textbox &_HMG_cMacroTemp ;
             of      wndABM ;
             HEIGHT  21 ;
-            value   "" ;
+            VALUE   "" ;
             WIDTH   iif( (_aEstructura[nItem,3] * 10)>160, 160, _aEstructura[nItem,3] * 10 ) ;
             font    "Arial" ;
             size    9 ;
-            maxlength _aEstructura[nItem,3]
+            MAXLENGTH _aEstructura[nItem,3]
 
       CASE _aEstructura[nItem,2] == "N"        // Campo tipo numerico
          IF _aEstructura[nItem,4] == 0
@@ -534,10 +534,10 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
             @ _HMG_aControles[nItem,2], _HMG_aControles[nItem,3] textbox &_HMG_cMacroTemp ;
                of      wndABM ;
                HEIGHT  21 ;
-               value   0 ;
+               VALUE   0 ;
                WIDTH   iif( (_aEstructura[nItem,3] * 10)>160, 160, _aEstructura[nItem,3] * 10 ) ;
-               numeric ;
-               maxlength _aEstructura[nItem,3] ;
+               NUMERIC ;
+               MAXLENGTH _aEstructura[nItem,3] ;
                font "Arial" ;
                size 9
          ELSE
@@ -552,10 +552,10 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
             @ _HMG_aControles[nItem,2], _HMG_aControles[nItem,3] textbox &_HMG_cMacroTemp ;
                of      wndABM ;
                HEIGHT  21 ;
-               value   0 ;
+               VALUE   0 ;
                WIDTH   iif( (_aEstructura[nItem,3] * 10)>160, 160, _aEstructura[nItem,3] * 10 ) ;
-               numeric ;
-               inputmask cMascara
+               NUMERIC ;
+               INPUTMASK cMascara
          ENDIF
       CASE _aEstructura[nItem,2] == "D"        // Campo tipo fecha.
 
@@ -563,7 +563,7 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
 
          @ _HMG_aControles[nItem,2], _HMG_aControles[nItem,3] datepicker &_HMG_cMacroTemp ;
             of      wndABM ;
-            value   Date() ;
+            VALUE   Date() ;
             WIDTH   100 ;
             font    "Arial" ;
             size    9
@@ -580,10 +580,10 @@ FUNCTION ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
 
          @ _HMG_aControles[nItem,2], _HMG_aControles[nItem,3] checkbox &_HMG_cMacroTemp ;
             of      wndABM ;
-            caption "" ;
+            CAPTION "" ;
             WIDTH   21 ;
             HEIGHT  21 ;
-            value   .t. ;
+            VALUE   .t. ;
             font    "Arial" ;
             size    9
       CASE _aEstructura[nItem,2] == "M"        // Campo tipo memo.
@@ -1001,7 +1001,7 @@ STATIC FUNCTION ABMBuscar()
          HEIGHT 160 ;
          TITLE _HMG_SYSDATA [ 132 ][6] ;
          modal ;
-         nosysmenu ;
+         NOSYSMENU ;
          font "Serif" ;
          size 8
    END WINDOW
@@ -1010,7 +1010,7 @@ STATIC FUNCTION ABMBuscar()
    // Etiquetas
    @ 20, 20 label lblEtiqueta1 ;
       of wndABMBuscar ;
-      value "" ;
+      VALUE "" ;
       WIDTH 160 ;
       HEIGHT 21 ;
       font "ms sans serif" ;
@@ -1019,16 +1019,16 @@ STATIC FUNCTION ABMBuscar()
    // Botones.
    @ 80, 20 button btnGuardar ;
       of      wndABMBuscar ;
-      caption "&" + _HMG_SYSDATA [ 133 ][5] ;
-      action  {|| ABMBusqueda() } ;
+      CAPTION "&" + _HMG_SYSDATA [ 133 ][5] ;
+      ACTION  {|| ABMBusqueda() } ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8
    @ 80, 100 button btnCancelar ;
       of      wndABMBuscar ;
-      caption "&" + _HMG_SYSDATA [ 133 ][13] ;
-      action  {|| wndABMBuscar.Release } ;
+      CAPTION "&" + _HMG_SYSDATA [ 133 ][13] ;
+      ACTION  {|| wndABMBuscar.Release } ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
@@ -1042,17 +1042,17 @@ STATIC FUNCTION ABMBuscar()
       @ 45, 20 textbox txtBuscar ;
          of wndABMBuscar ;
          HEIGHT 21 ;
-         value "" ;
+         VALUE "" ;
          WIDTH 160 ;
          font "Arial" ;
          size 9 ;
-         maxlength _aEstructura[nTipoCampo,3]
+         MAXLENGTH _aEstructura[nTipoCampo,3]
    CASE cTipoCampo == "D"
       cModo := _HMG_SYSDATA [ 132 ] [8]
       wndABMBuscar.lblEtiqueta1.Value := cModo
       @ 45, 20 datepicker txtBuscar ;
          of  wndABMBuscar ;
-         value   Date() ;
+         VALUE   Date() ;
          WIDTH   100 ;
          font    "Arial" ;
          size    9
@@ -1133,7 +1133,7 @@ FUNCTION ABMListado()
          HEIGHT 295 ;
          TITLE _HMG_SYSDATA [ 132 ][10] ;
          modal ;
-         nosysmenu ;
+         NOSYSMENU ;
          font "Serif" ;
          size 8
    END WINDOW
@@ -1145,28 +1145,28 @@ FUNCTION ABMListado()
    // Label.
    @ 20, 20 label lblLabel1 ;
       of wndABMListado ;
-      value _HMG_SYSDATA [ 132 ][11] ;
+      VALUE _HMG_SYSDATA [ 132 ][11] ;
       WIDTH 140 ;
       HEIGHT 21 ;
       font "ms sans serif" ;
       size 8
    @ 20, 250 label lblLabel2 ;
       of     wndABMListado ;
-      value  _HMG_SYSDATA [ 132 ][12] ;
+      VALUE  _HMG_SYSDATA [ 132 ][12] ;
       WIDTH  140 ;
       HEIGHT 21 ;
       font   "ms sans serif" ;
       size   8
    @ 160, 20 label lblLabel3 ;
       of wndABMListado ;
-      value _HMG_SYSDATA [ 132 ][13] ;
+      VALUE _HMG_SYSDATA [ 132 ][13] ;
       WIDTH 140 ;
       HEIGHT 21 ;
       font "ms sans serif" ;
       size 8
    @ 160, 250 label lblLabel4 ;
       of wndABMListado ;
-      value _HMG_SYSDATA [ 132 ][14] ;
+      VALUE _HMG_SYSDATA [ 132 ][14] ;
       WIDTH 140 ;
       HEIGHT 21 ;
       font "ms sans serif" ;
@@ -1178,7 +1178,7 @@ FUNCTION ABMListado()
       WIDTH 140 ;
       HEIGHT 100 ;
       items aCamposListado ;
-      value 1 ;
+      VALUE 1 ;
       font "Arial" ;
       size 9
    @ 45, 250 listbox lbxCampos ;
@@ -1186,7 +1186,7 @@ FUNCTION ABMListado()
       WIDTH 140 ;
       HEIGHT 100 ;
       items aCamposTotales ;
-      value 1 ;
+      VALUE 1 ;
       font "Arial" ;
       size 9 ;
       SORT
@@ -1195,7 +1195,7 @@ FUNCTION ABMListado()
    @ 185, 20 spinner spnPrimero ;
       of wndABMListado ;
       range 1, (_cArea)->( RecCount() ) ;
-      value nPrimero ;
+      VALUE nPrimero ;
       WIDTH 70 ;
       HEIGHT 21 ;
       font "Arial" ;
@@ -1203,7 +1203,7 @@ FUNCTION ABMListado()
    @ 185, 250 spinner spnUltimo ;
       of wndABMListado ;
       range 1, (_cArea)->( RecCount() ) ;
-      value nUltimo ;
+      VALUE nUltimo ;
       WIDTH 70 ;
       HEIGHT 21 ;
       font "Arial" ;
@@ -1212,38 +1212,38 @@ FUNCTION ABMListado()
    // Botones.
    @ 45, 170 button btnMas ;
       of      wndABMListado ;
-      caption _HMG_SYSDATA [ 133 ][14] ;
-      action  {|| ABMListadoEvento( ABM_LISTADO_MAS ) } ;
+      CAPTION _HMG_SYSDATA [ 133 ][14] ;
+      ACTION  {|| ABMListadoEvento( ABM_LISTADO_MAS ) } ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8
    @ 85, 170 button btnMenos ;
       of      wndABMListado ;
-      caption _HMG_SYSDATA [ 133 ][15] ;
-      action  {|| ABMListadoEvento( ABM_LISTADO_MENOS ) } ;
+      CAPTION _HMG_SYSDATA [ 133 ][15] ;
+      ACTION  {|| ABMListadoEvento( ABM_LISTADO_MENOS ) } ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8
    @ 225, 240 button btnImprimir ;
       of      wndABMListado ;
-      caption _HMG_SYSDATA [ 133 ][16] ;
-      action  {|| ABMListadoEvento( ABM_LISTADO_IMPRIMIR ) } ;
+      CAPTION _HMG_SYSDATA [ 133 ][16] ;
+      ACTION  {|| ABMListadoEvento( ABM_LISTADO_IMPRIMIR ) } ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
    @ 225, 330 button btnCerrar ;
       of      wndABMListado ;
-      caption _HMG_SYSDATA [ 133 ][17] ;
-      action  {|| ABMListadoEvento( ABM_LISTADO_CERRAR ) } ;
+      CAPTION _HMG_SYSDATA [ 133 ][17] ;
+      ACTION  {|| ABMListadoEvento( ABM_LISTADO_CERRAR ) } ;
       WIDTH   70 ;
       HEIGHT  30 ;
       font    "ms sans serif" ;
       size    8 ;
-      notabstop
+      NOTABSTOP
 
    // Activación de la ventana----------------------------------------------------
    center   window wndABMListado

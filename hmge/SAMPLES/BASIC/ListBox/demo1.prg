@@ -9,7 +9,7 @@ FUNCTION main()
 
       @ 0,1 LISTBOX ListBox_1 WIDTH 392 HEIGHT 160 ;
          ITEMS { '01 UM' , '02 DOIS' , '03 TRES' } ;
-         value 2
+         VALUE 2
 
       @ 200,10 button bt1 caption 'Add'     action cas_add()
       @ 230,10 button bt2 caption 'Del'     action cas_del()

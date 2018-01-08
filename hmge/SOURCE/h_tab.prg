@@ -85,7 +85,7 @@ FUNCTION _BeginTab( ControlName , ParentFormName , row , col , w , h , value , f
    ENDIF
 
    IF ValType ( value ) == 'U' .OR. value < 1
-      value := 1
+      VALUE := 1
    ENDIF
 
    _HMG_FrameLevel++
@@ -326,7 +326,7 @@ FUNCTION InitDialogTab( ParentName, ControlHandle, k )
 
    FOR z := 1 TO Len ( aCaptions )
 
-      Caption := Upper ( aCaptions [z] )
+      CAPTION := Upper ( aCaptions [z] )
 
       i := At ( '&' , Caption )
 

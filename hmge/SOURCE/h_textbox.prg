@@ -80,7 +80,7 @@ FUNCTION _DefineTextBox ( ControlName, ParentFormName, x, y, w, h, ;
       IF  At ( '>', Field ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + " : You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( Field , At ( '>', Field ) - 2 )
+         WORKAREA := Left ( Field , At ( '>', Field ) - 2 )
          IF Select ( WorkArea ) != 0
             cValue := &( Field )
          ENDIF
@@ -320,9 +320,9 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentFormName, x, y, inputmask, w,
       IF  At ( '>', Field ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + " : You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( Field , At ( '>', Field ) - 2 )
+         WORKAREA := Left ( Field , At ( '>', Field ) - 2 )
          IF Select ( WorkArea ) != 0
-            Value := &( Field )
+            VALUE := &( Field )
          ENDIF
       ENDIF
    ENDIF
@@ -361,9 +361,9 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentFormName, x, y, inputmask, w,
       Format := '@' + AllTrim( Format )
    ENDIF
 
-   InputMask := Format + ' ' + InputMask
+   INPUTMASK := Format + ' ' + InputMask
 
-   Value := Transform ( value , InputMask )
+   VALUE := Transform ( value , InputMask )
 
    IF ( FontHandle := GetFontHandle( FontName ) ) != 0
       GetFontParamByRef( FontHandle, @FontName, @FontSize, @bold, @italic, @underline, @strikeout )
@@ -591,9 +591,9 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentFormName, x, y, inputmask ,
       IF  At ( '>', Field ) == 0
          MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + " : You must specify a fully qualified field name." )
       ELSE
-         WorkArea := Left ( Field , At ( '>', Field ) - 2 )
+         WORKAREA := Left ( Field , At ( '>', Field ) - 2 )
          IF Select ( WorkArea ) != 0
-            Value := &( Field )
+            VALUE := &( Field )
          ENDIF
       ENDIF
    ENDIF
@@ -607,7 +607,7 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentFormName, x, y, inputmask ,
    __defaultNIL( @enter, "" )
 
    IF ValType ( Value ) == "U"
-      Value := iif( date, CToD ( '  /  /  ' ), "" )
+      VALUE := iif( date, CToD ( '  /  /  ' ), "" )
    ENDIF
 
    dateformat := Set ( _SET_DATEFORMAT )
@@ -616,31 +616,31 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentFormName, x, y, inputmask ,
       IF Lower ( Left ( dateformat , 4 ) ) == "yyyy"
 
          IF '/' $ dateformat
-            Inputmask := '9999/99/99'
+            INPUTMASK := '9999/99/99'
          ELSEIF '.' $ dateformat
-            Inputmask := '9999.99.99'
+            INPUTMASK := '9999.99.99'
          ELSEIF '-' $ dateformat
-            Inputmask := '9999-99-99'
+            INPUTMASK := '9999-99-99'
          ENDIF
 
       ELSEIF Lower ( Right ( dateformat , 4 ) ) == "yyyy"
 
          IF '/' $ dateformat
-            Inputmask := '99/99/9999'
+            INPUTMASK := '99/99/9999'
          ELSEIF '.' $ dateformat
-            Inputmask := '99.99.9999'
+            INPUTMASK := '99.99.9999'
          ELSEIF '-' $ dateformat
-            Inputmask := '99-99-9999'
+            INPUTMASK := '99-99-9999'
          ENDIF
 
       ELSE
 
          IF '/' $ dateformat
-            Inputmask := '99/99/99'
+            INPUTMASK := '99/99/99'
          ELSEIF '.' $ dateformat
-            Inputmask := '99.99.99'
+            INPUTMASK := '99.99.99'
          ELSEIF '-' $ dateformat
-            Inputmask := '99-99-99'
+            INPUTMASK := '99-99-99'
          ENDIF
 
       ENDIF
@@ -784,7 +784,7 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentFormName, x, y, inputmask ,
 
       IF !Empty( cuetext ) .AND. IsVistaOrLater()
          IF Empty( Value )
-            Value := NIL
+            VALUE := NIL
          ENDIF
          SendMessageWideString ( ControlHandle, EM_SETCUEBANNER, .T. /*show on focus*/, cuetext )
       ENDIF

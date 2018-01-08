@@ -167,7 +167,7 @@ FUNCTION _DefineTab ( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, 
 
    FOR z := 1 To HMG_LEN ( aCaptions )
 
-      Caption := HMG_UPPER ( aCaptions [z] )
+      CAPTION := HMG_UPPER ( aCaptions [z] )
 
       i := HB_UAT ( '&' , Caption )
 
@@ -345,7 +345,7 @@ FUNCTION _BeginTab( name , parent , row , col , w , h , value , f , s , tooltip 
       parent := _HMG_SYSDATA [ 223 ]
    ENDIF
    IF valtype (value) == 'U'
-      value := 1
+      VALUE := 1
    ENDIF
 
    _HMG_SYSDATA [ 183 ]++
@@ -462,7 +462,7 @@ FUNCTION _AddTabPage ( ControlName , ParentForm , Position , Caption , cImage )
    LOCAL i
 
    IF ValType (Caption) == 'U'
-      Caption := ''
+      CAPTION := ''
    ENDIF
 
    IF ValType (cImage) == 'U'

@@ -47,7 +47,7 @@ FUNCTION Main
          WIDTH   650            ;
          HEIGHT   400            ;
          TITLE   'HMG Grid Demo'         ;
-         Main
+         MAIN
 
       DEFINE MAIN MENU
 
@@ -129,22 +129,22 @@ FUNCTION LoadGrid(aRows,lmultiselect,lcelled,leditable)
       WIDTH      615
       HEIGHT      300
       Parent      oWindow
-      Widths      {150,60,70,40,90,40,100}
-      Headers      {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6','Column 7'}
+      WIDTHS      {150,60,70,40,90,40,100}
+      HEADERS      {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6','Column 7'}
       Items      aRows
-      Value      if (lmultiselect, { 1 }, if (lcelled, { 1 , 1 }, 1))
+      VALUE      if (lmultiselect, { 1 }, if (lcelled, { 1 , 1 }, 1))
       AllowEdit   leditable
-      CellNavigation   lcelled
+      CELLNAVIGATION   lcelled
       MultiSelect   lmultiselect
       Justify      {0,1,0,0,0,1,0}
-      ColumnControls   {{'TEXTBOX','CHARACTER'},;
+      COLUMNCONTROLS   {{'TEXTBOX','CHARACTER'},;
          {'TEXTBOX','NUMERIC','9,999.99'},;
          {'TEXTBOX','DATE'},;
          {'CHECKBOX','Yes','No'},;
          {"DATEPICKER","UPDOWN"},{"SPINNER",1,1000},;
          {"COMBOBOX",{"January","February","March","April","May","June","July","August","September","October","November","December"}};
          }
-      ColumnWhen {{||.f.},;
+      COLUMNWHEN {{||.f.},;
          {||.t.},;
          {||.t.},;
          {||.t.},;
@@ -361,7 +361,7 @@ FUNCTION AddNewColumn(control, form, nColumn)
    LOCAL bColor2 := { || { 193,224,255 } }
 
    IF GetProperty( form, control, "ItemCount" ) > 0
-      Value := GetProperty( form, control, "Value" )
+      VALUE := GetProperty( form, control, "Value" )
       FOR n := 1 to GetProperty( form, control, "ItemCount" )
          aAdd(aItems, GetProperty( form, control, "Item", n ))
       NEXT n
@@ -398,7 +398,7 @@ FUNCTION DeleteColumn(control, form, nColumn)
    LOCAL aItems := {}, n, aEditcontrols, adbc
 
    IF GetProperty( form, control, "ItemCount" ) > 0
-      Value := GetProperty( form, control, "Value" )
+      VALUE := GetProperty( form, control, "Value" )
       FOR n := 1 to GetProperty( form, control, "ItemCount" )
          aAdd( aItems, GetProperty( form, control, "Item", n ) )
       NEXT n

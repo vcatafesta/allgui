@@ -44,25 +44,25 @@ FUNCTION venda_mesas()
          TITLE 'Venda Mesas';
          ICON path_imagens+'icone.ico';
          modal;
-         on init (desabilita_consumo(),mostra_mesas())
+         ON INIT (desabilita_consumo(),mostra_mesas())
 
       * mostrar texto explicando como fechar o pedido
       @ getdesktopheight()-100,000 label label_fechar_pedido;
          of form_vda_mesas;
          WIDTH getdesktopwidth();
          HEIGHT 040;
-         value 'F2-abrir mesa  F3-consumo  F4-fechar mesa  F8-limpar mesa  ESC-sair';
+         VALUE 'F2-abrir mesa  F3-consumo  F4-fechar mesa  F8-limpar mesa  ESC-sair';
          font 'verdana' size 018;
          bold;
          BACKCOLOR _preto_001;
-         fontcolor _cinza_001;
+         FONTCOLOR _cinza_001;
          centeralign
 
       * separar a tela em 2 partes distintas
       DEFINE LABEL label_separador
          COL 400
          ROW 000
-         value ''
+         VALUE ''
          WIDTH 002
          HEIGHT getdesktopheight()-100
          transparent .F.
@@ -74,226 +74,226 @@ FUNCTION venda_mesas()
          parent form_vda_mesas;
          WIDTH 380;
          HEIGHT getdesktopheight()-115;
-         headers {'id','id mesa','Mesa','Aberta as'};
-         widths {001,001,230,130};
+         HEADERS {'id','id mesa','Mesa','Aberta as'};
+         WIDTHS {001,001,230,130};
          font 'tahoma' size 010;
          bold;
          BACKCOLOR _branco_001;
-         fontcolor BLUE
+         FONTCOLOR BLUE
 
       *-Pizzas------------------------------------------------------------------------
       * escolher código da pizza
       @ 010,410 label label_pizza;
          of form_vda_mesas;
-         value 'Pizza';
+         VALUE 'Pizza';
          autosize;
          font 'courier new' size 012;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,410 textbox tbox_pizza;
          of form_vda_mesas;
          HEIGHT 030;
          WIDTH 100;
-         value '';
-         maxlength 015;
+         VALUE '';
+         MAXLENGTH 015;
          font 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
-         on enter procura_pizza()
+         FONTCOLOR _letra_get_1;
+         ON ENTER procura_pizza()
       * mostrar nome da pizza
       @ 030,520 label label_nome_pizza;
          of form_vda_mesas;
-         value '';
+         VALUE '';
          autosize;
          font 'courier new' size 016;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       * botão para confirmar a escolha da pizza
       @ 030,850 buttonex botao_confirmar_pizza;
          parent form_vda_mesas;
-         caption 'Selecionar pizza';
+         CAPTION 'Selecionar pizza';
          WIDTH 165 height 040;
          PICTURE path_imagens+'adicionar.bmp';
-         action gravar_adicionar();
-         tooltip 'Clique aqui para confirmar a pizza selecionada'
+         ACTION gravar_adicionar();
+         TOOLTIP 'Clique aqui para confirmar a pizza selecionada'
 
       * mostrar pizzas já selecionadas
       @ 060,410 label label_pizza_selecionada;
          of form_vda_mesas;
-         value 'Pizzas selecionadas';
+         VALUE 'Pizzas selecionadas';
          autosize;
          font 'courier new' size 012;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,410 browse grid_pizzas;
          parent form_vda_mesas;
          WIDTH getdesktopwidth()-420;
          HEIGHT 200;
-         headers {'id produto','Seq.','Nome','Tamanho','Preço R$'};
-         widths {001,100,190,180,100};
-         workarea temp_pizzas;
-         fields {'temp_pizzas->id_produto','temp_pizzas->sequencia','temp_pizzas->nome','temp_pizzas->tamanho','trans(temp_pizzas->preco,"@E 99,999.99")'};
-         value 1;
+         HEADERS {'id produto','Seq.','Nome','Tamanho','Preço R$'};
+         WIDTHS {001,100,190,180,100};
+         WORKAREA temp_pizzas;
+         FIELDS {'temp_pizzas->id_produto','temp_pizzas->sequencia','temp_pizzas->nome','temp_pizzas->tamanho','trans(temp_pizzas->preco,"@E 99,999.99")'};
+         VALUE 1;
          font 'tahoma' size 010;
          bold;
          BACKCOLOR _amarelo_001;
-         fontcolor _preto_001
+         FONTCOLOR _preto_001
       @ 285,410 label label_observacoes;
          of form_vda_mesas;
-         value 'Observações para a montagem da(s) pizza(s)';
+         VALUE 'Observações para a montagem da(s) pizza(s)';
          autosize;
          font 'courier new' size 012;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 305,410 textbox tbox_observacoes;
          of form_vda_mesas;
          HEIGHT 030;
          WIDTH 420;
-         value '';
-         maxlength 030;
+         VALUE '';
+         MAXLENGTH 030;
          font 'courier new' size 012;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
 
       * botão para excluir ítem na escolha das pizzas
       @ 285,850 buttonex botao_excluir_pizza;
          parent form_vda_mesas;
-         caption 'Excluir ítem';
+         CAPTION 'Excluir ítem';
          WIDTH 165 height 040;
          PICTURE path_imagens+'excluir_item.bmp';
-         action excluir_pizza();
+         ACTION excluir_pizza();
          notabstop;
-         tooltip 'Clique aqui para excluir uma pizza selecionada acima'
+         TOOLTIP 'Clique aqui para excluir uma pizza selecionada acima'
 
       * explicação de como finalizar as pizzas
       @ 340,410 label label_instrucao_001;
          of form_vda_mesas;
-         value 'tecle F5 após completar a composição de 1 (uma) pizza, para finalizá-la,';
+         VALUE 'tecle F5 após completar a composição de 1 (uma) pizza, para finalizá-la,';
          autosize;
          font 'verdana' size 010;
          bold;
-         fontcolor _cinza_001;
+         FONTCOLOR _cinza_001;
          transparent
       @ 360,410 label label_instrucao_002;
          of form_vda_mesas;
-         value 'ou, para vender mais de 1 (uma) pizza, finalize uma para começar outra.';
+         VALUE 'ou, para vender mais de 1 (uma) pizza, finalize uma para começar outra.';
          autosize;
          font 'verdana' size 010;
          bold;
-         fontcolor _cinza_001;
+         FONTCOLOR _cinza_001;
          transparent
 
       *-Produtos----------------------------------------------------------------------
       * escolher código do produto
       @ 400,410 label label_produto;
          of form_vda_mesas;
-         value 'Produto';
+         VALUE 'Produto';
          autosize;
          font 'courier new' size 012;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 420,410 textbox tbox_produto;
          of form_vda_mesas;
          HEIGHT 030;
          WIDTH 100;
-         value '';
-         maxlength 015;
+         VALUE '';
+         MAXLENGTH 015;
          font 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
-         on enter procura_produto()
+         FONTCOLOR _letra_get_1;
+         ON ENTER procura_produto()
       @ 420,520 label label_nome_produto;
          of form_vda_mesas;
-         value '';
+         VALUE '';
          autosize;
          font 'courier new' size 016;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
 
       * quantidade
       @ 450,410 label label_quantidade;
          of form_vda_mesas;
-         value 'Quantidade';
+         VALUE 'Quantidade';
          autosize;
          font 'courier new' size 012;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 470,410 textbox tbox_quantidade;
          of form_vda_mesas;
          HEIGHT 030;
          WIDTH 100;
-         value 0;
+         VALUE 0;
          font 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          numeric;
-         on enter verifica_zero()
+         ON ENTER verifica_zero()
 
       * preço
       @ 450,530 label label_preco;
          of form_vda_mesas;
-         value 'Preço R$';
+         VALUE 'Preço R$';
          autosize;
          font 'courier new' size 012;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 470,530 getbox tbox_preco;
          of form_vda_mesas;
          HEIGHT 030;
          WIDTH 130;
-         value 0;
+         VALUE 0;
          font 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 9,999.99'
 
       * botão para confirmar a escolha do produto
       @ 460,670 buttonex botao_confirmar_produto;
          parent form_vda_mesas;
-         caption 'Selecionar produto';
+         CAPTION 'Selecionar produto';
          WIDTH 165 height 040;
          PICTURE path_imagens+'adicionar.bmp';
-         action gravar_produto();
-         tooltip 'Clique aqui para confirmar o produto selecionado'
+         ACTION gravar_produto();
+         TOOLTIP 'Clique aqui para confirmar o produto selecionado'
 
       * produtos já selecionados
       @ 510,410 browse grid_produtos;
          parent form_vda_mesas;
          WIDTH getdesktopwidth()-420;
          HEIGHT getdesktopheight()-615;
-         headers {'id produto','Qtd','Produto','Unitário R$','Subtotal R$'};
-         widths {001,080,210,140,140};
-         workarea temp_produtos;
-         fields {'temp_produtos->produto','temp_produtos->qtd','temp_produtos->nome','trans(temp_produtos->unitario,"@E 9,999.99")','trans(temp_produtos->subtotal,"@E 99,999.99")'};
-         value 1;
+         HEADERS {'id produto','Qtd','Produto','Unitário R$','Subtotal R$'};
+         WIDTHS {001,080,210,140,140};
+         WORKAREA temp_produtos;
+         FIELDS {'temp_produtos->produto','temp_produtos->qtd','temp_produtos->nome','trans(temp_produtos->unitario,"@E 9,999.99")','trans(temp_produtos->subtotal,"@E 99,999.99")'};
+         VALUE 1;
          font 'tahoma' size 010;
          bold;
          BACKCOLOR _amarelo_001;
-         fontcolor _preto_001
+         FONTCOLOR _preto_001
 
       * botão para excluir produto já selecionado
       @ 460,850 buttonex botao_excluir_produto;
          parent form_vda_mesas;
-         caption 'Excluir produto';
+         CAPTION 'Excluir produto';
          WIDTH 165 height 040;
          PICTURE path_imagens+'excluir_item.bmp';
-         action excluir_produto();
+         ACTION excluir_produto();
          notabstop;
-         tooltip 'Clique aqui para excluir um produto já selecionado'
+         TOOLTIP 'Clique aqui para excluir um produto já selecionado'
 
       on key F2 action abrir_mesa()
       on key F3 action lancar_consumo()
@@ -363,14 +363,14 @@ STATIC FUNCTION mostra_listagem_produto()
          ROW 000
          WIDTH 555
          HEIGHT 580
-         headers {'','Nome','Preço R$'}
-         widths {001,395,150}
+         HEADERS {'','Nome','Preço R$'}
+         WIDTHS {001,395,150}
          showheaders .F.
          nolines .T.
-         fontname 'courier new'
+         FONTNAME 'courier new'
          fontsize 012
          BACKCOLOR _ciano_001
-         fontcolor _preto_001
+         FONTCOLOR _preto_001
          ondblclick mostra_informacao_produto()
       END GRID
 
@@ -478,14 +478,14 @@ STATIC FUNCTION mostra_listagem_pizza()
          ROW 000
          WIDTH 405
          HEIGHT 580
-         headers {'','Nome'}
-         widths {001,395}
+         HEADERS {'','Nome'}
+         WIDTHS {001,395}
          showheaders .F.
          nolines .T.
-         fontname 'courier new'
+         FONTNAME 'courier new'
          fontsize 012
          BACKCOLOR _ciano_001
-         fontcolor _preto_001
+         FONTCOLOR _preto_001
          ondblclick mostra_informacao()
       END GRID
 
@@ -667,43 +667,43 @@ STATIC FUNCTION fecha_pizza()
 
       @ 005,005 label lbl_001;
          of form_finaliza_pizza;
-         value '1- Selecione o tamanho da pizza';
+         VALUE '1- Selecione o tamanho da pizza';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 025,005 label lbl_002;
          of form_finaliza_pizza;
-         value '2- Você poderá escolher entre o menor e o maior preço à ser cobrado, no caso de ter mais de 1 sabor na mesma pizza';
+         VALUE '2- Você poderá escolher entre o menor e o maior preço à ser cobrado, no caso de ter mais de 1 sabor na mesma pizza';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 045,005 label lbl_003;
          of form_finaliza_pizza;
-         value '3- Caso deseje, ao fechamento deste pedido, poderá conceder um desconto especial ao cliente';
+         VALUE '3- Caso deseje, ao fechamento deste pedido, poderá conceder um desconto especial ao cliente';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 065,005 label lbl_004;
          of form_finaliza_pizza;
-         value '4- Para finalizar esta pizza e continuar vendendo, dê duplo-clique ou enter sobre o tamanho/preço escolhido';
+         VALUE '4- Para finalizar esta pizza e continuar vendendo, dê duplo-clique ou enter sobre o tamanho/preço escolhido';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 085,005 label lbl_005;
          of form_finaliza_pizza;
-         value '5- ESC fecha esta janela e retorna para a tela de vendas';
+         VALUE '5- ESC fecha esta janela e retorna para a tela de vendas';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _vermelho_002;
+         FONTCOLOR _vermelho_002;
          transparent
 
       DEFINE GRID grid_finaliza_pizza
@@ -712,15 +712,15 @@ STATIC FUNCTION fecha_pizza()
          ROW 105
          WIDTH 985
          HEIGHT 260
-         headers {'id','Pizza',_tamanho_001,_tamanho_002,_tamanho_003,_tamanho_004,_tamanho_005,_tamanho_006}
-         widths {001,250,120,120,120,120,120,120}
-         value 1
+         HEADERS {'id','Pizza',_tamanho_001,_tamanho_002,_tamanho_003,_tamanho_004,_tamanho_005,_tamanho_006}
+         WIDTHS {001,250,120,120,120,120,120,120}
+         VALUE 1
          celled .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
+         FONTBOLD .T.
          BACKCOLOR _cinza_005
-         fontcolor _preto_001
+         FONTCOLOR _preto_001
          ondblclick pega_tamanho_valor_pizza()
       END GRID
 
@@ -902,7 +902,7 @@ STATIC FUNCTION fecha_pedido()
       DEFINE LABEL label_sep_001
          COL 000
          ROW 190
-         value ''
+         VALUE ''
          WIDTH 500
          HEIGHT 002
          transparent .F.
@@ -911,7 +911,7 @@ STATIC FUNCTION fecha_pedido()
       DEFINE LABEL label_sep_002
          COL 000
          ROW 390
-         value ''
+         VALUE ''
          WIDTH 500
          HEIGHT 002
          transparent .F.
@@ -920,7 +920,7 @@ STATIC FUNCTION fecha_pedido()
       DEFINE LABEL label_sep_003
          COL 000
          ROW 440
-         value ''
+         VALUE ''
          WIDTH 500
          HEIGHT 002
          transparent .F.
@@ -929,219 +929,219 @@ STATIC FUNCTION fecha_pedido()
 
       @ 010,020 label label_001;
          of form_fecha_pedido;
-         value 'SUBTOTAL PIZZAS';
+         VALUE 'SUBTOTAL PIZZAS';
          autosize;
          font 'verdana' size 012;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 010,250 label label_001_valor;
          of form_fecha_pedido;
-         value trans(x_valor_pizza,'@E 999,999.99');
+         VALUE trans(x_valor_pizza,'@E 999,999.99');
          autosize;
          font 'courier new' size 016;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 040,020 label label_002;
          of form_fecha_pedido;
-         value 'SUBTOTAL PRODUTOS';
+         VALUE 'SUBTOTAL PRODUTOS';
          autosize;
          font 'verdana' size 012;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 040,250 label label_002_valor;
          of form_fecha_pedido;
-         value trans(x_valor_prod,'@E 999,999.99');
+         VALUE trans(x_valor_prod,'@E 999,999.99');
          autosize;
          font 'courier new' size 016;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 070,020 label label_003;
          of form_fecha_pedido;
-         value 'TAXA DE ENTREGA';
+         VALUE 'TAXA DE ENTREGA';
          autosize;
          font 'verdana' size 012;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 070,250 getbox tbox_taxa;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
-         value 0;
+         VALUE 0;
          font 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 9,999.99'
       @ 110,020 label label_004;
          of form_fecha_pedido;
-         value 'DESCONTO';
+         VALUE 'DESCONTO';
          autosize;
          font 'verdana' size 012;
          bold;
-         fontcolor _vermelho_002;
+         FONTCOLOR _vermelho_002;
          transparent
       @ 110,250 getbox tbox_desconto;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
-         value 0;
+         VALUE 0;
          font 'courier new' size 016;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _vermelho_002;
+         FONTCOLOR _vermelho_002;
          PICTURE '@E 9,999.99';
-         on change setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod+form_fecha_pedido.tbox_taxa.value)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'));
-         on lostfocus setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod+form_fecha_pedido.tbox_taxa.value)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'))
+         ON CHANGE setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod+form_fecha_pedido.tbox_taxa.value)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'));
+         ON LOSTFOCUS setproperty('form_fecha_pedido','label_005_valor','value',trans((x_valor_pizza+x_valor_prod+form_fecha_pedido.tbox_taxa.value)-form_fecha_pedido.tbox_desconto.value,'@E 999,999.99'))
       @ 150,020 label label_005;
          of form_fecha_pedido;
-         value 'TOTAL DESTA MESA';
+         VALUE 'TOTAL DESTA MESA';
          autosize;
          font 'verdana' size 012;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 150,250 label label_005_valor;
          of form_fecha_pedido;
-         value '';
+         VALUE '';
          autosize;
          font 'courier new' size 016;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
 
       * escolher formas de recebimento
       @ 200,020 label label_006;
          of form_fecha_pedido;
-         value 'Você pode escolher até 3 formas de recebimento';
+         VALUE 'Você pode escolher até 3 formas de recebimento';
          autosize;
          font 'verdana' size 012;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       * formas de recebimento
       * 1º
       @ 230,020 combobox combo_1;
          itemsource formas_recebimento->nome;
          valuesource formas_recebimento->codigo;
-         value 1;
+         VALUE 1;
          WIDTH 250;
          font 'courier new' size 010
       @ 230,300 getbox tbox_fr001;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
-         value 0;
+         VALUE 0;
          font 'courier new' size 014;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 99,999.99'
       * 2º
       @ 270,020 combobox combo_2;
          itemsource formas_recebimento->nome;
          valuesource formas_recebimento->codigo;
-         value 1;
+         VALUE 1;
          WIDTH 250;
          font 'courier new' size 010
       @ 270,300 getbox tbox_fr002;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
-         value 0;
+         VALUE 0;
          font 'courier new' size 014;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 99,999.99'
       * 3º
       @ 310,020 combobox combo_3;
          itemsource formas_recebimento->nome;
          valuesource formas_recebimento->codigo;
-         value 1;
+         VALUE 1;
          WIDTH 250;
          font 'courier new' size 010
       @ 310,300 getbox tbox_fr003;
          of form_fecha_pedido;
          HEIGHT 030;
          WIDTH 130;
-         value 0;
+         VALUE 0;
          font 'courier new' size 014;
          bold;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 99,999.99';
-         on lostfocus calcula_final()
+         ON LOSTFOCUS calcula_final()
 
       @ 360,020 label label_011;
          of form_fecha_pedido;
-         value 'TOTAL RECEBIDO';
+         VALUE 'TOTAL RECEBIDO';
          autosize;
          font 'verdana' size 012;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
       @ 360,250 label label_011_valor;
          of form_fecha_pedido;
-         value '';
+         VALUE '';
          autosize;
          font 'courier new' size 016;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
 
       @ 400,020 label label_012;
          of form_fecha_pedido;
-         value 'TROCO';
+         VALUE 'TROCO';
          autosize;
          font 'verdana' size 012;
          bold;
-         fontcolor _vermelho_002;
+         FONTCOLOR _vermelho_002;
          transparent
       @ 400,250 label label_012_valor;
          of form_fecha_pedido;
-         value '';
+         VALUE '';
          autosize;
          font 'courier new' size 016;
          bold;
-         fontcolor BLUE;
+         FONTCOLOR BLUE;
          transparent
 
       * selecionar atendente/garçon
       @ 450,020 label label_013;
          of form_fecha_pedido;
-         value 'atendente/garçon';
+         VALUE 'atendente/garçon';
          autosize;
          font 'verdana' size 012;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 470,020 combobox combo_motoboy;
          itemsource atendentes->nome;
          valuesource atendentes->codigo;
-         value 1;
+         VALUE 1;
          WIDTH 250;
          font 'courier new' size 010
 
       * botões
       @ 510,115 buttonex botao_ok;
          parent form_fecha_pedido;
-         caption 'Fechar mesa';
+         CAPTION 'Fechar mesa';
          WIDTH 150 height 040;
          PICTURE path_imagens+'img_pedido.bmp';
-         action fechamento_geral(x_mesa);
-         tooltip 'Clique aqui para finalizar a mesa'
+         ACTION fechamento_geral(x_mesa);
+         TOOLTIP 'Clique aqui para finalizar a mesa'
       @ 510,270 buttonex botao_voltar;
          parent form_fecha_pedido;
-         caption 'Voltar para tela anterior';
+         CAPTION 'Voltar para tela anterior';
          WIDTH 220 height 040;
          PICTURE path_imagens+'img_sair.bmp';
-         action form_fecha_pedido.release;
-         tooltip 'Clique aqui para voltar a vender'
+         ACTION form_fecha_pedido.release;
+         TOOLTIP 'Clique aqui para voltar a vender'
 
       ON KEY ESCAPE ACTION thiswindow.release
 

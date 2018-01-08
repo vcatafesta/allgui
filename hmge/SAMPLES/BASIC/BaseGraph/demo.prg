@@ -63,37 +63,37 @@ PROCEDURE Main
          WIDTH 720 ;
          HEIGHT 480 ;
          TITLE "Graph Demo" ;
-         Main ;
+         MAIN ;
          ICON "Graph.ico" ;
-         nomaximize nosize ;
-         On Init DrawBarGraph(aSer,aYvalAll,aColor)
+         NOMAXIMIZE nosize ;
+         ON INIT DrawBarGraph(aSer,aYvalAll,aColor)
 
       DEFINE BUTTON Button_1
          ROW   405
          COL   40
-         Caption   '1er Semestre'
-         Action DrawBarGraph(aSer1,aYval1er,aColor1)
+         CAPTION   '1er Semestre'
+         ACTION DrawBarGraph(aSer1,aYval1er,aColor1)
       END BUTTON
 
       DEFINE BUTTON Button_2
          ROW   405
          COL   180
-         Caption   '2do Semestre'
-         Action DrawBarGraph(aSer2,aYval2do,aColor1)
+         CAPTION   '2do Semestre'
+         ACTION DrawBarGraph(aSer2,aYval2do,aColor1)
       END BUTTON
 
       DEFINE BUTTON Button_3
          ROW   405
          COL   320
-         Caption   'Lineas'
-         Action DrawLinesGraph(aSer,aYvalAll,aColor)
+         CAPTION   'Lineas'
+         ACTION DrawLinesGraph(aSer,aYvalAll,aColor)
       END BUTTON
 
       DEFINE BUTTON Button_4
          ROW   405
          COL   460
-         Caption   'Puntos'
-         Action DrawPointsGraph(aSer,aYvalAll,aColor)
+         CAPTION   'Puntos'
+         ACTION DrawPointsGraph(aSer,aYvalAll,aColor)
       END BUTTON
 
       ON KEY ESCAPE ACTION ThisWindow.Release

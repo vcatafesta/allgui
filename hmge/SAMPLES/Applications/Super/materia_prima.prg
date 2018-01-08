@@ -24,7 +24,7 @@ FUNCTION materia_prima()
          ICON path_imagens+'icone.ico';
          modal;
          nosize;
-         on init pesquisar()
+         ON INIT pesquisar()
 
       * botões (toolbar)
       DEFINE BUTTONEX button_incluir
@@ -33,12 +33,12 @@ FUNCTION materia_prima()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F5 Incluir'
-         action dados(1)
-         fontname 'verdana'
+         CAPTION 'F5 Incluir'
+         ACTION dados(1)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -50,12 +50,12 @@ FUNCTION materia_prima()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F6 Alterar'
-         action dados(2)
-         fontname 'verdana'
+         CAPTION 'F6 Alterar'
+         ACTION dados(2)
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -67,12 +67,12 @@ FUNCTION materia_prima()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F7 Excluir'
-         action excluir()
-         fontname 'verdana'
+         CAPTION 'F7 Excluir'
+         ACTION excluir()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -84,12 +84,12 @@ FUNCTION materia_prima()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'F8 Imprimir'
-         action relacao()
-         fontname 'verdana'
+         CAPTION 'F8 Imprimir'
+         ACTION relacao()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -101,12 +101,12 @@ FUNCTION materia_prima()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'Atualizar'
-         action atualizar()
-         fontname 'verdana'
+         CAPTION 'Atualizar'
+         ACTION atualizar()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -118,12 +118,12 @@ FUNCTION materia_prima()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'Fornecedores'
-         action fornecedores_mprima()
-         fontname 'verdana'
+         CAPTION 'Fornecedores'
+         ACTION fornecedores_mprima()
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -135,12 +135,12 @@ FUNCTION materia_prima()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'ESC Voltar'
-         action form_materia_prima.release
-         fontname 'verdana'
+         CAPTION 'ESC Voltar'
+         ACTION form_materia_prima.release
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -154,13 +154,13 @@ FUNCTION materia_prima()
             ROW 105
             WIDTH 795
             HEIGHT 430
-            headers {'Código','Nome','Unidade','Preço R$','Qtd.'}
-            widths {080,320,120,120,120}
-            fontname 'verdana'
+            HEADERS {'Código','Nome','Unidade','Preço R$','Qtd.'}
+            WIDTHS {080,320,120,120,120}
+            FONTNAME 'verdana'
             fontsize 010
-            fontbold .T.
+            FONTBOLD .T.
             BACKCOLOR _amarelo_001
-            fontcolor _preto_001
+            FONTCOLOR _preto_001
             ondblclick dados(2)
          END GRID
       END SPLITBOX
@@ -169,35 +169,35 @@ FUNCTION materia_prima()
          parent form_materia_prima
          COL 005
          ROW 545
-         value 'Digite sua pesquisa'
+         VALUE 'Digite sua pesquisa'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
+         FONTBOLD .T.
+         FONTCOLOR _cinza_001
          transparent .T.
       END LABEL
       @ 540,160 textbox tbox_pesquisa;
          of form_materia_prima;
          HEIGHT 027;
          WIDTH 300;
-         value '';
-         maxlength 040;
+         VALUE '';
+         MAXLENGTH 040;
          font 'verdana' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase;
-         on change pesquisar()
+         ON CHANGE pesquisar()
       DEFINE LABEL rodape_002
          parent form_materia_prima
          COL form_materia_prima.width - 270
          ROW 545
-         value 'DUPLO CLIQUE : Alterar informação'
+         VALUE 'DUPLO CLIQUE : Alterar informação'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
-         fontcolor _verde_002
+         FONTBOLD .T.
+         FONTCOLOR _verde_002
          transparent .T.
       END LABEL
 
@@ -258,88 +258,88 @@ STATIC FUNCTION dados(parametro)
       * entrada de dados
       @ 010,005 label lbl_001;
          of form_dados;
-         value 'Nome';
+         VALUE 'Nome';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 030,005 textbox tbox_001;
          of form_dados;
          HEIGHT 027;
          WIDTH 310;
-         value x_nome;
-         maxlength 020;
+         VALUE x_nome;
+         MAXLENGTH 020;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          uppercase
       @ 060,005 label lbl_002;
          of form_dados;
-         value 'Unidade';
+         VALUE 'Unidade';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 080,005 textbox tbox_002;
          of form_dados;
          HEIGHT 027;
          WIDTH 060;
-         value x_unidade;
+         VALUE x_unidade;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          numeric;
-         on enter procura_unidade('form_dados','tbox_002')
+         ON ENTER procura_unidade('form_dados','tbox_002')
       @ 080,075 label lbl_nome_unidade;
          of form_dados;
-         value '';
+         VALUE '';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _azul_001;
+         FONTCOLOR _azul_001;
          transparent
       @ 110,005 label lbl_003;
          of form_dados;
-         value 'Preço R$';
+         VALUE 'Preço R$';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 130,005 getbox tbox_003;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_preco;
+         VALUE x_preco;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@E 999,999.99'
       @ 110,135 label lbl_004;
          of form_dados;
-         value 'Quantidade';
+         VALUE 'Quantidade';
          autosize;
          font 'tahoma' size 010;
          bold;
-         fontcolor _preto_001;
+         FONTCOLOR _preto_001;
          transparent
       @ 130,135 getbox tbox_004;
          of form_dados;
          HEIGHT 027;
          WIDTH 120;
-         value x_qtd;
+         VALUE x_qtd;
          font 'tahoma' size 010;
          BACKCOLOR _fundo_get;
-         fontcolor _letra_get_1;
+         FONTCOLOR _letra_get_1;
          PICTURE '@R 99,999.999'
 
       * linha separadora
       DEFINE LABEL linha_rodape
          COL 000
          ROW form_dados.height-090
-         value ''
+         VALUE ''
          WIDTH form_dados.width
          HEIGHT 001
          BACKCOLOR _preto_001
@@ -353,10 +353,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 120
          HEIGHT 050
-         caption 'Ok, gravar'
-         action gravar(parametro)
-         fontbold .T.
-         tooltip 'Confirmar as informações digitadas'
+         CAPTION 'Ok, gravar'
+         ACTION gravar(parametro)
+         FONTBOLD .T.
+         TOOLTIP 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -366,10 +366,10 @@ STATIC FUNCTION dados(parametro)
          ROW form_dados.height-085
          WIDTH 090
          HEIGHT 050
-         caption 'Voltar'
-         action form_dados.release
-         fontbold .T.
-         tooltip 'Sair desta tela sem gravar informações'
+         CAPTION 'Voltar'
+         ACTION form_dados.release
+         FONTBOLD .T.
+         TOOLTIP 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
       END BUTTONEX
@@ -655,19 +655,19 @@ STATIC FUNCTION getcode_unidade(value)
       DEFINE LABEL label_pesquisa
          COL 005
          ROW 440
-         value 'Buscar'
+         VALUE 'Buscar'
          autosize .T.
-         fontname 'verdana'
+         FONTNAME 'verdana'
          fontsize 012
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          transparent .T.
       END LABEL
       DEFINE TEXTBOX txt_pesquisa
          COL 075
          ROW 440
          WIDTH 400
-         maxlength 040
+         MAXLENGTH 040
          onchange find_unidade()
          uppercase .T.
       END TEXTBOX
@@ -677,14 +677,14 @@ STATIC FUNCTION getcode_unidade(value)
          COL 002
          WIDTH 480
          HEIGHT 430
-         headers {'Código','Nome'}
-         widths {080,370}
-         workarea unidade_medida
-         fields {'unidade_medida->codigo','unidade_medida->nome'}
-         value nreg
-         fontname 'verdana'
+         HEADERS {'Código','Nome'}
+         WIDTHS {080,370}
+         WORKAREA unidade_medida
+         FIELDS {'unidade_medida->codigo','unidade_medida->nome'}
+         VALUE nreg
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .T.
+         FONTBOLD .T.
          BACKCOLOR _ciano_001
          nolines .T.
          lock .T.
@@ -746,12 +746,12 @@ STATIC FUNCTION fornecedores_mprima()
          ROW 002
          WIDTH 100
          HEIGHT 100
-         caption 'ESC Voltar'
-         action form_fornecedor_mprima.release
-         fontname 'verdana'
+         CAPTION 'ESC Voltar'
+         ACTION form_fornecedor_mprima.release
+         FONTNAME 'verdana'
          fontsize 009
-         fontbold .T.
-         fontcolor _preto_001
+         FONTBOLD .T.
+         FONTCOLOR _preto_001
          vertical .T.
          flat .T.
          noxpstyle .T.
@@ -764,14 +764,14 @@ STATIC FUNCTION fornecedores_mprima()
          ROW 104
          WIDTH 585
          HEIGHT 360
-         headers {'Nome do fornecedor'}
-         widths {570}
-         fontname 'verdana'
+         HEADERS {'Nome do fornecedor'}
+         WIDTHS {570}
+         FONTNAME 'verdana'
          fontsize 010
-         fontbold .F.
+         FONTBOLD .F.
          nolines .T.
          BACKCOLOR _branco_001
-         fontcolor _preto_001
+         FONTCOLOR _preto_001
       END GRID
 
       ON KEY ESCAPE ACTION thiswindow.release

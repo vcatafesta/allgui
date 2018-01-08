@@ -15,11 +15,11 @@ FUNCTION Main
          COL 10
          WIDTH 300
          HEIGHT 150
-         widths { 100, 170 }
-         headers { 'Sl.No.', 'Name' }
-         cellnavigation .t.
-         columnwhen { {|| .t. }, {|| .t. } }
-         columncontrols { { 'TEXTBOX', 'NUMERIC', '999' }, { 'TEXTBOX', 'CHARACTER' } }
+         WIDTHS { 100, 170 }
+         HEADERS { 'Sl.No.', 'Name' }
+         CELLNAVIGATION .t.
+         COLUMNWHEN { {|| .t. }, {|| .t. } }
+         COLUMNCONTROLS { { 'TEXTBOX', 'NUMERIC', '999' }, { 'TEXTBOX', 'CHARACTER' } }
          allowedit .t.
          items { { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' } }
       END GRID

@@ -140,9 +140,9 @@ METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, ;
    z := 1
    DO WHILE z <= LEN( aCaptions ) .AND. z <= LEN( Images ) .AND. z <= LEN( aPageMap )
       IF z <= LEN( aCaptions ) .AND. VALTYPE( aCaptions[ z ] ) $ "CM"
-         Caption := aCaptions[ z ]
+         CAPTION := aCaptions[ z ]
       ELSE
-         Caption := ""
+         CAPTION := ""
       ENDIF
       IF z <= LEN( Images ) .AND. VALTYPE( Images[ z ] ) $ "CM"
          Image := Images[ z ]
@@ -321,10 +321,10 @@ METHOD AddPage( Position, Caption, Image, aControls, Mnemonic, Name, oSubClass )
    ENDIF
 
    IF ! ValType( Caption ) $ 'CM'
-      Caption := ''
+      CAPTION := ''
    ELSE
       IF ! EMPTY( Image ) .AND. IsXPThemeActive() .AND. At( '&' , Caption ) != 0
-         Caption := Space( 3 ) + Caption
+         CAPTION := Space( 3 ) + Caption
       ENDIF
    ENDIF
 
@@ -792,9 +792,9 @@ METHOD CreatePages( aCaptions, Images, aPageMap, aMnemonic ) CLASS TMultiPage
    z := 1
    DO WHILE z <= LEN( aCaptions ) .AND. z <= LEN( Images ) .AND. z <= LEN( aPageMap )
       IF z <= LEN( aCaptions ) .AND. VALTYPE( aCaptions[ z ] ) $ "CM"
-         Caption := aCaptions[ z ]
+         CAPTION := aCaptions[ z ]
       ELSE
-         Caption := ""
+         CAPTION := ""
       ENDIF
       IF z <= LEN( Images ) .AND. VALTYPE( Images[ z ] ) $ "CM"
          Image := Images[ z ]
@@ -953,10 +953,10 @@ METHOD AddPage( Position, Caption, Image, aControls, Mnemonic, Name, oSubClass )
    ENDIF
 
    IF ! ValType( Caption ) $ 'CM'
-      Caption := ''
+      CAPTION := ''
    ELSE
       IF ! EMPTY( Image ) .AND. IsXPThemeActive() .AND. At( '&' , Caption ) != 0
-         Caption := Space( 3 ) + Caption
+         CAPTION := Space( 3 ) + Caption
       ENDIF
    ENDIF
 
@@ -1280,9 +1280,9 @@ METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, ;
          Image := ""
       ENDIF
       IF z <= LEN( aCaptions ) .AND. VALTYPE( aCaptions[ z ] ) $ "CM"
-         Caption := aCaptions[ z ]
+         CAPTION := aCaptions[ z ]
       ELSE
-         Caption := ""
+         CAPTION := ""
       ENDIF
       ::InsertItem( ::ItemCount + 1, Caption, Image )
       z++

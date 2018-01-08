@@ -16,7 +16,7 @@ PROCEDURE Main
          WIDTH 400 ;
          HEIGHT 200 ;
          TITLE 'Menu Break Test' ;
-         Main ;
+         MAIN ;
          NotifyIcon 'demo.ico'
 
       DEFINE MAIN MENU

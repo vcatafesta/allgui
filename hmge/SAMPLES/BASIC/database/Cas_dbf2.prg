@@ -73,7 +73,7 @@ FUNCTION Main
          TOOLTIP 'Escolha os campos abaixo e utilize o duplo click'
       @ 50,010 LISTBOX ListBox_1 WIDTH 140 HEIGHT 110 ;
          ITEMS a_fields ;
-         value 1 ;
+         VALUE 1 ;
          TOOLTIP 'Duplo Click - Move o campo para ser indexado' ;
          ON CHANGE nil ;
          ON DBLCLICK f_click() ;
@@ -82,7 +82,7 @@ FUNCTION Main
          TOOLTIP 'Para apagar os campos abaixo, utilize o duplo click'
       @ 50,154 LISTBOX ListBox_2 WIDTH 140 HEIGHT 110 ;
          ITEMS {} ;
-         value 1 ;
+         VALUE 1 ;
          TOOLTIP 'Duplo Click - Para apagar o campo escolhido' ;
          ON CHANGE nil ;
          ON DBLCLICK cas_del() ;

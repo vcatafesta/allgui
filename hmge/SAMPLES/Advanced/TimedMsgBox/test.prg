@@ -86,15 +86,15 @@ PROCEDURE Test2()
 
       @ 10,120 TEXTBOX text_2 ;
          VALUE 'Test2'  ;
-         On Enter Msgt("On enter - No Timer!",[test2])
+         ON ENTER Msgt("On enter - No Timer!",[test2])
 
       @ 40,120 TEXTBOX text_3 ;
          VALUE 'Test3';
-         On Enter Msgt(2,"on enter",[test3],"YESNO")
+         ON ENTER Msgt(2,"on enter",[test3],"YESNO")
 
       @ 70,120 TEXTBOX text_4 ;
          VALUE 'test 4' ;
-         On Lostfocus Quiz_Test()
+         ON LOSTFOCUS Quiz_Test()
 
    END WINDOW
 

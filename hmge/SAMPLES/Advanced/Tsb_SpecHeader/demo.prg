@@ -269,7 +269,7 @@ FUNCTION SaveDan(aFld)
       FOR n:=1 TO Len(aFld)
          cFld  := aFld[n]
          cGBox := "GBox_"+AllTrim(Str(n))
-         value :=GetProperty("Form_Ed",cGBox,'Value')
+         VALUE :=GetProperty("Form_Ed",cGBox,'Value')
          REPLACE &cFld   with value
       NEXT
 

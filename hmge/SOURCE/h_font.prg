@@ -322,7 +322,7 @@ FUNCTION GetFontParamByRef( FontHandle, FontName, FontSize, bold, italic, underl
 #else
       IF hb_PIsByRef( 2 )
 #endif
-         FontName := iif( lExpr, _HMG_aControlFontName[ i ], _HMG_DefaultFontName )
+         FONTNAME := iif( lExpr, _HMG_aControlFontName[ i ], _HMG_DefaultFontName )
       ENDIF
 #ifdef __XHARBOUR__
       IF HB_IsByRef( @FontSize )

@@ -319,7 +319,7 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
       sumarr := summation
    ENDIF
 
-   fontname := fontname1
+   FONTNAME := fontname1
    IF HMG_LEN(aData) > 0 // array
       lines := HMG_LEN(aData)
       lArrayMode := .t.
@@ -447,14 +447,14 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                COL 10
                WIDTH 270
                HEIGHT 300
-               widths {130,60,60}
+               WIDTHS {130,60,60}
                justify {0,1,0}
-               headers {msgarr[6],msgarr[7],msgarr[57]}
+               HEADERS {msgarr[6],msgarr[7],msgarr[57]}
                allowedit .t.
-               columncontrols {{"TEXTBOX","CHARACTER"},{"TEXTBOX","NUMERIC","9999.99"},{"COMBOBOX",{msgarr[59],msgarr[60]}}}
-               columnwhen {{||.f.},{||iif(printgrid.spread.value,.f.,.t.)},{||.t.}}
+               COLUMNCONTROLS {{"TEXTBOX","CHARACTER"},{"TEXTBOX","NUMERIC","9999.99"},{"COMBOBOX",{msgarr[59],msgarr[60]}}}
+               COLUMNWHEN {{||.f.},{||iif(printgrid.spread.value,.f.,.t.)},{||.t.}}
                columnvalid {{||.t.},{||columnsizeverify()},{||columnselected()}}
-               on lostfocus refreshprintgrid()
+               ON LOSTFOCUS refreshprintgrid()
             END GRID
             /*
             DEFINE button editdetails
@@ -474,54 +474,54 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                ROW 30
                COL 10
                WIDTH 100
-               value msgarr[12]
+               VALUE msgarr[12]
             END LABEL
             DEFINE TEXTBOX header1
                ROW 30
                COL 110
                WIDTH 165
-               on change printgridpreview()
+               ON CHANGE printgridpreview()
             END TEXTBOX
             DEFINE LABEL header2label
                ROW 70
                COL 10
                WIDTH 100
-               value msgarr[13]
+               VALUE msgarr[13]
             END LABEL
             DEFINE TEXTBOX header2
                ROW 70
                COL 110
-               on change printgridpreview()
+               ON CHANGE printgridpreview()
                WIDTH 165
             END TEXTBOX
             DEFINE LABEL header3label
                ROW 100
                COL 10
                WIDTH 100
-               value msgarr[14]
+               VALUE msgarr[14]
             END LABEL
             DEFINE TEXTBOX Header3
                ROW 100
                COL 110
-               on change printgridpreview()
+               ON CHANGE printgridpreview()
                WIDTH 165
             END TEXTBOX
             DEFINE LABEL footer1label
                ROW 130
                COL 10
                WIDTH 100
-               value msgarr[15]
+               VALUE msgarr[15]
             END LABEL
             DEFINE TEXTBOX Footer1
                ROW 130
                COL 110
                WIDTH 165
-               on change printgridpreview()
+               ON CHANGE printgridpreview()
             END TEXTBOX
             DEFINE LABEL selectfontsizelabel
                ROW 160
                COL 10
-               value msgarr[17]
+               VALUE msgarr[17]
                WIDTH 100
             END LABEL
             DEFINE COMBOBOX selectfontsize
@@ -529,12 +529,12 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                COL 110
                WIDTH 50
                items fontsizesstr
-               on change fontsizechanged()
+               ON CHANGE fontsizechanged()
             END COMBOBOX
             DEFINE LABEL multilinelabel
                ROW 190
                COL 10
-               value msgarr[18]
+               VALUE msgarr[18]
                WIDTH 100
             END LABEL
             DEFINE COMBOBOX wordwrap
@@ -542,12 +542,12 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                COL 110
                WIDTH 90
                items {msgarr[19],msgarr[20]}
-               on change printgridpreview()
+               ON CHANGE printgridpreview()
             END COMBOBOX
             DEFINE LABEL pagination
                ROW 220
                COL 10
-               value msgarr[21]
+               VALUE msgarr[21]
                WIDTH 100
             END LABEL
             DEFINE COMBOBOX pageno
@@ -555,60 +555,60 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                COL 110
                WIDTH 90
                items {msgarr[22],msgarr[23],msgarr[24]}
-               on change printgridpreview()
+               ON CHANGE printgridpreview()
             END COMBOBOX
             DEFINE LABEL separatorlab
                ROW 250
                COL 10
                WIDTH 100
-               value msgarr[25]
+               VALUE msgarr[25]
             END LABEL
             DEFINE CHECKBOX collines
                ROW 245
                COL 110
                WIDTH 60
-               on change printgridpreview()
-               caption msgarr[26]
+               ON CHANGE printgridpreview()
+               CAPTION msgarr[26]
             END CHECKBOX
             DEFINE CHECKBOX rowlines
                ROW 245
                COL 180
                WIDTH 60
-               on change printgridpreview()
-               caption msgarr[27]
+               ON CHANGE printgridpreview()
+               CAPTION msgarr[27]
             END CHECKBOX
             DEFINE LABEL centerlab
                ROW 280
                COL 10
                WIDTH 100
-               value msgarr[28]
+               VALUE msgarr[28]
             END LABEL
             DEFINE CHECKBOX vertical
                ROW 275
                COL 110
                WIDTH 60
-               on change printgridpreview()
-               caption msgarr[29]
+               ON CHANGE printgridpreview()
+               CAPTION msgarr[29]
             END CHECKBOX
             DEFINE LABEL spacelab
                ROW 310
                COL 10
                WIDTH 100
-               value msgarr[54]
+               VALUE msgarr[54]
             END LABEL
             DEFINE CHECKBOX spread
                ROW 305
                COL 110
                WIDTH 60
-               on change spreadchanged()
-               caption msgarr[55]
+               ON CHANGE spreadchanged()
+               CAPTION msgarr[55]
             END CHECKBOX
          END PAGE
          DEFINE PAGE msgarr[30]
             DEFINE LABEL orientationlabel
                ROW 30
                COL 10
-               Value msgarr[31]
+               VALUE msgarr[31]
                WIDTH 100
             END LABEL
             DEFINE COMBOBOX paperorientation
@@ -616,74 +616,74 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                COL 110
                WIDTH 90
                items {msgarr[32],msgarr[33]}
-               on change papersizechanged()
+               ON CHANGE papersizechanged()
             END COMBOBOX
             DEFINE LABEL printerslabel
                ROW 60
                COL 10
                WIDTH 100
-               value msgarr[34]
+               VALUE msgarr[34]
             END LABEL
             DEFINE COMBOBOX printers
                ROW 60
                COL 110
                WIDTH 165
                items aprinternames
-               value printerno
+               VALUE printerno
             END COMBOBOX
             DEFINE LABEL sizelabel
                ROW 90
                COL 10
                WIDTH 100
-               value msgarr[35]
+               VALUE msgarr[35]
             END LABEL
             DEFINE COMBOBOX pagesizes
                ROW 90
                COL 110
                WIDTH 165
                items papernames
-               on change papersizechanged()
+               ON CHANGE papersizechanged()
             END COMBOBOX
             DEFINE LABEL widthlabel
                ROW 120
                COL 10
-               value msgarr[36]
+               VALUE msgarr[36]
                WIDTH 100
             END LABEL
             DEFINE TEXTBOX width
                ROW 120
                COL 110
                WIDTH 60
-               inputmask "999.99"
-               on change pagesizechanged()
-               numeric .t.
-               rightalign .t.
+               INPUTMASK "999.99"
+               ON CHANGE pagesizechanged()
+               NUMERIC .t.
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL widthmm
                ROW 120
                COL 170
-               value "mm"
+               VALUE "mm"
                WIDTH 25
             END LABEL
             DEFINE LABEL heightlabel
                ROW 150
                COL 10
-               value msgarr[37]
+               VALUE msgarr[37]
                WIDTH 100
             END LABEL
             DEFINE TEXTBOX height
                ROW 150
                COL 110
                WIDTH 60
-               inputmask "999.99"
-               on change pagesizechanged()
-               numeric .t.
-               rightalign .t.
+               INPUTMASK "999.99"
+               ON CHANGE pagesizechanged()
+               NUMERIC .t.
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL heightmm
                ROW 150
                COL 170
-               value "mm"
+               VALUE "mm"
                WIDTH 25
             END LABEL
             DEFINE FRAME margins
@@ -691,67 +691,67 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                COL 5
                WIDTH 185
                HEIGHT 80
-               caption msgarr[38]
+               CAPTION msgarr[38]
             END FRAME
             DEFINE LABEL toplabel
                ROW 200
                COL 10
                WIDTH 35
-               value msgarr[39]
+               VALUE msgarr[39]
             END LABEL
             DEFINE TEXTBOX top
                ROW 200
                COL 45
                WIDTH 50
-               inputmask "99.99"
-               numeric .t.
-               on change printgridpreview()
-               rightalign .t.
+               INPUTMASK "99.99"
+               NUMERIC .t.
+               ON CHANGE printgridpreview()
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL rightlabel
                ROW 200
                COL 100
                WIDTH 35
-               value msgarr[40]
+               VALUE msgarr[40]
             END LABEL
             DEFINE TEXTBOX right
                ROW 200
                COL 135
                WIDTH 50
-               inputmask "99.99"
-               on change papersizechanged()
-               numeric .t.
-               rightalign .t.
+               INPUTMASK "99.99"
+               ON CHANGE papersizechanged()
+               NUMERIC .t.
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL leftlabel
                ROW 230
                COL 10
                WIDTH 35
-               value msgarr[41]
+               VALUE msgarr[41]
             END LABEL
             DEFINE TEXTBOX left
                ROW 230
                COL 45
                WIDTH 50
-               inputmask "99.99"
-               on change papersizechanged()
-               numeric .t.
-               rightalign .t.
+               INPUTMASK "99.99"
+               ON CHANGE papersizechanged()
+               NUMERIC .t.
+               RIGHTALIGN .t.
             END TEXTBOX
             DEFINE LABEL bottomlabel
                ROW 230
                COL 100
                WIDTH 35
-               value msgarr[42]
+               VALUE msgarr[42]
             END LABEL
             DEFINE TEXTBOX bottom
                ROW 230
                COL 135
                WIDTH 50
-               inputmask "99.99"
-               numeric .t.
-               on change printgridpreview()
-               rightalign .t.
+               INPUTMASK "99.99"
+               NUMERIC .t.
+               ON CHANGE printgridpreview()
+               RIGHTALIGN .t.
             END TEXTBOX
          END PAGE
          DEFINE PAGE msgarr[61]
@@ -760,34 +760,34 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
                COL 10
                WIDTH 240
                HEIGHT 240
-               headers {msgarr[62],msgarr[63],msgarr[64]}
-               widths {40,40,100}
+               HEADERS {msgarr[62],msgarr[63],msgarr[64]}
+               WIDTHS {40,40,100}
                allowedit .t.
-               columncontrols {{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","CHARACTER"}}
+               COLUMNCONTROLS {{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","NUMERIC","999"},{"TEXTBOX","CHARACTER"}}
                columnvalid {{||.t.},{||.t.},{||.t.}}
-               on lostfocus mergeheaderschanged()
+               ON LOSTFOCUS mergeheaderschanged()
             END GRID
             DEFINE BUTTON add
                ROW 30
                COL 260
                WIDTH 20
                HEIGHT 20
-               caption "+"
-               fontbold .t.
+               CAPTION "+"
+               FONTBOLD .t.
                fontsize 16
                //               picture "additem"
-               action addmergeheadrow()
+               ACTION addmergeheadrow()
             END BUTTON
             DEFINE BUTTON del
                ROW 55
                COL 260
                WIDTH 20
                HEIGHT 20
-               caption "-"
-               fontbold .t.
+               CAPTION "-"
+               FONTBOLD .t.
                fontsize 16
                //               picture "delitem"
-               action delmergeheadrow()
+               ACTION delmergeheadrow()
             END BUTTON
 
          END PAGE
@@ -795,22 +795,22 @@ FUNCTION _gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwi
       DEFINE BUTTON browseprint1
          ROW 350
          COL 160
-         caption msgarr[43]
-         action printstart()
+         CAPTION msgarr[43]
+         ACTION printstart()
          WIDTH 80
       END BUTTON
       DEFINE BUTTON browseprintcancel
          ROW 350
          COL 260
-         caption msgarr[44]
-         action printgrid.release
+         CAPTION msgarr[44]
+         ACTION printgrid.release
          WIDTH 80
       END BUTTON
       DEFINE BUTTON browseprintreset
          ROW 350
          COL 360
-         caption msgarr[66]
-         action resetprintgridform()
+         CAPTION msgarr[66]
+         ACTION resetprintgridform()
          WIDTH 80
       END BUTTON
       DEFINE STATUSBAR

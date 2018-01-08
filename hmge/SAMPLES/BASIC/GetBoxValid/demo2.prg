@@ -14,7 +14,7 @@ FUNCTION main
    DEFINE WINDOW form_1 ;
          at 0,0 width 500 height 350 ;
          TITLE "Getbox Valid demo 2 by Jack Daniels" ;
-         main ;
+         MAIN ;
          on interactiveclose CheckValids(1)
 
       DEFINE TAB tab_1 at 10,10 width 400 height 250 on change {|page| CheckValids(page)}

@@ -18,31 +18,31 @@ FUNCTION DBUcreaindex()
          ROW 10
          COL 10
          WIDTH 280
-         value "Field Names List:"
-         fontbold .t.
+         VALUE "Field Names List:"
+         FONTBOLD .t.
       END LABEL
       DEFINE GRID _DBUfields
          ROW 40
          COL 10
          WIDTH 280
          HEIGHT 380
-         widths {0,200}
-         headers {"","Field Names"}
+         WIDTHS {0,200}
+         HEADERS {"","Field Names"}
          image {"wrong","right"}
-         tooltip "Double Click a field name to toggle between creating and not creating an index for that field."
+         TOOLTIP "Double Click a field name to toggle between creating and not creating an index for that field."
          ondblclick _DBUindexfieldtoggle()
       END GRID
       DEFINE BUTTON _DBUsaveindex
          ROW 430
          COL 40
-         caption "Create"
-         action _DBUcreateindex()
+         CAPTION "Create"
+         ACTION _DBUcreateindex()
       END BUTTON
       DEFINE BUTTON _DBUcancelindex
          ROW 430
          COL 160
-         caption "Cancel"
-         action _DBUcreaindex.release
+         CAPTION "Cancel"
+         ACTION _DBUcreaindex.release
       END BUTTON
    END WINDOW
    FOR _DBUi := 1 to len(_DBUfieldnames)
@@ -173,7 +173,7 @@ FUNCTION DBUcloseindex()
       DEFINE LABEL _DBUcurrentlabel
          ROW 10
          COL 10
-         value "Choose the index file(s) to close"
+         VALUE "Choose the index file(s) to close"
          WIDTH 280
       END LABEL
       DEFINE LISTBOX _DBUcurrentindices
@@ -187,8 +187,8 @@ FUNCTION DBUcloseindex()
       DEFINE BUTTON _DBUcloseindexbutton
          ROW 320
          COL 10
-         caption "Close"
-         action DBUcloseindexdone()
+         CAPTION "Close"
+         ACTION DBUcloseindexdone()
       END BUTTON
    END WINDOW
    _DBUcloseindex.center
@@ -255,7 +255,7 @@ FUNCTION DBUchangeactiveindex()
       DEFINE LABEL _DBUcurrentlabel
          ROW 10
          COL 10
-         value "Change the field to make it active"
+         VALUE "Change the field to make it active"
          WIDTH 280
       END LABEL
       DEFINE LISTBOX _DBUcurrentindices
@@ -264,13 +264,13 @@ FUNCTION DBUchangeactiveindex()
          WIDTH 280
          HEIGHT 250
          items _DBUindexfields
-         value _DBUactiveindex
+         VALUE _DBUactiveindex
       END listbox
       DEFINE BUTTON _DBUchangeactivedone
          ROW 320
          COL 10
-         caption "Done"
-         action DBUchangeactiveindexdone()
+         CAPTION "Done"
+         ACTION DBUchangeactiveindexdone()
       END BUTTON
    END WINDOW
    _DBUactiveindex.center

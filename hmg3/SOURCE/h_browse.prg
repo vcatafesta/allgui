@@ -75,13 +75,13 @@ FUNCTION _DefineBrowse ( ControlName, ;
       value, ;
       fontname, ;
       fontsize , ;
-      tooltip , ;
+      TOOLTIP , ;
       change , ;
       dblclick , ;
       aHeadClick , ;
       gotfocus , ;
       lostfocus , ;
-      WorkArea , ;
+      WORKAREA , ;
       DELETE, ;
       nogrid, ;
       aImage, ;
@@ -93,7 +93,7 @@ FUNCTION _DefineBrowse ( ControlName, ;
       strikeout , ;
       break , ;
       BACKCOLOR , ;
-      fontcolor , ;
+      FONTCOLOR , ;
       lock , ;
       inplace , ;
       novscroll , ;
@@ -105,7 +105,7 @@ FUNCTION _DefineBrowse ( ControlName, ;
       DYNAMICbackcolor , ;
       aWhenFields , ;
       DYNAMICforecolor , ;
-      inputmask , ;
+      INPUTMASK , ;
       format , ;
       inputitems , displayitems , aHeaderImages, ;
       NoTrans, NoTransHeader)
@@ -123,7 +123,7 @@ FUNCTION _DefineBrowse ( ControlName, ;
    IF _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
       IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-         FontName := _HMG_SYSDATA [ 224 ]
+         FONTNAME := _HMG_SYSDATA [ 224 ]
       ENDIF
       IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]
@@ -161,7 +161,7 @@ FUNCTION _DefineBrowse ( ControlName, ;
       h := 120
    ENDIF
    IF valtype(value) == "U"
-      value := 0
+      VALUE := 0
    ENDIF
    IF valtype(aFields) == "U"
       aFields := {}
@@ -482,7 +482,7 @@ PROCEDURE _BrowseUpdate( ControlName,ParentName , z )
 
    First   := iif( HMG_LEN( _HMG_SYSDATA [ 14 ][i] ) == 0, 1, 2 ) // Browse+ ( 2= bitmap definido, se cargan campos a partir de 2º )
 
-   Fields := _HMG_SYSDATA [ 31 ] [i]
+   FIELDS := _HMG_SYSDATA [ 31 ] [i]
 
    ListViewReset ( _HMG_SYSDATA [3][i] )
    PageLength := ListViewGetCountPerPage ( _HMG_SYSDATA [3][i] )
@@ -1299,7 +1299,7 @@ FUNCTION  _BrowseDelete (  ControlName , ParentForm , z  )
 
    _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-   Value := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
+   VALUE := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
 
    IF Value == 0
 

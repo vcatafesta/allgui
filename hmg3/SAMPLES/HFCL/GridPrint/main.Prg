@@ -127,7 +127,7 @@ FUNCTION Main
          ROW 340
          COL 10
          CAPTION "Print"
-         action form_1.grid_1.print
+         ACTION form_1.grid_1.print
          //          action doprint()
          //         ACTION _GridPrint("Grid_1","Form_1")
       END BUTTON

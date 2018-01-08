@@ -1323,7 +1323,7 @@ METHOD Events( hWnd, nMsg, wParam, lParam ) CLASS TTree
          ENDIF
          ::LastTarget := Nil
 
-         Value := ::Value
+         VALUE := ::Value
          IF ! Empty( Value ) .AND. ::lSelBold
             ::BoldItem( ::Value, .T. )
          ENDIF

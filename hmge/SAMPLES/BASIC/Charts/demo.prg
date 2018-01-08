@@ -54,36 +54,36 @@ PROCEDURE Main
       DEFINE BUTTON Button_1
          ROW   510
          COL   30
-         Caption   'Chart &1'
-         Action  drawchart_1( aser1 )
+         CAPTION   'Chart &1'
+         ACTION  drawchart_1( aser1 )
       END BUTTON
 
       DEFINE BUTTON Button_2
          ROW   510
          COL   150
-         Caption   'Chart &2'
-         Action  drawchart_2( aser2 )
+         CAPTION   'Chart &2'
+         ACTION  drawchart_2( aser2 )
       END BUTTON
 
       DEFINE BUTTON Button_3
          ROW   510
          COL   270
-         Caption   'Chart &3'
-         Action  drawchart_3( aser3 )
+         CAPTION   'Chart &3'
+         ACTION  drawchart_3( aser3 )
       END BUTTON
 
       DEFINE BUTTON Button_4
          ROW   510
          COL   390
-         Caption   '&Print'
-         Action  PrintGraph( nGraphType )
+         CAPTION   '&Print'
+         ACTION  PrintGraph( nGraphType )
       END BUTTON
 
       DEFINE BUTTON Button_5
          ROW   510
          COL   510
-         Caption   'E&xit'
-         Action  GraphTest.Release
+         CAPTION   'E&xit'
+         ACTION  GraphTest.Release
       END BUTTON
 
    END WINDOW

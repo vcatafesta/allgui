@@ -51,22 +51,22 @@ PROCEDURE main()
       DEFINE BUTTON Btn_1
          ROW 290
          COL Form_1.Width - 344
-         caption "OK"
-         action ( ApplyChanges(), Form_1.Release() )
+         CAPTION "OK"
+         ACTION ( ApplyChanges(), Form_1.Release() )
       END BUTTON
 
       DEFINE BUTTON Btn_2
          ROW 290
          COL Form_1.Width - 234
-         caption "Cancel"
-         action Form_1.Release()
+         CAPTION "Cancel"
+         ACTION Form_1.Release()
       END BUTTON
 
       DEFINE BUTTON Btn_3
          ROW 290
          COL Form_1.Width - 124
-         caption "Apply"
-         action ApplyChanges()
+         CAPTION "Apply"
+         ACTION ApplyChanges()
       END BUTTON
 
    END WINDOW

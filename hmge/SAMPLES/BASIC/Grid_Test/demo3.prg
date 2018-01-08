@@ -11,8 +11,8 @@ PROCEDURE Main
          COL 10
          WIDTH 472
          HEIGHT 200
-         headers {"Name","City","Amount"}
-         widths {200,150,100}
+         HEADERS {"Name","City","Amount"}
+         WIDTHS {200,150,100}
          allowedit .t.
          COLUMNCONTROLS { { 'TEXTBOX','CHARACTER' } , { 'COMBOBOX',{ 'CHENNAI','DELHI','KOLKATTA' } } , { 'TEXTBOX','NUMERIC',"999999.99" } }
          items { {"Person 1", 1, 1000} , {"Person 2", 3, 2000} }
@@ -23,16 +23,16 @@ PROCEDURE Main
          ROW 230
          COL 10
          WIDTH 240
-         caption "Add a new item in inplaced combobox"
-         action AddGridEditComboItem( "g", "m", 2, Upper( InputBox("Enter a new city", "Add city", "MUMBAI") ) )
+         CAPTION "Add a new item in inplaced combobox"
+         ACTION AddGridEditComboItem( "g", "m", 2, Upper( InputBox("Enter a new city", "Add city", "MUMBAI") ) )
       END BUTTON
 
       DEFINE BUTTON b2
          ROW 260
          COL 10
          WIDTH 240
-         caption "Add a new item in grid"
-         action ( nId := m.g.ItemCount, m.g.AddItem( {"Person "+hb_ntos(++nId), Random(3), nId*1000} ) )
+         CAPTION "Add a new item in grid"
+         ACTION ( nId := m.g.ItemCount, m.g.AddItem( {"Person "+hb_ntos(++nId), Random(3), nId*1000} ) )
       END BUTTON
 
       ON KEY ESCAPE ACTION thiswindow.release()

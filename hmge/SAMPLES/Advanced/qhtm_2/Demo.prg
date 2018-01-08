@@ -158,8 +158,8 @@ PROCEDURE Main
          WIDTH 780                         ;
          HEIGHT 565                        ;
          TITLE 'QHTM & SQLite3 Usage Demo' ;
-         Main                              ;
-         On init ReSize()                  ;
+         MAIN                              ;
+         ON INIT ReSize()                  ;
          On maximize ReSize()              ;
          On size ReSize()
 
@@ -182,7 +182,7 @@ PROCEDURE Main
          DEFINE POPUP 'Record'
             MENUITEM 'Add files to base' Action AddToBase()
             MENUITEM 'Delete record'     Name pdDelete      ;
-               Action DelRecord() ;
+               ACTION DelRecord() ;
                Disabled
          END POPUP
 
@@ -211,17 +211,17 @@ PROCEDURE Main
             at TB_TOP, TB_LEFT ;
             WIDTH TB_WIDTH     ;
             HEIGHT 105         ;
-            On change SwitchTab()
+            ON CHANGE SwitchTab()
 
          Page 'Files'
 
             @ 32, 5 Grid grdFiles           ;
                WIDTH ( TB_WIDTH - 10 ) ;
                HEIGHT 360              ;
-               Widths { 200 }          ;
+               WIDTHS { 200 }          ;
                NoHeaders               ;
-               On Change ShowMe()      ;
-               Tooltip ( '<img src="res:INFO" align="right">List files in <br><font color="blue"><b>' + ;
+               ON CHANGE ShowMe()      ;
+               TOOLTIP ( '<img src="res:INFO" align="right">List files in <br><font color="blue"><b>' + ;
                aParams[ 'StartDir' ] + '</font></b>' )
 
          END PAGE
@@ -231,17 +231,17 @@ PROCEDURE Main
             @ 32, 5 Grid grdRecords          ;
                WIDTH ( TB_WIDTH - 10 )  ;
                HEIGHT 360               ;
-               Widths { 50, 180 }       ;
-               Headers { 'ID', 'Name' } ;
-               On Change ShowMe()       ;
-               Tooltip ( '<img src="res:INFO">List of pictures, stored in a base' )
+               WIDTHS { 50, 180 }       ;
+               HEADERS { 'ID', 'Name' } ;
+               ON CHANGE ShowMe()       ;
+               TOOLTIP ( '<img src="res:INFO">List of pictures, stored in a base' )
 
          END PAGE
 
       END TAB
 
       @ DATA_TOP, DATA_LEFT QHTM HtmlData of wMain ;
-         Value cHTML                                ;
+         VALUE cHTML                                ;
          WIDTH 505                                  ;
          HEIGHT 105                                 ;
          Border
@@ -1067,10 +1067,10 @@ STATIC PROCEDURE DemoPrint
          Border
 
       @ 370, 160 Button btnPrint ;
-         Caption 'Print' ;
+         CAPTION 'Print' ;
          WIDTH 150       ;
          HEIGHT 80       ;
-         Action PrintHTML( cHTMLFile )
+         ACTION PrintHTML( cHTMLFile )
 
    END WINDOW
 

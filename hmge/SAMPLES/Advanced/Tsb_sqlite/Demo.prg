@@ -311,7 +311,7 @@ FUNCTION c2Sql(Value)
    LOCAL cdate := ""
 
    IF valtype(value) == "C" .and. len(alltrim(value)) > 0
-      value := strtran(value,"'","''")
+      VALUE := strtran(value,"'","''")
    ENDIF
    DO CASE
    CASE Valtype(Value) == "N"

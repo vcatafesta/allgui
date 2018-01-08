@@ -25,8 +25,8 @@ FUNCTION main
          WIDTH 640 ;
          HEIGHT 480 ;
          TITLE "Draw Box And Panel Sample By Grigory Filatov" ;
-         main nomaximize nosize ;
-         on init x.Button_1.Setfocus
+         MAIN nomaximize nosize ;
+         ON INIT x.Button_1.Setfocus
 
       DRAW BOX         ;
          IN WINDOW x         ;

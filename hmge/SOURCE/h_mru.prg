@@ -96,8 +96,8 @@ FUNCTION AddMenuElement( NewItem , cAction )
    LOCAL x , n , cx
    LOCAL action , Caption , xCaption , cyMRU_Id , cxMRU_Id
 
-   Caption := iif( Len( NewItem ) < 40, NewItem, SubStr( NewItem, 1, 3 ) + '...' + SubStr( NewItem, Len( NewItem ) - 34 ) )
-   action := iif( cAction == NIL, {|| Nil }, &( '{|| ' + Left( cAction, At("(",cAction ) ) + ' "' + NewItem + '" ) }' ) )
+   CAPTION := iif( Len( NewItem ) < 40, NewItem, SubStr( NewItem, 1, 3 ) + '...' + SubStr( NewItem, Len( NewItem ) - 34 ) )
+   ACTION := iif( cAction == NIL, {|| Nil }, &( '{|| ' + Left( cAction, At("(",cAction ) ) + ' "' + NewItem + '" ) }' ) )
 
    // Check if this is the first item
    IF MRUCount == 0
@@ -203,7 +203,7 @@ FUNCTION _DefineMruItem ( caption , cIniFile , cSection , nMaxItems , action , n
 
    IF lExist
       IF Empty( action )
-         action := Nil
+         ACTION := Nil
       ENDIF
       FOR EACH n IN aTmp DESCEND
          AddMRUItem( n, action )

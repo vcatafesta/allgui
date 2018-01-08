@@ -281,7 +281,7 @@ FUNCTION TBrw_Create( ControlName, ParentForm, nRow, nCol, nWidth, nHeight, uAli
       nHeight    := 0,                    ;
       lCell      := .T.,                  ;
       ParentForm := _HMG_ThisFormName,    ;
-      FontName   := _HMG_DefaultFontName, ;
+      FONTNAME   := _HMG_DefaultFontName, ;
       FontSize   := _HMG_DefaultFontSize
 
    hWnd := GetFormHandle(ParentForm)

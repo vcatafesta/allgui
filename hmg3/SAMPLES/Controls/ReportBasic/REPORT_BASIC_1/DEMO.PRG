@@ -9,7 +9,7 @@ PROCEDURE main()
          WIDTH 100;
          HEIGHT 100 ;
          TITLE 'DO REPORT Test' ;
-         main
+         MAIN
 
       DEFINE MAIN MENU
          POPUP 'File'

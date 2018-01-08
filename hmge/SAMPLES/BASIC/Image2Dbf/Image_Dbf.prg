@@ -40,9 +40,9 @@ proc main
 
    DEFINE WINDOW Form_1 ;
          At 0, 0 Width 700 Height 500 ;
-         on init f_init() ;
-         on release f_release() ;
-         nosysmenu ;
+         ON INIT f_init() ;
+         ON RELEASE f_release() ;
+         NOSYSMENU ;
          TITLE 'IMAGE to DBF - by cas.soft@gmail.com' Main
 
       @ 01,1 button btn_read caption 'Importar' action f_importar()
@@ -73,7 +73,7 @@ proc main
 
       Define timer timer_1 ;
          interval 250 ;
-         action ( setforegroundwindow( getformhandle('form_1') ),;
+         ACTION ( setforegroundwindow( getformhandle('form_1') ),;
          form_1.browse_1.setfocus ) once
 
    END WINDOW
@@ -111,10 +111,10 @@ proc main
       DEFINE WINDOW Form_2 ;
             At m_row, m_col Width m_width Height m_height ;
             TITLE 'CAS' ;
-            on init f_size() ;
+            ON INIT f_size() ;
             on maximize f_size() ;
             on size f_size() ;
-            nosysmenu ON INTERACTIVECLOSE .f. child
+            NOSYSMENU ON INTERACTIVECLOSE .f. child
          @ 0,0 image img_cas picture ''
       END WINDOW
 

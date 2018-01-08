@@ -15,10 +15,10 @@ FUNCTION Main
          HEIGHT   400         ;
          TITLE   'Miniprint Demo'   ;
          MAIN            ;
-         On Init   Win1.Center()
+         ON INIT   Win1.Center()
 
       @ 40 , 40 Button Button1   ;
-         Caption 'Start Print'   ;
+         CAPTION 'Start Print'   ;
          On Click Button1Click()   ;
          DEFAULT
 

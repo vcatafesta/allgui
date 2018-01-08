@@ -143,7 +143,7 @@ FUNCTION main()
       WIDTHS  { 449,30,30,50,50,50,50,50,50,50,50,50,50,30,30}
       ONCHANGE  (IIF(ATIVADO = .T.,(E_D_Frame3(.f.),ChecaList() ),NIL))
       NOLINES .t.
-      fontname "courier new"
+      FONTNAME "courier new"
       fontsize 10
    END GRID
 END WINDOW

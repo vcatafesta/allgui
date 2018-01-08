@@ -241,10 +241,10 @@ FUNCTION _SetStatusClock ( FormName , Width , ToolTip , action , nIntervalUpdate
       WIDTH := 70
    ENDIF
    IF ValType (ToolTip) == 'U'
-      ToolTip := 'Clock'
+      TOOLTIP := 'Clock'
    ENDIF
    IF ValType (Action) == 'U'
-      Action := ''
+      ACTION := ''
    ENDIF
    IF ValType (nIntervalUpdate) == 'U'
       nIntervalUpdate := 1000
@@ -255,8 +255,8 @@ FUNCTION _SetStatusClock ( FormName , Width , ToolTip , action , nIntervalUpdate
       WIDTH      , ;
       , ;
       , ;
-      ToolTip   , ;
-      action   ;
+      TOOLTIP   , ;
+      ACTION   ;
       )
 
    _DefineTimer ( 'StatusTimer' , FormName , nIntervalUpdate, {|| _SetItem ( 'StatusBar' , FormName , nrItem  , Time() ) } )
@@ -275,10 +275,10 @@ FUNCTION _SetStatusKeybrd ( FormName ,Width , ToolTip , action , nIntervalUpdate
       WIDTH := 75
    ENDIF
    IF ValType (ToolTip) == 'U'
-      ToolTip := ''
+      TOOLTIP := ''
    ENDIF
    IF ValType (Action) == 'U'
-      Action := ''
+      ACTION := ''
    ENDIF
    IF ValType (nIntervalUpdate) == 'U'
       nIntervalUpdate := 200
@@ -289,8 +289,8 @@ FUNCTION _SetStatusKeybrd ( FormName ,Width , ToolTip , action , nIntervalUpdate
       WIDTH + 20   , ;
       IF ( IsNumLockActive() , "zzz_led_on" , "zzz_led_off" )   , ;
          , ;
-         ToolTip   , ;
-         Action   ;
+         TOOLTIP   , ;
+         ACTION   ;
          )
 
       nrItem2 := _DefineStatusBarItem   (      ;
@@ -298,8 +298,8 @@ FUNCTION _SetStatusKeybrd ( FormName ,Width , ToolTip , action , nIntervalUpdate
          WIDTH + 20   , ;
          IF ( IsCapsLockActive() , "zzz_led_on" , "zzz_led_off" )   , ;
             , ;
-            ToolTip   , ;
-            Action   ;
+            TOOLTIP   , ;
+            ACTION   ;
             )
 
          nrItem3 := _DefineStatusBarItem   (      ;
@@ -307,8 +307,8 @@ FUNCTION _SetStatusKeybrd ( FormName ,Width , ToolTip , action , nIntervalUpdate
             WIDTH + 20   , ;
             IF ( IsInsertActive() , "zzz_led_on" , "zzz_led_off" )   , ;
                , ;
-               ToolTip   , ;
-               Action   ;
+               TOOLTIP   , ;
+               ACTION   ;
                )
 
             _DefineTimer ( 'StatusKeyBrd' , FormName , nIntervalUpdate , ;

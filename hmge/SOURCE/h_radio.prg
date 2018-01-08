@@ -288,7 +288,7 @@ FUNCTION InitDialogRadioGroup( ParentName, ControlHandle, k )
    HB_SYMBOL_UNUSED( ControlHandle )
 
    aHandles := _HMG_aControlHandles [k]
-   Value    := _HMG_aControlValue [k]
+   VALUE    := _HMG_aControlValue [k]
    // EF 93
    IF ValType ( Value ) == 'N' .AND. Value > 0
       _SetValue ( , , Value , k )

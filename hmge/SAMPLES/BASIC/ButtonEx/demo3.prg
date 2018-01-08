@@ -90,7 +90,7 @@ FUNCTION Main()
          BACKCOLOR {240,255,240} ;
          BOLD ;
          ACTION TONE(100)
-      Tooltip "OButton_1 BUTTONEX with icon"
+      TOOLTIP "OButton_1 BUTTONEX with icon"
 
       //       horizontal buttonex with icons (multiline caption)
 

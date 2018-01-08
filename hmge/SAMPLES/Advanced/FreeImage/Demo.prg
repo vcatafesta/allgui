@@ -59,11 +59,11 @@ PROCEDURE Main
          WIDTH 780                      ;
          HEIGHT 525                     ;
          TITLE 'FreeImage & SQLite3 Usage Demo' ;
-         NoMaximize                     ;
+         NOMAXIMIZE                     ;
          NOSIZE                         ;
          ICON 'main.ico'                ;
-         Main                           ;
-         On Release FI_DeInitialise()   ;
+         MAIN                           ;
+         ON RELEASE FI_DeInitialise()   ;
          On Paint ShowMe()
 
       // ShowMe() - процедура вывода изображения. В описании окна её лучше
@@ -75,28 +75,28 @@ PROCEDURE Main
             at 5, 5    ;
             WIDTH 250  ;
             HEIGHT 470 ;
-            On Change SwitchTab()
+            ON CHANGE SwitchTab()
 
          Page 'Files'
 
             @ 32, 5 Grid grdFiles   ;
                WIDTH 235       ;
                HEIGHT 340      ;
-               Widths { 200 }  ;
+               WIDTHS { 200 }  ;
                NoHeaders       ;
-               On Change ShowMe()
+               ON CHANGE ShowMe()
 
             @ 385, 5 ButtonEx btnChDir       ;
-               Caption 'Change folder' ;
+               CAPTION 'Change folder' ;
                WIDTH 235               ;
                PICTURE 'DIR'           ;
-               Action ChangeFolder()
+               ACTION ChangeFolder()
 
             @ 430, 5 ButtonEx btnAdd        ;
-               Caption 'Copy to base' ;
+               CAPTION 'Copy to base' ;
                WIDTH 235              ;
                PICTURE 'COPY'         ;
-               Action AddToBase()
+               ACTION AddToBase()
 
          END PAGE
 
@@ -105,21 +105,21 @@ PROCEDURE Main
             @ 32, 5 Grid grdRecords          ;
                WIDTH 235                ;
                HEIGHT 340               ;
-               Widths { 50, 180 }       ;
-               Headers { 'ID', 'Name' } ;
-               On Change ShowMe()
+               WIDTHS { 50, 180 }       ;
+               HEADERS { 'ID', 'Name' } ;
+               ON CHANGE ShowMe()
 
             @ 385, 5 ButtonEx btnDelete      ;
-               Caption 'Delete record' ;
+               CAPTION 'Delete record' ;
                WIDTH 235               ;
                PICTURE 'DELETE'        ;
-               Action DelRecord()
+               ACTION DelRecord()
 
             @ 430, 5 ButtonEx btnSave       ;
-               Caption 'Save to file' ;
+               CAPTION 'Save to file' ;
                WIDTH 235              ;
                PICTURE 'SAVE'         ;
-               Action SaveToFile()
+               ACTION SaveToFile()
 
          END PAGE
 

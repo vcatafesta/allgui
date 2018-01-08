@@ -212,7 +212,7 @@ FUNCTION _DefineItemMessage ( ControlName, ParentControl, x, y, Caption, Procedu
          _DefineLetterOrDigitHotKey ( cCaption, i, cParentForm, ProcedureName )
       ENDIF
 
-      Caption := StrTran ( Caption, '&', '' )
+      CAPTION := StrTran ( Caption, '&', '' )
    ENDIF
 
    IF default
@@ -347,7 +347,7 @@ FUNCTION _IsOwnerDrawStatusBarItem( ParentHandle , ItemID , Value , lSet )
                IF lSet
                   _HMG_aControlCaption [i] := Value
                ELSE
-                  Value := i
+                  VALUE := i
                ENDIF
             ENDIF
             EXIT

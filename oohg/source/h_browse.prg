@@ -961,7 +961,7 @@ METHOD Delete() CLASS TOBrowse
 
    LOCAL Value, nRecNo, lSync, cWorkArea
 
-   Value := ::Value
+   VALUE := ::Value
 
    IF Value == 0
       RETURN SELF
@@ -3595,7 +3595,7 @@ METHOD Delete() CLASS TOBrowseByCell
 
    LOCAL Value, nRow, nRecNo, lSync, cWorkArea
 
-   Value := ::Value
+   VALUE := ::Value
    nRow  := Value[ 1 ]
 
    IF nRow == 0
@@ -3639,7 +3639,7 @@ METHOD Delete() CLASS TOBrowseByCell
    ENDIF
 
    IF lSync
-      Value := ::Value
+      VALUE := ::Value
       nRow  := Value[ 1 ]
 
       IF ( cWorkArea )->( RecNo() ) != nRow
