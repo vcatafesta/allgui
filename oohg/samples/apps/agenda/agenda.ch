@@ -2,5 +2,5 @@
 #DEFINE SISTEMA  "Agenda"
 #DEFINE TRUE      .T.
 #DEFINE FALSE     .F.
-#DEFINE QUEBRA	  Chr(13)+Chr(10)
+#DEFINE QUEBRA     Chr(13)+Chr(10)
 *---------------------------------------------------------------------------*

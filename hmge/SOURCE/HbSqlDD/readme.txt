@@ -1,7 +1,6 @@
 ===================================================================
                      Simple SQL Interface for Harbour
 
-
 1. Introduction
 
     Simple SQL interface implements accessing SQL query result via RDD
@@ -76,7 +75,6 @@ all query (it could contain millions of records!) will be cached.
   do FLOCK() on DBF to guarantee the records are not changed. Do you use FLOCK()
   before readonly DO WHILE ! EOF() loops? :)
 
-
 2. Architecture
 
               +-------------+
@@ -109,7 +107,6 @@ exchange interface between SQLBASE and SQL server.
     A few additional functions are also implemented, ex. HB_SQLCONNECT().
 Usualy these functions are just a shorter version of corresponding RDDINFO()
 call.
-
 
 3. Modifying database
 

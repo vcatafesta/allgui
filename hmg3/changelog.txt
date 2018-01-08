@@ -1068,7 +1068,6 @@
    - Solucionado: Problemas con las propiedades 'BackColor' and 'FontColor' de data-bound grid.
    Reportado por mustafa.
 
-
 - HMG 3.0.28 Changelog:
 
    English:
@@ -2746,7 +2745,6 @@
    Gracias a Grigory por el reporte.
 
    - Fixed: Misc errors in reference doc. Thanks to Esgici.
-
 
 - HMG 2.5.5 Changelog:
 

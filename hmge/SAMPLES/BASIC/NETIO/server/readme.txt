@@ -131,7 +131,6 @@ Client side functions:
       If stream was open by netio_OpenItemStream() then data is returned
       as array of items received from the server.
 
-
 Server side functions:
 ======================
    netio_Listen( [<nPort>], [<cIfAddr>], [<cRootDir>], [<lRPC>] )

@@ -1,9 +1,9 @@
 
 DEFINE WINDOW Template                                         ;
       At 100, 100                                            ;
-      Width 800                                               ;
-      Height 600                                               ;
-      Title "Prueba de MDI -- MDIChild"                           ;
+      WIDTH 800                                               ;
+      HEIGHT 600                                               ;
+      TITLE "Prueba de MDI -- MDIChild"                           ;
       Main                                                ;
       Mdi
    DEFINE STATUSBAR                                        ;

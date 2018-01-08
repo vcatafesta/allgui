@@ -324,7 +324,6 @@ There are three messages to control the preview operation.
 -  Use the WM_CAP_SET_SCALE message (or the capPreviewScale macro) to
    enable or disable scaling of the preview video.
 
-
 When preview and scaling are both enabled, the captured video frame is
 stretched to the dimensions of the capture window. Enabling preview mode
 automatically disables overlay mode.
@@ -356,7 +355,6 @@ and allows you to perform the following tasks:
 - Specify whether an MCI device (VCR or videodisc) is used during capture.
 - Specify keyboard or mouse control for ending streaming.
 - Specify the type of video averaging applied during capture.
-
 
 You can retrieve the current capture settings within the CAPTUREPARMS
 structure by sending the WM_CAP_GET_SEQUENCE_SETUP message (or the
@@ -474,7 +472,6 @@ You can control the audio portion of a capture operation in three ways:
 - Include or exclude audio from the capture operation.
 - Request a specific number of audio buffers.
 - Request that audio buffers be a specific size.
-
 
 You can retrieve the settings for audio buffers by using the
 WM_CAP_GET_SEQUENCE_SETUP message (or the capCaptureGetSetup macro).

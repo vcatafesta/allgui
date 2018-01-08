@@ -72,16 +72,16 @@ FUNCTION CrearChild( nChild )
       On Key Control+F6 Action SwitchToNextWin()
       SWITCH Val( Right( cChild, 1 ) )
       CASE 1
-         row := 0
-         col := 0
+         ROW := 0
+         COL := 0
          EXIT
       CASE 2
-         row := ntitle - 1
-         col := 22
+         ROW := ntitle - 1
+         COL := 22
          EXIT
       CASE 3
-         row := 2*(ntitle - 1)
-         col := 44
+         ROW := 2*(ntitle - 1)
+         COL := 44
       END SWITCH
       MoveWindow ( GetFormHandle(cChild), col, row, width, height, .T. )
    ELSE

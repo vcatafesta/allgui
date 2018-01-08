@@ -114,10 +114,10 @@ PROCEDURE print()
    define imagelist "ILIST1" picture "flags"
    define imagelist "ILIST2" picture "mytoolbar" iconcount 11
 
-   define font "f0" name "courier new" size 12 bold
-   define font "f1" name "times new roman" size 30 width 30 bold italic underline strikeout
-   define font "f2" name "times new roman" size 30 bold
-   define font "f3" name "times new roman" size 12 bold
+   DEFINE FONT "f0" name "courier new" size 12 bold
+   DEFINE FONT "f1" name "times new roman" size 30 width 30 bold italic underline strikeout
+   DEFINE FONT "f2" name "times new roman" size 30 bold
+   DEFINE FONT "f3" name "times new roman" size 12 bold
 
    define pen "p0" style PS_SOLID width 1 color 0x000000
    define pen "p1" style PS_SOLID width 10 color 0xFF0000

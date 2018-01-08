@@ -9,7 +9,6 @@ SET LIB=%ooHG_INSTALL%\Harbour\lib;%ooHG_INSTALL%\Mingw\lib;%ooHG_INSTALL%\lib
 
 echo #define oohgpath %oohg_INSTALL%\resources > _oohg_resconfig.h
 
-
 copy /b %ooHG_INSTALL%\resources\ooHG.rc _temp.rc >NUL
 if exist _temp.rc windres -i _temp.rc -o _temp.o
 
@@ -25,6 +24,3 @@ rem c:\c2wm\harbour\bin\hbmk2 %1 %2 %3 %4 %5 %6
 
 if exist _temp.rc del _temp.rc
 if exist _temp.o del _temp.o
-
-
-

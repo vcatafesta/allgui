@@ -17,111 +17,111 @@ FUNCTION main
       define timer timer1 interval showinterval action (drawkalai(),iif(iswindowactive(s),drawstereowindow(),))
 
       DEFINE LABEL iterationslabel
-         row 10
-         col 510
+         ROW 10
+         COL 510
          value "Iterations"
-         width 80
+         WIDTH 80
       END LABEL
       DEFINE SPINNER iterations
-         row 10
-         col 590
-         width 50
+         ROW 10
+         COL 590
+         WIDTH 50
          rangemin 1
          rangemax 999
          value 3
       END spinner
       DEFINE FRAME shapes
-         row 40
-         col 505
-         width 135
-         height 200
+         ROW 40
+         COL 505
+         WIDTH 135
+         HEIGHT 200
          caption "Shapes"
       END FRAME
       DEFINE CHECKBOX triangles
-         row 60
-         col 510
-         width 120
+         ROW 60
+         COL 510
+         WIDTH 120
          caption "Triangles"
       END CHECKBOX
       DEFINE CHECKBOX circles
-         row 90
-         col 510
-         width 120
+         ROW 90
+         COL 510
+         WIDTH 120
          caption "Circles"
       END CHECKBOX
       DEFINE CHECKBOX rectangles
-         row 120
-         col 510
-         width 120
+         ROW 120
+         COL 510
+         WIDTH 120
          caption "Rectangles"
       END CHECKBOX
       DEFINE CHECKBOX ellipses
-         row 150
-         col 510
-         width 120
+         ROW 150
+         COL 510
+         WIDTH 120
          caption "Ellipses"
       END CHECKBOX
       DEFINE CHECKBOX squares
-         row 180
-         col 510
-         width 120
+         ROW 180
+         COL 510
+         WIDTH 120
          caption "Squares"
       END CHECKBOX
       DEFINE CHECKBOX polygons
-         row 210
-         col 510
-         width 120
+         ROW 210
+         COL 510
+         WIDTH 120
          caption "Polygons"
          value .t.
       END CHECKBOX
       DEFINE BUTTON backcolor
-         row 250
-         col 510
-         width 130
+         ROW 250
+         COL 510
+         WIDTH 130
          caption "Background Colour"
          action  setbackcolor()
       END BUTTON
       DEFINE CHECKBOX show1
-         row 280
-         col 510
+         ROW 280
+         COL 510
          caption "Slideshow ("+alltrim(str(showinterval/1000,5,0))+" Sec)"
-         width 130
+         WIDTH 130
          onchange show1changed()
       END CHECKBOX
       DEFINE BUTTON but1
-         row 310
-         col 510
-         width 60
+         ROW 310
+         COL 510
+         WIDTH 60
          caption "Show"
          action drawkalai()
       END BUTTON
       DEFINE BUTTON save
-         row 310
-         col 580
-         width 60
+         ROW 310
+         COL 580
+         WIDTH 60
          caption "Save"
          action savewindow1()
       END BUTTON
       DEFINE BUTTON showstereo
-         row 340
-         col 510
-         width 130
+         ROW 340
+         COL 510
+         WIDTH 130
          caption "Show Stereo"
          action showstereowindow()
       END BUTTON
       define hyperlink email1
-         row 400
-         col 510
+         ROW 400
+         COL 510
          value "Algorithm of Cliff"
-         width 130
+         WIDTH 130
          handcursor .t.
          address "http://sprott.physics.wisc.edu/pickover/ekscop.html"
       END hyperlink
       define hyperlink email
-         row 430
-         col 510
+         ROW 430
+         COL 510
          value "E-Mail me"
-         width 130
+         WIDTH 130
          handcursor .t.
          address "srgiri@dataone.in"
       END hyperlink
@@ -330,7 +330,7 @@ FUNCTION savewindow1
 
 FUNCTION setbackcolor
 
-   backcolor := getcolor(backcolor)
+   BACKCOLOR := getcolor(backcolor)
 
    RETURN NIL
 
@@ -353,16 +353,16 @@ FUNCTION showstereowindow
    IF .not. iswindowdefined(s)
       DEFINE WINDOW s at 0,0 width 1100 height 580 title "Stereo Window" modal nosize backcolor {0,0,0} on init drawstereowindow()
          DEFINE BUTTON save1
-            row 520
-            col 10
-            width 50
+            ROW 520
+            COL 10
+            WIDTH 50
             caption "Save"
             action savestereowindow1()
          END BUTTON
          DEFINE BUTTON close1
-            row 520
-            col 70
-            width 50
+            ROW 520
+            COL 70
+            WIDTH 50
             caption "Close"
             action s.release()
          END BUTTON

@@ -75,7 +75,7 @@ PROCEDURE Main()
 
    SET DATE german
    SET CENTURY ON
-   SET MULTIPLE OFF warning
+   SET MULTIPLE OFF WARNING
 
    IF file("MySqlCli.ini")
       BEGIN INI FILE "MySqlCli.ini"
@@ -91,13 +91,13 @@ PROCEDURE Main()
 
    DEFINE WINDOW       F_Main              ;
          at          0, 0                ;
-         width       800                 ;
-         height      600                 ;
-         title       PROGRAM             ;
-         icon        "A_ICO_MAIN"        ;
+         WIDTH       800                 ;
+         HEIGHT      600                 ;
+         TITLE       PROGRAM             ;
+         ICON        "A_ICO_MAIN"        ;
          main                            ;
          nomaximize                      ;
-         nosize                          ;
+         NOSIZE                          ;
          ON INIT     {|| UpdateMain() }  ;
          ON RELEASE Disconnect()
 
@@ -137,22 +137,22 @@ PROCEDURE Main()
 
             button tbbConnect                              ;
                caption "Connect"                      ;
-               picture "BMP_32_CONNECT"               ;
+               PICTURE "BMP_32_CONNECT"               ;
                action {|| Connect() }
 
             button tbbDisconnect                           ;
                caption "Disconnect"                   ;
-               picture "BMP_32_DISCONNECT"            ;
+               PICTURE "BMP_32_DISCONNECT"            ;
                action {|| Disconnect() }
 
             button tbbsql2dbf                              ;
                caption "Export to DBF"                ;
-               picture "BMP_32_BASE"                  ;
+               PICTURE "BMP_32_BASE"                  ;
                action {|| SQL2Dbf() }
 
             button tbbdbf2sql                              ;
                caption "Import from DBF"              ;
-               picture "BMP_32_TABLE"                 ;
+               PICTURE "BMP_32_TABLE"                 ;
                action {|| Dbf2Sql(.t.) }
 
          END toolbar
@@ -166,8 +166,8 @@ PROCEDURE Main()
 
       DEFINE TREE          TREE_1                     ;
             at           60,10                      ;
-            width        200                        ;
-            height       460                        ;
+            WIDTH        200                        ;
+            HEIGHT       460                        ;
             ON change    {|| TreeChange() }         ;
             nodeimages   { "BMP_16_SERVER" }        ;
             itemimages   { "BMP_16_ITEMOFF", "BMP_16_ITEMON" } ;
@@ -177,20 +177,20 @@ PROCEDURE Main()
 
       DEFINE TAB        tabInfo       ;
             at        60, 220       ;
-            width     565           ;
-            height    460           ;
+            WIDTH     565           ;
+            HEIGHT    460           ;
             value     1
 
          page "&Structure"
             @ 30, 15 frame  frmTable                ;
                caption "Structure"             ;
-               width   535                     ;
-               height  415                     ;
+               WIDTH   535                     ;
+               HEIGHT  415                     ;
                bold
 
             @ 50, 30 grid        GRD_Table                   ;
-               width        505                        ;
-               height       380                        ;
+               WIDTH        505                        ;
+               HEIGHT       380                        ;
                headers      { "Name", "Type",      ;
                "Null", "Key",       ;
                "Default value",     ;
@@ -203,13 +203,13 @@ PROCEDURE Main()
          page "&Data"
             @ 30, 15 frame  frmData ;
                caption "Data" ;
-               width   535 ;
-               height  415 ;
+               WIDTH   535 ;
+               HEIGHT  415 ;
                bold
 
             @ 50, 30 grid        GRD_Data                   ;
-               width        505                        ;
-               height       380                        ;
+               WIDTH        505                        ;
+               HEIGHT       380                        ;
                headers      { "" }                     ;
                widths       { 100 }                    ;
                items        { { "" } }                 ;
@@ -243,54 +243,54 @@ FUNCTION Connect()
 
    DEFINE WINDOW F_Connect ;
          at nRow, nCol ;
-         width  315 ;
-         height 205 ;
-         title  " Connect to MySQL server" ;
+         WIDTH  315 ;
+         HEIGHT 205 ;
+         TITLE  " Connect to MySQL server" ;
          modal ;
-         nosize ;
+         NOSIZE ;
          nosysmenu
 
       @ 10, 10 frame  frm_Data ;
          caption "" ;
-         width   285 ;
-         height  120 ;
+         WIDTH   285 ;
+         HEIGHT  120 ;
          bold
 
       @ 34, 20 label lblServer ;
          value "Server" ;
-         width 50 ;
-         height 21
+         WIDTH 50 ;
+         HEIGHT 21
 
       @ 64, 20 label lblUser ;
          value "User" ;
-         width 50 ;
-         height 21
+         WIDTH 50 ;
+         HEIGHT 21
 
       @ 94, 20 label lblPaswd ;
          value "Password" ;
-         width 55 ;
-         height 21
+         WIDTH 55 ;
+         HEIGHT 21
 
       @ 30, 85 textbox txtServer ;
-         height 21 ;
+         HEIGHT 21 ;
          value cServer ;
-         width 200 ;
+         WIDTH 200 ;
          ON gotfocus {|| setControl( .T. ) }  ;
          ON lostfocus {|| setControl( .F. ) } ;
          maxlength 60
 
       @ 60, 85 textbox txtUser ;
-         height 21 ;
+         HEIGHT 21 ;
          value cUser ;
-         width 100 ;
+         WIDTH 100 ;
          ON gotfocus {|| setControl( .T. ) }  ;
          ON lostfocus {|| setControl( .F. ) } ;
          maxlength 40
 
       @ 90, 85 textbox txtPaswd ;
-         height 21 ;
+         HEIGHT 21 ;
          value cPaswd ;
-         width 100 ;
+         WIDTH 100 ;
          password ;
          ON gotfocus {|| setControl( .T. ) } ;
          ON lostfocus {|| setControl( .F. ) } ;
@@ -299,8 +299,8 @@ FUNCTION Connect()
       @ 140, 225 button btnConnect ;
          caption "&Connect" ;
          action {|| Login() } ;
-         width   70 ;
-         height  25
+         WIDTH   70 ;
+         HEIGHT  25
 
    END WINDOW
 
@@ -654,60 +654,60 @@ FUNCTION SQL2Dbf()
 
    DEFINE WINDOW    F_2Dbf ;
          at        nRow, nCol ;
-         width     360 ;
-         height    220 ;
-         title     " Export to DBF" ;
+         WIDTH     360 ;
+         HEIGHT    220 ;
+         TITLE     " Export to DBF" ;
          modal ;
-         nosize
+         NOSIZE
 
       @ 10, 10 frame  frm_2Dbf ;
          caption "" ;
-         width   335 ;
-         height  100 ;
+         WIDTH   335 ;
+         HEIGHT  100 ;
          bold
 
       @ 34, 20 label lblFile ;
          value "Table name:" ;
-         width 70 ;
-         height 21
+         WIDTH 70 ;
+         HEIGHT 21
 
       @ 30, 100 textbox txtFile ;
-         height 21 ;
+         HEIGHT 21 ;
          value cFileName ;
-         width 200 ;
+         WIDTH 200 ;
          ON gotfocus {|| setControl( .T. ) }  ;
          ON lostfocus {|| setControl( .F. ) } ;
          maxlength 60
 
       @ 64, 20 label lblMap ;
          value "Folder:" ;
-         width 70 ;
-         height 21
+         WIDTH 70 ;
+         HEIGHT 21
 
       @ 60, 100 textbox txtMap ;
-         height 21 ;
+         HEIGHT 21 ;
          value BSL+lower(curdir())+BSL ;
-         width 200 ;
+         WIDTH 200 ;
          ON gotfocus {|| setControl( .T. ) } ;
          ON lostfocus {|| setControl( .F. ) }
 
       @ 60, 305 button btnFolder ;
          caption "..." ;
          action  {|| (F_2Dbf.txtMap.Value:=GetFolder( "Select folder:" )), F_2Dbf.txtMap.SetFocus } ;
-         width 30 ;
-         height 21
+         WIDTH 30 ;
+         HEIGHT 21
 
       @ 120, 275 button btn2Dbf ;
          caption "&Export" ;
          action  {|| copy2dbf(F_2Dbf.txtMap.Value, F_2Dbf.txtFile.Value), F_2Dbf.Release } ;
-         width   70 ;
-         height  25
+         WIDTH   70 ;
+         HEIGHT  25
 
       @ 155, 275 button btn2DbfCancel ;
          caption "&Cancel" ;
          action  {|| F_2Dbf.Release } ;
-         width   70 ;
-         height  25
+         WIDTH   70 ;
+         HEIGHT  25
 
    END WINDOW
 

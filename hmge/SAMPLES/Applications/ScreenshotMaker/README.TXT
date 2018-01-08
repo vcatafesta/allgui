@@ -19,7 +19,6 @@ Usage
 2) It may be convenient to create shortcuts on the desktop, in the Start
    menu, or the StartUp folder to run the program.
 
-
 Comments and suggestions
 ------------------------
 Although I can't promise there will be any new versions of this program, I

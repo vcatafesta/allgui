@@ -55,10 +55,10 @@ FUNCTION TestXLS()
       AUTOCOLS TRANSPARENT SELECTOR cBmp EDITABLE
 
    Add Super Header To oBrw From Column 2 To Column 3 Color CLR_BLUE, { CLR_NBLUE, CLR_WHITE } ;
-      Title "Name" 3DLook
+      TITLE "Name" 3DLook
 
    Add Super Header To oBrw FROM Column 4 TO Column 6 Color CLR_BLUE, { CLR_NBLUE, CLR_WHITE } ;
-      Title "Address" 3DLook
+      TITLE "Address" 3DLook
 
    oBrw:nHeightCell += 4
    oBrw:nHeightHead += 3

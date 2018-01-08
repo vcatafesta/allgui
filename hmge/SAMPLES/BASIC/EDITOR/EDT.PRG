@@ -43,9 +43,9 @@ FUNCTION main()
 
    DEFINE WINDOW Frm1 ;
          at nTop, nLeft ;
-         width ColChartopix(nWidth) height Rowchartopix(nHeight) ;
-         title 'Simple Editor' ;
-         icon 'main' ;
+         WIDTH ColChartopix(nWidth) height Rowchartopix(nHeight) ;
+         TITLE 'Simple Editor' ;
+         ICON 'main' ;
          main ;
          on init nuevo() ;
          on maximize ( frm1.tmr1.enabled := .t. ) ;
@@ -153,10 +153,10 @@ FUNCTION main()
 PROCEDURE editor()
 
    DEFINE EDITBOX edit
-      row      rowchartopix(2) + 2
-      col      colchartopix(0)
-      width      colchartopix( nWidth - 1 )
-      height      rowchartopix( nHeight - 7 )
+      ROW      rowchartopix(2) + 2
+      COL      colchartopix(0)
+      WIDTH      colchartopix( nWidth - 1 )
+      HEIGHT      rowchartopix( nHeight - 7 )
       parent      frm1
       fontname   cFontName
       fontsize   nFontSize
@@ -165,7 +165,7 @@ PROCEDURE editor()
       fontUnderline   lUnderline
       fontStrikeout   lStrikeOut
       fontcolor   aColour
-      backcolor   { 240, 240, 241 }
+      BACKCOLOR   { 240, 240, 241 }
       HScrollBar   !lWordWrap
       onchange   (lSaveNeeded := .T., Frm1.Button_3.Enabled := lSaveNeeded)
    END editbox
@@ -378,10 +378,10 @@ PROCEDURE Acercade()
 
    DEFINE WINDOW Frm2 ;
          at 0, 0 ;
-         width colchartopix(34) + iif(IsThemed(), GetBorderWidth(), 0) ;
-         height rowchartopix(15) + iif(IsThemed(), GetBorderHeight() + 6, 0) ;
-         title 'About' ;
-         icon 'main' ;
+         WIDTH colchartopix(34) + iif(IsThemed(), GetBorderWidth(), 0) ;
+         HEIGHT rowchartopix(15) + iif(IsThemed(), GetBorderHeight() + 6, 0) ;
+         TITLE 'About' ;
+         ICON 'main' ;
          modal ;
          font 'Courier New' size 9
 

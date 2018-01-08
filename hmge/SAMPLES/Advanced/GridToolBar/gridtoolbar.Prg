@@ -18,31 +18,31 @@ FUNCTION  _addGridToolBar( cGrid, cWindow )
 
    DEFINE BUTTON &cpdf
       parent &cWindow
-      row nToolBarRow
-      col nToolBarCol
-      width nButtonSize
-      height nButtonSize
-      picture 'pdf'
+      ROW nToolBarRow
+      COL nToolBarCol
+      WIDTH nButtonSize
+      HEIGHT nButtonSize
+      PICTURE 'pdf'
       tooltip 'Export to PDF file'
       action _grid2pdf( cGrid, cWindow )
    END BUTTON
    DEFINE BUTTON &cCsv
       parent &cWindow
-      row nToolBarRow
-      col nToolBarCol + nButtonSize + nInterval
-      width nButtonSize
-      height nButtonSize
-      picture 'csv'
+      ROW nToolBarRow
+      COL nToolBarCol + nButtonSize + nInterval
+      WIDTH nButtonSize
+      HEIGHT nButtonSize
+      PICTURE 'csv'
       tooltip 'Export to CSV file'
       action _grid2csv( cGrid, cWindow )
    END BUTTON
    DEFINE BUTTON &cPrint
       parent &cWindow
-      row nToolBarRow
-      col nToolBarCol + nButtonSize + nInterval + nButtonSize + nInterval
-      width nButtonSize
-      height nButtonSize
-      picture 'print'
+      ROW nToolBarRow
+      COL nToolBarCol + nButtonSize + nInterval + nButtonSize + nInterval
+      WIDTH nButtonSize
+      HEIGHT nButtonSize
+      PICTURE 'print'
       tooltip 'Print this table'
       action _gridprint( cGrid, cWindow )
    END BUTTON

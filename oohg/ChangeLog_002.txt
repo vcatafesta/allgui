@@ -905,7 +905,6 @@
   * include/oohg.ch
     * testing gui mode init
 
-
 2009-08-25 19:56 UTC-0500 Vicente Guerra <vicente@guerra.com.mx>
   * source/c_windows.c
     ! Fixed duplicated functions.
@@ -924,7 +923,6 @@
   * source/c_controlmisc.c
   * source/h_hotkeybox.prg
     !  in order to Run with Harbour 2.0.
-
 
 2009-08-23 12:06 UTC-0500 Vicente Guerra <vicente@guerra.com.mx>
   * source/h_tab.prg
@@ -1030,7 +1028,6 @@
     include/i_textbox.ch
 
      added optional action button inside textbox.
-
 
 2009-04-09 21:50 UTC-0500 Vicente Guerra <vicente@guerra.com.mx>
   * source/h_browse.prg
@@ -1224,7 +1221,6 @@
 2008-12-01 16:43 UTC-0500 Ciro Vargas C. <cvc@oohg.org>
   * source/h_tooltip.prg
    ! Fixed compilation for MinGW.
-
 
 2008-11-30 10:33 UTC-0600 Vicente Guerra <vicente@guerra.com.mx>
   * source/h_datepicker.prg

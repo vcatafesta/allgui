@@ -23,15 +23,15 @@ FUNCTION Main
    NEXT i
    DEFINE WINDOW main at 0, 0 width 800 height 600 main
       DEFINE LABEL textboxlabel
-         row 10
-         col 10
+         ROW 10
+         COL 10
          value 'Enter a search string'
          autosize .t.
          vcenteralign .t.
       END LABEL
       DEFINE TEXTBOX textbox
-         row 10
-         col 160
+         ROW 10
+         COL 160
          onchange ( _cAnywhereSearchStr := getproperty( ThisWindow.Name, 'textbox', 'VALUE' ), ;
             setproperty( ThisWindow.Name, '_anywherelabel', 'VALUE', _cAnywhereSearchStr ), ;
             iif( empty(_HMGAnywhereSearch( cActiveControl, ThisWindow.Name, .t. )),;
@@ -67,10 +67,10 @@ FUNCTION Main
          END node
       END tree
       DEFINE LISTBOX list1
-         row 40
-         col 210
-         width 200
-         height 200
+         ROW 40
+         COL 210
+         WIDTH 200
+         HEIGHT 200
          multiselect .t.
          fontname 'Arial'
          fontsize 14
@@ -79,9 +79,9 @@ FUNCTION Main
          on gotfocus ( cActiveControl := this.name, main.Radio.Value := 2 )
       END listbox
       DEFINE COMBOBOX combo1
-         row 250
-         col 10
-         width 200
+         ROW 250
+         COL 10
+         WIDTH 200
          items aNationalities
          fontname 'FixedSys'
          fontsize 12
@@ -89,10 +89,10 @@ FUNCTION Main
          on gotfocus ( cActiveControl := this.name, main.Radio.Value := 3 )
       END COMBOBOX
       DEFINE GRID grid1
-         row 280
-         col 10
-         width 350
-         height 200
+         ROW 280
+         COL 10
+         WIDTH 350
+         HEIGHT 200
          items aGrid
          headers { 'Head1', 'Head2', 'Head3' }
          widths { 100, 100, 120 }
@@ -101,10 +101,10 @@ FUNCTION Main
          on gotfocus ( cActiveControl := this.name, main.Radio.Value := 4 )
       END GRID
       DEFINE GRID grid2
-         row 280
-         col 370
-         width 330
-         height 200
+         ROW 280
+         COL 370
+         WIDTH 330
+         HEIGHT 200
          virtual .t.
          itemcount 1000
          headers { 'Column1', 'Column2' }
@@ -114,9 +114,9 @@ FUNCTION Main
          on gotfocus ( cActiveControl := this.name, main.Radio.Value := 5 )
       END GRID
       DEFINE LABEL _anywherelabel
-         row GetProperty( ThisWindow.Name, 'HEIGHT' ) - 85
-         col 10
-         width 200
+         ROW GetProperty( ThisWindow.Name, 'HEIGHT' ) - 85
+         COL 10
+         WIDTH 200
          transparent .t.
          fontcolor { 255, 0, 0 }
          fontname 'Arial'

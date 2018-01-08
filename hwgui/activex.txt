@@ -64,7 +64,6 @@ I don't want ever talk about how these queries are done and methods called,
 let's just say they use INTERFACEs. Some INTERFACEs are "standard"
 (must be allways present), others are specific to specific objects.
 
-
 As you may easily try, you can use TOleAuto from a text mode application
 and the called external application opens a... different window!
 
@@ -161,7 +160,6 @@ c_activex.c contains the initialization code and the event management code
 
 In rmsample.prg I created a class to better handle the events... it's perhaps not
 the best code.... there are some comments.
-
 
 Just to add something on event handling.
 You need to use EventMap to map events -> code.

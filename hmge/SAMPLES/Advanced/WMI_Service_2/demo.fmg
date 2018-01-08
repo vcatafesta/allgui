@@ -58,7 +58,7 @@ DEFINE WINDOW TEMPLATE AT 140 , 235 WIDTH 800 HEIGHT 600 TITLE _MYTITLE_ ICON "D
       FONTNAME 'Trebuchet MS'
       FONTSIZE 10
       FONTBOLD .T.
-      BackColor {190, 190, 255}
+      BACKCOLOR {190, 190, 255}
       CAPTION ' :: stringBuffer :: '
    END FRAME
 

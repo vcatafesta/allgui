@@ -13,11 +13,11 @@ PROCEDURE Main
 
    DEFINE WINDOW wDemo ;
          At 0, 0 ;
-         Width 550 Height 350 ;
-         Title 'Usage Help File in Format CHM' ;
+         WIDTH 550 Height 350 ;
+         TITLE 'Usage Help File in Format CHM' ;
          Main ;
          NoMaximize ;
-         NoSize
+         NOSIZE
 
       DEFINE MAIN MENU
          DEFINE POPUP 'File'
@@ -35,8 +35,8 @@ PROCEDURE Main
       END MENU
 
       DEFINE BUTTON b1
-         row 20
-         col 20
+         ROW 20
+         COL 20
          caption 'Press me'
          onclick DisplayHelpTopic( "helpindex.htm" )
       END BUTTON

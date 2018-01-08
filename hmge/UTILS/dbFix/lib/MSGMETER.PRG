@@ -142,7 +142,7 @@ FUNCTION MsgWait(bAction, cMsg, cTitle, lNoCancel, oParent)
       cTitle    := "Please Wait", ;
       lNoCancel := .F.
 
-   define font oFont name "MS Sans Serif" size 0, -8 bold
+   DEFINE FONT oFont name "MS Sans Serif" size 0, -8 bold
 
    define dialog oDlg from 1, 1 to 76, 340 title cTitle pixel font oFont ;
       style nOr(DS_MODALFRAME, WS_POPUP, WS_CAPTION)

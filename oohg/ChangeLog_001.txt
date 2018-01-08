@@ -1882,7 +1882,6 @@
 
     + New TPRINT class , now can change print library without modify source code
 
-
 2006-01-18 23:20 UTC-0600 Vicente Guerra <vicente@guerra.com.mx>
   * source/h_windows.prg
     * Now it's possible to create non-modal windows after a modal window.

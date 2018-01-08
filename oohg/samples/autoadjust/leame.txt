@@ -8,14 +8,13 @@ SET AUTOADJUST OFF   ////  Apaga el autoajuste global
 
 SET ADJUSTWIDTH ON   ////  Prende el ajuste global de ancho
 SET ADJUSTWIDTH OFF  ////  Apaga del ajuste global de ancho
-                     ////  Depende del primero  
+                     ////  Depende del primero
 
 SET ADJUSTFONT ON    ////  Prende el ajuste global de font
 SET ADJUSTFONT OFF   ////  Apaga el autoajuste global de font
                      ////  Depende del primero.
 
 ------------------------------------------------------------------
-
 
  Para cada control se puede activar o desactivar el autoajuste
  si esta prendido el global.
@@ -38,7 +37,3 @@ con        oControl:lfixwidth := .T.
 
 con        oControl:lfixfont  := .T.
  o         oControl:lfixfont  := .F.
-
-
-
- 

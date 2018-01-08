@@ -20,9 +20,9 @@ FUNCTION Main()
 
    DEFINE WINDOW Pr_Form ;
          at 0,0 ;
-         width 200 ;
-         height 100 ;
-         title 'DO REPORT Tests' ;
+         WIDTH 200 ;
+         HEIGHT 100 ;
+         TITLE 'DO REPORT Tests' ;
          main ;
          on release ( DbCloseArea(), FErase("lista.ntx") )
 
@@ -48,7 +48,7 @@ FUNCTION PrintTest()
    DbGoTop()    // in "Test.dbf"
 
    do report ;
-      title  'REPORT OF CINEMA ARTISTS | second title'                        ;
+      TITLE  'REPORT OF CINEMA ARTISTS | second title'                        ;
       headers  {'','','',''} , { 'SIMPLE', 'LAST NAME', 'BIO', 'INCOME' }     ;
       fields   {'code','last','BIO','incoming'}                               ;
       widths   {10,20,26,14}                                                  ;

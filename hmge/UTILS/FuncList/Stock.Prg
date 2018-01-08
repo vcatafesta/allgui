@@ -62,10 +62,10 @@ PROCEDURE Main
 
    DEFINE WINDOW wStock                                      ;
          At 132, 235                                        ;
-         Width 556                                          ;
-         Height 403                                         ;
-         Title APPTITLE                                     ;
-         Icon 'STOCK'                                       ;
+         WIDTH 556                                          ;
+         HEIGHT 403                                         ;
+         TITLE APPTITLE                                     ;
+         ICON 'STOCK'                                       ;
          Main                                               ;
          On Init ReSize()                                   ;
          On Size ReSize()                                   ;
@@ -88,8 +88,8 @@ PROCEDURE Main
       // ќ„≈Ќ№ замедл€ет формирование нового списка.
 
       @ 31, 3 Grid grdContent                                   ;
-         Width 535                                         ;
-         Height 305                                        ;
+         WIDTH 535                                         ;
+         HEIGHT 305                                        ;
          Headers { 'Name', 'Type', 'Comment' }             ;
          Widths { 200, 100, 200 }                          ;
          Font 'Tahoma' Size 10                             ;
@@ -102,14 +102,14 @@ PROCEDURE Main
 
       @ 340, 5 Label lblSearch    ;
          Value 'Find'       ;
-         Width 40 Height 18 ;
+         WIDTH 40 Height 18 ;
          FontColor BLUE     ;
          Bold
 
       @ ( wStock.lblSearch.Row - 4 ), ( wStock.lblSearch.Col + wStock.lblSearch.Width + 10 ) ;
          TextBox txbSearch                    ;
-         Width 400                            ;
-         Height 20                            ;
+         WIDTH 400                            ;
+         HEIGHT 20                            ;
          UpperCase                            ;
          On change QSeek()                    ;
          On enter wStock.grdContent.SetFocus  ;
@@ -117,17 +117,17 @@ PROCEDURE Main
 
       @ wStock.txbSearch.Row, ( wStock.txbSearch.Col + wStock.txbSearch.Width + 5 ) ;
          Button btnSearch   ;
-         Picture 'FIND'     ;
-         Width 20           ;
-         Height 20          ;
+         PICTURE 'FIND'     ;
+         WIDTH 20           ;
+         HEIGHT 20          ;
          Action QSeek()     ;
          Tooltip 'Find more'
 
       @ wStock.btnSearch.Row, ( wStock.btnSearch.Col + wStock.btnSearch.Width + 5 ) ;
          Button btnFindAll  ;
-         Picture 'FINDALL'  ;
-         Width 20           ;
-         Height 20          ;
+         PICTURE 'FINDALL'  ;
+         WIDTH 20           ;
+         HEIGHT 20          ;
          Action FindAll()   ;
          Tooltip 'Find all'
 
@@ -857,23 +857,23 @@ STATIC PROCEDURE FindAll
 
       DEFINE WINDOW wFindAll     ;
             At 0, 0                ;
-            Width 350              ;
-            Height 300             ;
-            Title aStrings[ 1, 2 ] ;
-            Icon 'STOCK'           ;
+            WIDTH 350              ;
+            HEIGHT 300             ;
+            TITLE aStrings[ 1, 2 ] ;
+            ICON 'STOCK'           ;
             Modal
 
          @ 10, 5 Label lblName                                    ;
             Value ( aStrings[ 1, 2 ] + ' [' + cValue + ']' ) ;
-            Width 330                                        ;
-            Height 18                                        ;
+            WIDTH 330                                        ;
+            HEIGHT 18                                        ;
             Bold                                             ;
             FontColor BLUE
 
          @ ( wFindAll.lblName.Row + wFindAll.lblName.Height + 3 ), wFindAll.lblName.Col ;
             Grid grdMatches                                                  ;
-            Width 330                                                        ;
-            Height 200                                                       ;
+            WIDTH 330                                                        ;
+            HEIGHT 200                                                       ;
             Headers { aStrings[ 3, 2 ], aStrings[ 4, 2 ], aStrings[ 5, 2 ] } ;
             Widths { 150, 100, 200 }                                         ;
             Font 'Tahoma' Size 10                                            ;
@@ -1180,22 +1180,22 @@ STATIC PROCEDURE SetTitle
 
    DEFINE WINDOW wSetTitle       ;
          At 132, 235            ;
-         Width 406              ;
-         Height 142             ;
-         Title aStrings[ 1, 2 ] ;
-         Icon 'STOCK'           ;
+         WIDTH 406              ;
+         HEIGHT 142             ;
+         TITLE aStrings[ 1, 2 ] ;
+         ICON 'STOCK'           ;
          Modal
 
       @ 10, 5 Label lblName          ;
          Value aStrings[ 2, 2 ] ;
-         Width 100              ;
-         Height 18              ;
+         WIDTH 100              ;
+         HEIGHT 18              ;
          Bold                   ;
          FontColor BLUE
 
       @ ( wSetTitle.lblName.Row + wSetTitle.lblName.Height + 10 ), wSetTitle.lblName.Col ;
          TextBox txbName                 ;
-         Height 20                       ;
+         HEIGHT 20                       ;
          Value aOptions[ OPTIONS_TITLE ]
 
       @ ( wSetTitle.txbName.Row + wSetTitle.txbName.Height + 15 ), 150               ;
@@ -1258,58 +1258,58 @@ STATIC PROCEDURE Options
 
    DEFINE WINDOW wOptions        ;
          At 132, 235            ;
-         Width 433              ;
-         Height 309             ;
-         Title aStrings[ 1, 2 ] ;
-         Icon 'STOCK'           ;
+         WIDTH 433              ;
+         HEIGHT 309             ;
+         TITLE aStrings[ 1, 2 ] ;
+         ICON 'STOCK'           ;
          Modal
 
       @ 5, 5 Frame frmOnStart         ;
          Caption aStrings[ 2, 2 ] ;
-         Width 205                ;
-         Height 75                ;
+         WIDTH 205                ;
+         HEIGHT 75                ;
          Bold                     ;
          Fontcolor BLUE
 
       @ ( wOptions.frmOnStart.Row + 15 ), ( wOptions.frmOnStart.Col + 10 ) ;
          RadioGroup rdgOnStart                                              ;
          Options { aStrings[ 3, 2 ], aStrings[ 4, 2 ] }                     ;
-         Width 185                                                          ;
+         WIDTH 185                                                          ;
          Value aOptions[ OPTIONS_ONSTART ]
 
       @ wOptions.frmOnStart.Row                                           , ;
          ( wOptions.frmOnStart.Col + wOptions.frmOnStart.Width + 5 )         ;
          Frame frmSearch                                                     ;
          Caption aStrings[ 5, 2 ]                                            ;
-         Width wOptions.frmOnStart.Width Height wOptions.frmOnStart.Height   ;
+         WIDTH wOptions.frmOnStart.Width Height wOptions.frmOnStart.Height   ;
          Bold                                                                ;
          Fontcolor BLUE
 
       @ wOptions.rdgOnStart.Row, ( wOptions.frmSearch.Col + 15 ) ;
          RadioGroup rdgSearch                                     ;
          Options { aStrings[ 6, 2 ], aStrings[ 7, 2 ] }           ;
-         Width 165                                                ;
+         WIDTH 165                                                ;
          Value aOptions[ OPTIONS_SEARCH ]
 
       @ ( wOptions.frmOnStart.Row + wOptions.frmOnStart.Height + 5 )      , ;
          wOptions.frmOnStart.Col                                             ;
          Frame frmEditor                                                     ;
          Caption aStrings[ 8, 2 ]                                            ;
-         Width ( wOptions.frmOnStart.Width + wOptions.frmSearch.Width + 5 )  ;
-         Height 140                                                          ;
+         WIDTH ( wOptions.frmOnStart.Width + wOptions.frmSearch.Width + 5 )  ;
+         HEIGHT 140                                                          ;
          Bold                                                                ;
          Fontcolor BLUE
 
       @ ( wOptions.frmEditor.Row + 25 ), ( wOptions.frmEditor.Col + 10 ) ;
          Textbox txbEditor                                                ;
          Value aOptions[ OPTIONS_EDITOR ]                                 ;
-         Height 20                                                        ;
-         Width ( wOptions.frmEditor.Width - 45 )
+         HEIGHT 20                                                        ;
+         WIDTH ( wOptions.frmEditor.Width - 45 )
 
       @ wOptions.txbEditor.Row                                          , ;
          ( wOptions.txbEditor.Col + wOptions.txbEditor.Width + 5 )         ;
          Button btnSearch                                                  ;
-         Picture 'FIND'                                                    ;
+         PICTURE 'FIND'                                                    ;
          Action { |cFile| cFile  := GetFile( { { aLang[ 4, 2 ], '*.exe' }, ;
          { aLang[ 5, 2 ], '*.*'   }  ;
          }                           , ;
@@ -1320,12 +1320,12 @@ STATIC PROCEDURE Options
          Iif( !Empty( cFile )                           , ;
          SetProperty( 'wOptions', 'txbEditor', 'Value', cFile ), ) ;
          }                                                                       ;
-         Width 20 Height 20
+         WIDTH 20 Height 20
 
       @ ( wOptions.txbEditor.Row + 25 ), wOptions.txbEditor.Col            ;
          RadioGroup rdgParameters                                           ;
          Options { aStrings[ 9, 2 ], aStrings[ 10, 2 ], aStrings[ 11, 2 ] } ;
-         Width 270                                                          ;
+         WIDTH 270                                                          ;
          Spacing 28                                                         ;
          Value aOptions[ OPTIONS_RUNMODE ]                                  ;
          On change EnableParameters()
@@ -1333,13 +1333,13 @@ STATIC PROCEDURE Options
       @ ( wOptions.rdgParameters.Row + 30 )                              , ;
          ( wOptions.rdgParameters.Col + wOptions.rdgParameters.Width + 5 )  ;
          Textbox txbWithNumber                                              ;
-         Height 20                                                          ;
-         Width 120
+         HEIGHT 20                                                          ;
+         WIDTH 120
 
       @ ( wOptions.txbWithNumber.Row + 30 ), wOptions.txbWithNumber.Col ;
          Textbox txbWithName                                             ;
-         Height 20                                                       ;
-         Width 120
+         HEIGHT 20                                                       ;
+         WIDTH 120
 
       @ ( wOptions.Height - 70 ), 80 Button btnOk Caption _HMG_MESSAGE[ 6 ] ;
          Action { || SaveOptions(), wOptions.Release }

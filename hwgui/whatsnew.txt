@@ -410,7 +410,6 @@ HWGUI 2.01 ( 05.07.2002 )
 
 [-] Some fixes in HBrowse class, dialog creating functions, ...
 
-
 HWGUI 2.0 final ( 26.06.2002 )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

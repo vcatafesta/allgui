@@ -105,5 +105,4 @@ Alle Parameter sind wahlweise freigestellt.
 
 Ich hoffe, gebildet zu haben, was zur ganzer Gemeinschaft Minigui schätzen!
 
-
 Pierpaolo Martinello pier@-NOSPAM-.bmm.it

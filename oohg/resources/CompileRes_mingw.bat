@@ -23,7 +23,6 @@ rem
    echo.
    goto EXIT
 
-
 :CONTINUE
 
    if not "%HG_MINGW%"=="" goto CHECK

@@ -25,55 +25,55 @@ FUNCTION Main()
 
    DEFINE WINDOW f1 ;
          At 0, 0 ;
-         Width ColCharToPix( nWidth ) ;
-         Height RowCharToPix( nHeight ) + GetBorderHeight() / iif( IsWinXP(), .5, 2 ) ;
-         Title "Enter Form" ;
-         Icon "demo2.ico" ;
+         WIDTH ColCharToPix( nWidth ) ;
+         HEIGHT RowCharToPix( nHeight ) + GetBorderHeight() / iif( IsWinXP(), .5, 2 ) ;
+         TITLE "Enter Form" ;
+         ICON "demo2.ico" ;
          Main ;
          ON Maximize ( f1.width := ColCharToPix( nWidth ), ;
          f1.height := RowCharToPix( nHeight ) + GetBorderHeight() / iif( IsWinXP(), .5, 2 ) ) ;
-         Nosize
+         NOSIZE
 
       @RowCharToPix( 1 ), nCol LABEL l1 value "Enter Name    " font "MS Sans Serif" size 8
 
       @RowCharToPix( 1 ) -n, LenChartopix( f1 .l1. value ) getbox cName value cName PICTURE "@!" ;
-         width nCtrlW height nCtrlH ;
+         WIDTH nCtrlW height nCtrlH ;
          valid {|| CheckEmpty( ( cName := f1 .cName. value ), "You must enter a name" ) }
 
       @RowCharToPix( 4 ) -n, nCol LABEL l2 value "Enter street 1" font "MS Sans Serif" size 8
 
       @RowCharToPix( 4 ) -2 * n, LenChartopix( f1 .l2. value ) getbox cStreet1 value cStreet1 ;
-         width nCtrlW height nCtrlH ;
+         WIDTH nCtrlW height nCtrlH ;
          valid {|| CheckEmpty( ( cStreet1 := f1 .cStreet1. value ), "You must enter a street address" ) }
 
       @RowCharToPix( 7 ) -2 * n, nCol LABEL l3 value "Enter street 2" font "MS Sans Serif" size 8
 
       @RowCharToPix( 7 ) -3 * n, LenChartopix( f1 .l3. value ) getbox cStreet2 value cStreet2 ;
-         width nCtrlW height nCtrlH
+         WIDTH nCtrlW height nCtrlH
 
       @RowCharToPix( 10 ) -3 * n, nCol LABEL l4 value "Enter City    " font "MS Sans Serif" size 8
 
       @RowCharToPix( 10 ) -4 * n, LenChartopix( f1 .l4. value ) getbox cCity value cCity PICTURE "@!" ;
-         width nCtrlW height nCtrlH ;
+         WIDTH nCtrlW height nCtrlH ;
          valid {|| CheckEmpty( ( cCity := f1 .cCity. value ), "You must enter a city name" ) }
 
       @RowCharToPix( 13 ) -4 * n, nCol LABEL l5 value "Enter state   " font "MS Sans Serif" size 8
 
       @RowCharToPix( 13 ) -5 * n, LenChartopix( f1 .l5. value ) getbox cState value cState PICTURE "@!" ;
-         width ColCharToPix( 3.5 ) height nCtrlH ;
+         WIDTH ColCharToPix( 3.5 ) height nCtrlH ;
          valid {|| IfState( ( cState := f1 .cState. value ) ) }
 
       @RowCharToPix( 16 ) -6 * n, nCol LABEL l6 value "Enter zipcode " font "MS Sans Serif" size 8
 
       @RowCharToPix( 16 ) -7 * n, LenChartopix( f1 .l6. value ) getbox cZipcode value cZipcode PICTURE "99999" ;
-         width ColCharToPix( 6 ) height nCtrlH ;
+         WIDTH ColCharToPix( 6 ) height nCtrlH ;
          valid {|| CheckEmpty( ( cZipcode := f1 .cZipcode. value ), "You must enter a zipcode" ) }
 
       DEFINE BUTTON b1
-         row f1.height - 60 -iif( IsWinXP(), GetBorderHeight(), 0 )
-         col nCol
-         width ColCharToPix( 9 )
-         height RowCharToPix( 1.65 )
+         ROW f1.height - 60 -iif( IsWinXP(), GetBorderHeight(), 0 )
+         COL nCol
+         WIDTH ColCharToPix( 9 )
+         HEIGHT RowCharToPix( 1.65 )
          caption "&Ok"
          fontname "MS Sans Serif"
          fontsize 8
@@ -82,10 +82,10 @@ FUNCTION Main()
       END BUTTON
 
       DEFINE BUTTON b2
-         row f1.height - 60 -iif( IsWinXP(), GetBorderHeight(), 0 )
-         col nCol + f1 .b1. width + 10
-         width ColCharToPix( 9 )
-         height RowCharToPix( 1.65 )
+         ROW f1.height - 60 -iif( IsWinXP(), GetBorderHeight(), 0 )
+         COL nCol + f1 .b1. width + 10
+         WIDTH ColCharToPix( 9 )
+         HEIGHT RowCharToPix( 1.65 )
          caption "&Cancel"
          fontname "MS Sans Serif"
          fontsize 8
