@@ -46,7 +46,7 @@ FUNCTION Main()
       principal.label_1.fontcolor:={0,0,0}
 
       @ 321,150 TEXTBOX text_1 HEIGHT 24 WIDTH 219 ;
-         Font 'MS Sans Serif' size 10 MAXLENGTH 30 ;
+         FONT 'MS Sans Serif' size 10 MAXLENGTH 30 ;
 
       principal.text_1.fontcolor:={0,0,0}
       principal.text_1.backcolor:={255,255,255}

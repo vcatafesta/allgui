@@ -230,7 +230,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       ROW 470
       COL 240
       WIDTH 50
-      readonly .t.
+      READONLY .t.
       VALUE _DBUmaxcol1
       NUMERIC .t.
       RIGHTALIGN .t.
@@ -246,7 +246,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       ROW 470
       COL 510
       WIDTH 50
-      readonly .t.
+      READONLY .t.
       VALUE 2
       NUMERIC .t.
       RIGHTALIGN .t.

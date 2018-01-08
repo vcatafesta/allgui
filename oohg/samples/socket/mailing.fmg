@@ -42,7 +42,7 @@ DEFINE WINDOW  TEMPLATE ;
    @ 161,101 TEXTBOX asunto_txb ;
       HEIGHT 24 ;
       WIDTH 289 ;
-      Font 'MS Sans Serif' ;
+      FONT 'MS Sans Serif' ;
       size 10 ;
       MAXLENGTH 30 ;
 
@@ -89,7 +89,7 @@ DEFINE WINDOW  TEMPLATE ;
    @ 26,133 TEXTBOX smtp ;
       HEIGHT 24 ;
       WIDTH 200 ;
-      Font 'MS Sans Serif' ;
+      FONT 'MS Sans Serif' ;
       size 10 ;
       MAXLENGTH 30 ;
 
@@ -108,7 +108,7 @@ DEFINE WINDOW  TEMPLATE ;
    @ 76,133 TEXTBOX send ;
       HEIGHT 24 ;
       WIDTH 200 ;
-      Font 'MS Sans Serif' ;
+      FONT 'MS Sans Serif' ;
       size 10 ;
       MAXLENGTH 30 ;
 
@@ -127,7 +127,7 @@ DEFINE WINDOW  TEMPLATE ;
    @ 116,133 TEXTBOX rname ;
       HEIGHT 24 ;
       WIDTH 202 ;
-      Font 'MS Sans Serif' ;
+      FONT 'MS Sans Serif' ;
       size 10 ;
       MAXLENGTH 30 ;
 

@@ -69,7 +69,7 @@ FUNCTION Main()
             @ 266,125 TEXTBOX text_1 ;
                HEIGHT 26 ;
                WIDTH 241 ;
-               Font 'MS Sans Serif' ;
+               FONT 'MS Sans Serif' ;
                size 10 ;
                MAXLENGTH 30 ;
                UPPERCASE ;
@@ -213,7 +213,7 @@ FUNCTION Main()
             @ 170,100 TEXTBOX rubro ;
                HEIGHT 22 ;
                WIDTH 48 ;
-               Font 'MS Sans Serif' ;
+               FONT 'MS Sans Serif' ;
                size 10 ;
                NUMERIC ;
                MAXLENGTH 2 ;
@@ -228,7 +228,7 @@ FUNCTION Main()
             @ 63,426 TEXTBOX ndesde ;
                HEIGHT 24 ;
                WIDTH 120 ;
-               Font 'MS Sans Serif' ;
+               FONT 'MS Sans Serif' ;
                size 10 ;
                NUMERIC ;
                MAXLENGTH 6 ;
@@ -266,7 +266,7 @@ FUNCTION Main()
             @ 108,427 TEXTBOX nhasta ;
                HEIGHT 24 ;
                WIDTH 120 ;
-               Font 'MS Sans Serif' ;
+               FONT 'MS Sans Serif' ;
                size 10 ;
                NUMERIC ;
                MAXLENGTH 6 ;

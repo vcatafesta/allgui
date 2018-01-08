@@ -44,7 +44,7 @@ FUNCTION Main()
       @ windemo:height - 57 , 43 TEXTBOX URL_ToNavigate  ;
          HEIGHT 23 ;
          WIDTH windemo:width - 165 ;
-         Font 'Verdana' ;
+         FONT 'Verdana' ;
          ON ENTER Navegar() ;
 
       @ windemo:height - 60 , windemo:width - 115 BUTTON BNavigate ;

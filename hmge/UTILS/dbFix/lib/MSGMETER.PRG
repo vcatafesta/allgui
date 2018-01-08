@@ -148,9 +148,9 @@ FUNCTION MsgWait(bAction, cMsg, cTitle, lNoCancel, oParent)
       style nOr(DS_MODALFRAME, WS_POPUP, WS_CAPTION)
 
    @  3,  3 say oTxt var cMsg centered size 165, 16 pixel of oDlg ;
-      font oFont
+      FONT oFont
    @ 22, 63 button "Cancel" size 43, 11 pixel of oDlg ;
-      font oFont ;
+      FONT oFont ;
       ACTION lEnd := .T. ;
       when !lNoCancel
 

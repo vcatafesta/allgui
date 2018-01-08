@@ -50,7 +50,7 @@ PROCEDURE AdministraDBF( nReg )
                VIRTUAL height MAX(nAlto-70,451)         ;
                INTERNAL                                 ;
                nocaption                                ;
-               font "ms sans serif" size 9              ;
+               FONT "ms sans serif" size 9              ;
                focused
 
             CreaControles()
@@ -186,7 +186,7 @@ PROCEDURE Buscando()
                VIRTUAL height MAX(nAlto-70,451)         ;
                INTERNAL                                 ;
                nocaption                                ;
-               font "ms sans serif" size 9              ;
+               FONT "ms sans serif" size 9              ;
                focused
 
             CreaControles()

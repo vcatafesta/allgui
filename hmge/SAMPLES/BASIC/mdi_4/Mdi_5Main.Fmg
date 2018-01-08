@@ -7,7 +7,7 @@ DEFINE WINDOW Template                                         ;
       MAIN                                                ;
       Mdi
    DEFINE STATUSBAR                                        ;
-         Font "Courier New"                                     ;
+         FONT "Courier New"                                     ;
          Size 9
       StatusItem "Gestión de Ventanas MDIChild" Flat
       Clock

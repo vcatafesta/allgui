@@ -40,7 +40,7 @@ PROCEDURE CallsTable
       @ 5, 5 EditBox edtConsole              ;
          HEIGHT ( wConsole.Height - 80 ) ;  /* was 40 */
          WIDTH ( wConsole.Width - 20 )   ;
-         ReadOnly
+         READONLY
 
       // GAL added (with what .PRG we're working now?)
       @ wConsole.edtConsole.Row + wConsole.edtConsole.Height + 5, 5 ;
@@ -76,7 +76,7 @@ PROCEDURE CallsTable
          aLangStrings[ 5, 2 ], aLangStrings[ 6, 2 ]  ;
          }                                             ;
          WIDTHS { 130, 100, 130, 130 }                        ;
-         Font 'Tahoma' Size 10
+         FONT 'Tahoma' Size 10
 
       // GAL added
       @ wCallsTable.grdList.Row + wCallsTable.grdList.Height + 5, 5 ;

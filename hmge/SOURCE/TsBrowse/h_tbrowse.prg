@@ -107,7 +107,7 @@ FUNCTION _DefineTBrowse ( ControlName, ParentFormName, nCol, nRow, nWidth, nHeig
       cMsg        := "", ;
       UPDATE      := .f., ;
       lNogrid     := .F.,;
-      lock        := .F.,;
+      LOCK        := .F.,;
       appendable  := .F.,;
       lEnum       := .F.,;
       lAutoSearch := .F.,;
@@ -140,7 +140,7 @@ FUNCTION _DefineTBrowse ( ControlName, ParentFormName, nCol, nRow, nWidth, nHeig
 
    IF valtype(uWhen) == 'B'                                         /* BK    18.05.2015 */
       IF valtype(readonly) != 'A'
-         readonly := ! Eval( uWhen )
+         READONLY := ! Eval( uWhen )
       ENDIF
       uWhen := Nil                                                  // its needed else will be crash
    ENDIF

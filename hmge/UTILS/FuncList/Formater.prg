@@ -95,7 +95,7 @@ PROCEDURE Formater
          @ 5, 5 EditBox edtConsole              ;
             HEIGHT ( wConsole.Height - 90 ) ;
             WIDTH ( wConsole.Width - 20 )   ;
-            ReadOnly
+            READONLY
 
          @ ( wConsole.edtConsole.Row + wConsole.edtConsole.Height + 15 ), ;
             ( wConsole.edtConsole.Col + 125 )                              ;

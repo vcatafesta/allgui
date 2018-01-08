@@ -92,9 +92,9 @@ PROCEDURE Main
          HEIGHT 305                                        ;
          HEADERS { 'Name', 'Type', 'Comment' }             ;
          WIDTHS { 200, 100, 200 }                          ;
-         Font 'Tahoma' Size 10                             ;
+         FONT 'Tahoma' Size 10                             ;
          ON CHANGE GridStatus()                            ;
-         NoLines                                           ;
+         NOLINES                                           ;
          Edit Inplace {}                                   ;
          COLUMNWHEN { { || .F. }, { || .F. }, { || .T. } }
 
@@ -876,8 +876,8 @@ STATIC PROCEDURE FindAll
             HEIGHT 200                                                       ;
             HEADERS { aStrings[ 3, 2 ], aStrings[ 4, 2 ], aStrings[ 5, 2 ] } ;
             WIDTHS { 150, 100, 200 }                                         ;
-            Font 'Tahoma' Size 10                                            ;
-            NoLines                                                          ;
+            FONT 'Tahoma' Size 10                                            ;
+            NOLINES                                                          ;
             ON DBLCLICK Do_GoTo( aMatches )
 
          @ ( wFindAll.grdMatches.Row + wFindAll.grdMatches.Height + 10 ), ;

@@ -15,7 +15,7 @@ PROCEDURE inicio
          on maximize ( ajustar() );
          on size ( ajustar() );
          ON RELEASE ( oConexion:Destroy() );
-         font 'ms sans serif' size 8
+         FONT 'ms sans serif' size 8
 
       @ 0,  0 button btn1 caption '&Agregar'    width 80 height 20 action eventos(1)
       @ 0, 80 button btn2 caption '&Editar'    width 80 height 20 action eventos(2)
@@ -83,7 +83,7 @@ PROCEDURE eventos(n)
             at 0,0 width 350 height 120;
             TITLE iif(n = 2,'Edicion','Agregar');
             modal;
-            font 'ms sans serif' size 8
+            FONT 'ms sans serif' size 8
 
          @ 10, 10 label label1 width 80 height 20 value 'Nombre sucursal'
          @ 10,100 textbox text1 width 200 height 20 value cNombre

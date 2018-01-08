@@ -423,7 +423,7 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
    lCleanZero := _HMG_aControlInputMask [i,3]
 
    oGet       := _HMG_aControlHeadClick [i]
-   readonly   := _HMG_aControlMiscData1 [i,2]
+   READONLY   := _HMG_aControlMiscData1 [i,2]
 
    _HMG_ThisFormName := _HMG_aFormNames [ ParentHandle ]
    _HMG_ThisControlName := _HMG_aControlNames [i]

@@ -109,7 +109,7 @@ FUNCTION MAIN()
          ON RELEASE DBUclosedbfs() ;
          on maximize DBUwinSize()  ;
          on size DBUwinSize()      ;
-         font 'Arial' size 8       ;
+         FONT 'Arial' size 8       ;
          noshow
 
       DEFINE STATUSBAR

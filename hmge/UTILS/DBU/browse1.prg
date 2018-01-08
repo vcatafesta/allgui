@@ -109,7 +109,7 @@ FUNCTION DBUbrowse1()
          ALLOWAPPEND .t.
          ALLOWEDIT .t.
          ALLOWDELETE .t.
-         lock .t.
+         LOCK .t.
          INPLACEEDIT .t.
          ON CHANGE DBUbrowsechanged()
       END BROWSE
@@ -149,7 +149,7 @@ FUNCTION DBUbrowse1()
             COL 360
             WIDTH _DBUwindowwidth - 400
             VALUE _DBUcondition
-            readonly .T.
+            READONLY .T.
             FONTBOLD .T.
             BACKCOLOR _DBUgreenish
             // fontcolor {255,0,0}
