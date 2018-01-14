@@ -106,7 +106,7 @@ FUNCTION Main()
                HEADERS {'Nombre','Codigo','Packaging','Rubro','Precio 1','Precio 2','Precio 3','Cod. Barra','Existencia'} ;
                WIDTHS  {250,60,100,100,100,100,100,100,100} ;
                WORKAREA revent ;
-               FIELDS  {'hb_oemtoansi(nombre)','codart','cantxbulto','rubro','precio1','precio2','precio3','codbarras','exist'} ;
+               FIELDS  {'nombre','codart','cantxbulto','rubro','precio1','precio2','precio3','codbarras','exist'} ;
                FONT 'MS Sans Serif' ;
                SIZE 10 ;
                ON CHANGE NIL  ;

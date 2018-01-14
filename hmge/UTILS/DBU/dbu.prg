@@ -1465,9 +1465,6 @@ FUNCTION DBU_OEM2ANSI( lANSI )
       NewDBF->(DBAppend())
       FOR nI := 1 TO nFields
          xField := FieldGet(nI)
-         IF ValType( xField ) == "C"
-            xField := IF( lANSI, HB_OEMTOANSI( xField ), HB_ANSITOOEM(xField) )
-         ENDIF
          NewDBF->( FieldPut(nI, xField) )
       NEXT nI
       OldDbf->( DBSkip() )

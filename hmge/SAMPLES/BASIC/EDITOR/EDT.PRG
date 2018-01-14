@@ -285,7 +285,6 @@ PROCEDURE print(lPrev)
 
    cTexto := Frm1.edit.Value
    IF !empty(cTexto)
-      cTexto := IF( ISOEMTEXT(substr(cTexto,5,50)), HB_OEMTOANSI(cTexto), cTexto )
       nLines := MLCOUNT( cTexto, MAX_LINE )
       FOR nCnt := 1 To nLines
          nMaxWidth := MAX( nMaxWidth, Len( RTrim( MemoLine(cTexto, MAX_LINE, nCnt) ) ) )

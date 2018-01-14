@@ -401,7 +401,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                               ERASE "dummy"
                            ENDIF
 
-                           cDisKun := HB_OEMTOANSI( MEMOREAD( cFName2 ) )
+                           cDisKun := MEMOREAD( cFName2 )
 
                            FileWipe( { cFName1, cFName2 }  )
 

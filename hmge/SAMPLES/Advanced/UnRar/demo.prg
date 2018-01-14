@@ -204,7 +204,7 @@ PROCEDURE Test3()
          FOR i := 1 TO nCount
             msg = ""
             msg += ( "Archive name " + cTab + ": " + aFiles[ i ][ RAR_ARCNAME ] + CRLF )
-            msg += ( "File name    " + cTab + ": " + Hb_OemToAnsi( aFiles[ i ][ RAR_FILENAME ] )  + CRLF )
+            msg += ( "File name    " + cTab + ": " + aFiles[ i ][ RAR_FILENAME ] + CRLF )
             msg += ( "Packed size, b  " + cTab + ": " + ltrim( transform( aFiles[i][ RAR_PACKSIZE ], "999 999 999" ) ) + CRLF )
             msg += ( "Unpacked size, b" + cTab + ": " + ltrim( transform( aFiles[i][ RAR_UNPSIZE ], "999 999 999" ) ) + CRLF )
 
@@ -238,7 +238,7 @@ PROCEDURE Test3()
             msg += ( "Unpack version "  + cTab + ": " + str( aFiles[ i ][ RAR_UNPVER ]/10 ) + CRLF )
             msg += ( "File attribute "  + cTab + ": " + aFiles[ i ][ RAR_FILEATTR ] + CRLF )
 
-            MsgInfo( msg, "File Info : " + Hb_OemToAnsi( aFiles[ i ][ RAR_FILENAME ] ) )
+            MsgInfo( msg, "File Info : " + aFiles[ i ][ RAR_FILENAME ] )
          NEXT
       ENDIF
    ENDIF
@@ -415,7 +415,7 @@ FUNCTION HB_RarCallBackFunc( p1, p2, p3, p4 )
    IF p1 == UCM_CHANGEVOLUME
 
       IF p4 == RAR_VOL_NOTIFY
-         Win_1.StatusBar.Item(1) := Hb_OemToAnsi( p3 )
+         Win_1.StatusBar.Item(1) := p3
          result := 0
 
       ELSEIF p4 == RAR_VOL_ASK

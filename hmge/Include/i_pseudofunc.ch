@@ -763,9 +763,6 @@ cFilePath( <cFile> ) + "\" + cFileNoExt( <cFile> ) + <cExt>
 #  xtranslate __defaultNIL( @<v>, <x> )   => ( <v> := iif( <v> == NIL, <x>, <v> ) )
 #endif
 
-#if ( __HARBOUR__ - 0 > 0x030200 )
-   #xtranslate hb_oemtoansi( <x> )        => <x>
-#endif
 #  xtranslate IsDirectory( <c> )          => hb_DirExists( <c> )
 #  xtranslate GetComputerName()           => NetName()
 #  xtranslate GetUserName()               => hb_UserName()

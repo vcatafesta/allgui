@@ -253,9 +253,6 @@ FUNCTION easyreport
          IF lmode
             DO CASE
             CASE cType == 'C'
-               IF IsOemText( wfield )
-                  wfield := hb_OEMToANSI( wfield )
-               ENDIF
                @ nlin, ncol SAY SubStr( wfield, 1, awidths[i] ) font "f0" TO PRINT
             CASE cType == 'N'
                @ nlin, ncol SAY  iif( .NOT. ( aformats[i] == '' ), Transform( wfield, aformats[i] ), Str( wfield, awidths[i] ) ) font "f0" TO PRINT
@@ -387,9 +384,6 @@ STATIC FUNCTION headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grp
    ENDIF
    _npage++
    IF lmode
-      IF IsOemText( ctitle1 )
-         ctitle1 := hb_OEMToANSI( ctitle1 )
-      ENDIF
       @ nlin, 1 + nlmargin SAY _HMG_MESSAGE [9] font "f0" TO PRINT
       @ nlin, 6 + nlmargin SAY hb_ntos( _npage ) font "f0" TO PRINT
       @ nlin, ncenter + nlmargin SAY ctitle1 font "f2" TO PRINT
@@ -408,9 +402,6 @@ STATIC FUNCTION headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grp
 
    IF Len( ctitle2 ) > 0
       IF lmode
-         IF IsOemText( ctitle2 )
-            ctitle2 := hb_OEMToANSI( ctitle2 )
-         ENDIF
          @ nlin, ncenter2 + nlmargin SAY ctitle2 font "f2" TO PRINT
          IF ldatetimestamp
             @ nlin, nsum - 10 + Len( afields ) + nlmargin SAY Time() font "f0" TO PRINT
@@ -447,9 +438,6 @@ STATIC FUNCTION headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grp
       ncol := nlmargin + 1
       FOR i := 1 TO Len( awidths )
          IF lmode
-            IF IsOemText( aheaders1[i] )
-               aheaders1[i] := hb_OEMToANSI( aheaders1[i] )
-            ENDIF
             @ nlin, ncol SAY SubStr( aheaders1[i], 1, awidths[i] ) font "f1" TO PRINT
          ELSE
             @ nlin, ncol SAY SubStr( aheaders1[i], 1, awidths[i] )
@@ -463,9 +451,6 @@ STATIC FUNCTION headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grp
       ncol := nlmargin + 1
       FOR i := 1 TO Len( awidths )
          IF lmode
-            IF IsOemText( aheaders2[i] )
-               aheaders2[i] := hb_OEMToANSI( aheaders2[i] )
-            ENDIF
             @ nlin, ncol SAY SubStr( aheaders2[i], 1, awidths[i] ) font "f1" TO PRINT
          ELSE
             @ nlin, ncol SAY SubStr( aheaders2[i], 1, awidths[i] )
@@ -488,13 +473,7 @@ STATIC FUNCTION headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grp
    IF grpby <> NIL
       IF !ISEVERYPAGE
          IF lmode
-            IF IsOemText( chdrgrp )
-               chdrgrp := hb_OEMToANSI( chdrgrp )
-            ENDIF
             cgrpby := &grpby
-            IF IsOemText( cgrpby )
-               cgrpby := hb_OEMToANSI( cgrpby )
-            ENDIF
             @ nlin, 1 + nlmargin SAY '** ' + chdrgrp + ' ** ' + hb_ValToStr( cgrpby ) font "f1" TO PRINT
          ELSE
             @ nlin, 1 + nlmargin SAY '** ' + chdrgrp + ' ** ' + hb_ValToStr( &grpby )
@@ -513,9 +492,6 @@ STATIC FUNCTION mypreview( cfilerepo )
 
    wfilerepo := cfilerepo
    wr := MemoRead( wfilerepo )
-   IF IsOemText( wr )
-      wr := hb_OEMToANSI( wr )
-   ENDIF
 
    DEFINE WINDOW PRINT_PREVIEW ;
          AT 10, 10 ;
@@ -852,13 +828,7 @@ STATIC PROCEDURE imp_SUBTOTALES ( nlin, ncol, lmode, swt, grpby )
 
          IF swt == 0 .AND. ! ISEVERYPAGE
             IF lmode
-               IF IsOemText( chdrgrp )
-                  chdrgrp := hb_OEMToANSI( chdrgrp )
-               ENDIF
                cgrpby := &grpby
-               IF IsOemText( cgrpby )
-                  cgrpby := hb_OEMToANSI( cgrpby )
-               ENDIF
                @ nlin, 1 + nlmargin SAY '** ' + chdrgrp + ' ** ' + iif( !ISEVERYPAGE, hb_ValToStr( cgrpby ), '' ) font "f1" TO PRINT
             ELSE
                @ nlin, 1 + nlmargin SAY '** ' + chdrgrp + ' ** ' + iif( !ISEVERYPAGE, hb_ValToStr( &grpby ), '' )

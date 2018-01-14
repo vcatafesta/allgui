@@ -6115,7 +6115,6 @@ FUNCTION _HMG_PRINTER_H_MULTILINE_PRINT ( nHdc , nRow , nCol , nToRow , nToCol ,
 
    LOCAL nAlign := TA_LEFT
 
-   //  cText := hb_oemtoansi(cText)
    IF ValType (cText) == "N"
       cText := ALLTRIM(STR(cText))
    ELSEIF ValType (cText) == "D"

@@ -68,14 +68,6 @@
 
 #if defined( HB_ARCH_64BIT )
 
-#xtranslate WIN_OEMTOANSI( <arg1> ) ;
-   => ;
-      HB_OEMTOANSI( <arg1> )
-
-#xtranslate WIN_ANSITOOEM( <arg1> ) ;
-   => ;
-      HB_ANSITOOEM( <arg1> )
-
 #xtranslate TIP_HTMLTOSTR( <arg1> ) ;
    => ;
       HTMLTOOEM( <arg1> )

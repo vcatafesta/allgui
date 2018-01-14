@@ -1342,7 +1342,7 @@ FUNCTION TextEdit( cFile, cExt, lReadOnly )
    ELSE
       cText := MEMOREAD( cFile )
       IF HB_ISOEM(cText)
-         cText := HB_OEMTOANSI(cText)
+         cText := cText
       ENDIF
 
       DEFINE WINDOW wTextEdit ;

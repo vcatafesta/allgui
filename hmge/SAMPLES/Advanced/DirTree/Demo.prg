@@ -523,7 +523,7 @@ STATIC FUNCTION ArcIndex( cArcFile )
 
                IF ( Left( cString, 7 ) == 'Path = ' )
 
-                  cString := HB_OEMtoANSI( AllTrim( Substr( cString, 8 ) ) )
+                  cString := AllTrim( Substr( cString, 8 ) )
 
                   // Последние версии 7-Zip в отчет о содержимом архива добавляют
                   // наименование самого архива (также в строке "Path =").

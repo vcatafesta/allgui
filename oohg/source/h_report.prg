@@ -1678,7 +1678,7 @@ STATIC FUNCTION ImprimoUnaLinea(sLin, lBold)
 
    LOCAL sAux
 
-   sAux := HB_OEMTOANSI(sLin)
+   sAux := sLin
    IF aReportData[RP_WIDTH] <= 80
       oprint:printdata(nPosrow,nPoscol+aReportData[RP_LMARGIN],sAux, ,_RF_SIZENORMAL ,lbold)
    ELSE

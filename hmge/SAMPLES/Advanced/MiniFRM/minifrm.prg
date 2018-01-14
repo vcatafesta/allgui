@@ -869,7 +869,7 @@ FUNCTION ImprimoUnaLinea(sLin, lBold)
    ENDIF
 #endif
 
-   sAux := HB_OEMTOANSI(sLin)
+   sAux := sLin
 
 #ifdef _RF_MINIPRINT
    IF lBold

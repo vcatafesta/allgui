@@ -368,7 +368,7 @@ METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,
             NEXT i
             crompe:=&grpby
             nlin++
-            oprint:printdata(nlin,repobject:nlmargin,  '** ' +hb_oemtoansi(chdrgrp)+' ** '+hb_oemtoansi(&grpby),,repobject:nfsize,.T.)
+            oprint:printdata(nlin,repobject:nlmargin,  '** ' +chdrgrp+' ** '+&grpby,,repobject:nfsize,.T.)
             nlin++
          ENDIF
       ENDIF

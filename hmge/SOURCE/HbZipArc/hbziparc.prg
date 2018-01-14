@@ -740,7 +740,7 @@ FUNCTION hb_ZipFile( cFileName, ;
             hb_FGetDateTime( cFileToZip, @tTime )
             hb_fGetAttr( cFileToZip, @nAttr )
 
-            hb_FNameSplit( hb_ANSIToOEM( cFileToZip ), @cPath, @cName, @cExt, @cDrive )
+            hb_FNameSplit( cFileToZip, @cPath, @cName, @cExt, @cDrive )
             IF ! lWithDrive .AND. ! Empty( cDrive ) .AND. hb_LeftEq( cPath, cDrive + ":" )
                cPath := SubStr( cPath, Len( cDrive + ":" ) + 1 )
             ENDIF
@@ -890,7 +890,7 @@ FUNCTION hb_UnzipFile( cFileName, bUpdate, lWithPath, cPassword, cPath, acFiles,
 
          IF hb_UnzipFileInfo( hUnzip, @cZipName, @dDate, @cTime, , , , @nSize ) == 0
 
-            hb_FNameSplit( hb_OEMToANSI( cZipName ), @cSubPath, @cName, @cExt )
+            hb_FNameSplit( cZipName, @cSubPath, @cName, @cExt )
             cExtName := hb_FNameMerge( NIL, cName, cExt )
 
             /* NOTE: As opposed to original hbziparch we don't do a second match without path. */
