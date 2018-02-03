@@ -6,7 +6,7 @@ libpaths=${hb_install_prefix}/addons/hmg3/lib/win/${hb_comp}
 
 # main hmg libs
 
-libs=hmg3_core hmg3_crypt hmg3_edit hmg3_editex hmg3_graph hmg3_ini hmg3_report hmg3_hfcl
+libs=hmg3_core hmg3_crypt hmg3_edit hmg3_editex hmg3_graph hmg3_ini hmg3_report hmg3_hfcl hmg3_hbvpdf
 
 # system libs
 
@@ -14,7 +14,7 @@ libs=msvfw32 vfw32
 
 # harbour contrib libs
 
-libs=hbct.hbc hbwin.hbc hbmzip.hbc minizip hbmisc.hbc hbtip.hbc hbhpdf.hbc hbvpdf
+libs=hbct.hbc hbwin.hbc hbmzip.hbc minizip hbmisc.hbc hbtip.hbc hbhpdf.hbc
 #libs=sqlite3 hbsqlit3 sddodbc rddsql sddmy hbodbc odbc32 hbmysql mysql hbmemio
 #libs=hbhpdf hbfimage hbpgsql hbnetio png hbvpdf hbzebra
 #libs=xhb
